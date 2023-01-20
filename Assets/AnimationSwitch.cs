@@ -11,11 +11,15 @@ public class AnimationSwitch : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        animator.Play(animationName);
+        Debug.Log("animationName " + animationName);
     }
 
     private void Start()
     {
         // Debug.Log(listNameClip);
+    }
+
+    private void OnEnable() {
+        animator.Play(animationName);
     }
 }
