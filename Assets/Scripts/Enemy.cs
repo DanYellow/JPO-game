@@ -1,13 +1,13 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour, IDamageable
 {
     public GameObject deathEffect;
 
-    public FloatValue maxHealth;
+    public EnemyStatsValue info;
     public float currentHealth = 0f;
+    public float maxHealth;
 
     private SpriteRenderer spriteRenderer;
 
@@ -22,7 +22,8 @@ public class Enemy : MonoBehaviour, IDamageable
     // Start is called before the first frame update
     void Awake()
     {
-        currentHealth = maxHealth?.CurrentValue ?? 1f;
+        maxHealth = info?.maxHealth ?? 1f;
+        currentHealth = maxHealth;
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
@@ -34,7 +35,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage)
     {
-        currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHealth.CurrentValue);
+        currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHealth);
         if (currentHealth == 0)
         {
             GameObject impact = Instantiate(deathEffect, transform.position, Quaternion.identity);
@@ -67,7 +68,7 @@ public class Enemy : MonoBehaviour, IDamageable
         other.GetContacts(listContacts);
         if (other.transform.TryGetComponent<IDamageable>(out IDamageable iDamageable) && listContacts[0].normal.y > -0.5f)
         {
-            iDamageable.TakeDamage(0);
+            iDamageable.TakeDamage(info.damage);
         }
     }
 

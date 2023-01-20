@@ -50,7 +50,7 @@ public class PlayerMovements : MonoBehaviour
 
     private bool isHitted = false;
 
-    private float fallThreshold = -3f;
+    private float fallThreshold = -10f;
 
     PlayerInput playerInput;
 
@@ -139,7 +139,7 @@ public class PlayerMovements : MonoBehaviour
             0
         ) * factor;
         rb.AddForce(pushBackVector * backForce, ForceMode2D.Impulse);
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.25f);
         isHitted = false;
     }
 
