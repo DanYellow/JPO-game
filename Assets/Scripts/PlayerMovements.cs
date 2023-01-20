@@ -36,7 +36,7 @@ public class PlayerMovements : MonoBehaviour
     public int maxJumpCount;
     public float jumpForce;
 
-    public PlayerInput playerInput;
+    PlayerInput playerInput;
 
     // Start is called before the first frame update
     private void Awake() {
@@ -75,13 +75,7 @@ public class PlayerMovements : MonoBehaviour
             jumpBoolEventChannel.Raise(ctx.phase == InputActionPhase.Performed);
             jumpCount++;
             rb.velocity = new Vector2((moveInput.x * moveSpeed), jumpForce);
-            Debug.Log("phase");
         } 
-        else if(ctx.phase == InputActionPhase.Waiting && isGrounded) {
-            Debug.Log("fezfze");
-            // jumpCount = 0;
-        }
-            // animator.SetBool("IsJumping", ctx.phase == InputActionPhase.Performed);
     }
 
     private void Flip()
