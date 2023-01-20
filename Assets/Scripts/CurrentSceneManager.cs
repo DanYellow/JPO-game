@@ -17,8 +17,8 @@ public class CurrentSceneManager : MonoBehaviour
 
     public void RestartLevel()
     {
-        OnEventRaised?.Invoke();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        // OnEventRaised?.Invoke();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
     }
 
 

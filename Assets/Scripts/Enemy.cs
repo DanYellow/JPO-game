@@ -35,7 +35,7 @@ public class Enemy : MonoBehaviour, IDamageable
         if (currentHealth == 0)
         {
             GameObject impact = Instantiate(deathEffect, transform.position, Quaternion.identity);
-            Destroy(impact, impact.GetComponent<Animator>().GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+            Destroy(impact, impact.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
             Destroy(gameObject);
         } else {
             StopCoroutine(HandleInvincibilityDelay());

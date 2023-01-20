@@ -7,15 +7,17 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField]
     BoolEventChannel isShootingEventChannel;
 
-    public LineRenderer lineRenderer;
+    private LineRenderer lineRenderer;
     public GameObject impactEffect;
 
     public Transform firePoint;
 
+    public float damage = 1f;
+
     private Vector3 moveInput;
 
     private void Awake() {
-        // lineRenderer = GetComponentInChildren<LineRenderer>();
+        lineRenderer = GetComponentInChildren<LineRenderer>();
     }
 
     public void OnShoot(InputAction.CallbackContext ctx)
@@ -24,7 +26,6 @@ public class PlayerShoot : MonoBehaviour
         {
             isShootingEventChannel.Raise(ctx.phase == InputActionPhase.Performed);
             StartCoroutine(DetectHit());
-
         }
     }
 
@@ -35,7 +36,7 @@ public class PlayerShoot : MonoBehaviour
         if (hitInfo)
         {
             if(hitInfo.transform.TryGetComponent<IDamageable>(out IDamageable iDamageable)) {
-                iDamageable.TakeDamage(0.1f);
+                iDamageable.TakeDamage(damage);
             }
 
             GameObject impact = Instantiate(impactEffect, hitInfo.point, Quaternion.identity);
