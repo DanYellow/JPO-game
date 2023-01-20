@@ -16,6 +16,9 @@ public class Enemy : MonoBehaviour, IDamageable
     public float invincibilityFlashDelay = 0.2f;
     public float invincibilityTimeAfterHit = 0.75f;
 
+    // List of contact points when something collides with that GameObject
+    private ContactPoint2D[] listContacts = new ContactPoint2D[1];
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -37,7 +40,9 @@ public class Enemy : MonoBehaviour, IDamageable
             GameObject impact = Instantiate(deathEffect, transform.position, Quaternion.identity);
             Destroy(impact, impact.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
             Destroy(gameObject);
-        } else {
+        }
+        else
+        {
             StopCoroutine(HandleInvincibilityDelay());
             StopCoroutine(InvincibilityFlash());
 
@@ -48,11 +53,21 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public IEnumerator InvincibilityFlash()
     {
-        while(isHurt) {
+        while (isHurt)
+        {
             spriteRenderer.color = new Color(1f, 1f, 1f, 0f);
             yield return new WaitForSeconds(invincibilityFlashDelay);
             spriteRenderer.color = new Color(1f, 1f, 1f, 1f);
             yield return new WaitForSeconds(invincibilityFlashDelay);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        other.GetContacts(listContacts);
+        if (other.transform.TryGetComponent<IDamageable>(out IDamageable iDamageable) && listContacts[0].normal.y > -0.5f)
+        {
+            iDamageable.TakeDamage(0);
         }
     }
 
