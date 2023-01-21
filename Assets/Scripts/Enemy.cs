@@ -30,7 +30,7 @@ public class Enemy : MonoBehaviour, IDamageable
     // Update is called once per frame
     void Update()
     {
-
+        // transform.Translate(Time.deltaTime * 1 * Vector3.down);
     }
 
     public void TakeDamage(float damage)
