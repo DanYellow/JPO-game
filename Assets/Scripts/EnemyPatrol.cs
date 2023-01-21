@@ -32,15 +32,22 @@ public class EnemyPatrol : MonoBehaviour
 
     private void Update()
     {
-        if (isIdle)
-        {
-            Idle();
-        }
-        else
-        {
-            Move();
-        }
+        // if (isIdle)
+        // {
+        //     Idle();
+        // }
+        // else
+        // {
+        //     Move();
+        // }
         animator.SetFloat("MoveDirectionX", Mathf.Abs(rb.velocity.x));
+    }
+
+    private void FixedUpdate()
+    {
+        Vector3 startCast = transform.position;
+        Vector3 endCast = transform.position + (Vector3.right);
+        Debug.DrawLine(startCast, endCast, Color.green);
     }
 
     IEnumerator ChangeState()

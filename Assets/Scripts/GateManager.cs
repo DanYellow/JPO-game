@@ -47,7 +47,6 @@ public class GateManager : MonoBehaviour, IOpenable
         }
         else
         {
-            Debug.Log("isOpening " + isOpening);
             gameObject.layer = LayerMask.NameToLayer("Default");
         }
 
