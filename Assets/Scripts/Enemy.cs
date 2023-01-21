@@ -68,7 +68,7 @@ public class Enemy : MonoBehaviour, IDamageable
     private void OnCollisionEnter2D(Collision2D other)
     {
         other.GetContacts(listContacts);
-        if (other.transform.TryGetComponent<IDamageable>(out IDamageable iDamageable) && listContacts[0].normal.y > -0.5f)
+        if (other.transform.TryGetComponent<IDamageable>(out IDamageable iDamageable))
         {
             StartCoroutine(SwitchKinematic());
             iDamageable.TakeDamage(info.damage);

@@ -9,7 +9,6 @@ public class CurrentSceneManager : MonoBehaviour
         #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.R))
         {
-            Time.timeScale = 1f;
             Debug.ClearDeveloperConsole();
             RestartLevel();
         }
@@ -18,6 +17,7 @@ public class CurrentSceneManager : MonoBehaviour
 
     public void RestartLevel()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
     }
 

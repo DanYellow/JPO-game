@@ -487,6 +487,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: eaf77300-e7e2-4625-8f98-480292ff8025
     m_ActionName: Player/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
+        m_MethodName: TogglePause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 9c1d96f0-e939-4efe-96a4-c3cd0685e219
+    m_ActionName: Player/Start/Resume[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
+        m_MethodName: TogglePause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a338fc34-4237-41df-8dd7-1c29f4193d00
+    m_ActionName: UI/Start/Resume[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -515,10 +547,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   groundCheck: {fileID: 7665010453357774128}
-  groundCheckRadius: 0.1
+  groundCheckRadius: 0.07
   jumpCount: 0
   playerStatsValue: {fileID: 11400000, guid: 4d8b9f9261ee27f47ad567a2af8e73c2, type: 2}
-  waerLayer:
+  waterLayer:
     serializedVersion: 2
     m_Bits: 16
 --- !u!114 &7665010452612635959
@@ -575,8 +607,6 @@ MonoBehaviour:
   isHurtVoidEventChannel: {fileID: 11400000, guid: 03eb6c1b9f1a7ae4dac9b654d5a925a8, type: 2}
   onPlayerDeathVoidEventChannel: {fileID: 11400000, guid: ee804061685d49549a86590b0c280ccd, type: 2}
   deathEffectPrefab: {fileID: 1992304688091250534, guid: 44fb5dd6c04248741b0fdac87cf0d958, type: 3}
-  currentHealth: {fileID: 11400000, guid: bfb766c9dac9e9e4ab6f8cc9b193c4fe, type: 2}
-  maxHealth: {fileID: 11400000, guid: dc65cf0e315747b4cb40ee032f488aea, type: 2}
   playerStatsValue: {fileID: 11400000, guid: 4d8b9f9261ee27f47ad567a2af8e73c2, type: 2}
 --- !u!61 &7665010452612635957
 BoxCollider2D:
@@ -591,7 +621,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.01257813, y: -0.04399568}
+  m_Offset: {x: -0.01257813, y: -0.057669878}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -602,7 +632,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.2672248, y: 0.49893296}
+  m_Size: {x: 0.19797888, y: 0.48152924}
   m_EdgeRadius: 0
 --- !u!50 &7665010452612635958
 Rigidbody2D:

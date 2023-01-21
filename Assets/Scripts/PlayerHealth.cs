@@ -14,7 +14,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     [SerializeField]
     private PlayerStatsValue playerStatsValue;
 
-    private void Start() {
+    private void Awake() {
         playerStatsValue.currentHealth = playerStatsValue.maxHealth;
     }
 
@@ -29,13 +29,11 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     // Update is called once per frame
     public void TakeDamage(float damage)
     {
-
         playerStatsValue.currentHealth = Mathf.Clamp(playerStatsValue.currentHealth - damage, 0, playerStatsValue.maxHealth);
         if (playerStatsValue.currentHealth == 0)
         {
             // StartCoroutine(SlowTime());
             GameObject deathEffect = Instantiate(deathEffectPrefab, transform.position, Quaternion.identity);
-            deathEffect.GetComponent<Animator>().speed = 0.5f;
             Destroy(deathEffect, deathEffect.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
             Destroy(gameObject);
             onPlayerDeathVoidEventChannel.Raise();

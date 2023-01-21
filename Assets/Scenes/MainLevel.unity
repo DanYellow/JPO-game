@@ -10933,7 +10933,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 229.6, y: -77.8}
+  m_AnchoredPosition: {x: 229.59998, y: -78.79999}
   m_SizeDelta: {x: 364.893, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &481931348
@@ -13156,6 +13156,7 @@ MonoBehaviour:
   isHurtVoidEventChannel: {fileID: 11400000, guid: 03eb6c1b9f1a7ae4dac9b654d5a925a8, type: 2}
   playerStatsValue: {fileID: 11400000, guid: 4d8b9f9261ee27f47ad567a2af8e73c2, type: 2}
   healthText: {fileID: 481931348}
+  playerHUDUI: {fileID: 124622978}
 --- !u!1 &1026987511
 GameObject:
   m_ObjectHideFlags: 0
@@ -48293,6 +48294,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7665010452612635953, guid: cbbe23bfa7d691240a259d1c9cf29111, type: 3}
+      propertyPath: groundCheckRadius
+      value: 0.07
+      objectReference: {fileID: 0}
     - target: {fileID: 7665010452612635953, guid: cbbe23bfa7d691240a259d1c9cf29111, type: 3}
       propertyPath: waterLayer.m_Bits
       value: 16

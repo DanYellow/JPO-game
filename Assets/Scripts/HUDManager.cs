@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class HUDManager : MonoBehaviour
 {
@@ -20,34 +21,33 @@ public class HUDManager : MonoBehaviour
     private void Awake()
     {
         listTexts = playerHUDUI.GetComponentsInChildren<TMP_Text>();
-
-        foreach (TMP_Text text in listTexts)
-            healthText.text = $"Energy {playerStatsValue.currentHealth.ToString()}";
-
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
         isHurtVoidEventChannel.OnEventRaised += UpdateLifePoints;
+
+        UpdateLifePoints();
     }
 
     private void UpdateLifePoints()
     {
+        Debug.Log("playerStatsValue.currentHealth " + playerStatsValue.currentHealth);
         foreach (TMP_Text text in listTexts)
-            healthText.text = $"Energy {playerStatsValue.currentHealth.ToString()}";
-
-        // healthText.text = $"Energy {playerStatsValue.currentHealth.ToString()}";
+            text.text = $"Energy {playerStatsValue.currentHealth.ToString()}";
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         isHurtVoidEventChannel.OnEventRaised -= UpdateLifePoints;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+    
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        UpdateLifePoints();
     }
 }

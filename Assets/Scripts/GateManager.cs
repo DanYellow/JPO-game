@@ -41,7 +41,19 @@ public class GateManager : MonoBehaviour, IOpenable
 
     IEnumerator ToggleOpening(bool isOpening)
     {
+         if (isOpening)
+        {
+            gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+        }
+        else
+        {
+            Debug.Log("isOpening " + isOpening);
+            gameObject.layer = LayerMask.NameToLayer("Default");
+        }
+
         yield return new WaitForSeconds(0.5f);
+
+       
 
         foreach (Animator animator in listGates)
             animator.SetBool("IsOpen", isOpening);
@@ -52,8 +64,6 @@ public class GateManager : MonoBehaviour, IOpenable
     {
         yield return new WaitForSeconds(3.5f);
 
-        foreach (Animator animator in listGates)
-            animator.SetBool("IsOpen", false);
-        collider2d.isTrigger = false;
+        StartCoroutine(ToggleOpening(false));
     }
 }
