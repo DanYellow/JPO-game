@@ -6,6 +6,7 @@ public class GameOverManager : MonoBehaviour
     [SerializeField]
     private VoidEventChannel onPlayerDeathVoidEventChannel;
     public GameObject gameoverMenuUI;
+    public GameObject playerHUDUI;
 
     private void Awake()
     {
@@ -21,6 +22,7 @@ public class GameOverManager : MonoBehaviour
     private void DisplayGameOverScreen()
     {
         gameoverMenuUI.SetActive(true);
+        playerHUDUI.SetActive(false);
         gameoverMenuUI.GetComponentInChildren<Button>().Select();
     }
 

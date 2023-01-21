@@ -4,6 +4,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour, IDamageable
 {
     public GameObject deathEffect;
+    public Rigidbody2D rb;
 
     public EnemyStatsValue info;
     public float currentHealth = 0f;
@@ -25,6 +26,7 @@ public class Enemy : MonoBehaviour, IDamageable
         maxHealth = info?.maxHealth ?? 1f;
         currentHealth = maxHealth;
         spriteRenderer = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -68,8 +70,16 @@ public class Enemy : MonoBehaviour, IDamageable
         other.GetContacts(listContacts);
         if (other.transform.TryGetComponent<IDamageable>(out IDamageable iDamageable) && listContacts[0].normal.y > -0.5f)
         {
+            StartCoroutine(SwitchKinematic());
             iDamageable.TakeDamage(info.damage);
         }
+    }
+
+    public IEnumerator SwitchKinematic()
+    {
+        rb.isKinematic = true;
+        yield return new WaitForSeconds(0.5f);
+        rb.isKinematic = false;
     }
 
     public IEnumerator HandleInvincibilityDelay()
