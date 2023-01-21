@@ -274,7 +274,7 @@ GameObject:
   - component: {fileID: 575242137}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -510,6 +510,7 @@ MonoBehaviour:
   jumpBoolEventChannel: {fileID: 11400000, guid: e84ab78e0af1b4a4fa5004800869d6f4, type: 2}
   isGroundedBoolEventChannel: {fileID: 11400000, guid: 4a5695552568afb44a47d026fcdbaac2, type: 2}
   fallingBoolEventChannel: {fileID: 11400000, guid: 9379fc0aeeef18941b2be4119d24bcb9, type: 2}
+  isHurtVoidEventChannel: {fileID: 11400000, guid: 03eb6c1b9f1a7ae4dac9b654d5a925a8, type: 2}
   listGroundLayers:
     serializedVersion: 2
     m_Bits: 8
@@ -519,6 +520,7 @@ MonoBehaviour:
   jumpCount: 0
   maxJumpCount: 1
   jumpForce: 5
+  backForce: 1.75
 --- !u!114 &7665010452612635959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -614,6 +616,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isHurtVoidEventChannel: {fileID: 11400000, guid: 03eb6c1b9f1a7ae4dac9b654d5a925a8, type: 2}
   deathEffectPrefab: {fileID: 1992304688091250534, guid: 44fb5dd6c04248741b0fdac87cf0d958, type: 3}
+  currentHealth: {fileID: 11400000, guid: bfb766c9dac9e9e4ab6f8cc9b193c4fe, type: 2}
+  maxHealth: {fileID: 11400000, guid: dc65cf0e315747b4cb40ee032f488aea, type: 2}
 --- !u!1 &7665010452763690252
 GameObject:
   m_ObjectHideFlags: 0

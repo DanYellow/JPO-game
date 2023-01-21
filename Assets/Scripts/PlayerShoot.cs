@@ -39,6 +39,10 @@ public class PlayerShoot : MonoBehaviour
                 iDamageable.TakeDamage(damage);
             }
 
+            if(hitInfo.transform.TryGetComponent<IOpenable>(out IOpenable iOpenable)) {
+                iOpenable.Open();
+            }
+
             GameObject impact = Instantiate(impactEffect, hitInfo.point, Quaternion.identity);
             Destroy(impact, impact.GetComponent<Animator>().GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length); 
 

@@ -28,8 +28,6 @@ public class PlayerMovements : MonoBehaviour
     [SerializeField]
     private VoidEventChannel isHurtVoidEventChannel;
 
-    // private UnityAction onHurtEvent;
-
     [Space(15)]
 
     [Tooltip("Position checks")]
@@ -52,7 +50,12 @@ public class PlayerMovements : MonoBehaviour
 
     private float fallThreshold = -10f;
 
-    PlayerInput playerInput;
+    private PlayerInput playerInput;
+
+    // Value used to speed down or up the player
+    private float speedFactor = 1;
+
+    public LayerMask wayerLayer;
 
     // Start is called before the first frame update
     private void Awake()
@@ -76,6 +79,10 @@ public class PlayerMovements : MonoBehaviour
         isGroundedBoolEventChannel.Raise(isGrounded);
 
         Flip();
+
+        if(Input.GetKeyDown(KeyCode.W)) {
+            Debug.Log("IsInWater " + IsInWater());
+        }
     }
 
     private void FixedUpdate()
@@ -126,12 +133,19 @@ public class PlayerMovements : MonoBehaviour
         return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, listGroundLayers);
     }
 
-    private void OnHurt()
+    public bool IsInWater()
     {
-       StartCoroutine(OnHurtProxy()); 
+
+        return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, wayerLayer);
     }
 
-    IEnumerator OnHurtProxy() {
+    private void OnHurt()
+    {
+        StartCoroutine(OnHurtProxy());
+    }
+
+    IEnumerator OnHurtProxy()
+    {
         isHitted = true;
         int factor = isFacingRight ? -1 : 1;
         Vector2 pushBackVector = new Vector2(
@@ -155,4 +169,34 @@ public class PlayerMovements : MonoBehaviour
     {
         isHurtVoidEventChannel.OnEventRaised -= OnHurt;
     }
+
+    // private void OnTriggerExit2D(Collider2D other)
+    // {
+    //     if (other.gameObject.CompareTag("Water"))
+    //     {
+    //         Debug.Log("OnTriggerExit2D");
+    //         speedFactor = 1;
+    //         rb.mass = 1;
+    //     }
+    // }
+
+    // private void OnTriggerEnter2D(Collider2D other)
+    // {
+    //     if (other.gameObject.CompareTag("Water"))
+    //     {
+    //         Debug.Log("OnTriggerEnter2D");
+    //         speedFactor = 0.25f;
+    //         rb.mass = 20;
+    //     }
+    // }
+
+    // private void OnTriggerStay2D(Collider2D other)
+    // {
+    //     if (other.gameObject.CompareTag("Water"))
+    //     {
+    //         Debug.Log("OnTriggerStay2D");
+    //         speedFactor = 0.25f;
+    //         rb.mass = 20;
+    //     }
+    // }
 }
