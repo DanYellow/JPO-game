@@ -12,11 +12,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     public FloatValue currentHealth;
     public FloatValue maxHealth;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        currentHealth.CurrentValue = maxHealth.CurrentValue;
-    }
+    [SerializeField]
+    private PlayerStatsValue playerStatsValue;
 
     private void Update()
     {
@@ -30,8 +27,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     public void TakeDamage(float damage)
     {
 
-        currentHealth.CurrentValue = Mathf.Clamp(currentHealth.CurrentValue - damage, 0, maxHealth.CurrentValue);
-        if (currentHealth.CurrentValue == 0)
+        playerStatsValue.currentHealth = Mathf.Clamp(playerStatsValue.currentHealth - damage, 0, playerStatsValue.maxHealth);
+        if (playerStatsValue.currentHealth == 0)
         {
             GameObject deathEffect = Instantiate(deathEffectPrefab, transform.position, Quaternion.identity);
             Destroy(deathEffect, deathEffect.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);

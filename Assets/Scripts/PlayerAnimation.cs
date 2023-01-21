@@ -20,13 +20,19 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField]
     private BoolEventChannel fallingBoolEventChannel;
 
+     [SerializeField]
+    private BoolEventChannel isInWaterBoolEventChannel;
+
     [SerializeField]
     private VoidEventChannel isHurtVoidEventChannel;
+    [SerializeField]
+    private PlayerStatsValue playerStatsValue;
 
     private UnityAction<bool> onJumpEvent;
     private UnityAction<bool> onLandEvent;
     private UnityAction<bool> onShootEvent;
     private UnityAction<bool> onFallEvent;
+    private UnityAction<bool> inWaterEvent;
     private UnityAction onHurtEvent;
     // https://forum.unity.com/threads/unsubscribe-from-an-event-using-a-lambda-expression.1287587/
     private void Awake()
@@ -38,6 +44,9 @@ public class PlayerAnimation : MonoBehaviour
         onShootEvent = (bool isGrounded) => { animator.SetTrigger("IsShooting"); };
         onFallEvent = (bool isGrounded) => { animator.SetTrigger("IsFalling"); };
         onHurtEvent = () => { animator.SetTrigger("IsHurt"); };
+        inWaterEvent = (bool isInWater) => { 
+            animator.speed = isInWater ? playerStatsValue.waterSpeedFactor : playerStatsValue.speedFactor;
+        };
 
         vectorEventChannel.OnEventRaised += UpdateMovement;
         jumpBoolEventChannel.OnEventRaised += onJumpEvent;
@@ -45,6 +54,7 @@ public class PlayerAnimation : MonoBehaviour
         isGroundedBoolEventChannel.OnEventRaised += onLandEvent;
         fallingBoolEventChannel.OnEventRaised += onFallEvent;
         isHurtVoidEventChannel.OnEventRaised += onHurtEvent;
+        isInWaterBoolEventChannel.OnEventRaised += inWaterEvent;
     }
 
     private void UpdateMovement(Vector3 direction)
@@ -62,5 +72,6 @@ public class PlayerAnimation : MonoBehaviour
         fallingBoolEventChannel.OnEventRaised -= onFallEvent;
         isGroundedBoolEventChannel.OnEventRaised -= onLandEvent;
         isHurtVoidEventChannel.OnEventRaised -= onHurtEvent;
+        isInWaterBoolEventChannel.OnEventRaised -= inWaterEvent;
     }
 }

@@ -13,8 +13,8 @@ public class PlayerMovements : MonoBehaviour
     private Vector3 moveInput = Vector3.zero;
 
     private bool isFacingRight = true;
-    public bool isGrounded;
-    public bool isInWater;
+    private bool isGrounded;
+    private bool isInWater;
 
     [Header("Events")]
     [SerializeField]
@@ -25,6 +25,8 @@ public class PlayerMovements : MonoBehaviour
     private BoolEventChannel isGroundedBoolEventChannel;
     [SerializeField]
     private BoolEventChannel fallingBoolEventChannel;
+    [SerializeField]
+    private BoolEventChannel isInWaterBoolEventChannel;
 
     [SerializeField]
     private VoidEventChannel isHurtVoidEventChannel;
@@ -36,27 +38,27 @@ public class PlayerMovements : MonoBehaviour
     public Transform groundCheck;
     public float groundCheckRadius;
 
-    [Tooltip("Running system")]
-    public float moveSpeed;
+    private float moveSpeed;
 
     [Header("Jump system")]
     public int jumpCount = 0;
-    public int maxJumpCount;
-    public float jumpForce;
+    private int maxJumpCount;
+    private float jumpForce;
 
-    [Range(0, 500)]
-    public float backForce;
+    private float backForce;
 
     private bool isHitted = false;
 
     private float fallThreshold = -10f;
 
+    private float speedFactor;
+
     private PlayerInput playerInput;
 
-    // Value used to speed down or up the player
-    private float speedFactor = 1;
+    [SerializeField]
+    private PlayerStatsValue playerStatsValue;
 
-    public LayerMask wayerLayer;
+    public LayerMask waerLayer;
 
     // Start is called before the first frame update
     private void Awake()
@@ -65,6 +67,11 @@ public class PlayerMovements : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
 
         isHurtVoidEventChannel.OnEventRaised += OnHurt;
+
+        moveSpeed = playerStatsValue.moveSpeed;
+        jumpForce = playerStatsValue.jumpForce;
+        maxJumpCount = playerStatsValue.maxJumpCount;
+        backForce = playerStatsValue.knockbackForce;
     }
 
     // Update is called once per frame
@@ -78,14 +85,9 @@ public class PlayerMovements : MonoBehaviour
 
         vectorEventChannel.Raise(moveInput);
         isGroundedBoolEventChannel.Raise(isGrounded);
+        isInWaterBoolEventChannel.Raise(isInWater);
 
         Flip();
-
-        animator.speed = speedFactor;
-
-        if(Input.GetKeyDown(KeyCode.W)) {
-            Debug.Log("IsInWater " + IsInWater());
-        }
     }
 
     private void FixedUpdate()
@@ -97,7 +99,7 @@ public class PlayerMovements : MonoBehaviour
 
         isGrounded = IsGrounded();
         isInWater = IsInWater();
-        speedFactor = isInWater ? 0.5f : 1f;
+        speedFactor = isInWater ? playerStatsValue.waterSpeedFactor : playerStatsValue.speedFactor;
 
         if (rb.velocity.y < fallThreshold)
         {
@@ -120,7 +122,7 @@ public class PlayerMovements : MonoBehaviour
         {
             jumpBoolEventChannel.Raise(ctx.phase == InputActionPhase.Performed);
             jumpCount++;
-            rb.velocity = new Vector2((moveInput.x * moveSpeed) * speedFactor, jumpForce  * speedFactor);
+            rb.velocity = new Vector2((moveInput.x * moveSpeed) * speedFactor, jumpForce * speedFactor);
         }
     }
 
@@ -141,7 +143,7 @@ public class PlayerMovements : MonoBehaviour
     public bool IsInWater()
     {
 
-        return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, wayerLayer);
+        return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, waerLayer);
     }
 
     private void OnHurt()
