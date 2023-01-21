@@ -1,7 +1,6 @@
 
 using UnityEngine;
 using System.Collections;
-using UnityEditor;
 
 public class EnemyPatrol : MonoBehaviour
 {
@@ -9,16 +8,23 @@ public class EnemyPatrol : MonoBehaviour
     public Animator animator;
     public float speed;
 
+    private SpriteRenderer sr;
+
     public bool isFacingRight = false;
 
     private bool isIdle = true;
 
     private float idleTime;
 
-    public Vector3 offset = new Vector3(0.2f, 0.25f, 0);
+    [SerializeField]
+    private Vector3 offset;
     public Vector3 rightOffset = new Vector3(-0.2f, 0.25f, 0);
 
+    [SerializeField]
+    private Vector3 lastKnownPosition = Vector3.zero;
+
     private bool isGrounded;
+    private bool isFlipping = false;
 
     [Tooltip("Define how long the enemy will walk")]
     public float walkTime = 5f;
@@ -30,12 +36,24 @@ public class EnemyPatrol : MonoBehaviour
     {
         // We don't want the script to be enabled by default
         enabled = false;
+        sr = GetComponent<SpriteRenderer>();
+
+        offset = new Vector3(sr.bounds.size.x / 4, sr.bounds.size.y / 2, 0);
     }
 
     private void Start()
     {
         idleTime = Mathf.Round(Random.Range(0, 3.5f));
         StartCoroutine(ChangeState());
+
+        InvokeRepeating(nameof(UpdateLastKnownPosition), 3.0f, 3f);
+    }
+
+    void UpdateLastKnownPosition() {
+        if(lastKnownPosition == transform.position && !isFlipping) {
+            StartCoroutine(Flip());
+        }
+        lastKnownPosition = transform.position;
     }
 
     private void Update()
@@ -48,6 +66,7 @@ public class EnemyPatrol : MonoBehaviour
         {
             Move();
         }
+
         animator.SetFloat("MoveDirectionX", Mathf.Abs(rb.velocity.x));
     }
 
@@ -58,23 +77,22 @@ public class EnemyPatrol : MonoBehaviour
         Vector3 endCast = transform.position + (isFacingRight ? Vector3.right : Vector3.left) * 0.5f;
         Debug.DrawLine(startCast, endCast, Color.green);
 
-         RaycastHit2D hit = Physics2D.Linecast(transform.position, endCast, layerMask);
-        //  RaycastHit2D hit = Physics2D.Raycast(transform.position, endCast, Mathf.Infinity, layerMask);
-// (hit.collider != null && hit.distance < 0.4f) ||
+        RaycastHit2D hit = Physics2D.Linecast(transform.position, endCast, layerMask);
+
         if ((hit.collider != null && hit.distance < 0.4f) || !isGrounded)
         {
-            Flip();
+            StartCoroutine(Flip());
         }
     }
 
     public bool IsGrounded()
     {
-        return Physics2D.OverlapCircle(transform.position - (isFacingRight ? rightOffset : offset), groundCheckRadius, layerMask);
+        return Physics2D.OverlapCircle(transform.position - offset, groundCheckRadius, layerMask);
     }
 
     void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(transform.position - (isFacingRight ? rightOffset : offset), groundCheckRadius);
+        Gizmos.DrawWireSphere(transform.position - offset, groundCheckRadius);
     }
 
     IEnumerator ChangeState()
@@ -108,16 +126,15 @@ public class EnemyPatrol : MonoBehaviour
         }
     }
 
-    // private void OnTriggerExit2D(Collider2D other)
-    // {
-    //     if (isIdle) return;
-    //     Flip();
-    // }
-
-    public void Flip()
+    IEnumerator Flip()
     {
+        offset.x *= -1;
+        isFlipping = true;
         isFacingRight = !isFacingRight;
         transform.Rotate(0f, 180f, 0f);
+        lastKnownPosition = Vector3.zero;
+        yield return new WaitForSeconds(0.2f);
+        isFlipping = false;
     }
 
     private void OnBecameVisible()
