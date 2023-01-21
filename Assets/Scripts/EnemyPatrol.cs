@@ -15,8 +15,16 @@ public class EnemyPatrol : MonoBehaviour
 
     private float idleTime;
 
+    public Vector3 offset = new Vector3(0.2f, 0.25f, 0);
+    public Vector3 rightOffset = new Vector3(-0.2f, 0.25f, 0);
+
+    private bool isGrounded;
+
     [Tooltip("Define how long the enemy will walk")]
     public float walkTime = 5f;
+
+    public LayerMask layerMask;
+    public float groundCheckRadius = 0.25f;
 
     private void Awake()
     {
@@ -32,22 +40,41 @@ public class EnemyPatrol : MonoBehaviour
 
     private void Update()
     {
-        // if (isIdle)
-        // {
-        //     Idle();
-        // }
-        // else
-        // {
-        //     Move();
-        // }
+        if (isIdle)
+        {
+            Idle();
+        }
+        else
+        {
+            Move();
+        }
         animator.SetFloat("MoveDirectionX", Mathf.Abs(rb.velocity.x));
     }
 
     private void FixedUpdate()
     {
+        isGrounded = IsGrounded();
         Vector3 startCast = transform.position;
-        Vector3 endCast = transform.position + (Vector3.right);
+        Vector3 endCast = transform.position + (isFacingRight ? Vector3.right : Vector3.left) * 0.5f;
         Debug.DrawLine(startCast, endCast, Color.green);
+
+         RaycastHit2D hit = Physics2D.Linecast(transform.position, endCast, layerMask);
+        //  RaycastHit2D hit = Physics2D.Raycast(transform.position, endCast, Mathf.Infinity, layerMask);
+// (hit.collider != null && hit.distance < 0.4f) ||
+        if ((hit.collider != null && hit.distance < 0.4f) || !isGrounded)
+        {
+            Flip();
+        }
+    }
+
+    public bool IsGrounded()
+    {
+        return Physics2D.OverlapCircle(transform.position - (isFacingRight ? rightOffset : offset), groundCheckRadius, layerMask);
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position - (isFacingRight ? rightOffset : offset), groundCheckRadius);
     }
 
     IEnumerator ChangeState()
@@ -81,11 +108,11 @@ public class EnemyPatrol : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (isIdle) return;
-        Flip();
-    }
+    // private void OnTriggerExit2D(Collider2D other)
+    // {
+    //     if (isIdle) return;
+    //     Flip();
+    // }
 
     public void Flip()
     {

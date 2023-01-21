@@ -77,6 +77,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public IEnumerator SwitchKinematic()
     {
+        Debug.Log("dddaa");
         rb.isKinematic = true;
         yield return new WaitForSeconds(0.5f);
         rb.isKinematic = false;
