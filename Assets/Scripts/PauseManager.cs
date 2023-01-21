@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class PauseManager : MonoBehaviour
 {
@@ -9,13 +10,14 @@ public class PauseManager : MonoBehaviour
 
     bool isGamePaused = false;
 
-    private void Awake() {
+    private void Awake()
+    {
         pauseMenuUI.SetActive(false);
     }
 
-    void Update()
+    public void TogglePause(InputAction.CallbackContext ctx)
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (ctx.phase == InputActionPhase.Performed)
         {
             if (isGamePaused)
             {

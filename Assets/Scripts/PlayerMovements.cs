@@ -58,7 +58,7 @@ public class PlayerMovements : MonoBehaviour
     [SerializeField]
     private PlayerStatsValue playerStatsValue;
 
-    public LayerMask waerLayer;
+    public LayerMask waterLayer;
 
     // Start is called before the first frame update
     private void Awake()
@@ -143,7 +143,7 @@ public class PlayerMovements : MonoBehaviour
     public bool IsInWater()
     {
 
-        return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, waerLayer);
+        return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, waterLayer);
     }
 
     private void OnHurt()

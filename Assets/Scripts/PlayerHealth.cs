@@ -7,6 +7,9 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     [SerializeField]
     private VoidEventChannel isHurtVoidEventChannel;
 
+    [SerializeField]
+    private VoidEventChannel onPlayerDeathVoidEventChannel;
+
     public GameObject deathEffectPrefab;
 
     public FloatValue currentHealth;
@@ -32,6 +35,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         {
             GameObject deathEffect = Instantiate(deathEffectPrefab, transform.position, Quaternion.identity);
             Destroy(deathEffect, deathEffect.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+            Destroy(gameObject);
+            onPlayerDeathVoidEventChannel.Raise();
         } else {
             isHurtVoidEventChannel.Raise();
         }

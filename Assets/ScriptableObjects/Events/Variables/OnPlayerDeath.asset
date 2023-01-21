@@ -9,14 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31e396c6d09ebea458d18d9107564468, type: 3}
-  m_Name: PlayerStats
+  m_Script: {fileID: 11500000, guid: 98f16f8575c369942b5726a8637aaedc, type: 3}
+  m_Name: OnPlayerDeath
   m_EditorClassIdentifier: 
-  maxHealth: 10
-  currentHealth: 10
-  moveSpeed: 3
-  jumpForce: 5
-  maxJumpCount: 1
-  knockbackForce: 1.75
-  speedFactor: 1
-  waterSpeedFactor: 0.65
+  DeveloperDescription: 

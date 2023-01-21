@@ -21,4 +21,9 @@ public class InputManager : MonoBehaviour
             playerInput.SwitchCurrentActionMap("Player");
         }
     }
+
+    private void OnDestroy()
+    {
+        onTogglePauseEvent.OnEventRaised -= ToggleActionMap;
+    }
 }

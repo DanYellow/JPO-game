@@ -24,8 +24,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2648717974480530226}
-  m_LocalRotation: {x: -0, y: -0, z: -0.0016152697, w: 0.9999987}
-  m_LocalPosition: {x: 0.48, y: 0.031999946, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.605, y: 0.031999946, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 2.095677
+  m_PointLightOuterRadius: 1.7757107
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
@@ -269,9 +269,9 @@ GameObject:
   - component: {fileID: 7665010452612635953}
   - component: {fileID: 7665010452612635959}
   - component: {fileID: 7665010452612635952}
+  - component: {fileID: 575242137}
   - component: {fileID: 7665010452612635957}
   - component: {fileID: 7665010452612635958}
-  - component: {fileID: 575242137}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -505,22 +505,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 7665010452612635965}
-  isGrounded: 0
   vectorEventChannel: {fileID: 11400000, guid: 6635956797fede24d9522b8c3237406c, type: 2}
   jumpBoolEventChannel: {fileID: 11400000, guid: e84ab78e0af1b4a4fa5004800869d6f4, type: 2}
   isGroundedBoolEventChannel: {fileID: 11400000, guid: 4a5695552568afb44a47d026fcdbaac2, type: 2}
   fallingBoolEventChannel: {fileID: 11400000, guid: 9379fc0aeeef18941b2be4119d24bcb9, type: 2}
+  isInWaterBoolEventChannel: {fileID: 11400000, guid: 1f211ac587888d940b381af98b39824a, type: 2}
   isHurtVoidEventChannel: {fileID: 11400000, guid: 03eb6c1b9f1a7ae4dac9b654d5a925a8, type: 2}
   listGroundLayers:
     serializedVersion: 2
     m_Bits: 8
   groundCheck: {fileID: 7665010453357774128}
   groundCheckRadius: 0.1
-  moveSpeed: 3
   jumpCount: 0
-  maxJumpCount: 1
-  jumpForce: 5
-  backForce: 1.75
+  playerStatsValue: {fileID: 11400000, guid: 4d8b9f9261ee27f47ad567a2af8e73c2, type: 2}
+  waerLayer:
+    serializedVersion: 2
+    m_Bits: 16
 --- !u!114 &7665010452612635959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -535,6 +535,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isShootingEventChannel: {fileID: 11400000, guid: 67fd6d7d25b663d44bb8ed019111c00a, type: 2}
   impactEffect: {fileID: 7484998729519011172, guid: ba6d719ee13d7d34cbd9eefa46c40157, type: 3}
+  collisionLayers:
+    serializedVersion: 2
+    m_Bits: 41
   firePoint: {fileID: 7665010452763690243}
   damage: 1
 --- !u!114 &7665010452612635952
@@ -554,7 +557,27 @@ MonoBehaviour:
   isGroundedBoolEventChannel: {fileID: 11400000, guid: 4a5695552568afb44a47d026fcdbaac2, type: 2}
   isShootingEventChannel: {fileID: 11400000, guid: 67fd6d7d25b663d44bb8ed019111c00a, type: 2}
   fallingBoolEventChannel: {fileID: 11400000, guid: 9379fc0aeeef18941b2be4119d24bcb9, type: 2}
+  isInWaterBoolEventChannel: {fileID: 11400000, guid: 1f211ac587888d940b381af98b39824a, type: 2}
   isHurtVoidEventChannel: {fileID: 11400000, guid: 03eb6c1b9f1a7ae4dac9b654d5a925a8, type: 2}
+  playerStatsValue: {fileID: 11400000, guid: 4d8b9f9261ee27f47ad567a2af8e73c2, type: 2}
+--- !u!114 &575242137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7665010452612635966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04699c8e0b0d77440b10ee86a3318d02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isHurtVoidEventChannel: {fileID: 11400000, guid: 03eb6c1b9f1a7ae4dac9b654d5a925a8, type: 2}
+  onPlayerDeathVoidEventChannel: {fileID: 11400000, guid: ee804061685d49549a86590b0c280ccd, type: 2}
+  deathEffectPrefab: {fileID: 1992304688091250534, guid: 44fb5dd6c04248741b0fdac87cf0d958, type: 3}
+  currentHealth: {fileID: 11400000, guid: bfb766c9dac9e9e4ab6f8cc9b193c4fe, type: 2}
+  maxHealth: {fileID: 11400000, guid: dc65cf0e315747b4cb40ee032f488aea, type: 2}
+  playerStatsValue: {fileID: 11400000, guid: 4d8b9f9261ee27f47ad567a2af8e73c2, type: 2}
 --- !u!61 &7665010452612635957
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -602,22 +625,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &575242137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7665010452612635966}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04699c8e0b0d77440b10ee86a3318d02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isHurtVoidEventChannel: {fileID: 11400000, guid: 03eb6c1b9f1a7ae4dac9b654d5a925a8, type: 2}
-  deathEffectPrefab: {fileID: 1992304688091250534, guid: 44fb5dd6c04248741b0fdac87cf0d958, type: 3}
-  currentHealth: {fileID: 11400000, guid: bfb766c9dac9e9e4ab6f8cc9b193c4fe, type: 2}
-  maxHealth: {fileID: 11400000, guid: dc65cf0e315747b4cb40ee032f488aea, type: 2}
 --- !u!1 &7665010452763690252
 GameObject:
   m_ObjectHideFlags: 0
