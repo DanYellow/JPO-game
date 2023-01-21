@@ -10,6 +10,8 @@ public class PlayerShoot : MonoBehaviour
     private LineRenderer lineRenderer;
     public GameObject impactEffect;
 
+    public LayerMask collisionLayers;
+
     public Transform firePoint;
 
     public float damage = 1f;
@@ -31,7 +33,7 @@ public class PlayerShoot : MonoBehaviour
 
     IEnumerator DetectHit()
     {
-        RaycastHit2D hitInfo = Physics2D.Raycast(firePoint.position, firePoint.right);
+        RaycastHit2D hitInfo = Physics2D.Raycast(firePoint.position, firePoint.right, Mathf.Infinity, collisionLayers);
 
         if (hitInfo)
         {
@@ -44,7 +46,7 @@ public class PlayerShoot : MonoBehaviour
             }
 
             GameObject impact = Instantiate(impactEffect, hitInfo.point, Quaternion.identity);
-            Destroy(impact, impact.GetComponent<Animator>().GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length); 
+            Destroy(impact, impact.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length); 
 
             lineRenderer.SetPosition(0, firePoint.position);
             lineRenderer.SetPosition(1, hitInfo.point);

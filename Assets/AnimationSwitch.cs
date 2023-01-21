@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,12 +10,6 @@ public class AnimationSwitch : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        Debug.Log("animationName " + animationName);
-    }
-
-    private void Start()
-    {
-        // Debug.Log(listNameClip);
     }
 
     private void OnEnable() {

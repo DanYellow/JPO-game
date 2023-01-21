@@ -14,6 +14,7 @@ public class PlayerMovements : MonoBehaviour
 
     private bool isFacingRight = true;
     public bool isGrounded;
+    public bool isInWater;
 
     [Header("Events")]
     [SerializeField]
@@ -80,6 +81,8 @@ public class PlayerMovements : MonoBehaviour
 
         Flip();
 
+        animator.speed = speedFactor;
+
         if(Input.GetKeyDown(KeyCode.W)) {
             Debug.Log("IsInWater " + IsInWater());
         }
@@ -89,10 +92,12 @@ public class PlayerMovements : MonoBehaviour
     {
         if (!isHitted)
         {
-            rb.velocity = new Vector2((moveInput.x * moveSpeed), rb.velocity.y);
+            rb.velocity = new Vector2((moveInput.x * moveSpeed) * speedFactor, rb.velocity.y);
         }
 
         isGrounded = IsGrounded();
+        isInWater = IsInWater();
+        speedFactor = isInWater ? 0.5f : 1f;
 
         if (rb.velocity.y < fallThreshold)
         {
@@ -115,7 +120,7 @@ public class PlayerMovements : MonoBehaviour
         {
             jumpBoolEventChannel.Raise(ctx.phase == InputActionPhase.Performed);
             jumpCount++;
-            rb.velocity = new Vector2((moveInput.x * moveSpeed), jumpForce);
+            rb.velocity = new Vector2((moveInput.x * moveSpeed) * speedFactor, jumpForce  * speedFactor);
         }
     }
 
@@ -169,34 +174,4 @@ public class PlayerMovements : MonoBehaviour
     {
         isHurtVoidEventChannel.OnEventRaised -= OnHurt;
     }
-
-    // private void OnTriggerExit2D(Collider2D other)
-    // {
-    //     if (other.gameObject.CompareTag("Water"))
-    //     {
-    //         Debug.Log("OnTriggerExit2D");
-    //         speedFactor = 1;
-    //         rb.mass = 1;
-    //     }
-    // }
-
-    // private void OnTriggerEnter2D(Collider2D other)
-    // {
-    //     if (other.gameObject.CompareTag("Water"))
-    //     {
-    //         Debug.Log("OnTriggerEnter2D");
-    //         speedFactor = 0.25f;
-    //         rb.mass = 20;
-    //     }
-    // }
-
-    // private void OnTriggerStay2D(Collider2D other)
-    // {
-    //     if (other.gameObject.CompareTag("Water"))
-    //     {
-    //         Debug.Log("OnTriggerStay2D");
-    //         speedFactor = 0.25f;
-    //         rb.mass = 20;
-    //     }
-    // }
 }
