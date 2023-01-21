@@ -49,7 +49,7 @@ public class PlayerMovements : MonoBehaviour
 
     private bool isHitted = false;
 
-    private float fallThreshold = -10f;
+    private float fallThreshold;
 
     private float speedFactor;
 
@@ -72,6 +72,7 @@ public class PlayerMovements : MonoBehaviour
         jumpForce = playerStatsValue.jumpForce;
         maxJumpCount = playerStatsValue.maxJumpCount;
         backForce = playerStatsValue.knockbackForce;
+        fallThreshold = playerStatsValue.fallThreshold;
     }
 
     // Update is called once per frame
@@ -86,6 +87,7 @@ public class PlayerMovements : MonoBehaviour
         vectorEventChannel.Raise(moveInput);
         isGroundedBoolEventChannel.Raise(isGrounded);
         isInWaterBoolEventChannel.Raise(isInWater);
+        speedFactor = isInWater ? playerStatsValue.waterSpeedFactor : playerStatsValue.speedFactor;
 
         Flip();
     }
@@ -99,8 +101,6 @@ public class PlayerMovements : MonoBehaviour
 
         isGrounded = IsGrounded();
         isInWater = IsInWater();
-        speedFactor = isInWater ? playerStatsValue.waterSpeedFactor : playerStatsValue.speedFactor;
-
         if (rb.velocity.y < fallThreshold)
         {
             fallingBoolEventChannel.Raise(true);

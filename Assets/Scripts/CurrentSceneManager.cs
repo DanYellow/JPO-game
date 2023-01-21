@@ -4,8 +4,6 @@ using UnityEngine.Events;
 
 public class CurrentSceneManager : MonoBehaviour
 {
-    public UnityAction OnEventRaised;
-
     void Update()
     {
         #if UNITY_EDITOR
@@ -20,7 +18,6 @@ public class CurrentSceneManager : MonoBehaviour
 
     public void RestartLevel()
     {
-        // OnEventRaised?.Invoke();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
     }
 

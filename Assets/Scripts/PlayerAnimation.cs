@@ -45,8 +45,7 @@ public class PlayerAnimation : MonoBehaviour
         onFallEvent = (bool isGrounded) => { animator.SetTrigger("IsFalling"); };
         onHurtEvent = () => { animator.SetTrigger("IsHurt"); };
         inWaterEvent = (bool isInWater) => { 
-            // animator.speed = isInWater ? playerStatsValue.waterSpeedFactor : playerStatsValue.speedFactor;
-            // animator.speed = isInWater ? playerStatsValue.waterSpeedFactor : playerStatsValue.speedFactor;
+            animator.speed = isInWater ? (playerStatsValue.waterSpeedFactor * 1.75f) : playerStatsValue.speedFactor;
         };
 
         vectorEventChannel.OnEventRaised += UpdateMovement;

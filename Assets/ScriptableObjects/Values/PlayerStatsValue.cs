@@ -16,6 +16,8 @@ public class PlayerStatsValue : ScriptableObject
     public float speedFactor = 1;
     public float waterSpeedFactor = 0.5f;
 
+    public float fallThreshold = -5f;
+
     private void OnEnable() {
         currentHealth = maxHealth;
     }
