@@ -5,7 +5,10 @@ using System.Collections;
 public class PlayerShoot : MonoBehaviour
 {
     [SerializeField]
-    BoolEventChannel isShootingEventChannel;
+    private BoolEventChannel isShootingEventChannel;
+
+    [SerializeField]
+    private PlayerStatsValue playerStatsValue;
 
     private LineRenderer lineRenderer;
     public GameObject impactEffect;
@@ -13,8 +16,6 @@ public class PlayerShoot : MonoBehaviour
     public LayerMask collisionLayers;
 
     public Transform firePoint;
-
-    public float damage = 1f;
 
     private Vector3 moveInput;
 
@@ -38,7 +39,7 @@ public class PlayerShoot : MonoBehaviour
         if (hitInfo)
         {
             if(hitInfo.transform.TryGetComponent<IDamageable>(out IDamageable iDamageable)) {
-                iDamageable.TakeDamage(damage);
+                iDamageable.TakeDamage(playerStatsValue.damage);
             }
 
             if(hitInfo.transform.TryGetComponent<IOpenable>(out IOpenable iOpenable)) {

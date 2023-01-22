@@ -18,6 +18,8 @@ public class PlayerStatsValue : ScriptableObject
 
     public float fallThreshold = -5f;
 
+    public float damage = 1;
+
     private void OnEnable() {
         currentHealth = maxHealth;
     }

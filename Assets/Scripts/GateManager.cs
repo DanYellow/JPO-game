@@ -5,22 +5,31 @@ using UnityEngine;
 public class GateManager : MonoBehaviour, IOpenable
 {
     private Collider2D collider2d;
-    private Animator[] listGates;
+    private Animator[] listGatesAnimator;
+    private SpriteRenderer[] listGatesSpriteRenderer;
     private IEnumerator autocloseRef;
+
+    public bool isDisabled = false;
 
     private bool isPlayerIn = false;
 
     private void Awake()
     {
         collider2d = GetComponent<BoxCollider2D>();
-        listGates = GetComponentsInChildren<Animator>();
+        listGatesAnimator = GetComponentsInChildren<Animator>();
+        listGatesSpriteRenderer = GetComponentsInChildren<SpriteRenderer>();
+
+        ToggleDisable(isDisabled);
     }
 
     public void Open()
     {
-        StartCoroutine(ToggleOpening(true));
-        autocloseRef = Autoclose();
-        StartCoroutine(autocloseRef);
+        if (!isDisabled)
+        {
+            StartCoroutine(ToggleOpening(true));
+            autocloseRef = Autoclose();
+            StartCoroutine(autocloseRef);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -52,9 +61,7 @@ public class GateManager : MonoBehaviour, IOpenable
 
         yield return new WaitForSeconds(0.5f);
 
-       
-
-        foreach (Animator animator in listGates)
+        foreach (Animator animator in listGatesAnimator)
             animator.SetBool("IsOpen", isOpening);
         collider2d.isTrigger = isOpening;
     }
@@ -64,5 +71,12 @@ public class GateManager : MonoBehaviour, IOpenable
         yield return new WaitForSeconds(3.5f);
 
         StartCoroutine(ToggleOpening(false));
+    }
+
+    private void ToggleDisable(bool _isDisabled) {
+        isDisabled = _isDisabled;
+
+        foreach (SpriteRenderer sr in listGatesSpriteRenderer)
+            sr.color = new Color(1, 1, 1, isDisabled ? 0.5f : 1f);
     }
 }

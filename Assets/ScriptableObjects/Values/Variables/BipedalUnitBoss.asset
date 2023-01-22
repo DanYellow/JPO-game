@@ -9,8 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 640e2ac57a0a7de49ac3c885d15e15a5, type: 3}
-  m_Name: PlayerCurrentHealth
+  m_Script: {fileID: 11500000, guid: 1a2df51d7df8cf84e866198d7593ab89, type: 3}
+  m_Name: BipedalUnitBoss
   m_EditorClassIdentifier: 
-  CurrentValue: 0
-  DeveloperDescription: 
+  maxHealth: 20
+  damage: 3
+  moveSpeed: 0.95
+  moveSpeedFactor: 1.25
+  defense: 1.25
+  knockbackForce: 1.75
+  attackRange: 10

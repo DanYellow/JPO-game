@@ -4,13 +4,16 @@ using UnityEngine;
 public class Enemy : MonoBehaviour, IDamageable
 {
     public GameObject deathEffect;
-    private Rigidbody2D rb;
+    protected Rigidbody2D rb;
 
     public EnemyStatsValue enemyData;
-    private float currentHealth = 0f;
-    private float maxHealth;
+    protected float currentHealth = 0f;
+    protected float maxHealth;
 
-    private SpriteRenderer spriteRenderer;
+    [SerializeField]
+    private VoidEventChannel onDeathCallback = null;
+
+    protected SpriteRenderer sr;
 
     private bool isHurt = false;
 
@@ -25,18 +28,19 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         maxHealth = enemyData?.maxHealth ?? 1f;
         currentHealth = maxHealth;
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        sr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
     }
 
-    public void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage)
     {
-        currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHealth);
+        currentHealth = Mathf.Clamp(currentHealth - (damage * enemyData.defense), 0, maxHealth);
         if (currentHealth == 0)
         {
             GameObject impact = Instantiate(deathEffect, transform.position, Quaternion.identity);
             Destroy(impact, impact.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
             Destroy(gameObject);
+            onDeathCallback?.Raise();
         }
         else
         {
@@ -52,9 +56,9 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         while (isHurt)
         {
-            spriteRenderer.color = new Color(1f, 1f, 1f, 0f);
+            sr.color = new Color(1f, 1f, 1f, 0f);
             yield return new WaitForSeconds(invincibilityFlashDelay);
-            spriteRenderer.color = new Color(1f, 1f, 1f, 1f);
+            sr.color = new Color(1f, 1f, 1f, 1f);
             yield return new WaitForSeconds(invincibilityFlashDelay);
         }
     }
