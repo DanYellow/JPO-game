@@ -4,11 +4,11 @@ using UnityEngine;
 public class Enemy : MonoBehaviour, IDamageable
 {
     public GameObject deathEffect;
-    public Rigidbody2D rb;
+    private Rigidbody2D rb;
 
-    public EnemyStatsValue info;
-    public float currentHealth = 0f;
-    public float maxHealth;
+    public EnemyStatsValue enemyData;
+    private float currentHealth = 0f;
+    private float maxHealth;
 
     private SpriteRenderer spriteRenderer;
 
@@ -23,16 +23,10 @@ public class Enemy : MonoBehaviour, IDamageable
     // Start is called before the first frame update
     void Awake()
     {
-        maxHealth = info?.maxHealth ?? 1f;
+        maxHealth = enemyData?.maxHealth ?? 1f;
         currentHealth = maxHealth;
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        // transform.Translate(Time.deltaTime * 1 * Vector3.down);
     }
 
     public void TakeDamage(float damage)
@@ -70,14 +64,13 @@ public class Enemy : MonoBehaviour, IDamageable
         other.GetContacts(listContacts);
         if (other.transform.TryGetComponent<IDamageable>(out IDamageable iDamageable))
         {
-            StartCoroutine(SwitchKinematic());
-            iDamageable.TakeDamage(info.damage);
+            StartCoroutine(SwitchRbBodyType());
+            iDamageable.TakeDamage(enemyData.damage);
         }
     }
 
-    public IEnumerator SwitchKinematic()
+    public IEnumerator SwitchRbBodyType()
     {
-        Debug.Log("dddaa");
         rb.isKinematic = true;
         yield return new WaitForSeconds(0.5f);
         rb.isKinematic = false;

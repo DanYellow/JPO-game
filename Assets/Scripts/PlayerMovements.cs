@@ -13,7 +13,7 @@ public class PlayerMovements : MonoBehaviour
     private Vector3 moveInput = Vector3.zero;
 
     private bool isFacingRight = true;
-    private bool isGrounded;
+    
     private bool isInWater;
 
     [Header("Events")]
@@ -34,6 +34,7 @@ public class PlayerMovements : MonoBehaviour
     [Space(15)]
 
     [Tooltip("Position checks")]
+    private bool isGrounded;
     public LayerMask listGroundLayers;
     public Transform groundCheck;
     public float groundCheckRadius;

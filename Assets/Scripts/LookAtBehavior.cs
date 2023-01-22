@@ -12,6 +12,8 @@ public class LookAtBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(target == null)
+            return;
         if(Vector2.Distance(target.position, transform.position) > thresholdDistanceBeforeLookAt) {
             return;
         }

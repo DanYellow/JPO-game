@@ -6,4 +6,6 @@ public class EnemyStatsValue : ScriptableObject
 {
     public float maxHealth;
     public float damage;
+    public float moveSpeed;
+    public float moveSpeedFactor = 1.25f;
 }

@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 2534878612226961946}
   - component: {fileID: 2534878612226961926}
   - component: {fileID: 2534878612226961925}
-  - component: {fileID: 2534878612226961947}
   - component: {fileID: 2534878612226961949}
   m_Layer: 7
   m_Name: CrabEnemy
@@ -170,27 +169,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathEffect: {fileID: 1992304688091250534, guid: 44fb5dd6c04248741b0fdac87cf0d958, type: 3}
-  rb: {fileID: 0}
-  info: {fileID: 11400000, guid: 6670c96dfa97be944a07e1a9df3f513e, type: 2}
-  currentHealth: 0
-  maxHealth: 0
+  enemyData: {fileID: 11400000, guid: 6670c96dfa97be944a07e1a9df3f513e, type: 2}
   invincibilityFlashDelay: 0.2
   invincibilityTimeAfterHit: 1.5
---- !u!114 &2534878612226961947
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2534878612226961924}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a40553c2415d6ac42b9e8b1b3e8bc1b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  isFacingRight: 0
-  thresholdDistanceBeforeLookAt: 10
 --- !u!114 &2534878612226961949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,14 +184,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6145d747649693a498d6f7b405ead0ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 2534878612226961946}
-  animator: {fileID: 2534878612226961927}
-  speed: 0.75
+  startSpeed: 0.75
+  enemyData: {fileID: 11400000, guid: 6670c96dfa97be944a07e1a9df3f513e, type: 2}
+  currentSpeed: 0
   isFacingRight: 0
-  offset: {x: 0.2, y: 0.25, z: 0}
-  rightOffset: {x: -0.2, y: 0.25, z: 0}
   walkTime: 5
-  layerMask:
+  obstacleLayersMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 9
   groundCheckRadius: 0.1

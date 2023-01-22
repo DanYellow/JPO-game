@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class HUDManager : MonoBehaviour
@@ -29,7 +28,6 @@ public class HUDManager : MonoBehaviour
 
     private void UpdateLifePoints()
     {
-        Debug.Log("playerStatsValue.currentHealth " + playerStatsValue.currentHealth);
         foreach (TMP_Text text in listTexts)
             text.text = $"Energy {playerStatsValue.currentHealth.ToString()}";
     }
@@ -38,12 +36,6 @@ public class HUDManager : MonoBehaviour
     {
         isHurtVoidEventChannel.OnEventRaised -= UpdateLifePoints;
         SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
     
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)

@@ -1,12 +1,19 @@
 
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Serialization;
+
 
 public class EnemyPatrol : MonoBehaviour
 {
-    public Rigidbody2D rb;
-    public Animator animator;
-    public float speed;
+    private Rigidbody2D rb;
+    private Animator animator;
+    private float maxMoveSpeed;
+
+    public EnemyStatsValue enemyData;
+
+    [SerializeField]
+    private float currentMoveSpeed;
 
     private SpriteRenderer sr;
 
@@ -16,11 +23,8 @@ public class EnemyPatrol : MonoBehaviour
 
     private float idleTime;
 
-    [SerializeField]
     private Vector3 offset;
-    public Vector3 rightOffset = new Vector3(-0.2f, 0.25f, 0);
 
-    [SerializeField]
     private Vector3 lastKnownPosition = Vector3.zero;
 
     private bool isGrounded;
@@ -29,7 +33,8 @@ public class EnemyPatrol : MonoBehaviour
     [Tooltip("Define how long the enemy will walk")]
     public float walkTime = 5f;
 
-    public LayerMask layerMask;
+    [FormerlySerializedAs("layerMask")]
+    public LayerMask obstacleLayersMask;
     public float groundCheckRadius = 0.25f;
 
     private void Awake()
@@ -37,6 +42,11 @@ public class EnemyPatrol : MonoBehaviour
         // We don't want the script to be enabled by default
         enabled = false;
         sr = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
+
+        maxMoveSpeed = enemyData.moveSpeed * enemyData.moveSpeedFactor;
+        currentMoveSpeed = enemyData.moveSpeed;
 
         offset = new Vector3(sr.bounds.size.x / 4, sr.bounds.size.y / 2, 0);
     }
@@ -49,8 +59,10 @@ public class EnemyPatrol : MonoBehaviour
         InvokeRepeating(nameof(UpdateLastKnownPosition), 3.0f, 3f);
     }
 
-    void UpdateLastKnownPosition() {
-        if(lastKnownPosition == transform.position && !isFlipping) {
+    void UpdateLastKnownPosition()
+    {
+        if (lastKnownPosition == transform.position && !isFlipping)
+        {
             StartCoroutine(Flip());
         }
         lastKnownPosition = transform.position;
@@ -73,21 +85,34 @@ public class EnemyPatrol : MonoBehaviour
     private void FixedUpdate()
     {
         isGrounded = IsGrounded();
-        Vector3 startCast = transform.position;
+        Vector3 startCast = transform.position + new Vector3(sr.bounds.size.x, 0, 0);;
         Vector3 endCast = transform.position + (isFacingRight ? Vector3.right : Vector3.left) * 0.5f;
         Debug.DrawLine(startCast, endCast, Color.green);
 
-        RaycastHit2D hit = Physics2D.Linecast(transform.position, endCast, layerMask);
+        RaycastHit2D hitObstacle = Physics2D.Linecast(transform.position, endCast, obstacleLayersMask);
 
-        if ((hit.collider != null && hit.distance < 0.4f) || !isGrounded)
+        if (hitObstacle.collider != null)
         {
+            if (hitObstacle.distance < 0.3f && hitObstacle.collider.gameObject.layer == LayerMask.NameToLayer("Platforms")) {
+                StartCoroutine(Flip());
+            } else if(hitObstacle.collider.gameObject.CompareTag("Player")) {
+                currentMoveSpeed = Mathf.Clamp(currentMoveSpeed * enemyData.moveSpeedFactor, enemyData.moveSpeed, maxMoveSpeed);
+            } else {
+                currentMoveSpeed = Mathf.Clamp(currentMoveSpeed / enemyData.moveSpeedFactor, enemyData.moveSpeed, maxMoveSpeed);
+            }
+        }
+
+        if(!isGrounded) {
             StartCoroutine(Flip());
         }
+        // if ((hitObstacle.collider != null && hitObstacle.distance < 0.3f) || !isGrounded)
+        // {
+        // }
     }
 
     public bool IsGrounded()
     {
-        return Physics2D.OverlapCircle(transform.position - offset, groundCheckRadius, layerMask);
+        return Physics2D.OverlapCircle(transform.position - offset, groundCheckRadius, obstacleLayersMask);
     }
 
     void OnDrawGizmos()
@@ -118,11 +143,11 @@ public class EnemyPatrol : MonoBehaviour
     {
         if (isFacingRight)
         {
-            rb.velocity = new Vector2(speed, rb.velocity.y);
+            rb.velocity = new Vector2(currentMoveSpeed, rb.velocity.y);
         }
         else
         {
-            rb.velocity = new Vector2(-speed, rb.velocity.y);
+            rb.velocity = new Vector2(-currentMoveSpeed, rb.velocity.y);
         }
     }
 
