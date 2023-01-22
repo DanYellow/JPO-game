@@ -1,8 +1,6 @@
-
 using UnityEngine;
 using System.Collections;
 using UnityEngine.Serialization;
-
 
 public class EnemyPatrol : MonoBehaviour
 {
@@ -48,7 +46,7 @@ public class EnemyPatrol : MonoBehaviour
         maxMoveSpeed = enemyData.moveSpeed * enemyData.moveSpeedFactor;
         currentMoveSpeed = enemyData.moveSpeed;
 
-        offset = new Vector3(sr.bounds.size.x / 4, sr.bounds.size.y / 2, 0);
+        offset = new Vector3(sr.bounds.size.x / 4 * (isFacingRight ? -1 : 1), sr.bounds.size.y / 2, 0);
     }
 
     private void Start()
@@ -85,8 +83,8 @@ public class EnemyPatrol : MonoBehaviour
     private void FixedUpdate()
     {
         isGrounded = IsGrounded();
-        Vector3 startCast = transform.position + new Vector3(sr.bounds.size.x, 0, 0);;
-        Vector3 endCast = transform.position + (isFacingRight ? Vector3.right : Vector3.left) * 0.5f;
+        Vector3 startCast = transform.position - new Vector3(offset.x, 0, 0);;
+        Vector3 endCast = transform.position + (isFacingRight ? Vector3.right : Vector3.left) * 0.75f;
         Debug.DrawLine(startCast, endCast, Color.green);
 
         RaycastHit2D hitObstacle = Physics2D.Linecast(transform.position, endCast, obstacleLayersMask);
@@ -105,9 +103,6 @@ public class EnemyPatrol : MonoBehaviour
         if(!isGrounded) {
             StartCoroutine(Flip());
         }
-        // if ((hitObstacle.collider != null && hitObstacle.distance < 0.3f) || !isGrounded)
-        // {
-        // }
     }
 
     public bool IsGrounded()
