@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     [SerializeField]
     private VoidEventChannel onDeathCallback = null;
+    protected Animator animator;
 
     protected SpriteRenderer sr;
 
@@ -24,12 +25,13 @@ public class Enemy : MonoBehaviour, IDamageable
     private ContactPoint2D[] listContacts = new ContactPoint2D[1];
 
     // Start is called before the first frame update
-    void Awake()
+    public virtual void Awake()
     {
         maxHealth = enemyData?.maxHealth ?? 1f;
         currentHealth = maxHealth;
         sr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     public virtual void TakeDamage(float damage)

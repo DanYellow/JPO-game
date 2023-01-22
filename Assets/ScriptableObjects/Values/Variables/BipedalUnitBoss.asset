@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a2df51d7df8cf84e866198d7593ab89, type: 3}
   m_Name: BipedalUnitBoss
   m_EditorClassIdentifier: 
-  maxHealth: 20
+  maxHealth: 21
   damage: 3
   moveSpeed: 0.95
   moveSpeedFactor: 1.25
   defense: 1.25
   knockbackForce: 1.75
   attackRange: 10
+  enrageThreshold: 0.15

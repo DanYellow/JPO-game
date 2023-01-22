@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SpriteBeam : MonoBehaviour
 {
     private Rigidbody2D rb;
+    protected float damage;
     // Start is called before the first frame update
      void Awake()
     {
