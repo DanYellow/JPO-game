@@ -59,7 +59,7 @@ public class EnemyPatrol : MonoBehaviour
 
     void UpdateLastKnownPosition()
     {
-        if (lastKnownPosition == transform.position && !isFlipping)
+        if (lastKnownPosition == transform.position && !isFlipping && (rb.velocity.y > -0.1f && rb.velocity.y < 0.1f))
         {
             StartCoroutine(Flip());
         }

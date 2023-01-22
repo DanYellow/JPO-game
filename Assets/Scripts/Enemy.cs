@@ -65,13 +65,18 @@ public class Enemy : MonoBehaviour, IDamageable
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionStay2D(Collision2D other)
     {
         other.GetContacts(listContacts);
         if (other.transform.TryGetComponent<IDamageable>(out IDamageable iDamageable))
         {
-            StartCoroutine(SwitchRbBodyType());
+            // StartCoroutine(SwidtchRbBodyType());
             iDamageable.TakeDamage(enemyData.damage);
+        }
+
+        if (other.transform.TryGetComponent<IPushable>(out IPushable iPushable))
+        {
+            iPushable.HitDirection(listContacts[0]);
         }
     }
 

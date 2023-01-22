@@ -1,9 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovements : MonoBehaviour
+public class PlayerMovements : MonoBehaviour, IPushable
 {
     private Rigidbody2D rb;
 
@@ -13,7 +12,7 @@ public class PlayerMovements : MonoBehaviour
     private Vector3 moveInput = Vector3.zero;
 
     private bool isFacingRight = true;
-    
+
     private bool isInWater;
 
     [Header("Events")]
@@ -31,6 +30,9 @@ public class PlayerMovements : MonoBehaviour
     [SerializeField]
     private VoidEventChannel isHurtVoidEventChannel;
 
+    private ContactPoint2D[] listContacts = new ContactPoint2D[1];
+
+
     [Space(15)]
 
     [Tooltip("Position checks")]
@@ -44,9 +46,6 @@ public class PlayerMovements : MonoBehaviour
     [Header("Jump system")]
     public int jumpCount = 0;
     private int maxJumpCount;
-    private float jumpForce;
-
-    private float backForce;
 
     private bool isHitted = false;
 
@@ -56,8 +55,8 @@ public class PlayerMovements : MonoBehaviour
 
     private PlayerInput playerInput;
 
-    [SerializeField]
-    private PlayerStatsValue playerStatsValue;
+    [SerializeField, UnityEngine.Serialization.FormerlySerializedAs("playerStatsValue")]
+    private PlayerStatsValue playerData;
 
     public LayerMask waterLayer;
 
@@ -69,11 +68,9 @@ public class PlayerMovements : MonoBehaviour
 
         isHurtVoidEventChannel.OnEventRaised += OnHurt;
 
-        moveSpeed = playerStatsValue.moveSpeed;
-        jumpForce = playerStatsValue.jumpForce;
-        maxJumpCount = playerStatsValue.maxJumpCount;
-        backForce = playerStatsValue.knockbackForce;
-        fallThreshold = playerStatsValue.fallThreshold;
+        moveSpeed = playerData.moveSpeed;
+        maxJumpCount = playerData.maxJumpCount;
+        fallThreshold = playerData.fallThreshold;
     }
 
     // Update is called once per frame
@@ -88,7 +85,7 @@ public class PlayerMovements : MonoBehaviour
         vectorEventChannel.Raise(moveInput);
         isGroundedBoolEventChannel.Raise(isGrounded);
         isInWaterBoolEventChannel.Raise(isInWater);
-        speedFactor = isInWater ? playerStatsValue.waterSpeedFactor : playerStatsValue.speedFactor;
+        speedFactor = isInWater ? playerData.waterSpeedFactor : playerData.speedFactor;
 
         Flip();
     }
@@ -123,7 +120,7 @@ public class PlayerMovements : MonoBehaviour
         {
             jumpBoolEventChannel.Raise(ctx.phase == InputActionPhase.Performed);
             jumpCount++;
-            rb.velocity = new Vector2((moveInput.x * moveSpeed) * speedFactor, jumpForce * speedFactor);
+            rb.velocity = new Vector2((moveInput.x * moveSpeed) * speedFactor, playerData.jumpForce * speedFactor);
         }
     }
 
@@ -143,7 +140,6 @@ public class PlayerMovements : MonoBehaviour
 
     public bool IsInWater()
     {
-
         return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, waterLayer);
     }
 
@@ -152,17 +148,22 @@ public class PlayerMovements : MonoBehaviour
         StartCoroutine(OnHurtProxy());
     }
 
+
     IEnumerator OnHurtProxy()
     {
         isHitted = true;
-        int factor = isFacingRight ? -1 : 1;
-        Vector2 pushBackVector = new Vector2(
-            transform.position.normalized.x,
-            0
-        ) * factor;
-        rb.AddForce(pushBackVector * backForce, ForceMode2D.Impulse);
         yield return new WaitForSeconds(0.25f);
         isHitted = false;
+    }
+
+    public void HitDirection(ContactPoint2D contactPoint)
+    {
+        int factor = isFacingRight ? -1 : 1;
+        Vector2 pushBackVector = new Vector2(
+           transform.position.normalized.x,
+           0
+       ) * contactPoint.normal.x * -1;
+        rb.AddForce(pushBackVector * playerData.knockbackForce, ForceMode2D.Impulse);
     }
 
     void OnDrawGizmos()

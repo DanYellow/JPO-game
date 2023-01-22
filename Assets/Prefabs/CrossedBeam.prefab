@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 59332764896449056}
   - component: {fileID: 59332764896449057}
   - component: {fileID: 366414829336365144}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: CrossedBeam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,6 +142,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
+  moveSpeed: 1.5
+  invoker: {fileID: 0}
 --- !u!61 &366414829336365144
 BoxCollider2D:
   m_ObjectHideFlags: 0
