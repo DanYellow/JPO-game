@@ -5,6 +5,9 @@ public class SpriteBeam : MonoBehaviour
     private Rigidbody2D rb;
     public float damage = 0;
     public float moveSpeed = 1.5f;
+    public GameObject impactEffect;
+
+    [HideInInspector]
     public GameObject invoker = null;
     // Start is called before the first frame update
     void Awake()
@@ -20,18 +23,14 @@ public class SpriteBeam : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (
-            other.transform.TryGetComponent<IDamageable>(out IDamageable iDamageable) &&
-            invoker != other.gameObject
-        )
-        {
-            iDamageable.TakeDamage(damage);
-        }
-
         if (invoker != other.gameObject)
         {
+            if(other.transform.TryGetComponent<IDamageable>(out IDamageable iDamageable)) {
+                iDamageable.TakeDamage(damage);
+            }
             Destroy(gameObject);
+            GameObject impact = Instantiate(impactEffect, transform.position, Quaternion.identity);
+            Destroy(impact, 0.05f);
         }
-
     }
 }

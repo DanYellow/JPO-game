@@ -143,6 +143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 0
   moveSpeed: 1.5
+  impactEffect: {fileID: 7969564955982403684, guid: be0c8a2cfe0b3004bac01ad324d53758, type: 3}
   invoker: {fileID: 0}
 --- !u!61 &366414829336365144
 BoxCollider2D:
@@ -168,5 +169,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4031296, y: 0.4349423}
+  m_Size: {x: 0.3682912, y: 0.3652686}
   m_EdgeRadius: 0

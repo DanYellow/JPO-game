@@ -31,7 +31,6 @@ public class GameOverManager : MonoBehaviour
         gameoverMenuUI.SetActive(false);
     }
 
-    // Update is called once per frame
     private void OnDestroy()
     {
         onPlayerDeathVoidEventChannel.OnEventRaised -= DisplayGameOverScreen;

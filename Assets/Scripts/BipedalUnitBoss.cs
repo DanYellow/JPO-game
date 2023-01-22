@@ -14,6 +14,7 @@ public class BipedalUnitBoss : Enemy, IDamageable
 
     public bool isEnraged = false;
 
+    public bool isInvulnerable = false;
 
     private void Start()
     {
@@ -21,6 +22,7 @@ public class BipedalUnitBoss : Enemy, IDamageable
 
     public override void TakeDamage(float damage)
     {
+        if (isInvulnerable) return;
         base.TakeDamage(damage);
 
         if (currentHealth / enemyData.maxHealth < enemyData.enrageThreshold && !isEnraged)
@@ -28,13 +30,6 @@ public class BipedalUnitBoss : Enemy, IDamageable
             isEnraged = true;
             animator.SetTrigger("IsEnraged");
         }
-
-        // int factor = isFacingRight ? -1 : 1;
-        // Vector2 pushBackVector = new Vector2(
-        //     transform.position.normalized.x,
-        //     0
-        // ) * factor;
-        // rb.AddForce(pushBackVector * enemyData.knockbackForce, ForceMode2D.Impulse);dd
     }
 
     public void Shoot()

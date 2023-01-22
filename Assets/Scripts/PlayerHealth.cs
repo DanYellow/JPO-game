@@ -14,21 +14,27 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     [SerializeField]
     private PlayerStatsValue playerStatsValue;
 
+    private bool isInvulnerable = false;
+
     private void Awake() {
         playerStatsValue.currentHealth = playerStatsValue.maxHealth;
     }
 
     private void Update()
     {
+        #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.H))
         {
             TakeDamage(1);
         }
+        #endif
     }
 
     // Update is called once per frame
     public void TakeDamage(float damage)
     {
+        if (isInvulnerable) return;
+
         playerStatsValue.currentHealth = Mathf.Clamp(playerStatsValue.currentHealth - damage, 0, playerStatsValue.maxHealth);
         if (playerStatsValue.currentHealth == 0)
         {
@@ -47,5 +53,12 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         Time.timeScale = 0.5f;
         yield return new WaitForSecondsRealtime(5.25f);
         Time.timeScale = 1f;
+    }
+
+    public IEnumerator HandleInvincibilityDelay()
+    {
+        isInvulnerable = true;
+        yield return new WaitForSeconds(playerStatsValue.invulnerabiltyTime);
+        isInvulnerable = false;
     }
 }
