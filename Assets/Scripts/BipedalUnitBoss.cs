@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BipedalUnitBoss : Enemy, IDamageable
-{    
+{
     private bool isFacingRight;
 
     [SerializeField]
@@ -23,7 +23,8 @@ public class BipedalUnitBoss : Enemy, IDamageable
     {
         base.TakeDamage(damage);
 
-        if(currentHealth / enemyData.maxHealth < enemyData.enrageThreshold && !isEnraged) {
+        if (currentHealth / enemyData.maxHealth < enemyData.enrageThreshold && !isEnraged)
+        {
             isEnraged = true;
             animator.SetTrigger("IsEnraged");
         }
@@ -38,11 +39,15 @@ public class BipedalUnitBoss : Enemy, IDamageable
 
     public void Shoot()
     {
-        //    GameObject nextBeam = Instantiate(beam, firePoint.position, Quaternion.identity);
-        //    nextBeam.transform.right = firePoint.right.normalized;
+        GameObject nextBeam = Instantiate(beam, firePoint.position, Quaternion.identity);
+        nextBeam.transform.right = firePoint.right.normalized;
+        SpriteBeam spriteBeam = nextBeam.GetComponent<SpriteBeam>();
+        spriteBeam.damage = enemyData.damage;
+        spriteBeam.invoker = gameObject;
     }
 
-    public void EnragedCallback() {
+    public void EnragedCallback()
+    {
         animator.ResetTrigger("IsEnraged");
     }
 }
