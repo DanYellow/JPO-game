@@ -12,13 +12,17 @@ public class InputManager : MonoBehaviour
     [SerializeField]
     private VoidEventChannel onBossKilled;
 
-    private UnityAction onCreditsEvent;
+    [SerializeField]
+    private VoidEventChannel onPlayerDeath;
+
+    private UnityAction onCreditsOrDeathEvent;
 
     private void Awake()
     {
-        onCreditsEvent = () => { ToggleActionMap(true); };
+        onCreditsOrDeathEvent = () => { SetUIGameOverActionMap(); };
         onTogglePauseEvent.OnEventRaised += ToggleActionMap;
-        onBossKilled.OnEventRaised += onCreditsEvent;
+        onBossKilled.OnEventRaised += onCreditsOrDeathEvent;
+        onPlayerDeath.OnEventRaised += onCreditsOrDeathEvent;
     }
 
     public void ToggleActionMap(bool isPaused)
@@ -33,9 +37,14 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    private void SetUIGameOverActionMap() {
+        playerInput.SwitchCurrentActionMap("UIGameOverAndCredits");
+    }
+
     private void OnDestroy()
     {
         onTogglePauseEvent.OnEventRaised -= ToggleActionMap;
-        onBossKilled.OnEventRaised -= onCreditsEvent;
+        onBossKilled.OnEventRaised -= onCreditsOrDeathEvent;
+        onPlayerDeath.OnEventRaised -= onCreditsOrDeathEvent;
     }
 }

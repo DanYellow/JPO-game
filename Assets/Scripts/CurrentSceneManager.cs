@@ -40,10 +40,10 @@ public class CurrentSceneManager : MonoBehaviour
 
     public void OnControlsChanged(PlayerInput input)
     {
-        if (input.currentControlScheme.Equals("Gamepad"))
-        {
-            creditsUI.GetComponentInChildren<Button>().Select();
-        }
+        // if (input.currentControlScheme.Equals("Gamepad"))
+        // {
+        //     creditsUI.GetComponentInChildren<Button>().Select();
+        // }
     }
 
     public void RestartLevel()

@@ -25,7 +25,7 @@ public class BipedalUnitWalk : StateMachineBehaviour
     
         Vector2 target = new Vector2(player.position.x, rb.position.y);
         // Debug.Log((rb.position.y - player.position.y));
-        if (rb.position.y > player.position.y) // (rb.position.y - player.position.y) > 0
+        if (true) // rb.position.y > player.position.y (rb.position.y - player.position.y) > 0
         {
             rb.MovePosition(
                 Vector2.MoveTowards(rb.position, target, enemyData.moveSpeed * Time.fixedDeltaTime * (isEnraged ? 1 : enemyData.enrageFactor))

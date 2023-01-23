@@ -28,6 +28,13 @@ public class PlayerHealth : MonoBehaviour, IDamageable
             TakeDamage(1);
         }
         #endif
+
+        #if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.F9))
+        {
+            TakeDamage(float.MaxValue);
+        }
+        #endif
     }
 
     // Update is called once per frame

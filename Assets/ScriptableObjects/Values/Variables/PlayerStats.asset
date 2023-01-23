@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
   maxHealth: 50
-  currentHealth: 97
+  currentHealth: 0
   moveSpeed: 3
   jumpForce: 3.75
   maxJumpCount: 2
@@ -23,3 +23,4 @@ MonoBehaviour:
   fallThreshold: -5
   damage: 1
   invulnerabiltyTime: 2.5
+  shootingRate: 0.35
