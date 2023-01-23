@@ -7,6 +7,8 @@ public class Enemy : MonoBehaviour, IDamageable
     protected Rigidbody2D rb;
 
     public EnemyStatsValue enemyData;
+
+    [SerializeField]
     protected float currentHealth = 0f;
     protected float maxHealth;
 

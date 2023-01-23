@@ -14,5 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 2
   damage: 1
-  moveSpeed: 0.75
-  moveSpeedFactor: 1.25
+  moveSpeed: 0.6
+  accelerationRate: 2.183
+  defense: 1
+  knockbackForce: 1.75
+  attackRange: 0.5
+  enrageThreshold: 0
+  enrageFactor: 1
+  beamSpeed: 1.75

@@ -13,6 +13,8 @@ public class PlayerShoot : MonoBehaviour
     private LineRenderer lineRenderer;
     public GameObject impactEffect;
 
+    private float nextShootTime = 0f;
+
     public LayerMask collisionLayers;
 
     public Transform firePoint;
@@ -25,10 +27,11 @@ public class PlayerShoot : MonoBehaviour
 
     public void OnShoot(InputAction.CallbackContext ctx)
     {
-        if (ctx.phase == InputActionPhase.Performed)
+        if (ctx.phase == InputActionPhase.Performed && Time.time >= playerStatsValue.shootingRate)
         {
             isShootingEventChannel.Raise(ctx.phase == InputActionPhase.Performed);
             StartCoroutine(DetectHit());
+            nextShootTime = Time.time + playerStatsValue.shootingRate;
         }
     }
 

@@ -26,6 +26,7 @@ public class EnemyPatrol : MonoBehaviour
     private Vector3 lastKnownPosition = Vector3.zero;
 
     private bool isGrounded;
+    public float groundCheckRadius = 0.25f;
     private bool isFlipping = false;
 
     [Tooltip("Define how long the enemy will walk")]
@@ -33,7 +34,6 @@ public class EnemyPatrol : MonoBehaviour
 
     [FormerlySerializedAs("layerMask")]
     public LayerMask obstacleLayersMask;
-    public float groundCheckRadius = 0.25f;
 
     private void Awake()
     {
@@ -43,10 +43,10 @@ public class EnemyPatrol : MonoBehaviour
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
 
-        maxMoveSpeed = enemyData.moveSpeed * enemyData.moveSpeedFactor;
+        maxMoveSpeed = enemyData.moveSpeed * enemyData.accelerationRate;
         currentMoveSpeed = enemyData.moveSpeed;
 
-        offset = new Vector3(sr.bounds.size.x / 4 * (isFacingRight ? -1 : 1), sr.bounds.size.y / 2, 0);
+        offset = new Vector3(sr.bounds.extents.x * (isFacingRight ? -1 : 1), sr.bounds.extents.y, 0);
     }
 
     private void Start()
@@ -83,24 +83,30 @@ public class EnemyPatrol : MonoBehaviour
     private void FixedUpdate()
     {
         isGrounded = IsGrounded();
-        Vector3 startCast = transform.position - new Vector3(offset.x, 0, 0);;
+        Vector3 startCast = transform.position - new Vector3(offset.x, 0, 0);
         Vector3 endCast = transform.position + (isFacingRight ? Vector3.right : Vector3.left) * 0.75f;
         Debug.DrawLine(startCast, endCast, Color.green);
 
-        RaycastHit2D hitObstacle = Physics2D.Linecast(transform.position, endCast, obstacleLayersMask);
+        RaycastHit2D hitObstacle = Physics2D.Linecast(startCast, endCast, obstacleLayersMask);
 
-        if (hitObstacle.collider != null)
+        if (hitObstacle.collider != null && isGrounded)
         {
-            if (hitObstacle.distance < 0.3f && hitObstacle.collider.gameObject.layer == LayerMask.NameToLayer("Platforms")) {
+            if (hitObstacle.distance < 0.05f && hitObstacle.collider.gameObject.layer == LayerMask.NameToLayer("Platforms"))
+            {
                 StartCoroutine(Flip());
-            } else if(hitObstacle.collider.gameObject.CompareTag("Player")) {
-                currentMoveSpeed = Mathf.Clamp(currentMoveSpeed * enemyData.moveSpeedFactor, enemyData.moveSpeed, maxMoveSpeed);
-            } else {
-                currentMoveSpeed = Mathf.Clamp(currentMoveSpeed / enemyData.moveSpeedFactor, enemyData.moveSpeed, maxMoveSpeed);
+            }
+            else if (hitObstacle.collider.gameObject.CompareTag("Player"))
+            {
+                currentMoveSpeed = Mathf.Clamp(currentMoveSpeed * enemyData.accelerationRate, enemyData.moveSpeed, maxMoveSpeed);
             }
         }
+        else
+        {
+            currentMoveSpeed = Mathf.Clamp(currentMoveSpeed / enemyData.accelerationRate, enemyData.moveSpeed, maxMoveSpeed);
+        }
 
-        if(!isGrounded) {
+        if (!isGrounded)
+        {
             StartCoroutine(Flip());
         }
     }

@@ -7,8 +7,8 @@ public class EnemyStatsValue : ScriptableObject
     public float maxHealth;
     public float damage;
     public float moveSpeed;
-    [Tooltip("How much the speed will increase when the player is detected")]
-    public float moveSpeedFactor = 1.25f;
+    [Tooltip("How much the speed will increase when the player is detected"), Range(1, 3)]
+    public float accelerationRate = 1.25f;
 
     [Tooltip("How much the damage will be reduced on hit")]
     public float defense = 1;
@@ -16,7 +16,11 @@ public class EnemyStatsValue : ScriptableObject
     [Range(0, 5)]
     public float knockbackForce = 1.75f;
 
+    [Tooltip("How close the target have to be in order to start the attack sequence")]
     public float attackRange = 0.5f;
+
+    [Tooltip("How close the target have to be in order to start the fight sequence")]
+    public float activationRange = 0.3f;
 
     [Tooltip("Which threshold of life point the enemy have to reach in order to enrage")]
     [Range(0, 1)]

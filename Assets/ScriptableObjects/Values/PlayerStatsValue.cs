@@ -22,6 +22,8 @@ public class PlayerStatsValue : ScriptableObject
 
     public float invulnerabiltyTime = 2.5f;
 
+    public float shootingRate = 0.3f;
+
     private void OnEnable() {
         currentHealth = maxHealth;
     }

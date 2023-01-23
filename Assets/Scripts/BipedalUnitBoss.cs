@@ -1,5 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class BipedalUnitBoss : Enemy, IDamageable
@@ -11,15 +11,23 @@ public class BipedalUnitBoss : Enemy, IDamageable
 
     [SerializeField]
     private Transform firePoint;
+    public bool isActive { get; set; } = false;
 
     [HideInInspector]
     public bool isEnraged = false;
+
 
     [HideInInspector]
     public bool isInvulnerable = false;
 
     private void Start()
     {
+    }
+
+    public override void Awake()
+    {
+        base.Awake();
+        gameObject.SetActive(false);
     }
 
     public override void TakeDamage(float damage)
@@ -47,5 +55,16 @@ public class BipedalUnitBoss : Enemy, IDamageable
     public void EnragedCallback()
     {
         animator.ResetTrigger("IsEnraged");
+    }
+
+    public void StartCombat()
+    {
+        IEnumerator StartCombatProxy()
+        {
+            yield return new WaitForSeconds(0.2f);
+            animator.SetTrigger("CombatStarted");
+        }
+
+        StartCoroutine(StartCombatProxy());
     }
 }
