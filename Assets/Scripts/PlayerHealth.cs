@@ -44,6 +44,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
             Destroy(gameObject);
             onPlayerDeathVoidEventChannel.Raise();
         } else {
+            StartCoroutine(HandleInvincibilityDelay());
             isHurtVoidEventChannel.Raise();
         }
     }
