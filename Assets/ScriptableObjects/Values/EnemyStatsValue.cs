@@ -21,4 +21,8 @@ public class EnemyStatsValue : ScriptableObject
     [Tooltip("Which threshold of life point the enemy have to reach in order to enrage")]
     [Range(0, 1)]
     public float enrageThreshold = 0;
+    [Range(1, 3)]
+    public float enrageFactor = 1;
+
+    public float beamSpeed = 1.75f;
 }
