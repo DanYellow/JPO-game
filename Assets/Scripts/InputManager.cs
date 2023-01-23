@@ -1,13 +1,24 @@
 using UnityEngine.InputSystem;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class InputManager : MonoBehaviour
 {
     public PlayerInput playerInput;
-    public BoolEventChannel onTogglePauseEvent;
 
-    private void Start() {
+    [SerializeField]
+    private BoolEventChannel onTogglePauseEvent;
+
+    [SerializeField]
+    private VoidEventChannel onBossKilled;
+
+    private UnityAction onCreditsEvent;
+
+    private void Awake()
+    {
+        onCreditsEvent = () => { ToggleActionMap(true); };
         onTogglePauseEvent.OnEventRaised += ToggleActionMap;
+        onBossKilled.OnEventRaised += onCreditsEvent;
     }
 
     public void ToggleActionMap(bool isPaused)
@@ -25,5 +36,6 @@ public class InputManager : MonoBehaviour
     private void OnDestroy()
     {
         onTogglePauseEvent.OnEventRaised -= ToggleActionMap;
+        onBossKilled.OnEventRaised -= onCreditsEvent;
     }
 }

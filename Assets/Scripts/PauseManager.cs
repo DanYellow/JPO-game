@@ -38,6 +38,14 @@ public class PauseManager : MonoBehaviour
         onTogglePauseEvent.Raise(isGamePaused);
     }
 
+    public void OnControlsChanged(PlayerInput input)
+    {
+        if (input.currentControlScheme.Equals("Gamepad"))
+        {
+            pauseMenuUI.GetComponentInChildren<Button>().Select();
+        }
+    }
+
     void Pause()
     {
         pauseMenuUI.SetActive(true);

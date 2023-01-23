@@ -27,7 +27,7 @@ public class PlayerShoot : MonoBehaviour
 
     public void OnShoot(InputAction.CallbackContext ctx)
     {
-        if (ctx.phase == InputActionPhase.Performed && Time.time >= playerStatsValue.shootingRate)
+        if (ctx.phase == InputActionPhase.Performed && Time.time >= nextShootTime)
         {
             isShootingEventChannel.Raise(ctx.phase == InputActionPhase.Performed);
             StartCoroutine(DetectHit());

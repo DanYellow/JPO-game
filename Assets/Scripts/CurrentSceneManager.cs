@@ -1,6 +1,7 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class CurrentSceneManager : MonoBehaviour
 {
@@ -22,19 +23,27 @@ public class CurrentSceneManager : MonoBehaviour
 
     void Update()
     {
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.R))
         {
             Debug.ClearDeveloperConsole();
             RestartLevel();
         }
-        #endif
+#endif
     }
 
     private void DisplayCreditsScreen()
     {
         creditsUI.SetActive(true);
         creditsUI.GetComponentInChildren<Button>().Select();
+    }
+
+    public void OnControlsChanged(PlayerInput input)
+    {
+        if (input.currentControlScheme.Equals("Gamepad"))
+        {
+            creditsUI.GetComponentInChildren<Button>().Select();
+        }
     }
 
     public void RestartLevel()
