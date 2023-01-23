@@ -51,6 +51,8 @@ public class PlayerMovements : MonoBehaviour, IPushable
 
     private float fallThreshold;
 
+    private Vector2 nextPosition;
+
     private float speedFactor;
 
     private PlayerInput playerInput;
@@ -94,7 +96,11 @@ public class PlayerMovements : MonoBehaviour, IPushable
     {
         if (!isHitted)
         {
-            rb.velocity = new Vector2((moveInput.x * moveSpeed) * speedFactor, rb.velocity.y);
+            nextPosition = new Vector2((moveInput.x * moveSpeed) * speedFactor, rb.velocity.y);
+            if( moveInput.y <= -0.25f) {
+                nextPosition.x = 0;
+            }
+            rb.velocity = nextPosition;
         }
 
         isGrounded = IsGrounded();
