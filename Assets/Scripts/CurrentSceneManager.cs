@@ -2,6 +2,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class CurrentSceneManager : MonoBehaviour
 {
@@ -35,19 +36,21 @@ public class CurrentSceneManager : MonoBehaviour
     private void DisplayCreditsScreen()
     {
         creditsUI.SetActive(true);
-        creditsUI.GetComponentInChildren<Button>().Select();
+        EventSystemExtensions.UpdateSelectedGameObject(creditsUI.GetComponentInChildren<Button>().gameObject);
+
     }
 
     public void OnControlsChanged(PlayerInput input)
     {
-        // if (input.currentControlScheme.Equals("Gamepad"))
-        // {
-        //     creditsUI.GetComponentInChildren<Button>().Select();
-        // }
+        if (input.currentControlScheme.Equals("Gamepad") && creditsUI.activeInHierarchy)
+        {
+            creditsUI.GetComponentInChildren<Button>().Select();
+        }
     }
 
     public void RestartLevel()
     {
+        EventSystem.current.SetSelectedGameObject(null);
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
     }

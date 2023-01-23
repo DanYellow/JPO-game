@@ -130191,7 +130191,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 0
+    m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 1752693602}
     m_SelectOnDown: {fileID: 1752693602}
@@ -131449,17 +131449,17 @@ MonoBehaviour:
   m_MoveRepeatDelay: 0.5
   m_MoveRepeatRate: 0.1
   m_XRTrackingOrigin: {fileID: 0}
-  m_ActionsAsset: {fileID: -944628639613478452, guid: 3b58c4f8002d95d48845060fe8a9c6ac, type: 3}
-  m_PointAction: {fileID: -5159478255008088412, guid: 3b58c4f8002d95d48845060fe8a9c6ac, type: 3}
-  m_MoveAction: {fileID: 4623360812399868419, guid: 3b58c4f8002d95d48845060fe8a9c6ac, type: 3}
-  m_SubmitAction: {fileID: 7611001882954861678, guid: 3b58c4f8002d95d48845060fe8a9c6ac, type: 3}
-  m_CancelAction: {fileID: 6459458579658341682, guid: 3b58c4f8002d95d48845060fe8a9c6ac, type: 3}
-  m_LeftClickAction: {fileID: 3336459286327496039, guid: 3b58c4f8002d95d48845060fe8a9c6ac, type: 3}
-  m_MiddleClickAction: {fileID: -8737812027712258598, guid: 3b58c4f8002d95d48845060fe8a9c6ac, type: 3}
-  m_RightClickAction: {fileID: 8051818862334066785, guid: 3b58c4f8002d95d48845060fe8a9c6ac, type: 3}
-  m_ScrollWheelAction: {fileID: 6464089415735106224, guid: 3b58c4f8002d95d48845060fe8a9c6ac, type: 3}
-  m_TrackedDevicePositionAction: {fileID: 3213999996701537766, guid: 3b58c4f8002d95d48845060fe8a9c6ac, type: 3}
-  m_TrackedDeviceOrientationAction: {fileID: -5953981493264341806, guid: 3b58c4f8002d95d48845060fe8a9c6ac, type: 3}
+  m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_PointAction: {fileID: -1654692200621890270, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_MoveAction: {fileID: -8784545083839296357, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_SubmitAction: {fileID: 392368643174621059, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_CancelAction: {fileID: 7727032971491509709, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_LeftClickAction: {fileID: 3001919216989983466, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_MiddleClickAction: {fileID: -2185481485913320682, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_RightClickAction: {fileID: -4090225696740746782, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_ScrollWheelAction: {fileID: 6240969308177333660, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_TrackedDevicePositionAction: {fileID: 6564999863303420839, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: 7970375526676320489, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 1
@@ -134939,8 +134939,68 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7665010452612635954, guid: cbbe23bfa7d691240a259d1c9cf29111, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 7665010452612635954, guid: cbbe23bfa7d691240a259d1c9cf29111, type: 3}
+      propertyPath: m_ActionEvents.Array.data[16].m_ActionId
+      value: 7699341d-2cde-453a-b04d-eff317353b47
+      objectReference: {fileID: 0}
+    - target: {fileID: 7665010452612635954, guid: cbbe23bfa7d691240a259d1c9cf29111, type: 3}
+      propertyPath: m_ActionEvents.Array.data[17].m_ActionId
+      value: 5f98d455-5b70-4e3f-8c1d-42659972b0ce
+      objectReference: {fileID: 0}
+    - target: {fileID: 7665010452612635954, guid: cbbe23bfa7d691240a259d1c9cf29111, type: 3}
+      propertyPath: m_ActionEvents.Array.data[18].m_ActionId
+      value: b7a7f9dd-c764-4728-af6c-bf07d606510a
+      objectReference: {fileID: 0}
+    - target: {fileID: 7665010452612635954, guid: cbbe23bfa7d691240a259d1c9cf29111, type: 3}
+      propertyPath: m_ActionEvents.Array.data[19].m_ActionId
+      value: ad8a8ad3-de60-4e37-bfe6-b4d3646e4cfd
+      objectReference: {fileID: 0}
+    - target: {fileID: 7665010452612635954, guid: cbbe23bfa7d691240a259d1c9cf29111, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_ActionId
+      value: 4f07e862-f209-4e1f-83e7-c934bdefd977
+      objectReference: {fileID: 0}
+    - target: {fileID: 7665010452612635954, guid: cbbe23bfa7d691240a259d1c9cf29111, type: 3}
+      propertyPath: m_ActionEvents.Array.data[21].m_ActionId
+      value: a97f3a9a-3e90-4b3a-b9e7-9b61d7fa9ca6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7665010452612635954, guid: cbbe23bfa7d691240a259d1c9cf29111, type: 3}
+      propertyPath: m_ActionEvents.Array.data[22].m_ActionId
+      value: 356588e8-e09b-476a-b093-3750990a2f1e
+      objectReference: {fileID: 0}
+    - target: {fileID: 7665010452612635954, guid: cbbe23bfa7d691240a259d1c9cf29111, type: 3}
+      propertyPath: m_ActionEvents.Array.data[16].m_ActionName
+      value: UIGameOverAndCredits/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+      objectReference: {fileID: 0}
+    - target: {fileID: 7665010452612635954, guid: cbbe23bfa7d691240a259d1c9cf29111, type: 3}
+      propertyPath: m_ActionEvents.Array.data[17].m_ActionName
+      value: UIGameOverAndCredits/Submit[/Keyboard/enter]
+      objectReference: {fileID: 0}
+    - target: {fileID: 7665010452612635954, guid: cbbe23bfa7d691240a259d1c9cf29111, type: 3}
+      propertyPath: m_ActionEvents.Array.data[18].m_ActionName
+      value: UIGameOverAndCredits/Cancel[/Keyboard/escape]
+      objectReference: {fileID: 0}
+    - target: {fileID: 7665010452612635954, guid: cbbe23bfa7d691240a259d1c9cf29111, type: 3}
+      propertyPath: m_ActionEvents.Array.data[19].m_ActionName
+      value: UIGameOverAndCredits/Point[/Mouse/position]
+      objectReference: {fileID: 0}
+    - target: {fileID: 7665010452612635954, guid: cbbe23bfa7d691240a259d1c9cf29111, type: 3}
+      propertyPath: m_ActionEvents.Array.data[20].m_ActionName
+      value: UIGameOverAndCredits/Click[/Mouse/leftButton,/Keyboard/space]
+      objectReference: {fileID: 0}
+    - target: {fileID: 7665010452612635954, guid: cbbe23bfa7d691240a259d1c9cf29111, type: 3}
+      propertyPath: m_ActionEvents.Array.data[21].m_ActionName
+      value: UIGameOverAndCredits/ScrollWheel[/Mouse/scroll]
+      objectReference: {fileID: 0}
+    - target: {fileID: 7665010452612635954, guid: cbbe23bfa7d691240a259d1c9cf29111, type: 3}
+      propertyPath: m_ActionEvents.Array.data[22].m_ActionName
+      value: UIGameOverAndCredits/MiddleClick[/Mouse/middleButton]
+      objectReference: {fileID: 0}
+    - target: {fileID: 7665010452612635954, guid: cbbe23bfa7d691240a259d1c9cf29111, type: 3}
       propertyPath: m_ControlsChangedEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7665010452612635954, guid: cbbe23bfa7d691240a259d1c9cf29111, type: 3}
       propertyPath: m_ControlsChangedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -134961,11 +135021,11 @@ PrefabInstance:
     - target: {fileID: 7665010452612635954, guid: cbbe23bfa7d691240a259d1c9cf29111, type: 3}
       propertyPath: m_ControlsChangedEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1011796525}
+      objectReference: {fileID: 1011796523}
     - target: {fileID: 7665010452612635954, guid: cbbe23bfa7d691240a259d1c9cf29111, type: 3}
       propertyPath: m_ControlsChangedEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 1011796525}
+      objectReference: {fileID: 1011796522}
     - target: {fileID: 7665010452612635954, guid: cbbe23bfa7d691240a259d1c9cf29111, type: 3}
       propertyPath: m_ControlsChangedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -135004,11 +135064,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7665010452612635954, guid: cbbe23bfa7d691240a259d1c9cf29111, type: 3}
       propertyPath: m_ControlsChangedEvent.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: GameOverManager, Assembly-CSharp
+      value: PauseManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7665010452612635954, guid: cbbe23bfa7d691240a259d1c9cf29111, type: 3}
       propertyPath: m_ControlsChangedEvent.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: GameOverManager, Assembly-CSharp
+      value: CurrentSceneManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7665010452612635954, guid: cbbe23bfa7d691240a259d1c9cf29111, type: 3}
       propertyPath: m_ControlsChangedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName

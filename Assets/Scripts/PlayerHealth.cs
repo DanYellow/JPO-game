@@ -48,8 +48,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
             // StartCoroutine(SlowTime());
             GameObject deathEffect = Instantiate(deathEffectPrefab, transform.position, Quaternion.identity);
             Destroy(deathEffect, deathEffect.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-            Destroy(gameObject);
             onPlayerDeathVoidEventChannel.Raise();
+            Destroy(gameObject);
         } else {
             StartCoroutine(HandleInvincibilityDelay());
             isHurtVoidEventChannel.Raise();

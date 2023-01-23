@@ -47,4 +47,15 @@ public class InputManager : MonoBehaviour
         onBossKilled.OnEventRaised -= onCreditsOrDeathEvent;
         onPlayerDeath.OnEventRaised -= onCreditsOrDeathEvent;
     }
+
+    private void OnEnable()
+    {
+        Debug.Log("fezfze");
+        // playerInput.enabled = true;
+    }
+
+    // private void OnDisable()
+    // {
+    //     playerInput.enabled = false;
+    // }
 }

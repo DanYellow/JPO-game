@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
-using System.Linq;
 
 public class GameOverManager : MonoBehaviour
 {
@@ -32,15 +31,9 @@ public class GameOverManager : MonoBehaviour
 
     public void OnControlsChanged(PlayerInput input)
     {
-        
-
-        if (input.currentControlScheme.Equals("Gamepad"))
+        if (input.currentControlScheme.Equals("Gamepad") && gameoverMenuUI.activeInHierarchy)
         {
-            // Debug.Log("fezfzefza " + gameoverMenuUI.transform.GetChild(0).gameObject);
-            // EventSystem.current.SetSelectedGameObject(null);
-            // EventSystem.current.SetSelectedGameObject(gameoverMenuUI.transform.GetChild(0).gameObject);
-            // EventSystem.current.SetSelectedGameObject(gameoverMenuUI);
-               gameoverMenuUI.GetComponentInChildren<Button>().Select();
+            gameoverMenuUI.GetComponentInChildren<Button>().Select();
         }
     }
 

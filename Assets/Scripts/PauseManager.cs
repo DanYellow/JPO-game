@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class PauseManager : MonoBehaviour
 {
@@ -36,21 +37,23 @@ public class PauseManager : MonoBehaviour
         pauseMenuUI.SetActive(false);
         isGamePaused = false;
         onTogglePauseEvent.Raise(isGamePaused);
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void OnControlsChanged(PlayerInput input)
     {
-        // if (input.currentControlScheme.Equals("Gamepad"))
-        // {
-        //     pauseMenuUI.GetComponentInChildren<Button>().Select();
-        // }
+        if (input.currentControlScheme.Equals("Gamepad") && pauseMenuUI.activeInHierarchy)
+        {
+            pauseMenuUI.GetComponentInChildren<Button>().Select();
+        }
     }
 
     void Pause()
     {
         pauseMenuUI.SetActive(true);
 
-        pauseMenuUI.GetComponentInChildren<Button>().Select();
+        EventSystemExtensions.UpdateSelectedGameObject(pauseMenuUI.GetComponentInChildren<Button>().gameObject);
+
         isGamePaused = true;
         Time.timeScale = 0;
         onTogglePauseEvent.Raise(isGamePaused);
