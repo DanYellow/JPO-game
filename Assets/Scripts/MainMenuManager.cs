@@ -16,6 +16,8 @@ public class MainMenuManager : MonoBehaviour
         Time.timeScale = 1f;
         infosMenu.SetActive(false);
         EventSystemExtensions.UpdateSelectedGameObject(mainMenu.GetComponentInChildren<Button>().gameObject);
+
+        Debug.Log(UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject);
     }
 
     public void OnControlsChanged(PlayerInput input)

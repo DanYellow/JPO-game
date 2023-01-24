@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 using UnityEngine.EventSystems;
 
 //It is common to create a class to contain all of your
