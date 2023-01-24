@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public EnemyStatsValue enemyData;
 
-    [SerializeField]
+     [ReadOnlyInspector, SerializeField]
     protected float currentHealth = 0f;
     protected float maxHealth;
 
@@ -39,6 +39,7 @@ public class Enemy : MonoBehaviour, IDamageable
     public virtual void TakeDamage(float damage)
     {
         currentHealth = Mathf.Clamp(currentHealth - (damage * enemyData.defense), 0, maxHealth);
+        currentHealth = Mathf.Round(currentHealth * 100f) / 100f;
         if (currentHealth == 0)
         {
             GameObject impact = Instantiate(deathEffect, transform.position, Quaternion.identity);

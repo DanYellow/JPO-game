@@ -1,5 +1,4 @@
 using System.Collections;
-using System;
 using UnityEngine;
 
 public class BipedalUnitBoss : Enemy, IDamageable
@@ -33,7 +32,7 @@ public class BipedalUnitBoss : Enemy, IDamageable
     public override void TakeDamage(float damage)
     {
         if (isInvulnerable) return;
-        base.TakeDamage(damage);
+        base.TakeDamage(isEnraged ? damage / enemyData.enrageFactor : damage);
 
         if (currentHealth / enemyData.maxHealth < enemyData.enrageThreshold && !isEnraged)
         {

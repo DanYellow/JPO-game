@@ -10,6 +10,8 @@ public class EnemyStatsValue : ScriptableObject
     [Tooltip("How much the speed will increase when the player is detected"), Range(1, 3)]
     public float accelerationRate = 1.25f;
 
+    private float initDefense;
+
     [Tooltip("How much the damage will be reduced on hit")]
     public float defense = 1;
 
@@ -29,5 +31,4 @@ public class EnemyStatsValue : ScriptableObject
     public float enrageFactor = 1;
 
     public float beamSpeed = 1.75f;
-    
 }
