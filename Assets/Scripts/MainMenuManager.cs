@@ -12,12 +12,22 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField]
     private GameObject infosMenu;
 
-    private void Awake() {
+    [SerializeField]
+    private PlayerInput pi;
+
+    private void Awake()
+    {
         Time.timeScale = 1f;
         infosMenu.SetActive(false);
-        EventSystemExtensions.UpdateSelectedGameObject(mainMenu.GetComponentInChildren<Button>().gameObject);
 
-        Debug.Log(UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject);
+        if (pi.currentControlScheme.Equals("Gamepad"))
+        {
+            EventSystemExtensions.UpdateSelectedGameObject(mainMenu.GetComponentInChildren<Button>().gameObject);
+        }
+
+        Debug.Log("input.currentControlScheme " + pi.currentControlScheme);
+
+        // Debug.Log(UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject);
     }
 
     public void OnControlsChanged(PlayerInput input)
@@ -32,6 +42,11 @@ public class MainMenuManager : MonoBehaviour
             infosMenu.GetComponentInChildren<Button>().Select();
             // EventSystemExtensions.UpdateSelectedGameObject(infosMenu.GetComponentInChildren<ScrollRect>().gameObject);
         }
+
+        if (input.currentControlScheme.Equals("Keyboard&Mouse"))
+        {
+             EventSystem.current.SetSelectedGameObject(null);
+        }
     }
 
     public void LoadLevel(int index)
@@ -40,12 +55,14 @@ public class MainMenuManager : MonoBehaviour
         SceneManager.LoadScene(index, LoadSceneMode.Single);
     }
 
-    public void DisplayInfosMenu() {
+    public void DisplayInfosMenu()
+    {
         infosMenu.SetActive(true);
         EventSystemExtensions.UpdateSelectedGameObject(infosMenu.GetComponentInChildren<Button>().gameObject);
     }
 
-    public void HideInfosMenu() {
+    public void HideInfosMenu()
+    {
         EventSystemExtensions.UpdateSelectedGameObject(mainMenu.GetComponentInChildren<Button>().gameObject);
         infosMenu.SetActive(false);
     }

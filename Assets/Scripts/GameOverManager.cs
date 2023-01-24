@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+using System.Collections;
 
 public class GameOverManager : MonoBehaviour
 {
@@ -25,7 +26,11 @@ public class GameOverManager : MonoBehaviour
     {
         gameoverMenuUI.SetActive(true);
         playerHUDUI.SetActive(false);
+        StartCoroutine(TriggerInputAction());
+    }
 
+    IEnumerator TriggerInputAction() {
+        yield return new WaitForSeconds(0.5f);
         EventSystemExtensions.UpdateSelectedGameObject(gameoverMenuUI.GetComponentInChildren<Button>().gameObject);
     }
 

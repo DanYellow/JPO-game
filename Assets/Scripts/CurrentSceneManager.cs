@@ -28,7 +28,7 @@ public class CurrentSceneManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             Debug.ClearDeveloperConsole();
-            RestartLevel();
+            LoadLevel();
         }
 #endif
     }
@@ -48,11 +48,11 @@ public class CurrentSceneManager : MonoBehaviour
         }
     }
 
-    public void RestartLevel()
+    public void LoadLevel(int levelName = 1)
     {
         EventSystem.current.SetSelectedGameObject(null);
         Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+        SceneManager.LoadScene(levelName, LoadSceneMode.Single);
     }
 
     public void QuitGame()

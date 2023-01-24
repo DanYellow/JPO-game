@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class MenuButton : MonoBehaviour, ISelectHandler, IDeselectHandler, IPointerEnterHandler, IPointerExitHandler
+public class MenuButton : MonoBehaviour, ISelectHandler, IPointerEnterHandler, IPointerExitHandler
 {
     private Animator animator;
 
@@ -12,7 +9,6 @@ public class MenuButton : MonoBehaviour, ISelectHandler, IDeselectHandler, IPoin
     private void Awake()
     {
         listMenuButton = GameObject.FindObjectsOfType<MenuButton>();
-        Debug.Log("listMenuButton" + listMenuButton.Length);
         animator = GetComponent<Animator>();
     }
 
@@ -26,12 +22,13 @@ public class MenuButton : MonoBehaviour, ISelectHandler, IDeselectHandler, IPoin
                 item.GetComponent<Animator>().SetBool("IsSelected", false);
             }
         }
-        // animator.SetBool("IsSelected", true);
     }
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        // animator.SetBool("IsSelected", false);
+    public void OnPointerExit(PointerEventData eventData) {
+        foreach (var item in listMenuButton)
+        {   
+            item.GetComponent<Animator>().SetBool("IsSelected", false);
+        }
     }
 
     public void OnSelect(BaseEventData eventData)
@@ -46,8 +43,4 @@ public class MenuButton : MonoBehaviour, ISelectHandler, IDeselectHandler, IPoin
         }
     }
 
-    public void OnDeselect(BaseEventData eventData)
-    {
-        // animator.SetBool("IsSelected", false);
-    }
 }

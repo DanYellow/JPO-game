@@ -1,6 +1,4 @@
 using UnityEngine;
-using System.Collections;
-using System;
 
 public class BipedalUnitIdle : StateMachineBehaviour
 {
@@ -8,6 +6,9 @@ public class BipedalUnitIdle : StateMachineBehaviour
     private Rigidbody2D rb;
     private BipedalUnitBoss bipedalUnitBoss;
     public EnemyStatsValue enemyData;
+
+    [SerializeField]
+    private VoidEventChannel onBipedalBossActivation;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -33,6 +34,8 @@ public class BipedalUnitIdle : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        onBipedalBossActivation.Raise();
+        Time.timeScale = 0;
         animator.ResetTrigger("CombatStarted");
         bipedalUnitBoss.isInvulnerable = false;
     }

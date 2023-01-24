@@ -50,7 +50,6 @@ public class InputManager : MonoBehaviour
 
     private void OnEnable()
     {
-        Debug.Log("fezfze");
         // playerInput.enabled = true;
     }
 

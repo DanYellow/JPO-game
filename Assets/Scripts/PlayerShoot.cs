@@ -58,7 +58,7 @@ public class PlayerShoot : MonoBehaviour
         else
         {
             lineRenderer.SetPosition(0, firePoint.position);
-            lineRenderer.SetPosition(1, firePoint.position + firePoint.right * 100);
+            lineRenderer.SetPosition(1, firePoint.position + firePoint.right * playerStatsValue.beamLength);
         }
 
         lineRenderer.enabled = true;
