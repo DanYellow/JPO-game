@@ -29,4 +29,5 @@ public class EnemyStatsValue : ScriptableObject
     public float enrageFactor = 1;
 
     public float beamSpeed = 1.75f;
+    
 }

@@ -37,7 +37,7 @@ public class PlayerShoot : MonoBehaviour
 
     IEnumerator DetectHit()
     {
-        RaycastHit2D hitInfo = Physics2D.Raycast(firePoint.position, firePoint.right, Mathf.Infinity, collisionLayers);
+        RaycastHit2D hitInfo = Physics2D.Raycast(firePoint.position, firePoint.right, playerStatsValue.beamLength, collisionLayers);
 
         if (hitInfo)
         {

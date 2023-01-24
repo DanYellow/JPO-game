@@ -24,6 +24,8 @@ public class PlayerStatsValue : ScriptableObject
 
     public float shootingRate = 0.3f;
 
+    public float beamLength = 5.75f;
+
     private void OnEnable() {
         currentHealth = maxHealth;
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 // Unlit > texture
 public class LoopingBackground : MonoBehaviour
 {
-    [Range(0.1f, 100)]
+    [Range(0.001f, 10f)]
     public float speed = 0;
 
     public Renderer render;
