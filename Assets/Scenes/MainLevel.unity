@@ -20777,13 +20777,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 104718911}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.0463524, y: -5.2036686, z: -3.7173824}
+  m_LocalPosition: {x: -2.6463547, y: -5.2036686, z: -1.7173824}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2099341216}
   m_Father: {fileID: 902668478}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &104718913
 MonoBehaviour:
@@ -20819,7 +20819,7 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 1323241185}
+  m_Follow: {fileID: 166178824}
   m_Lens:
     FieldOfView: 25
     OrthographicSize: 2.5
@@ -83308,7 +83308,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 902668478}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &380152354
 BoxCollider2D:
@@ -83527,7 +83527,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 902668478}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &445563048
 GameObject:
@@ -85847,7 +85847,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2534878612226961945, guid: a644fff06deffdc4faef471a406fb785, type: 3}
       propertyPath: m_RootOrder
-      value: 23
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 2534878612226961945, guid: a644fff06deffdc4faef471a406fb785, type: 3}
       propertyPath: m_LocalPosition.x
@@ -86899,6 +86899,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1323241185}
   - {fileID: 380152353}
   - {fileID: 413876613}
   - {fileID: 104718912}
@@ -126811,7 +126812,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2534878612226961945, guid: a644fff06deffdc4faef471a406fb785, type: 3}
       propertyPath: m_RootOrder
-      value: 22
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 2534878612226961945, guid: a644fff06deffdc4faef471a406fb785, type: 3}
       propertyPath: m_LocalPosition.x
@@ -127450,7 +127451,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!50 &1312559518
 Rigidbody2D:
@@ -127595,13 +127596,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1323241183}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 48.190002, y: 0.68549997, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.046352386, y: -5.6981688, z: 8.282618}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_Father: {fileID: 902668478}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1330575341
 GameObject:
@@ -130563,6 +130564,21 @@ MonoBehaviour:
   invincibilityTimeAfterHit: 0.75
   beam: {fileID: 59332764896449052, guid: 9cd91548d61113f4e812ac95b0a35bb1, type: 3}
   firePoint: {fileID: 354508370}
+  onStartCombat:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 104718914}
+        m_TargetAssemblyTypeName: Cinemachine.CinemachineVirtualCamera, Cinemachine
+        m_MethodName: set_Follow
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1323241185}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   isEnraged: 0
   isInvulnerable: 0
 --- !u!114 &1602712313

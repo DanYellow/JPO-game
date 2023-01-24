@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BipedalUnitBoss : Enemy, IDamageable
 {
@@ -11,17 +12,15 @@ public class BipedalUnitBoss : Enemy, IDamageable
     [SerializeField]
     private Transform firePoint;
     public bool isActive { get; set; } = false;
+     public UnityEvent onStartCombat;
 
     [HideInInspector]
     public bool isEnraged = false;
 
 
+
     [HideInInspector]
     public bool isInvulnerable = false;
-
-    private void Start()
-    {
-    }
 
     public override void Awake()
     {
@@ -60,6 +59,7 @@ public class BipedalUnitBoss : Enemy, IDamageable
     {
         IEnumerator StartCombatProxy()
         {
+            onStartCombat.Invoke();
             yield return new WaitForSeconds(0.2f);
             animator.SetTrigger("CombatStarted");
         }
