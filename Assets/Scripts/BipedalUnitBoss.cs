@@ -12,7 +12,7 @@ public class BipedalUnitBoss : Enemy, IDamageable
     [SerializeField]
     private Transform firePoint;
     public bool isActive { get; set; } = false;
-     public UnityEvent onStartCombat;
+    public UnityEvent onStartCombat;
 
     [HideInInspector]
     public bool isEnraged = false;

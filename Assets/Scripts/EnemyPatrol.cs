@@ -15,7 +15,8 @@ public class EnemyPatrol : MonoBehaviour
 
     private SpriteRenderer sr;
 
-    public bool isFacingRight = false;
+    [SerializeField]
+    private bool isFacingRight = false;
 
     private bool isIdle = true;
 
@@ -45,7 +46,7 @@ public class EnemyPatrol : MonoBehaviour
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
 
-        maxMoveSpeed = enemyData.moveSpeed * enemyData.accelerationRate;
+        maxMoveSpeed = enemyData.moveSpeed * enemyData.accelerationFactorOnDetection;
         currentMoveSpeed = enemyData.moveSpeed;
 
         offset = new Vector3(sr.bounds.extents.x * (isFacingRight ? -1 : 1), sr.bounds.extents.y, 0);
@@ -99,12 +100,12 @@ public class EnemyPatrol : MonoBehaviour
             }
             else if (hitObstacle.collider.gameObject.CompareTag("Player"))
             {
-                currentMoveSpeed = Mathf.Clamp(currentMoveSpeed * enemyData.accelerationRate, enemyData.moveSpeed, maxMoveSpeed);
+                currentMoveSpeed = Mathf.Clamp(currentMoveSpeed * enemyData.accelerationFactorOnDetection, enemyData.moveSpeed, maxMoveSpeed);
             }
         }
         else
         {
-            currentMoveSpeed = Mathf.Clamp(currentMoveSpeed / enemyData.accelerationRate, enemyData.moveSpeed, maxMoveSpeed);
+            currentMoveSpeed = Mathf.Clamp(currentMoveSpeed / enemyData.accelerationFactorOnDetection, enemyData.moveSpeed, maxMoveSpeed);
         }
 
         if (!isGrounded)

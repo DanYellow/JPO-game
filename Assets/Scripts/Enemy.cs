@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public EnemyStatsValue enemyData;
 
-     [ReadOnlyInspector, SerializeField]
+    [ReadOnlyInspector, SerializeField]
     protected float currentHealth = 0f;
     protected float maxHealth;
 
@@ -19,9 +19,6 @@ public class Enemy : MonoBehaviour, IDamageable
     protected SpriteRenderer sr;
 
     private bool isHurt = false;
-
-    public float invincibilityFlashDelay = 0.2f;
-    public float invincibilityTimeAfterHit = 0.75f;
 
     // List of contact points when something collides with that GameObject
     private ContactPoint2D[] listContacts = new ContactPoint2D[1];
@@ -42,8 +39,11 @@ public class Enemy : MonoBehaviour, IDamageable
         currentHealth = Mathf.Round(currentHealth * 100f) / 100f;
         if (currentHealth == 0)
         {
-            GameObject impact = Instantiate(deathEffect, transform.position, Quaternion.identity);
-            Destroy(impact, impact.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+            if (deathEffect)
+            {
+                GameObject impact = Instantiate(deathEffect, transform.position, Quaternion.identity);
+                Destroy(impact, impact.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+            }
             Destroy(gameObject);
             onDeathCallback?.Raise();
         }
@@ -62,9 +62,9 @@ public class Enemy : MonoBehaviour, IDamageable
         while (isHurt)
         {
             sr.color = new Color(1f, 1f, 1f, 0f);
-            yield return new WaitForSeconds(invincibilityFlashDelay);
+            yield return new WaitForSeconds(enemyData.invincibilityFlashDelay);
             sr.color = new Color(1f, 1f, 1f, 1f);
-            yield return new WaitForSeconds(invincibilityFlashDelay);
+            yield return new WaitForSeconds(enemyData.invincibilityFlashDelay);
         }
     }
 
@@ -93,7 +93,7 @@ public class Enemy : MonoBehaviour, IDamageable
     public IEnumerator HandleInvincibilityDelay()
     {
         isHurt = true;
-        yield return new WaitForSeconds(invincibilityTimeAfterHit);
+        yield return new WaitForSeconds(enemyData.invincibilityTimeAfterHit);
         isHurt = false;
     }
 }
