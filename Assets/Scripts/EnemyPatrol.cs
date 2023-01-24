@@ -27,6 +27,8 @@ public class EnemyPatrol : MonoBehaviour
 
     private bool isGrounded;
     public float groundCheckRadius = 0.25f;
+    [SerializeField]
+    private Vector3 additionnalGroundCheckOffset = Vector3.zero;
     private bool isFlipping = false;
 
     [Tooltip("Define how long the enemy will walk")]
@@ -113,12 +115,12 @@ public class EnemyPatrol : MonoBehaviour
 
     public bool IsGrounded()
     {
-        return Physics2D.OverlapCircle(transform.position - offset, groundCheckRadius, obstacleLayersMask);
+        return Physics2D.OverlapCircle(transform.position - (offset + additionnalGroundCheckOffset), groundCheckRadius, obstacleLayersMask);
     }
 
     void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(transform.position - offset, groundCheckRadius);
+        Gizmos.DrawWireSphere(transform.position - (offset + additionnalGroundCheckOffset), groundCheckRadius);
     }
 
     IEnumerator ChangeState()
@@ -155,6 +157,7 @@ public class EnemyPatrol : MonoBehaviour
     IEnumerator Flip()
     {
         offset.x *= -1;
+        additionnalGroundCheckOffset.x *= -1;
         isFlipping = true;
         isFacingRight = !isFacingRight;
         transform.Rotate(0f, 180f, 0f);
