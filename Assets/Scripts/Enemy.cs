@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour, IDamageable
 {
+    public bool isSensitiveToLava { get; set; }
     public GameObject deathEffect;
     protected Rigidbody2D rb;
 
@@ -31,6 +32,7 @@ public class Enemy : MonoBehaviour, IDamageable
         sr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        isSensitiveToLava = enemyData.isSensitiveToLava;
     }
 
     public virtual void TakeDamage(float damage)

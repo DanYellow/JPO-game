@@ -27,6 +27,8 @@ public class PlayerStatsValue : ScriptableObject
 
     public float beamLength = 5.75f;
 
+    public bool isSensitiveToLava = true;
+
     private void OnEnable() {
         currentHealth = maxHealth;
     }

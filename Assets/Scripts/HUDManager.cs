@@ -29,7 +29,7 @@ public class HUDManager : MonoBehaviour
     private void UpdateLifePoints()
     {
         foreach (TMP_Text text in listTexts)
-            text.text = $"Energy {playerStatsValue.currentHealth.ToString()}";
+            text.text = $"Energy {Mathf.Ceil(playerStatsValue.currentHealth).ToString()}";
     }
 
     private void OnDisable()

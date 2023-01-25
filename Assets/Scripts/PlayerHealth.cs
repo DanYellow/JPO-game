@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour, IDamageable
 {
+    public bool isSensitiveToLava { get; set; }
     [SerializeField]
     private VoidEventChannel isHurtVoidEventChannel;
 
@@ -21,6 +22,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     private void Awake() {
         playerStatsValue.currentHealth = playerStatsValue.maxHealth;
         animator = GetComponent<Animator>();
+        isSensitiveToLava = playerStatsValue.isSensitiveToLava;
     }
 
     private void Update()

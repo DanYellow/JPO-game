@@ -36,4 +36,6 @@ public class EnemyStatsValue : ScriptableObject
     public float invincibilityTimeAfterHit = 0.75f;
 
     public float sightLength = 1;
+
+    public bool isSensitiveToLava = false;
 }
