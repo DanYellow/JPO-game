@@ -272,6 +272,7 @@ GameObject:
   - component: {fileID: 575242137}
   - component: {fileID: 7665010452612635957}
   - component: {fileID: 7665010452612635958}
+  - component: {fileID: 1381835086}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -377,7 +378,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7665010452612635966}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
@@ -393,7 +394,43 @@ MonoBehaviour:
       m_Calls: []
   m_ControlsChangedEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: GameOverManager, Assembly-CSharp
+        m_MethodName: OnControlsChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
+        m_MethodName: OnControlsChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: CurrentSceneManager, Assembly-CSharp
+        m_MethodName: OnControlsChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
@@ -519,6 +556,34 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: a338fc34-4237-41df-8dd7-1c29f4193d00
     m_ActionName: UI/Start/Resume[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7699341d-2cde-453a-b04d-eff317353b47
+    m_ActionName: UIGameOverAndCredits/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5f98d455-5b70-4e3f-8c1d-42659972b0ce
+    m_ActionName: UIGameOverAndCredits/Submit[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b7a7f9dd-c764-4728-af6c-bf07d606510a
+    m_ActionName: UIGameOverAndCredits/Cancel[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ad8a8ad3-de60-4e37-bfe6-b4d3646e4cfd
+    m_ActionName: UIGameOverAndCredits/Point[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4f07e862-f209-4e1f-83e7-c934bdefd977
+    m_ActionName: UIGameOverAndCredits/Click[/Mouse/leftButton,/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a97f3a9a-3e90-4b3a-b9e7-9b61d7fa9ca6
+    m_ActionName: UIGameOverAndCredits/ScrollWheel[/Mouse/scroll]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 356588e8-e09b-476a-b093-3750990a2f1e
+    m_ActionName: UIGameOverAndCredits/MiddleClick[/Mouse/middleButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -537,6 +602,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 7665010452612635965}
+  isFacingRight: 1
   vectorEventChannel: {fileID: 11400000, guid: 6635956797fede24d9522b8c3237406c, type: 2}
   jumpBoolEventChannel: {fileID: 11400000, guid: e84ab78e0af1b4a4fa5004800869d6f4, type: 2}
   isGroundedBoolEventChannel: {fileID: 11400000, guid: 4a5695552568afb44a47d026fcdbaac2, type: 2}
@@ -652,9 +718,26 @@ Rigidbody2D:
   m_GravityScale: 1
   m_Material: {fileID: 6200000, guid: 538352cec9c7e704587f41bb31b32566, type: 2}
   m_Interpolate: 2
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &1381835086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7665010452612635966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93bb89fb7acaada46a1f9ac3190b6a15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStatsValue: {fileID: 11400000, guid: 4d8b9f9261ee27f47ad567a2af8e73c2, type: 2}
+  listLayerToIgnoreAfterHit:
+    serializedVersion: 2
+    m_Bits: 128
+  isHurtVoidEventChannel: {fileID: 0}
 --- !u!1 &7665010452763690252
 GameObject:
   m_ObjectHideFlags: 0

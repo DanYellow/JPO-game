@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,6 +9,9 @@ public class EnemySpawn : MonoBehaviour
 
     [SerializeField]
     private VoidEventChannel onEvent;
+
+    [SerializeField]
+    private float delayBetweenSpawn = 0.75f;
 
     private UnityAction onEventProxy;
 
@@ -22,7 +24,7 @@ public class EnemySpawn : MonoBehaviour
 
     IEnumerator SpawnEnemy()
     {
-        yield return new WaitForSeconds(0.75f);
+        yield return new WaitForSeconds(delayBetweenSpawn);
         Instantiate(enemyToSpawn, transform.position, enemyToSpawn.transform.rotation);
     }
     

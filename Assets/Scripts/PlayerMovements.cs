@@ -45,7 +45,7 @@ public class PlayerMovements : MonoBehaviour, IPushable
     private float moveSpeed;
 
     [Header("Jump system")]
-    public int jumpCount = 0;
+    private int jumpCount = 0;
     private int maxJumpCount;
 
     private bool isHitted = false;
@@ -56,6 +56,7 @@ public class PlayerMovements : MonoBehaviour, IPushable
 
     private float speedFactor;
 
+    [SerializeField]
     private PlayerInput playerInput;
 
     [SerializeField, UnityEngine.Serialization.FormerlySerializedAs("playerStatsValue")]
@@ -67,7 +68,7 @@ public class PlayerMovements : MonoBehaviour, IPushable
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        playerInput = GetComponent<PlayerInput>();
+        // playerInput = GetComponent<PlayerInput>();
 
         isHurtVoidEventChannel.OnEventRaised += OnHurt;
 

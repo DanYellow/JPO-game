@@ -38,4 +38,6 @@ public class EnemyStatsValue : ScriptableObject
     public float sightLength = 1;
 
     public bool isSensitiveToLava = false;
+
+    public float wallCheckRadius = 0.25f;
 }
