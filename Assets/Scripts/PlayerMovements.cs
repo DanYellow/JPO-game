@@ -11,6 +11,7 @@ public class PlayerMovements : MonoBehaviour, IPushable
 
     private Vector3 moveInput = Vector3.zero;
 
+    [SerializeField, ReadOnlyInspector]
     private bool isFacingRight = true;
 
     private bool isInWater;
@@ -97,7 +98,8 @@ public class PlayerMovements : MonoBehaviour, IPushable
         if (!isHitted)
         {
             nextPosition = new Vector2((moveInput.x * moveSpeed) * speedFactor, rb.velocity.y);
-            if( moveInput.y <= -0.25f) {
+            if (moveInput.y <= -0.25f)
+            {
                 nextPosition.x = 0;
             }
             rb.velocity = nextPosition;
@@ -154,7 +156,6 @@ public class PlayerMovements : MonoBehaviour, IPushable
         StartCoroutine(OnHurtProxy());
     }
 
-
     IEnumerator OnHurtProxy()
     {
         isHitted = true;
@@ -164,11 +165,7 @@ public class PlayerMovements : MonoBehaviour, IPushable
 
     public void HitDirection(ContactPoint2D contactPoint)
     {
-        int factor = isFacingRight ? -1 : 1;
-        Vector2 pushBackVector = new Vector2(
-           transform.position.normalized.x,
-           0
-       ) * contactPoint.normal.x * -1;
+        Vector2 pushBackVector = new Vector2(contactPoint.normal.x, 0) * -1;
         rb.AddForce(pushBackVector * playerData.knockbackForce, ForceMode2D.Impulse);
     }
 

@@ -6,6 +6,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     [SerializeField]
     private VoidEventChannel isHurtVoidEventChannel;
 
+    private Animator animator;
+
     [SerializeField]
     private VoidEventChannel onPlayerDeathVoidEventChannel;
 
@@ -18,6 +20,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     private void Awake() {
         playerStatsValue.currentHealth = playerStatsValue.maxHealth;
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -43,6 +46,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         if (isInvulnerable) return;
 
         playerStatsValue.currentHealth = Mathf.Clamp(playerStatsValue.currentHealth - damage, 0, playerStatsValue.maxHealth);
+
         if (playerStatsValue.currentHealth == 0)
         {
             // StartCoroutine(SlowTime());
@@ -51,7 +55,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
             onPlayerDeathVoidEventChannel.Raise();
             Destroy(gameObject);
         } else {
-            StartCoroutine(HandleInvincibilityDelay());
+            animator.SetLayerWeight(1, 1);
+            // StartCoroutine(HandleInvincibilityDelay());
             isHurtVoidEventChannel.Raise();
         }
     }

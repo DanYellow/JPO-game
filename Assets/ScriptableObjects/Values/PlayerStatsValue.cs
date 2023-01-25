@@ -21,6 +21,7 @@ public class PlayerStatsValue : ScriptableObject
     public float damage = 1;
 
     public float invulnerabiltyTime = 2.5f;
+    public float invulnerableFlashDelay = 0.2f;
 
     public float shootingRate = 0.3f;
 

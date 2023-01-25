@@ -35,7 +35,7 @@ public class EnemyCharge : MonoBehaviour
 
         if (hitObstacle.collider != null && hitObstacle.collider.gameObject.CompareTag("Player"))
         {
-            rb.velocity += -hitObstacle.normal * 0.01f;
+            rb.velocity += -hitObstacle.normal * 0.09f;
         }
     }
 

@@ -68,12 +68,12 @@ public class Enemy : MonoBehaviour, IDamageable
         }
     }
 
-    private void OnCollisionStay2D(Collision2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
         other.GetContacts(listContacts);
         if (other.transform.TryGetComponent<IDamageable>(out IDamageable iDamageable))
         {
-            // StartCoroutine(SwidtchRbBodyType());
+            // StartCoroutine(SwitchRbBodyType());
             iDamageable.TakeDamage(enemyData.damage);
         }
 

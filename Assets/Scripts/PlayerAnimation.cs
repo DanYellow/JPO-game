@@ -42,7 +42,10 @@ public class PlayerAnimation : MonoBehaviour
         onLandEvent = (bool isGrounded) => { animator.SetBool("IsGrounded", isGrounded); };
         onShootEvent = (bool isGrounded) => { animator.SetTrigger("IsShooting"); };
         onFallEvent = (bool isGrounded) => { animator.SetTrigger("IsFalling"); };
-        onHurtEvent = () => { animator.SetTrigger("IsHurt"); };
+        onHurtEvent = () => {
+            animator.SetLayerWeight(1, 1);
+            animator.SetTrigger("IsHurt"); 
+        };
         inWaterEvent = (bool isInWater) => { 
             animator.speed = isInWater ? (playerStatsValue.waterSpeedFactor * 1.75f) : playerStatsValue.speedFactor;
         };
