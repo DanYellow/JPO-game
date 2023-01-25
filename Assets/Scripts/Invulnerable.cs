@@ -58,7 +58,6 @@ public class Invulnerable : MonoBehaviour
 
         if (!isInvulnerable && isInLayer)
         {
-            Debug.Log("isInvulnerable");
             StartCoroutine(InvunlnerableFlash());
             StartCoroutine(HandleInvunlnerableDelay(otherLayer.value));
         }
@@ -69,13 +68,6 @@ public class Invulnerable : MonoBehaviour
         Physics2D.IgnoreLayerCollision(gameObject.layer, layerId, true);
         isInvulnerable = true;
         yield return new WaitForSeconds(playerStatsValue.invulnerabiltyTime);
-        // yield return new WaitUntil(() => animator.GetBool("IsNotInvulnerable"));
-
-        // while (!animator.GetBool("IsNotInvulnerable"))
-        // {
-        //     yield return null;
-        // }
-
         isInvulnerable = false;
         Physics2D.IgnoreLayerCollision(gameObject.layer, layerId, false);
     }

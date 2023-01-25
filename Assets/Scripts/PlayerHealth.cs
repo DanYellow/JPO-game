@@ -56,7 +56,6 @@ public class PlayerHealth : MonoBehaviour, IDamageable
             Destroy(gameObject);
         } else {
             animator.SetLayerWeight(1, 1);
-            // StartCoroutine(HandleInvincibilityDelay());
             isHurtVoidEventChannel.Raise();
         }
     }
@@ -66,12 +65,5 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         Time.timeScale = 0.5f;
         yield return new WaitForSecondsRealtime(5.25f);
         Time.timeScale = 1f;
-    }
-
-    public IEnumerator HandleInvincibilityDelay()
-    {
-        isInvulnerable = true;
-        yield return new WaitForSeconds(playerStatsValue.invulnerabiltyTime);
-        isInvulnerable = false;
     }
 }
