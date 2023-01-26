@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class MainMenuManager : MonoBehaviour
 {
@@ -24,10 +25,6 @@ public class MainMenuManager : MonoBehaviour
         {
             EventSystemExtensions.UpdateSelectedGameObject(mainMenu.GetComponentInChildren<Button>().gameObject);
         }
-
-        Debug.Log("input.currentControlScheme " + pi.currentControlScheme);
-
-        // Debug.Log(UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject);
     }
 
     public void OnControlsChanged(PlayerInput input)
@@ -55,9 +52,17 @@ public class MainMenuManager : MonoBehaviour
         SceneManager.LoadScene(index, LoadSceneMode.Single);
     }
 
-    public void DisplayInfosMenu()
+    public void DisplayInfosMenu(bool isStartGame = false)
     {
         infosMenu.SetActive(true);
+        if(isStartGame) {
+            Button button = infosMenu.GetComponentInChildren<Button>();
+            TextMeshProUGUI textMeshProUGUI = button.GetComponentInChildren<TextMeshProUGUI>();
+            textMeshProUGUI.SetText("COMMENCER");
+            button.onClick.RemoveAllListeners();
+            button.onClick.AddListener(() => LoadLevel(1));
+        }
+
         EventSystemExtensions.UpdateSelectedGameObject(infosMenu.GetComponentInChildren<Button>().gameObject);
     }
 
