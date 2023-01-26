@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 8057377719791965455}
   - component: {fileID: 8057377719791965448}
   - component: {fileID: 8057377719791965453}
+  - component: {fileID: 899968604748778728}
   - component: {fileID: 8057377719791965452}
   - component: {fileID: 8057377719791965491}
-  - component: {fileID: 899968604748778728}
+  - component: {fileID: 1158976093}
   m_Layer: 7
   m_Name: FishEnemy
   m_TagString: Untagged
@@ -79,7 +80,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -1702437878, guid: 770fee2ee1ac82e46acc7a9919fdc437, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.94960225, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -136,42 +137,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 6
---- !u!114 &8057377719791965452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8057377719791965449}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8499d37695bf4274abc3ee118a883ed4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyData: {fileID: 11400000, guid: b16cc1b5d59a90f44ba4ba407e30dd02, type: 2}
-  isFacingRight: 0
-  obstacleLayersMask:
-    serializedVersion: 2
-    m_Bits: 1
-  wallLayersMask:
-    serializedVersion: 2
-    m_Bits: 8
---- !u!114 &8057377719791965491
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8057377719791965449}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94e195d18eff92447aed379609e8760c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  deathEffect: {fileID: 1992304688091250534, guid: 44fb5dd6c04248741b0fdac87cf0d958, type: 3}
-  enemyData: {fileID: 11400000, guid: b16cc1b5d59a90f44ba4ba407e30dd02, type: 2}
-  currentHealth: 0
-  onDeathCallback: {fileID: 11400000, guid: 8be7a99257d8a5f40a64e9408ba1c0a7, type: 2}
 --- !u!95 &899968604748778728
 Animator:
   serializedVersion: 4
@@ -192,3 +157,54 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8057377719791965452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8057377719791965449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8499d37695bf4274abc3ee118a883ed4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyData: {fileID: 11400000, guid: b16cc1b5d59a90f44ba4ba407e30dd02, type: 2}
+  isFacingRight: 0
+  obstacleLayersMask:
+    serializedVersion: 2
+    m_Bits: 1
+  wallLayersMask:
+    serializedVersion: 2
+    m_Bits: 8
+  listDisabledBehaviours:
+  - {fileID: 1158976093}
+--- !u!114 &8057377719791965491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8057377719791965449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94e195d18eff92447aed379609e8760c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathEffect: {fileID: 1992304688091250534, guid: 44fb5dd6c04248741b0fdac87cf0d958, type: 3}
+  enemyData: {fileID: 11400000, guid: b16cc1b5d59a90f44ba4ba407e30dd02, type: 2}
+  currentHealth: 0
+  onDeathCallback: {fileID: 11400000, guid: 8be7a99257d8a5f40a64e9408ba1c0a7, type: 2}
+--- !u!114 &1158976093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8057377719791965449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7202d205e183d6544a7a75b40c3aa7ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyStatsValue: {fileID: 11400000, guid: b16cc1b5d59a90f44ba4ba407e30dd02, type: 2}

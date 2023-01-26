@@ -40,4 +40,6 @@ public class EnemyStatsValue : ScriptableObject
     public bool isSensitiveToLava = false;
 
     public float wallCheckRadius = 0.25f;
+
+    public float floatStrength = 0f;
 }

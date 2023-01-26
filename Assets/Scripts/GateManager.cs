@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GateManager : MonoBehaviour, IOpenable
@@ -18,6 +17,11 @@ public class GateManager : MonoBehaviour, IOpenable
         collider2d = GetComponent<BoxCollider2D>();
         listGatesAnimator = GetComponentsInChildren<Animator>();
         listGatesSpriteRenderer = GetComponentsInChildren<SpriteRenderer>();
+
+        Color colorDisabled;
+        ColorUtility.TryParseHtmlString("#8E8E8E", out colorDisabled);
+        foreach (SpriteRenderer sr in listGatesSpriteRenderer)
+            sr.color = isDisabled ? colorDisabled : Color.white;
 
         ToggleDisable(isDisabled);
     }

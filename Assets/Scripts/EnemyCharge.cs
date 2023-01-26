@@ -14,9 +14,14 @@ public class EnemyCharge : MonoBehaviour
     [SerializeField]
     private bool isFacingRight = false;
     private bool isFlipping = false;
+    private bool isAttacking = false;
 
     public LayerMask obstacleLayersMask;
     public LayerMask wallLayersMask;
+
+    [Header("Components to disable after specific event. E.g. : death")]
+    public Behaviour[] listDisabledBehaviours;
+
 
     private void Awake()
     {
@@ -26,7 +31,16 @@ public class EnemyCharge : MonoBehaviour
         offset = new Vector3(sr.bounds.extents.x * (isFacingRight ? -1 : 1), 0, 0);
     }
 
-    private void FixedUpdate() {
+    private void Update()
+    {
+        foreach (Behaviour component in listDisabledBehaviours)
+        {
+            component.enabled = !isAttacking;
+        }
+    }
+
+    private void FixedUpdate()
+    {
         isWallColliding = IsWallColliding();
         Vector3 startCast = transform.position - new Vector3(offset.x, 0, 0);
         Vector3 endCast = transform.position + (isFacingRight ? Vector3.right : Vector3.left) * enemyData.sightLength;
@@ -35,9 +49,10 @@ public class EnemyCharge : MonoBehaviour
 
         RaycastHit2D hitObstacle = Physics2D.Linecast(startCast, endCast, obstacleLayersMask);
 
-        if (hitObstacle.collider != null && hitObstacle.collider.gameObject.CompareTag("Player"))
+        if (hitObstacle.collider != null && hitObstacle.collider.gameObject.CompareTag("Player") && !isAttacking)
         {
-            rb.velocity += -hitObstacle.normal * (0.09f * enemyData.moveSpeed);
+            isAttacking = true;
+            rb.velocity += -hitObstacle.normal * (1 * enemyData.moveSpeed);
         }
 
         if (isWallColliding && !isFlipping)
@@ -62,6 +77,7 @@ public class EnemyCharge : MonoBehaviour
         isFlipping = true;
         yield return new WaitForSeconds(1.5f);
         offset.x *= -1;
+        isAttacking = false;
         isFlipping = false;
         isFacingRight = !isFacingRight;
         transform.Rotate(0f, 180f, 0f);

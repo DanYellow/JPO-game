@@ -17,8 +17,6 @@ public class BipedalUnitBoss : Enemy, IDamageable
     [HideInInspector]
     public bool isEnraged = false;
 
-
-
     [HideInInspector]
     public bool isInvulnerable = false;
 
@@ -45,8 +43,8 @@ public class BipedalUnitBoss : Enemy, IDamageable
         GameObject nextBeam = Instantiate(beam, firePoint.position, Quaternion.identity);
         nextBeam.transform.right = firePoint.right.normalized;
         SpriteBeam spriteBeam = nextBeam.GetComponent<SpriteBeam>();
-        spriteBeam.moveSpeed = enemyData.beamSpeed;
-        spriteBeam.damage = enemyData.damage;
+        spriteBeam.moveSpeed = (isEnraged ? enemyData.enrageFactor : 1) * enemyData.beamSpeed;
+        spriteBeam.damage = enemyData.damage * enemyData.enrageFactor;
         spriteBeam.invoker = gameObject;
     }
 
