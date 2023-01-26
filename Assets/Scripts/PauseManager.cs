@@ -40,6 +40,14 @@ public class PauseManager : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(null);
     }
 
+    public void OnNavigate(InputAction.CallbackContext ctx)
+    {
+        if (pauseMenuUI != null && pauseMenuUI.activeInHierarchy && ctx.phase == InputActionPhase.Performed && EventSystem.current.currentSelectedGameObject == null)
+        {
+            pauseMenuUI.GetComponentInChildren<Button>().Select();
+        }
+    }
+
     public void OnControlsChanged(PlayerInput input)
     {
         if (input.currentControlScheme.Equals("Gamepad") && pauseMenuUI.activeInHierarchy)

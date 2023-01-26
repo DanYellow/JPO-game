@@ -15,7 +15,7 @@ MonoBehaviour:
   maxHealth: 2
   damage: 1
   moveSpeed: 0.6
-  accelerationFactorOnDetection: 1.65
+  accelerationFactorOnDetection: 1.75
   defense: 1
   knockbackForce: 1.75
   attackRange: 0.5
@@ -26,3 +26,5 @@ MonoBehaviour:
   invincibilityFlashDelay: 0.2
   invincibilityTimeAfterHit: 0.75
   sightLength: 1
+  isSensitiveToLava: 0
+  wallCheckRadius: 0.25

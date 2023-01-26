@@ -14,6 +14,7 @@ public class CurrentSceneManager : MonoBehaviour
 
     private void Awake()
     {
+        Application.targetFrameRate = 60;
         creditsUI.SetActive(false);
     }
 
@@ -37,7 +38,14 @@ public class CurrentSceneManager : MonoBehaviour
     {
         creditsUI.SetActive(true);
         EventSystemExtensions.UpdateSelectedGameObject(creditsUI.GetComponentInChildren<Button>().gameObject);
+    }
 
+    public void OnNavigate(InputAction.CallbackContext ctx)
+    {
+        if (creditsUI != null && creditsUI.activeInHierarchy && ctx.phase == InputActionPhase.Performed && EventSystem.current.currentSelectedGameObject == null)
+        {
+            creditsUI.GetComponentInChildren<Button>().Select();
+        }
     }
 
     public void OnControlsChanged(PlayerInput input)

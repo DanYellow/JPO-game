@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using TMPro;
+// https://www.youtube.com/watch?v=vqZjZ6yv1lA
 
 public class MainMenuManager : MonoBehaviour
 {
