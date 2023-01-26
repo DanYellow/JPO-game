@@ -65,7 +65,6 @@ public class PlayerMovements : MonoBehaviour, IPushable
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        // playerInput = GetComponent<PlayerInput>();
 
         isHurtVoidEventChannel.OnEventRaised += OnHurt;
 

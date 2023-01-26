@@ -8,8 +8,6 @@ public class EnemyPatrol : MonoBehaviour, IPushable
     private Animator animator;
     private float maxMoveSpeed;
 
-    public bool isSensitiveToLava { get; set; }
-
     public EnemyStatsValue enemyData;
 
     [SerializeField]
@@ -123,13 +121,9 @@ public class EnemyPatrol : MonoBehaviour, IPushable
 
     public void HitDirection(Vector2 contactPoint)
     {
-        if(Mathf.Sign(contactPoint.x) == -1 && isFacingRight) {
+        if((Mathf.Sign(contactPoint.x) == -1 && isFacingRight) || Mathf.Sign(contactPoint.x) == 1 && !isFacingRight) {
             StartCoroutine(Flip());
         }
-        // Vector2 pushBackVector = new Vector2(contactPoint.x * -1, 0);
-        // rb.AddForce(pushBackVector * 2, ForceMode2D.Impulse);
-        // Debug.Log("contact" + contactPoint.x);
-        // Debug.Log("transform" + transform.localPosition.normalized.x);
     }
 
     void OnDrawGizmos()

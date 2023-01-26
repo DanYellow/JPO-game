@@ -13,16 +13,17 @@ MonoBehaviour:
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
   maxHealth: 50
-  currentHealth: 44
+  currentHealth: 40
   moveSpeed: 3
   jumpForce: 4.05
   maxJumpCount: 2
   knockbackForce: 1.75
   speedFactor: 1
   waterSpeedFactor: 0.55
-  fallThreshold: -5
+  fallThreshold: -2
   damage: 1
   invulnerabiltyTime: 1.95
   invulnerableFlashDelay: 0.2
   shootingRate: 0.2
   beamLength: 4
+  isSensitiveToLava: 1

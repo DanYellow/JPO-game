@@ -24,6 +24,7 @@ public class PlayerShoot : MonoBehaviour
     private void Awake()
     {
         lineRenderer = GetComponentInChildren<LineRenderer>();
+        lineRenderer.useWorldSpace = true;
     }
 
     public void OnShoot(InputAction.CallbackContext ctx)
