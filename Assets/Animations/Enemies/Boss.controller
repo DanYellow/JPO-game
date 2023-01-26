@@ -230,7 +230,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyData: {fileID: 11400000, guid: 3eda8d148a25d8649a2aaccc19bcf22f, type: 2}
-  onBipedalBossActivation: {fileID: 11400000, guid: 575c316a0a6b71442a0e5c66457267ad, type: 2}
+  onCinemachineShake: {fileID: 11400000, guid: 235824e89124e6d44baf6f4647dac34f, type: 2}
+  bipedalBossActivationShake: {fileID: 11400000, guid: ca2704fa8ae31d249b4f6573604d2ace, type: 2}
 --- !u!1107 &5084192880439824545
 AnimatorStateMachine:
   serializedVersion: 6
