@@ -10,17 +10,25 @@ public class CinemachineShake : MonoBehaviour
     [SerializeField]
     private VoidEventChannel onBipedalBossActivation;
 
+    [SerializeField]
+    private CinemachineShakeEventChannel onCinemachineShake;
+
     private CinemachineVirtualCamera cinemachineVirtualCamera;
     private void Awake() {
         cinemachineVirtualCamera = GetComponent<CinemachineVirtualCamera>();
 
-        onBipedalBossActivationEvent = () => { StartCoroutine(ShakeCamera()); };
-        onBipedalBossActivation.OnEventRaised += onBipedalBossActivationEvent;
+        // onBipedalBossActivationEvent = () => { StartCoroutine(ShakeCamera()); };
+        // onBipedalBossActivation.OnEventRaised += onBipedalBossActivationEvent;
+
+        // onCinemachineShake.OnEventRaised += ShakeCameraProxy;
+    }
+
+    void ShakeCameraProxy(ShakeTypeValue value) {
+        StartCoroutine(ShakeCamera(value.intensity, value.time));
     }
 
     // [ContextMenu("ShakeCamera")]
-    IEnumerator ShakeCamera(float intensity = 3f, float time = 2f)
-    {
+    IEnumerator ShakeCamera(float intensity = 3f, float time = 2f)    {
         
         CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin = 
             cinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
@@ -34,6 +42,7 @@ public class CinemachineShake : MonoBehaviour
 
      private void OnDestroy()
     {
-        onBipedalBossActivation.OnEventRaised -= onBipedalBossActivationEvent;
+        // onBipedalBossActivation.OnEventRaised -= onBipedalBossActivationEvent;
+        // onCinemachineShake.OnEventRaised -= ShakeCameraProxy;
     }
 }

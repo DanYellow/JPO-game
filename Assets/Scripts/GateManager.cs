@@ -12,13 +12,14 @@ public class GateManager : MonoBehaviour, IOpenable
 
     private bool isPlayerIn = false;
 
+    private Color colorDisabled;
+
     private void Awake()
     {
         collider2d = GetComponent<BoxCollider2D>();
         listGatesAnimator = GetComponentsInChildren<Animator>();
         listGatesSpriteRenderer = GetComponentsInChildren<SpriteRenderer>();
 
-        Color colorDisabled;
         ColorUtility.TryParseHtmlString("#8E8E8E", out colorDisabled);
         foreach (SpriteRenderer sr in listGatesSpriteRenderer)
             sr.color = isDisabled ? colorDisabled : Color.white;

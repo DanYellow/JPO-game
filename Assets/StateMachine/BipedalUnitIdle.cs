@@ -9,7 +9,10 @@ public class BipedalUnitIdle : StateMachineBehaviour
     public EnemyStatsValue enemyData;
 
     [SerializeField]
-    private VoidEventChannel onBipedalBossActivation;
+    private CinemachineShakeEventChannel onBipedalBossActivation;
+
+    [SerializeField]
+    private ShakeTypeValue bipedalBossActivationShake;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -35,7 +38,7 @@ public class BipedalUnitIdle : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        onBipedalBossActivation.Raise();
+        onBipedalBossActivation.Raise(bipedalBossActivationShake);
         Time.timeScale = 0;
         animator.ResetTrigger("CombatStarted");
         bipedalUnitBoss.isInvulnerable = false;
