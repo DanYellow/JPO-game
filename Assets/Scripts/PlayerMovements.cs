@@ -31,9 +31,6 @@ public class PlayerMovements : MonoBehaviour, IPushable
     [SerializeField]
     private VoidEventChannel isHurtVoidEventChannel;
 
-    private ContactPoint2D[] listContacts = new ContactPoint2D[1];
-
-
     [Space(15)]
 
     [Tooltip("Position checks")]
@@ -164,9 +161,9 @@ public class PlayerMovements : MonoBehaviour, IPushable
         isHitted = false;
     }
 
-    public void HitDirection(ContactPoint2D contactPoint)
+    public void HitDirection(Vector2 contactPoint)
     {
-        Vector2 pushBackVector = new Vector2(contactPoint.normal.x, 0) * -1;
+        Vector2 pushBackVector = new Vector2(contactPoint.x * -1, 0);
         rb.AddForce(pushBackVector * playerData.knockbackForce, ForceMode2D.Impulse);
     }
 

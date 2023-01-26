@@ -81,7 +81,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
         if (other.transform.TryGetComponent<IPushable>(out IPushable iPushable))
         {
-            iPushable.HitDirection(listContacts[0]);
+            iPushable.HitDirection(listContacts[0].normal);
         }
     }
 

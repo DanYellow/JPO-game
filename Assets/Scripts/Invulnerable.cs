@@ -51,8 +51,8 @@ public class Invulnerable : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        ContactPoint2D[] allContacts = new ContactPoint2D[other.contactCount];
-        other.GetContacts(allContacts);
+        // ContactPoint2D[] listContacts = new ContactPoint2D[0];
+        // other.GetContacts(listContacts);
         LayerMask otherLayer = other.gameObject.layer;
         bool isInLayer = ((listLayerToIgnoreAfterHit & (1 << otherLayer)) != 0);
 

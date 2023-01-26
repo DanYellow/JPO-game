@@ -21,7 +21,8 @@ public class PlayerShoot : MonoBehaviour
 
     private Vector3 moveInput;
 
-    private void Awake() {
+    private void Awake()
+    {
         lineRenderer = GetComponentInChildren<LineRenderer>();
     }
 
@@ -41,16 +42,23 @@ public class PlayerShoot : MonoBehaviour
 
         if (hitInfo)
         {
-            if(hitInfo.transform.TryGetComponent<IDamageable>(out IDamageable iDamageable)) {
+            if (hitInfo.transform.TryGetComponent<IDamageable>(out IDamageable iDamageable))
+            {
                 iDamageable.TakeDamage(playerStatsValue.damage);
             }
 
-            if(hitInfo.transform.TryGetComponent<IOpenable>(out IOpenable iOpenable)) {
+            if (hitInfo.transform.TryGetComponent<IOpenable>(out IOpenable iOpenable))
+            {
                 iOpenable.Open();
             }
 
+            if (hitInfo.transform.TryGetComponent<IPushable>(out IPushable iPushable))
+            {
+                iPushable.HitDirection(hitInfo.normal); 
+            } 
+
             GameObject impact = Instantiate(impactEffect, hitInfo.point, Quaternion.identity);
-            Destroy(impact, impact.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length); 
+            Destroy(impact, impact.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
 
             lineRenderer.SetPosition(0, firePoint.position);
             lineRenderer.SetPosition(1, hitInfo.point);

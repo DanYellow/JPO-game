@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class BipedalUnitBoss : Enemy, IDamageable
+public class BipedalUnitBoss : Enemy
 {
     private bool isFacingRight;
 

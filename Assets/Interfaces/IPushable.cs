@@ -1,5 +1,5 @@
 using UnityEngine;
 
 public interface IPushable {
-    void HitDirection(ContactPoint2D contactPoint) {}
+    void HitDirection(Vector2 contactPoint) {}
 }
