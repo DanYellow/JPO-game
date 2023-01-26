@@ -16,6 +16,8 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField]
     private PlayerInput pi;
 
+    // string deviceLayoutName, controlPath;
+
     private void Awake()
     {
         Time.timeScale = 1f;
@@ -27,11 +29,26 @@ public class MainMenuManager : MonoBehaviour
         }
     }
 
+    public void OnNavigate(InputAction.CallbackContext ctx) {
+        if(mainMenu != null && mainMenu.activeInHierarchy && ctx.phase == InputActionPhase.Performed && EventSystem.current.currentSelectedGameObject == null) {
+            mainMenu.GetComponentInChildren<Button>().Select();
+        }
+    }
+
     public void OnControlsChanged(PlayerInput input)
     {
+        //     int binding = input.actions["Navigate"].GetBindingIndex(group: input.currentControlScheme);
+
+        // var bindingString = input.actions["Navigate"].GetBindingDisplayString(binding, out string deviceLayoutName, out string controlPath);
+        // Debug.Log("deviceLayoutName " + deviceLayoutName);
+        // Debug.Log("input.currentControlScheme " + input.currentControlScheme);
+        // Debug.Log("controlPath " + controlPath);
+        // Debug.Log(input.actions["Navigate"].GetBindingDisplayString(out deviceLayout, out controlPath));
         if (input.currentControlScheme.Equals("Gamepad") && mainMenu.activeInHierarchy)
         {
-            mainMenu.GetComponentInChildren<Button>().Select();
+            if(EventSystem.current.currentSelectedGameObject == null) {
+                mainMenu.GetComponentInChildren<Button>().Select();
+            }
         }
 
         if (input.currentControlScheme.Equals("Gamepad") && infosMenu.activeInHierarchy)
@@ -74,7 +91,12 @@ public class MainMenuManager : MonoBehaviour
 
     public void QuitGame()
     {
-        Application.Quit();
+        if(!infosMenu.activeInHierarchy) {
+            #if UNITY_EDITOR
+                Debug.Log("Quit game");
+            #endif
+            Application.Quit();
+        }
     }
 }
 
