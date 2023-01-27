@@ -14,18 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 35
   damage: 3
-  moveSpeed: 0.95
+  moveSpeed: 1.03
   accelerationFactorOnDetection: 1.25
+  currentDefense: 1.6899998
   defense: 1.3
   knockbackForce: 1.75
   attackRange: 3
   activationRange: 2.25
   attackDamageFactor: 1
-  enrageThreshold: 0.4
-  enrageFactor: 1.3
   invincibilityFlashDelay: 0.2
   invincibilityTimeAfterHit: 0.75
   sightLength: 1
   isSensitiveToLava: 0
   wallCheckRadius: 0.25
-  floatStrength: 0

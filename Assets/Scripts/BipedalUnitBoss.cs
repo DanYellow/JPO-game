@@ -49,8 +49,8 @@ public class BipedalUnitBoss : Enemy
         GameObject nextBeam = Instantiate((isEnraged ? beamEnraged : beam), firePoint.position, Quaternion.identity);
         nextBeam.transform.right = firePoint.right.normalized;
         SpriteBeam spriteBeam = nextBeam.GetComponent<SpriteBeam>();
-        spriteBeam.moveSpeedFactor = (isEnraged ? enemyData.enrageFactor : 1);
-        spriteBeam.damageFactor = (isEnraged ? enemyData.enrageFactor : 1);
+        spriteBeam.moveSpeedFactor = (isEnraged ? enrageData.bonusFactor : 1);
+        spriteBeam.damageFactor = (isEnraged ? enrageData.bonusFactor : 1);
         spriteBeam.invoker = gameObject;
     }
 
