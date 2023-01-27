@@ -30,8 +30,10 @@ public class MainMenuManager : MonoBehaviour
         }
     }
 
-    public void OnNavigate(InputAction.CallbackContext ctx) {
-        if(mainMenu != null && mainMenu.activeInHierarchy && ctx.phase == InputActionPhase.Performed && EventSystem.current.currentSelectedGameObject == null) {
+    public void OnNavigate(InputAction.CallbackContext ctx)
+    {
+        if (mainMenu != null && mainMenu.activeInHierarchy && ctx.phase == InputActionPhase.Performed && EventSystem.current.currentSelectedGameObject == null)
+        {
             mainMenu.GetComponentInChildren<Button>().Select();
         }
     }
@@ -47,7 +49,8 @@ public class MainMenuManager : MonoBehaviour
         // Debug.Log(input.actions["Navigate"].GetBindingDisplayString(out deviceLayout, out controlPath));
         if (input.currentControlScheme.Equals("Gamepad") && mainMenu.activeInHierarchy)
         {
-            if(EventSystem.current.currentSelectedGameObject == null) {
+            if (EventSystem.current.currentSelectedGameObject == null)
+            {
                 mainMenu.GetComponentInChildren<Button>().Select();
             }
         }
@@ -60,7 +63,7 @@ public class MainMenuManager : MonoBehaviour
 
         if (input.currentControlScheme.Equals("Keyboard&Mouse"))
         {
-             EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(null);
         }
     }
 
@@ -73,12 +76,18 @@ public class MainMenuManager : MonoBehaviour
     public void DisplayInfosMenu(bool isStartGame = false)
     {
         infosMenu.SetActive(true);
-        if(isStartGame) {
-            Button button = infosMenu.GetComponentInChildren<Button>();
-            TextMeshProUGUI textMeshProUGUI = button.GetComponentInChildren<TextMeshProUGUI>();
+        Button button = infosMenu.GetComponentInChildren<Button>();
+        TextMeshProUGUI textMeshProUGUI = button.GetComponentInChildren<TextMeshProUGUI>();
+        button.onClick.RemoveAllListeners();
+        if (isStartGame)
+        {
             textMeshProUGUI.SetText("COMMENCER");
-            button.onClick.RemoveAllListeners();
             button.onClick.AddListener(() => LoadLevel(1));
+        }
+        else
+        {
+            // textMeshProUGUI.SetText("COMMENCER");
+            button.onClick.AddListener(() => HideInfosMenu());
         }
 
         EventSystemExtensions.UpdateSelectedGameObject(infosMenu.GetComponentInChildren<Button>().gameObject);
@@ -92,10 +101,11 @@ public class MainMenuManager : MonoBehaviour
 
     public void QuitGame()
     {
-        if(!infosMenu.activeInHierarchy) {
-            #if UNITY_EDITOR
-                Debug.Log("Quit game");
-            #endif
+        if (!infosMenu.activeInHierarchy)
+        {
+#if UNITY_EDITOR
+            Debug.Log("Quit game");
+#endif
             Application.Quit();
         }
     }
