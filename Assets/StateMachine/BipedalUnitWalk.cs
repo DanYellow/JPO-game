@@ -9,7 +9,6 @@ public class BipedalUnitWalk : StateMachineBehaviour
 
     private BipedalUnitBoss bipedalUnitBoss;
 
-    // private bool isEnraged = false;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -38,7 +37,8 @@ public class BipedalUnitWalk : StateMachineBehaviour
 
         if (
             Vector2.Distance(player.position, rb.position) <= attackRange &&
-            (player.position.y < collider.bounds.max.y && player.position.y > collider.bounds.min.y)
+            (player.position.y < collider.bounds.max.y && player.position.y > collider.bounds.min.y) &&
+            !bipedalUnitBoss.isInvulnerable
         )
         {
             animator.SetTrigger("Attack");

@@ -1,6 +1,4 @@
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace StateMachine
 {
@@ -8,11 +6,6 @@ namespace StateMachine
     {
         [SerializeField]
         PlayerStatsValue playerStatsValue;
-
-        [SerializeField]
-        private LayerMask listLayerToIgnoreAfterHit;
-        private List<int> listLayers = new List<int>();
-
 
         private float timerInvulnerability = 0;
         // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
