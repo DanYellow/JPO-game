@@ -4,7 +4,7 @@ using System;
 public class FloatBehavior : MonoBehaviour
 {
     [SerializeField]
-    private EnemyStatsValue enemyStatsValue;
+    private FloatDataValue floatData;
     private float originalY;
 
     private void Awake()
@@ -16,7 +16,7 @@ public class FloatBehavior : MonoBehaviour
     {
         transform.position = new Vector3(
             transform.position.x,
-            originalY + ((float)Math.Sin(Time.time) * (enemyStatsValue?.floatStrength ?? 0.2f)),
+            originalY + (Mathf.Sin(Time.time) * floatData.floatStrength),
             transform.position.z
         );
     }

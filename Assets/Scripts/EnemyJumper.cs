@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class EnemyJumper : MonoBehaviour
 {
-    [Tooltip("How long it takes to reach the target")]
-    public float jumpHigh = 1.25f;
+    [SerializeField]
+    private JumperDataValue jumperDataValue;
 
     private bool isGrounded;
 
@@ -25,6 +25,7 @@ public class EnemyJumper : MonoBehaviour
 
     private void Awake()
     {
+        enabled = false;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
@@ -72,12 +73,8 @@ public class EnemyJumper : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            StartCoroutine(JumpAttack(listTriggers[nextTriggerIndex].transform.position));
-        }
-
         animator.SetBool("IsGrounded", isGrounded);
+        animator.SetBool("IsJumping", !isGrounded);
     }
 
     private void FixedUpdate()
@@ -87,9 +84,9 @@ public class EnemyJumper : MonoBehaviour
 
     IEnumerator JumpAttack(Vector2 target)
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(jumperDataValue.delayBetweenJumps);
 
-        Vector2 targetVel = CalculateTrajectoryVelocity(transform.position, target, jumpHigh);
+        Vector2 targetVel = CalculateTrajectoryVelocity(transform.position, target, jumperDataValue.jumpHigh);
         rb.velocity = targetVel;
     }
 
@@ -134,5 +131,15 @@ public class EnemyJumper : MonoBehaviour
         }
 
         return nextValue;
+    }
+
+    private void OnBecameVisible()
+    {
+        enabled = true;
+    }
+
+    private void OnBecameInvisible()
+    {
+        enabled = false;
     }
 }
