@@ -10,6 +10,9 @@ public class BipedalUnitBoss : Enemy
     private GameObject beam;
 
     [SerializeField]
+    private GameObject beamEnraged;
+
+    [SerializeField]
     private Transform firePoint;
     public bool isActive { get; set; } = false;
     public UnityEvent onStartCombat;
@@ -40,11 +43,11 @@ public class BipedalUnitBoss : Enemy
 
     public void Shoot()
     {
-        GameObject nextBeam = Instantiate(beam, firePoint.position, Quaternion.identity);
+        GameObject nextBeam = Instantiate((isEnraged ? beamEnraged : beam), firePoint.position, Quaternion.identity);
         nextBeam.transform.right = firePoint.right.normalized;
         SpriteBeam spriteBeam = nextBeam.GetComponent<SpriteBeam>();
-        spriteBeam.moveSpeed = (isEnraged ? enemyData.enrageFactor : 1) * enemyData.beamSpeed;
-        spriteBeam.damage = enemyData.damage * enemyData.enrageFactor;
+        spriteBeam.moveSpeedFactor = (isEnraged ? enemyData.enrageFactor : 1);
+        spriteBeam.damageFactor = (isEnraged ? enemyData.enrageFactor : 1);
         spriteBeam.invoker = gameObject;
     }
 

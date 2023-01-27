@@ -16,7 +16,7 @@ public class FloatBehavior : MonoBehaviour
     {
         transform.position = new Vector3(
             transform.position.x,
-            originalY + ((float)Math.Sin(Time.time) * enemyStatsValue.floatStrength),
+            originalY + ((float)Math.Sin(Time.time) * (enemyStatsValue?.floatStrength ?? 0.2f)),
             transform.position.z
         );
     }

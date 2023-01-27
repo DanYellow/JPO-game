@@ -7,11 +7,9 @@ public class BipedalUnitWalk : StateMachineBehaviour
     private Collider2D collider;
     public EnemyStatsValue enemyData;
 
-    private SpriteRenderer sr;
-
     private BipedalUnitBoss bipedalUnitBoss;
 
-    private bool isEnraged = false;
+    // private bool isEnraged = false;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -19,7 +17,6 @@ public class BipedalUnitWalk : StateMachineBehaviour
         rb = animator.GetComponent<Rigidbody2D>();
         collider = animator.GetComponent<Collider2D>();
         bipedalUnitBoss = animator.GetComponent<BipedalUnitBoss>();
-        sr = animator.GetComponent<SpriteRenderer>();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -31,15 +28,19 @@ public class BipedalUnitWalk : StateMachineBehaviour
         Vector2 target = new Vector2(player.position.x, rb.position.y);
 
         rb.MovePosition(
-            Vector2.MoveTowards(rb.position, target, enemyData.moveSpeed * Time.fixedDeltaTime * (isEnraged ? 1 : enemyData.enrageFactor))
+            Vector2.MoveTowards(rb.position, target, enemyData.moveSpeed * Time.fixedDeltaTime * (bipedalUnitBoss.isEnraged ? 1 : enemyData.enrageFactor))
         );
 
+        float attackRange = enemyData.attackRange;
+        if(bipedalUnitBoss.isEnraged) {
+            attackRange += enemyData.attackRange / 2; 
+        }
+
         if (
-            Vector2.Distance(player.position, rb.position) <= enemyData.attackRange &&
+            Vector2.Distance(player.position, rb.position) <= attackRange &&
             (player.position.y < collider.bounds.max.y && player.position.y > collider.bounds.min.y)
         )
         {
-            isEnraged = true;
             animator.SetTrigger("Attack");
         }
     }

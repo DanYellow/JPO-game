@@ -3,9 +3,15 @@ using UnityEngine;
 public class SpriteBeam : MonoBehaviour
 {
     private Rigidbody2D rb;
-    public float damage = 0;
-    public float moveSpeed = 1.5f;
     public GameObject impactEffect;
+
+    [SerializeField]
+    private BeamValue beamData;
+
+    [HideInInspector]
+    public float damageFactor = 1;
+    [HideInInspector]
+    public float moveSpeedFactor = 1;
 
     [HideInInspector]
     public GameObject invoker = null;
@@ -17,7 +23,7 @@ public class SpriteBeam : MonoBehaviour
 
     private void Start()
     {
-        rb.velocity = transform.right * moveSpeed;
+        rb.velocity = transform.right * beamData.moveSpeed * moveSpeedFactor;
         Destroy(gameObject, 3f);
     }
 
@@ -26,7 +32,7 @@ public class SpriteBeam : MonoBehaviour
         if (invoker != other.gameObject)
         {
             if(other.transform.TryGetComponent<IDamageable>(out IDamageable iDamageable)) {
-                iDamageable.TakeDamage(damage);
+                iDamageable.TakeDamage(beamData.damage * damageFactor);
             }
             Destroy(gameObject);
             GameObject impact = Instantiate(impactEffect, transform.position, Quaternion.identity);

@@ -24,13 +24,15 @@ public class EnemyStatsValue : ScriptableObject
     [Tooltip("How close the target have to be in order to start the fight sequence")]
     public float activationRange = 0.3f;
 
+    [Tooltip("How much the attack will be damage increased for beams...")]
+    public float attackDamageFactor = 1;
+
     [Tooltip("Which threshold of life point the enemy have to reach in order to enrage")]
     [Range(0, 1)]
     public float enrageThreshold = 0;
     [Range(1, 3)]
     public float enrageFactor = 1;
 
-    public float beamSpeed = 1.75f;
 
     public float invincibilityFlashDelay = 0.2f;
     public float invincibilityTimeAfterHit = 0.75f;
