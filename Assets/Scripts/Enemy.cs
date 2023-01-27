@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour, IDamageable
     public GameObject deathEffect;
     protected Rigidbody2D rb;
 
+    [SerializeField]
     public EnemyStatsValue enemyData;
 
     [ReadOnlyInspector, SerializeField]
@@ -37,7 +38,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public virtual void TakeDamage(float damage)
     {
-        currentHealth = Mathf.Clamp(currentHealth - (damage * enemyData.defense), 0, maxHealth);
+        currentHealth = Mathf.Clamp(currentHealth - (damage * enemyData.currentDefense), 0, maxHealth);
         currentHealth = Mathf.Round(currentHealth * 100f) / 100f;
         if (currentHealth == 0)
         {

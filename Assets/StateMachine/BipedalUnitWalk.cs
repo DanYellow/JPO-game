@@ -5,8 +5,6 @@ public class BipedalUnitWalk : StateMachineBehaviour
     private Transform player;
     private Rigidbody2D rb;
     private Collider2D collider;
-    public EnemyStatsValue enemyData;
-
     private BipedalUnitBoss bipedalUnitBoss;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -26,13 +24,16 @@ public class BipedalUnitWalk : StateMachineBehaviour
 
         Vector2 target = new Vector2(player.position.x, rb.position.y);
 
+        float moveSpeed = bipedalUnitBoss.enemyData.moveSpeed;
+        moveSpeed *= (bipedalUnitBoss.isEnraged ? 1 : bipedalUnitBoss.enrageData.bonusFactor);
+
         rb.MovePosition(
-            Vector2.MoveTowards(rb.position, target, enemyData.moveSpeed * Time.fixedDeltaTime * (bipedalUnitBoss.isEnraged ? 1 : enemyData.enrageFactor))
+            Vector2.MoveTowards(rb.position, target, moveSpeed * Time.fixedDeltaTime)
         );
 
-        float attackRange = enemyData.attackRange;
+        float attackRange = bipedalUnitBoss.enemyData.attackRange;
         if(bipedalUnitBoss.isEnraged) {
-            attackRange += enemyData.attackRange / 2; 
+            attackRange += bipedalUnitBoss.enemyData.attackRange / 2; 
         }
 
         if (

@@ -23,6 +23,8 @@ public class EnemyJumper : MonoBehaviour
     [SerializeField]
     private int nextTriggerIndex = 1;
 
+    private bool countUp = true;
+
     private void Awake()
     {
         enabled = false;
@@ -33,7 +35,7 @@ public class EnemyJumper : MonoBehaviour
         offset = new Vector3(0, sr.bounds.extents.y, 0);
     }
 
-    private bool countUp = true;
+    
 
     // Start is called before the first frame update
     void Start()

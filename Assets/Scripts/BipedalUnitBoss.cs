@@ -13,6 +13,9 @@ public class BipedalUnitBoss : Enemy
     private GameObject beamEnraged;
 
     [SerializeField]
+    public EnrageBehaviorValue enrageData;
+
+    [SerializeField]
     private Transform firePoint;
     public bool isActive { get; set; } = false;
     public UnityEvent onStartCombat;
@@ -32,9 +35,9 @@ public class BipedalUnitBoss : Enemy
     public override void TakeDamage(float damage)
     {
         if (isInvulnerable) return;
-        base.TakeDamage(isEnraged ? damage / enemyData.enrageFactor : damage);
+        base.TakeDamage(isEnraged ? damage / enrageData.bonusFactor : damage);
 
-        if (currentHealth / enemyData.maxHealth < enemyData.enrageThreshold && !isEnraged)
+        if (currentHealth / enemyData.maxHealth < enrageData.threshold && !isEnraged)
         {
             isEnraged = true;
             animator.SetTrigger("IsEnraged");

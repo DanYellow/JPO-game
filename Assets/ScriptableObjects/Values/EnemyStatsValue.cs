@@ -10,7 +10,8 @@ public class EnemyStatsValue : ScriptableObject
     [Tooltip("How much the speed will increase when the player is detected"), Range(1, 3)]
     public float accelerationFactorOnDetection = 1.25f;
 
-    private float initDefense;
+    [HideInInspector]
+    public float currentDefense;
 
     [Tooltip("How much the damage will be reduced on hit")]
     public float defense = 1;
@@ -27,13 +28,6 @@ public class EnemyStatsValue : ScriptableObject
     [Tooltip("How much the attack will be damage increased for beams...")]
     public float attackDamageFactor = 1;
 
-    [Tooltip("Which threshold of life point the enemy have to reach in order to enrage")]
-    [Range(0, 1)]
-    public float enrageThreshold = 0;
-    [Range(1, 3)]
-    public float enrageFactor = 1;
-
-
     public float invincibilityFlashDelay = 0.2f;
     public float invincibilityTimeAfterHit = 0.75f;
 
@@ -43,5 +37,8 @@ public class EnemyStatsValue : ScriptableObject
 
     public float wallCheckRadius = 0.25f;
 
-    public float floatStrength = 0f;
+    private void OnEnable()
+    {
+        currentDefense = defense;
+    }
 }
