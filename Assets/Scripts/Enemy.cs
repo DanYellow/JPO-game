@@ -54,7 +54,8 @@ public class Enemy : MonoBehaviour, IDamageable
         {
             StopCoroutine(HandleInvincibilityDelay());
             StopCoroutine(InvincibilityFlash());
-
+            animator.SetTrigger("IsHurt");
+            animator.SetLayerWeight(1, 1);
             StartCoroutine(HandleInvincibilityDelay());
             StartCoroutine(InvincibilityFlash());
         }
@@ -69,6 +70,8 @@ public class Enemy : MonoBehaviour, IDamageable
             sr.color = new Color(1f, 1f, 1f, 1f);
             yield return new WaitForSeconds(enemyData.invincibilityFlashDelay);
         }
+        animator.SetLayerWeight(1, 0);
+        animator.ResetTrigger("IsHurt");
     }
 
     private void OnCollisionEnter2D(Collision2D other)

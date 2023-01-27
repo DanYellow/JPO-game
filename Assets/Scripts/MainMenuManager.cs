@@ -86,7 +86,6 @@ public class MainMenuManager : MonoBehaviour
         }
         else
         {
-            // textMeshProUGUI.SetText("COMMENCER");
             button.onClick.AddListener(() => HideInfosMenu());
         }
 
@@ -95,7 +94,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void HideInfosMenu()
     {
-        EventSystemExtensions.UpdateSelectedGameObject(mainMenu.GetComponentInChildren<Button>().gameObject);
+        EventSystemExtensions.UpdateSelectedGameObject(mainMenu.GetComponentsInChildren<Button>()[1].gameObject);
         infosMenu.SetActive(false);
     }
 
