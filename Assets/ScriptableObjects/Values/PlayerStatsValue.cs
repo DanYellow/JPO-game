@@ -29,6 +29,8 @@ public class PlayerStatsValue : ScriptableObject
 
     public bool isSensitiveToLava = true;
 
+    // public event System.Action ValueChanged = delegate {};
+
     private void OnEnable() {
         currentHealth = maxHealth;
     }

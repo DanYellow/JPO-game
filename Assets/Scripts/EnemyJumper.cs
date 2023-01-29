@@ -18,9 +18,8 @@ public class EnemyJumper : MonoBehaviour
 
     private Vector3 offset;
 
-    public EnemyJumpTrigger[] listTriggers;
+    public EnemyJumperTrigger[] listTriggers;
 
-    [SerializeField]
     private int nextTriggerIndex = 1;
 
     private bool countUp = true;
@@ -35,9 +34,6 @@ public class EnemyJumper : MonoBehaviour
         offset = new Vector3(0, sr.bounds.extents.y, 0);
     }
 
-    
-
-    // Start is called before the first frame update
     void Start()
     {
         SetTriggersSibling();
@@ -116,7 +112,6 @@ public class EnemyJumper : MonoBehaviour
         if (nextValue <= listTriggers.Length && countUp == true)
         {
             nextValue++;
-
             if (nextValue == listTriggers.Length)
             {
                 nextValue--;

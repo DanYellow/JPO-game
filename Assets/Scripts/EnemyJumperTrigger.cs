@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class EnemyJumpTrigger : MonoBehaviour
+public class EnemyJumperTrigger : MonoBehaviour
 {
     [HideInInspector]
     public GameObject sibling = null;
