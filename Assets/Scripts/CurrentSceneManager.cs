@@ -23,17 +23,6 @@ public class CurrentSceneManager : MonoBehaviour
         onBossKilled.OnEventRaised += DisplayCreditsScreen;
     }
 
-    void Update()
-    {
-#if UNITY_EDITOR
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            Debug.ClearDeveloperConsole();
-            LoadLevel();
-        }
-#endif
-    }
-
     private void DisplayCreditsScreen()
     {
         creditsUI.SetActive(true);
