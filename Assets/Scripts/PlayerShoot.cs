@@ -43,6 +43,7 @@ public class PlayerShoot : MonoBehaviour
 
         if (hitInfo)
         {
+            Debug.Log("Fffe" + hitInfo.transform.name);
             if (hitInfo.transform.TryGetComponent<IDamageable>(out IDamageable iDamageable))
             {
                 iDamageable.TakeDamage(playerStatsValue.damage);

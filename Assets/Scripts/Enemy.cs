@@ -1,10 +1,13 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Enemy : MonoBehaviour, IDamageable
 {
     public bool isSensitiveToLava { get; set; }
-    public GameObject deathEffect;
+
+    [FormerlySerializedAs("deathEffect")]
+    public GameObject deathEffectPrefab;
     protected Rigidbody2D rb;
 
     [SerializeField]
@@ -42,10 +45,10 @@ public class Enemy : MonoBehaviour, IDamageable
         currentHealth = Mathf.Round(currentHealth * 100f) / 100f;
         if (currentHealth == 0)
         {
-            if (deathEffect)
+            if (deathEffectPrefab)
             {
-                GameObject impact = Instantiate(deathEffect, transform.position, Quaternion.identity);
-                Destroy(impact, impact.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                GameObject deathEffect = Instantiate(deathEffectPrefab, transform.position, Quaternion.identity);
+                Destroy(deathEffect, deathEffect.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
             }
             Destroy(gameObject);
             onDeathCallback?.Raise();
@@ -54,8 +57,7 @@ public class Enemy : MonoBehaviour, IDamageable
         {
             StopCoroutine(HandleInvincibilityDelay());
             StopCoroutine(InvincibilityFlash());
-            animator.SetTrigger("IsHurt");
-            animator.SetLayerWeight(1, 1);
+
             StartCoroutine(HandleInvincibilityDelay());
             StartCoroutine(InvincibilityFlash());
         }
@@ -63,6 +65,11 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public IEnumerator InvincibilityFlash()
     {
+        if (animator)
+        {
+            animator.SetTrigger("IsHurt");
+            animator.SetLayerWeight(1, 1);
+        }
         while (isHurt)
         {
             sr.color = new Color(1f, 1f, 1f, 0f);
@@ -70,8 +77,11 @@ public class Enemy : MonoBehaviour, IDamageable
             sr.color = new Color(1f, 1f, 1f, 1f);
             yield return new WaitForSeconds(enemyData.invincibilityFlashDelay);
         }
-        animator.SetLayerWeight(1, 0);
-        animator.ResetTrigger("IsHurt");
+        if (animator)
+        {
+            animator.SetLayerWeight(1, 0);
+            animator.ResetTrigger("IsHurt");
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)

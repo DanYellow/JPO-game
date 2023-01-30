@@ -22,28 +22,12 @@ public class LaserSprite : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         stretchPartCollider.size = new Vector2(
             stretchPartSprite.bounds.size.x,
             stretchPartCollider.size.y
         );
 
         StartCoroutine(Shoot());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        t += Time.deltaTime / timeToReachTarget;
-        // Debug.Log("t " + t);
-        // if (t < timeToReachTarget)
-        // {
-        //     stretchPart.transform.localScale = Vector3.Lerp(
-        //         stretchPart.transform.localScale,
-        //         new Vector3(stretchPart.transform.localScale.x * 1.05f, stretchPart.transform.localScale.y, stretchPart.transform.localScale.z),
-        //         t
-        //     );
-        // }
     }
 
     IEnumerator Shoot() {
@@ -58,7 +42,6 @@ public class LaserSprite : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-            Debug.Log("feeeea");
         if (other.transform.TryGetComponent<IDamageable>(out IDamageable iDamageable))
         {
             iDamageable.TakeDamage(0);
