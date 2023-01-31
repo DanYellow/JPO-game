@@ -26,7 +26,7 @@ public class SecretBoss : MonoBehaviour
     [SerializeField]
     VoidEventChannel OnTorsoDeathChannel;
 
-    private bool isLaserAttacking = false;
+    public bool isLaserAttacking = false;
 
 
     private void Awake()
@@ -92,9 +92,37 @@ public class SecretBoss : MonoBehaviour
         //  transform.parent.position = transform.position - transform.localpostiion;
     }
 
+    public void MoveToTargetProxy(Vector2 targetPos, Bounds size) {
+        StartCoroutine(MoveToTarget(targetPos, size));
+    }
+
+    IEnumerator MoveToTarget(Vector2 targetPos, Bounds size) {
+        float lerpDuration = 1; 
+
+        bool isTargetLowerThanTorso = transform.InverseTransformPoint(targetPos).y < initTorsoPosition.y;
+        Vector2 endValue = new Vector2(
+            torso.transform.localPosition.x,
+            isTargetLowerThanTorso ? transform.InverseTransformPoint(size.max).y : transform.InverseTransformPoint(size.min).y
+        );
+
+        float timeElapsed = 0;
+        while (timeElapsed < lerpDuration)
+        {
+            torso.transform.localPosition = Vector2.Lerp(
+                torso.transform.localPosition, 
+                endValue, 
+                timeElapsed / lerpDuration
+            );
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+        torso.transform.localPosition = endValue;
+        StartCoroutine(ShootLaser());
+    }
+
     IEnumerator ShootLaser()
     {
-        yield return new WaitForSeconds(0.35f);
+        yield return new WaitForSeconds(0.25f);
         laser.transform.position = laserFirePoint.position;
         laser.SetActive(true);
         // GameObject laser = Instantiate(laserPrefab, laserFirePoint.position, Quaternion.identity);

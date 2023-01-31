@@ -9,7 +9,7 @@ public class SecretBossIdle : StateMachineBehaviour
     private EnemyStatsValue secretBossData;
 
     private float nextShootTime = 0f;
-    private float shootingRate = 6;
+    private float shootingRate = 3.5f;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -35,9 +35,7 @@ public class SecretBossIdle : StateMachineBehaviour
 
       if (Vector2.Distance(player.position, selfTransform.position) <= attackRange && Time.time >= nextShootTime)
         {
-            animator.GetComponent<SecretBoss>().ShootBeam(player.position, player.transform.GetComponent<BoxCollider2D>().bounds);
-            // animator.GetComponent<SecretBoss>().torso.transform.position = new Vector2(selfTransform.position.x, player.position.y);
-            // animator.SetBool("LaserBeamAttack", true);
+            animator.GetComponent<SecretBoss>().MoveToTargetProxy(player.position, player.transform.GetComponent<BoxCollider2D>().bounds);
             nextShootTime = Time.time + shootingRate;
         }
     }
@@ -45,6 +43,5 @@ public class SecretBossIdle : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        // Debug.Log(  "OnStateExit");
     }
 }

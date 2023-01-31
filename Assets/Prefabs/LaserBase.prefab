@@ -158,7 +158,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5708165026945059446}
   - component: {fileID: 5708165026945059444}
-  - component: {fileID: 5708165026945059447}
+  - component: {fileID: 815764713}
   m_Layer: 7
   m_Name: LaserRay
   m_TagString: Untagged
@@ -174,8 +174,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5708165026945059441}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.417, y: -0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.41864, y: 0.00004, z: 0}
+  m_LocalScale: {x: 0, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5708165026280100926}
@@ -233,7 +233,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &5708165026945059447
+--- !u!61 &815764713
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -246,7 +246,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.41864216, y: -0.005729921}
+  m_Offset: {x: -0.41875, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0.25, z: 0, w: 0.26250002}
     pivot: {x: 1, y: 0.5}
@@ -257,5 +257,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.83738434, y: 0.13909444}
+  m_Size: {x: 0.8375, y: 0.14}
   m_EdgeRadius: 0

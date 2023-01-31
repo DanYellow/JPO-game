@@ -3,6 +3,11 @@ using UnityEngine;
 
 public class DebugManager : MonoBehaviour
 {
+    [SerializeField]
+    private bool activateSlowTime = false;
+
+    [SerializeField, Range(0, 1)]
+    private float slowTime = 1f;
     // Update is called once per frame
     void Update()
     {
@@ -11,6 +16,14 @@ public class DebugManager : MonoBehaviour
         {
             Debug.ClearDeveloperConsole();
             RestartLevel();
+        }
+        if (activateSlowTime)
+        {
+            Time.timeScale = slowTime;
+        }
+        else
+        {
+            Time.timeScale = 1;
         }
 #endif
     }
