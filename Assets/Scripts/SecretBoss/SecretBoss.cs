@@ -13,19 +13,33 @@ public class SecretBoss : MonoBehaviour
 
     [Header("Parts")]
     [SerializeField]
-    private GameObject torso;
+    public GameObject torso;
     [SerializeField]
     private GameObject frontArm;
     [SerializeField]
     private GameObject backArm;
 
+    private GameObject laser;
+
+    private Vector2 initTorsoPosition;
+
     [SerializeField]
     VoidEventChannel OnTorsoDeathChannel;
 
+    private bool isLaserAttacking = false;
 
-    private void Awake() {
+
+    private void Awake()
+    {
         animator = GetComponent<Animator>();
+        laser = Instantiate(laserPrefab, laserFirePoint.position, Quaternion.identity);
+        laser.SetActive(false);
         OnTorsoDeathChannel.OnEventRaised += DestroyParts;
+
+        initTorsoPosition = torso.transform.localPosition;
+
+        // Debug.Log("localPosition " + torso.transform.localPosition);
+        // Debug.Log("position " + torso.transform.position);
     }
 
     void Start()
@@ -37,32 +51,61 @@ public class SecretBoss : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            animator.SetBool("LaserBeamAttack", true);
+            // animator.SetBool("LaserBeamAttack", true);
         }
 
         if (Input.GetKeyDown(KeyCode.B))
         {
-            animator.SetBool("Debug", !animator.GetBool("Debug"));
-            frontArm.transform.position += new Vector3(2, 0, 0);
+            // animator.SetBool("Debug", !animator.GetBool("Debug"));
+            frontArm.transform.position += new Vector3(20, 0, 0);
         }
     }
 
-    private void DestroyParts() {
+    private void DestroyParts()
+    {
         foreach (Transform g in GetComponentsInChildren<Transform>())
         {
             Destroy(g.gameObject);
         }
     }
 
-    IEnumerator ShootLaser()
+    public void ShootBeam(Vector2 targetPos, Bounds size)
     {
-        GameObject laser = Instantiate(laserPrefab, laserFirePoint.position, Quaternion.identity);
-        yield return new WaitForSeconds(0.5f);
-        animator.SetBool("LaserBeamAttack", false);
-        Destroy(laser);
+        bool isTargetLowerThanTorso = transform.InverseTransformPoint(targetPos).y < initTorsoPosition.y;
+        torso.transform.localPosition = new Vector3(
+            torso.transform.localPosition.x,
+            isTargetLowerThanTorso ? transform.InverseTransformPoint(size.max).y : transform.InverseTransformPoint(size.min).y
+        );
+        // Debug.Log("size.center " +  size.center);
+        /// https://docs.unity3d.com/ScriptReference/Transform.InverseTransformPoint.html
+        /// // Debug.Log("dd " + Mathf.Clamp(targetPos.y, 0, initTorsoPosition.y));
+        // Debug.Log("localPosition " + targetPos.InverseTransformPoint(torso.transform.localPosition));
+        // Debug.Log("size " + torso.GetComponent<SpriteRenderer>().bounds.size.y);
+        // Debug.Log("max " + size.max);
+        // Debug.Log("InverseTransformPoint " + transform.InverseTransformPoint(size.center));
+        Debug.Log("InverseTransformPoint 2 " + transform.InverseTransformPoint(size.max));
+        // torso.transform.localPosition = new Vector3(
+        //     torso.transform.localPosition.x, 
+        //     Mathf.Clamp(targetPos.y, 0, initTorsoPosition.y)
+        //     // (torso.transform.position - laserFirePoint.localPosition).y
+        // );
+        //  transform.parent.position = transform.position - transform.localpostiion;
     }
 
-    private void OnDisable() {
+    IEnumerator ShootLaser()
+    {
+        yield return new WaitForSeconds(0.35f);
+        laser.transform.position = laserFirePoint.position;
+        laser.SetActive(true);
+        // GameObject laser = Instantiate(laserPrefab, laserFirePoint.position, Quaternion.identity);
+        yield return new WaitForSeconds(0.45f);
+        laser.SetActive(false);
+        // animator.SetBool("LaserBeamAttack", false);
+        // Destroy(laser);
+    }
+
+    private void OnDisable()
+    {
         OnTorsoDeathChannel.OnEventRaised -= DestroyParts;
     }
 }

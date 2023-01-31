@@ -16,11 +16,8 @@ public class LaserSprite : MonoBehaviour
     {
         stretchPartSprite = stretchPart.GetComponent<SpriteRenderer>();
         stretchPartCollider = stretchPart.GetComponent<BoxCollider2D>();
-
-        Debug.Log(transform.localScale.x);
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         stretchPartCollider.size = new Vector2(

@@ -7,6 +7,8 @@ public class ArmJoint : MonoBehaviour
     public Transform bodyJoint;
     public Transform armJoint;
 
+    public float breakDistance = 3f;
+
     private void Awake()
     {
         lineRenderer = GetComponentInChildren<LineRenderer>();
@@ -22,5 +24,7 @@ public class ArmJoint : MonoBehaviour
     {
         lineRenderer.SetPosition(0, bodyJoint.position);
         lineRenderer.SetPosition(1, armJoint.position);
+
+        lineRenderer.enabled = Vector2.Distance(bodyJoint.position, armJoint.position) <= breakDistance;
     }
 }
