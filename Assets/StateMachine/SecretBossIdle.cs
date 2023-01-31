@@ -35,7 +35,7 @@ public class SecretBossIdle : StateMachineBehaviour
 
       if (Vector2.Distance(player.position, selfTransform.position) <= attackRange && Time.time >= nextShootTime)
         {
-            animator.GetComponent<SecretBoss>().MoveToTargetProxy(player.position, player.transform.GetComponent<BoxCollider2D>().bounds);
+            animator.GetComponent<SecretBoss>().MoveToTarget(player.position, player.transform.GetComponent<BoxCollider2D>().bounds);
             nextShootTime = Time.time + shootingRate;
         }
     }

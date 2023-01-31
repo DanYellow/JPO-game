@@ -17,32 +17,9 @@ public class LaserSprite : MonoBehaviour
         stretchPartCollider = stretchPart.GetComponent<BoxCollider2D>();
     }
 
-    void Start()
-    {
-        // stretchPartCollider.size = new Vector2(
-        //     stretchPartSprite.bounds.size.x / transform.localScale.x,
-        //     stretchPartCollider.size.y
-        // );
-    }
-
-    private void Update() {
-        // stretchPartCollider.size = new Vector2(
-        //     (stretchPartSprite.bounds.size.x / transform.localScale.x) / 2,
-        //     stretchPartCollider.size.y
-        // );
-        // stretchPartCollider.offset = new Vector2 (-(stretchPartSprite.bounds.size.x / 2), 0);
-    }
-
     IEnumerator Shoot() {
         float timeElapsed = 0f;
-        
-        // while (timeElapsed < timeToReachTarget)
-        // {
-        //     stretchPart.transform.localScale += new Vector3(0.25f, 0, 0);
-        //     // stretchPartCollider.size += new Vector2(0.025f, 0);
-        //     timeElapsed += Time.deltaTime;
-        //     yield return null;
-        // }
+
         Vector2 endValue = new Vector2(50f, stretchPart.transform.localScale.y);
         while (timeElapsed < timeToReachTarget)
         {
@@ -54,7 +31,6 @@ public class LaserSprite : MonoBehaviour
             timeElapsed += Time.deltaTime;
             yield return null;
         }
-        // ResetScale();
     }
 
     void ResetScale() {
