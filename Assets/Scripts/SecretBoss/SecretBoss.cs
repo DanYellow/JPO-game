@@ -150,11 +150,13 @@ public class SecretBoss : MonoBehaviour
             transitionDurationShot * 35
         ));
         
-        yield return StartCoroutine(MovePartTo(
+        StartCoroutine(MovePartTo(
             backArm.transform,
             Vector3.left * (speed + Vector3.Distance(backArm.transform.position, frontArm.transform.position)),
             transitionDurationShot * 35
         ));
+         yield return null;
+        // yield return new WaitForSeconds(1.5f);
         backArm.SetActive(false);
         Debug.Log("ttee");
     }
@@ -173,6 +175,7 @@ public class SecretBoss : MonoBehaviour
             yield return null;
         }
         part.localPosition = endPosition;
+        Debug.Log("tteeeee");
         yield break;    
     }
 
