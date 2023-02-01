@@ -9,7 +9,7 @@ public class SecretBossIdle : StateMachineBehaviour
     private EnemyStatsValue secretBossData;
 
     private float nextShootTime = 0f;
-    private float shootingRate = 3.5f;
+    private float shootingRate = 1f; // 3.5f
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
