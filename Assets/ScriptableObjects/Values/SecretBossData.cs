@@ -7,6 +7,9 @@ public class SecretBossData : EnemyStatsValue
     public Phase[] listPhases;
     public float laserDamage;
 
+    public float laserRetractTime = 1f;
+    public float laserShootInterval = 4f;
+
     void OnValidate()
     {
         laserDamage = Mathf.Max(laserDamage, 1);
@@ -21,4 +24,6 @@ public class Phase
 
     [Range(1, 2)]
     public float attackDamageFactor;
+
+
 }

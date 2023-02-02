@@ -8,10 +8,7 @@ public class SecretBossIdle : StateMachineBehaviour
     [SerializeField]
     private EnemyStatsValue secretBossData;
 
-    SecretBoss secretBoss;
-
-    private float nextShootTime = 0f;
-    private float shootingRate = 4f; // 3.5f
+    private SecretBoss secretBoss;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -19,7 +16,6 @@ public class SecretBossIdle : StateMachineBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         selfTransform = animator.GetComponent<Transform>();
         secretBoss = animator.GetComponent<SecretBoss>();
-        nextShootTime = Time.time + shootingRate;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -36,10 +32,9 @@ public class SecretBossIdle : StateMachineBehaviour
         //       attackRange += secretBossData.attackRange / 2;
         //   }
 
-        if (Vector2.Distance(player.position, selfTransform.position) <= attackRange && Time.time >= nextShootTime && secretBoss.isReadyToShootLaser)
+        if (Vector2.Distance(player.position, selfTransform.position) >= attackRange && secretBoss.isReadyToShootLaser)
         {
             secretBoss.MoveToShootTarget(player.position, player.transform.GetComponent<BoxCollider2D>().bounds);
-            nextShootTime = Time.time + shootingRate;
         }
     }
 

@@ -15,6 +15,7 @@ public class SecretBoss : MonoBehaviour
     [Header("Parts")]
     [SerializeField]
     public GameObject torso;
+    private SecretBossTorso secretBossTorso;
     [SerializeField]
     private GameObject frontArm;
     [SerializeField]
@@ -47,6 +48,7 @@ public class SecretBoss : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        secretBossTorso = torso.GetComponent<SecretBossTorso>();
         laser = Instantiate(laserPrefab, laserFirePoint.position, Quaternion.identity);
         laser.SetActive(false);
         laserSprite = laser.GetComponent<LaserSprite>();
@@ -205,18 +207,16 @@ public class SecretBoss : MonoBehaviour
     IEnumerator ShootLaser()
     {
         yield return new WaitForSeconds(timeDelayBeforeShot);
-        laser.transform.position = laserFirePoint.position;
-        // laserSprite.damage = en
-        laser.SetActive(true);
-        yield return new WaitForSeconds(timeDelayBeforeLaserDisappear);
-        laser.SetActive(false);
-
+        yield return StartCoroutine(secretBossTorso.ShootLaser());
         yield return new WaitForSeconds(timeDelayBeforeResetPosition);
         StartCoroutine(MovePartTo(frontArm.transform, initFrontArmPosition, timeToReachTarget));
         StartCoroutine(MovePartTo(backArm.transform, initBackArmPosition, timeToReachTarget));
         yield return StartCoroutine(MovePartTo(torso.transform, initTorsoPosition, timeToReachTarget));
         yield return new WaitForSeconds(timeDelayBeforeLaserDisappear);
+        yield return new WaitForSeconds(secretBossTorso.secretBossData.laserShootInterval);
+
         isReadyToShootLaser = true;
+        Debug.Log("Ready for next shoot");
     }
 
     private void OnDisable()

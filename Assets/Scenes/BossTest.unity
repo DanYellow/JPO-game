@@ -1140,7 +1140,7 @@ GameObject:
   m_Component:
   - component: {fileID: 916507578}
   m_Layer: 0
-  m_Name: LaserPoint
+  m_Name: LaserFirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1154,7 +1154,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 916507577}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.783, y: 0.077, z: 0}
+  m_LocalPosition: {x: -0.738, y: 0.077, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2322,7 +2322,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1695322836}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b8c4044f938feeb47981ae439c2609c8, type: 3}
   m_Name: 
@@ -2673,6 +2673,8 @@ MonoBehaviour:
   enemyData: {fileID: 11400000, guid: 25b9d430d1ca7f14d83f78c652f21a26, type: 2}
   currentHealth: 0
   onDeathCallback: {fileID: 11400000, guid: eb4a902577c016b4687f64edf1e1a855, type: 2}
-  level1: {fileID: 21300000, guid: 8eb94eabe2a735840a94744264be445a, type: 3}
-  level2: {fileID: 21300000, guid: 36cc9be7d97ec424b9b370aac89aa820, type: 3}
+  laserFirePoint: {fileID: 916507578}
+  laserPrefab: {fileID: 5708165026280100923, guid: d71b7ad76ccae9540aac4b9c9cd51525, type: 3}
+  secretBossData: {fileID: 0}
   isInvulnerable: 0
+  isReadyToShoot: 1
