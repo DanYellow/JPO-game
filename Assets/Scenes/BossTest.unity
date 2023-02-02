@@ -377,7 +377,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 481800565}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!120 &115675077
 LineRenderer:
@@ -603,7 +603,6 @@ Transform:
   - {fileID: 872476586}
   - {fileID: 1405044806}
   - {fileID: 1695322837}
-  - {fileID: 1020743485}
   - {fileID: 115675076}
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -627,6 +626,7 @@ MonoBehaviour:
   backArm: {fileID: 1405044805}
   lightningAttack: {fileID: 1068915468}
   OnTorsoDeathChannel: {fileID: 11400000, guid: eb4a902577c016b4687f64edf1e1a855, type: 2}
+  isReadyToShootLaser: 1
 --- !u!1 &533138150
 GameObject:
   m_ObjectHideFlags: 0
@@ -1161,90 +1161,6 @@ Transform:
   m_Father: {fileID: 2112746331}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1020743484
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1020743485}
-  - component: {fileID: 1020743486}
-  m_Layer: 0
-  m_Name: arm-part
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1020743485
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1020743484}
-  m_LocalRotation: {x: -0, y: -0, z: -0.43198767, w: 0.90187955}
-  m_LocalPosition: {x: 0.3223133, y: 0.30932617, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 481800565}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -51.188}
---- !u!212 &1020743486
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1020743484}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: f08cb3366f4dc33418d922e233ca2ca3, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 2
-  m_Size: {x: 0.6229723, y: 0.30000016}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
 --- !u!1 &1068915468
 GameObject:
   m_ObjectHideFlags: 0
@@ -2754,7 +2670,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathEffectPrefab: {fileID: 1669963593005900213, guid: 88faa381c5813094d921ea28432f0f70, type: 3}
-  enemyData: {fileID: 11400000, guid: 4dfc5b49f463f934086ef428704e5065, type: 2}
+  enemyData: {fileID: 11400000, guid: 25b9d430d1ca7f14d83f78c652f21a26, type: 2}
   currentHealth: 0
   onDeathCallback: {fileID: 11400000, guid: eb4a902577c016b4687f64edf1e1a855, type: 2}
   level1: {fileID: 21300000, guid: 8eb94eabe2a735840a94744264be445a, type: 3}

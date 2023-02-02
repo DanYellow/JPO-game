@@ -8,6 +8,8 @@ public class SecretBossIdle : StateMachineBehaviour
     [SerializeField]
     private EnemyStatsValue secretBossData;
 
+    SecretBoss secretBoss;
+
     private float nextShootTime = 0f;
     private float shootingRate = 4f; // 3.5f
 
@@ -16,6 +18,7 @@ public class SecretBossIdle : StateMachineBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         selfTransform = animator.GetComponent<Transform>();
+        secretBoss = animator.GetComponent<SecretBoss>();
         nextShootTime = Time.time + shootingRate;
     }
 
@@ -28,14 +31,14 @@ public class SecretBossIdle : StateMachineBehaviour
         Vector2 target = new Vector2(player.position.x, selfTransform.position.y);
 
         float attackRange = secretBossData.attackRange;
-      //   if (bipedalUnitBoss.isEnraged)
-      //   {
-      //       attackRange += secretBossData.attackRange / 2;
-      //   }
+        //   if (bipedalUnitBoss.isEnraged)
+        //   {
+        //       attackRange += secretBossData.attackRange / 2;
+        //   }
 
-      if (Vector2.Distance(player.position, selfTransform.position) <= attackRange && Time.time >= nextShootTime)
+        if (Vector2.Distance(player.position, selfTransform.position) <= attackRange && Time.time >= nextShootTime && secretBoss.isReadyToShootLaser)
         {
-            animator.GetComponent<SecretBoss>().MoveToShootTarget(player.position, player.transform.GetComponent<BoxCollider2D>().bounds);
+            secretBoss.MoveToShootTarget(player.position, player.transform.GetComponent<BoxCollider2D>().bounds);
             nextShootTime = Time.time + shootingRate;
         }
     }

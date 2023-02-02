@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Linq;
 
 public class SecretBossTorso : Enemy
 {
@@ -15,14 +16,14 @@ public class SecretBossTorso : Enemy
     {
         // if (isInvulnerable) return;
 
+        SecretBossData secretBossData = (SecretBossData)enemyData;
+
         base.TakeDamage(damage);
-        if (currentHealth / enemyData.maxHealth < (2f / 3f))
+        foreach (var phase in secretBossData.listPhases)
         {
-            sr.sprite = level1;
-        }
-        if (currentHealth / enemyData.maxHealth < (1f / 3f))
-        {
-            sr.sprite = level2;
+            if(currentHealth / enemyData.maxHealth < phase.threshold) {
+                sr.sprite = phase.sprite;
+            }
         }
     }
 }

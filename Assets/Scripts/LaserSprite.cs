@@ -9,7 +9,8 @@ public class LaserSprite : MonoBehaviour
     private SpriteRenderer stretchPartSprite;
     private BoxCollider2D stretchPartCollider;
 
-    float timeToReachTarget = 10f;
+    private float timeToReachTarget = 1.5f;
+    public float damage = 0;
 
     private void Awake()
     {
@@ -20,11 +21,12 @@ public class LaserSprite : MonoBehaviour
     IEnumerator Shoot() {
         float timeElapsed = 0f;
 
-        Vector2 endValue = new Vector2(50f, stretchPart.transform.localScale.y);
+        Vector2 endValue = new Vector2(stretchPart.transform.localScale.x + 50f, stretchPart.transform.localScale.y);
+        Vector2 startValue = stretchPart.transform.localScale;
         while (timeElapsed < timeToReachTarget)
         {
             stretchPart.transform.localScale = Vector2.Lerp(
-                stretchPart.transform.localScale, 
+                startValue, 
                 endValue, 
                 timeElapsed / timeToReachTarget
             );
@@ -40,7 +42,7 @@ public class LaserSprite : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.transform.TryGetComponent<IDamageable>(out IDamageable iDamageable))
         {
-            iDamageable.TakeDamage(0);
+            iDamageable.TakeDamage(damage);
         }
     }
 
