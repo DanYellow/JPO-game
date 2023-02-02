@@ -63,6 +63,11 @@ public class SecretBoss : MonoBehaviour
             ThrowArmsProxy(Vector2.zero);
         }
 
+        if (Input.GetKeyDown(KeyCode.K)) {
+            Debug.Log("position " + frontArm.transform.position.x);
+            Debug.Log("localPosition " + frontArm.transform.localPosition.x);
+        }
+
         if (Input.GetKeyDown(KeyCode.B))
         {
             frontArm.transform.position += new Vector3(20, 0, 0);
@@ -143,7 +148,6 @@ public class SecretBoss : MonoBehaviour
 
         yield return new WaitForSeconds(1.5f);
 
-
         StartCoroutine(MovePartTo(
             frontArm.transform,
             Vector3.left * speed,
@@ -155,10 +159,12 @@ public class SecretBoss : MonoBehaviour
             Vector3.left * (speed + Vector3.Distance(backArm.transform.position, frontArm.transform.position)),
             transitionDurationShot * 35
         ));
-         yield return null;
+
+        Debug.Log("fff" + Vector3.left * speed);
+        yield return new WaitUntil(() => frontArm.transform.localPosition.x <= -10f);
+        Debug.Log("fffdd");
         // yield return new WaitForSeconds(1.5f);
-        backArm.SetActive(false);
-        Debug.Log("ttee");
+        // backArm.SetActive(false);
     }
 
     IEnumerator MovePartTo(Transform part, Vector2 endPosition, float duration)
@@ -175,7 +181,6 @@ public class SecretBoss : MonoBehaviour
             yield return null;
         }
         part.localPosition = endPosition;
-        Debug.Log("tteeeee");
         yield break;    
     }
 
