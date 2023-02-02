@@ -10,8 +10,6 @@ public class GateManager : MonoBehaviour, IOpenable
 
     public bool isDisabled = false;
 
-    private bool isPlayerIn = false;
-
     private Color colorDisabled;
 
     private void Awake()
