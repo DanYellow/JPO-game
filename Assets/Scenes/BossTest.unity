@@ -485,6 +485,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1381835086, guid: cbbe23bfa7d691240a259d1c9cf29111, type: 3}
+      propertyPath: invulnerableDataValue
+      value: 
+      objectReference: {fileID: 11400000, guid: 9ab98fc8a64673b4593d13bd345651eb, type: 2}
     - target: {fileID: 7665010452612635953, guid: cbbe23bfa7d691240a259d1c9cf29111, type: 3}
       propertyPath: playerInput
       value: 
@@ -2333,6 +2337,7 @@ MonoBehaviour:
   enemyData: {fileID: 11400000, guid: 6d510f9ab4e8fcf4ebec5a68bbc1d47e, type: 2}
   currentHealth: 0
   onDeathCallback: {fileID: 11400000, guid: b2a02294465b5174083b4dfccafc3b1b, type: 2}
+  isInvulnerable: 0
   target: {fileID: 1646153328}
 --- !u!1 &1874733117
 GameObject:
@@ -2541,6 +2546,7 @@ GameObject:
   - component: {fileID: 2112746332}
   - component: {fileID: 2112746333}
   - component: {fileID: 2112746334}
+  - component: {fileID: 2112746335}
   m_Layer: 7
   m_Name: torso1
   m_TagString: Untagged
@@ -2660,8 +2666,25 @@ MonoBehaviour:
   enemyData: {fileID: 11400000, guid: 25b9d430d1ca7f14d83f78c652f21a26, type: 2}
   currentHealth: 0
   onDeathCallback: {fileID: 11400000, guid: eb4a902577c016b4687f64edf1e1a855, type: 2}
+  isInvulnerable: 0
   laserFirePoint: {fileID: 916507578}
   laserPrefab: {fileID: 5708165026280100923, guid: d71b7ad76ccae9540aac4b9c9cd51525, type: 3}
   secretBossData: {fileID: 0}
-  isInvulnerable: 0
   isReadyToShoot: 1
+--- !u!114 &2112746335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2112746330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93bb89fb7acaada46a1f9ac3190b6a15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  invulnerableDataValue: {fileID: 0}
+  listLayerToIgnoreAfterHit:
+    serializedVersion: 2
+    m_Bits: 1
+  isHurtVoidEventChannel: {fileID: 0}

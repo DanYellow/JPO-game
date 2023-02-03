@@ -5,14 +5,14 @@ namespace StateMachine
     public class Invulnerable : StateMachineBehaviour
     {
         [SerializeField]
-        PlayerStatsValue playerStatsValue;
+        InvulnerableDataValue invulnerableDataValue;
 
         private float timerInvulnerability = 0;
         // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             // animator.SetLayerWeight(1, 1);
-            timerInvulnerability = playerStatsValue.invulnerabiltyTime;
+            timerInvulnerability = invulnerableDataValue.invulnerabiltyTime;
         }
 
         override public void OnStateUpdate(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)

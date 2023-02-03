@@ -1,5 +1,6 @@
 
 using UnityEngine;
+using System;
 
 [CreateAssetMenu(fileName = "New Player Stats", menuName = "EndlessRunnerJPO/PlayerStatsValue", order = 0)]
 public class PlayerStatsValue : ScriptableObject
@@ -20,8 +21,8 @@ public class PlayerStatsValue : ScriptableObject
 
     public float damage = 1;
 
-    public float invulnerabiltyTime = 2.5f;
-    public float invulnerableFlashDelay = 0.2f;
+    [SerializeField]
+    public InvulnerableDataValue invulnerableData;
 
     public float shootingRate = 0.3f;
 

@@ -9,7 +9,7 @@ public class Invulnerable : MonoBehaviour
     private Animator animator;
     private bool isInvulnerable = false;
     [SerializeField]
-    private PlayerStatsValue playerStatsValue;
+    private InvulnerableDataValue invulnerableDataValue;
     [SerializeField]
     private LayerMask listLayerToIgnoreAfterHit;
     private List<int> listLayers = new List<int>();
@@ -51,8 +51,6 @@ public class Invulnerable : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        // ContactPoint2D[] listContacts = new ContactPoint2D[0];
-        // other.GetContacts(listContacts);
         LayerMask otherLayer = other.gameObject.layer;
         bool isInLayer = ((listLayerToIgnoreAfterHit & (1 << otherLayer)) != 0);
 
@@ -67,7 +65,7 @@ public class Invulnerable : MonoBehaviour
     {
         Physics2D.IgnoreLayerCollision(gameObject.layer, layerId, true);
         isInvulnerable = true;
-        yield return new WaitForSeconds(playerStatsValue.invulnerabiltyTime);
+        yield return new WaitForSeconds(invulnerableDataValue.invulnerabiltyTime);
         isInvulnerable = false;
         Physics2D.IgnoreLayerCollision(gameObject.layer, layerId, false);
     }
@@ -77,9 +75,9 @@ public class Invulnerable : MonoBehaviour
         while (isInvulnerable)
         {
             sr.color = new Color(1f, 1f, 1f, 0f);
-            yield return new WaitForSeconds(playerStatsValue.invulnerableFlashDelay);
+            yield return new WaitForSeconds(invulnerableDataValue.invulnerableFlashDelay);
             sr.color = new Color(1f, 1f, 1f, 1f);
-            yield return new WaitForSeconds(playerStatsValue.invulnerableFlashDelay);
+            yield return new WaitForSeconds(invulnerableDataValue.invulnerableFlashDelay);
         }
 
         // Hack to reenable OnTriggerEnter/Stay methods

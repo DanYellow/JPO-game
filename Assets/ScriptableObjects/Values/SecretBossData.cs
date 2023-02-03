@@ -21,7 +21,7 @@ public class SecretBossData : EnemyStatsValue
     public float timeDelayBeforeThrowArms = 0.82f;
     public float loadLightiningDuration = 0.07f;
 
-    
+    public InvulnerableDataValue invulnerableData;
 
     private void Awake() {
         

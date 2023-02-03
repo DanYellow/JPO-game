@@ -789,9 +789,6 @@ AnimatorStateMachine:
     m_State: {fileID: 5453924882216415587}
     m_Position: {x: 280, y: 110, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: 7490677451896437766}
-    m_Position: {x: 20, y: -40, z: 0}
-  - serializedVersion: 1
     m_State: {fileID: -5731790836757577113}
     m_Position: {x: 280, y: 30, z: 0}
   - serializedVersion: 1
@@ -814,7 +811,7 @@ AnimatorStateMachine:
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 40, y: -100, z: 0}
+  m_AnyStatePosition: {x: 50, y: 30, z: 0}
   m_EntryPosition: {x: 50, y: 110, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
@@ -989,10 +986,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b94fc7b9e90563f489bf27235d00a705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStatsValue: {fileID: 11400000, guid: 4d8b9f9261ee27f47ad567a2af8e73c2, type: 2}
-  listLayerToIgnoreAfterHit:
-    serializedVersion: 2
-    m_Bits: 128
+  invulnerableDataValue: {fileID: 11400000, guid: 9ab98fc8a64673b4593d13bd345651eb, type: 2}
 --- !u!1101 &6622452788680755844
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1018,32 +1012,6 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
---- !u!1102 &7490677451896437766
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: PlayerHurt
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 6ce15012b2c2ef044be299d4f1c527e1, type: 2}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!1107 &8723066525047806596
 AnimatorStateMachine:
   serializedVersion: 6
