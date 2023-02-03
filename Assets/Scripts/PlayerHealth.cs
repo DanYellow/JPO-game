@@ -45,7 +45,11 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     {
         if (isInvulnerable) return;
 
-        playerStatsValue.currentHealth = Mathf.Clamp(playerStatsValue.currentHealth - damage, 0, playerStatsValue.maxHealth);
+        playerStatsValue.currentHealth = Mathf.Clamp(
+            Mathf.Round(playerStatsValue.currentHealth - damage), 
+            0, 
+            playerStatsValue.maxHealth
+        );
 
         if (playerStatsValue.currentHealth == 0)
         {
