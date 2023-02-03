@@ -26,12 +26,11 @@ public class SecretBossIdle : StateMachineBehaviour
 
         Vector2 target = new Vector2(player.position.x, selfTransform.position.y);
 
-
-        float laserAttackRange = secretBossData.laserAttackRange;
+        float laserAttackRange = secretBoss.canThrowArms ? secretBossData.laserAttackRange : 0;
         float armsAttackRange = secretBossData.armsAttackRange;
 
         if (
-            Vector2.Distance(player.position, selfTransform.position) <= armsAttackRange && 
+            Vector2.Distance(player.position, selfTransform.position) <= armsAttackRange &&
             secretBoss.isReadyToThrowArms &&
             secretBoss.canThrowArms &&
             secretBoss.IsTargetInArmsRange(player.position)
@@ -40,10 +39,13 @@ public class SecretBossIdle : StateMachineBehaviour
             secretBoss.ThrowArms();
         }
 
-        // if (Vector2.Distance(player.position, selfTransform.position) >= laserAttackRange && secretBoss.isReadyToShootLaser)
-        // {
-        //     secretBoss.MoveToShootTarget(player.position, player.transform.GetComponent<BoxCollider2D>().bounds);
-        // }
+        if (
+            Vector2.Distance(player.position, selfTransform.position) >= laserAttackRange &&
+            secretBoss.isReadyToShootLaser
+        )
+        {
+            secretBoss.MoveToShootTarget(player.position, player.transform.GetComponent<BoxCollider2D>().bounds);
+        }
 
     }
 

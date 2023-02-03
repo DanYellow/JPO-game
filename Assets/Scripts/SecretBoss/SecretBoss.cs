@@ -128,7 +128,7 @@ public class SecretBoss : MonoBehaviour
     public bool IsTargetInArmsRange(Vector2 targetPos)
     {
         bool isInArmsRange = (
-            (float)targetPos.y <= (float)frontArm.transform.GetComponent<PolygonCollider2D>().bounds.max.y   &&
+            (float)targetPos.y <= (float)frontArm.transform.GetComponent<PolygonCollider2D>().bounds.max.y &&
             (float)targetPos.y >= (float)frontArm.transform.GetComponent<PolygonCollider2D>().bounds.min.y
         );
         return isInArmsRange;
@@ -200,10 +200,13 @@ public class SecretBoss : MonoBehaviour
 
     private void ResetArmsPosition()
     {
-        lightningAttack.SetActive(false);
-        frontArm.GetComponent<Collider2D>().isTrigger = false;
-        frontArm.transform.localPosition = initFrontArmPosition;
-        backArm.transform.localPosition = initBackArmPosition;
+        if (canThrowArms)
+        {
+            lightningAttack.SetActive(false);
+            frontArm.GetComponent<Collider2D>().isTrigger = false;
+            frontArm.transform.localPosition = initFrontArmPosition;
+            backArm.transform.localPosition = initBackArmPosition;
+        }
     }
 
     IEnumerator MovePartTo(Transform part, Vector2 endPosition, float duration)

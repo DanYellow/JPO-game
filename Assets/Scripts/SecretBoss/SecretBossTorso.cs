@@ -22,7 +22,6 @@ public class SecretBossTorso : Enemy
     private float nextShootTime = 0f;
 
     public Phase phase { get; private set; }
-    private Phase lastPhase;
 
     public override void Awake()
     {
@@ -61,14 +60,17 @@ public class SecretBossTorso : Enemy
     {
         if (isInvulnerable) return;
 
-        base.TakeDamage(damage);
 
         phase = GetPhase();
-        secretBossData.currentPhase = phase;
+        // secretBossData.currentPhase = phase;
 
         if (phase != null)
         {
+            base.TakeDamage(damage / phase.factor);
             sr.sprite = phase.sprite;
+        } else {
+            base.TakeDamage(damage);
+
         }
     }
 

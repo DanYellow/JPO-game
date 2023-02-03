@@ -4,7 +4,7 @@ using System;
 [CreateAssetMenu(fileName = "SecretBossData", menuName = "EndlessRunnerJPO/SecretBossData", order = 0)]
 public class SecretBossData : EnemyStatsValue
 {
-    public Phase currentPhase;
+    // public Phase currentPhase;
     public Phase[] listPhases;
 
     [Header("Laser")]
