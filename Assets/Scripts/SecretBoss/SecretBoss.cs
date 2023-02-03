@@ -110,6 +110,7 @@ public class SecretBoss : MonoBehaviour
 
         if (backArm != null)
         {
+            frontArm.GetComponent<Collider2D>().isTrigger = true;
             StartCoroutine(MovePartTo(
                 frontArm.transform,
                 initFrontArmPosition + (Vector2.one * 0.5f),
@@ -238,11 +239,11 @@ public class SecretBoss : MonoBehaviour
         yield return new WaitForSeconds(timeDelayBeforeResetPosition);
         if (backArm != null)
         {
+            frontArm.GetComponent<Collider2D>().isTrigger = false;
             StartCoroutine(MovePartTo(frontArm.transform, initFrontArmPosition, timeToReachTarget));
             StartCoroutine(MovePartTo(backArm.transform, initBackArmPosition, timeToReachTarget));
         }
         yield return StartCoroutine(MovePartTo(torso.transform, initTorsoPosition, timeToReachTarget));
-        // yield return new WaitForSeconds(timeDelayBeforeLaserDisappear);
         yield return new WaitForSeconds(secretBossTorso.secretBossData.laserShootInterval);
 
         isReadyToShootLaser = true;

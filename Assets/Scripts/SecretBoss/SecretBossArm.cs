@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SecretBossArm : Enemy
@@ -11,10 +9,13 @@ public class SecretBossArm : Enemy
 
     private bool isVisible = true;
 
+    private new Collider2D collider2D;
+
     public override void Awake()
     {
         base.Awake();
         initPosition = transform.position;
+        collider2D = GetComponent<Collider2D>();
     }
 
     private void Update()
@@ -33,14 +34,7 @@ public class SecretBossArm : Enemy
 
     public override void TakeDamage(float damage)
     {
-        if (isInvulnerable) return;
+        if (isInvulnerable || collider2D.isTrigger) return;
         base.TakeDamage(damage);
-    }
-
-    IEnumerator ResetPosition()
-    {
-        yield return new WaitForSeconds(1.25f);
-        rb.velocity = Vector3.zero;
-        transform.position = initPosition;
     }
 }

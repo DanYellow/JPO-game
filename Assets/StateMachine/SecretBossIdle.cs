@@ -40,7 +40,7 @@ public class SecretBossIdle : StateMachineBehaviour
         }
 
         if (
-            Vector2.Distance(player.position, selfTransform.position) >= laserAttackRange &&
+            Mathf.Abs(player.position.x - selfTransform.position.x) >= laserAttackRange &&
             secretBoss.isReadyToShootLaser
         )
         {
