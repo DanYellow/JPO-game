@@ -47,8 +47,8 @@ public class SecretBossTorso : Enemy
     public IEnumerator ShootLaser()
     {
         float damage = secretBossData.laserDamage;
-        if(lastPhase != phase) {
-            damage *= secretBossData.attackDamageFactor;
+        if(phase != null) {
+            damage *= phase.attackDamageFactor;
             Debug.Log("damage " + damage);
         }
         laserSprite.damage = damage;
@@ -81,7 +81,7 @@ public class SecretBossTorso : Enemy
     {
         // https://stackoverflow.com/questions/22830497/findindex-on-list-by-linq
         List<Phase> someList = new List<Phase>(secretBossData.listPhases);
-        someList.ForEach(p => Debug.Log(p.threshold));
+        // someList.ForEach(p => Debug.Log(p.threshold));
         // Debug.Log("item.threshold" + secretBossData.listPhases);
         int indexPhase = someList.FindIndex(item => {
         // Debug.Log("currentHealth / secretBossData.maxHealth " + currentHealth / secretBossData.maxHealth);
