@@ -24,7 +24,7 @@ public class BipedalUnitBoss : Enemy
     public bool isEnraged = false;
 
     [HideInInspector]
-    public bool isInvulnerable = false;
+    // public bool isInvulnerable = false;
 
     public override void Awake()
     {

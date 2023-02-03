@@ -626,7 +626,10 @@ MonoBehaviour:
   backArm: {fileID: 1405044805}
   lightningAttack: {fileID: 1068915468}
   OnTorsoDeathChannel: {fileID: 11400000, guid: eb4a902577c016b4687f64edf1e1a855, type: 2}
+  OnArmDeathChannel: {fileID: 11400000, guid: b2a02294465b5174083b4dfccafc3b1b, type: 2}
   isReadyToShootLaser: 1
+  isReadyToThrowArms: 1
+  canThrowArms: 1
 --- !u!1 &533138150
 GameObject:
   m_ObjectHideFlags: 0
@@ -2166,7 +2169,6 @@ GameObject:
   - component: {fileID: 1695322841}
   - component: {fileID: 1695322842}
   - component: {fileID: 1695322843}
-  - component: {fileID: 1695322844}
   m_Layer: 7
   m_Name: forearm-front
   m_TagString: Untagged
@@ -2322,7 +2324,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1695322836}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b8c4044f938feeb47981ae439c2609c8, type: 3}
   m_Name: 
@@ -2330,23 +2332,8 @@ MonoBehaviour:
   deathEffectPrefab: {fileID: 1669963593005900213, guid: 88faa381c5813094d921ea28432f0f70, type: 3}
   enemyData: {fileID: 11400000, guid: 6d510f9ab4e8fcf4ebec5a68bbc1d47e, type: 2}
   currentHealth: 0
-  onDeathCallback: {fileID: 0}
+  onDeathCallback: {fileID: 11400000, guid: b2a02294465b5174083b4dfccafc3b1b, type: 2}
   target: {fileID: 1646153328}
---- !u!114 &1695322844
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1695322836}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2758267e7a063c54d92204f1fa7e9bcc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bodyJoint: {fileID: 45997408}
-  armJoint: {fileID: 1514390969}
-  breakDistance: 3
 --- !u!1 &1874733117
 GameObject:
   m_ObjectHideFlags: 0

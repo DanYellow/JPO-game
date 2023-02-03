@@ -6,7 +6,7 @@ public class SecretBossIdle : StateMachineBehaviour
     private Transform selfTransform;
 
     [SerializeField]
-    private EnemyStatsValue secretBossData;
+    private SecretBossData secretBossData;
 
     private SecretBoss secretBoss;
 
@@ -26,16 +26,25 @@ public class SecretBossIdle : StateMachineBehaviour
 
         Vector2 target = new Vector2(player.position.x, selfTransform.position.y);
 
-        float attackRange = secretBossData.attackRange;
-        //   if (bipedalUnitBoss.isEnraged)
-        //   {
-        //       attackRange += secretBossData.attackRange / 2;
-        //   }
 
-        if (Vector2.Distance(player.position, selfTransform.position) >= attackRange && secretBoss.isReadyToShootLaser)
+        float laserAttackRange = secretBossData.laserAttackRange;
+        float armsAttackRange = secretBossData.armsAttackRange;
+
+        if (
+            Vector2.Distance(player.position, selfTransform.position) <= armsAttackRange && 
+            secretBoss.isReadyToThrowArms &&
+            secretBoss.canThrowArms &&
+            secretBoss.IsTargetInArmsRange(player.position)
+            )
         {
-            secretBoss.MoveToShootTarget(player.position, player.transform.GetComponent<BoxCollider2D>().bounds);
+            secretBoss.ThrowArms();
         }
+
+        // if (Vector2.Distance(player.position, selfTransform.position) >= laserAttackRange && secretBoss.isReadyToShootLaser)
+        // {
+        //     secretBoss.MoveToShootTarget(player.position, player.transform.GetComponent<BoxCollider2D>().bounds);
+        // }
+
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

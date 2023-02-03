@@ -21,6 +21,8 @@ public class Enemy : MonoBehaviour, IDamageable
     private VoidEventChannel onDeathCallback = null;
     protected Animator animator;
 
+    public bool isInvulnerable = false;
+
     protected SpriteRenderer sr;
 
     private bool isHurt = false;
@@ -41,6 +43,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public virtual void TakeDamage(float damage)
     {
+        isInvulnerable = true;
         currentHealth = Mathf.Clamp(currentHealth - (damage * enemyData.currentDefense), 0, maxHealth);
         currentHealth = Mathf.Round(currentHealth * 100f) / 100f;
         if (currentHealth == 0)
@@ -82,6 +85,7 @@ public class Enemy : MonoBehaviour, IDamageable
             animator.SetLayerWeight(1, 0);
             animator.ResetTrigger("IsHurt");
         }
+        isInvulnerable = false;
     }
 
     private void OnCollisionEnter2D(Collision2D other)

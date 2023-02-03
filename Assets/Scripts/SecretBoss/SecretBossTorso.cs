@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 
 public class SecretBossTorso : Enemy
 {
@@ -17,7 +16,7 @@ public class SecretBossTorso : Enemy
     public SecretBossData secretBossData;
 
     [HideInInspector]
-    public bool isInvulnerable = false;
+    
     public bool isReadyToShoot = true;
 
     private float nextShootTime = 0f;
@@ -33,7 +32,6 @@ public class SecretBossTorso : Enemy
         laserSprite = laser.GetComponent<LaserSprite>();
 
         secretBossData = (SecretBossData)enemyData;
-
     }
 
     private void Update()
@@ -47,9 +45,9 @@ public class SecretBossTorso : Enemy
     public IEnumerator ShootLaser()
     {
         float damage = secretBossData.laserDamage;
-        if(phase != null) {
-            damage *= phase.attackDamageFactor;
-            Debug.Log("damage " + damage);
+        if (phase != null)
+        {
+            damage *= phase.factor;
         }
         laserSprite.damage = damage;
         laser.transform.position = laserFirePoint.position;
@@ -61,16 +59,13 @@ public class SecretBossTorso : Enemy
 
     public override void TakeDamage(float damage)
     {
-        // if (isInvulnerable) return;
+        if (isInvulnerable) return;
 
         base.TakeDamage(damage);
 
-
         phase = GetPhase();
-        if(lastPhase != phase) {
-            lastPhase = phase;
-        }
-        
+        secretBossData.currentPhase = phase;
+
         if (phase != null)
         {
             sr.sprite = phase.sprite;
@@ -79,16 +74,12 @@ public class SecretBossTorso : Enemy
 
     private Phase GetPhase()
     {
-        // https://stackoverflow.com/questions/22830497/findindex-on-list-by-linq
-        List<Phase> someList = new List<Phase>(secretBossData.listPhases);
-        // someList.ForEach(p => Debug.Log(p.threshold));
-        // Debug.Log("item.threshold" + secretBossData.listPhases);
-        int indexPhase = someList.FindIndex(item => {
-        // Debug.Log("currentHealth / secretBossData.maxHealth " + currentHealth / secretBossData.maxHealth);
-        // Debug.Log("item.threshold" + item.threshold);
-            return currentHealth / secretBossData.maxHealth < item.threshold;
+        List<Phase> phasesList = new List<Phase>(secretBossData.listPhases);
+
+        int indexPhase = phasesList.FindLastIndex(item =>
+        {
+            return currentHealth / secretBossData.maxHealth <= item.threshold;
         });
-        // Debug.Log("indexPhase " + indexPhase);
-        return (indexPhase < 0 ? null : someList[indexPhase]);
+        return (indexPhase < 0 ? null : phasesList[indexPhase]);
     }
 }

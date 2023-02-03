@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class SecretBoss : MonoBehaviour
 {
-    private Animator animator;
     [SerializeField]
     private Transform laserFirePoint;
 
@@ -29,30 +28,31 @@ public class SecretBoss : MonoBehaviour
     private Vector2 initBackArmPosition;
 
     [SerializeField]
-    VoidEventChannel OnTorsoDeathChannel;
+    private VoidEventChannel OnTorsoDeathChannel;
+
+    [SerializeField]
+    private VoidEventChannel OnArmDeathChannel;
 
     // Time delays - shot
-    private float timeDelayBeforeShot = 0.7f;
-    private float timeDelayBeforeLaserDisappear = 0.4f;
     private float timeDelayBeforeResetPosition = 0.8f;
     private float timeToReachTarget = 0.1f;
-    private float transitionDurationResetPosition = 1.75f;
     public bool isReadyToShootLaser = true;
 
     // Time delays - arms electric
-    private float timeDelayLoadLightning = 0.1f;
     private float timeToReachPlayer = 1.35f;
-    private float timeBeforeResetArmsPosition = 1.65f;
+    private float timeBeforeResetArmsPosition = 0.95f;
     private float timeBeforeAttack = 0.65f;
+    public bool isReadyToThrowArms = true;
+    public bool canThrowArms = true;
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
         secretBossTorso = torso.GetComponent<SecretBossTorso>();
         laser = Instantiate(laserPrefab, laserFirePoint.position, Quaternion.identity);
         laser.SetActive(false);
         laserSprite = laser.GetComponent<LaserSprite>();
         OnTorsoDeathChannel.OnEventRaised += DestroyParts;
+        OnArmDeathChannel.OnEventRaised += ArmDestroyed;
 
         lightningAttack.SetActive(false);
 
@@ -61,16 +61,16 @@ public class SecretBoss : MonoBehaviour
         initBackArmPosition = backArm.transform.localPosition;
     }
 
-    void Start()
-    {
-
-    }
-
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            ThrowArms(Vector2.zero);
+            Debug.Log(
+                frontArm.transform.GetComponent<PolygonCollider2D>().bounds.min.y
+            );
+            Debug.Log(
+                frontArm.transform.GetComponent<PolygonCollider2D>().bounds.max.y
+            );
         }
     }
 
@@ -82,6 +82,12 @@ public class SecretBoss : MonoBehaviour
         }
     }
 
+    private void ArmDestroyed()
+    {
+        Destroy(backArm);
+        canThrowArms = false;
+    }
+
     public void MoveToShootTarget(Vector2 targetPos, Bounds targetSize)
     {
         StartCoroutine(MoveToShootCoroutine(targetPos, targetSize));
@@ -90,6 +96,7 @@ public class SecretBoss : MonoBehaviour
     IEnumerator MoveToShootCoroutine(Vector2 targetPos, Bounds size)
     {
         isReadyToShootLaser = false;
+        isReadyToThrowArms = false;
         bool isTargetLowerThanTorso = transform.InverseTransformPoint(targetPos).y < initTorsoPosition.y;
         Vector2 endValue = new Vector2(
             torso.transform.localPosition.x,
@@ -101,23 +108,36 @@ public class SecretBoss : MonoBehaviour
             endValue.y = initTorsoPosition.y;
         }
 
-        StartCoroutine(MovePartTo(
-            frontArm.transform,
-            initFrontArmPosition + (Vector2.one * 0.5f),
-            timeToReachTarget / 2
-        ));
-        yield return StartCoroutine(MovePartTo(
-            backArm.transform,
-            initBackArmPosition + (Vector2.one * 0.5f),
-            timeToReachTarget / 2
-        ));
+        if (backArm != null)
+        {
+            StartCoroutine(MovePartTo(
+                frontArm.transform,
+                initFrontArmPosition + (Vector2.one * 0.5f),
+                secretBossTorso.secretBossData.moveTorsoToReachTargetTime / 2
+            ));
+            yield return StartCoroutine(MovePartTo(
+                backArm.transform,
+                initBackArmPosition + (Vector2.one * 0.5f),
+                secretBossTorso.secretBossData.moveTorsoToReachTargetTime / 2
+            ));
+        }
         yield return StartCoroutine(MovePartTo(torso.transform, endValue, timeToReachTarget * 1.5f));
         StartCoroutine(ShootLaser());
     }
 
-    public void ThrowArms(Vector2 targetPos)
+    public bool IsTargetInArmsRange(Vector2 targetPos)
+    {
+        bool isInArmsRange = (
+            (float)targetPos.y <= (float)frontArm.transform.GetComponent<PolygonCollider2D>().bounds.max.y   &&
+            (float)targetPos.y >= (float)frontArm.transform.GetComponent<PolygonCollider2D>().bounds.min.y
+        );
+        return isInArmsRange;
+    }
+
+    public void ThrowArms()
     {
         isReadyToShootLaser = false;
+        isReadyToThrowArms = false;
         frontArm.GetComponent<Collider2D>().isTrigger = true;
         StartCoroutine(ThrowArmsCoroutine());
     }
@@ -127,20 +147,20 @@ public class SecretBoss : MonoBehaviour
         float speed = (Camera.main.transform.position.x + Camera.main.orthographicSize * Screen.width / Screen.height) * 2;
         float originalArmsDistance = Vector3.Distance(backArm.transform.position, frontArm.transform.position);
 
-        // Close arms
+        // Load lightning
         StartCoroutine(MovePartTo(
             frontArm.transform,
             frontArm.transform.localPosition - new Vector3(originalArmsDistance / 4, 0, 0),
-            timeDelayLoadLightning
+            secretBossTorso.secretBossData.loadLightiningDuration
         ));
 
         yield return StartCoroutine(MovePartTo(
              backArm.transform,
              backArm.transform.localPosition + new Vector3(originalArmsDistance / 4, 0, 0),
-             timeDelayLoadLightning
+             secretBossTorso.secretBossData.loadLightiningDuration
          ));
 
-        yield return new WaitForSeconds(timeDelayLoadLightning / 3);
+        yield return new WaitForSeconds(secretBossTorso.secretBossData.loadLightiningDuration / 3);
 
         lightningAttack.SetActive(true);
 
@@ -148,16 +168,16 @@ public class SecretBoss : MonoBehaviour
         StartCoroutine(MovePartTo(
             frontArm.transform,
             frontArm.transform.localPosition + new Vector3(originalArmsDistance / 4, 0, 0),
-            timeDelayLoadLightning / 2
+            secretBossTorso.secretBossData.loadLightiningDuration / 2
         ));
 
         yield return StartCoroutine(MovePartTo(
              backArm.transform,
              backArm.transform.localPosition - new Vector3(originalArmsDistance / 4, 0, 0),
-             timeDelayLoadLightning / 2
+             secretBossTorso.secretBossData.loadLightiningDuration / 2
          ));
 
-        yield return new WaitForSeconds(timeBeforeAttack);
+        yield return new WaitForSeconds(secretBossTorso.secretBossData.timeDelayBeforeThrowArms);
 
         // Go attack player
         StartCoroutine(MovePartTo(
@@ -173,7 +193,9 @@ public class SecretBoss : MonoBehaviour
 
         yield return new WaitForSeconds(timeBeforeResetArmsPosition);
         ResetArmsPosition();
+        yield return new WaitForSeconds(secretBossTorso.secretBossData.armsAttackInterval);
         isReadyToShootLaser = true;
+        isReadyToThrowArms = true;
     }
 
     private void ResetArmsPosition()
@@ -191,6 +213,8 @@ public class SecretBoss : MonoBehaviour
         Vector2 startPosition = part.localPosition;
         while (timeElapsed < duration)
         {
+            if (part == null)
+                yield break;
             lerpValue = Mathf.InverseLerp(0, duration, timeElapsed);
             part.localPosition = Vector2.Lerp(
                 startPosition,
@@ -206,21 +230,25 @@ public class SecretBoss : MonoBehaviour
 
     IEnumerator ShootLaser()
     {
-        yield return new WaitForSeconds(timeDelayBeforeShot);
+        yield return new WaitForSeconds(secretBossTorso.secretBossData.timeDelayBeforeShoot);
         yield return StartCoroutine(secretBossTorso.ShootLaser());
         yield return new WaitForSeconds(timeDelayBeforeResetPosition);
-        StartCoroutine(MovePartTo(frontArm.transform, initFrontArmPosition, timeToReachTarget));
-        StartCoroutine(MovePartTo(backArm.transform, initBackArmPosition, timeToReachTarget));
+        if (backArm != null)
+        {
+            StartCoroutine(MovePartTo(frontArm.transform, initFrontArmPosition, timeToReachTarget));
+            StartCoroutine(MovePartTo(backArm.transform, initBackArmPosition, timeToReachTarget));
+        }
         yield return StartCoroutine(MovePartTo(torso.transform, initTorsoPosition, timeToReachTarget));
-        yield return new WaitForSeconds(timeDelayBeforeLaserDisappear);
+        // yield return new WaitForSeconds(timeDelayBeforeLaserDisappear);
         yield return new WaitForSeconds(secretBossTorso.secretBossData.laserShootInterval);
 
         isReadyToShootLaser = true;
-        Debug.Log("Ready for next shoot");
+        isReadyToThrowArms = true;
     }
 
     private void OnDisable()
     {
         OnTorsoDeathChannel.OnEventRaised -= DestroyParts;
+        OnArmDeathChannel.OnEventRaised -= ArmDestroyed;
     }
 }

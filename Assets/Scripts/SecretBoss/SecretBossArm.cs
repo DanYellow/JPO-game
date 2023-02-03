@@ -31,24 +31,10 @@ public class SecretBossArm : Enemy
         }
     }
 
-    private void FixedUpdate()
-    {
-        // Vector2 nextPosition = new Vector2(target.position.x, rb.position.y);
-        // rb.MovePosition(
-        //     Vector2.MoveTowards(rb.position, nextPosition, 1 * Time.fixedDeltaTime)
-        // );
-    }
-
     public override void TakeDamage(float damage)
     {
+        if (isInvulnerable) return;
         base.TakeDamage(damage);
-    }
-
-    private void OnBecameInvisible()
-    {
-        if(enabled) {
-            // StartCoroutine(ResetPosition());
-        }
     }
 
     IEnumerator ResetPosition()
