@@ -1,6 +1,7 @@
+
 using UnityEngine;
 
-public class SecretBossIdle : StateMachineBehaviour
+public class SecretBossDisabled : StateMachineBehaviour
 {
     private Transform player;
     private Transform selfTransform;
@@ -18,7 +19,7 @@ public class SecretBossIdle : StateMachineBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         selfTransform = animator.GetComponent<Transform>();
-        // secretBoss = animator.GetComponent<SecretBoss>();
+        secretBoss = animator.GetComponent<SecretBoss>();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -27,19 +28,17 @@ public class SecretBossIdle : StateMachineBehaviour
         if (player == null)
             return;
 
-        Vector2 target = new Vector2(player.position.x, selfTransform.position.y);
-
-        // if (Vector2.Distance(player.position, selfTransform.position) <= secretBossData.activationRange)
-        // {
-        //     animator.SetTrigger("CombatStarted");
-        //     // secretBoss.StartCombat();
-        // }
+        if (Mathf.Abs(player.position.x - selfTransform.position.x) <= secretBossData.activationRange && !secretBoss.isActivating)
+        {
+            // animator.SetTrigger("CombatStarted");
+            secretBoss.StartCombat();
+        }
 
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.ResetTrigger("CombatStarted");
+        // animator.ResetTrigger("CombatStarted");
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class SecretBoss : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class SecretBoss : MonoBehaviour
     private GameObject frontArm;
     [SerializeField]
     private GameObject backArm;
+    [SerializeField]
+    private PlayableDirector director;
 
     [SerializeField]
     private GameObject lightningAttack;
@@ -36,25 +39,41 @@ public class SecretBoss : MonoBehaviour
     // Time delays - shot
     private float timeDelayBeforeResetPosition = 0.8f;
     private float timeToReachTarget = 0.1f;
-    public bool isReadyToShootLaser = true;
+
+    [ReadOnlyInspector]
+    public bool isReadyToShootLaser = false;
 
     // Time delays - arms electric
     private float timeToReachPlayer = 1.35f;
     private float timeBeforeResetArmsPosition = 0.95f;
     private float timeBeforeAttack = 0.65f;
-    public bool isReadyToThrowArms = true;
+
+    [ReadOnlyInspector]
+    public bool isReadyToThrowArms = false;
     public bool canThrowArms = true;
+
+    [ReadOnlyInspector]
+    public bool isActivating = false;
 
     private void Awake()
     {
         secretBossTorso = torso.GetComponent<SecretBossTorso>();
-        laser = Instantiate(laserPrefab, laserFirePoint.position, Quaternion.identity);
+        laser = Instantiate(laserPrefab, laserFirePoint.position, laserFirePoint.rotation);
         laser.SetActive(false);
         laserSprite = laser.GetComponent<LaserSprite>();
         OnTorsoDeathChannel.OnEventRaised += DestroyParts;
         OnArmDeathChannel.OnEventRaised += ArmDestroyed;
 
         lightningAttack.SetActive(false);
+
+        director.stopped += ActivationEnds;
+    }
+
+    void ActivationEnds(PlayableDirector obj)
+    {
+        GetComponent<Animator>().SetTrigger("CombatStarted");
+        StartCoroutine(StartCombatCoroutine());
+        director.enabled = false;
 
         initTorsoPosition = torso.transform.localPosition;
         initFrontArmPosition = frontArm.transform.localPosition;
@@ -65,12 +84,14 @@ public class SecretBoss : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            Debug.Log(
-                frontArm.transform.GetComponent<PolygonCollider2D>().bounds.min.y
-            );
-            Debug.Log(
-                frontArm.transform.GetComponent<PolygonCollider2D>().bounds.max.y
-            );
+            // GetComponent<Animator>().Play("SecretBossActivation");
+            ThrowArms();
+        }
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            // GetComponent<Animator>().Play("SecretBossFight");
+            // ThrowArms();
         }
     }
 
@@ -254,5 +275,27 @@ public class SecretBoss : MonoBehaviour
     {
         OnTorsoDeathChannel.OnEventRaised -= DestroyParts;
         OnArmDeathChannel.OnEventRaised -= ArmDestroyed;
+        director.stopped -= ActivationEnds;
+    }
+
+    public void StartCombat()
+    {
+        isActivating = true;
+        director.Play();
+    }
+
+    public IEnumerator StartCombatCoroutine()
+    {
+        yield return new WaitForSeconds(1.5f);
+        isReadyToShootLaser = true;
+        isReadyToThrowArms = true;
+    }
+
+    public void DisableAnimator()
+    {
+
+        // torso.transform.localPosition = new Vector3(-0.29f, 0.54f);
+        // Debug.Log("Playeee");
+        // GetComponent<Animator>().SetTrigger("CombatStarted");
     }
 }

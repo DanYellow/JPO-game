@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SecretBossLineController : MonoBehaviour
@@ -15,17 +13,17 @@ public class SecretBossLineController : MonoBehaviour
     private float fps = 30f;
     private float fpsCounter = 0;
 
+    public bool hideOnAwake = false;
+
     private void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
+        if(hideOnAwake) {
+            lineRenderer.material.SetColor("_Color", new Color(1f, 1f, 1f, 0));
+        }
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         fpsCounter += Time.deltaTime;
