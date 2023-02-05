@@ -7,11 +7,6 @@ public class SecretBoss : MonoBehaviour
     [SerializeField]
     private Transform laserFirePoint;
 
-    // [SerializeField]
-    // private GameObject laserPrefab;
-    // private GameObject laser;
-    // private LaserSprite laserSprite;
-
     [Header("Parts")]
     [SerializeField]
     public GameObject torso;
@@ -68,9 +63,6 @@ public class SecretBoss : MonoBehaviour
     {
         secretBossTorso = torso.GetComponent<SecretBossTorso>();
         secretBossTorso.isInvulnerable = true;
-        // laser = Instantiate(laserPrefab, laserFirePoint.position, laserFirePoint.rotation);
-        // laser.SetActive(false);
-        // laserSprite = laser.GetComponent<LaserSprite>();
 
         lightningAttack.SetActive(false);
 
@@ -216,7 +208,7 @@ public class SecretBoss : MonoBehaviour
     IEnumerator ThrowArmsCoroutine()
     {
         float originalArmsDistance = Vector3.Distance(backArmContainer.transform.position, frontArmContainer.transform.position);
-
+        Debug.Log("originalArmsDistance" + originalArmsDistance);
         // Load lightning
         StartCoroutine(MovePartTo(
             frontArmContainer.transform,
