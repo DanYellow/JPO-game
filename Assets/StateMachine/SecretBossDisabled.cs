@@ -1,4 +1,3 @@
-
 using UnityEngine;
 
 public class SecretBossDisabled : StateMachineBehaviour
@@ -30,15 +29,8 @@ public class SecretBossDisabled : StateMachineBehaviour
 
         if (Mathf.Abs(player.position.x - selfTransform.position.x) <= secretBossData.activationRange && !secretBoss.isActivating)
         {
-            // animator.SetTrigger("CombatStarted");
             secretBoss.StartCombat();
         }
 
-    }
-
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        // animator.ResetTrigger("CombatStarted");
     }
 }

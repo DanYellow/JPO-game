@@ -15,7 +15,7 @@ public class SecretBoss : MonoBehaviour
     [Header("Parts")]
     [SerializeField]
     public GameObject torso;
-    private SecretBossTorso secretBossTorso;
+    public SecretBossTorso secretBossTorso;
     [SerializeField]
     private GameObject frontArm;
     [SerializeField]
@@ -26,7 +26,7 @@ public class SecretBoss : MonoBehaviour
     [SerializeField]
     private GameObject lightningAttack;
 
-    private Vector2 initTorsoPosition;
+    public Vector2 initTorsoPosition {private set; get;}
     private Vector2 initFrontArmPosition;
     private Vector2 initBackArmPosition;
 
@@ -55,9 +55,16 @@ public class SecretBoss : MonoBehaviour
     [ReadOnlyInspector]
     public bool isActivating = false;
 
+    [SerializeField]
+    private CinemachineShakeEventChannel onCinemachineShake;
+
+    [SerializeField]
+    private ShakeTypeValue bossActivationShake;
+
     private void Awake()
     {
         secretBossTorso = torso.GetComponent<SecretBossTorso>();
+        secretBossTorso.isInvulnerable = true;
         laser = Instantiate(laserPrefab, laserFirePoint.position, laserFirePoint.rotation);
         laser.SetActive(false);
         laserSprite = laser.GetComponent<LaserSprite>();
@@ -75,6 +82,7 @@ public class SecretBoss : MonoBehaviour
         StartCoroutine(StartCombatCoroutine());
         director.enabled = false;
 
+        secretBossTorso.isInvulnerable = false;
         initTorsoPosition = torso.transform.localPosition;
         initFrontArmPosition = frontArm.transform.localPosition;
         initBackArmPosition = backArm.transform.localPosition;
@@ -132,6 +140,7 @@ public class SecretBoss : MonoBehaviour
         if (backArm != null)
         {
             frontArm.GetComponent<Collider2D>().isTrigger = true;
+            frontArm.GetComponent<SecretBossArm>().isInvulnerable = true;
             StartCoroutine(MovePartTo(
                 frontArm.transform,
                 initFrontArmPosition + (Vector2.one * 0.5f),
@@ -156,17 +165,26 @@ public class SecretBoss : MonoBehaviour
         return isInArmsRange;
     }
 
+    public bool IsTargetInLaserRange(Vector2 targetPos)
+    {
+        bool isInLaserRange = (
+            (float)targetPos.y <= (float)torso.transform.GetComponent<BoxCollider2D>().bounds.max.y &&
+            (float)targetPos.y >= (float)torso.transform.GetComponent<BoxCollider2D>().bounds.min.y
+        );
+        return isInLaserRange;
+    }
+
     public void ThrowArms()
     {
         isReadyToShootLaser = false;
         isReadyToThrowArms = false;
         frontArm.GetComponent<Collider2D>().isTrigger = true;
+        frontArm.GetComponent<SecretBossArm>().isInvulnerable = false;
         StartCoroutine(ThrowArmsCoroutine());
     }
 
     IEnumerator ThrowArmsCoroutine()
     {
-        float speed = (Camera.main.transform.position.x + Camera.main.orthographicSize * Screen.width / Screen.height) * 2;
         float originalArmsDistance = Vector3.Distance(backArm.transform.position, frontArm.transform.position);
 
         // Load lightning
@@ -286,16 +304,13 @@ public class SecretBoss : MonoBehaviour
 
     public IEnumerator StartCombatCoroutine()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.65f);
         isReadyToShootLaser = true;
         isReadyToThrowArms = true;
     }
 
-    public void DisableAnimator()
+    public void ActivateShake()
     {
-
-        // torso.transform.localPosition = new Vector3(-0.29f, 0.54f);
-        // Debug.Log("Playeee");
-        // GetComponent<Animator>().SetTrigger("CombatStarted");
+        onCinemachineShake.Raise(bossActivationShake);
     }
 }

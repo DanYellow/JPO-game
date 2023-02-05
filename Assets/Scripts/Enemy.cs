@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour, IDamageable
     private VoidEventChannel onDeathCallback = null;
     protected Animator animator;
 
-    public bool isInvulnerable = false;
+    public bool isInvulnerable { get; set; } = false;
 
     protected SpriteRenderer sr;
 

@@ -15,7 +15,6 @@ public class SecretBossArm : Enemy
     {
         base.Awake();
         initPosition = transform.position;
-        collider2D = GetComponent<Collider2D>();
     }
 
     private void Update()
@@ -34,7 +33,7 @@ public class SecretBossArm : Enemy
 
     public override void TakeDamage(float damage)
     {
-        if (isInvulnerable || collider2D.isTrigger) return;
+        if (isInvulnerable) return;
         base.TakeDamage(damage);
     }
 }

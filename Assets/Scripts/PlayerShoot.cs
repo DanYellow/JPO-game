@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerShoot : MonoBehaviour
 {
@@ -43,9 +44,18 @@ public class PlayerShoot : MonoBehaviour
 
         if (hitInfo)
         {
+            List<Vector3> listPositions = new List<Vector3>();
+            listPositions.Add(firePoint.position);
+            listPositions.Add(hitInfo.point);
+
             if (hitInfo.transform.TryGetComponent<IDamageable>(out IDamageable iDamageable))
             {
                 iDamageable.TakeDamage(playerStatsValue.damage);
+                if(iDamageable.isInvulnerable == true) {
+                    Debug.Log("fffe");
+                    // listPositions.Add(Vector3.zero);
+                    // listPositions.Add(Vector3.Reflect(hitInfo.point, hitInfo.normal));
+                }
             }
 
             if (hitInfo.transform.TryGetComponent<IOpenable>(out IOpenable iOpenable))
@@ -55,14 +65,15 @@ public class PlayerShoot : MonoBehaviour
 
             if (hitInfo.transform.TryGetComponent<IPushable>(out IPushable iPushable))
             {
-                iPushable.HitDirection(hitInfo.normal); 
-            } 
+                iPushable.HitDirection(hitInfo.normal);
+            }
 
             GameObject impact = Instantiate(impactEffect, hitInfo.point, Quaternion.identity);
             Destroy(impact, impact.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-
-            lineRenderer.SetPosition(0, firePoint.position);
-            lineRenderer.SetPosition(1, hitInfo.point);
+            
+            lineRenderer.positionCount = listPositions.Count;
+            lineRenderer.SetPositions(listPositions.ToArray());
+            listPositions.Clear();
         }
         else
         {

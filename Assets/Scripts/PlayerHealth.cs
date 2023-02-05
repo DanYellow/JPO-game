@@ -17,7 +17,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     [SerializeField]
     private PlayerStatsValue playerStatsValue;
 
-    private bool isInvulnerable = false;
+    public bool isInvulnerable { get; set; } = false;
 
     private void Awake() {
         playerStatsValue.currentHealth = playerStatsValue.maxHealth;

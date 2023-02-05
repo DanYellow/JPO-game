@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SecretBossFight : StateMachineBehaviour
@@ -26,8 +24,6 @@ public class SecretBossFight : StateMachineBehaviour
         if (player == null)
             return;
 
-        Vector2 target = new Vector2(player.position.x, selfTransform.position.y);
-
         float laserAttackRange = secretBoss.canThrowArms ? secretBossData.laserAttackRange : 0;
         float armsAttackRange = secretBossData.armsAttackRange;
 
@@ -40,9 +36,12 @@ public class SecretBossFight : StateMachineBehaviour
         {
             secretBoss.ThrowArms();
         }
-
+        
         if (
-            Mathf.Abs(player.position.x - selfTransform.position.x) >= laserAttackRange &&
+            (
+                Mathf.Abs(player.position.x - selfTransform.position.x) >= laserAttackRange ||
+                (secretBoss.IsTargetInLaserRange(player.position) && (Vector2) secretBoss.secretBossTorso.transform.localPosition == secretBoss.initTorsoPosition)
+            ) &&
             secretBoss.isReadyToShootLaser
         )
         {
