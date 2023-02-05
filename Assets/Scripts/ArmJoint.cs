@@ -9,10 +9,15 @@ public class ArmJoint : MonoBehaviour
 
     public float breakDistance = 3f;
 
+    public bool hideOnAwake = false;
+
     private void Awake()
     {
         lineRenderer = GetComponentInChildren<LineRenderer>();
         lineRenderer.useWorldSpace = true;
+        if(hideOnAwake) {
+            lineRenderer.material.SetColor("_Color", new Color(1f, 1f, 1f, 0));
+        }
     }
     void Start()
     {

@@ -52,7 +52,7 @@ public class PlayerShoot : MonoBehaviour
             {
                 iDamageable.TakeDamage(playerStatsValue.damage);
                 if(iDamageable.isInvulnerable == true) {
-                    Debug.Log("fffe");
+                    // Debug.Log("fffe");
                     // listPositions.Add(Vector3.zero);
                     // listPositions.Add(Vector3.Reflect(hitInfo.point, hitInfo.normal));
                 }
