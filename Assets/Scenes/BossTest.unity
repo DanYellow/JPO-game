@@ -364,7 +364,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &115675076
 Transform:
   m_ObjectHideFlags: 0
@@ -1480,6 +1480,7 @@ GameObject:
   - component: {fileID: 1405044806}
   - component: {fileID: 1405044807}
   - component: {fileID: 1405044808}
+  - component: {fileID: 1405044809}
   m_Layer: 0
   m_Name: forearm-back
   m_TagString: Untagged
@@ -1572,6 +1573,18 @@ MonoBehaviour:
   bodyJoint: {fileID: 1481716805}
   armJoint: {fileID: 681339918}
   breakDistance: 3
+--- !u!114 &1405044809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1405044805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a44bf56c99044c47a0f1a2e07d21d73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1481716804
 GameObject:
   m_ObjectHideFlags: 0
@@ -1996,51 +2009,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1646153326 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7665010452612635966, guid: cbbe23bfa7d691240a259d1c9cf29111, type: 3}
-  m_PrefabInstance: {fileID: 282578893}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1646153327 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7665010452612635959, guid: cbbe23bfa7d691240a259d1c9cf29111, type: 3}
   m_PrefabInstance: {fileID: 282578893}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1646153326}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 78fc3630375c91543b65e3a87a3b90c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &1646153328 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7665010452612635955, guid: cbbe23bfa7d691240a259d1c9cf29111, type: 3}
-  m_PrefabInstance: {fileID: 282578893}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1646153329 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7665010452612635953, guid: cbbe23bfa7d691240a259d1c9cf29111, type: 3}
   m_PrefabInstance: {fileID: 282578893}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1646153326}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 99bc10850e48dbd479e8bee3d25caa70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1646153337
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1646153326}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f38aa2d568eb9745a53cc66ccac13d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  linePrefab: {fileID: 5878409856583439990, guid: 1760aaab58e763b428410d33ea1b6860, type: 3}
 --- !u!1 &1662635576
 GameObject:
   m_ObjectHideFlags: 0
@@ -2052,13 +2042,14 @@ GameObject:
   - component: {fileID: 1662635580}
   - component: {fileID: 1662635579}
   - component: {fileID: 1662635578}
+  - component: {fileID: 1662635581}
   m_Layer: 7
   m_Name: REdSquare
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!61 &1662635578
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2145,13 +2136,25 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1662635576}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.36358166, y: 0.77, z: 0}
+  m_LocalPosition: {x: -0.36358166, y: 1.229, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1662635581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662635576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a44bf56c99044c47a0f1a2e07d21d73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1679363487
 GameObject:
   m_ObjectHideFlags: 0
@@ -2442,7 +2445,7 @@ MonoBehaviour:
   enemyData: {fileID: 11400000, guid: 6d510f9ab4e8fcf4ebec5a68bbc1d47e, type: 2}
   currentHealth: 0
   onDeathCallback: {fileID: 11400000, guid: b2a02294465b5174083b4dfccafc3b1b, type: 2}
-  target: {fileID: 1646153328}
+  _isInvulnerable: 0
 --- !u!114 &1695322844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2527,7 +2530,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 481800566}
           m_TargetAssemblyTypeName: SecretBoss, Assembly-CSharp
-          m_MethodName: DisableAnimator
+          m_MethodName: ActivateOscillation
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -2868,7 +2871,6 @@ MonoBehaviour:
   laserFirePoint: {fileID: 916507578}
   laserPrefab: {fileID: 5708165026280100923, guid: d71b7ad76ccae9540aac4b9c9cd51525, type: 3}
   secretBossData: {fileID: 0}
-  isReadyToShoot: 1
 --- !u!114 &2112746335
 MonoBehaviour:
   m_ObjectHideFlags: 0

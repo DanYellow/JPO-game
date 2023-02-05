@@ -15,12 +15,6 @@ public class SecretBossTorso : Enemy
     [HideInInspector]
     public SecretBossData secretBossData;
 
-    [HideInInspector]
-    
-    public bool isReadyToShoot = true;
-
-    private float nextShootTime = 0f;
-
     public Phase phase { get; private set; }
 
     public override void Awake()
@@ -31,14 +25,7 @@ public class SecretBossTorso : Enemy
         laserSprite = laser.GetComponent<LaserSprite>();
 
         secretBossData = (SecretBossData)enemyData;
-    }
-
-    private void Update()
-    {
-        if (Time.time >= nextShootTime)
-        {
-            nextShootTime = Time.time + secretBossData.laserShootInterval;
-        }
+        phase = GetPhase();
     }
 
     public IEnumerator ShootLaser()

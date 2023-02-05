@@ -13,6 +13,8 @@ public class EnemySpawn : MonoBehaviour
     [SerializeField]
     private float delayBetweenSpawn = 0.75f;
 
+    public int numberOfSpawn = int.MaxValue;
+
     private UnityAction onEventProxy;
 
     private void Awake()
@@ -26,6 +28,10 @@ public class EnemySpawn : MonoBehaviour
     {
         yield return new WaitForSeconds(delayBetweenSpawn);
         Instantiate(enemyToSpawn, transform.position, enemyToSpawn.transform.rotation);
+        numberOfSpawn--;
+        if(numberOfSpawn == 0) {
+            Destroy(gameObject);
+        }
     }
     
     private void OnDestroy()
