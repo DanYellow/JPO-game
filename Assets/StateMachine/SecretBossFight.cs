@@ -27,26 +27,25 @@ public class SecretBossFight : StateMachineBehaviour
         float laserAttackRange = secretBoss.canThrowArms ? secretBossData.laserAttackRange : 0;
         float armsAttackRange = secretBossData.armsAttackRange;
 
-        if (
-            Vector2.Distance(player.position, selfTransform.position) <= armsAttackRange &&
-            secretBoss.isReadyToThrowArms &&
-            secretBoss.canThrowArms &&
-            secretBoss.IsTargetInArmsRange(player.position)
-            )
-        {
-            secretBoss.ThrowArms();
-        }
+        // if (
+        //     Vector2.Distance(player.position, selfTransform.position) <= armsAttackRange &&
+        //     secretBoss.isReadyToThrowArms &&
+        //     secretBoss.canThrowArms &&
+        //     secretBoss.IsTargetInArmsRange(player.position)
+        //     )
+        // {
+        //     secretBoss.ThrowArms();
+        // }
         
-        if (
-            (
-                Mathf.Abs(player.position.x - selfTransform.position.x) >= laserAttackRange ||
-                (secretBoss.IsTargetInLaserRange(player.position) && (Vector2) secretBoss.secretBossTorso.transform.localPosition == secretBoss.initTorsoPosition)
-            ) &&
-            secretBoss.isReadyToShootLaser
-        )
-        {
-            secretBoss.MoveToShootTarget(player.position, player.transform.GetComponent<BoxCollider2D>().bounds);
-        }
-
+        // if (
+        //     (
+        //         Mathf.Abs(player.position.x - selfTransform.position.x) >= laserAttackRange ||
+        //         (secretBoss.IsTargetInLaserRange(player.position) && (Vector2) secretBoss.secretBossTorso.transform.localPosition == secretBoss.initTorsoPosition)
+        //     ) &&
+        //     secretBoss.isReadyToShootLaser
+        // )
+        // {
+        //     secretBoss.MoveToShootTarget(player.position, player.transform.GetComponent<BoxCollider2D>().bounds);
+        // }
     }
 }

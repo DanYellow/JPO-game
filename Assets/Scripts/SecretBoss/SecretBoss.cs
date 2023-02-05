@@ -96,26 +96,23 @@ public class SecretBoss : MonoBehaviour
         initFrontArmPosition = frontArm.transform.localPosition;
         initBackArmPosition = backArm.transform.localPosition;
 
+        Debug.Log("initFrontArmPosition " + initFrontArmPosition);
+
         listArmsOscillationMovement[0] = frontArm.GetComponent<OscillationMovement>().Move();
         listArmsOscillationMovement[1] = backArm.GetComponent<OscillationMovement>().Move();
 
-        // ToggleArmsOscillation(true);
-    }
-
-    IEnumerator ToggleArmsOscillation() {
-        yield return new WaitForSeconds(0.5f);
-        
+        ToggleArmsOscillation(true);
     }
 
     private void ToggleArmsOscillation(bool isActivating) {
-        // foreach (var armOscillation in listArmsOscillationMovement)
-        // {
-        //     if(isActivating){
-        //         StartCoroutine(armOscillation);
-        //     } else {
-        //         StopCoroutine(armOscillation);
-        //     }
-        // }
+        foreach (var armOscillation in listArmsOscillationMovement)
+        {
+            if(isActivating){
+                StartCoroutine(armOscillation);
+            } else {
+                StopCoroutine(armOscillation);
+            }
+        }
     }
 
     void Update()
