@@ -21,10 +21,6 @@ public class DebugManager : MonoBehaviour
         {
             Time.timeScale = slowTime;
         }
-        else
-        {
-            Time.timeScale = 1;
-        }
 #endif
     }
 

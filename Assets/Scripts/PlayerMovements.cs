@@ -13,7 +13,6 @@ public class PlayerMovements : MonoBehaviour, IPushable
 
     [SerializeField, ReadOnlyInspector]
     private bool isFacingRight = true;
-
     private bool isInWater;
 
     [Header("Events")]
@@ -31,37 +30,27 @@ public class PlayerMovements : MonoBehaviour, IPushable
     [SerializeField]
     private VoidEventChannel isHurtVoidEventChannel;
 
-    [Space(15)]
-
-    [Tooltip("Position checks")]
+    [Space(15), Tooltip("Position checks")]
     private bool isGrounded;
     public LayerMask listGroundLayers;
     public Transform groundCheck;
     public float groundCheckRadius;
-
     private float moveSpeed;
 
     [Header("Jump system")]
     private int jumpCount = 0;
     private int maxJumpCount;
-
     private bool isHitted = false;
-
     private float fallThreshold;
-
     private Vector2 nextPosition;
-
     private float speedFactor;
 
     [SerializeField]
     private PlayerInput playerInput;
-
     [SerializeField, UnityEngine.Serialization.FormerlySerializedAs("playerStatsValue")]
     private PlayerStatsValue playerData;
-
     public LayerMask waterLayer;
 
-    // Start is called before the first frame update
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -73,7 +62,6 @@ public class PlayerMovements : MonoBehaviour, IPushable
         fallThreshold = playerData.fallThreshold;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (isGrounded && rb.velocity.y < 0.1f)

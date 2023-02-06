@@ -58,12 +58,10 @@ public class PauseManager : MonoBehaviour
 
     void Pause()
     {
-        pauseMenuUI.SetActive(true);
-
-        EventSystemExtensions.UpdateSelectedGameObject(pauseMenuUI.GetComponentInChildren<Button>().gameObject);
-
-        isGamePaused = true;
         Time.timeScale = 0;
+        isGamePaused = true;
+        pauseMenuUI.SetActive(true);
+        EventSystemExtensions.UpdateSelectedGameObject(pauseMenuUI.GetComponentInChildren<Button>().gameObject);
         onTogglePauseEvent.Raise(isGamePaused);
     }
 }

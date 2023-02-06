@@ -11,6 +11,8 @@ public class InputManager : MonoBehaviour
 
     [SerializeField]
     private VoidEventChannel onBossKilled;
+    [SerializeField]
+    private VoidEventChannel onSecretBossKilled;
 
     [SerializeField]
     private VoidEventChannel onPlayerDeath;
@@ -23,6 +25,7 @@ public class InputManager : MonoBehaviour
         onTogglePauseEvent.OnEventRaised += ToggleActionMap;
         onBossKilled.OnEventRaised += onCreditsOrDeathEvent;
         onPlayerDeath.OnEventRaised += onCreditsOrDeathEvent;
+        onSecretBossKilled.OnEventRaised += onCreditsOrDeathEvent;
     }
 
     public void ToggleActionMap(bool isPaused)
@@ -46,6 +49,7 @@ public class InputManager : MonoBehaviour
         onTogglePauseEvent.OnEventRaised -= ToggleActionMap;
         onBossKilled.OnEventRaised -= onCreditsOrDeathEvent;
         onPlayerDeath.OnEventRaised -= onCreditsOrDeathEvent;
+        onSecretBossKilled.OnEventRaised -= onCreditsOrDeathEvent;
     }
 
     private void OnEnable()
