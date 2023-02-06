@@ -64,6 +64,7 @@ public class SecretBoss : MonoBehaviour
 
     private void Awake()
     {
+        gameObject.SetActive(false);
         secretBossTorso = torso.GetComponent<SecretBossTorso>();
         secretBossTorso.isInvulnerable = true;
 
@@ -76,6 +77,7 @@ public class SecretBoss : MonoBehaviour
 
     void ActivationEnds(PlayableDirector obj)
     {
+        onStartCombat.Invoke();
         StartCoroutine(ActivationEndsCoroutine());
     }
 
@@ -211,7 +213,6 @@ public class SecretBoss : MonoBehaviour
     IEnumerator ThrowArmsCoroutine()
     {
         float originalArmsDistance = Vector3.Distance(backArmContainer.transform.position, frontArmContainer.transform.position);
-        Debug.Log("originalArmsDistance" + originalArmsDistance);
         // Load lightning
         StartCoroutine(MovePartTo(
             frontArmContainer.transform,

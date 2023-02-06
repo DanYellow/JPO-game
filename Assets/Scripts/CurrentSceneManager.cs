@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+using UnityEngine.Events;
+using System.Collections;
 
 public class CurrentSceneManager : MonoBehaviour
 {
@@ -15,6 +17,8 @@ public class CurrentSceneManager : MonoBehaviour
     [SerializeField]
     private GameObject creditsUI;
 
+    private UnityAction onDisplayCreditsScreen;
+
     private void Awake()
     {
         Application.targetFrameRate = 60;
@@ -23,12 +27,15 @@ public class CurrentSceneManager : MonoBehaviour
 
     void Start()
     {
-        onBossKilled.OnEventRaised += DisplayCreditsScreen;
-        onSecretBossKilled.OnEventRaised += DisplayCreditsScreen;
+        onDisplayCreditsScreen = () => { StartCoroutine(DisplayCreditsScreen()); };
+
+        onBossKilled.OnEventRaised += onDisplayCreditsScreen;
+        onSecretBossKilled.OnEventRaised += onDisplayCreditsScreen;
     }
 
-    private void DisplayCreditsScreen()
+    IEnumerator DisplayCreditsScreen()
     {
+        yield return new WaitForSeconds(1);
         creditsUI.SetActive(true);
         EventSystemExtensions.UpdateSelectedGameObject(creditsUI.GetComponentInChildren<Button>().gameObject);
     }
@@ -63,7 +70,7 @@ public class CurrentSceneManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        onBossKilled.OnEventRaised -= DisplayCreditsScreen;
-        onSecretBossKilled.OnEventRaised -= DisplayCreditsScreen;
+        onBossKilled.OnEventRaised -= onDisplayCreditsScreen;
+        onSecretBossKilled.OnEventRaised -= onDisplayCreditsScreen;
     }
 }

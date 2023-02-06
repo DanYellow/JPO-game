@@ -34,4 +34,8 @@ public class DebugManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    public void DebugMessage(string message = "hello") {
+        Debug.Log("Debug Manager: " + message);
+    }
+
 }

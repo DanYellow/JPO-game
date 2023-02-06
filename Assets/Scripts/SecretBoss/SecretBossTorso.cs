@@ -48,7 +48,6 @@ public class SecretBossTorso : Enemy
         if (isInvulnerable) return;
 
         phase = GetPhase();
-        // secretBossData.currentPhase = phase;
 
         if (phase != null)
         {

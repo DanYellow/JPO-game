@@ -21,7 +21,6 @@ public class SecretBossLineController : MonoBehaviour
         if(hideOnAwake) {
             lineRenderer.material.SetColor("_Color", new Color(1f, 1f, 1f, 0));
         }
-
     }
 
     void Update()

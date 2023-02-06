@@ -40,13 +40,6 @@ public class MainMenuManager : MonoBehaviour
 
     public void OnControlsChanged(PlayerInput input)
     {
-        //     int binding = input.actions["Navigate"].GetBindingIndex(group: input.currentControlScheme);
-
-        // var bindingString = input.actions["Navigate"].GetBindingDisplayString(binding, out string deviceLayoutName, out string controlPath);
-        // Debug.Log("deviceLayoutName " + deviceLayoutName);
-        // Debug.Log("input.currentControlScheme " + input.currentControlScheme);
-        // Debug.Log("controlPath " + controlPath);
-        // Debug.Log(input.actions["Navigate"].GetBindingDisplayString(out deviceLayout, out controlPath));
         if (input.currentControlScheme.Equals("Gamepad") && mainMenu.activeInHierarchy)
         {
             if (EventSystem.current.currentSelectedGameObject == null)

@@ -13,7 +13,7 @@ public class BipedalUnitBoss : Enemy
     private GameObject beamEnraged;
 
     [SerializeField]
-    public EnrageBehaviorValue enrageData { get; private set; }
+    public EnrageBehaviorValue enrageData;
 
     [SerializeField]
     private Transform firePoint;
