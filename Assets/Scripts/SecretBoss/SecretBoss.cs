@@ -138,7 +138,7 @@ public class SecretBoss : MonoBehaviour
 
     private void ArmDestroyed()
     {
-        Destroy(backArmContainer);
+        Destroy(GameObject.Find("forearm-back"));
         canThrowArms = false;
     }
 
@@ -163,7 +163,7 @@ public class SecretBoss : MonoBehaviour
             endValue.y = initTorsoPosition.y;
         }
 
-        if (backArmContainer != null)
+        if (backArmContainer.transform.childCount > 0)
         {
             frontArmContainer.GetComponentInChildren<Collider2D>().isTrigger = true;
             frontArmContainer.GetComponentInChildren<SecretBossArm>().isInvulnerable = true;
@@ -304,7 +304,7 @@ public class SecretBoss : MonoBehaviour
         yield return new WaitForSeconds(secretBossTorso.secretBossData.timeDelayBeforeShoot / secretBossTorso.phase.factor);
         yield return StartCoroutine(secretBossTorso.ShootLaser());
         yield return new WaitForSeconds(timeDelayBeforeResetPosition);
-        if (backArmContainer != null)
+        if (backArmContainer.transform.childCount > 0)
         {
             StartCoroutine(MovePartTo(frontArmContainer.transform, initFrontArmContainerPosition, timeToReachTarget));
             StartCoroutine(MovePartTo(backArmContainer.transform, initBackArmContainerPosition, timeToReachTarget));
