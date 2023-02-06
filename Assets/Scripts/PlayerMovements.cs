@@ -162,7 +162,6 @@ public class PlayerMovements : MonoBehaviour, IPushable
 
     public void HitDirection(Vector2 contactPoint)
     {
-        Debug.Log(" playerData.knockbackForce" + playerData.knockbackForce);
         Vector2 pushBackVector = new Vector2(contactPoint.x * -1, 0);
         rb.AddForce(pushBackVector * playerData.knockbackForce, ForceMode2D.Impulse);
     }

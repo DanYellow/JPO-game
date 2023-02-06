@@ -1192,6 +1192,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 77427089806677396, guid: 7013fb47490367542b86c56d498092b0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.414
+      objectReference: {fileID: 0}
+    - target: {fileID: 77427089806677396, guid: 7013fb47490367542b86c56d498092b0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.607
+      objectReference: {fileID: 0}
+    - target: {fileID: 77427089998696968, guid: 7013fb47490367542b86c56d498092b0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.585
+      objectReference: {fileID: 0}
+    - target: {fileID: 77427089998696968, guid: 7013fb47490367542b86c56d498092b0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.01642396
+      objectReference: {fileID: 0}
     - target: {fileID: 77427090719165049, guid: 7013fb47490367542b86c56d498092b0, type: 3}
       propertyPath: m_Name
       value: SecretBoss
@@ -1244,5 +1260,17 @@ PrefabInstance:
       propertyPath: director
       value: 
       objectReference: {fileID: 1767443819}
+    - target: {fileID: 77427091220249325, guid: 7013fb47490367542b86c56d498092b0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.014
+      objectReference: {fileID: 0}
+    - target: {fileID: 77427091220249325, guid: 7013fb47490367542b86c56d498092b0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3456712614635030663, guid: 7013fb47490367542b86c56d498092b0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7013fb47490367542b86c56d498092b0, type: 3}
