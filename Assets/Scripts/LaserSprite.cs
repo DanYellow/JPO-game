@@ -62,3 +62,4 @@ public class LaserSprite : MonoBehaviour
         ResetScale();
     }
 }
+ 
