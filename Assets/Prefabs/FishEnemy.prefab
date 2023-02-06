@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 8057377719791965453}
   - component: {fileID: 899968604748778728}
   - component: {fileID: 8057377719791965452}
-  - component: {fileID: 8057377719791965491}
   - component: {fileID: 1158976093}
+  - component: {fileID: 7058853849260821202}
   m_Layer: 7
   m_Name: FishEnemy
   m_TagString: Untagged
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8057377719791965449}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8499d37695bf4274abc3ee118a883ed4, type: 3}
   m_Name: 
@@ -179,22 +179,6 @@ MonoBehaviour:
     m_Bits: 8
   listDisabledBehaviours:
   - {fileID: 1158976093}
---- !u!114 &8057377719791965491
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8057377719791965449}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94e195d18eff92447aed379609e8760c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  deathEffect: {fileID: 1992304688091250534, guid: 44fb5dd6c04248741b0fdac87cf0d958, type: 3}
-  enemyData: {fileID: 11400000, guid: b16cc1b5d59a90f44ba4ba407e30dd02, type: 2}
-  currentHealth: 0
-  onDeathCallback: {fileID: 11400000, guid: 8be7a99257d8a5f40a64e9408ba1c0a7, type: 2}
 --- !u!114 &1158976093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,3 +192,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floatData: {fileID: 11400000, guid: 862f29872faeb08408522387e05b5ac8, type: 2}
+--- !u!114 &7058853849260821202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8057377719791965449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeb7da812ac8e594f9eb0ab2e7e6ebda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathEffectPrefab: {fileID: 1992304688091250534, guid: 44fb5dd6c04248741b0fdac87cf0d958, type: 3}
+  enemyData: {fileID: 11400000, guid: b16cc1b5d59a90f44ba4ba407e30dd02, type: 2}
+  currentHealth: 0
+  onDeathCallback: {fileID: 11400000, guid: 8be7a99257d8a5f40a64e9408ba1c0a7, type: 2}
+  isInvulnerableProxy: 0
+  listDisabledBehaviours:
+  - {fileID: 8057377719791965452}
