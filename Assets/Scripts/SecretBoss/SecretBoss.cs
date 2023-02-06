@@ -213,18 +213,17 @@ public class SecretBoss : MonoBehaviour
     IEnumerator ThrowArmsCoroutine()
     {
         float originalArmsDistance = Vector3.Distance(backArmContainer.transform.position, frontArmContainer.transform.position);
-        Debug.Log("backArmContainer" + backArmContainer.transform.localPosition);
-        Debug.Log("frontArmContainer" + frontArmContainer.transform.localPosition);
+
         // Load lightning
         StartCoroutine(MovePartTo(
             frontArmContainer.transform,
-            frontArmContainer.transform.localPosition - new Vector3(originalArmsDistance / 4, 0, 0),
+            frontArmContainer.transform.localPosition - new Vector3(originalArmsDistance / 2, 0, 0),
             secretBossTorso.secretBossData.loadLightiningDuration
         ));
 
         yield return StartCoroutine(MovePartTo(
              backArmContainer.transform,
-             backArmContainer.transform.localPosition + new Vector3(originalArmsDistance / 4, 0, 0),
+             backArmContainer.transform.localPosition + new Vector3(originalArmsDistance / 2, 0, 0),
              secretBossTorso.secretBossData.loadLightiningDuration
          ));
 
@@ -232,38 +231,38 @@ public class SecretBoss : MonoBehaviour
 
         lightningAttack.SetActive(true);
 
-        // // Go expand arms
-        // StartCoroutine(MovePartTo(
-        //     frontArmContainer.transform,
-        //     frontArmContainer.transform.localPosition + new Vector3(originalArmsDistance / 4, 0, 0),
-        //     secretBossTorso.secretBossData.loadLightiningDuration / 2
-        // ));
+        // Go expand arms
+        StartCoroutine(MovePartTo(
+            frontArmContainer.transform,
+            frontArmContainer.transform.localPosition + new Vector3(originalArmsDistance / 2, 0, 0),
+            secretBossTorso.secretBossData.loadLightiningDuration / 2
+        ));
 
-        // yield return StartCoroutine(MovePartTo(
-        //      backArmContainer.transform,
-        //      backArmContainer.transform.localPosition - new Vector3(originalArmsDistance / 4, 0, 0),
-        //      secretBossTorso.secretBossData.loadLightiningDuration / 2
-        //  ));
+        yield return StartCoroutine(MovePartTo(
+             backArmContainer.transform,
+             backArmContainer.transform.localPosition - new Vector3(originalArmsDistance / 2, 0, 0),
+             secretBossTorso.secretBossData.loadLightiningDuration / 2
+         ));
 
-        // yield return new WaitForSeconds(secretBossTorso.secretBossData.timeDelayBeforeThrowArms);
+        yield return new WaitForSeconds(secretBossTorso.secretBossData.timeDelayBeforeThrowArms);
 
-        // // Go attack player
-        // StartCoroutine(MovePartTo(
-        //     backArmContainer.transform,
-        //     (Vector3.left * 10),
-        //     timeToReachPlayer
-        // ));
-        // yield return StartCoroutine(MovePartTo(
-        //     frontArmContainer.transform,
-        //     (Vector3.left * 10) + new Vector3(originalArmsDistance, 0, 0),
-        //    timeToReachPlayer
-        // ));
+        // Go attack player
+        StartCoroutine(MovePartTo(
+            backArmContainer.transform,
+            (Vector3.left * 10),
+            timeToReachPlayer
+        ));
+        yield return StartCoroutine(MovePartTo(
+            frontArmContainer.transform,
+            (Vector3.left * 10) + new Vector3(originalArmsDistance, 0, 0),
+           timeToReachPlayer
+        ));
 
-        // yield return new WaitForSeconds(timeBeforeResetArmsPosition);
-        // ResetArmsPosition();
-        // yield return new WaitForSeconds(secretBossTorso.secretBossData.armsAttackInterval);
-        // isReadyToShootLaser = true;
-        // isReadyToThrowArms = true;
+        yield return new WaitForSeconds(timeBeforeResetArmsPosition);
+        ResetArmsPosition();
+        yield return new WaitForSeconds(secretBossTorso.secretBossData.armsAttackInterval);
+        isReadyToShootLaser = true;
+        isReadyToThrowArms = true;
     }
 
     private void ResetArmsPosition()
