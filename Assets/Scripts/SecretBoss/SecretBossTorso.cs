@@ -47,7 +47,6 @@ public class SecretBossTorso : Enemy
     {
         if (isInvulnerable) return;
 
-
         phase = GetPhase();
         // secretBossData.currentPhase = phase;
 
@@ -57,8 +56,13 @@ public class SecretBossTorso : Enemy
             sr.sprite = phase.sprite;
         } else {
             base.TakeDamage(damage);
-
         }
+    }
+
+    public override void OnDeath()
+    {
+        base.OnDeath();
+        Destroy(laser);
     }
 
     private Phase GetPhase()

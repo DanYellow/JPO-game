@@ -9,6 +9,8 @@ public class LaserSprite : MonoBehaviour
     private SpriteRenderer stretchPartSprite;
     private BoxCollider2D stretchPartCollider;
 
+    private ContactPoint2D[] listContacts = new ContactPoint2D[1];
+
     private float timeToReachTarget = 1.5f;
     public float damage = 0;
 
@@ -40,9 +42,15 @@ public class LaserSprite : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
+        other.GetContacts(listContacts);
         if (other.transform.TryGetComponent<IDamageable>(out IDamageable iDamageable))
         {
             iDamageable.TakeDamage(damage);
+        }
+
+        if (other.transform.TryGetComponent<IPushable>(out IPushable iPushable))
+        {
+            iPushable.HitDirection(listContacts[0].normal);
         }
     }
 

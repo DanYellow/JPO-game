@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.Events;
 
 public class SecretBoss : MonoBehaviour
 {
@@ -58,6 +59,8 @@ public class SecretBoss : MonoBehaviour
 
     [SerializeField]
     private ShakeTypeValue bossActivationShake;
+
+    public UnityEvent onStartCombat;
 
     private void Awake()
     {

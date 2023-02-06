@@ -10,6 +10,9 @@ public class CurrentSceneManager : MonoBehaviour
     private VoidEventChannel onBossKilled;
 
     [SerializeField]
+    private VoidEventChannel onSecretBossKilled;
+
+    [SerializeField]
     private GameObject creditsUI;
 
     private void Awake()
@@ -21,6 +24,7 @@ public class CurrentSceneManager : MonoBehaviour
     void Start()
     {
         onBossKilled.OnEventRaised += DisplayCreditsScreen;
+        onSecretBossKilled.OnEventRaised += DisplayCreditsScreen;
     }
 
     private void DisplayCreditsScreen()
@@ -60,5 +64,6 @@ public class CurrentSceneManager : MonoBehaviour
     private void OnDestroy()
     {
         onBossKilled.OnEventRaised -= DisplayCreditsScreen;
+        onSecretBossKilled.OnEventRaised -= DisplayCreditsScreen;
     }
 }

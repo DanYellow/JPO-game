@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class Invulnerable : MonoBehaviour
 {
@@ -14,17 +13,10 @@ public class Invulnerable : MonoBehaviour
     private LayerMask listLayerToIgnoreAfterHit;
     private List<int> listLayers = new List<int>();
 
-    [SerializeField]
-    private VoidEventChannel isHurtVoidEventChannel;
-    private UnityAction isHurtVoidEvent;
-
     private void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-
-        // isHurtVoidEvent = () => { StartCoroutine(); };
-        // isHurtVoidEventChannel.OnEventRaised += isHurtVoidEvent;
     }
 
     // Start is called before the first frame update
@@ -85,10 +77,5 @@ public class Invulnerable : MonoBehaviour
             gameObject.transform.position.x + 0.001f,
             gameObject.transform.position.y
         );
-    }
-
-    private void OnDisable()
-    {
-        // isHurtVoidEventChannel.OnEventRaised -= isHurtVoidEvent;
     }
 }

@@ -48,13 +48,7 @@ public class Enemy : MonoBehaviour, IDamageable
         currentHealth = Mathf.Round(currentHealth * 100f) / 100f;
         if (currentHealth == 0)
         {
-            if (deathEffectPrefab)
-            {
-                GameObject deathEffect = Instantiate(deathEffectPrefab, transform.position, Quaternion.identity);
-                Destroy(deathEffect, deathEffect.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-            }
-            Destroy(gameObject);
-            onDeathCallback?.Raise();
+            OnDeath();
         }
         else
         {
@@ -64,6 +58,17 @@ public class Enemy : MonoBehaviour, IDamageable
             StartCoroutine(HandleInvincibilityDelay());
             StartCoroutine(InvincibilityFlash());
         }
+    }
+
+    public virtual void OnDeath()
+    {
+        if (deathEffectPrefab)
+        {
+            GameObject deathEffect = Instantiate(deathEffectPrefab, transform.position, Quaternion.identity);
+            Destroy(deathEffect, deathEffect.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+        }
+        Destroy(gameObject);
+        onDeathCallback?.Raise();
     }
 
     public IEnumerator InvincibilityFlash()
