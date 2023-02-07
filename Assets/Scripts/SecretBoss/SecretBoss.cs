@@ -45,7 +45,6 @@ public class SecretBoss : MonoBehaviour
     // Time delays - arms electric
     private float timeToReachPlayer = 1.35f;
     private float timeBeforeResetArmsPosition = 0.95f;
-    private float timeBeforeAttack = 0.65f;
 
     [ReadOnlyInspector]
     public bool isReadyToThrowArms = false;

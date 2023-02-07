@@ -5,7 +5,6 @@ public class EnemyJumper : MonoBehaviour
 {
     [SerializeField]
     private JumperDataValue jumperDataValue;
-
     private bool isGrounded;
 
     public float groundCheckRadius = 0.25f;
@@ -42,6 +41,7 @@ public class EnemyJumper : MonoBehaviour
         listTriggers[0].transform.position = transform.position;
 
         StartCoroutine(JumpAttack(listTriggers[nextTriggerIndex].transform.position));
+        // StartCoroutine(Teleport());
     }
 
     void EnableTriggers()
@@ -49,6 +49,19 @@ public class EnemyJumper : MonoBehaviour
         for (int i = 0; i < listTriggers.Length; i++)
         {
             listTriggers[i].gameObject.SetActive(i == nextTriggerIndex);
+        }
+    }
+
+    IEnumerator Teleport()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(2);
+            float index = Mathf.Repeat(nextTriggerIndex - 1, listTriggers.Length);
+            if (Vector3.Distance(transform.position, listTriggers[(int)index].transform.position)> 1 && isGrounded) {
+                transform.position = listTriggers[(int)index].transform.position;
+                ChangeTrigger();
+            }
         }
     }
 

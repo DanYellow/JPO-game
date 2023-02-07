@@ -1707,8 +1707,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 411249994}
   m_HandleRect: {fileID: 411249993}
   m_Direction: 0
-  m_Value: 0
-  m_Size: 1
+  m_Value: 1
+  m_Size: 0.9999999
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3847,7 +3847,7 @@ GameObject:
   - component: {fileID: 1700252496}
   - component: {fileID: 1700252495}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: VersionNumber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4188,6 +4188,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2265402483902109174, guid: 51a33da2987ce7646ac576a3482e4cd2, type: 3}
+      propertyPath: m_fontColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2265402483902109174, guid: 51a33da2987ce7646ac576a3482e4cd2, type: 3}
+      propertyPath: m_fontColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2265402483902109174, guid: 51a33da2987ce7646ac576a3482e4cd2, type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2265402483902109174, guid: 51a33da2987ce7646ac576a3482e4cd2, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51a33da2987ce7646ac576a3482e4cd2, type: 3}
 --- !u!1 &1978967307
@@ -4202,7 +4218,6 @@ GameObject:
   - component: {fileID: 1978967313}
   - component: {fileID: 1978967312}
   - component: {fileID: 1978967311}
-  - component: {fileID: 1978967310}
   - component: {fileID: 1978967309}
   m_Layer: 5
   m_Name: Sprite
@@ -4243,19 +4258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4375ce3237cf2a44a4e7af8df9e503d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationName: PlayerRun
---- !u!114 &1978967310
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1978967307}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89b0cebceb4744b44a19d845d35a358c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  animationName: PlayerJump
 --- !u!95 &1978967311
 Animator:
   serializedVersion: 4
@@ -4805,8 +4808,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 863318459}
   m_HandleRect: {fileID: 863318458}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.99999684
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
