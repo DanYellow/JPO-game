@@ -21,6 +21,7 @@ public class MainMenuManager : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log("Time.timeScale" + Time.timeScale);
         Time.timeScale = 1f;
         infosMenu.SetActive(false);
 

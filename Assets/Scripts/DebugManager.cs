@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
@@ -11,7 +12,6 @@ public class DebugManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-#if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.R))
         {
             Debug.ClearDeveloperConsole();
@@ -21,7 +21,6 @@ public class DebugManager : MonoBehaviour
         {
             Time.timeScale = slowTime;
         }
-#endif
     }
 
     private void RestartLevel(int levelName = 1)
@@ -33,5 +32,5 @@ public class DebugManager : MonoBehaviour
     public void DebugMessage(string message = "hello") {
         Debug.Log("Debug Manager: " + message);
     }
-
 }
+#endif
