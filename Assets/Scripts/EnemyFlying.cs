@@ -6,9 +6,12 @@ public class EnemyFlying : Enemy
 {
     public Transform target;
     private Vector2 startingPosition;
+
+    [HideInInspector]
     public bool isChasing = false;
     private Vector2 nextDirection;
     private bool isDashing = false;
+    private bool startFreeMovement = true;
     public Behaviour[] listDisabledBehaviours;
 
     private FlyingEnemyDataValue enemyFlyingData;
@@ -36,6 +39,12 @@ public class EnemyFlying : Enemy
 
     void Chase()
     {
+        foreach (Behaviour component in listDisabledBehaviours)
+        {
+            component.enabled = false;
+        }
+        startFreeMovement = false;
+
         nextDirection = target.position;
         transform.position = Vector2.MoveTowards(transform.position, target.position, enemyFlyingData.flySpeed * Time.deltaTime);
         if (Vector2.Distance(transform.position, target.position) < enemyFlyingData.dashingRange)
@@ -52,18 +61,33 @@ public class EnemyFlying : Enemy
     void ReturnToStartPoint()
     {
         nextDirection = startingPosition;
-        if ((Vector2)transform.position != startingPosition)
+        if ((Vector2)transform.position != startingPosition && !startFreeMovement)
         {
+            if ((Vector2)transform.position == startingPosition)
+            {
+                startFreeMovement = true;
+                foreach (Behaviour component in listDisabledBehaviours)
+                {
+                    component.enabled = false;
+                }
+            }
+
             transform.position = Vector2.MoveTowards(transform.position, startingPosition, (enemyFlyingData.flySpeed * 1.25f) * Time.deltaTime);
-        } else {
-            // listDisabledBehaviours
+        }
+        else
+        {
+            foreach (Behaviour component in listDisabledBehaviours)
+            {
+                component.enabled = true;
+            }
         }
     }
 
     void Flip()
     {
-        if (transform.position.x > nextDirection.x)
+        if (!Mathf.Approximately(transform.position.x, nextDirection.x) && transform.position.x > nextDirection.x)
         {
+        
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }
         else
