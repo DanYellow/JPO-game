@@ -8,6 +8,8 @@ public class EnemyFlying : Enemy
     private Vector2 startingPosition;
     public bool isChasing = false;
     private Vector2 nextDirection;
+    private bool isDashing = false;
+    public Behaviour[] listDisabledBehaviours;
 
     private FlyingEnemyDataValue enemyFlyingData;
 
@@ -16,7 +18,6 @@ public class EnemyFlying : Enemy
         base.Awake();
         startingPosition = transform.position;
         nextDirection = startingPosition;
-        rb = GetComponent<Rigidbody2D>();
         enemyFlyingData = (FlyingEnemyDataValue)enemyData;
     }
 
@@ -37,20 +38,46 @@ public class EnemyFlying : Enemy
     {
         nextDirection = target.position;
         transform.position = Vector2.MoveTowards(transform.position, target.position, enemyFlyingData.flySpeed * Time.deltaTime);
+        if (Vector2.Distance(transform.position, target.position) < enemyFlyingData.dashingRange)
+        {
+            isDashing = true;
+            transform.position = Vector2.MoveTowards(transform.position, target.position, enemyFlyingData.flySpeed * 6f * Time.deltaTime);
+        }
+        else
+        {
+            isDashing = false;
+        }
     }
 
     void ReturnToStartPoint()
     {
         nextDirection = startingPosition;
-        transform.position = Vector2.MoveTowards(transform.position, startingPosition, (enemyFlyingData.flySpeed * 1.25f) * Time.deltaTime);
+        if ((Vector2)transform.position != startingPosition)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, startingPosition, (enemyFlyingData.flySpeed * 1.25f) * Time.deltaTime);
+        } else {
+            // listDisabledBehaviours
+        }
     }
 
     void Flip()
     {
-        if(transform.position.x > nextDirection.x) {
+        if (transform.position.x > nextDirection.x)
+        {
             transform.rotation = Quaternion.Euler(0, 0, 0);
-        } else {
+        }
+        else
+        {
             transform.rotation = Quaternion.Euler(0, 180f, 0);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.transform.TryGetComponent<IDamageable>(out IDamageable iDamageable) && other.transform.CompareTag("Player") && isDashing)
+        {
+            TakeDamage(float.MaxValue);
+            iDamageable.TakeDamage(enemyData.damage);
         }
     }
 }
