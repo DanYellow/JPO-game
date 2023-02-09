@@ -13,6 +13,10 @@ public class EnemyFlying : Enemy
     private bool isDashing = false;
     private bool startFreeMovement = true;
     public Behaviour[] listDisabledBehaviours;
+    private LineRenderer lineRenderer;
+
+    private Vector2? lockedDashPosition = null;
+    private bool isResetting = false;
 
     private FlyingEnemyDataValue enemyFlyingData;
 
@@ -22,6 +26,8 @@ public class EnemyFlying : Enemy
         startingPosition = transform.position;
         nextDirection = startingPosition;
         enemyFlyingData = (FlyingEnemyDataValue)enemyData;
+        lineRenderer = GetComponentInChildren<LineRenderer>();
+        lineRenderer.useWorldSpace = true;
     }
 
     void Update()
@@ -49,18 +55,60 @@ public class EnemyFlying : Enemy
         transform.position = Vector2.MoveTowards(transform.position, target.position, enemyFlyingData.flySpeed * Time.deltaTime);
         if (Vector2.Distance(transform.position, target.position) < enemyFlyingData.dashingRange)
         {
+            if (lockedDashPosition == null)
+            {
+                lockedDashPosition = target.position;
+            }
+            lineRenderer.SetPosition(0, transform.position);
+            lineRenderer.SetPosition(1, lockedDashPosition.Value);
+
+            AnimationCurve curve = new AnimationCurve();
+            curve.AddKey(0.25f, 0.75f);
+            curve.AddKey(0.75f, 0f);
+
+            lineRenderer.widthCurve = curve;
+            lineRenderer.widthMultiplier = 0.20f;
+
             isDashing = true;
-            transform.position = Vector2.MoveTowards(transform.position, target.position, enemyFlyingData.flySpeed * 6f * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, lockedDashPosition.Value, enemyFlyingData.flySpeed * 6f * Time.deltaTime);
+            if (!isResetting)
+            {
+                lineRenderer.enabled = true;
+                if (transform.position == lockedDashPosition)
+                {
+                    StartCoroutine(ResetDashing());
+                }
+            }
         }
         else
         {
             isDashing = false;
+            lineRenderer.enabled = false;
+            lockedDashPosition = null;
         }
+    }
+
+    IEnumerator ResetDashing()
+    {
+        isResetting = true;
+        lineRenderer.enabled = false;
+        yield return new WaitForSeconds(enemyFlyingData.delayBeforeRestartDashing);
+        isDashing = false;
+        isResetting = false;
+        lockedDashPosition = null;
+    }
+
+    IEnumerator StartDashing()
+    {
+        yield return new WaitForSeconds(enemyFlyingData.delayBeforeRestartDashing);
+        isDashing = false;
+        lockedDashPosition = null;
     }
 
     void ReturnToStartPoint()
     {
         nextDirection = startingPosition;
+        lineRenderer.enabled = false;
         if ((Vector2)transform.position != startingPosition && !startFreeMovement)
         {
             if ((Vector2)transform.position == startingPosition)
@@ -87,7 +135,7 @@ public class EnemyFlying : Enemy
     {
         if (!Mathf.Approximately(transform.position.x, nextDirection.x) && transform.position.x > nextDirection.x)
         {
-        
+
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }
         else
