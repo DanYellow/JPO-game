@@ -7,6 +7,7 @@ public class GateManager : MonoBehaviour, IOpenable
     private Animator[] listGatesAnimator;
     private SpriteRenderer[] listGatesSpriteRenderer;
     private IEnumerator autocloseRef;
+    private IEnumerator closeRef;
 
     public bool isDisabled = false;
 
@@ -21,8 +22,9 @@ public class GateManager : MonoBehaviour, IOpenable
         ColorUtility.TryParseHtmlString("#8E8E8E", out colorDisabled);
         foreach (SpriteRenderer sr in listGatesSpriteRenderer)
             sr.color = isDisabled ? colorDisabled : Color.white;
-
+        closeRef = ToggleOpening(false);
         ToggleDisable(isDisabled);
+
     }
 
     public void Open()
@@ -39,6 +41,15 @@ public class GateManager : MonoBehaviour, IOpenable
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            StopCoroutine(closeRef);
+            StopCoroutine(autocloseRef);
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D other) {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            StopCoroutine(closeRef);
             StopCoroutine(autocloseRef);
         }
     }
@@ -47,13 +58,14 @@ public class GateManager : MonoBehaviour, IOpenable
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            StartCoroutine(ToggleOpening(false));
+            closeRef = ToggleOpening(false);
+            StartCoroutine(closeRef);
         }
     }
 
     IEnumerator ToggleOpening(bool isOpening)
     {
-         if (isOpening)
+        if (isOpening)
         {
             gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
         }
@@ -71,12 +83,13 @@ public class GateManager : MonoBehaviour, IOpenable
 
     IEnumerator Autoclose()
     {
-        yield return new WaitForSeconds(3.5f);
+        yield return new WaitForSeconds(3f);
 
         StartCoroutine(ToggleOpening(false));
     }
 
-    private void ToggleDisable(bool _isDisabled) {
+    private void ToggleDisable(bool _isDisabled)
+    {
         isDisabled = _isDisabled;
 
         foreach (SpriteRenderer sr in listGatesSpriteRenderer)
