@@ -41,19 +41,22 @@ public class PlayerShoot : MonoBehaviour
     IEnumerator DetectHit()
     {
         RaycastHit2D hitInfo = Physics2D.Raycast(firePoint.position, firePoint.right, playerStatsValue.beamLength, collisionLayers);
+        List<Vector3> listPositions = new List<Vector3>();
 
         if (hitInfo)
         {
-            List<Vector3> listPositions = new List<Vector3>();
             listPositions.Add(firePoint.position);
             listPositions.Add(hitInfo.point);
 
             if (hitInfo.transform.TryGetComponent<IDamageable>(out IDamageable iDamageable))
             {
-                iDamageable.TakeDamage(playerStatsValue.damage);
-                if(iDamageable.isInvulnerable == true) {
-                    // listPositions.Add(Vector3.zero);
-                    // listPositions.Add(Vector3.Reflect(hitInfo.point, hitInfo.normal));
+                if (iDamageable.isInvulnerable == true)
+                {
+                    // listPositions.Add(Vector3.Reflect(transform.right.normalized, hitInfo.normal));
+                }
+                else
+                {
+                    iDamageable.TakeDamage(playerStatsValue.damage);
                 }
             }
 
@@ -67,18 +70,22 @@ public class PlayerShoot : MonoBehaviour
                 iPushable.HitDirection(hitInfo.normal);
             }
 
-            GameObject impact = Instantiate(impactEffect, hitInfo.point, Quaternion.identity);
-            Destroy(impact, impact.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-            
+            foreach (var item in listPositions)
+            {
+                GameObject impact = Instantiate(impactEffect, item, Quaternion.identity);
+                Destroy(impact, impact.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+            }
+
             lineRenderer.positionCount = listPositions.Count;
             lineRenderer.SetPositions(listPositions.ToArray());
-            listPositions.Clear();
         }
         else
         {
             lineRenderer.SetPosition(0, firePoint.position);
             lineRenderer.SetPosition(1, firePoint.position + firePoint.right * playerStatsValue.beamLength);
         }
+
+        listPositions.Clear();
 
         lineRenderer.enabled = true;
 

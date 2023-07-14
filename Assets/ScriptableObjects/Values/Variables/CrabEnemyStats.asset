@@ -12,20 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a2df51d7df8cf84e866198d7593ab89, type: 3}
   m_Name: CrabEnemyStats
   m_EditorClassIdentifier: 
-  maxHealth: 2
+  maxHealth: 502
   damage: 1
   moveSpeed: 0.6
   accelerationFactorOnDetection: 1.75
+  currentDefense: 1
   defense: 1
   knockbackForce: 1.75
   attackRange: 0.5
   activationRange: 0.3
   attackDamageFactor: 1
-  enrageThreshold: 0
-  enrageFactor: 1
   invincibilityFlashDelay: 0.2
   invincibilityTimeAfterHit: 0.75
   sightLength: 1
   isSensitiveToLava: 0
   wallCheckRadius: 0.25
-  floatStrength: 0

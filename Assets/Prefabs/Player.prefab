@@ -417,7 +417,7 @@ MonoBehaviour:
   impactEffect: {fileID: 7484998729519011172, guid: ba6d719ee13d7d34cbd9eefa46c40157, type: 3}
   collisionLayers:
     serializedVersion: 2
-    m_Bits: 137
+    m_Bits: 393
   firePoint: {fileID: 7665010452763690243}
 --- !u!114 &7665010452612635952
 MonoBehaviour:
@@ -518,7 +518,6 @@ MonoBehaviour:
   listLayerToIgnoreAfterHit:
     serializedVersion: 2
     m_Bits: 128
-  isHurtVoidEventChannel: {fileID: 0}
 --- !u!1 &7665010452763690252
 GameObject:
   m_ObjectHideFlags: 0
