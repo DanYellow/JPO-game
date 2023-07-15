@@ -26,6 +26,19 @@ public class Obstacle : MonoBehaviour
             ScreenUtility.Instance.Top + height,
             transform.position.z
         );
+        // rb.constraints = RigidbodyConstraints2D.FreezePositionY;
+        
+        // StartCoroutine(Fall());
+    }
+
+    IEnumerator Fall() {
+        yield return new WaitForSeconds(Random.Range(2.25f, 3.85f));
+        rb.velocity = Vector3.zero;
+        transform.position = new Vector3(
+            Random.Range(ScreenUtility.Instance.Left, ScreenUtility.Instance.Right),
+            ScreenUtility.Instance.Top + height,
+            transform.position.z
+        );
     }
 
     IEnumerator AutoDestroy(float duration = 0)
@@ -37,8 +50,23 @@ public class Obstacle : MonoBehaviour
 
     public void OnBecameInvisible()
     {
-        if(gameObject.activeSelf) {
-            autoDestroyCoroutine = StartCoroutine(AutoDestroy(Random.Range(2.25f, 5.75f)));
+        // Initialize();
+        gameObject.SetActive(false);
+        // if(gameObject.activeSelf) {
+        //     autoDestroyCoroutine = StartCoroutine(AutoDestroy(Random.Range(2.25f, 3.85f)));
+        // }
+    }
+
+    private void Reset() {
+        // Initialize();
+    }
+
+    private void OnCollisionEnter2D(Collision2D other) {
+        if(other.gameObject.CompareTag("Player")) {
+            PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();
+            playerHealth.TakeDamage(4);
+            Debug.Log("Touché !");
+            Initialize();
         }
     }
 }

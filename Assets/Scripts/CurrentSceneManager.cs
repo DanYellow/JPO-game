@@ -9,9 +9,6 @@ using System.Collections;
 public class CurrentSceneManager : MonoBehaviour
 {
     [SerializeField]
-    private VoidEventChannel onBossKilled;
-
-    [SerializeField]
     private GameObject creditsUI;
 
     private UnityAction onDisplayCreditsScreen;

@@ -22,8 +22,6 @@ public class PlayerMovements : MonoBehaviour
 
     [SerializeField]
     private BoolEventChannel isGroundedBoolEventChannel;
-    [SerializeField]
-    private BoolEventChannel fallingBoolEventChannel;
 
     [Space(15), Tooltip("Position checks")]
     private bool isGrounded;
@@ -100,12 +98,6 @@ public class PlayerMovements : MonoBehaviour
         isHitted = true;
         yield return new WaitForSeconds(0.25f);
         isHitted = false;
-    }
-
-    public void HitDirection(Vector2 contactPoint)
-    {
-        Vector2 pushBackVector = new Vector2(contactPoint.x * -1, 0);
-        rb.AddForce(pushBackVector * playerData.knockbackForce, ForceMode2D.Impulse);
     }
 
     void OnDrawGizmos()

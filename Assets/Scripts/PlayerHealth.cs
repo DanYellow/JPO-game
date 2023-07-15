@@ -1,9 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
-public class PlayerHealth : MonoBehaviour, IDamageable
+public class PlayerHealth : MonoBehaviour
 {
-    public bool isSensitiveToLava { get; set; }
     [SerializeField]
     private VoidEventChannel isHurtVoidEventChannel;
 
@@ -20,9 +19,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     public bool isInvulnerable { get; set; } = false;
 
     private void Awake() {
-        playerStatsValue.currentHealth = playerStatsValue.maxHealth;
+        // playerStatsValue.currentHealth = playerStatsValue.maxHealth;
         animator = GetComponent<Animator>();
-        isSensitiveToLava = playerStatsValue.isSensitiveToLava;
     }
 
     private void Update()
@@ -45,13 +43,13 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     {
         if (isInvulnerable) return;
 
-        playerStatsValue.currentHealth = Mathf.Clamp(
-            Mathf.Round(playerStatsValue.currentHealth - damage), 
+        playerStatsValue.nbCurrentLifes = Mathf.Clamp(
+            playerStatsValue.nbCurrentLifes - 1, 
             0, 
-            playerStatsValue.maxHealth
+            playerStatsValue.nbMaxLifes
         );
 
-        if (playerStatsValue.currentHealth == 0)
+        if (playerStatsValue.nbCurrentLifes <= 0)
         {
             // StartCoroutine(SlowTime());
             GameObject deathEffect = Instantiate(deathEffectPrefab, transform.position, Quaternion.identity);
@@ -59,7 +57,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
             onPlayerDeathVoidEventChannel.Raise();
             Destroy(gameObject);
         } else {
-            animator.SetLayerWeight(1, 1);
+            // animator.SetLayerWeight(1, 1);
             isHurtVoidEventChannel.Raise();
         }
     }

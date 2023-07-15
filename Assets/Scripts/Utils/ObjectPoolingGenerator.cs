@@ -16,9 +16,23 @@ public class ObjectPoolingGenerator : MonoBehaviour
     private void Start()
     {
         StartCoroutine(Generate());
+        // InvokeRepeating(nameof(Create), 0.5f, 2f);
     }
 
-    IEnumerator Generate() {
+    private void Create()
+    {
+        GameObject objectPooled = objectPooling.CreateObject("obstacle");
+
+        if (objectPooled != null)
+        {
+
+            Obstacle bullet = objectPooled.GetComponent<Obstacle>();
+            bullet.Initialize();
+        }
+    }
+
+    IEnumerator Generate()
+    {
         List<ObjectPoolItem> listItemsToPool = objectPooling.listItemsToPool.Where(item => item.extInit == false).ToList();
 
         foreach (ObjectPoolItem obj in listItemsToPool)
@@ -30,10 +44,11 @@ public class ObjectPoolingGenerator : MonoBehaviour
                 {
                     Obstacle bullet = objectPooled.GetComponent<Obstacle>();
                     bullet.Initialize();
-                    yield return new WaitForSeconds(Random.Range(0.25f, 1f));
+                    yield return new WaitForSeconds(Random.Range(0.15f, 0.75f));
                 }
             }
         }
+        InvokeRepeating(nameof(Create), 0, 0.15f);
     }
 
 

@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using System.Collections;
+using TMPro;
 
 public class GameOverManager : MonoBehaviour
 {
@@ -11,9 +12,11 @@ public class GameOverManager : MonoBehaviour
     public GameObject gameoverMenuUI;
     public GameObject playerHUDUI;
 
+    public TMP_Text timerText;
+
     private void Awake()
     {
-        // gameoverMenuUI.SetActive(false);
+        gameoverMenuUI.SetActive(false);
     }
 
     // Start is called before the first frame update
@@ -24,7 +27,9 @@ public class GameOverManager : MonoBehaviour
 
     private void DisplayGameOverScreen()
     {
-        // gameoverMenuUI.SetActive(true);
+        string nbSeconds = Time.timeSinceLevelLoad.ToString("F2");
+        timerText.SetText($"Vous avez tenu : <b>{nbSeconds} secondes </b>");
+        gameoverMenuUI.SetActive(true);
         // playerHUDUI.SetActive(false);
         StartCoroutine(TriggerInputAction());
     }
@@ -50,6 +55,6 @@ public class GameOverManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        // onPlayerDeathVoidEventChannel.OnEventRaised -= DisplayGameOverScreen;
+        onPlayerDeathVoidEventChannel.OnEventRaised -= DisplayGameOverScreen;
     }
 }

@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &124622979
 RectTransform:
   m_ObjectHideFlags: 0
@@ -189,7 +189,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &175186956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -504,7 +504,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &237532028
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3554,7 +3554,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onBossKilled: {fileID: 11400000, guid: a2662032cc1e54a4e88dac8a202dfacb, type: 2}
-  onSecretBossKilled: {fileID: 11400000, guid: eb4a902577c016b4687f64edf1e1a855, type: 2}
   creditsUI: {fileID: 1966925118}
 --- !u!114 &1011796523
 MonoBehaviour:
@@ -6155,7 +6154,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1966925119
 RectTransform:
   m_ObjectHideFlags: 0

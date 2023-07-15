@@ -4,9 +4,7 @@ using UnityEngine;
 public class ScreenUtility : MonoBehaviour
 {
     protected Camera cam;
- 
-    [SerializeField] protected float widthToMaintain = 5f;
- 
+  
     public static ScreenUtility Instance { get; protected set; }
     /// <summary>
     /// Left side of the screen in world coordinates
@@ -96,10 +94,5 @@ public class ScreenUtility : MonoBehaviour
     {
         float height = cam.orthographicSize * 2f;
         float width = height * cam.aspect;
- 
-        // if (width != widthToMaintain)
-        // {
-        //     cam.orthographicSize = widthToMaintain / cam.aspect;
-        // }
     }
 }
