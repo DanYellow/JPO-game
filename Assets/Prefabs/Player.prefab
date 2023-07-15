@@ -38,7 +38,7 @@ Transform:
   m_Children:
   - {fileID: 9121902345217950092}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &9121902344590174939
 SpriteRenderer:
@@ -199,7 +199,8 @@ MonoBehaviour:
   invulnerableDataValue: {fileID: 11400000, guid: 9ab98fc8a64673b4593d13bd345651eb, type: 2}
   listLayerToIgnoreAfterHit:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 256
+  isHurtVoidEventChannel: {fileID: 11400000, guid: 03eb6c1b9f1a7ae4dac9b654d5a925a8, type: 2}
 --- !u!114 &9121902344590174940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,10 +213,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99bc10850e48dbd479e8bee3d25caa70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
   isFacingRight: 1
   vectorEventChannel: {fileID: 11400000, guid: 6635956797fede24d9522b8c3237406c, type: 2}
-  isGroundedBoolEventChannel: {fileID: 11400000, guid: 4a5695552568afb44a47d026fcdbaac2, type: 2}
   listGroundLayers:
     serializedVersion: 2
     m_Bits: 8
@@ -251,9 +250,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e09b485c08b771844ae4b5398f46c4a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vectorEventChannel: {fileID: 0}
+  vectorEventChannel: {fileID: 11400000, guid: 6635956797fede24d9522b8c3237406c, type: 2}
   onPlayerDeathVoidEventChannel: {fileID: 0}
-  isHurtVoidEventChannel: {fileID: 0}
+  isHurtVoidEventChannel: {fileID: 11400000, guid: 03eb6c1b9f1a7ae4dac9b654d5a925a8, type: 2}
 --- !u!1 &9121902345217950093
 GameObject:
   m_ObjectHideFlags: 0

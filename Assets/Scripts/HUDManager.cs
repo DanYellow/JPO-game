@@ -19,11 +19,11 @@ public class HUDManager : MonoBehaviour
     private void Awake()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
-        isHurtVoidEventChannel.OnEventRaised += UpdateLifePoints;
+        isHurtVoidEventChannel.OnEventRaised += HeartLost;
         GenerateHearts();
     }
 
-    private void GenerateHearts() 
+    private void GenerateHearts()
     {
         RectTransform rectHeartUI = heartUI.GetComponent<RectTransform>();
         float xOffset = 10;
@@ -41,23 +41,26 @@ public class HUDManager : MonoBehaviour
         }
     }
 
-    private void UpdateLifePoints()
+    private void HeartLost()
     {
-        GameObject lastHeartLife = listHeartsUI[listHeartsUI.Count - 1];
-        Animator animator = lastHeartLife.GetComponent<Animator>();
-        animator.SetTrigger("IsHurt");
-        Destroy(lastHeartLife, animator.GetCurrentAnimatorStateInfo(0).length);
-        listHeartsUI.RemoveAt(listHeartsUI.Count - 1);
+        if (listHeartsUI.Count > 0)
+        {
+            GameObject lastHeartLife = listHeartsUI[listHeartsUI.Count - 1];
+            Animator animator = lastHeartLife.GetComponent<Animator>();
+            animator.SetTrigger("IsHurt");
+            Destroy(lastHeartLife, animator.GetCurrentAnimatorStateInfo(0).length);
+            listHeartsUI.RemoveAt(listHeartsUI.Count - 1);
+        }
     }
 
     private void OnDisable()
     {
-        isHurtVoidEventChannel.OnEventRaised -= UpdateLifePoints;
+        isHurtVoidEventChannel.OnEventRaised -= HeartLost;
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
-    
+
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // UpdateLifePoints();
+        // HeartLost();
     }
 }

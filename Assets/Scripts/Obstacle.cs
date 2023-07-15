@@ -25,6 +25,7 @@ public class Obstacle : MonoBehaviour
             rb.drag = Mathf.Clamp(rb.drag - 0.5f, 0, maxLinearDrag);
         }
         rb.velocity = Vector3.zero;
+        
         transform.position = new Vector3(
             Random.Range(ScreenUtility.Instance.Left, ScreenUtility.Instance.Right),
             ScreenUtility.Instance.Top + height,

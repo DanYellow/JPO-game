@@ -7,25 +7,28 @@ public class PlayerHealth : MonoBehaviour
     private VoidEventChannel isHurtVoidEventChannel;
 
     private Animator animator;
+    private SpriteRenderer sr;
 
     [SerializeField]
     private VoidEventChannel onPlayerDeathVoidEventChannel;
 
     public GameObject deathEffectPrefab;
-    
+
     [SerializeField]
     private PlayerStatsValue playerStatsValue;
 
     public bool isInvulnerable { get; set; } = false;
 
-    private void Awake() {
+    private void Awake()
+    {
         // playerStatsValue.currentHealth = playerStatsValue.maxHealth;
         animator = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
     {
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.H))
         {
             TakeDamage();
@@ -35,7 +38,7 @@ public class PlayerHealth : MonoBehaviour
         // {
         //     TakeDamage(float.MaxValue);
         // }
-        #endif
+#endif
     }
 
     // Update is called once per frame
@@ -45,8 +48,8 @@ public class PlayerHealth : MonoBehaviour
         if (isInvulnerable) return;
 
         playerStatsValue.nbCurrentLifes = Mathf.Clamp(
-            playerStatsValue.nbCurrentLifes - 1, 
-            0, 
+            playerStatsValue.nbCurrentLifes - 1,
+            0,
             playerStatsValue.nbMaxLifes
         );
 
@@ -58,13 +61,27 @@ public class PlayerHealth : MonoBehaviour
             Destroy(deathEffect, deathEffect.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
             onPlayerDeathVoidEventChannel.Raise();
             Destroy(gameObject);
+        } else {
+            // StartCoroutine(HandleInvicibilityDelay());
+            // StartCoroutine(InvicibilityFlash());
         }
     }
 
-    IEnumerator SlowTime()
+    public IEnumerator InvicibilityFlash()
     {
-        Time.timeScale = 0.5f;
-        yield return new WaitForSecondsRealtime(5.25f);
-        Time.timeScale = 1f;
+        while (isInvulnerable)
+        {
+            sr.color = new Color(1f, 1f, 1f, 0f);
+            yield return new WaitForSeconds(playerStatsValue.invulnerableData.flashDelay);
+            sr.color = new Color(1f, 1f, 1f, 1f);
+            yield return new WaitForSeconds(playerStatsValue.invulnerableData.flashDelay);
+        }
+    }
+
+    public IEnumerator HandleInvicibilityDelay()
+    {
+        isInvulnerable = true;
+        yield return new WaitForSeconds(playerStatsValue.invulnerableData.time);
+        isInvulnerable = false;
     }
 }

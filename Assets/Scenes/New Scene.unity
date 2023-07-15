@@ -1747,11 +1747,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99bc10850e48dbd479e8bee3d25caa70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &1196378695 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 9121902344590174942, guid: 665a9f2698f60a843957d7f247023f29, type: 3}
-  m_PrefabInstance: {fileID: 9121902345617596569}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1210427658
 GameObject:
   m_ObjectHideFlags: 0
@@ -4435,7 +4430,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 6
-      m_TileSpriteIndex: 6
+      m_TileSpriteIndex: 11
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -4605,7 +4600,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 3
-      m_TileSpriteIndex: 3
+      m_TileSpriteIndex: 6
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -4644,14 +4639,14 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 168
     m_Data: {fileID: 1110292003, guid: 9684f206e64564c408c90860974e16dd, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: -679208436, guid: 9684f206e64564c408c90860974e16dd, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 9
     m_Data: {fileID: -414174345, guid: 9684f206e64564c408c90860974e16dd, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
   - m_RefCount: 1
-    m_Data: {fileID: 790457082, guid: 9684f206e64564c408c90860974e16dd, type: 3}
+    m_Data: {fileID: -679208436, guid: 9684f206e64564c408c90860974e16dd, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: 612422979, guid: 9684f206e64564c408c90860974e16dd, type: 3}
   - m_RefCount: 2
@@ -4660,8 +4655,8 @@ Tilemap:
     m_Data: {fileID: 1553056578, guid: 9684f206e64564c408c90860974e16dd, type: 3}
   - m_RefCount: 3
     m_Data: {fileID: 139000226, guid: 9684f206e64564c408c90860974e16dd, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 790457082, guid: 9684f206e64564c408c90860974e16dd, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 198
     m_Data:
@@ -4985,6 +4980,7 @@ MonoBehaviour:
   playerStatsValue: {fileID: 11400000, guid: 4d8b9f9261ee27f47ad567a2af8e73c2, type: 2}
   heartUI: {fileID: 8523994437467737665, guid: 6407de21ddfd9934484262df5e8b6636, type: 3}
   playerHUDUI: {fileID: 2038182011}
+  listHeartsUI: []
 --- !u!114 &1736709080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5051,7 +5047,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1736709076}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.894672, y: -0.94852597, z: -0.05080132}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5396,6 +5392,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Heart
       objectReference: {fileID: 0}
+    - target: {fileID: 8523994437467737665, guid: 6407de21ddfd9934484262df5e8b6636, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5409,14 +5409,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -8061603833418936049, guid: 665a9f2698f60a843957d7f247023f29, type: 3}
-      propertyPath: vectorEventChannel
-      value: 
-      objectReference: {fileID: 11400000, guid: 6635956797fede24d9522b8c3237406c, type: 2}
-    - target: {fileID: -8061603833418936049, guid: 665a9f2698f60a843957d7f247023f29, type: 3}
-      propertyPath: isHurtVoidEventChannel
-      value: 
-      objectReference: {fileID: 11400000, guid: 03eb6c1b9f1a7ae4dac9b654d5a925a8, type: 2}
     - target: {fileID: 9121902344590174886, guid: 665a9f2698f60a843957d7f247023f29, type: 3}
       propertyPath: m_Name
       value: Player
@@ -5465,10 +5457,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9121902344590174940, guid: 665a9f2698f60a843957d7f247023f29, type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 1196378695}
     - target: {fileID: 9121902344590174940, guid: 665a9f2698f60a843957d7f247023f29, type: 3}
       propertyPath: playerInput
       value: 

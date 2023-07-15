@@ -13,6 +13,9 @@ public class Invulnerable : MonoBehaviour
     private LayerMask listLayerToIgnoreAfterHit;
     private List<int> listLayers = new List<int>();
 
+    [SerializeField]
+    private VoidEventChannel isHurtVoidEventChannel;
+
     private void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
@@ -23,6 +26,8 @@ public class Invulnerable : MonoBehaviour
     private void Start()
     {
         CheckMasks();
+
+        isHurtVoidEventChannel.OnEventRaised += OnCollision;
 
         foreach (var layerIndex in listLayers)
         {
@@ -41,6 +46,10 @@ public class Invulnerable : MonoBehaviour
         }
     }
 
+    private void OnCollision() {
+
+    }
+
     private void OnCollisionEnter2D(Collision2D other)
     {
         LayerMask otherLayer = other.gameObject.layer;
@@ -48,8 +57,9 @@ public class Invulnerable : MonoBehaviour
 
         if (!isInvulnerable && isInLayer)
         {
-            StartCoroutine(InvunlnerableFlash());
+            Debug.Log("ggggz");
             StartCoroutine(HandleInvunlnerableDelay(otherLayer.value));
+            StartCoroutine(InvunlnerableFlash());
         }
     }
 
@@ -57,7 +67,7 @@ public class Invulnerable : MonoBehaviour
     {
         Physics2D.IgnoreLayerCollision(gameObject.layer, layerId, true);
         isInvulnerable = true;
-        yield return new WaitForSeconds(invulnerableDataValue.invulnerabiltyTime);
+        yield return new WaitForSeconds(invulnerableDataValue.time);
         isInvulnerable = false;
         Physics2D.IgnoreLayerCollision(gameObject.layer, layerId, false);
     }
@@ -67,9 +77,9 @@ public class Invulnerable : MonoBehaviour
         while (isInvulnerable)
         {
             sr.color = new Color(1f, 1f, 1f, 0f);
-            yield return new WaitForSeconds(invulnerableDataValue.invulnerableFlashDelay);
+            yield return new WaitForSeconds(invulnerableDataValue.flashDelay);
             sr.color = new Color(1f, 1f, 1f, 1f);
-            yield return new WaitForSeconds(invulnerableDataValue.invulnerableFlashDelay);
+            yield return new WaitForSeconds(invulnerableDataValue.flashDelay);
         }
 
         // Hack to reenable OnTriggerEnter/Stay methods
@@ -77,5 +87,10 @@ public class Invulnerable : MonoBehaviour
             gameObject.transform.position.x + 0.001f,
             gameObject.transform.position.y
         );
+    }
+
+    private void OnDestroy()
+    {
+        isHurtVoidEventChannel.OnEventRaised -= OnCollision;
     }
 }
