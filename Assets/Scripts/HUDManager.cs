@@ -14,7 +14,7 @@ public class HUDManager : MonoBehaviour
     private GameObject heartUI;
 
     public GameObject playerHUDUI;
-    public List<GameObject> listHeartsUI = new List<GameObject>();
+    private List<GameObject> listHeartsUI = new List<GameObject>();
 
     private void Awake()
     {

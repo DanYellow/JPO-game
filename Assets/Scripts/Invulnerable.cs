@@ -16,10 +16,17 @@ public class Invulnerable : MonoBehaviour
     [SerializeField]
     private VoidEventChannel isHurtVoidEventChannel;
 
+    private Material originalMaterial;
+
+    [Tooltip("Material to switch to during the flash.")]
+    [SerializeField] private Material flashMaterial;
+
     private void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+
+        originalMaterial = sr.material;
     }
 
     // Start is called before the first frame update
@@ -46,7 +53,8 @@ public class Invulnerable : MonoBehaviour
         }
     }
 
-    private void OnCollision() {
+    private void OnCollision()
+    {
 
     }
 
@@ -57,7 +65,6 @@ public class Invulnerable : MonoBehaviour
 
         if (!isInvulnerable && isInLayer)
         {
-            Debug.Log("ggggz");
             StartCoroutine(HandleInvunlnerableDelay(otherLayer.value));
             StartCoroutine(InvunlnerableFlash());
         }
@@ -76,9 +83,9 @@ public class Invulnerable : MonoBehaviour
     {
         while (isInvulnerable)
         {
-            sr.color = new Color(1f, 1f, 1f, 0f);
+            sr.material = flashMaterial;
             yield return new WaitForSeconds(invulnerableDataValue.flashDelay);
-            sr.color = new Color(1f, 1f, 1f, 1f);
+            sr.material = originalMaterial;
             yield return new WaitForSeconds(invulnerableDataValue.flashDelay);
         }
 
