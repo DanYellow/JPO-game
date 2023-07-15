@@ -8,8 +8,7 @@ public class PlayerMovements : MonoBehaviour
 {
     private Rigidbody2D rb;
 
-    [SerializeField]
-    Animator animator;
+    private Animator animator;
 
     private Vector3 moveInput = Vector3.zero;
 
@@ -19,9 +18,6 @@ public class PlayerMovements : MonoBehaviour
     [Header("Events")]
     [SerializeField]
     private VectorEventChannel vectorEventChannel;
-
-    [SerializeField]
-    private BoolEventChannel isGroundedBoolEventChannel;
 
     [Space(15), Tooltip("Position checks")]
     private bool isGrounded;
@@ -42,6 +38,7 @@ public class PlayerMovements : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
 
         moveSpeed = playerData.moveSpeed;
     }
@@ -49,7 +46,6 @@ public class PlayerMovements : MonoBehaviour
     void Update()
     {
         vectorEventChannel.Raise(moveInput);
-        isGroundedBoolEventChannel.Raise(isGrounded);
 
         Flip();
     }

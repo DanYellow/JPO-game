@@ -57,7 +57,6 @@ public class PlayerHealth : MonoBehaviour
             onPlayerDeathVoidEventChannel.Raise();
             Destroy(gameObject);
         } else {
-            // animator.SetLayerWeight(1, 1);
             isHurtVoidEventChannel.Raise();
         }
     }
