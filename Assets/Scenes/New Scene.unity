@@ -290,7 +290,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000015258789, y: -217}
+  m_AnchoredPosition: {x: -0.000015258789, y: -18.999992}
   m_SizeDelta: {x: 553.533, y: 130.812}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &179668051
@@ -444,7 +444,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.00000011920929}
+  m_AnchoredPosition: {x: 0, y: 123}
   m_SizeDelta: {x: 800, y: 53.708}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &293119358
@@ -740,7 +740,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.0000076293945, y: -132}
+  m_AnchoredPosition: {x: -0.0000076293945, y: -127}
   m_SizeDelta: {x: 642.079, y: 134.05103}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &424539654
@@ -790,13 +790,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
-  m_fontSizeBase: 72
+  m_fontSize: 86
+  m_fontSizeBase: 86
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -2115,6 +2115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5c3381e20ad8dc4aad0ecdf4e4310f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onPlayerDeathVoidEventChannel: {fileID: 11400000, guid: ee804061685d49549a86590b0c280ccd, type: 2}
 --- !u!1 &1988368685
 GameObject:
   m_ObjectHideFlags: 0

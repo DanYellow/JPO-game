@@ -28,18 +28,18 @@ public class PlayerHealth : MonoBehaviour
         #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.H))
         {
-            TakeDamage(1);
+            TakeDamage();
         }
 
-        if (Input.GetKeyDown(KeyCode.F9))
-        {
-            TakeDamage(float.MaxValue);
-        }
+        // if (Input.GetKeyDown(KeyCode.F9))
+        // {
+        //     TakeDamage(float.MaxValue);
+        // }
         #endif
     }
 
     // Update is called once per frame
-    public void TakeDamage(float damage)
+    public void TakeDamage()
     {
         if (isInvulnerable) return;
 

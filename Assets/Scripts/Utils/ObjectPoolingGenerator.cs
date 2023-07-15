@@ -6,7 +6,16 @@ using System.Linq;
 public class ObjectPoolingGenerator : MonoBehaviour
 {
 
+    [SerializeField]
+    private VoidEventChannel onPlayerDeathVoidEventChannel;
+
     private ObjectPooling objectPooling;
+
+    [SerializeField]
+    private float delayBetweenGeneration = 0.75f;
+    private float timer = 0f;
+    public float delayBetweenDelayUpdate = 7;
+
 
     private void Awake()
     {
@@ -16,7 +25,12 @@ public class ObjectPoolingGenerator : MonoBehaviour
     private void Start()
     {
         StartCoroutine(Generate());
-        // InvokeRepeating(nameof(Create), 0.5f, 2f);
+        onPlayerDeathVoidEventChannel.OnEventRaised += StopGeneration;
+    }
+
+    private void StopGeneration()
+    {
+       StopAllCoroutines();
     }
 
     private void Create()
@@ -25,7 +39,6 @@ public class ObjectPoolingGenerator : MonoBehaviour
 
         if (objectPooled != null)
         {
-
             Obstacle bullet = objectPooled.GetComponent<Obstacle>();
             bullet.Initialize();
         }
@@ -48,13 +61,30 @@ public class ObjectPoolingGenerator : MonoBehaviour
                 }
             }
         }
-        InvokeRepeating(nameof(Create), 0, 0.15f);
+        StartCoroutine(CreateObstacle());
     }
 
-
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
+        timer += Time.deltaTime;
+        if (timer >= delayBetweenDelayUpdate)
+        {
+            timer = 0f;
+            delayBetweenGeneration = Mathf.Clamp(delayBetweenGeneration - 0.05f, 0.15f, 0.75f);
+        }
+    }
 
+    IEnumerator CreateObstacle()
+    {
+        while (true)
+        {
+            Create();
+            yield return new WaitForSeconds(delayBetweenGeneration);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        onPlayerDeathVoidEventChannel.OnEventRaised -= StopGeneration;
     }
 }

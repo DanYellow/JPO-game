@@ -7,7 +7,7 @@ public class PlayerStatsValue : ScriptableObject
 {
     public float moveSpeed;
 
-    [Range(0, 5)]
+    [Range(1, 99)]
     public int nbMaxLifes = 3;
     public int nbCurrentLifes;
 
