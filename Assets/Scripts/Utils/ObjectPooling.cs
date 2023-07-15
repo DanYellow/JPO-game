@@ -14,6 +14,7 @@ public class ObjectPoolItem
     public Queue<GameObject> queueObjectsPooled = new Queue<GameObject>();
 
     public bool extInit = false;
+    public bool isExtendable = false;
 }
 
 // More info : 
@@ -44,7 +45,9 @@ public class ObjectPooling : MonoBehaviour
 
             bool allObjectsActive = queueObjectsPooled.ToList().All(obj => obj.activeSelf);
 
-            if (queueObjectsPooled.Count < itemToPool.poolSize || allObjectsActive)
+            Debug.Log("ddd " + (allObjectsActive && queueObjectsPooled.Count >= itemToPool.poolSize));
+            if (allObjectsActive && queueObjectsPooled.Count >= itemToPool.poolSize) return poolObject;
+            if (queueObjectsPooled.Count < itemToPool.poolSize)
             {
                 poolObject = Instantiate(itemToPool.prefab, transform.position, Quaternion.identity);
                 poolObject.name = $"{transform.name}_{itemToPool.prefab.name}_{queueObjectsPooled.Count}";

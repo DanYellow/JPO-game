@@ -266,7 +266,7 @@ GameObject:
   - component: {fileID: 179668052}
   - component: {fileID: 179668051}
   m_Layer: 5
-  m_Name: Button
+  m_Name: RestartBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -421,7 +421,7 @@ GameObject:
   - component: {fileID: 293119359}
   - component: {fileID: 293119358}
   m_Layer: 5
-  m_Name: TimerText
+  m_Name: ResultText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1123,6 +1123,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99bc10850e48dbd479e8bee3d25caa70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1196378695 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9121902344590174942, guid: 665a9f2698f60a843957d7f247023f29, type: 3}
+  m_PrefabInstance: {fileID: 9121902345617596569}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1210427658
 GameObject:
   m_ObjectHideFlags: 0
@@ -1925,10 +1930,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listItemsToPool:
-  - poolSize: 12
+  - poolSize: 20
     key: obstacle
     prefab: {fileID: 5300067975064995127, guid: 737a40bd6c285f246a78308b0e387ef4, type: 3}
     extInit: 0
+    isExtendable: 0
 --- !u!114 &1736709086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2217,6 +2223,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9121902344590174940, guid: 665a9f2698f60a843957d7f247023f29, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1196378695}
     - target: {fileID: 9121902344590174940, guid: 665a9f2698f60a843957d7f247023f29, type: 3}
       propertyPath: playerInput
       value: 
