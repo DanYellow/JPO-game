@@ -40,7 +40,6 @@ public class ObjectPoolingGenerator : MonoBehaviour
         if (objectPooled != null)
         {
             Obstacle bullet = objectPooled.GetComponent<Obstacle>();
-            bullet.Initialize();
         }
     }
 
@@ -56,7 +55,6 @@ public class ObjectPoolingGenerator : MonoBehaviour
                 if (objectPooled != null)
                 {
                     Obstacle bullet = objectPooled.GetComponent<Obstacle>();
-                    bullet.Initialize();
                     yield return new WaitForSeconds(Random.Range(0.15f, 0.75f));
                 }
             }

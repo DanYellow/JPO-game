@@ -41,7 +41,7 @@ public class PlayerHealth : MonoBehaviour
     // Update is called once per frame
     public void TakeDamage()
     {
-        if (true) return;
+        // if (true) return;
         if (isInvulnerable) return;
 
         playerStatsValue.nbCurrentLifes = Mathf.Clamp(
@@ -50,6 +50,7 @@ public class PlayerHealth : MonoBehaviour
             playerStatsValue.nbMaxLifes
         );
 
+        isHurtVoidEventChannel.Raise();
         if (playerStatsValue.nbCurrentLifes <= 0)
         {
             // StartCoroutine(SlowTime());
@@ -57,8 +58,6 @@ public class PlayerHealth : MonoBehaviour
             Destroy(deathEffect, deathEffect.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
             onPlayerDeathVoidEventChannel.Raise();
             Destroy(gameObject);
-        } else {
-            isHurtVoidEventChannel.Raise();
         }
     }
 
