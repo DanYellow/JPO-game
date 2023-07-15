@@ -14,8 +14,9 @@ public class ObjectPoolingGenerator : MonoBehaviour
     [SerializeField]
     private float delayBetweenGeneration = 0.75f;
     private float timer = 0f;
+    private float timerPoolUpdate = 0f;
+    private float delayBetweenTimerPoolUpdate = 25f;
     public float delayBetweenDelayUpdate = 7;
-
 
     private void Awake()
     {
@@ -30,13 +31,12 @@ public class ObjectPoolingGenerator : MonoBehaviour
 
     private void StopGeneration()
     {
-       StopAllCoroutines();
+        StopAllCoroutines();
     }
 
     private void Create()
     {
         GameObject objectPooled = objectPooling.CreateObject("obstacle");
-
         if (objectPooled != null)
         {
             Obstacle bullet = objectPooled.GetComponent<Obstacle>();
@@ -46,9 +46,9 @@ public class ObjectPoolingGenerator : MonoBehaviour
 
     IEnumerator Generate()
     {
-        List<ObjectPoolItem> listItemsToPool = objectPooling.listItemsToPool.Where(item => item.extInit == false).ToList();
+        List<ObjectPoolItemData> listItemsToPool = objectPooling.listItemsToPool.Where(item => item.extInit == false).ToList();
 
-        foreach (ObjectPoolItem obj in listItemsToPool)
+        foreach (ObjectPoolItemData obj in listItemsToPool)
         {
             for (var i = 0; i < obj.poolSize; i++)
             {
@@ -67,10 +67,22 @@ public class ObjectPoolingGenerator : MonoBehaviour
     private void Update()
     {
         timer += Time.deltaTime;
+        timerPoolUpdate += Time.deltaTime;
+
         if (timer >= delayBetweenDelayUpdate)
         {
             timer = 0f;
             delayBetweenGeneration = Mathf.Clamp(delayBetweenGeneration - 0.05f, 0.15f, 0.75f);
+        }
+
+        if (timerPoolUpdate >= delayBetweenTimerPoolUpdate)
+        {
+            timerPoolUpdate = 0f;
+            delayBetweenGeneration = Mathf.Clamp(delayBetweenGeneration - 0.05f, 0.15f, 0.75f);
+            if (objectPooling.listDictItemsToPool.TryGetValue("obstacle", out ObjectPoolItemData itemToPool))
+            {
+                itemToPool.poolSize += 5;
+            }
         }
     }
 

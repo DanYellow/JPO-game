@@ -18,14 +18,10 @@ public class Obstacle : MonoBehaviour
         rb.drag = maxLinearDrag;
     }
 
-    private void FixedUpdate()
+    private void OnEnable()
     {
-        // rb.velocity += 0.5f * Time.fixedDeltaTime;
-    }
-
-    public void Initialize()
-    {
-        if(nbInvocations % 5 == 0) {
+        if (nbInvocations % 5 == 0)
+        {
             rb.drag = Mathf.Clamp(rb.drag - 0.5f, 0, maxLinearDrag);
         }
         rb.velocity = Vector3.zero;
@@ -36,10 +32,30 @@ public class Obstacle : MonoBehaviour
         );
     }
 
+    private void Update() {
+        if(transform.position.y < ScreenUtility.Instance.Bottom) {
+            nbInvocations++;
+            gameObject.SetActive(false);
+        }
+    }
+
+    public void Initialize()
+    {
+        // if(nbInvocations % 5 == 0) {
+        //     rb.drag = Mathf.Clamp(rb.drag - 0.5f, 0, maxLinearDrag);
+        // }
+        // rb.velocity = Vector3.zero;
+        // transform.position = new Vector3(
+        //     Random.Range(ScreenUtility.Instance.Left, ScreenUtility.Instance.Right),
+        //     ScreenUtility.Instance.Top + height,
+        //     transform.position.z
+        // );
+    }
+
     public void OnBecameInvisible()
     {
-        nbInvocations++;
-        gameObject.SetActive(false);
+        // nbInvocations++;
+        // gameObject.SetActive(false);
     }
 
     private void OnCollisionEnter2D(Collision2D other)

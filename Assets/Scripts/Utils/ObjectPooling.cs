@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class ObjectPoolItem
+public class ObjectPoolItemData
 {
     [SerializeField, Tooltip("Sets the limit of objects created in memory (expandable dynamically)")]
     public int poolSize = 5;
@@ -22,13 +22,13 @@ public class ObjectPoolItem
 // https://gameprogrammingpatterns.com/object-pool.html
 public class ObjectPooling : MonoBehaviour
 {
-    public List<ObjectPoolItem> listItemsToPool = new List<ObjectPoolItem>();
+    public List<ObjectPoolItemData> listItemsToPool = new List<ObjectPoolItemData>();
 
-    public Dictionary<string, ObjectPoolItem> listDictItemsToPool = new Dictionary<string, ObjectPoolItem>();
+    public Dictionary<string, ObjectPoolItemData> listDictItemsToPool = new Dictionary<string, ObjectPoolItemData>();
 
     private void Start()
     {
-        foreach (ObjectPoolItem obj in listItemsToPool)
+        foreach (ObjectPoolItemData obj in listItemsToPool)
         {
             string key = (obj.key != "") ? obj.key : obj.prefab.name;
             listDictItemsToPool.Add(key, obj);
@@ -39,14 +39,16 @@ public class ObjectPooling : MonoBehaviour
     {
         GameObject poolObject = null;
 
-        if (listDictItemsToPool.TryGetValue(key, out ObjectPoolItem itemToPool))
+        if (listDictItemsToPool.TryGetValue(key, out ObjectPoolItemData itemToPool))
         {
             Queue<GameObject> queueObjectsPooled = itemToPool.queueObjectsPooled;
 
-            bool allObjectsActive = queueObjectsPooled.ToList().All(obj => obj.activeSelf);
+            int nbItemsActive = queueObjectsPooled.ToList().Count(obj => obj.activeSelf);
+            // bool allObjectsActive = queueObjectsPooled.ToList().All(obj => obj.activeSelf);
 
-            Debug.Log("ddd " + (allObjectsActive && queueObjectsPooled.Count >= itemToPool.poolSize));
-            if (allObjectsActive && queueObjectsPooled.Count >= itemToPool.poolSize) return poolObject;
+            if (nbItemsActive == itemToPool.poolSize) {
+                return poolObject;
+            };
             if (queueObjectsPooled.Count < itemToPool.poolSize)
             {
                 poolObject = Instantiate(itemToPool.prefab, transform.position, Quaternion.identity);
@@ -69,7 +71,7 @@ public class ObjectPooling : MonoBehaviour
 
     private void OnDestroy()
     {
-        foreach (ObjectPoolItem itemToPool in listItemsToPool)
+        foreach (ObjectPoolItemData itemToPool in listItemsToPool)
         {
             Queue<GameObject> queueObjectsPooled = itemToPool.queueObjectsPooled;
 

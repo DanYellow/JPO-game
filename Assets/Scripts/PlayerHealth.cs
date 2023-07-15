@@ -41,6 +41,7 @@ public class PlayerHealth : MonoBehaviour
     // Update is called once per frame
     public void TakeDamage()
     {
+        if (true) return;
         if (isInvulnerable) return;
 
         playerStatsValue.nbCurrentLifes = Mathf.Clamp(

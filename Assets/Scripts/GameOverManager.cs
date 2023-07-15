@@ -28,7 +28,7 @@ public class GameOverManager : MonoBehaviour
     private void DisplayGameOverScreen()
     {
         string nbSeconds = Time.timeSinceLevelLoad.ToString("F2");
-        timerText.SetText($"Vous avez tenu : <b>{nbSeconds} secondes </b>");
+        timerText.SetText($"Vous avez tenu : <b>{nbSeconds} secondes</b>");
         gameoverMenuUI.SetActive(true);
         // playerHUDUI.SetActive(false);
         StartCoroutine(TriggerInputAction());
