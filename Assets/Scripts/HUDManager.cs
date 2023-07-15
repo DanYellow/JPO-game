@@ -19,7 +19,7 @@ public class HUDManager : MonoBehaviour
 
     private void Awake()
     {
-        listTexts = playerHUDUI.GetComponentsInChildren<TMP_Text>();
+        // listTexts = playerHUDUI.GetComponentsInChildren<TMP_Text>();
         SceneManager.sceneLoaded += OnSceneLoaded;
         isHurtVoidEventChannel.OnEventRaised += UpdateLifePoints;
 
@@ -28,8 +28,8 @@ public class HUDManager : MonoBehaviour
 
     private void UpdateLifePoints()
     {
-        foreach (TMP_Text text in listTexts)
-            text.text = $"Energy {Mathf.Ceil(playerStatsValue.currentHealth).ToString()}";
+        // foreach (TMP_Text text in listTexts)
+        //     text.text = $"Energy {Mathf.Ceil(playerStatsValue.currentHealth).ToString()}";
     }
 
     private void OnDisable()

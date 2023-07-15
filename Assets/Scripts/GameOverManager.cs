@@ -13,7 +13,7 @@ public class GameOverManager : MonoBehaviour
 
     private void Awake()
     {
-        gameoverMenuUI.SetActive(false);
+        // gameoverMenuUI.SetActive(false);
     }
 
     // Start is called before the first frame update
@@ -24,8 +24,8 @@ public class GameOverManager : MonoBehaviour
 
     private void DisplayGameOverScreen()
     {
-        gameoverMenuUI.SetActive(true);
-        playerHUDUI.SetActive(false);
+        // gameoverMenuUI.SetActive(true);
+        // playerHUDUI.SetActive(false);
         StartCoroutine(TriggerInputAction());
     }
 
@@ -38,18 +38,18 @@ public class GameOverManager : MonoBehaviour
     {
         if (input.currentControlScheme.Equals("Gamepad") && gameoverMenuUI.activeInHierarchy)
         {
-            gameoverMenuUI.GetComponentInChildren<Button>().Select();
+            // gameoverMenuUI.GetComponentInChildren<Button>().Select();
         }
     }
 
     public void HideGameOverScreen()
     {
         EventSystem.current.SetSelectedGameObject(null);
-        gameoverMenuUI.SetActive(false);
+        // gameoverMenuUI.SetActive(false);
     }
 
     private void OnDestroy()
     {
-        onPlayerDeathVoidEventChannel.OnEventRaised -= DisplayGameOverScreen;
+        // onPlayerDeathVoidEventChannel.OnEventRaised -= DisplayGameOverScreen;
     }
 }
