@@ -2,7 +2,9 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovements : MonoBehaviour, IPushable
+// https://www.youtube.com/watch?v=xx1oKVTU_gM
+
+public class PlayerMovements : MonoBehaviour
 {
     private Rigidbody2D rb;
 
@@ -13,22 +15,15 @@ public class PlayerMovements : MonoBehaviour, IPushable
 
     [SerializeField, ReadOnlyInspector]
     private bool isFacingRight = true;
-    private bool isInWater;
 
     [Header("Events")]
     [SerializeField]
     private VectorEventChannel vectorEventChannel;
-    [SerializeField]
-    private BoolEventChannel jumpBoolEventChannel;
+
     [SerializeField]
     private BoolEventChannel isGroundedBoolEventChannel;
     [SerializeField]
     private BoolEventChannel fallingBoolEventChannel;
-    [SerializeField]
-    private BoolEventChannel isInWaterBoolEventChannel;
-
-    [SerializeField]
-    private VoidEventChannel isHurtVoidEventChannel;
 
     [Space(15), Tooltip("Position checks")]
     private bool isGrounded;
@@ -37,43 +32,26 @@ public class PlayerMovements : MonoBehaviour, IPushable
     public float groundCheckRadius;
     private float moveSpeed;
 
-    [Header("Jump system")]
-    private int jumpCount = 0;
-    private int maxJumpCount;
     private bool isHitted = false;
     private float fallThreshold;
     private Vector2 nextPosition;
-    private float speedFactor;
 
     [SerializeField]
     private PlayerInput playerInput;
     [SerializeField, UnityEngine.Serialization.FormerlySerializedAs("playerStatsValue")]
     private PlayerStatsValue playerData;
-    public LayerMask waterLayer;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
 
-        isHurtVoidEventChannel.OnEventRaised += OnHurt;
-
         moveSpeed = playerData.moveSpeed;
-        maxJumpCount = playerData.maxJumpCount;
-        fallThreshold = playerData.fallThreshold;
     }
 
     void Update()
     {
-        if (isGrounded && rb.velocity.y < 0.1f)
-        {
-            jumpBoolEventChannel.Raise(playerInput.actions["Jump"].WasReleasedThisFrame());
-            jumpCount = 0;
-        }
-
         vectorEventChannel.Raise(moveInput);
         isGroundedBoolEventChannel.Raise(isGrounded);
-        isInWaterBoolEventChannel.Raise(isInWater);
-        speedFactor = isInWater ? playerData.waterSpeedFactor : playerData.speedFactor;
 
         Flip();
     }
@@ -82,7 +60,7 @@ public class PlayerMovements : MonoBehaviour, IPushable
     {
         if (!isHitted)
         {
-            nextPosition = new Vector2((moveInput.x * moveSpeed) * speedFactor, rb.velocity.y);
+            nextPosition = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
             if (moveInput.y <= -0.25f)
             {
                 nextPosition.x = 0;
@@ -91,30 +69,11 @@ public class PlayerMovements : MonoBehaviour, IPushable
         }
 
         isGrounded = IsGrounded();
-        isInWater = IsInWater();
-        if (rb.velocity.y < fallThreshold)
-        {
-            fallingBoolEventChannel.Raise(true);
-        }
     }
 
     public void OnMove(InputAction.CallbackContext ctx)
     {
         moveInput = (Vector3)ctx.ReadValue<Vector2>();
-    }
-
-    public void OnJump(InputAction.CallbackContext ctx)
-    {
-        if (
-            ctx.phase == InputActionPhase.Performed &&
-            jumpCount < maxJumpCount &&
-            moveInput.y > -0.5f
-        )
-        {
-            jumpBoolEventChannel.Raise(ctx.phase == InputActionPhase.Performed);
-            jumpCount++;
-            rb.velocity = new Vector2((moveInput.x * moveSpeed) * speedFactor, playerData.jumpForce * speedFactor);
-        }
     }
 
     private void Flip()
@@ -129,11 +88,6 @@ public class PlayerMovements : MonoBehaviour, IPushable
     public bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, listGroundLayers);
-    }
-
-    public bool IsInWater()
-    {
-        return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, waterLayer);
     }
 
     private void OnHurt()
@@ -160,10 +114,5 @@ public class PlayerMovements : MonoBehaviour, IPushable
         {
             Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
         }
-    }
-
-    private void OnDestroy()
-    {
-        isHurtVoidEventChannel.OnEventRaised -= OnHurt;
     }
 }

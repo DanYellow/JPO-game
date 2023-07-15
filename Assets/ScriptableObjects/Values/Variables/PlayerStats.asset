@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
   maxHealth: 100
-  currentHealth: 50
-  moveSpeed: 3
+  currentHealth: 100
+  moveSpeed: 6
   jumpForce: 4.05
   maxJumpCount: 2
   knockbackForce: 1.75
@@ -22,7 +22,7 @@ MonoBehaviour:
   waterSpeedFactor: 0.55
   fallThreshold: -2
   damage: 1
-  invulnerableData: {fileID: 0}
+  invulnerableData: {fileID: 11400000, guid: 9ab98fc8a64673b4593d13bd345651eb, type: 2}
   shootingRate: 0.2
   beamLength: 4
   isSensitiveToLava: 1
