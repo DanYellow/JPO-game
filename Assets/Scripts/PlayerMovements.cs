@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,8 +6,6 @@ using UnityEngine.InputSystem;
 public class PlayerMovements : MonoBehaviour
 {
     private Rigidbody2D rb;
-
-    private Animator animator;
 
     private Vector3 moveInput = Vector3.zero;
 
@@ -25,9 +22,6 @@ public class PlayerMovements : MonoBehaviour
     public Transform groundCheck;
     public float groundCheckRadius;
     private float moveSpeed;
-
-    private bool isHitted = false;
-    private float fallThreshold;
     private Vector2 nextPosition;
 
     [SerializeField]
@@ -36,7 +30,6 @@ public class PlayerMovements : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
 
         moveSpeed = playerData.moveSpeed;
     }
@@ -50,15 +43,8 @@ public class PlayerMovements : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!isHitted)
-        {
-            nextPosition = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
-            if (moveInput.y <= -0.25f)
-            {
-                nextPosition.x = 0;
-            }
-            rb.velocity = nextPosition;
-        }
+        nextPosition = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
+        rb.velocity = nextPosition;
 
         isGrounded = IsGrounded();
     }
@@ -80,18 +66,6 @@ public class PlayerMovements : MonoBehaviour
     public bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, listGroundLayers);
-    }
-
-    private void OnHurt()
-    {
-        StartCoroutine(OnHurtProxy());
-    }
-
-    IEnumerator OnHurtProxy()
-    {
-        isHitted = true;
-        yield return new WaitForSeconds(0.25f);
-        isHitted = false;
     }
 
     void OnDrawGizmos()

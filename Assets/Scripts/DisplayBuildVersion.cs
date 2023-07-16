@@ -5,7 +5,7 @@ public class DisplayBuildVersion : MonoBehaviour
 {
     private void Awake() {
         if(TryGetComponent(out TextMeshProUGUI text)) {
-            text.SetText(Application.version);
+            text.SetText($"v{Application.version}");
         }
     }
 }

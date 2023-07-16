@@ -21,14 +21,17 @@ public class Trigger : MonoBehaviour
             yield return new WaitForSeconds(animator.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
             
             Animator animatorPlayer = other.GetComponent<Animator>();
-            animatorPlayer.SetTrigger("EntersDoor");
-            yield return null;
-            yield return new WaitForSeconds(animatorPlayer.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+            Rigidbody2D rbPlayer = other.GetComponent<Rigidbody2D>();
+            other.GetComponent<PlayerMovements>().enabled = false;
+            rbPlayer.velocity = new Vector2(0.5f, 0); 
+            // animatorPlayer.SetTrigger("EntersDoor");
+            // yield return null;
+            // yield return new WaitForSeconds(animatorPlayer.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
             
-            Close();
-            yield return null;
-            yield return new WaitForSeconds(animator.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length * 1.5f);
-            OnFirstLevelStart.Raise();
+            // Close();
+            // yield return null;
+            // yield return new WaitForSeconds(animator.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length * 1.5f);
+            // OnFirstLevelStart.Raise();
         }
         yield return null;
     }

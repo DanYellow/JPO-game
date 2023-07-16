@@ -84,9 +84,9 @@ public class HUDManager : MonoBehaviour
     {
         while (timeBar.fillAmount > 0)
         {
-            timeBarValue.CurrentValue -= 0.005f;
+            timeBarValue.CurrentValue -= 0.001f;
             timeBar.fillAmount = timeBarValue.CurrentValue;
-            yield return new WaitForSeconds(0.5f);
+            yield return null;
         }
         onPlayerDeathVoidEventChannel.Raise();
     }
