@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using TMPro;
+using UnityEngine.Events;
 // https://www.youtube.com/watch?v=vqZjZ6yv1lA
 
 public class MainMenuManager : MonoBehaviour
@@ -17,11 +18,15 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField]
     private PlayerInput pi;
 
+    [SerializeField]
+    private VoidEventChannel OnFirstLevelStart;
+
+    private UnityAction onFirstLevelLoadEvent;
+
     // string deviceLayoutName, controlPath;
 
     private void Awake()
     {
-        Debug.Log("Time.timeScale" + Time.timeScale);
         Time.timeScale = 1f;
         infosMenu.SetActive(false);
 
@@ -29,6 +34,14 @@ public class MainMenuManager : MonoBehaviour
         {
             EventSystemExtensions.UpdateSelectedGameObject(mainMenu.GetComponentInChildren<Button>().gameObject);
         }
+    }
+
+    private void Start() {
+        onFirstLevelLoadEvent = () => {
+            LoadLevel(1); 
+        };
+
+        OnFirstLevelStart.OnEventRaised += onFirstLevelLoadEvent;
     }
 
     public void OnNavigate(InputAction.CallbackContext ctx)
@@ -101,6 +114,10 @@ public class MainMenuManager : MonoBehaviour
 #endif
             Application.Quit();
         }
+    }
+
+    private void OnDisable() {
+        OnFirstLevelStart.OnEventRaised -= onFirstLevelLoadEvent;
     }
 }
 
