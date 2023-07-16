@@ -13,7 +13,7 @@ public class PauseManager : MonoBehaviour
 
     private void Awake()
     {
-        // pauseMenuUI.SetActive(false);
+        pauseMenuUI.SetActive(false);
     }
 
     public void TogglePause(InputAction.CallbackContext ctx)
@@ -34,7 +34,7 @@ public class PauseManager : MonoBehaviour
     public void Resume()
     {
         Time.timeScale = 1;
-        // pauseMenuUI.SetActive(false);
+        pauseMenuUI.SetActive(false);
         isGamePaused = false;
         onTogglePauseEvent.Raise(isGamePaused);
         EventSystem.current.SetSelectedGameObject(null);
@@ -42,10 +42,10 @@ public class PauseManager : MonoBehaviour
 
     public void OnNavigate(InputAction.CallbackContext ctx)
     {
-        // if (pauseMenuUI != null && pauseMenuUI.activeInHierarchy && ctx.phase == InputActionPhase.Performed && EventSystem.current.currentSelectedGameObject == null)
-        // {
-        //     // pauseMenuUI.GetComponentInChildren<Button>().Select();
-        // }
+        if (pauseMenuUI != null && pauseMenuUI.activeInHierarchy && ctx.phase == InputActionPhase.Performed && EventSystem.current.currentSelectedGameObject == null)
+        {
+            pauseMenuUI.GetComponentInChildren<Button>().Select();
+        }
     }
 
     public void OnControlsChanged(PlayerInput input)
@@ -60,8 +60,8 @@ public class PauseManager : MonoBehaviour
     {
         Time.timeScale = 0;
         isGamePaused = true;
-        // pauseMenuUI.SetActive(true);
-        // EventSystemExtensions.UpdateSelectedGameObject(pauseMenuUI.GetComponentInChildren<Button>().gameObject);
+        pauseMenuUI.SetActive(true);
+        EventSystemExtensions.UpdateSelectedGameObject(pauseMenuUI.GetComponentInChildren<Button>().gameObject);
         onTogglePauseEvent.Raise(isGamePaused);
     }
 }

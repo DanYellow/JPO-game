@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5300067975064995125}
   - component: {fileID: 5300067975064995126}
   - component: {fileID: 8373724090711029484}
+  - component: {fileID: 8539350375720415276}
   m_Layer: 8
   m_Name: Obstacle
   m_TagString: Untagged
@@ -161,3 +162,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66ef5f89c06b4984cbfdd08ffccfec6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxLinearDrag: 4.5
+--- !u!95 &8539350375720415276
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5300067975064995127}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3adef2fce1acb8d4eb8b89bc44b28a96, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0

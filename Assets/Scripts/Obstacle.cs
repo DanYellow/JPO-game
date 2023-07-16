@@ -1,9 +1,11 @@
 using UnityEngine;
+using System.Collections;
 
 public class Obstacle : MonoBehaviour
 {
     private Rigidbody2D rb;
     private SpriteRenderer sr;
+    private Animator animator;
 
     private float height;
     private int nbInvocations = 0;
@@ -13,6 +15,7 @@ public class Obstacle : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
 
         height = sr.bounds.size.y;
         rb.drag = maxLinearDrag;
@@ -25,7 +28,7 @@ public class Obstacle : MonoBehaviour
             rb.drag = Mathf.Clamp(rb.drag - 0.5f, 0, maxLinearDrag);
         }
         rb.velocity = Vector3.zero;
-        
+
         transform.position = new Vector3(
             Random.Range(ScreenUtility.Instance.Left, ScreenUtility.Instance.Right),
             ScreenUtility.Instance.Top + height,
@@ -48,8 +51,15 @@ public class Obstacle : MonoBehaviour
         {
             PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();
             playerHealth.TakeDamage();
-            Debug.Log("Touché !");
-            gameObject.SetActive(false);
+
+            animator.SetTrigger("Touched");
+            StartCoroutine(Disable());
         }
+    }
+
+    IEnumerator Disable()
+    {
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+        gameObject.SetActive(false);
     }
 }

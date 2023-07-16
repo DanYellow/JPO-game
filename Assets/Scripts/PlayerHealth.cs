@@ -21,7 +21,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Awake()
     {
-        // playerStatsValue.currentHealth = playerStatsValue.maxHealth;
+        playerStatsValue.nbCurrentLifes = playerStatsValue.nbMaxLifes;
         animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
     }
@@ -57,9 +57,9 @@ public class PlayerHealth : MonoBehaviour
         if (playerStatsValue.nbCurrentLifes <= 0)
         {
             // StartCoroutine(SlowTime());
+            onPlayerDeathVoidEventChannel.Raise();
             GameObject deathEffect = Instantiate(deathEffectPrefab, transform.position, Quaternion.identity);
             Destroy(deathEffect, deathEffect.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-            onPlayerDeathVoidEventChannel.Raise();
             Destroy(gameObject);
         } else {
             // StartCoroutine(HandleInvicibilityDelay());

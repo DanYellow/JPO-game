@@ -14,9 +14,9 @@ public class ObjectPoolingGenerator : MonoBehaviour
     [SerializeField]
     private float delayBetweenGeneration = 0.75f;
     private float timer = 0f;
-    private float timerPoolUpdate = 0f;
-    private float delayBetweenTimerPoolUpdate = 25f;
     public float delayBetweenDelayUpdate = 7;
+    private float timerPoolUpdate = 0f;
+    private float delayBetweenTimerPoolUpdate = 15f;
 
     private void Awake()
     {
@@ -79,7 +79,7 @@ public class ObjectPoolingGenerator : MonoBehaviour
             delayBetweenGeneration = Mathf.Clamp(delayBetweenGeneration - 0.05f, 0.15f, 0.75f);
             if (objectPooling.listDictItemsToPool.TryGetValue("obstacle", out ObjectPoolItemData itemToPool))
             {
-                itemToPool.poolSize += 5;
+                itemToPool.poolSize += 10;
             }
         }
     }
