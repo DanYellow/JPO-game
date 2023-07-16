@@ -27,13 +27,16 @@ public class HUDManager : MonoBehaviour
     [SerializeField]
     private VoidEventChannel onPlayerDeathVoidEventChannel;
 
-    private void Start()
+    private void Awake()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
         isHurtVoidEventChannel.OnEventRaised += HeartLost;
+    }
 
+    private void Start()
+    {
         timeBar.fillAmount = timeBarValue.CurrentValue;
-        Debug.Log(timeBar.fillAmount);
+
         StartCoroutine(DecreaseTimeBar());
     }
 
@@ -42,6 +45,7 @@ public class HUDManager : MonoBehaviour
         RectTransform rectHeartUI = heartUI.GetComponent<RectTransform>();
         float xOffset = 10;
         float startPosX = playerHUDUI.GetComponent<RectTransform>().rect.xMin + rectHeartUI.rect.width;
+
 
         for (int i = 0; i < playerStatsValue.nbCurrentLifes; i++)
         {
@@ -88,6 +92,7 @@ public class HUDManager : MonoBehaviour
             timeBar.fillAmount = timeBarValue.CurrentValue;
             yield return null;
         }
+        StopAllCoroutines();
         onPlayerDeathVoidEventChannel.Raise();
     }
 
@@ -99,6 +104,7 @@ public class HUDManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        Debug.Log("playerStatsValue.nbCurrentLifes " + playerStatsValue.nbCurrentLifes);
         FillHearts();
     }
 }

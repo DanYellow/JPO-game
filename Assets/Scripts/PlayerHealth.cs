@@ -6,6 +6,12 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField]
     private VoidEventChannel isHurtVoidEventChannel;
 
+    [SerializeField]
+    private CinemachineShakeEventChannel onCinemachineShake;
+
+    [SerializeField]
+    private CameraShakeTypeValue hurtCameraShake;
+
     private Animator animator;
     private SpriteRenderer sr;
 
@@ -53,9 +59,14 @@ public class PlayerHealth : MonoBehaviour
         );
 
         isHurtVoidEventChannel.Raise();
-        if (playerStatsValue.nbCurrentLifes <= 0)
+        if (playerStatsValue.nbCurrentLifes == 0)
         {
             onPlayerDeathVoidEventChannel.Raise();
+        }
+        else
+        {
+            Debug.Log("onCinemachineShake");
+            onCinemachineShake.Raise(hurtCameraShake);
         }
     }
 

@@ -8,9 +8,6 @@ using System.Collections;
 
 public class CurrentSceneManager : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject creditsUI;
-
     private UnityAction onDisplayCreditsScreen;
 
     [SerializeField]
@@ -19,34 +16,24 @@ public class CurrentSceneManager : MonoBehaviour
     private void Awake()
     {
         Application.targetFrameRate = 60;
-        // creditsUI.SetActive(false);
     }
 
     void Start()
     {
-        onDisplayCreditsScreen = () => { StartCoroutine(DisplayCreditsScreen()); };
+        timeBarValue.CurrentValue = 1f;
     }
 
-    IEnumerator DisplayCreditsScreen()
-    {
-        yield return new WaitForSeconds(1);
-        // creditsUI.SetActive(true);
-        EventSystemExtensions.UpdateSelectedGameObject(creditsUI.GetComponentInChildren<Button>().gameObject);
-    }
 
     public void OnNavigate(InputAction.CallbackContext ctx)
     {
-        if (creditsUI != null && creditsUI.activeInHierarchy && ctx.phase == InputActionPhase.Performed && EventSystem.current.currentSelectedGameObject == null)
-        {
-            creditsUI.GetComponentInChildren<Button>().Select();
-        }
+
     }
 
     public void OnControlsChanged(PlayerInput input)
     {
-        if (input.currentControlScheme.Equals("Gamepad") && creditsUI.activeInHierarchy)
+        if (input.currentControlScheme.Equals("Gamepad"))
         {
-            creditsUI.GetComponentInChildren<Button>().Select();
+            // creditsUI.GetComponentInChildren<Button>().Select();
         }
     }
 

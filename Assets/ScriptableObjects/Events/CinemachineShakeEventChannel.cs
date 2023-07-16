@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-[CreateAssetMenu(fileName = "CinemachineShakeEventChannel", menuName = "EndlessRunnerJPO/CinemachineShakeEventChannel", order = 0)]
+[CreateAssetMenu(fileName = "CinemachineShakeEventChannel", menuName = "ScriptableObjects/CinemachineShakeEventChannel", order = 0)]
 public class CinemachineShakeEventChannel : ScriptableObject
 {
-    public UnityAction<ShakeTypeValue> OnEventRaised;
+    public UnityAction<CameraShakeTypeValue> OnEventRaised;
 
-	public void Raise(ShakeTypeValue value)
+	public void Raise(CameraShakeTypeValue value)
 	{
 		if (OnEventRaised != null)
 			OnEventRaised.Invoke(value);

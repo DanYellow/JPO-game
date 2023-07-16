@@ -8,7 +8,7 @@ public class CinemachineShakeEventEditor : Editor
     float time;
     float intensity;
 
-    ShakeTypeValue dynamicShakeType = null;
+    CameraShakeTypeValue dynamicShakeType = null;
 
     public override void OnInspectorGUI()
     {
@@ -23,10 +23,10 @@ public class CinemachineShakeEventEditor : Editor
 
         EditorGUILayout.BeginHorizontal();
         GUILayout.Label("SO");
-        dynamicShakeType = (ShakeTypeValue)EditorGUILayout.ObjectField(dynamicShakeType, typeof(ShakeTypeValue), false);
+        dynamicShakeType = (CameraShakeTypeValue)EditorGUILayout.ObjectField(dynamicShakeType, typeof(CameraShakeTypeValue), false);
         EditorGUILayout.EndHorizontal();
 
-        ShakeTypeValue shakeType = new ShakeTypeValue();
+        CameraShakeTypeValue shakeType = new CameraShakeTypeValue();
 
         if (dynamicShakeType)
         {

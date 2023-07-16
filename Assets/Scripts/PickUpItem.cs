@@ -30,19 +30,16 @@ public class PickUpItem : MonoBehaviour
         );
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    IEnumerator OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            timeBarValue.CurrentValue += data.value;
+            timeBarValue.CurrentValue = Mathf.Clamp01(timeBarValue.CurrentValue + data.value);
             animator.SetTrigger("IsPicked");
-            StartCoroutine(Disable());
-        }
-    }
 
-    IEnumerator Disable()
-    {
-        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
-        gameObject.SetActive(false);
+            yield return null;
+            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+            gameObject.SetActive(false);
+        }
     }
 }
