@@ -12,7 +12,7 @@ public class ObjectPoolingGenerator : MonoBehaviour
     private ObjectPooling objectPooling;
 
     [SerializeField]
-    private float delayBetweenGeneration = 0.75f;
+    private float delayBetweenNewItem = 0.75f;
     private float timer = 0f;
     public float delayBetweenDelayUpdate = 7;
     private float timerPoolUpdate = 0f;
@@ -70,13 +70,12 @@ public class ObjectPoolingGenerator : MonoBehaviour
         if (timer >= delayBetweenDelayUpdate)
         {
             timer = 0f;
-            delayBetweenGeneration = Mathf.Clamp(delayBetweenGeneration - 0.05f, 0.15f, 0.75f);
+            delayBetweenNewItem = Mathf.Clamp(delayBetweenNewItem - 0.05f, 0.15f, 0.75f);
         }
 
         if (timerPoolUpdate >= delayBetweenTimerPoolUpdate)
         {
             timerPoolUpdate = 0f;
-            delayBetweenGeneration = Mathf.Clamp(delayBetweenGeneration - 0.05f, 0.15f, 0.75f);
             if (objectPooling.listDictItemsToPool.TryGetValue("obstacle", out ObjectPoolItemData itemToPool))
             {
                 itemToPool.poolSize += 10;
@@ -89,7 +88,7 @@ public class ObjectPoolingGenerator : MonoBehaviour
         while (true)
         {
             Create();
-            yield return new WaitForSeconds(delayBetweenGeneration);
+            yield return new WaitForSeconds(delayBetweenNewItem);
         }
     }
 

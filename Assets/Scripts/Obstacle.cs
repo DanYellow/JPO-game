@@ -28,9 +28,14 @@ public class Obstacle : MonoBehaviour
             rb.drag = Mathf.Clamp(rb.drag - 0.5f, 0, maxLinearDrag);
         }
         rb.velocity = Vector3.zero;
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        animator.ResetTrigger("Touched");
 
         transform.position = new Vector3(
-            Random.Range(ScreenUtility.Instance.Left, ScreenUtility.Instance.Right),
+            Random.Range(
+                ScreenUtility.Instance.Left + (sr.bounds.size.x / 2),
+                ScreenUtility.Instance.Right - (sr.bounds.size.x / 2)
+            ),
             ScreenUtility.Instance.Top + height,
             transform.position.z
         );
@@ -53,13 +58,20 @@ public class Obstacle : MonoBehaviour
             playerHealth.TakeDamage();
 
             animator.SetTrigger("Touched");
-            StartCoroutine(Disable());
+            // StartCoroutine(Disable());
         }
     }
 
-    IEnumerator Disable()
+    void Disable()
     {
-        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
         gameObject.SetActive(false);
     }
 }
+
+// yield return new WaitWhile(() => animator.GetCurrentAnimatorStateInfo(0).IsName("ObstacleExplosion"));
+
+// Wait for the transition to end
+// yield return new WaitUntil(() => _Animator.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1.0f );
+
+// Wait for the animation to end
+// yield return new WaitWhile(() => _Animator.GetCurrentAnimatorStateInfo(0).IsName("anim_state"));
