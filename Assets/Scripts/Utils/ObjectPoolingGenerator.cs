@@ -1,26 +1,37 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 
 public class ObjectPoolingGenerator : MonoBehaviour
 {
-
     [SerializeField]
     private VoidEventChannel onPlayerDeathVoidEventChannel;
 
+    [HideInInspector]
     private ObjectPooling objectPooling;
 
     [SerializeField]
-    private float delayBetweenNewItem = 0.75f;
-    private float timer = 0f;
-    public float delayBetweenDelayUpdate = 7;
-    private float timerPoolUpdate = 0f;
-    private float delayBetweenTimerPoolUpdate = 15f;
+    private float delayBetweenNewItemPooled = 0.75f;
+    private float timerBetweenNewItemPooledUpdate = 0f;
+    public float delayBetweenNewItemPooledUpdate = 7;
+    public bool canUpdateDelayBetweenNewItemPooled = false;
+
+    private float timerPoolSizeUpdate = 0f;
+    private float delayBetweenPoolSizeUpdate = 15f;
+
+    [SerializeField]
+    private int nbSlotsAddable = 10;
+
+    [SerializeField]
+    private string key = "";
 
     private void Awake()
     {
-        objectPooling = GetComponent<ObjectPooling>();
+        objectPooling = FindObjectOfType<ObjectPooling>();
+
+        if (!canUpdateDelayBetweenNewItemPooled)
+        {
+            delayBetweenNewItemPooledUpdate = -1;
+        }
     }
 
     private void Start()
@@ -36,27 +47,17 @@ public class ObjectPoolingGenerator : MonoBehaviour
 
     private void Create()
     {
-        GameObject objectPooled = objectPooling.CreateObject("obstacle");
-        if (objectPooled != null)
-        {
-            Obstacle bullet = objectPooled.GetComponent<Obstacle>();
-        }
+        GameObject objectPooled = objectPooling.CreateObject(key);
     }
 
     IEnumerator Generate()
     {
-        List<ObjectPoolItemData> listItemsToPool = objectPooling.listItemsToPool.Where(item => item.extInit == false).ToList();
-
-        foreach (ObjectPoolItemData obj in listItemsToPool)
+        foreach (ObjectPoolItemData obj in objectPooling.listItemsToPool)
         {
             for (var i = 0; i < obj.poolSize; i++)
             {
                 GameObject objectPooled = objectPooling.CreateObject(obj.key);
-                if (objectPooled != null)
-                {
-                    Obstacle bullet = objectPooled.GetComponent<Obstacle>();
-                    yield return new WaitForSeconds(Random.Range(0.15f, 0.75f));
-                }
+                yield return new WaitForSeconds(Random.Range(0.15f, 0.75f));
             }
         }
         StartCoroutine(CreateObstacle());
@@ -64,21 +65,24 @@ public class ObjectPoolingGenerator : MonoBehaviour
 
     private void Update()
     {
-        timer += Time.deltaTime;
-        timerPoolUpdate += Time.deltaTime;
+        timerBetweenNewItemPooledUpdate += Time.deltaTime;
+        timerPoolSizeUpdate += Time.deltaTime;
 
-        if (timer >= delayBetweenDelayUpdate)
+        if (timerBetweenNewItemPooledUpdate >= delayBetweenNewItemPooledUpdate)
         {
-            timer = 0f;
-            delayBetweenNewItem = Mathf.Clamp(delayBetweenNewItem - 0.05f, 0.15f, 0.75f);
+            timerBetweenNewItemPooledUpdate = 0f;
+            if (canUpdateDelayBetweenNewItemPooled)
+            {
+                delayBetweenNewItemPooled = Mathf.Clamp(delayBetweenNewItemPooled - 0.05f, 0.15f, 0.75f);
+            }
         }
 
-        if (timerPoolUpdate >= delayBetweenTimerPoolUpdate)
+        if (timerPoolSizeUpdate >= delayBetweenPoolSizeUpdate)
         {
-            timerPoolUpdate = 0f;
-            if (objectPooling.listDictItemsToPool.TryGetValue("obstacle", out ObjectPoolItemData itemToPool))
+            timerPoolSizeUpdate = 0f;
+            if (objectPooling.listDictItemsToPool.TryGetValue(key, out ObjectPoolItemData itemToPool))
             {
-                itemToPool.poolSize += 10;
+                itemToPool.poolSize += nbSlotsAddable;
             }
         }
     }
@@ -88,7 +92,7 @@ public class ObjectPoolingGenerator : MonoBehaviour
         while (true)
         {
             Create();
-            yield return new WaitForSeconds(delayBetweenNewItem);
+            yield return new WaitForSeconds(delayBetweenNewItemPooled);
         }
     }
 

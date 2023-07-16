@@ -52,7 +52,7 @@ public class ObjectPooling : MonoBehaviour
             if (queueObjectsPooled.Count < itemToPool.poolSize)
             {
                 poolObject = Instantiate(itemToPool.prefab, transform.position, Quaternion.identity);
-                poolObject.name = $"{transform.name}_{itemToPool.prefab.name}_{queueObjectsPooled.Count}";
+                poolObject.name = $"{itemToPool.prefab.name}_{transform.name}_{queueObjectsPooled.Count}";
             }
             else
             {
