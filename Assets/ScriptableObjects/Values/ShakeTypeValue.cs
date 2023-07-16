@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Shake Type", menuName = "EndlessRunnerJPO/ShakeTypeValue", order = 0)]
+[CreateAssetMenu(fileName = "New Shake Type", menuName = "ScriptableObjects/ShakeTypeValue", order = 0)]
 public class ShakeTypeValue : ScriptableObject
 {
     public float time = 2f;

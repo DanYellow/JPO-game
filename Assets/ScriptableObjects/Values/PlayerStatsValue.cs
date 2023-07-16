@@ -2,7 +2,7 @@
 using UnityEngine;
 using System;
 
-[CreateAssetMenu(fileName = "New Player Stats", menuName = "EndlessRunnerJPO/PlayerStatsValue", order = 0)]
+[CreateAssetMenu(fileName = "New Player Stats", menuName = "ScriptableObjects/PlayerStatsValue", order = 0)]
 public class PlayerStatsValue : ScriptableObject
 {
     public float moveSpeed;
