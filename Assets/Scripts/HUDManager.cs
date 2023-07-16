@@ -1,6 +1,8 @@
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using System.Collections;
 
 public class HUDManager : MonoBehaviour
 {
@@ -16,10 +18,23 @@ public class HUDManager : MonoBehaviour
     public GameObject playerHUDUI;
     private List<GameObject> listHeartsUI = new List<GameObject>();
 
-    private void Awake()
+    [SerializeField]
+    private Image timeBar;
+
+    [SerializeField]
+    private FloatValue timeBarValue;
+
+    [SerializeField]
+    private VoidEventChannel onPlayerDeathVoidEventChannel;
+
+    private void Start()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
         isHurtVoidEventChannel.OnEventRaised += HeartLost;
+
+        timeBar.fillAmount = timeBarValue.CurrentValue;
+        Debug.Log(timeBar.fillAmount);
+        StartCoroutine(DecreaseTimeBar());
     }
 
     private void FillHearts()
@@ -57,12 +72,23 @@ public class HUDManager : MonoBehaviour
 
     private void AnimateLastHeart()
     {
-        if(listHeartsUI.Count == 0) return;
+        if (listHeartsUI.Count == 0) return;
 
         GameObject lastHeartLife = listHeartsUI[listHeartsUI.Count - 1];
         lastHeartLife = listHeartsUI[listHeartsUI.Count - 1];
         Animator animator = lastHeartLife.GetComponent<Animator>();
         animator.SetBool("IsLast", true);
+    }
+
+    IEnumerator DecreaseTimeBar()
+    {
+        while (timeBar.fillAmount > 0)
+        {
+            timeBarValue.CurrentValue -= 0.005f;
+            timeBar.fillAmount = timeBarValue.CurrentValue;
+            yield return new WaitForSeconds(0.5f);
+        }
+        onPlayerDeathVoidEventChannel.Raise();
     }
 
     private void OnDisable()

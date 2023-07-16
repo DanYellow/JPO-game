@@ -2153,7 +2153,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &974776409
 MonoBehaviour:
@@ -2168,7 +2168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onPlayerDeathVoidEventChannel: {fileID: 11400000, guid: ee804061685d49549a86590b0c280ccd, type: 2}
-  delayBetweenNewItemPooled: 2.25
+  delayBetweenNewItemPooled: 1.95
   delayBetweenNewItemPooledUpdate: 7
   canUpdateDelayBetweenNewItemPooled: 0
   nbSlotsAddable: 10
@@ -2510,7 +2510,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1282952490
 GameObject:
@@ -3274,7 +3274,7 @@ GameObject:
   - component: {fileID: 1588566096}
   - component: {fileID: 1588566095}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Diamond
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5648,7 +5648,7 @@ GameObject:
   - component: {fileID: 1698436749}
   - component: {fileID: 1698436748}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5671,8 +5671,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -756.02966, y: 403.81036}
-  m_SizeDelta: {x: 243.6132, y: 41.4187}
+  m_AnchoredPosition: {x: -750.52576, y: 403.81036}
+  m_SizeDelta: {x: 242.6126, y: 41.4187}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1698436748
 MonoBehaviour:
@@ -5687,7 +5687,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.5231595, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5988,6 +5988,9 @@ MonoBehaviour:
   playerStatsValue: {fileID: 11400000, guid: 63ce0a99404d15c43bf3417238ccd1aa, type: 2}
   heartUI: {fileID: 8523994437467737665, guid: 6407de21ddfd9934484262df5e8b6636, type: 3}
   playerHUDUI: {fileID: 2038182011}
+  timeBar: {fileID: 1698436748}
+  timeBarValue: {fileID: 11400000, guid: 56994dd132ec4334781b2af9c25d9382, type: 2}
+  onPlayerDeathVoidEventChannel: {fileID: 11400000, guid: ee804061685d49549a86590b0c280ccd, type: 2}
 --- !u!114 &1736709080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6046,6 +6049,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   creditsUI: {fileID: 0}
+  timeBarValue: {fileID: 11400000, guid: 56994dd132ec4334781b2af9c25d9382, type: 2}
 --- !u!4 &1736709084
 Transform:
   m_ObjectHideFlags: 0
@@ -6472,67 +6476,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2082640454}
   m_CullTransparentMesh: 1
---- !u!1001 &1709273481704079692
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1709273481406156916, guid: 74be66d7f2604864ba3834afbc8836b8, type: 3}
-      propertyPath: m_Name
-      value: Diamond
-      objectReference: {fileID: 0}
-    - target: {fileID: 1709273481406156919, guid: 74be66d7f2604864ba3834afbc8836b8, type: 3}
-      propertyPath: m_RootOrder
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 1709273481406156919, guid: 74be66d7f2604864ba3834afbc8836b8, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2.4432013
-      objectReference: {fileID: 0}
-    - target: {fileID: 1709273481406156919, guid: 74be66d7f2604864ba3834afbc8836b8, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -4.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1709273481406156919, guid: 74be66d7f2604864ba3834afbc8836b8, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1709273481406156919, guid: 74be66d7f2604864ba3834afbc8836b8, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1709273481406156919, guid: 74be66d7f2604864ba3834afbc8836b8, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1709273481406156919, guid: 74be66d7f2604864ba3834afbc8836b8, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1709273481406156919, guid: 74be66d7f2604864ba3834afbc8836b8, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1709273481406156919, guid: 74be66d7f2604864ba3834afbc8836b8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1709273481406156919, guid: 74be66d7f2604864ba3834afbc8836b8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1709273481406156919, guid: 74be66d7f2604864ba3834afbc8836b8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 74be66d7f2604864ba3834afbc8836b8, type: 3}
 --- !u!1001 &9121902345617596569
 PrefabInstance:
   m_ObjectHideFlags: 0

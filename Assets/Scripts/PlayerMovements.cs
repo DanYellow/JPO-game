@@ -31,8 +31,6 @@ public class PlayerMovements : MonoBehaviour
     private Vector2 nextPosition;
 
     [SerializeField]
-    private PlayerInput playerInput;
-    [SerializeField, UnityEngine.Serialization.FormerlySerializedAs("playerStatsValue")]
     private PlayerStatsValue playerData;
 
     private void Awake()

@@ -26,6 +26,11 @@ public class PlayerHealth : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
     }
 
+    private void Start()
+    {
+        onPlayerDeathVoidEventChannel.OnEventRaised += OnDeath;
+    }
+
     private void Update()
     {
 #if UNITY_EDITOR
@@ -33,18 +38,12 @@ public class PlayerHealth : MonoBehaviour
         {
             TakeDamage();
         }
-
-        // if (Input.GetKeyDown(KeyCode.F9))
-        // {
-        //     TakeDamage(float.MaxValue);
-        // }
 #endif
     }
 
     // Update is called once per frame
     public void TakeDamage()
     {
-        // if (true) return;
         if (isInvulnerable) return;
 
         playerStatsValue.nbCurrentLifes = Mathf.Clamp(
@@ -56,32 +55,20 @@ public class PlayerHealth : MonoBehaviour
         isHurtVoidEventChannel.Raise();
         if (playerStatsValue.nbCurrentLifes <= 0)
         {
-            // StartCoroutine(SlowTime());
             onPlayerDeathVoidEventChannel.Raise();
-            GameObject deathEffect = Instantiate(deathEffectPrefab, transform.position, Quaternion.identity);
-            Destroy(deathEffect, deathEffect.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-            Destroy(gameObject);
-        } else {
-            // StartCoroutine(HandleInvicibilityDelay());
-            // StartCoroutine(InvicibilityFlash());
         }
     }
 
-    public IEnumerator InvicibilityFlash()
+    private void OnDeath()
     {
-        while (isInvulnerable)
-        {
-            sr.color = new Color(1f, 1f, 1f, 0f);
-            yield return new WaitForSeconds(playerStatsValue.invulnerableData.flashDelay);
-            sr.color = new Color(1f, 1f, 1f, 1f);
-            yield return new WaitForSeconds(playerStatsValue.invulnerableData.flashDelay);
-        }
+        GameObject deathEffect = Instantiate(deathEffectPrefab, transform.position, Quaternion.identity);
+        Destroy(deathEffect, deathEffect.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+        Destroy(gameObject);
     }
 
-    public IEnumerator HandleInvicibilityDelay()
+    private void OnDisable()
     {
-        isInvulnerable = true;
-        yield return new WaitForSeconds(playerStatsValue.invulnerableData.time);
-        isInvulnerable = false;
+        onPlayerDeathVoidEventChannel.OnEventRaised -= OnDeath;
+
     }
 }

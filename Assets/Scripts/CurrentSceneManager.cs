@@ -13,6 +13,9 @@ public class CurrentSceneManager : MonoBehaviour
 
     private UnityAction onDisplayCreditsScreen;
 
+    [SerializeField]
+    private FloatValue timeBarValue;
+
     private void Awake()
     {
         Application.targetFrameRate = 60;
@@ -59,7 +62,8 @@ public class CurrentSceneManager : MonoBehaviour
         Application.Quit();
     }
 
-    private void OnDestroy()
+    private void OnEnable()
     {
+        timeBarValue.CurrentValue = 1f;
     }
 }

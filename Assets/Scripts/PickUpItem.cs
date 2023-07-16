@@ -9,6 +9,9 @@ public class PickUpItem : MonoBehaviour
     private Animator animator;
     private SpriteRenderer sr;
 
+    [SerializeField]
+    private FloatValue timeBarValue;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -31,6 +34,7 @@ public class PickUpItem : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            timeBarValue.CurrentValue += data.value;
             animator.SetTrigger("IsPicked");
             StartCoroutine(Disable());
         }
