@@ -14,7 +14,6 @@ public class ObjectPoolItemData
     public Queue<GameObject> queueObjectsPooled = new Queue<GameObject>();
 
     public bool extInit = false;
-    public bool isExtendable = false;
 }
 
 // More info : 
@@ -46,7 +45,8 @@ public class ObjectPooling : MonoBehaviour
             int nbItemsActive = queueObjectsPooled.ToList().Count(obj => obj.activeSelf);
             // bool allObjectsActive = queueObjectsPooled.ToList().All(obj => obj.activeSelf);
 
-            if (nbItemsActive == itemToPool.poolSize) {
+            if (nbItemsActive == itemToPool.poolSize)
+            {
                 return poolObject;
             };
             if (queueObjectsPooled.Count < itemToPool.poolSize)

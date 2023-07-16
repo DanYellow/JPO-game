@@ -57,8 +57,8 @@ public class Obstacle : MonoBehaviour
             PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();
             playerHealth.TakeDamage();
 
+            rb.constraints = RigidbodyConstraints2D.FreezeAll;
             animator.SetTrigger("Touched");
-            // StartCoroutine(Disable());
         }
     }
 

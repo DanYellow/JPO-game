@@ -23,7 +23,7 @@ public class DebugManager : MonoBehaviour
         }
     }
 
-    private void RestartLevel(int levelName = 1)
+    private void RestartLevel()
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

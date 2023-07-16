@@ -1,6 +1,6 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class HUDManager : MonoBehaviour
 {
@@ -20,10 +20,9 @@ public class HUDManager : MonoBehaviour
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
         isHurtVoidEventChannel.OnEventRaised += HeartLost;
-        GenerateHearts();
     }
 
-    private void GenerateHearts()
+    private void FillHearts()
     {
         RectTransform rectHeartUI = heartUI.GetComponent<RectTransform>();
         float xOffset = 10;
@@ -39,6 +38,7 @@ public class HUDManager : MonoBehaviour
             heartLife.transform.SetParent(playerHUDUI.transform, false);
             listHeartsUI.Add(heartLife);
         }
+        AnimateLastHeart();
     }
 
     private void HeartLost()
@@ -50,7 +50,19 @@ public class HUDManager : MonoBehaviour
             animator.SetTrigger("IsHurt");
             Destroy(lastHeartLife, animator.GetCurrentAnimatorStateInfo(0).length);
             listHeartsUI.RemoveAt(listHeartsUI.Count - 1);
+
+            AnimateLastHeart();
         }
+    }
+
+    private void AnimateLastHeart()
+    {
+        if(listHeartsUI.Count == 0) return;
+
+        GameObject lastHeartLife = listHeartsUI[listHeartsUI.Count - 1];
+        lastHeartLife = listHeartsUI[listHeartsUI.Count - 1];
+        Animator animator = lastHeartLife.GetComponent<Animator>();
+        animator.SetBool("IsLast", true);
     }
 
     private void OnDisable()
@@ -61,6 +73,6 @@ public class HUDManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // HeartLost();
+        FillHearts();
     }
 }
