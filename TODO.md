@@ -1,1 +1,1 @@
-- Add cinematic on gamestart
+- Add cinematic + dialogue on gamestart

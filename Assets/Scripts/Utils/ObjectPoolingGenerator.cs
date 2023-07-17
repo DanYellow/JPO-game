@@ -7,32 +7,29 @@ public class ObjectPoolingGenerator : MonoBehaviour
     [SerializeField]
     private VoidEventChannel onPlayerDeathVoidEventChannel;
 
-    [HideInInspector]
     private ObjectPoolingManager objectPooling;
-
-    [SerializeField]
-    private float delayBetweenNewItemPooled = 0.75f;
-    private float timerBetweenNewItemPooledUpdate = 0f;
-    public float delayBetweenNewItemPooledUpdate = 7;
-    public bool canUpdateDelayBetweenNewItemPooled = false;
-
-    private float timerPoolSizeUpdate = 0f;
-    private float delayBetweenPoolSizeUpdate = 15f;
-
-    [SerializeField]
-    private int nbSlotsAddable = 10;
 
     [SerializeField]
     private string key = "";
 
+    [Header("Pooling")]
+    [SerializeField, Tooltip("Interval between creation / new pool of an object")]
+    private float delayBetweenNewItemPooled = 0.75f;
+    [Tooltip("Define how often the pool interval can be update. -1 if not needed")]
+    public float whenDelayBetweenNewItemPooledUpdated = -1;
+    private float timerBetweenNewItemPooledUpdate = 0f;
+
+    [Header("Upgrade pool size")]
+    [SerializeField]
+    private float delayBetweenPoolSizeUpdate = 15f;
+    private float timerPoolSizeUpdate = 0f;
+
+    [SerializeField]
+    private int nbSlotsAddable = 10;
+
     private void Awake()
     {
         objectPooling = FindObjectOfType<ObjectPoolingManager>(false);
-
-        if (!canUpdateDelayBetweenNewItemPooled)
-        {
-            delayBetweenNewItemPooledUpdate = -1;
-        }
         onPlayerDeathVoidEventChannel.OnEventRaised += StopPooling;
     }
 
@@ -64,16 +61,16 @@ public class ObjectPoolingGenerator : MonoBehaviour
         timerBetweenNewItemPooledUpdate += Time.deltaTime;
         timerPoolSizeUpdate += Time.deltaTime;
 
-        if (timerBetweenNewItemPooledUpdate >= delayBetweenNewItemPooledUpdate)
+        if (whenDelayBetweenNewItemPooledUpdated > 0 && timerBetweenNewItemPooledUpdate >= whenDelayBetweenNewItemPooledUpdated)
         {
             timerBetweenNewItemPooledUpdate = 0f;
-            if (canUpdateDelayBetweenNewItemPooled)
-            {
-                delayBetweenNewItemPooled = Mathf.Clamp(delayBetweenNewItemPooled - 0.05f, 0.15f, 0.75f);
-            }
+            delayBetweenNewItemPooled = Mathf.Clamp(delayBetweenNewItemPooled - 0.05f, 0.15f, 0.75f);
         }
 
-        if (timerPoolSizeUpdate >= delayBetweenPoolSizeUpdate)
+        if (
+            delayBetweenPoolSizeUpdate > 0 &&
+            timerPoolSizeUpdate >= delayBetweenPoolSizeUpdate
+        )
         {
             timerPoolSizeUpdate = 0f;
             if (objectPooling.listDictItemsToPool.TryGetValue(key, out ObjectPoolItemData itemToPool))

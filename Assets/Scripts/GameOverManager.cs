@@ -28,14 +28,16 @@ public class GameOverManager : MonoBehaviour
     private void DisplayGameOverScreen()
     {
         string nbSeconds = Time.timeSinceLevelLoad.ToString("F2");
-        timerText.SetText($"Vous avez tenu : <b>{nbSeconds} secondes</b>");
+        timerText.SetText($"Vous avez tenu : <b>{nbSeconds} secondes !</b>");
         gameoverMenuUI.SetActive(true);
         // playerHUDUI.SetActive(false);
         StartCoroutine(TriggerInputAction());
     }
 
-    IEnumerator TriggerInputAction() {
+    IEnumerator TriggerInputAction()
+    {
         yield return new WaitForSeconds(0.5f);
+
         EventSystemExtensions.UpdateSelectedGameObject(gameoverMenuUI.GetComponentInChildren<Button>().gameObject);
     }
 
@@ -43,14 +45,19 @@ public class GameOverManager : MonoBehaviour
     {
         if (input.currentControlScheme.Equals("Gamepad") && gameoverMenuUI.activeInHierarchy)
         {
-            // gameoverMenuUI.GetComponentInChildren<Button>().Select();
+            gameoverMenuUI.GetComponentInChildren<Button>().Select();
         }
+    }
+
+    public void OnActionTriggered(InputAction.CallbackContext context)
+    {
+
     }
 
     public void HideGameOverScreen()
     {
         EventSystem.current.SetSelectedGameObject(null);
-        // gameoverMenuUI.SetActive(false);
+        gameoverMenuUI.SetActive(false);
     }
 
     private void OnDestroy()

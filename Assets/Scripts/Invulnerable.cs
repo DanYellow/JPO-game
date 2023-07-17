@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Invulnerable : MonoBehaviour
 {
+    private SpriteRenderer sr;
     private bool isInvulnerable = false;
     [SerializeField]
     private InvulnerableDataValue invulnerableDataValue;
@@ -14,12 +15,18 @@ public class Invulnerable : MonoBehaviour
     [SerializeField]
     private VoidEventChannel isHurtVoidEventChannel;
 
+
+
     [SerializeField]
     private MaterialEventChannel onMaterialChange;
 
     [SerializeField]
     private MaterialChangeValue materialChange;
 
+    private void Awake()
+    {
+        sr = GetComponent<SpriteRenderer>();
+    }
 
     // Start is called before the first frame update
     private void Start()
@@ -58,6 +65,7 @@ public class Invulnerable : MonoBehaviour
         if (!isInvulnerable && isInLayer)
         {
             StartCoroutine(HandleInvunlnerableDelay(otherLayer.value));
+            StartCoroutine(InvunlnerableFlash());
             onMaterialChange.Raise(materialChange);
         }
     }
@@ -69,6 +77,23 @@ public class Invulnerable : MonoBehaviour
         yield return new WaitForSeconds(invulnerableDataValue.time);
         isInvulnerable = false;
         Physics2D.IgnoreLayerCollision(gameObject.layer, layerId, false);
+    }
+
+    public IEnumerator InvunlnerableFlash()
+    {
+        while (isInvulnerable)
+        {
+            sr.color = new Color(0, 0, 0, 0.3f);
+            yield return new WaitForSeconds(materialChange.interval);
+            sr.color = Color.white;
+            yield return new WaitForSeconds(materialChange.interval);
+        }
+
+        // // Hack to reenable OnTriggerEnter/Stay methods
+        // gameObject.transform.position = new Vector3(
+        //     gameObject.transform.position.x + 0.001f,
+        //     gameObject.transform.position.y
+        // );
     }
 
     private void OnDestroy()

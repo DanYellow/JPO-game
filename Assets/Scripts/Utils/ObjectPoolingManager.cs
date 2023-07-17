@@ -46,6 +46,7 @@ public class ObjectPoolingManager : MonoBehaviour
             {
                 return poolObject;
             };
+
             if (queueObjectsPooled.Count < itemToPool.poolSize)
             {
                 poolObject = Instantiate(itemToPool.prefab, transform.position, Quaternion.identity);

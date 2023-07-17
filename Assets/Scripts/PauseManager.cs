@@ -52,7 +52,7 @@ public class PauseManager : MonoBehaviour
     {
         if (input.currentControlScheme.Equals("Gamepad") && pauseMenuUI.activeInHierarchy)
         {
-            // pauseMenuUI.GetComponentInChildren<Button>().Select();
+            pauseMenuUI.GetComponentInChildren<Button>().Select();
         }
     }
 
