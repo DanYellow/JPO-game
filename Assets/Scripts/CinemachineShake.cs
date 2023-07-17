@@ -14,7 +14,7 @@ public class CinemachineShake : MonoBehaviour
         onCinemachineShake.OnEventRaised += ShakeCameraProxy;
     }
 
-    void ShakeCameraProxy(CameraShakeTypeValue value) {
+    public void ShakeCameraProxy(CameraShakeTypeValue value) {
         StartCoroutine(ShakeCamera(value.intensity, value.duration));
     }
 
