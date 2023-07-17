@@ -27,16 +27,26 @@ public class ObjectPoolingGenerator : MonoBehaviour
     [SerializeField]
     private int nbSlotsAddable = 10;
 
+    [SerializeField]
+    private VoidEventChannel onStartPlayEvent;
+
     private void Awake()
     {
         objectPooling = FindObjectOfType<ObjectPoolingManager>(false);
         onPlayerDeathVoidEventChannel.OnEventRaised += StopPooling;
+        // onStartPlayEvent.OnEventRaised += OnStart;
     }
 
     private void Start()
     {
-        StartCoroutine(Generate());
+        if(onStartPlayEvent == null) {
+            StartCoroutine(Generate());
+        }
         // StartCoroutine(Create());
+    }
+
+    public void StartGame() {
+        StartCoroutine(Generate());
     }
 
     private void StopPooling()
@@ -94,5 +104,6 @@ public class ObjectPoolingGenerator : MonoBehaviour
     private void OnDestroy()
     {
         onPlayerDeathVoidEventChannel.OnEventRaised -= StopPooling;
+        // onStartPlayEvent.OnEventRaised -= OnStart;
     }
 }

@@ -25,11 +25,20 @@ public class PlayerMovements : MonoBehaviour
     private Vector2 nextPosition;
 
     [SerializeField]
+    private bool hasStartingPosition = false;
+    [SerializeField]
+    private Transform startingPosition;
+
+    [SerializeField]
     private PlayerStatsValue playerData;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        if(hasStartingPosition && startingPosition != null) {
+            transform.position = startingPosition.position;
+        }
 
         moveSpeed = playerData.moveSpeed;
     }
