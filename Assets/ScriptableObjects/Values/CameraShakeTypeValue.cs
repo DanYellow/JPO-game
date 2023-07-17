@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Camera Shake Type", menuName = "ScriptableObjects/ShakeTypeValue", order = 0)]
+[CreateAssetMenu(fileName = "New Camera Shake Type", menuName = "ScriptableObjects/Values/ShakeTypeValue", order = 0)]
 public class CameraShakeTypeValue : ScriptableObject
 {
     public float duration = 2f;

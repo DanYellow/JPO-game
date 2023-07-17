@@ -53,8 +53,8 @@ public class ObjectPoolingGenerator : MonoBehaviour
         for (var i = 0; i < obj.poolSize; i++)
         {
             objectPooling.CreateObject(key);
-            yield return new WaitForSeconds(Random.Range(0.15f, 0.75f));
         }
+        yield return new WaitForSeconds(Random.Range(0.15f, 0.75f));
 
         StartCoroutine(Create());
     }

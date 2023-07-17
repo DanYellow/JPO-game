@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-[CreateAssetMenu(fileName = "CinemachineShakeEventChannel", menuName = "ScriptableObjects/CinemachineShakeEventChannel", order = 0)]
+[CreateAssetMenu(fileName = "CinemachineShakeEventChannel", menuName = "ScriptableObjects/Events/CinemachineShakeEventChannel", order = 0)]
 public class CinemachineShakeEventChannel : ScriptableObject
 {
     public UnityAction<CameraShakeTypeValue> OnEventRaised;

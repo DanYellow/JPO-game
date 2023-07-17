@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 9121902344590174940}
   - component: {fileID: 9121902344590174943}
   - component: {fileID: -8061603833418936049}
+  - component: {fileID: 8450606249008077287}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -201,7 +202,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   isHurtVoidEventChannel: {fileID: 11400000, guid: 03eb6c1b9f1a7ae4dac9b654d5a925a8, type: 2}
-  flashMaterial: {fileID: 0}
+  flashMaterial: {fileID: 2100000, guid: 48966779802e5184e97090699469a154, type: 2}
+  onMaterialChange: {fileID: 11400000, guid: 1ef143ed0456178448a9a26f8fb8dd48, type: 2}
+  materialChange: {fileID: 11400000, guid: f83f25e3727d3074ea00996d2bdcfb3d, type: 2}
 --- !u!114 &9121902344590174940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,6 +240,7 @@ MonoBehaviour:
   isHurtVoidEventChannel: {fileID: 11400000, guid: 03eb6c1b9f1a7ae4dac9b654d5a925a8, type: 2}
   onCinemachineShake: {fileID: 11400000, guid: 235824e89124e6d44baf6f4647dac34f, type: 2}
   hurtCameraShake: {fileID: 11400000, guid: 40f81f8a9ee7d7f4681c2c2cb2015fb3, type: 2}
+  deathCameraShake: {fileID: 0}
   onPlayerDeathVoidEventChannel: {fileID: 11400000, guid: ee804061685d49549a86590b0c280ccd, type: 2}
   deathEffectPrefab: {fileID: 1992304688091250534, guid: 44fb5dd6c04248741b0fdac87cf0d958, type: 3}
   playerStatsValue: {fileID: 11400000, guid: 63ce0a99404d15c43bf3417238ccd1aa, type: 2}
@@ -255,6 +259,19 @@ MonoBehaviour:
   vectorEventChannel: {fileID: 11400000, guid: 6635956797fede24d9522b8c3237406c, type: 2}
   onPlayerDeathVoidEventChannel: {fileID: 11400000, guid: ee804061685d49549a86590b0c280ccd, type: 2}
   isHurtVoidEventChannel: {fileID: 11400000, guid: 03eb6c1b9f1a7ae4dac9b654d5a925a8, type: 2}
+--- !u!114 &8450606249008077287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9121902344590174886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9759ce8b209e33641a08cc6e598f63d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onMaterialChange: {fileID: 11400000, guid: 1ef143ed0456178448a9a26f8fb8dd48, type: 2}
 --- !u!1 &9121902345217950093
 GameObject:
   m_ObjectHideFlags: 0

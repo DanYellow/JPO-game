@@ -21,6 +21,12 @@ public class Invulnerable : MonoBehaviour
     [Tooltip("Material to switch to during the flash.")]
     [SerializeField] private Material flashMaterial;
 
+    [SerializeField]
+    private MaterialEventChannel onMaterialChange;
+
+    [SerializeField]
+    private MaterialChangeValue materialChange;
+
     private void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
@@ -66,7 +72,9 @@ public class Invulnerable : MonoBehaviour
         if (!isInvulnerable && isInLayer)
         {
             StartCoroutine(HandleInvunlnerableDelay(otherLayer.value));
-            StartCoroutine(InvunlnerableFlash());
+
+            onMaterialChange.Raise(materialChange);
+            // StartCoroutine(InvunlnerableFlash());
         }
     }
 

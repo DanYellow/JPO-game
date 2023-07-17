@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-[CreateAssetMenu(fileName = "VoidEventChannel", menuName = "EndlessRunnerJPO/VoidEventChannel", order = 0)]
+[CreateAssetMenu(fileName = "VoidEventChannel", menuName = "ScriptableObjects/Events/VoidEventChannel", order = 0)]
 public class VoidEventChannel : ScriptableObject
 {
     public UnityAction OnEventRaised;

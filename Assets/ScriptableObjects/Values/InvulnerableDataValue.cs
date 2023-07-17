@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "InvulnerableDataValue", menuName = "ScriptableObjects/InvulnerableDataValue", order = 0)]
+[CreateAssetMenu(fileName = "InvulnerableDataValue", menuName = "ScriptableObjects/Values/InvulnerableDataValue", order = 0)]
 public class InvulnerableDataValue : ScriptableObject
 {
     [Tooltip("Time flashing between 0 and 1 opacity")]

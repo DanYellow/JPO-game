@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-[CreateAssetMenu(fileName = "VectorEventChannel", menuName = "EndlessRunnerJPO/VectorEventChannel", order = 0)]
+[CreateAssetMenu(fileName = "VectorEventChannel", menuName = "ScriptableObjects/Events/VectorEventChannel", order = 0)]
 public class VectorEventChannel : ScriptableObject
 {
     public UnityAction<Vector3> OnEventRaised;

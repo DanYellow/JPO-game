@@ -13,6 +13,12 @@ public class PickUpItem : MonoBehaviour
 
     private Coroutine autoDisable;
 
+    [SerializeField]
+    private MaterialEventChannel onMaterialChange;
+
+    [SerializeField]
+    private MaterialChangeValue materialChange;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -33,12 +39,13 @@ public class PickUpItem : MonoBehaviour
         autoDisable = StartCoroutine(AutoDisable());
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
             timeBarValue.CurrentValue = Mathf.Clamp01(timeBarValue.CurrentValue + data.value);
             StartCoroutine(Disable());
+            onMaterialChange.Raise(materialChange);
         }
     }
 
