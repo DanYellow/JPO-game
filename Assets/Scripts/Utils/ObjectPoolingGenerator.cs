@@ -36,6 +36,7 @@ public class ObjectPoolingGenerator : MonoBehaviour
     private void Start()
     {
         StartCoroutine(Generate());
+        // StartCoroutine(Create());
     }
 
     private void StopPooling()
@@ -50,7 +51,7 @@ public class ObjectPoolingGenerator : MonoBehaviour
         for (var i = 0; i < obj.poolSize; i++)
         {
             objectPooling.CreateObject(key);
-            yield return new WaitForSeconds(Random.Range(0.15f, 0.75f));
+            yield return new WaitForSeconds(Random.Range(0.1f, 0.65f));
         }
 
         StartCoroutine(Create());
@@ -64,7 +65,8 @@ public class ObjectPoolingGenerator : MonoBehaviour
         if (whenDelayBetweenNewItemPooledUpdated > 0 && timerBetweenNewItemPooledUpdate >= whenDelayBetweenNewItemPooledUpdated)
         {
             timerBetweenNewItemPooledUpdate = 0f;
-            delayBetweenNewItemPooled = Mathf.Clamp(delayBetweenNewItemPooled - 0.05f, 0.15f, 0.75f);
+            delayBetweenNewItemPooled = Mathf.Clamp(delayBetweenNewItemPooled - 0.05f, 0.05f, 0.75f);
+            delayBetweenNewItemPooled = float.Parse(delayBetweenNewItemPooled.ToString("0.00"));
         }
 
         if (

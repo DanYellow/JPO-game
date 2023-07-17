@@ -41,7 +41,6 @@ public class ObjectPoolingManager : MonoBehaviour
             Queue<GameObject> queueObjectsPooled = itemToPool.queueObjectsPooled;
 
             int nbItemsActive = queueObjectsPooled.ToList().Count(obj => obj.activeSelf);
-
             if (nbItemsActive == itemToPool.poolSize)
             {
                 return poolObject;
@@ -57,6 +56,9 @@ public class ObjectPoolingManager : MonoBehaviour
                 poolObject = queueObjectsPooled.Dequeue();
                 poolObject.SetActive(true);
             }
+
+            // queueObjectsPooled.Select(item => item.name).ToList().ForEach(Debug.Log);
+            // Debug.Log("-----------");
 
             queueObjectsPooled.Enqueue(poolObject);
         }

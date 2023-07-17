@@ -83,7 +83,7 @@ public class Invulnerable : MonoBehaviour
     {
         while (isInvulnerable)
         {
-            sr.color = new Color(0, 0, 0, 0.3f);
+            sr.color = new Color(1, 1, 1, 0.55f);
             yield return new WaitForSeconds(materialChange.interval);
             sr.color = Color.white;
             yield return new WaitForSeconds(materialChange.interval);

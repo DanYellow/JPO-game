@@ -2642,7 +2642,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &974776408
 Transform:
   m_ObjectHideFlags: 0
@@ -2672,11 +2672,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onPlayerDeathVoidEventChannel: {fileID: 11400000, guid: ee804061685d49549a86590b0c280ccd, type: 2}
   key: diamond
-  delayBetweenNewItemPooled: 2.05
-  delayBetweenNewItemPooledUpdate: -1
-  canUpdateDelayBetweenNewItemPooled: 0
-  delayBetweenPoolSizeUpdate: -1
-  nbSlotsAddable: 10
+  delayBetweenNewItemPooled: 2.25
+  whenDelayBetweenNewItemPooledUpdated: -1
+  delayBetweenPoolSizeUpdate: 20
+  nbSlotsAddable: 1
 --- !u!1001 &981178079
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3260,7 +3259,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1278083185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3275,11 +3274,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onPlayerDeathVoidEventChannel: {fileID: 11400000, guid: ee804061685d49549a86590b0c280ccd, type: 2}
   key: obstacle
-  delayBetweenNewItemPooled: 1.5
-  delayBetweenNewItemPooledUpdate: 7
-  canUpdateDelayBetweenNewItemPooled: 0
-  delayBetweenPoolSizeUpdate: 15
-  nbSlotsAddable: 10
+  delayBetweenNewItemPooled: 1.25
+  whenDelayBetweenNewItemPooledUpdated: 7
+  delayBetweenPoolSizeUpdate: 20
+  nbSlotsAddable: 15
 --- !u!4 &1278083187
 Transform:
   m_ObjectHideFlags: 0
@@ -7029,10 +7027,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listItemsToPool:
-  - poolSize: 7
+  - poolSize: 3
     key: diamond
     prefab: {fileID: 1709273481406156916, guid: 74be66d7f2604864ba3834afbc8836b8, type: 3}
-  - poolSize: 12
+  - poolSize: 20
     key: obstacle
     prefab: {fileID: 5300067975064995127, guid: 737a40bd6c285f246a78308b0e387ef4, type: 3}
 --- !u!1 &1775859216

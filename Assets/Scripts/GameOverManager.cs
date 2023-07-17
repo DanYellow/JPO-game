@@ -19,6 +19,16 @@ public class GameOverManager : MonoBehaviour
         gameoverMenuUI.SetActive(false);
     }
 
+        private void Update()
+    {
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            Debug.Log("Time spent : " + Time.timeSinceLevelLoad.ToString("F2"));
+        }
+#endif
+    }
+
     // Start is called before the first frame update
     void Start()
     {
