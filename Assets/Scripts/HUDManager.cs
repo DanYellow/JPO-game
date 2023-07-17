@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using System.Collections;
+using System;
 
 public class HUDManager : MonoBehaviour
 {
@@ -32,6 +33,7 @@ public class HUDManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
         isHurtVoidEventChannel.OnEventRaised += HeartLost;
     }
+
 
     private void Start()
     {
@@ -86,7 +88,7 @@ public class HUDManager : MonoBehaviour
 
     IEnumerator DecreaseTimeBar()
     {
-        while (timeBar.fillAmount > 0)
+        while (timeBar.fillAmount > 0 && playerStatsValue.nbCurrentLifes > 0)
         {
             timeBarValue.CurrentValue -= 0.0005f;
             timeBar.fillAmount = timeBarValue.CurrentValue;
@@ -96,14 +98,16 @@ public class HUDManager : MonoBehaviour
         onPlayerDeathVoidEventChannel.Raise();
     }
 
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        FillHearts();
+    }
+
     private void OnDisable()
     {
         isHurtVoidEventChannel.OnEventRaised -= HeartLost;
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        FillHearts();
-    }
 }
