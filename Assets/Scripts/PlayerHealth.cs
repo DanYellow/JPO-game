@@ -12,6 +12,9 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField]
     private CameraShakeTypeValue hurtCameraShake;
 
+    [SerializeField]
+    private CameraShakeTypeValue deathCameraShake;
+
     private Animator animator;
     private SpriteRenderer sr;
 
@@ -67,6 +70,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void OnDeath()
     {
+        onCinemachineShake.Raise(deathCameraShake);
         GameObject deathEffect = Instantiate(deathEffectPrefab, transform.position, Quaternion.identity);
         Destroy(deathEffect, deathEffect.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
         Destroy(gameObject);

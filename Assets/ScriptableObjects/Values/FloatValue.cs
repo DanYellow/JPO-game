@@ -5,6 +5,6 @@ public class FloatValue : ScriptableObject
 {
     public float CurrentValue;
 
-    [Multiline]
-    public string DeveloperDescription = "";
+    [Multiline, SerializeField]
+    private string DeveloperDescription = "";
 }

@@ -7,4 +7,7 @@ public class InvulnerableDataValue : ScriptableObject
     public float flashDelay = 0.2f;
     [Tooltip("Time during which the player will be considered as invulnerable")]
     public float time = 0.75f;
+
+    [Multiline, SerializeField]
+    private string DeveloperDescription = "";
 }

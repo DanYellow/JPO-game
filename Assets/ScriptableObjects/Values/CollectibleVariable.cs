@@ -5,6 +5,6 @@ public class CollectibleVariable : ScriptableObject
 {
     public float value;
   
-    [Multiline]
-    public string DeveloperDescription = "";
+    [Multiline, SerializeField]
+    private string DeveloperDescription = "";
 }

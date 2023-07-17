@@ -46,11 +46,6 @@ public class ObjectPoolingGenerator : MonoBehaviour
         StopAllCoroutines();
     }
 
-    private void Create()
-    {
-        objectPooling.CreateObject(key);
-    }
-
     IEnumerator Generate()
     {
         ObjectPoolItemData obj = objectPooling.listItemsToPool.First((item) => item.key == key);
@@ -61,7 +56,7 @@ public class ObjectPoolingGenerator : MonoBehaviour
             yield return new WaitForSeconds(Random.Range(0.15f, 0.75f));
         }
 
-        StartCoroutine(CreateObstacle());
+        StartCoroutine(Create());
     }
 
     private void Update()
@@ -88,11 +83,11 @@ public class ObjectPoolingGenerator : MonoBehaviour
         }
     }
 
-    IEnumerator CreateObstacle()
+    IEnumerator Create()
     {
         while (true)
         {
-            Create();
+            objectPooling.CreateObject(key);
             yield return new WaitForSeconds(delayBetweenNewItemPooled);
         }
     }

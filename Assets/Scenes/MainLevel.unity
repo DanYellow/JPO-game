@@ -581,7 +581,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 123}
+  m_AnchoredPosition: {x: 0, y: 282}
   m_SizeDelta: {x: 800, y: 53.708}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &293119358
@@ -1217,8 +1217,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.0000076293945, y: -146}
-  m_SizeDelta: {x: 642.079, y: 134.05103}
+  m_AnchoredPosition: {x: -0.0000076293945, y: -122}
+  m_SizeDelta: {x: 795.5358, y: 90.8913}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &424539654
 MonoBehaviour:
@@ -2089,7 +2089,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onPlayerDeathVoidEventChannel: {fileID: 11400000, guid: ee804061685d49549a86590b0c280ccd, type: 2}
-  delayBetweenNewItemPooled: 1.5
+  delayBetweenNewItemPooled: 2.05
   delayBetweenNewItemPooledUpdate: -1
   canUpdateDelayBetweenNewItemPooled: 0
   nbSlotsAddable: 10
@@ -5942,14 +5942,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listItemsToPool:
-  - poolSize: 7
+  - poolSize: 12
     key: obstacle
     prefab: {fileID: 1823335545}
-    extInit: 0
   - poolSize: 3
     key: diamond
     prefab: {fileID: 1709273481406156916, guid: 74be66d7f2604864ba3834afbc8836b8, type: 3}
-    extInit: 0
 --- !u!1 &1775859216
 GameObject:
   m_ObjectHideFlags: 0
@@ -6376,7 +6374,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2082640455
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6617,6 +6615,10 @@ PrefabInstance:
       propertyPath: flashMaterial
       value: 
       objectReference: {fileID: 2100000, guid: 48966779802e5184e97090699469a154, type: 2}
+    - target: {fileID: 9121902344590174943, guid: 665a9f2698f60a843957d7f247023f29, type: 3}
+      propertyPath: deathCameraShake
+      value: 
+      objectReference: {fileID: 11400000, guid: fc3b3f289b44e9447a860057dedb2e11, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

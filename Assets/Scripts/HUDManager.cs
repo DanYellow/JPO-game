@@ -88,7 +88,7 @@ public class HUDManager : MonoBehaviour
     {
         while (timeBar.fillAmount > 0)
         {
-            timeBarValue.CurrentValue -= 0.001f;
+            timeBarValue.CurrentValue -= 0.0005f;
             timeBar.fillAmount = timeBarValue.CurrentValue;
             yield return null;
         }

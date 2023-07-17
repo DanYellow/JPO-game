@@ -29,6 +29,7 @@ public class PickUpItem : MonoBehaviour
             -4.6f,
             transform.position.z
         );
+        sr.color = Color.white;
         autoDisable = StartCoroutine(AutoDisable());
     }
 
@@ -53,6 +54,7 @@ public class PickUpItem : MonoBehaviour
     IEnumerator AutoDisable()
     {
         yield return new WaitForSeconds(7);
+        sr.color = Color.black;
         StartCoroutine(Disable());
 
     }

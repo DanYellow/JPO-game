@@ -50,7 +50,7 @@ public class Obstacle : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    IEnumerator OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
@@ -59,12 +59,11 @@ public class Obstacle : MonoBehaviour
 
             rb.constraints = RigidbodyConstraints2D.FreezeAll;
             animator.SetTrigger("Touched");
-        }
-    }
 
-    void Disable()
-    {
-        gameObject.SetActive(false);
+            yield return null;
+            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+            gameObject.SetActive(false);
+        }
     }
 }
 

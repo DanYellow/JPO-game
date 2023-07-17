@@ -6,6 +6,6 @@ public class CameraShakeTypeValue : ScriptableObject
     public float duration = 2f;
     public float intensity = 3f;
 
-    [Multiline]
-    public string DeveloperDescription = "";
+    [Multiline, SerializeField]
+    private string DeveloperDescription = "";
 }
