@@ -25,11 +25,6 @@ public class PlayerMovements : MonoBehaviour
     private Vector2 nextPosition;
 
     [SerializeField]
-    private bool hasStartingPosition = false;
-    [SerializeField]
-    private Transform startingPosition;
-
-    [SerializeField]
     private PlayerStatsValue playerData;
 
     private void Awake()

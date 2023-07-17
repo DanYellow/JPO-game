@@ -3399,7 +3399,7 @@ PrefabInstance:
       objectReference: {fileID: 1998521834, guid: 48726cdfa4235bd4891b5548f5479cf0, type: 3}
     - target: {fileID: 8740770281689477467, guid: 0b8f2e82d98b4bb4d9ef10059a30678f, type: 3}
       propertyPath: m_Color.a
-      value: 0.7490196
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8740770281689477467, guid: 0b8f2e82d98b4bb4d9ef10059a30678f, type: 3}
       propertyPath: m_SortingLayer
@@ -3413,13 +3413,12 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8740770281689477470, guid: 0b8f2e82d98b4bb4d9ef10059a30678f, type: 3}
+    - {fileID: 8740770281689477465, guid: 0b8f2e82d98b4bb4d9ef10059a30678f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8740770281689477445, guid: 0b8f2e82d98b4bb4d9ef10059a30678f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2096781211}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b8f2e82d98b4bb4d9ef10059a30678f, type: 3}
 --- !u!1 &1163360696
 GameObject:
@@ -4154,7 +4153,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!320 &1415293482
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -4180,6 +4179,8 @@ PlayableDirector:
     value: {fileID: 1568389621}
   - key: {fileID: -8032787271822166683, guid: 11f73e40a0409724ca23b31ecc98df61, type: 2}
     value: {fileID: 1452581680}
+  - key: {fileID: -5466593717208003400, guid: 11f73e40a0409724ca23b31ecc98df61, type: 2}
+    value: {fileID: 2096781208}
   m_ExposedReferences:
     m_References:
     - e3249ab32bebe1146a0ef2fb4f9c98c6: {fileID: 2096781205}
@@ -4241,6 +4242,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 1736709079}
+          m_TargetAssemblyTypeName: HUDManager, Assembly-CSharp
+          m_MethodName: StartGame
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     - m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1944199002}
@@ -4248,7 +4261,7 @@ MonoBehaviour:
           m_MethodName: ShakeCameraProxy
           m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 11400000, guid: 40f81f8a9ee7d7f4681c2c2cb2015fb3, type: 2}
+            m_ObjectArgument: {fileID: 11400000, guid: fc2fdd0ea61673248856738c742edbb1, type: 2}
             m_ObjectArgumentAssemblyTypeName: CameraShakeTypeValue, Assembly-CSharp
             m_IntArgument: 0
             m_FloatArgument: 0
@@ -8260,23 +8273,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8740770281689477464, guid: 0b8f2e82d98b4bb4d9ef10059a30678f, type: 3}
   m_PrefabInstance: {fileID: 1151734718}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2096781211
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2096781205}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cb1fcd90f902be47b7d68ebf976262a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isOpened: 1
-  disableAfterAction: 0
-  OnOpen: {fileID: 0}
-  OnClose: {fileID: 11400000, guid: 094ed0d1bbc296a4cbbe1063032aa64e, type: 2}
-  bc2d: {fileID: 0}
 --- !u!1001 &9121902345617596569
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8307,7 +8303,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9121902344590174938, guid: 665a9f2698f60a843957d7f247023f29, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.46
+      value: -4.483544
       objectReference: {fileID: 0}
     - target: {fileID: 9121902344590174938, guid: 665a9f2698f60a843957d7f247023f29, type: 3}
       propertyPath: m_LocalPosition.z

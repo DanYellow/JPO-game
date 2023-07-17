@@ -38,7 +38,9 @@ public class HUDManager : MonoBehaviour
     private void Start()
     {
         timeBar.fillAmount = timeBarValue.CurrentValue;
+    }
 
+    public void StartGame() {
         StartCoroutine(DecreaseTimeBar());
     }
 
