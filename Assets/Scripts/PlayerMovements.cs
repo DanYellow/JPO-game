@@ -36,10 +36,6 @@ public class PlayerMovements : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
 
-        if(hasStartingPosition && startingPosition != null) {
-            transform.position = startingPosition.position;
-        }
-
         moveSpeed = playerData.moveSpeed;
     }
 
