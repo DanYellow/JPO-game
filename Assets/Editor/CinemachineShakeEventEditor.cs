@@ -5,7 +5,7 @@ using UnityEngine;
 [CustomEditor(typeof(CinemachineShakeEventChannel), editorForChildClasses: true)]
 public class CinemachineShakeEventEditor : Editor
 {
-    float time;
+    float duration;
     float intensity;
 
     CameraShakeTypeValue dynamicShakeType = null;
@@ -18,7 +18,7 @@ public class CinemachineShakeEventEditor : Editor
 
         CinemachineShakeEventChannel e = target as CinemachineShakeEventChannel;
 
-        time = EditorGUILayout.FloatField("duration ", time);
+        duration = EditorGUILayout.FloatField("duration ", duration);
         intensity = EditorGUILayout.FloatField("magnitude ", intensity);
 
         EditorGUILayout.BeginHorizontal();
@@ -34,7 +34,7 @@ public class CinemachineShakeEventEditor : Editor
         }
         else
         {
-            shakeType.time = time;
+            shakeType.duration = duration;
             shakeType.intensity = intensity;
         }
 

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PickUpItem : MonoBehaviour
@@ -11,6 +10,8 @@ public class PickUpItem : MonoBehaviour
 
     [SerializeField]
     private FloatValue timeBarValue;
+
+    private Coroutine autoDisable;
 
     private void Awake()
     {
@@ -28,18 +29,31 @@ public class PickUpItem : MonoBehaviour
             -4.6f,
             transform.position.z
         );
+        autoDisable = StartCoroutine(AutoDisable());
     }
 
-    IEnumerator OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
             timeBarValue.CurrentValue = Mathf.Clamp01(timeBarValue.CurrentValue + data.value);
-            animator.SetTrigger("IsPicked");
-
-            yield return null;
-            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
-            gameObject.SetActive(false);
+            StartCoroutine(Disable());
         }
+    }
+
+    IEnumerator Disable()
+    {
+        animator.SetTrigger("IsPicked");
+        StopCoroutine(autoDisable);
+        yield return null;
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+        gameObject.SetActive(false);
+    }
+
+    IEnumerator AutoDisable()
+    {
+        yield return new WaitForSeconds(7);
+        StartCoroutine(Disable());
+
     }
 }

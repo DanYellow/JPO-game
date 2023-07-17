@@ -1610,7 +1610,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
-  m_PivotOffset: {x: 0.75, y: 1, z: 0}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
   m_AmplitudeGain: 0
   m_FrequencyGain: 0
   mNoiseOffsets: {x: 0, y: 0, z: 0}
@@ -1898,9 +1898,9 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2038182012}
   - {fileID: 2082640455}
   - {fileID: 1433368971}
-  - {fileID: 2038182012}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5653,7 +5653,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: 3b58c4f8002d95d48845060fe8a9c6ac, type: 3}
   m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
+  m_UIInputModule: {fileID: 1210427659}
   m_DeviceLostEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -5913,7 +5913,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbbdc036a104e224eb142e0094679402, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  creditsUI: {fileID: 0}
   timeBarValue: {fileID: 11400000, guid: 56994dd132ec4334781b2af9c25d9382, type: 2}
 --- !u!4 &1736709084
 Transform:
@@ -5939,15 +5938,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1736709076}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9a7f393a554fe940a8c3be570c0031c, type: 3}
+  m_Script: {fileID: 11500000, guid: ab40026ba0e76f5458e2f7d45bcc8c06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   listItemsToPool:
-  - poolSize: 10
+  - poolSize: 7
     key: obstacle
-    prefab: {fileID: 5300067975064995127, guid: 737a40bd6c285f246a78308b0e387ef4, type: 3}
+    prefab: {fileID: 1823335545}
     extInit: 0
-  - poolSize: 1
+  - poolSize: 3
     key: diamond
     prefab: {fileID: 1709273481406156916, guid: 74be66d7f2604864ba3834afbc8836b8, type: 3}
     extInit: 0
@@ -6027,6 +6026,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1775859216}
   m_CullTransparentMesh: 1
+--- !u!1 &1823335545 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5300067975064995127, guid: 737a40bd6c285f246a78308b0e387ef4, type: 3}
+  m_PrefabInstance: {fileID: 1076974171}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1858378830
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6548,6 +6552,14 @@ PrefabInstance:
     - target: {fileID: 9121902344590174886, guid: 665a9f2698f60a843957d7f247023f29, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 9121902344590174937, guid: 665a9f2698f60a843957d7f247023f29, type: 3}
+      propertyPath: m_Size.x
+      value: 0.48138142
+      objectReference: {fileID: 0}
+    - target: {fileID: 9121902344590174937, guid: 665a9f2698f60a843957d7f247023f29, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.07667267
       objectReference: {fileID: 0}
     - target: {fileID: 9121902344590174938, guid: 665a9f2698f60a843957d7f247023f29, type: 3}
       propertyPath: m_RootOrder

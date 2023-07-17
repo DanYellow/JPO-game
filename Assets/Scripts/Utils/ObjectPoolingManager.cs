@@ -12,14 +12,12 @@ public class ObjectPoolItemData
     [Tooltip("Defines the prefab to instanciate / pool")]
     public GameObject prefab;
     public Queue<GameObject> queueObjectsPooled = new Queue<GameObject>();
-
-    public bool extInit = false;
 }
 
 // More info : 
 // https://www.youtube.com/watch?v=YCHJwnmUGDk
 // https://gameprogrammingpatterns.com/object-pool.html
-public class ObjectPooling : MonoBehaviour
+public class ObjectPoolingManager : MonoBehaviour
 {
     public List<ObjectPoolItemData> listItemsToPool = new List<ObjectPoolItemData>();
 

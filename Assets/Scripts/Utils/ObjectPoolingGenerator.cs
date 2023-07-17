@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using System.Linq;
 
 public class ObjectPoolingGenerator : MonoBehaviour
 {
@@ -7,7 +8,7 @@ public class ObjectPoolingGenerator : MonoBehaviour
     private VoidEventChannel onPlayerDeathVoidEventChannel;
 
     [HideInInspector]
-    private ObjectPooling objectPooling;
+    private ObjectPoolingManager objectPooling;
 
     [SerializeField]
     private float delayBetweenNewItemPooled = 0.75f;
@@ -26,7 +27,7 @@ public class ObjectPoolingGenerator : MonoBehaviour
 
     private void Awake()
     {
-        objectPooling = FindObjectOfType<ObjectPooling>();
+        objectPooling = FindObjectOfType<ObjectPoolingManager>();
 
         if (!canUpdateDelayBetweenNewItemPooled)
         {
@@ -47,19 +48,19 @@ public class ObjectPoolingGenerator : MonoBehaviour
 
     private void Create()
     {
-        GameObject objectPooled = objectPooling.CreateObject(key);
+        objectPooling.CreateObject(key);
     }
 
     IEnumerator Generate()
     {
-        foreach (ObjectPoolItemData obj in objectPooling.listItemsToPool)
+        ObjectPoolItemData obj = objectPooling.listItemsToPool.First((item) => item.key == key);
+
+        for (var i = 0; i < obj.poolSize; i++)
         {
-            for (var i = 0; i < obj.poolSize; i++)
-            {
-                GameObject objectPooled = objectPooling.CreateObject(obj.key);
-                yield return new WaitForSeconds(Random.Range(0.15f, 0.75f));
-            }
+            objectPooling.CreateObject(key);
+            yield return new WaitForSeconds(Random.Range(0.15f, 0.75f));
         }
+
         StartCoroutine(CreateObstacle());
     }
 

@@ -15,15 +15,14 @@ public class CinemachineShake : MonoBehaviour
     }
 
     void ShakeCameraProxy(CameraShakeTypeValue value) {
-        Debug.Log("ShakeCameraProxy");
-        StartCoroutine(ShakeCamera(value.intensity, value.time));
+        StartCoroutine(ShakeCamera(value.intensity, value.duration));
     }
 
     IEnumerator ShakeCamera(float intensity = 3f, float time = 2f)    {
         CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin = 
             cinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-
         cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = intensity;
+        cinemachineBasicMultiChannelPerlin.m_FrequencyGain = time;
         yield return new WaitForSecondsRealtime(time);
         Time.timeScale = 1;
         cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 0;

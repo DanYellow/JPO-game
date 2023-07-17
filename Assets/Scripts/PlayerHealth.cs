@@ -23,8 +23,6 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField]
     private PlayerStatsValue playerStatsValue;
 
-    public bool isInvulnerable { get; set; } = false;
-
     private void Awake()
     {
         playerStatsValue.nbCurrentLifes = playerStatsValue.nbMaxLifes;
@@ -50,8 +48,6 @@ public class PlayerHealth : MonoBehaviour
     // Update is called once per frame
     public void TakeDamage()
     {
-        if (isInvulnerable) return;
-
         playerStatsValue.nbCurrentLifes = Mathf.Clamp(
             playerStatsValue.nbCurrentLifes - 1,
             0,
@@ -65,7 +61,6 @@ public class PlayerHealth : MonoBehaviour
         }
         else
         {
-            Debug.Log("onCinemachineShake");
             onCinemachineShake.Raise(hurtCameraShake);
         }
     }

@@ -104,7 +104,6 @@ public class HUDManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log("playerStatsValue.nbCurrentLifes " + playerStatsValue.nbCurrentLifes);
         FillHearts();
     }
 }
