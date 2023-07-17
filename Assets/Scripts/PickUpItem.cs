@@ -63,6 +63,5 @@ public class PickUpItem : MonoBehaviour
         yield return new WaitForSeconds(7);
         sr.color = Color.black;
         StartCoroutine(Disable());
-
     }
 }

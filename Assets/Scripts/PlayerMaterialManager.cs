@@ -16,9 +16,7 @@ public class PlayerMaterialManager : MonoBehaviour
     private void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
-
         originalMaterial = sr.material;
-
         onMaterialChange.OnEventRaised += ChangeMaterialProxy;
     }
 
@@ -31,6 +29,7 @@ public class PlayerMaterialManager : MonoBehaviour
     {
         currentTime = 0;
         StartCoroutine(StartTimer());
+        sr.material = originalMaterial;
         while (currentTime < materialChange.duration)
         {
             sr.material = materialChange.material;
@@ -38,6 +37,7 @@ public class PlayerMaterialManager : MonoBehaviour
             sr.material = originalMaterial;
             yield return new WaitForSeconds(materialChange.interval);
         }
+        sr.material = originalMaterial;
         StopAllCoroutines();
     }
 

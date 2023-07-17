@@ -27,34 +27,34 @@ public class ObjectPoolingGenerator : MonoBehaviour
 
     private void Awake()
     {
-        objectPooling = FindObjectOfType<ObjectPoolingManager>();
+        objectPooling = FindObjectOfType<ObjectPoolingManager>(false);
 
         if (!canUpdateDelayBetweenNewItemPooled)
         {
             delayBetweenNewItemPooledUpdate = -1;
         }
+        onPlayerDeathVoidEventChannel.OnEventRaised += StopPooling;
     }
 
     private void Start()
     {
         StartCoroutine(Generate());
-        onPlayerDeathVoidEventChannel.OnEventRaised += StopGeneration;
     }
 
-    private void StopGeneration()
+    private void StopPooling()
     {
         StopAllCoroutines();
     }
 
     IEnumerator Generate()
     {
+        // Create pool of objects
         ObjectPoolItemData obj = objectPooling.listItemsToPool.First((item) => item.key == key);
-
         for (var i = 0; i < obj.poolSize; i++)
         {
             objectPooling.CreateObject(key);
+            yield return new WaitForSeconds(Random.Range(0.15f, 0.75f));
         }
-        yield return new WaitForSeconds(Random.Range(0.15f, 0.75f));
 
         StartCoroutine(Create());
     }
@@ -94,6 +94,6 @@ public class ObjectPoolingGenerator : MonoBehaviour
 
     private void OnDestroy()
     {
-        onPlayerDeathVoidEventChannel.OnEventRaised -= StopGeneration;
+        onPlayerDeathVoidEventChannel.OnEventRaised -= StopPooling;
     }
 }

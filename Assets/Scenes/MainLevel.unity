@@ -206,7 +206,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 123124328}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1736709083}
+        m_TargetAssemblyTypeName: CurrentSceneManager, Assembly-CSharp
+        m_MethodName: LoadLevel
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &123124328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2413,9 +2425,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onPlayerDeathVoidEventChannel: {fileID: 11400000, guid: ee804061685d49549a86590b0c280ccd, type: 2}
-  delayBetweenNewItemPooled: 0.75
-  delayBetweenNewItemPooledUpdate: 7
-  canUpdateDelayBetweenNewItemPooled: 1
+  delayBetweenNewItemPooled: 2.05
+  delayBetweenNewItemPooledUpdate: -10
+  canUpdateDelayBetweenNewItemPooled: 0
   nbSlotsAddable: 10
   key: obstacle
 --- !u!4 &1278083187
@@ -5942,12 +5954,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listItemsToPool:
-  - poolSize: 12
-    key: obstacle
-    prefab: {fileID: 1823335545}
   - poolSize: 3
     key: diamond
     prefab: {fileID: 1709273481406156916, guid: 74be66d7f2604864ba3834afbc8836b8, type: 3}
+  - poolSize: 12
+    key: obstacle
+    prefab: {fileID: 1823335545}
 --- !u!1 &1775859216
 GameObject:
   m_ObjectHideFlags: 0
