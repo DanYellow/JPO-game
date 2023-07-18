@@ -38,7 +38,7 @@ public class MainMenuManager : MonoBehaviour
 
     private void Start() {
         onFirstLevelLoadEvent = () => {
-            LoadLevel(1); 
+            // LoadLevel(1); 
         };
 
         OnFirstLevelStart.OnEventRaised += onFirstLevelLoadEvent;

@@ -79,7 +79,7 @@ public class NPC : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(TypeSentence(sentence));
     }
-
+// https://github.com/TUTOUNITYFR/creer-un-jeu-en-2d-facilement-unity/blob/master/Assets/Scripts/DialogueManager.cs
     IEnumerator TypeSentence(string sentence)
     {
         dialogueText.text = "";
@@ -88,7 +88,7 @@ public class NPC : MonoBehaviour
             dialogueText.text += letter;
             yield return new WaitForSeconds(0.05f);
         }
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.025f);
         nextSentenceSprite.SetActive(true);
     }
 
