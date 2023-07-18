@@ -22,6 +22,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Speak",
+                    "type": "Button",
+                    "id": "fd1c6715-b74e-444f-96ac-30ccc7f2cc5e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -231,6 +240,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Start/Resume",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1b491995-af00-4ba0-91e5-e2fff4b2a127",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Speak",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "96508c7a-9cea-47df-bd75-3db496e4e2cf",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Speak",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

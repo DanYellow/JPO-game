@@ -37,7 +37,7 @@ public class InputManager : MonoBehaviour
         playerInput.SwitchCurrentActionMap("UIGameOverAndCredits");
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         onTogglePauseEvent.OnEventRaised -= ToggleActionMap;
         onPlayerDeath.OnEventRaised -= onCreditsOrDeathEvent;

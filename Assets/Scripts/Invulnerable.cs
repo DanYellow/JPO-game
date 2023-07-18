@@ -96,7 +96,7 @@ public class Invulnerable : MonoBehaviour
         // );
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         isHurtVoidEventChannel.OnEventRaised -= OnCollision;
     }

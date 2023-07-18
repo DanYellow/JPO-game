@@ -70,7 +70,7 @@ public class GameOverManager : MonoBehaviour
         gameoverMenuUI.SetActive(false);
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         onPlayerDeathVoidEventChannel.OnEventRaised -= DisplayGameOverScreen;
     }

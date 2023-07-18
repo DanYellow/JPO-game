@@ -15,9 +15,15 @@ public class NPC : MonoBehaviour
 
     private Animator animator;
 
+    private bool isPlayerInRange = false;
+
+    [SerializeField]
+    private VoidEventChannel playerListenEventChannel;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        playerListenEventChannel.OnEventRaised += DisplayNextSentence;
     }
 
 
@@ -45,7 +51,31 @@ public class NPC : MonoBehaviour
             yield return null;
             yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
 
-            dialogueText.SetText(listSentences.Dequeue());
+            isPlayerInRange = true;
+            // DisplayNextSentence();
+        }
+    }
+
+    public void DisplayNextSentence()
+    {
+        if(listSentences.Count == 0 || isPlayerInRange)
+        {
+            // EndDialogue();
+            return;
+        }
+
+        string sentence = listSentences.Dequeue();
+        StopAllCoroutines();
+        StartCoroutine(TypeSentence(sentence));
+    }
+
+    IEnumerator TypeSentence(string sentence)
+    {
+        dialogueText.text = "";
+        foreach (char letter in sentence.ToCharArray())
+        {
+            dialogueText.text += letter;
+            yield return new WaitForSeconds(0.05f);
         }
     }
 
@@ -53,7 +83,12 @@ public class NPC : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            isPlayerInRange = false;
             animator.SetTrigger("EndDialog");
         }
+    }
+
+    private void OnDisable() {
+        playerListenEventChannel.OnEventRaised -= DisplayNextSentence;
     }
 }

@@ -28,7 +28,7 @@ public class CinemachineShake : MonoBehaviour
         cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 0;
     }
 
-     private void OnDestroy()
+     private void OnDisable()
     {
         onCinemachineShake.OnEventRaised -= ShakeCameraProxy;
     }
