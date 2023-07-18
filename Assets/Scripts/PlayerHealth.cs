@@ -1,5 +1,5 @@
-using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -25,17 +25,19 @@ public class PlayerHealth : MonoBehaviour
 
     [SerializeField]
     private PlayerStatsValue playerStatsValue;
+    
 
     private void Awake()
     {
-        playerStatsValue.nbCurrentLifes = playerStatsValue.nbMaxLifes;
+        // playerStatsValue.nbCurrentLifes = playerStatsValue.nbMaxLifes;
         animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
+        onPlayerDeathVoidEventChannel.OnEventRaised += OnDeath;
     }
 
-    private void Start()
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        onPlayerDeathVoidEventChannel.OnEventRaised += OnDeath;
+        // FillHearts();
     }
 
     private void Update()
@@ -61,10 +63,13 @@ public class PlayerHealth : MonoBehaviour
         if (playerStatsValue.nbCurrentLifes == 0)
         {
             onPlayerDeathVoidEventChannel.Raise();
+            OnDeath();
         }
         else
         {
             onCinemachineShake.Raise(hurtCameraShake);
+            
+            // onMaterialChange.Raise();
         }
     }
 

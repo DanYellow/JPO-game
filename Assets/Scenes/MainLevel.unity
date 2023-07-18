@@ -7581,6 +7581,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: e0ca6fed-78bb-4678-b917-a5c3bb1a34a9
     m_ActionName: UIGameOverAndCredits/Quit[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fd1c6715-b74e-444f-96ac-30ccc7f2cc5e
+    m_ActionName: Player/Speak[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -8285,6 +8289,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 9121902344590174886, guid: 665a9f2698f60a843957d7f247023f29, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9121902344590174937, guid: 665a9f2698f60a843957d7f247023f29, type: 3}
       propertyPath: m_Size.x
       value: 0.48138142
@@ -8358,9 +8366,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 48966779802e5184e97090699469a154, type: 2}
     - target: {fileID: 9121902344590174943, guid: 665a9f2698f60a843957d7f247023f29, type: 3}
+      propertyPath: materialChange
+      value: 
+      objectReference: {fileID: 11400000, guid: f83f25e3727d3074ea00996d2bdcfb3d, type: 2}
+    - target: {fileID: 9121902344590174943, guid: 665a9f2698f60a843957d7f247023f29, type: 3}
       propertyPath: deathCameraShake
       value: 
       objectReference: {fileID: 11400000, guid: fc3b3f289b44e9447a860057dedb2e11, type: 2}
+    - target: {fileID: 9121902344590174943, guid: 665a9f2698f60a843957d7f247023f29, type: 3}
+      propertyPath: onMaterialChange
+      value: 
+      objectReference: {fileID: 11400000, guid: 1ef143ed0456178448a9a26f8fb8dd48, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

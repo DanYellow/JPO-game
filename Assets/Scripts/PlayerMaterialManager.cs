@@ -17,6 +17,9 @@ public class PlayerMaterialManager : MonoBehaviour
     {
         sr = GetComponent<SpriteRenderer>();
         originalMaterial = sr.material;
+    }
+    
+    private void OnEnable() {
         onMaterialChange.OnEventRaised += ChangeMaterialProxy;
     }
 

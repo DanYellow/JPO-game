@@ -3,7 +3,6 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using System.Collections;
-using System;
 
 public class HUDManager : MonoBehaviour
 {
@@ -37,10 +36,12 @@ public class HUDManager : MonoBehaviour
 
     private void Start()
     {
-        timeBar.fillAmount = timeBarValue.CurrentValue;
     }
 
     public void StartGame() {
+        timeBar.fillAmount = timeBarValue.CurrentValue;
+        playerStatsValue.nbCurrentLifes = playerStatsValue.nbMaxLifes;
+        FillHearts();
         StartCoroutine(DecreaseTimeBar());
     }
 
@@ -49,7 +50,6 @@ public class HUDManager : MonoBehaviour
         RectTransform rectHeartUI = heartUI.GetComponent<RectTransform>();
         float xOffset = 10;
         float startPosX = playerHUDUI.GetComponent<RectTransform>().rect.xMin + rectHeartUI.rect.width;
-
 
         for (int i = 0; i < playerStatsValue.nbCurrentLifes; i++)
         {
@@ -103,7 +103,7 @@ public class HUDManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        FillHearts();
+        // FillHearts();
     }
 
     private void OnDisable()

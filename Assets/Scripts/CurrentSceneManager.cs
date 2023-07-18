@@ -21,6 +21,7 @@ public class CurrentSceneManager : MonoBehaviour
     void Start()
     {
         timeBarValue.CurrentValue = 1f;
+        
     }
 
 
