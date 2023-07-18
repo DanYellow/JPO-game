@@ -15,8 +15,6 @@ public class Invulnerable : MonoBehaviour
     [SerializeField]
     private VoidEventChannel isHurtVoidEventChannel;
 
-
-
     [SerializeField]
     private MaterialEventChannel onMaterialChange;
 

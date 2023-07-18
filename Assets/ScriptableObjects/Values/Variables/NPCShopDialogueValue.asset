@@ -13,10 +13,13 @@ MonoBehaviour:
   m_Name: NPCShopDialogueValue
   m_EditorClassIdentifier: 
   listSentences:
-  - "Bienvenue aux JPO de l'IUT de Sarcelles dans le d\xE9partement MMI"
-  - "\xC7a vous dirait de jouer ?"
-  - "Dans le parcours d\xE9veloppement web, on d\xE9veloppe des jeux vid\xE9o. Et
-    on en a fait un pour promouvoir notre parcours"
+  - "Bienvenue aux JPO de l'IUT de Sarcelles dans le d\xE9partement M\xE9tiers du
+    Multim\xE9dia et de l'Internet (MMI)."
+  - "\xC7a te dirait de jouer ?"
+  - Mais avant de jouer, j'aimerais un peu contextualiser ce jeu.
+  - "Dans le parcours d\xE9veloppement web, on \xE9tudie notamment le d\xE9veloppement
+    de jeux vid\xE9o. "
+  - Et on en a fait un pour promouvoir notre parcours.
   - "Les \xE9tudiants apprennent \xE0 utiliser le logiciel Unity et le langage de
     programmation C# (\xE7a se prononce see-sharp)"
   - "Bref, le but du jeu est tenir le plus longtemps possible tout en \xE9vitant
@@ -25,7 +28,8 @@ MonoBehaviour:
     termin\xE9e."
   - "Le temps de jeu n'est pas illimit\xE9 (je la paie cette salle...), il faudra
     donc ramasser les diamants pour augmenter ton temps de jeu."
-  - 'Alors, tu joues ou non ?
+  - "Si le temps de jeu est \xE9coul\xE9, la partie est aussi termin\xE9e."
+  - 'Alors, tu veux jouer ?
 
     (Reculer pour refuser. Barre espace pour continuer)'
   OnConversationEnd: {fileID: 11400000, guid: 408e20dca0cbd46448b484b3000fcc8e, type: 2}

@@ -26,6 +26,8 @@ public class NPC : MonoBehaviour
     [SerializeField]
     private VoidEventChannel endDialogueCallback;
 
+    private bool dialogueHasStarted = false;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -33,10 +35,12 @@ public class NPC : MonoBehaviour
         nextSentenceSprite.SetActive(false);
     }
 
-
     void Start()
     {
+        Load();
+    }
 
+    private void Load() {
         listSentences = new Queue<string>();
         dialogueText.SetText("");
         listSentences.Clear(); //clear any sentences in the queue
@@ -51,7 +55,6 @@ public class NPC : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-
             // animator.SetLayerWeight(1, 0);
             animator.SetTrigger("OpenDialog");
             if (listSentences.Count == 0)
@@ -62,12 +65,16 @@ public class NPC : MonoBehaviour
             yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
 
             isPlayerInRange = true;
-            DisplayNextSentence();
+            if (!dialogueHasStarted)
+            {
+                DisplayNextSentence();
+            }
         }
     }
 
     public void DisplayNextSentence()
     {
+        dialogueHasStarted = true;
         nextSentenceSprite.SetActive(false);
         if (listSentences.Count == 0 || !isPlayerInRange)
         {
@@ -79,7 +86,7 @@ public class NPC : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(TypeSentence(sentence));
     }
-// https://github.com/TUTOUNITYFR/creer-un-jeu-en-2d-facilement-unity/blob/master/Assets/Scripts/DialogueManager.cs
+    // https://github.com/TUTOUNITYFR/creer-un-jeu-en-2d-facilement-unity/blob/master/Assets/Scripts/DialogueManager.cs
     IEnumerator TypeSentence(string sentence)
     {
         dialogueText.text = "";
@@ -98,13 +105,18 @@ public class NPC : MonoBehaviour
         {
             isPlayerInRange = false;
             animator.SetTrigger("EndDialog");
+            nextSentenceSprite.SetActive(false);
         }
     }
 
     private void EndDialogue()
     {
+        Load();
         animator.SetTrigger("EndDialog");
-        if(endDialogueCallback && isPlayerInRange) {
+        dialogueHasStarted = false;
+        nextSentenceSprite.SetActive(false);
+        if (endDialogueCallback && isPlayerInRange)
+        {
             endDialogueCallback.Raise();
         }
     }
