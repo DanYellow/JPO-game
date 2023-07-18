@@ -40,7 +40,8 @@ public class NPC : MonoBehaviour
         Load();
     }
 
-    private void Load() {
+    private void Load()
+    {
         listSentences = new Queue<string>();
         dialogueText.SetText("");
         listSentences.Clear(); //clear any sentences in the queue
@@ -56,10 +57,14 @@ public class NPC : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             // animator.SetLayerWeight(1, 0);
-            animator.SetTrigger("OpenDialog");
             if (listSentences.Count == 0)
             {
                 yield return null;
+            }
+            animator.SetTrigger("OpenDialog");
+            if (dialogueHasStarted)
+            {
+                nextSentenceSprite.SetActive(true);
             }
             yield return null;
             yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
@@ -82,9 +87,9 @@ public class NPC : MonoBehaviour
             return;
         }
 
-        string sentence = listSentences.Dequeue();
+        string nextSentence = listSentences.Dequeue();
         StopAllCoroutines();
-        StartCoroutine(TypeSentence(sentence));
+        StartCoroutine(TypeSentence(nextSentence));
     }
     // https://github.com/TUTOUNITYFR/creer-un-jeu-en-2d-facilement-unity/blob/master/Assets/Scripts/DialogueManager.cs
     IEnumerator TypeSentence(string sentence)
@@ -118,6 +123,16 @@ public class NPC : MonoBehaviour
         if (endDialogueCallback && isPlayerInRange)
         {
             endDialogueCallback.Raise();
+        }
+    }
+
+
+    private void OnValidate()
+    {
+        if (dialogue.listSentences.Count > 0)
+        {
+            string nextSentence = dialogue.listSentences[0];
+            dialogueText.SetText(nextSentence);
         }
     }
 

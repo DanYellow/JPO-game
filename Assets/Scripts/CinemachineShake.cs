@@ -5,7 +5,7 @@ using Cinemachine;
 public class CinemachineShake : MonoBehaviour
 {
     [SerializeField]
-    private CinemachineShakeEventChannel? onCinemachineShake;
+    private CinemachineShakeEventChannel onCinemachineShake;
 
     private CinemachineVirtualCamera cinemachineVirtualCamera;
     private void Awake() {
@@ -15,7 +15,6 @@ public class CinemachineShake : MonoBehaviour
     }
 
     public void ShakeCameraProxy(CameraShakeTypeValue value) {
-        Debug.Log("ffeeee");
         StartCoroutine(ShakeCamera(value.intensity, value.duration));
     }
 

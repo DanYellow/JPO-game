@@ -50,6 +50,7 @@ public class PlayerMaterialManager : MonoBehaviour
         }
     }
 
+
     private void OnDisable()
     {
         onMaterialChange.OnEventRaised -= ChangeMaterialProxy;
