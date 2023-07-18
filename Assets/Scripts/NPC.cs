@@ -15,20 +15,28 @@ public class NPC : MonoBehaviour
 
     private Animator animator;
 
+    [SerializeField]
+    private GameObject nextSentenceSprite;
+
     private bool isPlayerInRange = false;
 
     [SerializeField]
     private VoidEventChannel playerListenEventChannel;
 
+    [SerializeField]
+    private VoidEventChannel endDialogueCallback;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
         playerListenEventChannel.OnEventRaised += DisplayNextSentence;
+        nextSentenceSprite.SetActive(false);
     }
 
 
     void Start()
     {
+
         listSentences = new Queue<string>();
         dialogueText.SetText("");
         listSentences.Clear(); //clear any sentences in the queue
@@ -43,6 +51,8 @@ public class NPC : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+
+            // animator.SetLayerWeight(1, 0);
             animator.SetTrigger("OpenDialog");
             if (listSentences.Count == 0)
             {
@@ -52,15 +62,16 @@ public class NPC : MonoBehaviour
             yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
 
             isPlayerInRange = true;
-            // DisplayNextSentence();
+            DisplayNextSentence();
         }
     }
 
     public void DisplayNextSentence()
     {
-        if(listSentences.Count == 0 || isPlayerInRange)
+        nextSentenceSprite.SetActive(false);
+        if (listSentences.Count == 0 || !isPlayerInRange)
         {
-            // EndDialogue();
+            EndDialogue();
             return;
         }
 
@@ -77,6 +88,8 @@ public class NPC : MonoBehaviour
             dialogueText.text += letter;
             yield return new WaitForSeconds(0.05f);
         }
+        yield return new WaitForSeconds(0.05f);
+        nextSentenceSprite.SetActive(true);
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -88,7 +101,16 @@ public class NPC : MonoBehaviour
         }
     }
 
-    private void OnDisable() {
+    private void EndDialogue()
+    {
+        animator.SetTrigger("EndDialog");
+        if(endDialogueCallback && isPlayerInRange) {
+            endDialogueCallback.Raise();
+        }
+    }
+
+    private void OnDisable()
+    {
         playerListenEventChannel.OnEventRaised -= DisplayNextSentence;
     }
 }

@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaa054f8c30a3b944b44806a80b2cf81, type: 3}
+  m_Name: NPCShopDialogueValue
+  m_EditorClassIdentifier: 
+  listSentences:
+  - "Bienvenue aux JPO de l'IUT de Sarcelles dans le d\xE9partement MMI"
+  - "\xE7a vous dirait de jouer ?"
+  - "Dans le parcours d\xE9veloppement web, on d\xE9veloppe des jeux vid\xE9o"
+  - "Les \xE9tudiants apprennent \xE0 utiliser le logiciel Unity et le langage de
+    programmation C# (\xE7a se prononce see-sharp)"
+  - "Bref, le but du jeu est tenir le plus longtemps possible tout en \xE9vitant
+    les bombes qui tombent."
+  - "Si tu te fais toucher, tu perds un coeur. Si tu n'as plus de coeurs, partie
+    termin\xE9e."
+  - "Le temps de jeu n'est pas illimit\xE9 (je la paie cette salle...), il faudra
+    donc ramasser les diamants pour augmenter ton temps de jeu."
+  - 'Alors, tu joues ou non ?
+
+    (Reculer pour refuser. Barre espace pour continuer)'
+  OnConversationEnd: {fileID: 11400000, guid: 408e20dca0cbd46448b484b3000fcc8e, type: 2}
