@@ -8,6 +8,12 @@ public class NPCDialogueValue : ScriptableObject
     [SerializeField, TextArea]
     public List<string> listSentences = new List<string>();
 
+    [Tooltip("Sentence displayed if the player left the NPC before he finishes"), TextArea]
+    public string interruptionSentence = "";
+
+    [Tooltip("Sentence displayed if the player left the NPC before he finishes and comes back"), TextArea]
+   public List<string> listContinueSentences = new List<string>();
+
     [SerializeField]
     private VoidEventChannel OnConversationEnd;
 }

@@ -37,6 +37,8 @@ public class NPC : MonoBehaviour
     [SerializeField]
     private float delayBeforeReset = 10;
 
+    private Coroutine typeSentenceCo;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -86,6 +88,7 @@ public class NPC : MonoBehaviour
             isPlayerInRange = true;
             if (!dialogueHasStarted)
             {
+                dialogueText.fontStyle = FontStyles.Normal;
                 DisplayNextSentence();
             }
         }
@@ -115,7 +118,7 @@ public class NPC : MonoBehaviour
 
     private void DisplayFullSentence()
     {
-        StopAllCoroutines();
+        StopTyping();
         dialogueText.text = currentSentence;
         EndSentence();
     }
@@ -124,8 +127,8 @@ public class NPC : MonoBehaviour
     {
         string nextSentence = listSentences.Dequeue();
         currentSentence = nextSentence;
-        StopAllCoroutines();
-        StartCoroutine(TypeSentence(nextSentence));
+        StopTyping();
+        typeSentenceCo = StartCoroutine(TypeSentence(nextSentence));
     }
 
     // https://github.com/TUTOUNITYFR/creer-un-jeu-en-2d-facilement-unity/blob/master/Assets/Scripts/DialogueManager.cs
@@ -145,18 +148,45 @@ public class NPC : MonoBehaviour
     private void EndSentence()
     {
         isTyping = false;
-        nextSentenceSprite.SetActive(true);
+        if(isPlayerInRange) {
+            nextSentenceSprite.SetActive(true);
+        }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    IEnumerator OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
             isPlayerInRange = false;
+
+            if (listSentences.Count > 0)
+            {
+                StopTyping();
+                dialogueText.fontStyle = FontStyles.Bold;
+                yield return StartCoroutine(TypeSentence(dialogue.interruptionSentence));
+                yield return new WaitForSeconds(1.5f);
+            }
+
             animator.SetTrigger("EndDialog");
             nextSentenceSprite.SetActive(false);
             resetDialogueCo = StartCoroutine(ResetDialogue());
         }
+        yield return null;
+    }
+
+    void StopTyping()
+    {
+        if (typeSentenceCo != null)
+        {
+            StopCoroutine(typeSentenceCo);
+        }
+    }
+
+
+    IEnumerator Foo()
+    {
+        yield return StartCoroutine(TypeSentence(dialogue.interruptionSentence));
+        yield return new WaitForSeconds(1.5f);
     }
 
     IEnumerator ResetDialogue()
