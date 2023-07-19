@@ -85,14 +85,13 @@ public class NPC : MonoBehaviour
         dialogueHasStarted = true;
         nextSentenceSprite.SetActive(false);
         
-        if (listSentences.Count == 0 || !isPlayerInRange)
+        if ((listSentences.Count == 0 && !isTyping) || !isPlayerInRange)
         {
             EndDialogue();
             return;
         }
 
         if(isTyping) {
-            // Check queue length
             DisplayFullSentence();
         } else {
             GoToNextSentence();
