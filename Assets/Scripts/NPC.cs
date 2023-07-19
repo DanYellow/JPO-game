@@ -85,9 +85,9 @@ public class NPC : MonoBehaviour
                 // dialogueText.text = listSentences.Peek();
                 // if (dialogueText.text == dialogue.interruptionSentence)
                 // {
-                //     dialogueText.text = dialogue.listContinueSentences[UnityEngine.Random.Range(
-                //         0, dialogue.listContinueSentences.Count
-                //     )];
+                    dialogueText.text = dialogue.listContinueSentences[UnityEngine.Random.Range(
+                        0, dialogue.listContinueSentences.Count
+                    )];
                 // }
                 nextSentenceSprite.SetActive(true);
             }
@@ -100,12 +100,11 @@ public class NPC : MonoBehaviour
                 StopCoroutine(resetDialogueCo);
             }
 
-            Debug.Log("isTyping : " + isTyping);
-            DisplayNextSentence();
-            // if (!dialogueHasStarted)
-            // {
-            //     DisplayNextSentence();
-            // }
+            // DisplayNextSentence();
+            if (!dialogueHasStarted)
+            {
+                DisplayNextSentence();
+            }
         }
     }
 
@@ -182,7 +181,7 @@ public class NPC : MonoBehaviour
                 yield return typeSentenceCo = StartCoroutine(TypeSentence(dialogue.interruptionSentence));;
                 yield return new WaitForSeconds(0.75f);
             }
-            Debug.Log("EndDialog");
+     
             animator.SetTrigger("EndDialog");
             resetDialogueCo = StartCoroutine(ResetDialogue());
         }
