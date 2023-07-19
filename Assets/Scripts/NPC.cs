@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class NPC : MonoBehaviour
 {
@@ -31,6 +32,11 @@ public class NPC : MonoBehaviour
 
     private bool dialogueHasStarted = false;
 
+    private Coroutine resetDialogueCo;
+
+    [SerializeField]
+    private float delayBeforeReset = 10;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -45,6 +51,8 @@ public class NPC : MonoBehaviour
 
     private void Load()
     {
+        dialogueHasStarted = false;
+        isTyping = false;
         listSentences = new Queue<string>();
         dialogueText.SetText("");
         listSentences.Clear(); //clear any sentences in the queue
@@ -59,7 +67,6 @@ public class NPC : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            // animator.SetLayerWeight(1, 0);
             if (listSentences.Count == 0)
             {
                 yield return null;
@@ -72,6 +79,10 @@ public class NPC : MonoBehaviour
             yield return null;
             yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
 
+            if (resetDialogueCo != null)
+            {
+                StopCoroutine(resetDialogueCo);
+            }
             isPlayerInRange = true;
             if (!dialogueHasStarted)
             {
@@ -84,27 +95,33 @@ public class NPC : MonoBehaviour
     {
         dialogueHasStarted = true;
         nextSentenceSprite.SetActive(false);
-        
+
         if ((listSentences.Count == 0 && !isTyping) || !isPlayerInRange)
         {
             EndDialogue();
             return;
         }
 
-        if(isTyping) {
+
+        if (isTyping)
+        {
             DisplayFullSentence();
-        } else {
+        }
+        else
+        {
             GoToNextSentence();
         }
     }
 
-    private void DisplayFullSentence() {
+    private void DisplayFullSentence()
+    {
         StopAllCoroutines();
         dialogueText.text = currentSentence;
         EndSentence();
     }
 
-    private void GoToNextSentence() {
+    private void GoToNextSentence()
+    {
         string nextSentence = listSentences.Dequeue();
         currentSentence = nextSentence;
         StopAllCoroutines();
@@ -125,7 +142,8 @@ public class NPC : MonoBehaviour
         EndSentence();
     }
 
-    private void EndSentence() {
+    private void EndSentence()
+    {
         isTyping = false;
         nextSentenceSprite.SetActive(true);
     }
@@ -137,14 +155,20 @@ public class NPC : MonoBehaviour
             isPlayerInRange = false;
             animator.SetTrigger("EndDialog");
             nextSentenceSprite.SetActive(false);
+            resetDialogueCo = StartCoroutine(ResetDialogue());
         }
+    }
+
+    IEnumerator ResetDialogue()
+    {
+        yield return new WaitForSeconds(delayBeforeReset);
+        Load();
     }
 
     private void EndDialogue()
     {
         Load();
         animator.SetTrigger("EndDialog");
-        dialogueHasStarted = false;
         nextSentenceSprite.SetActive(false);
         if (endDialogueCallback && isPlayerInRange)
         {
