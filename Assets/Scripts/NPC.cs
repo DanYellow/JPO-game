@@ -20,6 +20,8 @@ public class NPC : MonoBehaviour
     private GameObject nextSentenceSprite;
 
     private bool isPlayerInRange = false;
+
+    [SerializeField]
     private bool isTyping = false;
 
     private string currentSentence = "";
@@ -69,15 +71,27 @@ public class NPC : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            StopTyping();
+            isPlayerInRange = true;
+            dialogueText.fontStyle = FontStyles.Normal;
+
             if (listSentences.Count == 0)
             {
-                yield return null;
+                yield break;
             }
             animator.SetTrigger("OpenDialog");
             if (dialogueHasStarted)
             {
+                // dialogueText.text = listSentences.Peek();
+                // if (dialogueText.text == dialogue.interruptionSentence)
+                // {
+                //     dialogueText.text = dialogue.listContinueSentences[UnityEngine.Random.Range(
+                //         0, dialogue.listContinueSentences.Count
+                //     )];
+                // }
                 nextSentenceSprite.SetActive(true);
             }
+
             yield return null;
             yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
 
@@ -85,12 +99,13 @@ public class NPC : MonoBehaviour
             {
                 StopCoroutine(resetDialogueCo);
             }
-            isPlayerInRange = true;
-            if (!dialogueHasStarted)
-            {
-                dialogueText.fontStyle = FontStyles.Normal;
-                DisplayNextSentence();
-            }
+
+            Debug.Log("isTyping : " + isTyping);
+            DisplayNextSentence();
+            // if (!dialogueHasStarted)
+            // {
+            //     DisplayNextSentence();
+            // }
         }
     }
 
@@ -99,12 +114,11 @@ public class NPC : MonoBehaviour
         dialogueHasStarted = true;
         nextSentenceSprite.SetActive(false);
 
-        if ((listSentences.Count == 0 && !isTyping) || !isPlayerInRange)
+        if ((listSentences.Count == 0 && !isTyping && isPlayerInRange) || !isPlayerInRange)
         {
             EndDialogue();
             return;
         }
-
 
         if (isTyping)
         {
@@ -148,7 +162,8 @@ public class NPC : MonoBehaviour
     private void EndSentence()
     {
         isTyping = false;
-        if(isPlayerInRange) {
+        if (isPlayerInRange)
+        {
             nextSentenceSprite.SetActive(true);
         }
     }
@@ -158,17 +173,17 @@ public class NPC : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInRange = false;
+            nextSentenceSprite.SetActive(false);
 
-            if (listSentences.Count > 0)
+            if (listSentences.Count > 0 && dialogue.interruptionSentence != null)
             {
                 StopTyping();
                 dialogueText.fontStyle = FontStyles.Bold;
-                yield return StartCoroutine(TypeSentence(dialogue.interruptionSentence));
-                yield return new WaitForSeconds(1.5f);
+                yield return typeSentenceCo = StartCoroutine(TypeSentence(dialogue.interruptionSentence));;
+                yield return new WaitForSeconds(0.75f);
             }
-
+            Debug.Log("EndDialog");
             animator.SetTrigger("EndDialog");
-            nextSentenceSprite.SetActive(false);
             resetDialogueCo = StartCoroutine(ResetDialogue());
         }
         yield return null;
@@ -178,15 +193,18 @@ public class NPC : MonoBehaviour
     {
         if (typeSentenceCo != null)
         {
+            dialogueText.text = "...";
             StopCoroutine(typeSentenceCo);
         }
     }
 
+    IEnumerator DisplayContinueBtnSprite() {
+        while(true) {
+            if (true) {
 
-    IEnumerator Foo()
-    {
-        yield return StartCoroutine(TypeSentence(dialogue.interruptionSentence));
-        yield return new WaitForSeconds(1.5f);
+            }
+            yield return null;
+        }
     }
 
     IEnumerator ResetDialogue()
@@ -205,7 +223,6 @@ public class NPC : MonoBehaviour
             endDialogueCallback.Raise();
         }
     }
-
 
     private void OnValidate()
     {

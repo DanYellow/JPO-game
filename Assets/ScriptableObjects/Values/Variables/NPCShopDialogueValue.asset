@@ -15,7 +15,7 @@ MonoBehaviour:
   listSentences:
   - "Bienvenue aux JPO de l'IUT de Sarcelles dans le d\xE9partement M\xE9tiers du
     Multim\xE9dia et de l'Internet (MMI)."
-  - "\xC7a te dirait de jouer ?"
+  - "Voudrais-tu... jouer \xE0 un jeu ?"
   - Mais avant de jouer, j'aimerais un peu contextualiser ce jeu.
   - "Dans le parcours d\xE9veloppement web, on \xE9tudie notamment le d\xE9veloppement
     de jeux vid\xE9o. "
@@ -29,8 +29,12 @@ MonoBehaviour:
   - "Le temps de jeu n'est pas illimit\xE9 (je la paie cette salle...), il faudra
     donc ramasser les diamants pour augmenter ton temps de jeu."
   - "Si le temps de jeu est \xE9coul\xE9, la partie est aussi termin\xE9e."
-  - 'Alors, tu veux jouer ?
+  - 'Bon on joue ?
 
-    (Reculer pour refuser. Barre espace pour continuer)'
-  interruptionSentence: Hey ! Je n'ai pas fini... reviens tout de suite !
+    <i>(Reculer pour refuser. Barre espace pour continuer)</i>'
+  interruptionSentence: Hey ! Je n'ai pas fini... Reviens tout de suite !
+  listContinueSentences:
+  - Bon, je disais...
+  - "Ah, tu m'\xE9coutes enfin"
+  - "J'en \xE9tais o\xF9 d\xE9j\xE0 ? Ah oui !"
   OnConversationEnd: {fileID: 11400000, guid: 408e20dca0cbd46448b484b3000fcc8e, type: 2}
