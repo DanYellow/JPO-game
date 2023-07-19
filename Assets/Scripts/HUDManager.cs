@@ -24,6 +24,8 @@ public class HUDManager : MonoBehaviour
     [SerializeField]
     private FloatValue timeBarValue;
 
+    public float decreaseTimeBarStep = 0.001f;
+
     [SerializeField]
     private VoidEventChannel onPlayerDeathVoidEventChannel;
 
@@ -92,7 +94,7 @@ public class HUDManager : MonoBehaviour
     {
         while (timeBar.fillAmount > 0 && playerStatsValue.nbCurrentLifes > 0)
         {
-            timeBarValue.CurrentValue -= 0.0005f;
+            timeBarValue.CurrentValue -= decreaseTimeBarStep;
             timeBar.fillAmount = timeBarValue.CurrentValue;
             yield return null;
         }

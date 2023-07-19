@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -35,11 +34,6 @@ public class PlayerHealth : MonoBehaviour
         onPlayerDeathVoidEventChannel.OnEventRaised += OnDeath;
     }
 
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        // FillHearts();
-    }
-
     private void Update()
     {
 #if UNITY_EDITOR
@@ -68,8 +62,6 @@ public class PlayerHealth : MonoBehaviour
         else
         {
             onCinemachineShake.Raise(hurtCameraShake);
-            
-            // onMaterialChange.Raise();
         }
     }
 

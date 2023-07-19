@@ -746,6 +746,7 @@ GameObject:
   - component: {fileID: 273183151}
   - component: {fileID: 273183153}
   - component: {fileID: 273183152}
+  - component: {fileID: 273183154}
   m_Layer: 0
   m_Name: Spacebar
   m_TagString: Untagged
@@ -811,6 +812,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 273183150}
   m_CullTransparentMesh: 1
+--- !u!114 &273183154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273183150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 735c037051602864783b300a5a33219d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  endColor: {r: 1, g: 1, b: 1, a: 0.2509804}
+  speed: 2
 --- !u!1 &300796069
 GameObject:
   m_ObjectHideFlags: 0
@@ -1270,6 +1285,7 @@ GameObject:
   - component: {fileID: 490432074}
   - component: {fileID: 490432073}
   - component: {fileID: 490432078}
+  - component: {fileID: 490432079}
   m_Layer: 0
   m_Name: DialogueText
   m_TagString: Untagged
@@ -1381,7 +1397,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0.4, y: 0.3, z: 0.4, w: 1.25}
+  m_margin: {x: 0.5, y: 0.35, z: 0.5, w: 1.25}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1402,11 +1418,26 @@ CanvasGroup:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 490432071}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Alpha: 1
   m_Interactable: 0
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &490432079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 490432071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8a7ad7cb4619c141b5ce58b412d6126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AngleMultiplier: 1
+  SpeedMultiplier: 1
+  CurveScale: 1
 --- !u!1 &505872679
 GameObject:
   m_ObjectHideFlags: 0
@@ -7191,6 +7222,7 @@ GameObject:
   - component: {fileID: 1636643705}
   - component: {fileID: 1636643704}
   - component: {fileID: 1636643703}
+  - component: {fileID: 1636643706}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -7216,8 +7248,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 362.49, y: 208.73}
-  m_SizeDelta: {x: 730, y: 411}
+  m_AnchoredPosition: {x: -0.38, y: 1.18}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1636643703
 MonoBehaviour:
@@ -7281,6 +7313,20 @@ Canvas:
   m_SortingLayerID: -72354591
   m_SortingOrder: 3
   m_TargetDisplay: 0
+--- !u!114 &1636643706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1636643701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 2
+  m_VerticalFit: 2
 --- !u!1 &1672113558
 GameObject:
   m_ObjectHideFlags: 0
@@ -7392,7 +7438,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -363.92, y: -2.8650055}
+  m_AnchoredPosition: {x: -1.0700232, y: -0.6809597}
   m_SizeDelta: {x: 5.5491, y: 0}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!1 &1700252493
