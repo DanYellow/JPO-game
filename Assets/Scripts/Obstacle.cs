@@ -9,6 +9,7 @@ public class Obstacle : MonoBehaviour
 
     private float height;
     private int nbInvocations = 0;
+    private int accelerationFallThreshold = 5;
     public float maxLinearDrag = 4.5f;
 
     private void Awake()
@@ -23,7 +24,7 @@ public class Obstacle : MonoBehaviour
 
     private void OnEnable()
     {
-        if (nbInvocations % 5 == 0)
+        if (nbInvocations % accelerationFallThreshold == 0)
         {
             rb.drag = Mathf.Clamp(rb.drag - 0.5f, 0, maxLinearDrag);
         }

@@ -19,6 +19,9 @@ public class NPC : MonoBehaviour
     private GameObject nextSentenceSprite;
 
     private bool isPlayerInRange = false;
+    private bool isTyping = false;
+
+    private string currentSentence = "";
 
     [SerializeField]
     private VoidEventChannel playerListenEventChannel;
@@ -81,26 +84,50 @@ public class NPC : MonoBehaviour
     {
         dialogueHasStarted = true;
         nextSentenceSprite.SetActive(false);
+        
         if (listSentences.Count == 0 || !isPlayerInRange)
         {
             EndDialogue();
             return;
         }
 
+        if(isTyping) {
+            // Check queue length
+            DisplayFullSentence();
+        } else {
+            GoToNextSentence();
+        }
+    }
+
+    private void DisplayFullSentence() {
+        StopAllCoroutines();
+        dialogueText.text = currentSentence;
+        EndSentence();
+    }
+
+    private void GoToNextSentence() {
         string nextSentence = listSentences.Dequeue();
+        currentSentence = nextSentence;
         StopAllCoroutines();
         StartCoroutine(TypeSentence(nextSentence));
     }
+
     // https://github.com/TUTOUNITYFR/creer-un-jeu-en-2d-facilement-unity/blob/master/Assets/Scripts/DialogueManager.cs
     IEnumerator TypeSentence(string sentence)
     {
         dialogueText.text = "";
+        isTyping = true;
         foreach (char letter in sentence.ToCharArray())
         {
             dialogueText.text += letter;
             yield return new WaitForSeconds(0.05f);
         }
         yield return new WaitForSeconds(0.025f);
+        EndSentence();
+    }
+
+    private void EndSentence() {
+        isTyping = false;
         nextSentenceSprite.SetActive(true);
     }
 
