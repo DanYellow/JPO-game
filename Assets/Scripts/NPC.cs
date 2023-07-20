@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System;
+using System.Linq;
+
 
 public class NPC : MonoBehaviour
 {
@@ -85,9 +86,9 @@ public class NPC : MonoBehaviour
                 // dialogueText.text = listSentences.Peek();
                 // if (dialogueText.text == dialogue.interruptionSentence)
                 // {
-                    dialogueText.text = dialogue.listContinueSentences[UnityEngine.Random.Range(
-                        0, dialogue.listContinueSentences.Count
-                    )];
+                dialogueText.text = dialogue.listContinueSentences[UnityEngine.Random.Range(
+                    0, dialogue.listContinueSentences.Count
+                )];
                 // }
                 nextSentenceSprite.SetActive(true);
             }
@@ -174,15 +175,18 @@ public class NPC : MonoBehaviour
             isPlayerInRange = false;
             nextSentenceSprite.SetActive(false);
 
-            if (listSentences.Count > 0 && dialogue.interruptionSentence != null)
+            if (
+                listSentences.Count > 0 && 
+                dialogue.interruptionSentence != null &&
+                !dialogue.listContinueSentences.Contains(dialogueText.text)
+            )
             {
                 StopTyping();
                 dialogueText.fontStyle = FontStyles.Bold;
-                yield return typeSentenceCo = StartCoroutine(TypeSentence(dialogue.interruptionSentence));;
+                yield return typeSentenceCo = StartCoroutine(TypeSentence(dialogue.interruptionSentence)); ;
                 yield return new WaitForSeconds(0.75f);
             }
-     
-            animator.SetTrigger("EndDialog");
+
             resetDialogueCo = StartCoroutine(ResetDialogue());
         }
         yield return null;
@@ -197,9 +201,12 @@ public class NPC : MonoBehaviour
         }
     }
 
-    IEnumerator DisplayContinueBtnSprite() {
-        while(true) {
-            if (true) {
+    IEnumerator DisplayContinueBtnSprite()
+    {
+        while (true)
+        {
+            if (true)
+            {
 
             }
             yield return null;
@@ -208,6 +215,7 @@ public class NPC : MonoBehaviour
 
     IEnumerator ResetDialogue()
     {
+        animator.SetTrigger("EndDialog");
         yield return new WaitForSeconds(delayBeforeReset);
         Load();
     }
