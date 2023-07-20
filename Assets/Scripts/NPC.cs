@@ -18,6 +18,10 @@ public class NPC : MonoBehaviour
     [SerializeField]
     private GameObject nextSentenceSprite;
 
+    [SerializeField]
+    private GameObject bubble;
+    private Animator animatorBubble;
+
     private bool isPlayerInRange = false;
 
     [SerializeField]
@@ -44,7 +48,7 @@ public class NPC : MonoBehaviour
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
+        animatorBubble = bubble.GetComponent<Animator>();
         playerListenEventChannel.OnEventRaised += DisplayNextSentence;
         nextSentenceSprite.SetActive(false);
     }
@@ -87,11 +91,11 @@ public class NPC : MonoBehaviour
                 )];
             }
 
-            animator.SetBool("OpenBox", true);
+            animatorBubble.SetBool("OpenBox", true);
             nextSentenceSprite.SetActive(true);
 
             yield return null;
-            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+            yield return new WaitForSeconds(animatorBubble.GetCurrentAnimatorStateInfo(0).length);
 
             if (resetDialogueCo != null)
             {
@@ -207,14 +211,14 @@ public class NPC : MonoBehaviour
 
     IEnumerator ResetDialogue()
     {
-        animator.SetBool("OpenBox", false);
+        animatorBubble.SetBool("OpenBox", false);
         yield return new WaitForSeconds(delayBeforeReset);
         Load();
     }
 
     private void EndDialogue()
     {
-        animator.SetBool("OpenBox", false);
+        animatorBubble.SetBool("OpenBox", false);
 
         if (endDialogueCallback && isPlayerInRange)
         {
