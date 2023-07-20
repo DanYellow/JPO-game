@@ -222,13 +222,15 @@ public class NPC : MonoBehaviour
 
     private void EndDialogue()
     {
-        Load();
         animator.SetTrigger("EndDialog");
-        nextSentenceSprite.SetActive(false);
+        
         if (endDialogueCallback && isPlayerInRange)
         {
             endDialogueCallback.Raise();
         }
+
+        Load();
+        nextSentenceSprite.SetActive(false);
     }
 
     private void OnValidate()
