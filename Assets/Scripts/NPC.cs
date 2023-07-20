@@ -25,6 +25,8 @@ public class NPC : MonoBehaviour
     [SerializeField]
     private bool isTyping = false;
 
+    private bool displayLastSentence = false;
+
     private string currentSentence = "";
 
     [SerializeField]
@@ -78,20 +80,18 @@ public class NPC : MonoBehaviour
 
             if (listSentences.Count == 0)
             {
-                yield break;
+                dialogueText.text = dialogue.listSentences[dialogue.listSentences.Count - 1];
             }
-            animator.SetTrigger("OpenDialog");
-            if (dialogueHasStarted)
+            if (listSentences.Count != 0 && dialogueHasStarted)
             {
-                // dialogueText.text = listSentences.Peek();
-                // if (dialogueText.text == dialogue.interruptionSentence)
-                // {
                 dialogueText.text = dialogue.listContinueSentences[UnityEngine.Random.Range(
                     0, dialogue.listContinueSentences.Count
                 )];
-                // }
-                nextSentenceSprite.SetActive(true);
             }
+
+            // animator.SetTrigger("OpenDialogue");
+            animator.SetBool("Open", true);
+            nextSentenceSprite.SetActive(true);
 
             yield return null;
             yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
@@ -120,12 +120,23 @@ public class NPC : MonoBehaviour
             return;
         }
 
+
         if (isTyping)
         {
+            Debug.Log("DisplayFullSentence");
             DisplayFullSentence();
+        }
+        else if (displayLastSentence)
+        {
+            Debug.Log("displayLastSentence");
+            dialogueText.text = currentSentence;
+            displayLastSentence = false;
+            // listSentences.Dequeue();
+            EndSentence();
         }
         else
         {
+            Debug.Log("GoToNextSentence");
             GoToNextSentence();
         }
     }
@@ -173,21 +184,27 @@ public class NPC : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInRange = false;
+            displayLastSentence = true;
+            
             nextSentenceSprite.SetActive(false);
 
             if (
-                listSentences.Count > 0 && 
+                listSentences.Count > 0 &&
                 dialogue.interruptionSentence != null &&
                 !dialogue.listContinueSentences.Contains(dialogueText.text)
             )
             {
                 StopTyping();
                 dialogueText.fontStyle = FontStyles.Bold;
-                yield return typeSentenceCo = StartCoroutine(TypeSentence(dialogue.interruptionSentence)); ;
+                yield return typeSentenceCo = StartCoroutine(TypeSentence(dialogue.interruptionSentence));
                 yield return new WaitForSeconds(0.75f);
+                // listSentences.Dequeue();
             }
 
-            resetDialogueCo = StartCoroutine(ResetDialogue());
+            Debug.Log("'ffffee");
+            animator.SetBool("Open", false);
+            // animator.SetTrigger("EndDialogue");
+            // resetDialogueCo = StartCoroutine(ResetDialogue());
         }
         yield return null;
     }
@@ -201,35 +218,25 @@ public class NPC : MonoBehaviour
         }
     }
 
-    IEnumerator DisplayContinueBtnSprite()
-    {
-        while (true)
-        {
-            if (true)
-            {
-
-            }
-            yield return null;
-        }
-    }
-
     IEnumerator ResetDialogue()
     {
-        animator.SetTrigger("EndDialog");
+        // animator.SetTrigger("EndDialogue");
+        animator.SetBool("Open", false);
         yield return new WaitForSeconds(delayBeforeReset);
         Load();
     }
 
     private void EndDialogue()
     {
-        animator.SetTrigger("EndDialog");
-        
+        // animator.SetTrigger("EndDialogue");
+        animator.SetBool("Open", false);
+
         if (endDialogueCallback && isPlayerInRange)
         {
             endDialogueCallback.Raise();
         }
 
-        Load();
+        // Load();
         nextSentenceSprite.SetActive(false);
     }
 
