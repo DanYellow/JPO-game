@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System.Linq;
-
 
 public class NPC : MonoBehaviour
 {
@@ -89,8 +87,7 @@ public class NPC : MonoBehaviour
                 )];
             }
 
-            // animator.SetTrigger("OpenDialogue");
-            animator.SetBool("Open", true);
+            animator.SetBool("OpenBox", true);
             nextSentenceSprite.SetActive(true);
 
             yield return null;
@@ -101,7 +98,6 @@ public class NPC : MonoBehaviour
                 StopCoroutine(resetDialogueCo);
             }
 
-            // DisplayNextSentence();
             if (!dialogueHasStarted)
             {
                 DisplayNextSentence();
@@ -123,20 +119,16 @@ public class NPC : MonoBehaviour
 
         if (isTyping)
         {
-            Debug.Log("DisplayFullSentence");
             DisplayFullSentence();
         }
         else if (displayLastSentence)
         {
-            Debug.Log("displayLastSentence");
             dialogueText.text = currentSentence;
             displayLastSentence = false;
-            // listSentences.Dequeue();
             EndSentence();
         }
         else
         {
-            Debug.Log("GoToNextSentence");
             GoToNextSentence();
         }
     }
@@ -198,13 +190,8 @@ public class NPC : MonoBehaviour
                 dialogueText.fontStyle = FontStyles.Bold;
                 yield return typeSentenceCo = StartCoroutine(TypeSentence(dialogue.interruptionSentence));
                 yield return new WaitForSeconds(0.75f);
-                // listSentences.Dequeue();
             }
-
-            Debug.Log("'ffffee");
-            animator.SetBool("Open", false);
-            // animator.SetTrigger("EndDialogue");
-            // resetDialogueCo = StartCoroutine(ResetDialogue());
+            resetDialogueCo = StartCoroutine(ResetDialogue());
         }
         yield return null;
     }
@@ -220,23 +207,21 @@ public class NPC : MonoBehaviour
 
     IEnumerator ResetDialogue()
     {
-        // animator.SetTrigger("EndDialogue");
-        animator.SetBool("Open", false);
+        animator.SetBool("OpenBox", false);
         yield return new WaitForSeconds(delayBeforeReset);
         Load();
     }
 
     private void EndDialogue()
     {
-        // animator.SetTrigger("EndDialogue");
-        animator.SetBool("Open", false);
+        animator.SetBool("OpenBox", false);
 
         if (endDialogueCallback && isPlayerInRange)
         {
             endDialogueCallback.Raise();
         }
 
-        // Load();
+        Load();
         nextSentenceSprite.SetActive(false);
     }
 
