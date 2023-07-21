@@ -78,6 +78,7 @@ public class NPC : MonoBehaviour
         {
             StopTyping();
             isPlayerInRange = true;
+            isTyping = false;
             dialogueText.fontStyle = FontStyles.Normal;
 
             if (listSentences.Count == 0)
@@ -119,20 +120,23 @@ public class NPC : MonoBehaviour
             EndDialogue();
             return;
         }
-
-
+        
         if (isTyping)
         {
+            Debug.Log("isTyping");
             DisplayFullSentence();
         }
         else if (displayLastSentence)
         {
+            Debug.Log("displayLastSentence");
             dialogueText.text = currentSentence;
             displayLastSentence = false;
+            isTyping = false;
             EndSentence();
         }
         else
         {
+            Debug.Log("GoToNextSentence");
             GoToNextSentence();
         }
     }
@@ -182,6 +186,7 @@ public class NPC : MonoBehaviour
         {
             isPlayerInRange = false;
             displayLastSentence = true;
+            isTyping = false;
             
             nextSentenceSprite.SetActive(false);
 
