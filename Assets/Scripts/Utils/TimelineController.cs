@@ -1,5 +1,8 @@
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.Timeline;
+using System.Linq;
+
 
 public class TimelinePlayer : MonoBehaviour
 {
@@ -14,8 +17,25 @@ public class TimelinePlayer : MonoBehaviour
         director.played += Director_Played;
         director.stopped += Director_Stopped;
 
-        onStart.OnEventRaised += StartTimeline;
+        if (onStart != null)
+        {
+            onStart.OnEventRaised += StartTimeline;
+        }
     }
+
+    private void Update()
+    {
+        #if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            var timelineAsset = director.playableAsset as TimelineAsset;
+            var markers = timelineAsset.markerTrack.GetMarkers().ToArray();
+
+            director.time = markers.First().time;
+        }
+        #endif
+    }
+
 
     private void Director_Stopped(PlayableDirector obj)
     {
@@ -32,6 +52,9 @@ public class TimelinePlayer : MonoBehaviour
 
     private void OnDisable()
     {
-        onStart.OnEventRaised -= StartTimeline;
+        if (onStart != null)
+        {
+            onStart.OnEventRaised -= StartTimeline;
+        }
     }
 }

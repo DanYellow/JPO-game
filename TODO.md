@@ -7,3 +7,4 @@
 // https://joebrogers.itch.io/bitpotion
 // https://gamedevbeginner.com/coroutines-in-unity-when-and-how-to-use-them/
 // https://el-tramo.be/blog/fancy-dmg/
+// https://www.youtube.com/watch?v=Y5WVxdhEiIg

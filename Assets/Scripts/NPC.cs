@@ -157,10 +157,11 @@ public class NPC : MonoBehaviour
     {
         dialogueText.text = "";
         isTyping = true;
+        WaitForSeconds internalTypingChar = new WaitForSeconds(0.05f);
         foreach (char letter in sentence.ToCharArray())
         {
             dialogueText.text += letter;
-            yield return new WaitForSeconds(0.05f);
+            yield return internalTypingChar;
         }
         yield return new WaitForSeconds(0.025f);
         EndSentence();

@@ -79,12 +79,13 @@ public class Invulnerable : MonoBehaviour
 
     public IEnumerator InvunlnerableFlash()
     {
+        WaitForSeconds intervalMaterialChange = new WaitForSeconds(materialChange.interval);
         while (isInvulnerable)
         {
             sr.color = new Color(1, 1, 1, 0.55f);
-            yield return new WaitForSeconds(materialChange.interval);
+            yield return intervalMaterialChange;
             sr.color = Color.white;
-            yield return new WaitForSeconds(materialChange.interval);
+            yield return intervalMaterialChange;
         }
 
         // // Hack to reenable OnTriggerEnter/Stay methods

@@ -82,10 +82,11 @@ public class ObjectPoolingGenerator : MonoBehaviour
 
     IEnumerator Create()
     {
+        WaitForSeconds intervalNewItemPooled = new WaitForSeconds(delayBetweenNewItemPooled);
         while (true)
         {
             objectPooling.CreateObject(key);
-            yield return new WaitForSeconds(delayBetweenNewItemPooled);
+            yield return intervalNewItemPooled;
         }
     }
 

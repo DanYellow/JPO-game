@@ -33,12 +33,13 @@ public class PlayerMaterialManager : MonoBehaviour
         currentTime = 0;
         StartCoroutine(StartTimer());
         sr.material = originalMaterial;
+        WaitForSeconds intervalMaterialChange = new WaitForSeconds(materialChange.interval);
         while (currentTime < materialChange.duration)
         {
             sr.material = materialChange.material;
-            yield return new WaitForSeconds(materialChange.interval);
+            yield return intervalMaterialChange;
             sr.material = originalMaterial;
-            yield return new WaitForSeconds(materialChange.interval);
+            yield return intervalMaterialChange;
         }
         sr.material = originalMaterial;
         StopAllCoroutines();
