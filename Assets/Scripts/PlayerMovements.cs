@@ -27,9 +27,12 @@ public class PlayerMovements : MonoBehaviour
     [SerializeField]
     private PlayerStatsValue playerData;
 
+    ParticleSystem dust;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        dust = GetComponentInChildren<ParticleSystem>();
 
         moveSpeed = playerData.moveSpeed;
     }
@@ -39,6 +42,11 @@ public class PlayerMovements : MonoBehaviour
         vectorEventChannel.Raise(moveInput);
 
         Flip();
+
+        // if (Mathf.Abs(rb.velocity.x) > 0)
+        // {
+        //     dust.Play();
+        // }
     }
 
     private void FixedUpdate()
@@ -58,6 +66,7 @@ public class PlayerMovements : MonoBehaviour
     {
         if (moveInput.x > 0 && !isFacingRight || moveInput.x < 0 && isFacingRight)
         {
+            CreateDust();
             isFacingRight = !isFacingRight;
             transform.Rotate(0f, 180f, 0f);
         }
@@ -66,6 +75,11 @@ public class PlayerMovements : MonoBehaviour
     public bool IsGrounded()
     {
         return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, listGroundLayers);
+    }
+
+    void CreateDust()
+    {
+        dust.Play();
     }
 
     void OnDrawGizmos()
