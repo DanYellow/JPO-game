@@ -20,9 +20,6 @@ public class ChangeLight : MonoBehaviour
     private float delayBeforeDecreasing = 10f;
 
     [SerializeField]
-    private float intensityDecreaseTime = 1f;
-
-    [SerializeField]
     private VoidEventChannel onGlobalLightThresholdReached;
 
     private void Awake()
@@ -48,8 +45,8 @@ public class ChangeLight : MonoBehaviour
     IEnumerator DecreaseLight()
     {
         while (light.intensity > minIntensity) {
-            yield return new WaitForSeconds(intensityDecreaseTime);
             light.intensity -= intensityDecreaseStep;
+            yield return null;
         }
     }
 }

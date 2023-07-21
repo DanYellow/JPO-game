@@ -16,30 +16,25 @@ public class Candle : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
-    }
-
-    void Update()
-    {
-        if (light != null)
-        {
-            // float newY = (Mathf.Sin(Time.time * speed) * height) + _originPosition.y;
-            // light.intensity = 0.95f - Mathf.PingPong(Time.time, 0.10f);
-        }
+        light = GetComponentInChildren<Light2D>(true);
+        light.gameObject.SetActive(false);
     }
 
     IEnumerator LightVariation()
     {
         while (light.intensity <= defaultLightIntensity)
         {
-            light.intensity += 0.01f;
+            light.intensity += 0.005f;
             yield return null;
         }
-    
-        // while (true)
-        // {
-        //     light.intensity = 0.95f - Mathf.PingPong(Time.time, 0.10f);
-        //     yield return null;
-        // }
+
+        yield return null;
+
+        while (true)
+        {
+            light.intensity = 0.95f - Mathf.PingPong(Time.time, Random.Range(0.01f, 0.10f));
+            yield return null;
+        }
     }
 
     private void OnEnable()
@@ -53,9 +48,9 @@ public class Candle : MonoBehaviour
 
         yield return null;
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
-
-        light = GetComponentInChildren<Light2D>();
+        
         light.intensity = 0;
+        light.gameObject.SetActive(true);
 
         StartCoroutine(LightVariation());
     }

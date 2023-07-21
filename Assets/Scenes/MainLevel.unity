@@ -1332,7 +1332,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -2698,9 +2698,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minIntensity: 0.1
   intensityThreshold: 0.3
-  intensityDecreaseStep: 0.1
-  delayBeforeDecreasing: 1
-  intensityDecreaseTime: 1
+  intensityDecreaseStep: 0.005
+  delayBeforeDecreasing: 15
   onGlobalLightThresholdReached: {fileID: 11400000, guid: ab5e6c64e9fd0264ab5339c91fb72cb9, type: 2}
 --- !u!1 &607919522
 GameObject:
@@ -3435,7 +3434,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3861037944020561880, guid: 99069d89379dc8b4b88b2c9c9a34bf76, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3861037944020561882, guid: 99069d89379dc8b4b88b2c9c9a34bf76, type: 3}
       propertyPath: m_RootOrder
@@ -4051,7 +4050,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1278083185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4330,7 +4329,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3861037944020561880, guid: 99069d89379dc8b4b88b2c9c9a34bf76, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3861037944020561882, guid: 99069d89379dc8b4b88b2c9c9a34bf76, type: 3}
       propertyPath: m_RootOrder
@@ -8675,7 +8674,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3861037944460294872, guid: 99069d89379dc8b4b88b2c9c9a34bf76, type: 3}
       propertyPath: m_Intensity
-      value: 0
+      value: 0.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 3861037944460294878, guid: 99069d89379dc8b4b88b2c9c9a34bf76, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
