@@ -33,6 +33,8 @@ public class HUDManager : MonoBehaviour
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
         isHurtVoidEventChannel.OnEventRaised += HeartLost;
+
+        playerHUDUI.SetActive(true);
     }
 
 
