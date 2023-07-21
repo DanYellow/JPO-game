@@ -42,7 +42,7 @@ public class GameOverManager : MonoBehaviour
 
     IEnumerator DisplayGameOverScreenProxy() 
     {
-        yield return new WaitForSeconds(0.95f);
+        yield return new WaitForSeconds(0.75f);
         string nbSeconds = Time.timeSinceLevelLoad.ToString("F2");
         timerText.SetText($"Vous avez tenu : <b>{nbSeconds} secondes !</b>");
         gameoverMenuUI.SetActive(true);
