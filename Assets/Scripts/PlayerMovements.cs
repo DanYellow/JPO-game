@@ -45,10 +45,14 @@ public class PlayerMovements : MonoBehaviour
 
         Flip();
 
-        // if (Mathf.Abs(rb.velocity.x) > 0)
-        // {
-        //     dust.Play();
-        // }
+        if (Mathf.Abs(rb.velocity.x) > 0)
+        {
+            if(!dust.isEmitting) {
+                dust.Play();
+            }
+        } else {
+            dust.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+        }
     }
 
     private void FixedUpdate()
@@ -81,7 +85,7 @@ public class PlayerMovements : MonoBehaviour
 
     void CreateDust()
     {
-        dust.Play();
+        // dust.Play();
     }
 
     void OnDrawGizmos()
