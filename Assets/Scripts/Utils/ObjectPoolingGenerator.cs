@@ -33,7 +33,6 @@ public class ObjectPoolingGenerator : MonoBehaviour
 
     private void StopPooling()
     {
-        Debug.Log("ffff");
         StopAllCoroutines();
     }
 
@@ -53,52 +52,36 @@ public class ObjectPoolingGenerator : MonoBehaviour
         StartCoroutine(DecreaseNewPoolTime());
     }
 
-    private void Update()
-    {
-        timerBetweenNewItemPooledUpdate += Time.deltaTime;
-
-        if (whenDelayBetweenNewItemPooledUpdated > 0 && timerBetweenNewItemPooledUpdate >= whenDelayBetweenNewItemPooledUpdated)
-        {
-            timerBetweenNewItemPooledUpdate = 0f;
-            delayBetweenNewItemPooled = Mathf.Clamp(
-                delayBetweenNewItemPooled - stepDecreaseNewItem,
-                stepDecreaseNewItem,
-                0.75f
-            );
-            delayBetweenNewItemPooled = float.Parse(delayBetweenNewItemPooled.ToString("0.000"));
-        }
-    }
-
     IEnumerator DecreaseNewPoolTime()
     {
-        yield return null;
-        // while (true)
-        // {
-        //     timerBetweenNewItemPooledUpdate += Time.deltaTime;
+        while (true)
+        {
+            timerBetweenNewItemPooledUpdate += Time.deltaTime;
 
-        //     if (whenDelayBetweenNewItemPooledUpdated > 0 && timerBetweenNewItemPooledUpdate >= whenDelayBetweenNewItemPooledUpdated)
-        //     {
-        //         timerBetweenNewItemPooledUpdate = 0f;
-        //         delayBetweenNewItemPooled = Mathf.Clamp(
-        //             delayBetweenNewItemPooled - stepDecreaseNewItem,
-        //             stepDecreaseNewItem,
-        //             0.75f
-        //         );
-        //         delayBetweenNewItemPooled = float.Parse(delayBetweenNewItemPooled.ToString("0.000"));
-        //     }
+            if (whenDelayBetweenNewItemPooledUpdated > 0 && timerBetweenNewItemPooledUpdate >= whenDelayBetweenNewItemPooledUpdated)
+            {
+                timerBetweenNewItemPooledUpdate = 0f;
+                delayBetweenNewItemPooled = Mathf.Clamp(
+                    delayBetweenNewItemPooled - stepDecreaseNewItem,
+                    stepDecreaseNewItem,
+                    0.75f
+                );
+                delayBetweenNewItemPooled = float.Parse(delayBetweenNewItemPooled.ToString("0.000"));
+            }
 
-        //     yield return null;
-        // }
+            yield return null;
+        }
     }
 
     IEnumerator Create()
     {
         // WaitForSeconds intervalNewItemPooled = new WaitForSeconds(0);
         WaitForSeconds intervalNewItemPooled = new WaitForSeconds(delayBetweenNewItemPooled);
+
         while (true)
         {
-            objectPooling.CreateObject(key);
             yield return intervalNewItemPooled;
+            objectPooling.CreateObject(key);
         }
     }
 
