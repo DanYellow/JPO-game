@@ -42,7 +42,8 @@ public class HUDManager : MonoBehaviour
     {
     }
 
-    public void StartGame() {
+    public void StartGame()
+    {
         timeBar.fillAmount = timeBarValue.CurrentValue;
         playerStatsValue.nbCurrentLifes = playerStatsValue.nbMaxLifes;
         FillHearts();
@@ -114,6 +115,11 @@ public class HUDManager : MonoBehaviour
     {
         isHurtVoidEventChannel.OnEventRaised -= HeartLost;
         SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnValidate()
+    {
+        FillHearts();
     }
 
 }

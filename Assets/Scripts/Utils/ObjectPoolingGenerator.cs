@@ -41,7 +41,7 @@ public class ObjectPoolingGenerator : MonoBehaviour
         // Create pool of objects 0.0005
         ObjectPoolItemData obj = objectPooling.listItemsToPool.First((item) => item.key == key);
         int initialPoolSize = Mathf.CeilToInt(obj.poolSize * obj.ratioInitialPoolSizeSpawned);
-
+        
         for (var i = 0; i < initialPoolSize; i++)
         {
             objectPooling.CreateObject(key);
