@@ -38,6 +38,7 @@ public class NPC : MonoBehaviour
     private VoidEventChannel endDialogueCallback;
 
     private bool dialogueHasStarted = false;
+    private bool sentenceWasCompleted = false;
 
     private Coroutine resetDialogueCo;
 
@@ -120,23 +121,24 @@ public class NPC : MonoBehaviour
             EndDialogue();
             return;
         }
-        
+
         if (isTyping)
         {
-            Debug.Log("isTyping");
             DisplayFullSentence();
         }
         else if (displayLastSentence)
         {
-            Debug.Log("displayLastSentence");
             dialogueText.text = currentSentence;
+            dialogueText.ForceMeshUpdate();
+            int totalVisibleCharacters = dialogueText.textInfo.characterCount;
+
+            dialogueText.maxVisibleCharacters = totalVisibleCharacters;
             displayLastSentence = false;
             isTyping = false;
             EndSentence();
         }
         else
         {
-            Debug.Log("GoToNextSentence");
             GoToNextSentence();
         }
     }
@@ -145,6 +147,8 @@ public class NPC : MonoBehaviour
     {
         StopTyping();
         dialogueText.text = currentSentence;
+        dialogueText.ForceMeshUpdate();
+        dialogueText.maxVisibleCharacters = dialogueText.textInfo.characterCount;
         EndSentence();
     }
 
@@ -157,16 +161,38 @@ public class NPC : MonoBehaviour
     }
 
     // https://github.com/TUTOUNITYFR/creer-un-jeu-en-2d-facilement-unity/blob/master/Assets/Scripts/DialogueManager.cs
-    IEnumerator TypeSentence(string sentence)
+    // https://www.youtube.com/watch?v=UR_Rh0c4gbY
+    // https://www.youtube.com/watch?v=XqjEB9ySUm0
+    IEnumerator TypeSentence(string sentence, bool isInterrupted = false)
     {
-        dialogueText.text = "";
         isTyping = true;
-        WaitForSeconds internalTypingChar = new WaitForSeconds(0.05f);
-        foreach (char letter in sentence.ToCharArray())
+
+        if (sentenceWasCompleted && isPlayerInRange || isInterrupted)
         {
-            dialogueText.text += letter;
-            yield return internalTypingChar;
+            dialogueText.text = sentence;
         }
+        else
+        {
+            dialogueText.text = currentSentence;
+        }
+
+        dialogueText.ForceMeshUpdate();
+        int totalVisibleCharacters = dialogueText.textInfo.characterCount;
+
+        dialogueText.maxVisibleCharacters = 0;
+        int counter = 0;
+
+        TMP_TextInfo textInfo = dialogueText.textInfo;
+
+        WaitForSeconds internalTypingChar = new WaitForSeconds(0.03f);
+        while (counter < totalVisibleCharacters)
+        {
+            dialogueText.maxVisibleCharacters++;
+
+            yield return internalTypingChar;
+            counter++;
+        }
+        sentenceWasCompleted = true;
         yield return new WaitForSeconds(0.025f);
         EndSentence();
     }
@@ -187,7 +213,7 @@ public class NPC : MonoBehaviour
             isPlayerInRange = false;
             displayLastSentence = true;
             isTyping = false;
-            
+
             nextSentenceSprite.SetActive(false);
 
             if (
@@ -197,8 +223,9 @@ public class NPC : MonoBehaviour
             )
             {
                 StopTyping();
+                sentenceWasCompleted = false;
                 dialogueText.fontStyle = FontStyles.Bold;
-                yield return typeSentenceCo = StartCoroutine(TypeSentence(dialogue.interruptionSentence));
+                yield return typeSentenceCo = StartCoroutine(TypeSentence(dialogue.interruptionSentence, true));
                 yield return new WaitForSeconds(0.75f);
             }
             resetDialogueCo = StartCoroutine(ResetDialogue());
@@ -210,7 +237,6 @@ public class NPC : MonoBehaviour
     {
         if (typeSentenceCo != null)
         {
-            dialogueText.text = "...";
             StopCoroutine(typeSentenceCo);
         }
     }
