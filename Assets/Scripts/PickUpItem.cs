@@ -27,7 +27,6 @@ public class PickUpItem : MonoBehaviour
 
     private void OnEnable()
     {
-        if (gameObject == null) return;
         transform.position = new Vector3(
             Random.Range(
                 ScreenUtility.Instance.Left + (sr.bounds.size.x / 2),

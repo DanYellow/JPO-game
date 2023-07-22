@@ -14,6 +14,12 @@ public class GameOverManager : MonoBehaviour
 
     public TMP_Text timerText;
 
+    [SerializeField]
+    private ScoreIndicator[] listScoreIndicator;
+
+    [SerializeField]
+    private int scoreThreshold = 42;
+
     private void Awake()
     {
         gameoverMenuUI.SetActive(false);
@@ -56,25 +62,29 @@ public class GameOverManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.75f);
 
+        foreach (var item in gameoverMenuUI.GetComponentsInChildren<Button>())
+        {
+            item.interactable = false;
+        }
+
         timerText.SetText($"Vous avez tenu : <b>{GetGameTime()} secondes !</b>");
         gameoverMenuUI.SetActive(true);
 
-        int nbStars = Mathf.FloorToInt(Time.timeSinceLevelLoad / 3);
-        ScoreIndicator[] listScoreIndicator = FindObjectsOfType<ScoreIndicator>();
+        int nbScoreIndicatorsEarned = Mathf.FloorToInt(Time.timeSinceLevelLoad / scoreThreshold);
         
+        int nbScoreIndicatorsMax = (nbScoreIndicatorsEarned - (nbScoreIndicatorsEarned - listScoreIndicator.Length));
 
-        int nbScoreIndicatorMax = Mathf.Clamp(
-            (nbStars - (nbStars - listScoreIndicator.Length)),
-            0,
-            listScoreIndicator.Length
-        );
-        Debug.Log("fff " + (nbStars - (nbStars - listScoreIndicator.Length)));
-        for (int i = 0; i < (nbStars - (nbStars - listScoreIndicator.Length)); i++)
+        for (int i = 0; i <nbScoreIndicatorsMax; i++)
         {
+            yield return new WaitForSeconds(0.5f);
             listScoreIndicator[i].Activate();
         }
 
-        // playerHUDUI.SetActive(false);
+        foreach (var item in gameoverMenuUI.GetComponentsInChildren<Button>())
+        {
+            item.interactable = true;
+        }
+
         StartCoroutine(TriggerInputAction());
     }
 
