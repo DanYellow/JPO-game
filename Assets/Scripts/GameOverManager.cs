@@ -71,11 +71,14 @@ public class GameOverManager : MonoBehaviour
         gameoverMenuUI.SetActive(true);
 
         int nbScoreIndicatorsEarned = Mathf.FloorToInt(Time.timeSinceLevelLoad / scoreThreshold);
-        
-        int nbScoreIndicatorsMax = (nbScoreIndicatorsEarned - (nbScoreIndicatorsEarned - listScoreIndicator.Length));
+
+        int nbScoreIndicatorsMax = Mathf.Clamp(nbScoreIndicatorsEarned, 0, listScoreIndicator.Length);
 
         for (int i = 0; i <nbScoreIndicatorsMax; i++)
         {
+            if(i > listScoreIndicator.Length) {
+                yield break;
+            }
             yield return new WaitForSeconds(0.5f);
             listScoreIndicator[i].Activate();
         }
@@ -97,9 +100,19 @@ public class GameOverManager : MonoBehaviour
 
     public void OnControlsChanged(PlayerInput input)
     {
+        Debug.Log("input " + input);
         if (input.currentControlScheme.Equals("Gamepad") && gameoverMenuUI.activeInHierarchy)
         {
             gameoverMenuUI.GetComponentInChildren<Button>().Select();
+        }
+    }
+
+    public void OnArrowUsed() {
+        if (gameoverMenuUI.activeInHierarchy)
+        {
+            // https://discussions.unity.com/t/if-button-highlighted/136532
+            // gameoverMenuUI.GetComponentInChildren<Button>()
+            // gameoverMenuUI.GetComponentInChildren<Button>().Select();
         }
     }
 

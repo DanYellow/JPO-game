@@ -54,7 +54,7 @@ public class PlayerHealth : MonoBehaviour
         );
 
         isHurtVoidEventChannel.Raise();
-        if (playerStatsValue.nbCurrentLifes == 0)
+        if (playerStatsValue.nbCurrentLifes <= 0)
         {
             onPlayerDeathVoidEventChannel.Raise();
             OnDeath();
