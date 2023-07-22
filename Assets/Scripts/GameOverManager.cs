@@ -19,12 +19,12 @@ public class GameOverManager : MonoBehaviour
         gameoverMenuUI.SetActive(false);
     }
 
-        private void Update()
+    private void Update()
     {
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.N))
         {
-            Debug.Log("Time spent : " + Time.timeSinceLevelLoad.ToString("F2"));
+            Debug.Log("Time spent : " + Time.timeSinceLevelLoad);
         }
 #endif
     }
@@ -40,11 +40,23 @@ public class GameOverManager : MonoBehaviour
         StartCoroutine(DisplayGameOverScreenProxy());
     }
 
-    IEnumerator DisplayGameOverScreenProxy() 
+    private string GetGameTime()
+    {
+        float t = Time.timeSinceLevelLoad; // time since scene loaded
+
+        int seconds = (int)(t % 60); // return the remainder of the seconds divide by 60 as an int
+        t /= 60; // divide current time y 60 to get minutes
+        int minutes = (int)(t % 60); //return the remainder of the minutes divide by 60 as an int
+        t /= 60; // divide by 60 to get hours
+
+        return string.Format("{0}:{1}", minutes.ToString("00"), seconds.ToString("00"));
+    }
+
+    IEnumerator DisplayGameOverScreenProxy()
     {
         yield return new WaitForSeconds(0.75f);
-        string nbSeconds = Time.timeSinceLevelLoad.ToString("F2");
-        timerText.SetText($"Vous avez tenu : <b>{nbSeconds} secondes !</b>");
+
+        timerText.SetText($"Vous avez tenu : <b>{GetGameTime()} secondes !</b>");
         gameoverMenuUI.SetActive(true);
         // playerHUDUI.SetActive(false);
         StartCoroutine(TriggerInputAction());

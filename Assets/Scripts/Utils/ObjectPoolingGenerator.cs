@@ -15,17 +15,10 @@ public class ObjectPoolingGenerator : MonoBehaviour
     [Header("Pooling")]
     [SerializeField, Tooltip("Interval between creation / new pool of an object")]
     private float delayBetweenNewItemPooled = 0.75f;
-    [Tooltip("Define how often the pool interval can be update. -1 if not needed")]
+    [Tooltip("Define how often the pool interval can be updated. -1 if not needed")]
     public float whenDelayBetweenNewItemPooledUpdated = -1;
+    public float stepDecreaseNewItem = 0.01f;
     private float timerBetweenNewItemPooledUpdate = 0f;
-
-    [Header("Upgrade pool size")]
-    [SerializeField]
-    private float delayBetweenPoolSizeUpdate = 15f;
-    private float timerPoolSizeUpdate = 0f;
-
-    [SerializeField]
-    private int nbSlotsAddable = 10;
 
     private void Awake()
     {
@@ -33,12 +26,14 @@ public class ObjectPoolingGenerator : MonoBehaviour
         onPlayerDeathVoidEventChannel.OnEventRaised += StopPooling;
     }
 
-    public void StartGame() {
+    public void StartGame()
+    {
         StartCoroutine(Generate());
     }
 
     private void StopPooling()
     {
+        Debug.Log("ffff");
         StopAllCoroutines();
     }
 
@@ -46,43 +41,59 @@ public class ObjectPoolingGenerator : MonoBehaviour
     {
         // Create pool of objects 0.0005
         ObjectPoolItemData obj = objectPooling.listItemsToPool.First((item) => item.key == key);
-        for (var i = 0; i < obj.poolSize; i++)
+        int initialPoolSize = Mathf.CeilToInt(obj.poolSize * obj.ratioInitialPoolSizeSpawned);
+
+        for (var i = 0; i < initialPoolSize; i++)
         {
             objectPooling.CreateObject(key);
-            yield return new WaitForSeconds(Random.Range(0.05f, 0.25f));
+            yield return new WaitForSeconds(Random.Range(0.15f, 0.55f));
         }
 
         StartCoroutine(Create());
+        StartCoroutine(DecreaseNewPoolTime());
     }
 
     private void Update()
     {
         timerBetweenNewItemPooledUpdate += Time.deltaTime;
-        timerPoolSizeUpdate += Time.deltaTime;
 
         if (whenDelayBetweenNewItemPooledUpdated > 0 && timerBetweenNewItemPooledUpdate >= whenDelayBetweenNewItemPooledUpdated)
         {
             timerBetweenNewItemPooledUpdate = 0f;
-            delayBetweenNewItemPooled = Mathf.Clamp(delayBetweenNewItemPooled - 0.05f, 0.05f, 0.75f);
-            delayBetweenNewItemPooled = float.Parse(delayBetweenNewItemPooled.ToString("0.00"));
+            delayBetweenNewItemPooled = Mathf.Clamp(
+                delayBetweenNewItemPooled - stepDecreaseNewItem,
+                stepDecreaseNewItem,
+                0.75f
+            );
+            delayBetweenNewItemPooled = float.Parse(delayBetweenNewItemPooled.ToString("0.000"));
         }
+    }
 
-        if (
-            delayBetweenPoolSizeUpdate > 0 &&
-            timerPoolSizeUpdate >= delayBetweenPoolSizeUpdate
+    IEnumerator DecreaseNewPoolTime()
+    {
+        yield return null;
+        // while (true)
+        // {
+        //     timerBetweenNewItemPooledUpdate += Time.deltaTime;
 
-        )
-        {
-            timerPoolSizeUpdate = 0f;
-            if (objectPooling.listDictItemsToPool.TryGetValue(key, out ObjectPoolItemData itemToPool))
-            {
-                itemToPool.poolSize += nbSlotsAddable;
-            }
-        }
+        //     if (whenDelayBetweenNewItemPooledUpdated > 0 && timerBetweenNewItemPooledUpdate >= whenDelayBetweenNewItemPooledUpdated)
+        //     {
+        //         timerBetweenNewItemPooledUpdate = 0f;
+        //         delayBetweenNewItemPooled = Mathf.Clamp(
+        //             delayBetweenNewItemPooled - stepDecreaseNewItem,
+        //             stepDecreaseNewItem,
+        //             0.75f
+        //         );
+        //         delayBetweenNewItemPooled = float.Parse(delayBetweenNewItemPooled.ToString("0.000"));
+        //     }
+
+        //     yield return null;
+        // }
     }
 
     IEnumerator Create()
     {
+        // WaitForSeconds intervalNewItemPooled = new WaitForSeconds(0);
         WaitForSeconds intervalNewItemPooled = new WaitForSeconds(delayBetweenNewItemPooled);
         while (true)
         {

@@ -9,8 +9,8 @@ public class Obstacle : MonoBehaviour
 
     private float height;
     private int nbInvocations = 0;
-    private int accelerationFallThreshold = 5;
-    public float maxLinearDrag = 4.5f;
+    private int accelerationFallThreshold = 1;
+    public float maxLinearDrag = 3.5f;
 
     private void Awake()
     {
@@ -26,7 +26,7 @@ public class Obstacle : MonoBehaviour
     {
         if (nbInvocations % accelerationFallThreshold == 0)
         {
-            rb.drag = Mathf.Clamp(rb.drag - 0.5f, 0, maxLinearDrag);
+            rb.drag = Mathf.Clamp(rb.drag - 0.75f, 0, maxLinearDrag);
         }
         rb.velocity = Vector3.zero;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;

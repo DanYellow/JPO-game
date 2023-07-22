@@ -2699,7 +2699,7 @@ MonoBehaviour:
   minIntensity: 0.1
   intensityThreshold: 0.3
   intensityDecreaseStep: 0.0001
-  delayBeforeDecreasing: 15
+  delayBeforeDecreasing: 25
   onGlobalLightThresholdReached: {fileID: 11400000, guid: ab5e6c64e9fd0264ab5339c91fb72cb9, type: 2}
 --- !u!1 &607919522
 GameObject:
@@ -3351,8 +3351,7 @@ MonoBehaviour:
   key: diamond
   delayBetweenNewItemPooled: 2.25
   whenDelayBetweenNewItemPooledUpdated: -1
-  delayBetweenPoolSizeUpdate: 20
-  nbSlotsAddable: 1
+  stepDecreaseNewItem: 0.01
 --- !u!1001 &981178079
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4130,10 +4129,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onPlayerDeathVoidEventChannel: {fileID: 11400000, guid: ee804061685d49549a86590b0c280ccd, type: 2}
   key: obstacle
-  delayBetweenNewItemPooled: 0.65
-  whenDelayBetweenNewItemPooledUpdated: 6
-  delayBetweenPoolSizeUpdate: 17
-  nbSlotsAddable: 15
+  delayBetweenNewItemPooled: 0.35
+  whenDelayBetweenNewItemPooledUpdated: 0.55
+  stepDecreaseNewItem: 0.001
 --- !u!4 &1278083187
 Transform:
   m_ObjectHideFlags: 0
@@ -8114,9 +8112,11 @@ MonoBehaviour:
   listItemsToPool:
   - poolSize: 3
     key: diamond
+    ratioInitialPoolSizeSpawned: 1
     prefab: {fileID: 1709273481406156916, guid: 74be66d7f2604864ba3834afbc8836b8, type: 3}
-  - poolSize: 20
+  - poolSize: 70
     key: obstacle
+    ratioInitialPoolSizeSpawned: 0.25
     prefab: {fileID: 5300067975064995127, guid: 737a40bd6c285f246a78308b0e387ef4, type: 3}
 --- !u!1 &1775859216
 GameObject:
@@ -8962,22 +8962,6 @@ PrefabInstance:
     - target: {fileID: 9121902344590174886, guid: 665a9f2698f60a843957d7f247023f29, type: 3}
       propertyPath: m_IsActive
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9121902344590174937, guid: 665a9f2698f60a843957d7f247023f29, type: 3}
-      propertyPath: m_Size.x
-      value: 0.48138142
-      objectReference: {fileID: 0}
-    - target: {fileID: 9121902344590174937, guid: 665a9f2698f60a843957d7f247023f29, type: 3}
-      propertyPath: m_Size.y
-      value: 0.77288723
-      objectReference: {fileID: 0}
-    - target: {fileID: 9121902344590174937, guid: 665a9f2698f60a843957d7f247023f29, type: 3}
-      propertyPath: m_Offset.x
-      value: 0.07667267
-      objectReference: {fileID: 0}
-    - target: {fileID: 9121902344590174937, guid: 665a9f2698f60a843957d7f247023f29, type: 3}
-      propertyPath: m_Offset.y
-      value: -0.09077358
       objectReference: {fileID: 0}
     - target: {fileID: 9121902344590174938, guid: 665a9f2698f60a843957d7f247023f29, type: 3}
       propertyPath: m_RootOrder

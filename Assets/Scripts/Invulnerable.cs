@@ -63,7 +63,7 @@ public class Invulnerable : MonoBehaviour
         if (!isInvulnerable && isInLayer)
         {
             StartCoroutine(HandleInvunlnerableDelay(otherLayer.value));
-            StartCoroutine(InvunlnerableFlash());
+            // StartCoroutine(InvunlnerableFlash());
             onMaterialChange.Raise(materialChange);
         }
     }
@@ -87,12 +87,7 @@ public class Invulnerable : MonoBehaviour
             sr.color = Color.white;
             yield return intervalMaterialChange;
         }
-
-        // // Hack to reenable OnTriggerEnter/Stay methods
-        // gameObject.transform.position = new Vector3(
-        //     gameObject.transform.position.x + 0.001f,
-        //     gameObject.transform.position.y
-        // );
+        sr.color = Color.white;
     }
 
     private void OnDisable()

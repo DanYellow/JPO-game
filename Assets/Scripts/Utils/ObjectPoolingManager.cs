@@ -9,6 +9,9 @@ public class ObjectPoolItemData
     public int poolSize = 5;
     public string key = "";
 
+    [Range(0, 1)]
+    public float ratioInitialPoolSizeSpawned = 1;
+
     [Tooltip("Defines the prefab to instanciate / pool")]
     public GameObject prefab;
     public Queue<GameObject> queueObjectsPooled = new Queue<GameObject>();
