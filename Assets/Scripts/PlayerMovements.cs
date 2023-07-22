@@ -12,9 +12,7 @@ public class PlayerMovements : MonoBehaviour
     [SerializeField, ReadOnlyInspector]
     private bool isFacingRight = true;
 
-    [Header("Events")]
-    [SerializeField]
-    private VectorEventChannel vectorEventChannel;
+    
 
     [Space(15), Tooltip("Position checks")]
     private bool isGrounded;
@@ -23,6 +21,10 @@ public class PlayerMovements : MonoBehaviour
     public float groundCheckRadius;
     private float moveSpeed;
     private Vector2 nextPosition;
+
+    [Header("Events")]
+    [SerializeField]
+    private VectorEventChannel vectorEventChannel;
 
     [SerializeField]
     private PlayerStatsValue playerData;

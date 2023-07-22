@@ -24,7 +24,7 @@ public class HUDManager : MonoBehaviour
     [SerializeField]
     private FloatValue timeBarValue;
 
-    public float decreaseTimeBarStep = 0.001f;
+    public float decreaseTimeBarStep = 0.005f;
 
     [SerializeField]
     private VoidEventChannel onPlayerDeathVoidEventChannel;

@@ -1,11 +1,10 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMaterialManager : MonoBehaviour
 {
     private Material originalMaterial;
+    private float originalAlpha;
     private SpriteRenderer sr;
 
     [SerializeField]
@@ -17,9 +16,11 @@ public class PlayerMaterialManager : MonoBehaviour
     {
         sr = GetComponent<SpriteRenderer>();
         originalMaterial = sr.material;
+        originalAlpha = sr.color.a;
     }
-    
-    private void OnEnable() {
+
+    private void OnEnable()
+    {
         onMaterialChange.OnEventRaised += ChangeMaterialProxy;
     }
 
@@ -33,14 +34,23 @@ public class PlayerMaterialManager : MonoBehaviour
         currentTime = 0;
         StartCoroutine(StartTimer());
         sr.material = originalMaterial;
+
+        Color targetColor = sr.color;
+        targetColor.a = materialChange.opacity;
+
+        Color originalColor = sr.color;
+
         WaitForSeconds intervalMaterialChange = new WaitForSeconds(materialChange.interval);
         while (currentTime < materialChange.duration)
         {
             sr.material = materialChange.material;
+            sr.color = targetColor;
             yield return intervalMaterialChange;
             sr.material = originalMaterial;
+            sr.color = originalColor;
             yield return intervalMaterialChange;
         }
+        sr.color = originalColor;
         sr.material = originalMaterial;
         StopAllCoroutines();
     }
@@ -53,7 +63,6 @@ public class PlayerMaterialManager : MonoBehaviour
             yield return null;
         }
     }
-
 
     private void OnDisable()
     {

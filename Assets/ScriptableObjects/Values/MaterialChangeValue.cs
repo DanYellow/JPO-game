@@ -8,6 +8,9 @@ public class MaterialChangeValue : ScriptableObject
     public float interval;
     public float duration;
 
+    [Range(0, 1)]
+    public float opacity = 1;
+
     [Multiline, SerializeField]
     private string DeveloperDescription = "";
 }

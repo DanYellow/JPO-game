@@ -44,12 +44,12 @@ public class ObjectPoolingGenerator : MonoBehaviour
 
     IEnumerator Generate()
     {
-        // Create pool of objects
+        // Create pool of objects 0.0005
         ObjectPoolItemData obj = objectPooling.listItemsToPool.First((item) => item.key == key);
         for (var i = 0; i < obj.poolSize; i++)
         {
             objectPooling.CreateObject(key);
-            yield return new WaitForSeconds(Random.Range(0.1f, 0.65f));
+            yield return new WaitForSeconds(Random.Range(0.05f, 0.25f));
         }
 
         StartCoroutine(Create());
@@ -70,6 +70,7 @@ public class ObjectPoolingGenerator : MonoBehaviour
         if (
             delayBetweenPoolSizeUpdate > 0 &&
             timerPoolSizeUpdate >= delayBetweenPoolSizeUpdate
+
         )
         {
             timerPoolSizeUpdate = 0f;
