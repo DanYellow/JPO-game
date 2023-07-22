@@ -119,7 +119,7 @@ public class HUDManager : MonoBehaviour
 
     private void OnValidate()
     {
-        FillHearts();
+        // FillHearts();
     }
 
 }

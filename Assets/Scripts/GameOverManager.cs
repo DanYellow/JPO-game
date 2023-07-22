@@ -24,7 +24,7 @@ public class GameOverManager : MonoBehaviour
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.N))
         {
-            Debug.Log("Time spent : " + Time.timeSinceLevelLoad);
+            Debug.Log("Time spent : " + (int)Time.timeSinceLevelLoad);
         }
 #endif
     }
@@ -58,6 +58,22 @@ public class GameOverManager : MonoBehaviour
 
         timerText.SetText($"Vous avez tenu : <b>{GetGameTime()} secondes !</b>");
         gameoverMenuUI.SetActive(true);
+
+        int nbStars = Mathf.FloorToInt(Time.timeSinceLevelLoad / 3);
+        ScoreIndicator[] listScoreIndicator = FindObjectsOfType<ScoreIndicator>();
+        
+
+        int nbScoreIndicatorMax = Mathf.Clamp(
+            (nbStars - (nbStars - listScoreIndicator.Length)),
+            0,
+            listScoreIndicator.Length
+        );
+        Debug.Log("fff " + (nbStars - (nbStars - listScoreIndicator.Length)));
+        for (int i = 0; i < (nbStars - (nbStars - listScoreIndicator.Length)); i++)
+        {
+            listScoreIndicator[i].Activate();
+        }
+
         // playerHUDUI.SetActive(false);
         StartCoroutine(TriggerInputAction());
     }
