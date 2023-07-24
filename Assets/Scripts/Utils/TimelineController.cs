@@ -19,6 +19,8 @@ public class TimelinePlayer : MonoBehaviour
     [SerializeField]
     private Image skipProgress;
 
+    private float holdSkipBtnDuration = 0.7f;
+
 
     private void Awake()
     {
@@ -51,7 +53,7 @@ public class TimelinePlayer : MonoBehaviour
         while (skipProgress.fillAmount < 1)
         {
             currentTime += Time.deltaTime;
-            skipProgress.fillAmount = currentTime / 1;
+            skipProgress.fillAmount = currentTime / holdSkipBtnDuration;
 
             yield return null;
         }
@@ -64,7 +66,7 @@ public class TimelinePlayer : MonoBehaviour
         while (skipProgress.fillAmount > 0)
         {
             currentTime -= Time.deltaTime;
-            skipProgress.fillAmount = currentTime / 1;
+            skipProgress.fillAmount = currentTime / holdSkipBtnDuration;
 
             yield return null;
         }

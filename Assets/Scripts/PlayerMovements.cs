@@ -27,7 +27,10 @@ public class PlayerMovements : MonoBehaviour
     [SerializeField]
     private PlayerStatsValue playerData;
 
-    ParticleSystem dust;
+    private ParticleSystem dust;
+
+    [SerializeField]
+    private bool showOnStart = true;
 
     private void Awake()
     {
@@ -35,7 +38,7 @@ public class PlayerMovements : MonoBehaviour
         dust = GetComponentInChildren<ParticleSystem>();
 
         moveSpeed = playerData.moveSpeed;
-        gameObject.SetActive(false);
+        gameObject.SetActive(showOnStart);
     }
 
     void Update()

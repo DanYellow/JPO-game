@@ -79,7 +79,7 @@ public class GameOverManager : MonoBehaviour
             if(i > listScoreIndicator.Length) {
                 yield break;
             }
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.75f);
             listScoreIndicator[i].Activate();
         }
 
