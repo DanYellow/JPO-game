@@ -1,6 +1,8 @@
 - ~~Add cinematic + dialogue on gamestart~~
 - ~~Allow on press spacebar during dialogue to display the whole sentence instead of skip to the next line~~
-- Make NPC shout at player if he leaves during his speak
+- ~~Make NPC shout at player if he leaves during his speak~~
+- Add transition between scenes
+- 
 
 
 // https://www.youtube.com/watch?v=RXhTD8YZnY4

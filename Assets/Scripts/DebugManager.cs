@@ -9,6 +9,7 @@ public class DebugManager : MonoBehaviour
 
     [SerializeField, Range(0, 1)]
     private float slowTime = 1f;
+
     // Update is called once per frame
     void Update()
     {

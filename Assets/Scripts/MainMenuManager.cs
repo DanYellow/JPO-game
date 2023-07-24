@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
-using TMPro;
 using UnityEngine.Events;
 // https://www.youtube.com/watch?v=vqZjZ6yv1lA
 
@@ -13,9 +12,6 @@ public class MainMenuManager : MonoBehaviour
     private GameObject mainMenu;
 
     [SerializeField]
-    private GameObject infosMenu;
-
-    [SerializeField]
     private PlayerInput pi;
 
     [SerializeField]
@@ -23,25 +19,29 @@ public class MainMenuManager : MonoBehaviour
 
     private UnityAction onFirstLevelLoadEvent;
 
-    // string deviceLayoutName, controlPath;
+    private SceneTransition sceneTransition;
 
     private void Awake()
     {
         Time.timeScale = 1f;
-        infosMenu.SetActive(false);
 
-        if (pi.currentControlScheme.Equals("Gamepad"))
-        {
-            EventSystemExtensions.UpdateSelectedGameObject(mainMenu.GetComponentInChildren<Button>().gameObject);
-        }
+        sceneTransition = GetComponent<SceneTransition>();
+        pi.enabled = false;
     }
 
-    private void Start() {
-        onFirstLevelLoadEvent = () => {
+    private void Start()
+    {
+        onFirstLevelLoadEvent = () =>
+        {
             // LoadLevel(1); 
         };
 
+        StartCoroutine(sceneTransition.Show(EnableControls));
         OnFirstLevelStart.OnEventRaised += onFirstLevelLoadEvent;
+    }
+
+    private void EnableControls() {
+        pi.enabled = true;
     }
 
     public void OnNavigate(InputAction.CallbackContext ctx)
@@ -62,12 +62,6 @@ public class MainMenuManager : MonoBehaviour
             }
         }
 
-        if (input.currentControlScheme.Equals("Gamepad") && infosMenu.activeInHierarchy)
-        {
-            infosMenu.GetComponentInChildren<Button>().Select();
-            // EventSystemExtensions.UpdateSelectedGameObject(infosMenu.GetComponentInChildren<ScrollRect>().gameObject);
-        }
-
         if (input.currentControlScheme.Equals("Keyboard&Mouse"))
         {
             EventSystem.current.SetSelectedGameObject(null);
@@ -80,43 +74,20 @@ public class MainMenuManager : MonoBehaviour
         SceneManager.LoadScene(index, LoadSceneMode.Single);
     }
 
-    public void DisplayInfosMenu(bool isStartGame = false)
-    {
-        infosMenu.SetActive(true);
-        Button button = infosMenu.GetComponentInChildren<Button>();
-        TextMeshProUGUI textMeshProUGUI = button.GetComponentInChildren<TextMeshProUGUI>();
-        button.onClick.RemoveAllListeners();
-        if (isStartGame)
-        {
-            textMeshProUGUI.SetText("COMMENCER");
-            button.onClick.AddListener(() => LoadLevel(1));
-        }
-        else
-        {
-            button.onClick.AddListener(() => HideInfosMenu());
-        }
-
-        EventSystemExtensions.UpdateSelectedGameObject(infosMenu.GetComponentInChildren<Button>().gameObject);
-    }
-
-    public void HideInfosMenu()
-    {
-        EventSystemExtensions.UpdateSelectedGameObject(mainMenu.GetComponentsInChildren<Button>()[1].gameObject);
-        infosMenu.SetActive(false);
+    public void TransitionToScene(int levelIndex) {
+        StartCoroutine(sceneTransition.Hide(() => LoadLevel(levelIndex)));
     }
 
     public void QuitGame()
     {
-        if (!infosMenu.activeInHierarchy)
-        {
 #if UNITY_EDITOR
-            Debug.Log("Quit game");
+        Debug.Log("Quit game");
 #endif
-            Application.Quit();
-        }
+        Application.Quit();
     }
 
-    private void OnDisable() {
+    private void OnDisable()
+    {
         OnFirstLevelStart.OnEventRaised -= onFirstLevelLoadEvent;
     }
 }
