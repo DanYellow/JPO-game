@@ -26,7 +26,7 @@ public class MainMenuManager : MonoBehaviour
         Time.timeScale = 1f;
 
         sceneTransition = GetComponent<SceneTransition>();
-        pi.enabled = false;
+        // pi.enabled = false;
     }
 
     private void Start()

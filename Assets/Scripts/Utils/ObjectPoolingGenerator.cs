@@ -15,6 +15,7 @@ public class ObjectPoolingGenerator : MonoBehaviour
     [Header("Pooling")]
     [SerializeField, Tooltip("Interval between creation / new pool of an object")]
     private float delayBetweenNewItemPooled = 0.75f;
+    private float baseDelayBetweenNewItemPooled = 0;
     [Tooltip("Define how often the pool interval can be updated. -1 if not needed")]
     public float whenDelayBetweenNewItemPooledUpdated = -1;
     public float stepDecreaseNewItem = 0.01f;
@@ -24,6 +25,8 @@ public class ObjectPoolingGenerator : MonoBehaviour
     {
         objectPooling = FindObjectOfType<ObjectPoolingManager>(false);
         onPlayerDeathVoidEventChannel.OnEventRaised += StopPooling;
+
+        baseDelayBetweenNewItemPooled = delayBetweenNewItemPooled;
     }
 
     public void StartGame()
@@ -64,7 +67,7 @@ public class ObjectPoolingGenerator : MonoBehaviour
                 delayBetweenNewItemPooled = Mathf.Clamp(
                     delayBetweenNewItemPooled - stepDecreaseNewItem,
                     stepDecreaseNewItem,
-                    0.75f
+                    baseDelayBetweenNewItemPooled
                 );
                 delayBetweenNewItemPooled = float.Parse(delayBetweenNewItemPooled.ToString("0.000"));
             }

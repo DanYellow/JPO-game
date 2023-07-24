@@ -2,6 +2,14 @@ using UnityEngine.InputSystem;
 using UnityEngine;
 using UnityEngine.Events;
 
+public class ActionMapName
+{
+    public static string Player = "Player";
+    public static string UI = "UI";
+    public static string UIGameOverAndCredits = "UIGameOverAndCredits";
+    public static string Cinematics = "Cinematics";
+}
+
 public class InputManager : MonoBehaviour
 {
     public PlayerInput playerInput;
@@ -11,35 +19,47 @@ public class InputManager : MonoBehaviour
 
     [SerializeField]
     private VoidEventChannel onPlayerDeath;
+    
+    [SerializeField]
+    private VoidEventChannel onCinematicStartEvent;
 
     private UnityAction onCreditsOrDeathEvent;
+    private UnityAction onCinematic;
 
     private void Awake()
     {
-        onCreditsOrDeathEvent = () => { SetUIGameOverActionMap(); };
+        onCreditsOrDeathEvent = () => { SwitchActionMap(ActionMapName.UIGameOverAndCredits); };
         onTogglePauseEvent.OnEventRaised += ToggleActionMap;
         onPlayerDeath.OnEventRaised += onCreditsOrDeathEvent;
+
+        onCinematic = () => { 
+            Debug.Log("Hello");
+            SwitchActionMap(ActionMapName.Cinematics); };
+        onCinematicStartEvent.OnEventRaised += onCinematic;
     }
 
     public void ToggleActionMap(bool isPaused)
     {
         if (isPaused)
         {
-            playerInput.SwitchCurrentActionMap("UI");
+            SwitchActionMap(ActionMapName.UI);
         }
         else
         {
-            playerInput.SwitchCurrentActionMap("Player");
+            SwitchActionMap(ActionMapName.Player);
         }
     }
 
-    private void SetUIGameOverActionMap() {
-        playerInput.SwitchCurrentActionMap("UIGameOverAndCredits");
+    private void SwitchActionMap(string mapName = null)
+    {
+        mapName = mapName ?? ActionMapName.Player;
+        playerInput.SwitchCurrentActionMap(mapName);
     }
 
     private void OnDisable()
     {
         onTogglePauseEvent.OnEventRaised -= ToggleActionMap;
         onPlayerDeath.OnEventRaised -= onCreditsOrDeathEvent;
+        onCinematicStartEvent.OnEventRaised -= onCinematic;
     }
 }

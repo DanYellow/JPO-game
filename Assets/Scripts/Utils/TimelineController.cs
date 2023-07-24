@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
 using System.Linq;
-
+using UnityEngine.InputSystem;
 
 public class TimelinePlayer : MonoBehaviour
 {
@@ -10,6 +10,10 @@ public class TimelinePlayer : MonoBehaviour
 
     [SerializeField]
     private VoidEventChannel onStart;
+
+    [SerializeField]
+    private VoidEventChannel onStartPlay;
+
 
     private void Awake()
     {
@@ -23,19 +27,34 @@ public class TimelinePlayer : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        #if UNITY_EDITOR
-        if (Input.GetKeyDown(KeyCode.C) && director.state == PlayState.Playing)
-        {
-            var timelineAsset = director.playableAsset as TimelineAsset;
-            var markers = timelineAsset.markerTrack.GetMarkers().ToArray();
+    // private void Update()
+    // {
+    //     #if UNITY_EDITOR
+    //     if (Input.GetKeyDown(KeyCode.C) && director.state == PlayState.Playing)
+    //     {
+    //         var timelineAsset = director.playableAsset as TimelineAsset;
+    //         var markers = timelineAsset.markerTrack.GetMarkers().ToArray();
 
-            director.time = markers.First().time;
+    //         director.time = markers.First().time;
+    //     }
+    //     #endif
+    // }
+
+    public void OnSkip(InputAction.CallbackContext ctx)
+    {
+        if (ctx.phase == InputActionPhase.Performed)
+        {
+            Skip();
         }
-        #endif
     }
 
+    private void Skip()
+    {
+        var timelineAsset = director.playableAsset as TimelineAsset;
+        var markers = timelineAsset.markerTrack.GetMarkers().ToArray();
+
+        director.time = markers.First().time;
+    }
 
     private void Director_Stopped(PlayableDirector obj)
     {
@@ -43,6 +62,10 @@ public class TimelinePlayer : MonoBehaviour
 
     private void Director_Played(PlayableDirector obj)
     {
+        if (onStartPlay != null)
+        {
+            onStartPlay.Raise();
+        }
     }
 
     public void StartTimeline()

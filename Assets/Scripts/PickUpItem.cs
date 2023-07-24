@@ -36,6 +36,7 @@ public class PickUpItem : MonoBehaviour
             transform.position.z
         );
         sr.color = Color.white;
+        sr.sortingOrder += 1;
         autoDisable = StartCoroutine(AutoDisable());
     }
 

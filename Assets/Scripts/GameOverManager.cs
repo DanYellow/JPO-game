@@ -100,7 +100,6 @@ public class GameOverManager : MonoBehaviour
 
     public void OnControlsChanged(PlayerInput input)
     {
-        Debug.Log("input " + input);
         if (input.currentControlScheme.Equals("Gamepad") && gameoverMenuUI.activeInHierarchy)
         {
             gameoverMenuUI.GetComponentInChildren<Button>().Select();

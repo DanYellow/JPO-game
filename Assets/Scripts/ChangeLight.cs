@@ -25,7 +25,7 @@ public class ChangeLight : MonoBehaviour
     private void Awake()
     {
         light = GetComponent<Light2D>();
-        light.intensity = 1.05f;
+        light.intensity = 1f;
     }
 
     public void StartGameProxy()
