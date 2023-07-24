@@ -12,8 +12,6 @@ public class PlayerMovements : MonoBehaviour
     [SerializeField, ReadOnlyInspector]
     private bool isFacingRight = true;
 
-    
-
     [Space(15), Tooltip("Position checks")]
     private bool isGrounded;
     public LayerMask listGroundLayers;
@@ -37,6 +35,7 @@ public class PlayerMovements : MonoBehaviour
         dust = GetComponentInChildren<ParticleSystem>();
 
         moveSpeed = playerData.moveSpeed;
+        gameObject.SetActive(false);
     }
 
     void Update()

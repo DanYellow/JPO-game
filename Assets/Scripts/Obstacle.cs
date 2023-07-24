@@ -9,7 +9,7 @@ public class Obstacle : MonoBehaviour
 
     private float height;
     private int nbInvocations = 0;
-    private int accelerationFallThreshold = 1;
+    private int accelerationFallThreshold = 2;
     public float maxLinearDrag = 3.5f;
 
     private void Awake()

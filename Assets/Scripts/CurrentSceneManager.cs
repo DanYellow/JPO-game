@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
+using UnityEngine.Playables;
 
 public class CurrentSceneManager : MonoBehaviour
 {
@@ -11,17 +12,23 @@ public class CurrentSceneManager : MonoBehaviour
     [SerializeField]
     private FloatValue timeBarValue;
 
+    private SceneTransition sceneTransition;
+
+    [SerializeField]
+    private PlayableDirector playableDirector;
+
     private void Awake()
     {
         Application.targetFrameRate = 60;
+        sceneTransition = GetComponent<SceneTransition>();
     }
 
     void Start()
     {
         timeBarValue.CurrentValue = 1f;
-        
-    }
 
+        StartCoroutine(sceneTransition.Show(() => { playableDirector.Play(); }));
+    }
 
     public void OnNavigate(InputAction.CallbackContext ctx)
     {

@@ -26,7 +26,7 @@ public class TimelinePlayer : MonoBehaviour
     private void Update()
     {
         #if UNITY_EDITOR
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.C) && director.state == PlayState.Playing)
         {
             var timelineAsset = director.playableAsset as TimelineAsset;
             var markers = timelineAsset.markerTrack.GetMarkers().ToArray();
