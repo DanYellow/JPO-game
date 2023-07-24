@@ -33,16 +33,12 @@ public class SceneTransition : MonoBehaviour
     {
         sceneTransitionMaterial.SetFloat(propertyName, minValue);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.15f);
         float currentTime = 0f;
-        while (sceneTransitionMaterial.GetFloat(propertyName) <= maxValue)
+        while (sceneTransitionMaterial.GetFloat(propertyName) < maxValue)
         {
-            sceneTransitionMaterial.SetFloat(
-                propertyName,
-                Mathf.MoveTowards(sceneTransitionMaterial.GetFloat(propertyName), maxValue, transitionTime * Time.deltaTime)
-            );
-            // currentTime += Time.deltaTime;
-            // sceneTransitionMaterial.SetFloat(propertyName, Mathf.Clamp(currentTime / transitionTime, minValue, maxValue));
+            currentTime += Time.deltaTime;
+            sceneTransitionMaterial.SetFloat(propertyName, Mathf.Clamp(currentTime / transitionTime, minValue, maxValue));
             yield return null;
         }
 
@@ -52,10 +48,10 @@ public class SceneTransition : MonoBehaviour
     public IEnumerator Hide(System.Action callback)
     {
         sceneTransitionMaterial.SetFloat(propertyName, maxValue);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.15f);
 
-        float currentTime = 1f;
-        while (currentTime >= -0.75f)
+        float currentTime = transitionTime;
+        while (sceneTransitionMaterial.GetFloat(propertyName) > minValue)
         {
             currentTime -= Time.deltaTime;
             sceneTransitionMaterial.SetFloat(propertyName, Mathf.Clamp(currentTime / transitionTime, minValue, maxValue));
