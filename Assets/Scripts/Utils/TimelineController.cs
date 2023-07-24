@@ -2,7 +2,9 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
 using System.Linq;
+using System.Collections;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class TimelinePlayer : MonoBehaviour
 {
@@ -14,12 +16,17 @@ public class TimelinePlayer : MonoBehaviour
     [SerializeField]
     private VoidEventChannel onStartPlay;
 
+    [SerializeField]
+    private Image skipProgress;
+
 
     private void Awake()
     {
         director = GetComponent<PlayableDirector>();
         director.played += Director_Played;
         director.stopped += Director_Stopped;
+
+        skipProgress.fillAmount = 0;
 
         if (onStart != null)
         {
@@ -29,10 +36,37 @@ public class TimelinePlayer : MonoBehaviour
 
     public void OnSkip(InputAction.CallbackContext ctx)
     {
+        StopAllCoroutines();
         if (ctx.phase == InputActionPhase.Performed)
         {
-            Debug.Log("ffffe");
-            Skip();
+            StartCoroutine(FillProgressBar());
+        } else if (ctx.phase == InputActionPhase.Canceled) {
+            StartCoroutine(ClearProgressBar());
+        }
+    }
+
+    IEnumerator FillProgressBar()
+    {
+        float currentTime = 0;
+        while (skipProgress.fillAmount < 1)
+        {
+            currentTime += Time.deltaTime;
+            skipProgress.fillAmount = currentTime / 1;
+
+            yield return null;
+        }
+
+        Skip();
+    }
+
+    IEnumerator ClearProgressBar() {
+        float currentTime = 1;
+        while (skipProgress.fillAmount > 0)
+        {
+            currentTime -= Time.deltaTime;
+            skipProgress.fillAmount = currentTime / 1;
+
+            yield return null;
         }
     }
 
