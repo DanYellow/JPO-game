@@ -27,23 +27,11 @@ public class TimelinePlayer : MonoBehaviour
         }
     }
 
-    // private void Update()
-    // {
-    //     #if UNITY_EDITOR
-    //     if (Input.GetKeyDown(KeyCode.C) && director.state == PlayState.Playing)
-    //     {
-    //         var timelineAsset = director.playableAsset as TimelineAsset;
-    //         var markers = timelineAsset.markerTrack.GetMarkers().ToArray();
-
-    //         director.time = markers.First().time;
-    //     }
-    //     #endif
-    // }
-
     public void OnSkip(InputAction.CallbackContext ctx)
     {
         if (ctx.phase == InputActionPhase.Performed)
         {
+            Debug.Log("ffffe");
             Skip();
         }
     }

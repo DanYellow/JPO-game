@@ -32,9 +32,7 @@ public class InputManager : MonoBehaviour
         onTogglePauseEvent.OnEventRaised += ToggleActionMap;
         onPlayerDeath.OnEventRaised += onCreditsOrDeathEvent;
 
-        onCinematic = () => { 
-            Debug.Log("Hello");
-            SwitchActionMap(ActionMapName.Cinematics); };
+        onCinematic = () => { SwitchActionMap(ActionMapName.Cinematics); };
         onCinematicStartEvent.OnEventRaised += onCinematic;
     }
 
