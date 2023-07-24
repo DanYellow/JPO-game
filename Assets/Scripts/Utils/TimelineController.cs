@@ -60,7 +60,7 @@ public class TimelinePlayer : MonoBehaviour
     }
 
     IEnumerator ClearProgressBar() {
-        float currentTime = 1;
+        float currentTime = skipProgress.fillAmount / 1;
         while (skipProgress.fillAmount > 0)
         {
             currentTime -= Time.deltaTime;
