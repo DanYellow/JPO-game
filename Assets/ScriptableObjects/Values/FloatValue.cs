@@ -5,6 +5,8 @@ public class FloatValue : ScriptableObject
 {
     public float CurrentValue;
 
+    #pragma warning disable 0414
     [Multiline, SerializeField]
     private string DeveloperDescription = "";
+    #pragma warning restore 0414
 }

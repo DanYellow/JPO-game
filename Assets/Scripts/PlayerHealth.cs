@@ -24,7 +24,7 @@ public class PlayerHealth : MonoBehaviour
 
     [SerializeField]
     private PlayerStatsValue playerStatsValue;
-    
+
 
     private void Awake()
     {

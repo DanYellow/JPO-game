@@ -8,6 +8,8 @@ public class InvulnerableDataValue : ScriptableObject
     [Tooltip("Time during which the player will be considered as invulnerable")]
     public float time = 0.75f;
 
+    #pragma warning disable 0414
     [Multiline, SerializeField]
     private string DeveloperDescription = "";
+    #pragma warning restore 0414
 }

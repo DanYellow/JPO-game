@@ -24,11 +24,9 @@ public class PlayerAnimation : MonoBehaviour
         animator = GetComponent<Animator>();
 
         onHurtEvent = () => {
-            animator.SetTrigger("IsHurt"); 
         };
 
         onDeathEvent = () => {
-            animator.SetTrigger("IsDead"); 
         };
 
         vectorEventChannel.OnEventRaised += UpdateMovement;

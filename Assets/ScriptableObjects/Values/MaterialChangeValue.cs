@@ -11,6 +11,8 @@ public class MaterialChangeValue : ScriptableObject
     [Range(0, 1)]
     public float opacity = 1;
 
+    #pragma warning disable 0414
     [Multiline, SerializeField]
     private string DeveloperDescription = "";
+    #pragma warning restore 0414
 }
