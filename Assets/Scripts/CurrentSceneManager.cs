@@ -45,7 +45,6 @@ public class CurrentSceneManager : MonoBehaviour
 
     public void LoadLevel(int levelName = 1)
     {
-        Debug.Log("LoadLevel");
         EventSystem.current.SetSelectedGameObject(null);
         Time.timeScale = 1f;
         SceneManager.LoadScene(levelName, LoadSceneMode.Single);

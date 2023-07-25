@@ -23,12 +23,17 @@ public class PlayerAnimation : MonoBehaviour
     {
         animator = GetComponent<Animator>();
 
-        onHurtEvent = () => {
+        onHurtEvent = () =>
+        {
         };
 
-        onDeathEvent = () => {
+        onDeathEvent = () =>
+        {
         };
+    }
 
+    private void OnEnable()
+    {
         vectorEventChannel.OnEventRaised += UpdateMovement;
         isHurtVoidEventChannel.OnEventRaised += onHurtEvent;
         onPlayerDeathVoidEventChannel.OnEventRaised += onDeathEvent;
@@ -39,7 +44,7 @@ public class PlayerAnimation : MonoBehaviour
         animator.SetFloat("VelocityX", Mathf.Abs(direction.x));
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         vectorEventChannel.OnEventRaised -= UpdateMovement;
         // jumpBoolEventChannel.OnEventRaised -= onJumpEvent;
