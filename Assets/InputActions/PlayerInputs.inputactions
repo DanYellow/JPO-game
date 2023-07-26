@@ -728,6 +728,24 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Click",
+                    "type": "PassThrough",
+                    "id": "805530e4-d31f-4579-949d-552cd794dd21",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Start/Resume",
+                    "type": "Button",
+                    "id": "4a038c95-cd52-44db-aefa-ea0fa914dbac",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Quit",
                     "type": "Button",
                     "id": "e0ca6fed-78bb-4678-b917-a5c3bb1a34a9",
@@ -735,15 +753,6 @@
                     "processors": "",
                     "interactions": "Press",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "Point",
-                    "type": "PassThrough",
-                    "id": "08741edd-7748-4ed8-b71a-b118adbf9614",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -1024,34 +1033,67 @@
                 },
                 {
                     "name": "",
-                    "id": "33f3f67a-00c0-4646-9dff-de1e903c7919",
-                    "path": "<Mouse>/position",
+                    "id": "3bdefb06-5075-4c04-9b26-6abb941bb890",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Point",
+                    "action": "Start/Resume",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "6f79c52b-f83d-4a34-be88-f5798b5b6d55",
-                    "path": "<Pen>/position",
+                    "id": "1407b836-5037-4fd5-9652-dc6db4f70140",
+                    "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Point",
+                    "groups": "Gamepad",
+                    "action": "Start/Resume",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "a862bf33-ff5a-4d1b-bd90-ca4562f6a648",
-                    "path": "<Touchscreen>/touch*/position",
+                    "id": "48386479-4006-49ca-9d42-84de50b249d1",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "50bd37a6-afab-4e29-b1ea-271e4207d395",
+                    "path": "<Pen>/tip",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "29b32ca0-3da2-4f1c-a6b8-b4d1bd425063",
+                    "path": "<Touchscreen>/touch*/press",
                     "interactions": "",
                     "processors": "",
                     "groups": "Touch",
-                    "action": "Point",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "92f15a30-08a0-405f-8158-ba3cc9463279",
+                    "path": "<XRController>/trigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "XR",
+                    "action": "Click",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -1068,15 +1110,6 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Hold(duration=0.3)",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Start/Resume",
-                    "type": "Button",
-                    "id": "a6d4defd-4808-4c8b-8c4a-b165d7c20c12",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
                     "initialStateCheck": false
                 }
             ],
@@ -1100,28 +1133,6 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Skip",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "16bc7178-91b9-4920-9c5f-4706cef354ad",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Start/Resume",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "fc55a84e-3999-4859-a500-0d4dc3780a48",
-                    "path": "<Gamepad>/start",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Start/Resume",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

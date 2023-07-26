@@ -74,9 +74,10 @@ public class GameOverManager : MonoBehaviour
 
         int nbScoreIndicatorsMax = Mathf.Clamp(nbScoreIndicatorsEarned, 0, listScoreIndicator.Length);
 
-        for (int i = 0; i <nbScoreIndicatorsMax; i++)
+        for (int i = 0; i < nbScoreIndicatorsMax; i++)
         {
-            if(i > listScoreIndicator.Length) {
+            if (i > listScoreIndicator.Length)
+            {
                 yield break;
             }
             yield return new WaitForSeconds(0.75f);
