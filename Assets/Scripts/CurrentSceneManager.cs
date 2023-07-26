@@ -30,19 +30,6 @@ public class CurrentSceneManager : MonoBehaviour
         StartCoroutine(sceneTransition.Show(() => { playableDirector.Play(); }));
     }
 
-    public void OnNavigate(InputAction.CallbackContext ctx)
-    {
-
-    }
-
-    public void OnControlsChanged(PlayerInput input)
-    {
-        if (input.currentControlScheme.Equals("Gamepad"))
-        {
-            // creditsUI.GetComponentInChildren<Button>().Select();
-        }
-    }
-
     public void LoadLevel(int levelName = 1)
     {
         EventSystem.current.SetSelectedGameObject(null);

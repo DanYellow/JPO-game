@@ -106,18 +106,12 @@ public class GameOverManager : MonoBehaviour
         }
     }
 
-    public void OnArrowUsed() {
-        if (gameoverMenuUI.activeInHierarchy)
-        {
-            // https://discussions.unity.com/t/if-button-highlighted/136532
-            // gameoverMenuUI.GetComponentInChildren<Button>()
-            // gameoverMenuUI.GetComponentInChildren<Button>().Select();
-        }
-    }
-
-    public void OnActionTriggered(InputAction.CallbackContext context)
+    public void OnNavigate(InputAction.CallbackContext ctx)
     {
-
+        if (gameoverMenuUI != null && gameoverMenuUI.activeInHierarchy && ctx.phase == InputActionPhase.Performed && EventSystem.current.currentSelectedGameObject == null)
+        {
+            gameoverMenuUI.GetComponentInChildren<Button>().Select();
+        }
     }
 
     public void HideGameOverScreen()
