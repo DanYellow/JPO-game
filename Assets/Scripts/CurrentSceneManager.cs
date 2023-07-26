@@ -27,7 +27,8 @@ public class CurrentSceneManager : MonoBehaviour
     {
         timeBarValue.CurrentValue = 1f;
 
-        StartCoroutine(sceneTransition.Show(() => { playableDirector.Play(); }));
+        StartCoroutine(sceneTransition.Show());
+        // StartCoroutine(sceneTransition.Show(() => { playableDirector.Play(); }));
     }
 
     public void LoadLevel(int levelName = 1)

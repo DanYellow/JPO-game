@@ -36,7 +36,7 @@ public class MainMenuManager : MonoBehaviour
             // LoadLevel(1); 
         };
 
-        StartCoroutine(sceneTransition.Show(EnableControls));
+        StartCoroutine(sceneTransition.Show());
         OnFirstLevelStart.OnEventRaised += onFirstLevelLoadEvent;
     }
 
@@ -75,7 +75,7 @@ public class MainMenuManager : MonoBehaviour
     }
 
     public void TransitionToScene(int levelIndex) {
-        StartCoroutine(sceneTransition.Hide(() => LoadLevel(levelIndex)));
+        StartCoroutine(sceneTransition.Hide());
     }
 
     public void QuitGame()

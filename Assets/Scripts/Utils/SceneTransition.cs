@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 // https://www.youtube.com/watch?v=WvvvzupH18s
 // https://www.youtube.com/watch?v=WoNjob5E7Vw
@@ -19,18 +19,31 @@ public class SceneTransition : MonoBehaviour
     [SerializeField]
     private float maxValue = 1.1f;
 
+    [SerializeField]
+    private UnityEvent onShowStart;
+
+    [SerializeField]
+    private UnityEvent onShowEnd;
+
+    [SerializeField]
+    private UnityEvent onHideStart;
+
+    [SerializeField]
+    private UnityEvent onHideEnd;
+
     private void Update()
     {
         #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.E))
         {
-            StartCoroutine(Hide(() => {}));
+            StartCoroutine(Hide());
         }
         #endif
     }
 
-    public IEnumerator Show(System.Action callback)
+    public IEnumerator Show()
     {
+        onShowStart.Invoke();
         sceneTransitionMaterial.SetFloat(propertyName, minValue);
 
         yield return new WaitForSeconds(0.15f);
@@ -41,12 +54,12 @@ public class SceneTransition : MonoBehaviour
             sceneTransitionMaterial.SetFloat(propertyName, Mathf.Clamp(currentTime / transitionTime, minValue, maxValue));
             yield return null;
         }
-
-        callback();
+        onShowEnd.Invoke();
     }
 
-    public IEnumerator Hide(System.Action callback)
+    public IEnumerator Hide()
     {
+        onHideStart.Invoke();
         sceneTransitionMaterial.SetFloat(propertyName, maxValue);
         yield return new WaitForSeconds(0.15f);
 
@@ -58,6 +71,7 @@ public class SceneTransition : MonoBehaviour
             yield return null;
         }
 
-        callback();
+        onHideEnd.Invoke();
+        // callback();
     }
 }

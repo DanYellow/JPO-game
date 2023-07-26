@@ -12495,22 +12495,10 @@ MonoBehaviour:
     m_ActionName: UI/Start/Resume[/Keyboard/escape]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1736709083}
-        m_TargetAssemblyTypeName: CurrentSceneManager, Assembly-CSharp
-        m_MethodName: OnNavigate
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1736709080}
         m_TargetAssemblyTypeName: GameOverManager, Assembly-CSharp
-        m_MethodName: OnArrowUsed
-        m_Mode: 1
+        m_MethodName: OnNavigate
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -12573,6 +12561,14 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 08741edd-7748-4ed8-b71a-b118adbf9614
     m_ActionName: UIGameOverAndCredits/Point[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7e2831ef-8289-4f19-969d-8f8c0e2b7371
+    m_ActionName: UI/Cancel[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 804bb646-ac76-4f32-a36d-2c8687436d46
+    m_ActionName: UI/Submit[/Keyboard/enter]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
