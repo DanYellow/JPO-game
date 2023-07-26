@@ -2904,7 +2904,7 @@ MonoBehaviour:
   minIntensity: 0.15
   intensityThreshold: 0.3
   intensityDecreaseStep: 0.0005
-  delayBeforeDecreasing: 20
+  delayBeforeDecreasing: 25
   onGlobalLightThresholdReached: {fileID: 11400000, guid: ab5e6c64e9fd0264ab5339c91fb72cb9, type: 2}
 --- !u!1 &607919522
 GameObject:
@@ -12730,18 +12730,30 @@ MonoBehaviour:
   onShowEnd:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
+      - m_Target: {fileID: 1736709078}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 1
+      - m_Target: {fileID: 1415293482}
+        m_TargetAssemblyTypeName: UnityEngine.Playables.PlayableDirector, UnityEngine
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 1
   onHideStart:
     m_PersistentCalls:
       m_Calls: []
@@ -13773,6 +13785,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 9019450100160036545, guid: 665a9f2698f60a843957d7f247023f29, type: 3}
+      propertyPath: lengthInSec
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9019450100160036545, guid: 665a9f2698f60a843957d7f247023f29, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 9121902344590174886, guid: 665a9f2698f60a843957d7f247023f29, type: 3}
       propertyPath: m_Name
       value: Player
