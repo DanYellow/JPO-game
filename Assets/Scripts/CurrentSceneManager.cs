@@ -1,9 +1,7 @@
-using UnityEngine.SceneManagement;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
-using UnityEngine.Playables;
 
 public class CurrentSceneManager : MonoBehaviour
 {
@@ -14,12 +12,8 @@ public class CurrentSceneManager : MonoBehaviour
 
     private SceneTransition sceneTransition;
 
-    [SerializeField]
-    private PlayableDirector playableDirector;
-
     private void Awake()
     {
-        Application.targetFrameRate = 60;
         sceneTransition = GetComponent<SceneTransition>();
     }
 
@@ -28,7 +22,6 @@ public class CurrentSceneManager : MonoBehaviour
         timeBarValue.CurrentValue = 1f;
 
         StartCoroutine(sceneTransition.Show());
-        // StartCoroutine(sceneTransition.Show(() => { playableDirector.Play(); }));
     }
 
     public void LoadLevel(int levelName = 1)
