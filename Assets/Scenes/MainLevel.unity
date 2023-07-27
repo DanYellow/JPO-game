@@ -13754,6 +13754,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1575070134}
     m_Modifications:
+    - target: {fileID: 3861037944020561860, guid: 99069d89379dc8b4b88b2c9c9a34bf76, type: 3}
+      propertyPath: defaultLightIntensity
+      value: 0.9
+      objectReference: {fileID: 0}
     - target: {fileID: 3861037944020561880, guid: 99069d89379dc8b4b88b2c9c9a34bf76, type: 3}
       propertyPath: m_Name
       value: Candle
@@ -13802,9 +13806,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3861037944460294872, guid: 99069d89379dc8b4b88b2c9c9a34bf76, type: 3}
-      propertyPath: m_Intensity
-      value: 0.95
+    - target: {fileID: 3861037944460294873, guid: 99069d89379dc8b4b88b2c9c9a34bf76, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9999966
+      objectReference: {fileID: 0}
+    - target: {fileID: 3861037944460294873, guid: 99069d89379dc8b4b88b2c9c9a34bf76, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.0026126006
       objectReference: {fileID: 0}
     - target: {fileID: 3861037944460294878, guid: 99069d89379dc8b4b88b2c9c9a34bf76, type: 3}
       propertyPath: m_IsActive
