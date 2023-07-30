@@ -89,8 +89,10 @@ public class HUDManager : MonoBehaviour
         if (listHeartsUI.Count > 0)
         {
             GameObject lastHeartLife = listHeartsUI[listHeartsUI.Count - 1];
-            // Animator animator = lastHeartLife.GetComponent<Animator>();
-            // animator.SetTrigger("IsHurt");
+
+            UISpriteAnimationManager uiAnimator = lastHeartLife.GetComponent<UISpriteAnimationManager>();
+            uiAnimator.Play("destroy");
+            Debug.Log(uiAnimator.GetDurationForAnimation("destroy"));
             // Destroy(lastHeartLife, animator.GetCurrentAnimatorStateInfo(0).length);
             Destroy(lastHeartLife);
             listHeartsUI.RemoveAt(listHeartsUI.Count - 1);

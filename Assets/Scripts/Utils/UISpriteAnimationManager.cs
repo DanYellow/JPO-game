@@ -21,13 +21,13 @@ public class UISpriteAnimationItem
     [HideInInspector]
     public int currentIndex = 0;
 
-    public new string name;
+    public string name;
+    private bool isRunning;
 
-    // private Coroutine animCoroutine;
-    private bool IsDone;
+    public bool looping = false;
 
     private float Duration;
-    public float duration
+    public float cycleDuration
     {
         get
         {
@@ -41,27 +41,32 @@ public class UISpriteAnimationItem
 
     // public void Play()
     // {
-    //     IsDone = false;
+    //     isRunning = false;
     //     animCoroutine = StartCoroutine(PlayCo());
     // }
 
-    // IEnumerator PlayCo()
-    // {
-    //     yield return new WaitForSeconds(speed);
+    public IEnumerator Play()
+    {
+        isRunning = true;
+        while (isRunning)
+        {
+            yield return new WaitForSeconds(speed);
 
-    //     image.sprite = spriteArray[currentIndex];
-    //     currentIndex = (currentIndex + 1) % spriteArray.Length;
+            image.sprite = spriteArray[currentIndex];
+            currentIndex = (currentIndex + 1) % spriteArray.Length;
+        }
 
-    //     if (IsDone == false)
-    //         animCoroutine = StartCoroutine(PlayCo());
-    // }
+        // if (isRunning == false)
+        //     animCoroutine = StartCoroutine(PlayCo());
+    }
 
-    // public void Stop()
-    // {
-    //     IsDone = true;
-    //     StopCoroutine(animCoroutine);
-    // }
+    public void Stop()
+    {
+        isRunning = false;
+    }
 }
+
+
 
 [RequireComponent(typeof(Image))]
 public class UISpriteAnimationManager : MonoBehaviour
@@ -72,7 +77,7 @@ public class UISpriteAnimationManager : MonoBehaviour
     private bool playOnStart = true;
 
     [SerializeField]
-    private List<UISpriteAnimationItem> uiSpriteAnimationItemArray;
+    private UISpriteAnimationItem[] uiSpriteAnimationItemArray;
 
     private void Awake()
     {
@@ -83,7 +88,10 @@ public class UISpriteAnimationManager : MonoBehaviour
     {
         if (playOnStart)
         {
-            var uiSpriteAnimationItem = uiSpriteAnimationItemArray.First((item) => item.playOnStart == true);
+            var uiSpriteAnimationItem = uiSpriteAnimationItemArray
+                .DefaultIfEmpty(null)
+                .FirstOrDefault((item) => item.playOnStart == true);
+
             if (uiSpriteAnimationItem != null)
             {
                 Play(uiSpriteAnimationItem.name);
@@ -94,19 +102,39 @@ public class UISpriteAnimationManager : MonoBehaviour
     [ContextMenu("Play")]
     public void Play(string animationName)
     {
-        var uiSpriteAnimationItem = uiSpriteAnimationItemArray.First((item) => item.name == animationName);
+        var uiSpriteAnimationItem = uiSpriteAnimationItemArray
+            .DefaultIfEmpty(null)
+            .FirstOrDefault((item) => item.name == animationName);
+
         if (uiSpriteAnimationItem != null)
         {
             uiSpriteAnimationItem.image = image;
-            // uiSpriteAnimationItem.Play();
+            StartCoroutine(uiSpriteAnimationItem.Play());
         }
     }
     public void Stop(string animationName)
     {
-        var uiSpriteAnimationItem = uiSpriteAnimationItemArray.First((item) => item.name == animationName);
+        var uiSpriteAnimationItem = uiSpriteAnimationItemArray
+            .DefaultIfEmpty(null)
+            .FirstOrDefault((item) => item.name == animationName);
+
         if (uiSpriteAnimationItem != null)
         {
-            // uiSpriteAnimationItem.Play();
+            uiSpriteAnimationItem.Stop();
         }
+    }
+
+    public float GetDurationForAnimation(string animationName)
+    {
+        var uiSpriteAnimationItem = uiSpriteAnimationItemArray
+            .DefaultIfEmpty(null)
+            .FirstOrDefault((item) => item.name == animationName);
+
+        if (uiSpriteAnimationItem != null)
+        {
+            return uiSpriteAnimationItem.cycleDuration;
+        }
+
+        return 0;
     }
 }

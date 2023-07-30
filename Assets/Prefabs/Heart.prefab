@@ -92,14 +92,40 @@ MonoBehaviour:
   playOnStart: 1
   uiSpriteAnimationItemArray:
   - image: {fileID: 0}
-    spriteArray: []
-    speed: 0.02
-    playOnStart: 1
+    spriteArray:
+    - {fileID: 21300000, guid: f0379717faa4f284696f7436fccbfc90, type: 3}
+    - {fileID: 21300000, guid: 8601d42503409c64ab3a4844d804fcd3, type: 3}
+    - {fileID: 21300000, guid: 6ed0269aaca243c4fa21d068e881cce2, type: 3}
+    - {fileID: 21300000, guid: ee24240fa773a714cab9970cf4f35fd0, type: 3}
+    - {fileID: 21300000, guid: a75b415eae36bbf438d23c87b898fe5d, type: 3}
+    - {fileID: 21300000, guid: 97c5dcb11a954604ebf663fbf2b781cf, type: 3}
+    - {fileID: 21300000, guid: 923344ce471478c419b63908fcb5bc42, type: 3}
+    - {fileID: 21300000, guid: 29efa30d046577745a408e775467a35b, type: 3}
+    - {fileID: 21300000, guid: 26384c9565755cb4dbbb00d63de520a2, type: 3}
+    - {fileID: 21300000, guid: 72e2b37493d48524eb48e67a72711435, type: 3}
+    - {fileID: 21300000, guid: 7db39db394156814e93a1f8eb7324118, type: 3}
+    - {fileID: 21300000, guid: 9cb97319f9c83d442b6aa45b65fc1d87, type: 3}
+    - {fileID: 21300000, guid: 9e3247c0be048c94fb430764c32b7d5d, type: 3}
+    - {fileID: 21300000, guid: b0e0a6534ac13cb41a86387ff339187c, type: 3}
+    - {fileID: 21300000, guid: 07a563f19cd99cb4094746a61212b5b8, type: 3}
+    - {fileID: 21300000, guid: dfd760e1641974a448ba03dad2e35481, type: 3}
+    - {fileID: 21300000, guid: 1c7b8f2b61e7b9e4e906566222571e44, type: 3}
+    - {fileID: 21300000, guid: 28fd76c9ae840c44294fc5e8c801d849, type: 3}
+    - {fileID: 21300000, guid: 35ead27da273d794fac40fe754536094, type: 3}
+    - {fileID: 21300000, guid: 9cbdc82eb64df9b45b399ae7d63c5ecb, type: 3}
+    - {fileID: 21300000, guid: ca0bfbb76a845284a80cdbefb20c89bf, type: 3}
+    - {fileID: 21300000, guid: ba719b1b7a967f4469e5df0c5f189f17, type: 3}
+    speed: 0.04
+    playOnStart: 0
     currentIndex: 0
-    name: 
+    name: lastItem
   - image: {fileID: 0}
-    spriteArray: []
-    speed: 0.02
-    playOnStart: 1
+    spriteArray:
+    - {fileID: 21300000, guid: e1cddd42a6e1f4145809ffb8206e390c, type: 3}
+    - {fileID: 21300000, guid: 75d02a41e640fc24e949be1f3d75b93c, type: 3}
+    - {fileID: 21300000, guid: 5ecf37552d1be1e478a8719d73dc1444, type: 3}
+    - {fileID: 21300000, guid: 2538530bd503d404680e79850f661686, type: 3}
+    speed: 0.08
+    playOnStart: 0
     currentIndex: 0
-    name: 
+    name: destroy
