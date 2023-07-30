@@ -1,8 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using System.Collections;
+
 
 public class HUDManager : MonoBehaviour
 {
@@ -29,17 +31,26 @@ public class HUDManager : MonoBehaviour
     [SerializeField]
     private VoidEventChannel onPlayerDeathVoidEventChannel;
 
+    [SerializeField]
+    private BoolEventChannel onTogglePauseEvent;
+    private UnityAction<bool> onPause;
+    private bool isGamePaused = false;
+
     private void Awake()
+    {
+        playerHUDUI.SetActive(true);
+    }
+
+    private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
         isHurtVoidEventChannel.OnEventRaised += HeartLost;
 
-        playerHUDUI.SetActive(true);
-    }
-
-
-    private void Start()
-    {
+        onPause = (bool isPaused) =>
+        {
+            isGamePaused = isPaused;
+        };
+        onTogglePauseEvent.OnEventRaised += onPause;
     }
 
     public void StartGame()
@@ -97,8 +108,11 @@ public class HUDManager : MonoBehaviour
     {
         while (timeBar.fillAmount > 0 && playerStatsValue.nbCurrentLifes > 0)
         {
-            timeBarValue.CurrentValue -= decreaseTimeBarStep;
-            timeBar.fillAmount = timeBarValue.CurrentValue;
+            if (!isGamePaused)
+            {
+                timeBarValue.CurrentValue -= decreaseTimeBarStep;
+                timeBar.fillAmount = timeBarValue.CurrentValue;
+            }
             yield return null;
         }
         StopAllCoroutines();
@@ -115,6 +129,7 @@ public class HUDManager : MonoBehaviour
     {
         isHurtVoidEventChannel.OnEventRaised -= HeartLost;
         SceneManager.sceneLoaded -= OnSceneLoaded;
+        onTogglePauseEvent.OnEventRaised -= onPause;
     }
 
     private void OnValidate()
