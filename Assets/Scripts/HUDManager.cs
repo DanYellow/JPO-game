@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using System.Collections;
 
-
 public class HUDManager : MonoBehaviour
 {
     [SerializeField]
@@ -42,7 +41,6 @@ public class HUDManager : MonoBehaviour
     {
         playerHUDUI.SetActive(true);
         barContainer = playerHUDUI.transform.Find("BarContainer").gameObject;
-        // barContainer = GameObject.Find("BarContainer");
         barContainer.SetActive(false);
     }
 
@@ -91,9 +89,10 @@ public class HUDManager : MonoBehaviour
         if (listHeartsUI.Count > 0)
         {
             GameObject lastHeartLife = listHeartsUI[listHeartsUI.Count - 1];
-            Animator animator = lastHeartLife.GetComponent<Animator>();
-            animator.SetTrigger("IsHurt");
-            Destroy(lastHeartLife, animator.GetCurrentAnimatorStateInfo(0).length);
+            // Animator animator = lastHeartLife.GetComponent<Animator>();
+            // animator.SetTrigger("IsHurt");
+            // Destroy(lastHeartLife, animator.GetCurrentAnimatorStateInfo(0).length);
+            Destroy(lastHeartLife);
             listHeartsUI.RemoveAt(listHeartsUI.Count - 1);
 
             AnimateLastHeart();
@@ -106,8 +105,8 @@ public class HUDManager : MonoBehaviour
 
         GameObject lastHeartLife = listHeartsUI[listHeartsUI.Count - 1];
         lastHeartLife = listHeartsUI[listHeartsUI.Count - 1];
-        Animator animator = lastHeartLife.GetComponent<Animator>();
-        animator.SetBool("IsLast", true);
+        UISpriteAnimation uiAnimator = lastHeartLife.GetComponent<UISpriteAnimation>();
+        uiAnimator.Play();
     }
 
     IEnumerator DecreaseTimeBar()

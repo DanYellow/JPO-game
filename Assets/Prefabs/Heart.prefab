@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5024897739544929462}
   - component: {fileID: 5955018478976052306}
   - component: {fileID: 5473640124698444781}
-  - component: {fileID: 3306437907872893328}
+  - component: {fileID: -6227461139223260240}
   m_Layer: 5
   m_Name: Heart
   m_TagString: Untagged
@@ -77,23 +77,40 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!95 &3306437907872893328
-Animator:
-  serializedVersion: 5
+--- !u!114 &-6227461139223260240
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8523994437467737665}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8f759645976680d44ba281b181312c5b, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 947ed6a4355dd5b45860a7dc22b67b32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteArray:
+  - {fileID: 21300000, guid: f0379717faa4f284696f7436fccbfc90, type: 3}
+  - {fileID: 21300000, guid: 8601d42503409c64ab3a4844d804fcd3, type: 3}
+  - {fileID: 21300000, guid: 6ed0269aaca243c4fa21d068e881cce2, type: 3}
+  - {fileID: 21300000, guid: ee24240fa773a714cab9970cf4f35fd0, type: 3}
+  - {fileID: 21300000, guid: a75b415eae36bbf438d23c87b898fe5d, type: 3}
+  - {fileID: 21300000, guid: 97c5dcb11a954604ebf663fbf2b781cf, type: 3}
+  - {fileID: 21300000, guid: 923344ce471478c419b63908fcb5bc42, type: 3}
+  - {fileID: 21300000, guid: 29efa30d046577745a408e775467a35b, type: 3}
+  - {fileID: 21300000, guid: 26384c9565755cb4dbbb00d63de520a2, type: 3}
+  - {fileID: 21300000, guid: 72e2b37493d48524eb48e67a72711435, type: 3}
+  - {fileID: 21300000, guid: 7db39db394156814e93a1f8eb7324118, type: 3}
+  - {fileID: 21300000, guid: 9cb97319f9c83d442b6aa45b65fc1d87, type: 3}
+  - {fileID: 21300000, guid: 9e3247c0be048c94fb430764c32b7d5d, type: 3}
+  - {fileID: 21300000, guid: b0e0a6534ac13cb41a86387ff339187c, type: 3}
+  - {fileID: 21300000, guid: 07a563f19cd99cb4094746a61212b5b8, type: 3}
+  - {fileID: 21300000, guid: dfd760e1641974a448ba03dad2e35481, type: 3}
+  - {fileID: 21300000, guid: 1c7b8f2b61e7b9e4e906566222571e44, type: 3}
+  - {fileID: 21300000, guid: 28fd76c9ae840c44294fc5e8c801d849, type: 3}
+  - {fileID: 21300000, guid: 35ead27da273d794fac40fe754536094, type: 3}
+  - {fileID: 21300000, guid: 9cbdc82eb64df9b45b399ae7d63c5ecb, type: 3}
+  - {fileID: 21300000, guid: ca0bfbb76a845284a80cdbefb20c89bf, type: 3}
+  - {fileID: 21300000, guid: ba719b1b7a967f4469e5df0c5f189f17, type: 3}
+  speed: 0.04
+  playOnStart: 0
