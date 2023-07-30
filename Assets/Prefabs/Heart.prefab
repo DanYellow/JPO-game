@@ -119,6 +119,7 @@ MonoBehaviour:
     playOnStart: 0
     currentIndex: 0
     name: lastItem
+    looping: 1
   - image: {fileID: 0}
     spriteArray:
     - {fileID: 21300000, guid: e1cddd42a6e1f4145809ffb8206e390c, type: 3}
@@ -129,3 +130,4 @@ MonoBehaviour:
     playOnStart: 0
     currentIndex: 0
     name: destroy
+    looping: 0

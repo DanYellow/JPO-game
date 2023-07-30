@@ -91,10 +91,11 @@ public class HUDManager : MonoBehaviour
             GameObject lastHeartLife = listHeartsUI[listHeartsUI.Count - 1];
 
             UISpriteAnimationManager uiAnimator = lastHeartLife.GetComponent<UISpriteAnimationManager>();
-            uiAnimator.Play("destroy");
-            Debug.Log(uiAnimator.GetDurationForAnimation("destroy"));
+            uiAnimator.Play("destroy", () => {
+                Destroy(lastHeartLife);
+            });
+            // Debug.Log(uiAnimator.GetDurationForAnimation("destroy"));
             // Destroy(lastHeartLife, animator.GetCurrentAnimatorStateInfo(0).length);
-            Destroy(lastHeartLife);
             listHeartsUI.RemoveAt(listHeartsUI.Count - 1);
 
             AnimateLastHeart();

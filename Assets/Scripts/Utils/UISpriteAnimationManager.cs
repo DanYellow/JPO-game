@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 
 using UnityEngine;
@@ -26,38 +25,39 @@ public class UISpriteAnimationItem
 
     public bool looping = false;
 
-    private float Duration;
     public float cycleDuration
     {
         get
         {
             return spriteArray.Length * this.speed;
         }
-        // set
-        // {
-        //     this.Duration = value;
-        // }
     }
 
-    // public void Play()
-    // {
-    //     isRunning = false;
-    //     animCoroutine = StartCoroutine(PlayCo());
-    // }
-
-    public IEnumerator Play()
+    public IEnumerator Play(System.Action callback)
     {
-        isRunning = true;
-        while (isRunning)
+        if (looping)
         {
+            isRunning = true;
+            while (isRunning)
+            {
+                yield return new WaitForSeconds(speed);
+
+                image.sprite = spriteArray[currentIndex];
+                currentIndex = (currentIndex + 1) % spriteArray.Length;
+            }
+        }
+        else
+        {
+            foreach (var item in spriteArray)
+            {
+                yield return new WaitForSeconds(speed);
+
+                image.sprite = item;
+            }
             yield return new WaitForSeconds(speed);
 
-            image.sprite = spriteArray[currentIndex];
-            currentIndex = (currentIndex + 1) % spriteArray.Length;
+            callback();
         }
-
-        // if (isRunning == false)
-        //     animCoroutine = StartCoroutine(PlayCo());
     }
 
     public void Stop()
@@ -65,8 +65,6 @@ public class UISpriteAnimationItem
         isRunning = false;
     }
 }
-
-
 
 [RequireComponent(typeof(Image))]
 public class UISpriteAnimationManager : MonoBehaviour
@@ -99,8 +97,7 @@ public class UISpriteAnimationManager : MonoBehaviour
         }
     }
 
-    [ContextMenu("Play")]
-    public void Play(string animationName)
+    public void Play(string animationName, System.Action callback = null)
     {
         var uiSpriteAnimationItem = uiSpriteAnimationItemArray
             .DefaultIfEmpty(null)
@@ -108,10 +105,12 @@ public class UISpriteAnimationManager : MonoBehaviour
 
         if (uiSpriteAnimationItem != null)
         {
+            StopAllCoroutines();
             uiSpriteAnimationItem.image = image;
-            StartCoroutine(uiSpriteAnimationItem.Play());
+            StartCoroutine(uiSpriteAnimationItem.Play(callback ?? (() => {})));
         }
     }
+
     public void Stop(string animationName)
     {
         var uiSpriteAnimationItem = uiSpriteAnimationItemArray

@@ -26,7 +26,7 @@ public class CameraManager : MonoBehaviour
         onTogglePauseEvent.OnEventRaised += onPause;
 
         onPlayerDeathVoid = () => { camera.enabled = false; };
-        onPlayerDeathVoidEventChannel.OnEventRaised += onPlayerDeathVoid;
+        // onPlayerDeathVoidEventChannel.OnEventRaised += onPlayerDeathVoid;
     }
 
     private void OnDisable()
