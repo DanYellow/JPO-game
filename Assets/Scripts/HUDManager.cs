@@ -105,8 +105,8 @@ public class HUDManager : MonoBehaviour
 
         GameObject lastHeartLife = listHeartsUI[listHeartsUI.Count - 1];
         lastHeartLife = listHeartsUI[listHeartsUI.Count - 1];
-        UISpriteAnimation uiAnimator = lastHeartLife.GetComponent<UISpriteAnimation>();
-        uiAnimator.Play();
+        UISpriteAnimationManager uiAnimator = lastHeartLife.GetComponent<UISpriteAnimationManager>();
+        uiAnimator.Play("lastItem");
     }
 
     IEnumerator DecreaseTimeBar()
