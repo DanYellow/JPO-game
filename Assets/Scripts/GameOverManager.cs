@@ -60,6 +60,7 @@ public class GameOverManager : MonoBehaviour
 
     IEnumerator DisplayGameOverScreenProxy()
     {
+        playerHUDUI.SetActive(false);
         yield return new WaitForSeconds(0.75f);
 
         foreach (var item in gameoverMenuUI.GetComponentsInChildren<Button>())

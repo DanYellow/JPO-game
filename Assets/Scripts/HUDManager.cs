@@ -36,9 +36,14 @@ public class HUDManager : MonoBehaviour
     private UnityAction<bool> onPause;
     private bool isGamePaused = false;
 
+    private GameObject barContainer;
+
     private void Awake()
     {
         playerHUDUI.SetActive(true);
+        barContainer = playerHUDUI.transform.Find("BarContainer").gameObject;
+        // barContainer = GameObject.Find("BarContainer");
+        barContainer.SetActive(false);
     }
 
     private void OnEnable()
@@ -57,6 +62,7 @@ public class HUDManager : MonoBehaviour
     {
         timeBar.fillAmount = timeBarValue.CurrentValue;
         playerStatsValue.nbCurrentLifes = playerStatsValue.nbMaxLifes;
+        barContainer.SetActive(true);
         FillHearts();
         StartCoroutine(DecreaseTimeBar());
     }
