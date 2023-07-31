@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ActiveOnStart : MonoBehaviour
+public class DisabledOnAwake : MonoBehaviour
 {
     public bool isActive = false;
     private void Awake() {
