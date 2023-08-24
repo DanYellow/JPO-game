@@ -34,7 +34,7 @@ public class PauseManager : MonoBehaviour
     public void Resume()
     {
         Time.timeScale = 1;
-        Application.targetFrameRate = 30;
+        Application.targetFrameRate = 60;
         pauseMenuUI.SetActive(false);
         isGamePaused = false;
         onTogglePauseEvent.Raise(isGamePaused);
@@ -60,7 +60,7 @@ public class PauseManager : MonoBehaviour
     void Pause()
     {
         Time.timeScale = 0;
-        Application.targetFrameRate = 60;
+        Application.targetFrameRate = 30;
         isGamePaused = true;
         pauseMenuUI.SetActive(true);
         EventSystemExtensions.UpdateSelectedGameObject(pauseMenuUI.GetComponentInChildren<Button>().gameObject);

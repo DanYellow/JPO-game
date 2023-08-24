@@ -32,7 +32,7 @@ public class Candle : MonoBehaviour
 
         while (true)
         {
-            light.intensity = 0.95f - Mathf.PingPong(Time.time, Random.Range(0.01f, 0.10f));
+            light.intensity = defaultLightIntensity - Mathf.PingPong(Time.time, Random.Range(0.01f, 0.10f));
             yield return null;
         }
     }

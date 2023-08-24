@@ -20,6 +20,7 @@ public class CurrentSceneManager : MonoBehaviour
     void Start()
     {
         timeBarValue.CurrentValue = 1f;
+        Application.targetFrameRate = 60;
 
         StartCoroutine(sceneTransition.Show());
     }
