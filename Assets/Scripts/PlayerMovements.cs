@@ -59,7 +59,7 @@ public class PlayerMovements : MonoBehaviour
 
     private void FixedUpdate()
     {
-        nextPosition = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
+        nextPosition = new Vector2(moveInput.x * playerData.moveSpeed, rb.velocity.y);
         rb.velocity = nextPosition;
 
         isGrounded = IsGrounded();
