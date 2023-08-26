@@ -5,13 +5,61 @@ using UnityEngine;
 public class Destructable : MonoBehaviour, IDamageable
 {
     private Animator animator;
+    private List<GameObject> children = new List<GameObject>();
 
-    private void Awake() {
+    private int currentLifePoints = 3;
+
+    private void Awake()
+    {
         animator = GetComponent<Animator>();
+
+        foreach (Transform g in transform.GetComponentsInChildren<Transform>())
+        {
+            if(g != transform) {
+                children.Add(g.gameObject);
+            }
+        }
+        foreach (var item in children)
+        {
+            item.SetActive(false);
+        }
+
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            var child = transform.GetChild(i).gameObject;
+            child.SetActive(false);
+        }
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(int damage)
     {
-        animator.SetTrigger(AnimationStrings.isHit);
+        currentLifePoints -= damage;
+        // animator.SetTrigger(AnimationStrings.isHit);
+        if (currentLifePoints <= 0)
+        {
+            Dead();
+        }
+    }
+
+    private void Dead()
+    {
+        foreach (Collider2D collider in gameObject.GetComponents<Collider2D>())
+        {
+            collider.enabled = false;
+        }
+        // animator.SetTrigger(AnimationStrings.isDead);
+        foreach (var item in children)
+        {
+            item.SetActive(true);
+            item.transform.SetParent(null);
+        }
+
+        Destroy(gameObject);
+    }
+
+    void OnGUI()
+    {
+        //Output the first Animation speed to the screen
+        // GUI.Label(new Rect(25, 25, 200, 20),  "fullPathHash of State : " + animator.GetCurrentAnimatorStateInfo(0).fullPathHash);
     }
 }

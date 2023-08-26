@@ -1,5 +1,5 @@
 public interface IDamageable
 {
     // bool isInvulnerable { get; set; }
-    void TakeDamage(float damage);
+    void TakeDamage(int damage);
 }

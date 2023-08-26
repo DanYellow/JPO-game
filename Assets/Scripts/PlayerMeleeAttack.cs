@@ -33,7 +33,7 @@ public class PlayerMeleeAttack : MonoBehaviour
             {
                 if (hitItem.transform.TryGetComponent<IDamageable>(out IDamageable iDamageable))
                 {
-                    iDamageable.TakeDamage(0);
+                    iDamageable.TakeDamage(1);
                 }
             }
         }
