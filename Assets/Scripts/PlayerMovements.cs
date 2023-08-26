@@ -12,7 +12,7 @@ public class PlayerMovements : MonoBehaviour
     [SerializeField, ReadOnlyInspector]
     private bool isFacingRight = true;
 
-    [Space(15), Tooltip("Position checks")]
+    [Space(15), Tooltip("Position checks"), SerializeField]
     private bool isGrounded;
     public LayerMask listGroundLayers;
     public Transform groundCheck;
@@ -20,9 +20,8 @@ public class PlayerMovements : MonoBehaviour
     private float moveSpeed;
     private Vector2 nextPosition;
 
-    [Header("Events")]
-    [SerializeField]
-    private VectorEventChannel vectorEventChannel;
+    private BoxCollider2D bc2d;
+
 
     [SerializeField]
     private PlayerStatsValue playerData;
@@ -30,12 +29,20 @@ public class PlayerMovements : MonoBehaviour
     private ParticleSystem dust;
 
     [SerializeField]
+    private int jumpCount = 0;
+
+    [SerializeField]
     private bool showOnStart = true;
+
+    [Header("Events")]
+    [SerializeField]
+    private VectorEventChannel vectorEventChannel;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         dust = GetComponentInChildren<ParticleSystem>();
+        bc2d = GetComponent<BoxCollider2D>();
 
         moveSpeed = playerData.moveSpeed;
         gameObject.SetActive(showOnStart);
@@ -43,16 +50,33 @@ public class PlayerMovements : MonoBehaviour
 
     void Update()
     {
-        vectorEventChannel.Raise(moveInput);
+        vectorEventChannel.Raise(rb.velocity);
 
         Flip();
 
-        if (Mathf.Abs(rb.velocity.x) > 0)
+        if (isGrounded && rb.velocity.y < 0.1f)
         {
-            if(!dust.isEmitting) {
+            jumpCount = 0;
+        }
+
+        if (rb.velocity.y >= 0)
+        {
+            rb.gravityScale = playerData.gravityScaleGrounded;
+        }
+        else if (rb.velocity.y < -0.1f)
+        {
+            rb.gravityScale = playerData.gravityScaleFalling;
+        }
+
+        if (Mathf.Abs(rb.velocity.x) > 0 && isGrounded && rb.velocity.y < 0.1f)
+        {
+            if (!dust.isEmitting)
+            {
                 dust.Play();
             }
-        } else {
+        }
+        else
+        {
             dust.Stop(true, ParticleSystemStopBehavior.StopEmitting);
         }
     }
@@ -61,7 +85,6 @@ public class PlayerMovements : MonoBehaviour
     {
         nextPosition = new Vector2(moveInput.x * playerData.moveSpeed, rb.velocity.y);
         rb.velocity = nextPosition;
-
         isGrounded = IsGrounded();
     }
 
@@ -82,7 +105,27 @@ public class PlayerMovements : MonoBehaviour
 
     public bool IsGrounded()
     {
+        return Physics2D.OverlapBox(
+           groundCheck.position - new Vector3(bc2d.offset.x, 0, 0),
+            new Vector3(bc2d.bounds.size.x * 0.8f, 0.2f, 0),
+            0,
+            listGroundLayers
+        );
         return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, listGroundLayers);
+    }
+
+    public void OnJump(InputAction.CallbackContext ctx)
+    {
+        if (
+            ctx.phase == InputActionPhase.Performed &&
+            jumpCount < playerData.maxJumpCount
+        )
+        {
+            jumpCount++;
+            float jumpForce = Mathf.Sqrt(playerData.jumpForce * (Physics2D.gravity.y * rb.gravityScale) * -2) * rb.mass;
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            // rb.velocity = new Vector2(moveInput.x * playerData.moveSpeed, playerData.jumpForce);
+        }
     }
 
     void CreateDust()
@@ -94,7 +137,15 @@ public class PlayerMovements : MonoBehaviour
     {
         if (groundCheck != null)
         {
-            Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+            if (bc2d == null)
+            {
+                bc2d = GetComponent<BoxCollider2D>();
+            }
+            Gizmos.DrawWireCube(groundCheck.position - new Vector3(bc2d.offset.x, 0, 0), new Vector3(bc2d.bounds.size.x * 0.8f, 0.2f, 0));
+            // Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
         }
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(bc2d.bounds.center, bc2d.bounds.size);
     }
 }

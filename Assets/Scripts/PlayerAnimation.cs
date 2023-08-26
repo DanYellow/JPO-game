@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.Events;
+
 
 public class PlayerAnimation : MonoBehaviour
 {
@@ -7,8 +9,14 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField]
     private VectorEventChannel vectorEventChannel;
 
+    [SerializeField]
+    private VoidEventChannel lightAttackEventChannel;
+
+
+    private UnityAction onLightAttackEvent;
+
     // https://forum.unity.com/threads/unsubscribe-from-an-event-using-a-lambda-expression.1287587/
-    private void Start()
+    private void Awake()
     {
         animator = GetComponent<Animator>();
     }
@@ -16,15 +24,23 @@ public class PlayerAnimation : MonoBehaviour
     private void OnEnable()
     {
         vectorEventChannel.OnEventRaised += UpdateMovement;
+
+        onLightAttackEvent = () =>
+        {
+            animator.SetTrigger(AnimationStrings.lightAttack);
+        };
+        lightAttackEventChannel.OnEventRaised += onLightAttackEvent;
     }
 
     private void UpdateMovement(Vector3 direction)
     {
         animator.SetFloat("VelocityX", Mathf.Abs(direction.x));
+        animator.SetFloat("VelocityY", Mathf.Abs(direction.y));
     }
 
     private void OnDisable()
     {
         vectorEventChannel.OnEventRaised -= UpdateMovement;
+        lightAttackEventChannel.OnEventRaised -= onLightAttackEvent;
     }
 }
