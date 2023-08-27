@@ -2,14 +2,14 @@ using UnityEngine.InputSystem;
 using UnityEngine;
 using UnityEngine.Events;
 
-// public class ActionMapName
-// {
-//     public static string Player = "Player";
-//     public static string UI = "UI";
-//     public static string UIGameOverAndCredits = "UIGameOverAndCredits";
-//     public static string Cinematics = "Cinematics";
-//     public static string Interact = "Interact";
-// }
+public class ActionMapName
+{
+    public static string Player = "Player";
+    public static string UI = "UI";
+    public static string UIGameOverAndCredits = "UIGameOverAndCredits";
+    public static string Cinematics = "Cinematics";
+    public static string Interact = "Interact";
+}
 
 public class InputManager : MonoBehaviour
 {
