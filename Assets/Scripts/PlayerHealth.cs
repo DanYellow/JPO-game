@@ -47,14 +47,14 @@ public class PlayerHealth : MonoBehaviour
     // Update is called once per frame
     public void TakeDamage()
     {
-        playerStatsValue.nbCurrentLifes = Mathf.Clamp(
-            playerStatsValue.nbCurrentLifes - 1,
+        playerStatsValue.currentLifePoints = Mathf.Clamp(
+            playerStatsValue.currentLifePoints - 1,
             0,
-            playerStatsValue.nbMaxLifes
+            playerStatsValue.maxLifePoints
         );
 
         isHurtVoidEventChannel.Raise();
-        if (playerStatsValue.nbCurrentLifes <= 0)
+        if (playerStatsValue.currentLifePoints <= 0)
         {
             onPlayerDeathVoidEventChannel.Raise();
             OnDeath();

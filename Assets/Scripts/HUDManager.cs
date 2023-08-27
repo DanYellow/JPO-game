@@ -59,7 +59,7 @@ public class HUDManager : MonoBehaviour
     public void StartGame()
     {
         timeBar.fillAmount = timeBarValue.CurrentValue;
-        playerStatsValue.nbCurrentLifes = playerStatsValue.nbMaxLifes;
+        // playerStatsValue.nbCurrentLifes = playerStatsValue.nbMaxLifes;
         barContainer.SetActive(true);
         FillHearts();
         StartCoroutine(DecreaseTimeBar());
@@ -67,21 +67,21 @@ public class HUDManager : MonoBehaviour
 
     private void FillHearts()
     {
-        RectTransform rectHeartUI = heartUI.GetComponent<RectTransform>();
-        float xOffset = 10;
-        float startPosX = playerHUDUI.GetComponent<RectTransform>().rect.xMin + rectHeartUI.rect.width;
+        // RectTransform rectHeartUI = heartUI.GetComponent<RectTransform>();
+        // float xOffset = 10;
+        // float startPosX = playerHUDUI.GetComponent<RectTransform>().rect.xMin + rectHeartUI.rect.width;
 
-        for (int i = 0; i < playerStatsValue.nbCurrentLifes; i++)
-        {
-            Vector2 nextPos = new Vector2(
-                (rectHeartUI.rect.width * i) + (xOffset * (i + 1)) + startPosX,
-                480
-            );
-            GameObject heartLife = Instantiate(heartUI, nextPos, Quaternion.identity);
-            heartLife.transform.SetParent(playerHUDUI.transform, false);
-            listHeartsUI.Add(heartLife);
-        }
-        AnimateLastHeart();
+        // for (int i = 0; i < playerStatsValue.nbCurrentLifes; i++)
+        // {
+        //     Vector2 nextPos = new Vector2(
+        //         (rectHeartUI.rect.width * i) + (xOffset * (i + 1)) + startPosX,
+        //         480
+        //     );
+        //     GameObject heartLife = Instantiate(heartUI, nextPos, Quaternion.identity);
+        //     heartLife.transform.SetParent(playerHUDUI.transform, false);
+        //     listHeartsUI.Add(heartLife);
+        // }
+        // AnimateLastHeart();
     }
 
     private void HeartLost()
@@ -111,17 +111,17 @@ public class HUDManager : MonoBehaviour
 
     IEnumerator DecreaseTimeBar()
     {
-        while (timeBar.fillAmount > 0 && playerStatsValue.nbCurrentLifes > 0)
-        {
-            if (!isGamePaused)
-            {
-                timeBarValue.CurrentValue -= decreaseTimeBarStep;
-                timeBar.fillAmount = timeBarValue.CurrentValue;
-            }
+        // while (timeBar.fillAmount > 0 && playerStatsValue.nbCurrentLifes > 0)
+        // {
+        //     if (!isGamePaused)
+        //     {
+        //         timeBarValue.CurrentValue -= decreaseTimeBarStep;
+        //         timeBar.fillAmount = timeBarValue.CurrentValue;
+        //     }
             yield return null;
-        }
-        StopAllCoroutines();
-        onPlayerDeathVoidEventChannel.Raise();
+        // }
+        // StopAllCoroutines();
+        // onPlayerDeathVoidEventChannel.Raise();
     }
 
 

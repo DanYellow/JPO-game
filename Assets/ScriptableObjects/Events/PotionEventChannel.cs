@@ -1,24 +1,15 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public enum PotionType
-{
-    Heal,
-}
-
-
 [CreateAssetMenu(fileName = "PotionEventChannel", menuName = "ScriptableObjects/Events/PotionEventChannel", order = 0)]
 public class PotionEventChannel : ScriptableObject
 {
-    public PotionType potionType;
-    public int value;
+    public UnityAction<PotionTypeValue> OnEventRaised;
 
-    public UnityAction<PotionType, int> OnEventRaised;
-
-    public void Raise()
+    public void Raise(PotionTypeValue potionTypeValue)
     {
         if (OnEventRaised != null)
-            OnEventRaised.Invoke(potionType, value);
+            OnEventRaised.Invoke(potionTypeValue);
     }
 
     [Multiline]
