@@ -8569,6 +8569,7 @@ MonoBehaviour:
   onPlayerInteractingEvent: {fileID: 11400000, guid: c0ad5fd0fa33a0948888d68c3fb0efc0, type: 2}
   onInteract: {fileID: 11400000, guid: b015654123fbdf34ba1edba9a609afec, type: 2}
   text: Hello world
+  interactionItemTextValue: {fileID: 0}
 --- !u!224 &1507051741 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2265402483902109169, guid: 51a33da2987ce7646ac576a3482e4cd2, type: 3}
@@ -9849,7 +9850,19 @@ MonoBehaviour:
     m_ActionId: ac700bbe-6968-4a28-baac-429f1a20ac37
     m_ActionName: Player/LightAttack[/Keyboard/c]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 253364483}
+        m_TargetAssemblyTypeName: PlayerInteract, Assembly-CSharp
+        m_MethodName: OnInteract
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 66428289-0d14-47e5-aa4f-33b82fcd6a54
     m_ActionName: Read/Continue[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0

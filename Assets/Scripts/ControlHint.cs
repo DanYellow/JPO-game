@@ -7,6 +7,7 @@ using UnityEngine.Rendering.Universal;
 public class ControlHint : MonoBehaviour
 {
     private bool isPlayerInRange = false;
+    private bool isStarted = false;
 
     private new Light2D light;
 
@@ -21,15 +22,37 @@ public class ControlHint : MonoBehaviour
 
     [SerializeField]
     private StringEventChannel onInteract;
-    
+
     [SerializeField, TextArea]
     private string text;
+
+    [SerializeField]
+    private InteractionItemTextValue interactionItemTextValue;
+
+    private Queue<string> listSentences;
 
     private void Awake()
     {
         light = GetComponentInChildren<Light2D>(true);
         light.gameObject.SetActive(false);
     }
+
+    void Start()
+    {
+        Load();
+    }
+
+    private void Load()
+    {
+        listSentences = new Queue<string>();
+        listSentences.Clear(); //clear any sentences in the queue
+
+        foreach (string sentence in interactionItemTextValue.listSentences) //for each sentence, enqueue it
+        {
+            listSentences.Enqueue(sentence);
+        }
+    }
+
 
     private void OnEnable()
     {
@@ -40,11 +63,14 @@ public class ControlHint : MonoBehaviour
     {
         if (isPlayerInRange)
         {
-            onInteract.Raise(text);
+            if(listSentences.Count == 0) {
+                EndDialogue();
+                return;
+            }
+            onInteract.Raise(listSentences.Dequeue());
             onPlayerInteractingEvent.Raise();
         }
     }
-
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -64,6 +90,10 @@ public class ControlHint : MonoBehaviour
             light.gameObject.SetActive(false);
             onInteractRangeEvent.Raise(isPlayerInRange);
         }
+    }
+
+    private void EndDialogue() {
+
     }
 
     private void OnDisable()
