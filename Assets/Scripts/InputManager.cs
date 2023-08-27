@@ -25,7 +25,7 @@ public class InputManager : MonoBehaviour
     private VoidEventChannel onCinematicStartEvent;
 
     [SerializeField]
-    private VoidEventChannel onInteractEvent;
+    private VoidEventChannel onPlayerInteractingEvent;
 
     private UnityAction onCreditsOrDeathEvent;
     private UnityAction onCinematic;
@@ -40,8 +40,8 @@ public class InputManager : MonoBehaviour
         onCinematic = () => { SwitchActionMap(ActionMapName.Cinematics); };
         onCinematicStartEvent.OnEventRaised += onCinematic;
 
-        // onInteract = () => { SwitchActionMap(ActionMapName.Interact); };
-        // onInteractEvent.OnEventRaised += onInteract;
+        onInteract = () => { SwitchActionMap(ActionMapName.Interact); };
+        onPlayerInteractingEvent.OnEventRaised += onInteract;
     }
 
     public void ToggleActionMap(bool isPaused)
@@ -67,6 +67,6 @@ public class InputManager : MonoBehaviour
         onTogglePauseEvent.OnEventRaised -= ToggleActionMap;
         onPlayerDeath.OnEventRaised -= onCreditsOrDeathEvent;
         onCinematicStartEvent.OnEventRaised -= onCinematic;
-        // onInteractEvent.OnEventRaised -= onInteract;
+        onPlayerInteractingEvent.OnEventRaised -= onInteract;
     }
 }
