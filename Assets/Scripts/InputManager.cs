@@ -8,6 +8,7 @@ public class ActionMapName
     public static string UI = "UI";
     public static string UIGameOverAndCredits = "UIGameOverAndCredits";
     public static string Cinematics = "Cinematics";
+    public static string Interact = "Interact";
 }
 
 public class InputManager : MonoBehaviour
@@ -23,8 +24,12 @@ public class InputManager : MonoBehaviour
     [SerializeField]
     private VoidEventChannel onCinematicStartEvent;
 
+    [SerializeField]
+    private VoidEventChannel onInteractEvent;
+
     private UnityAction onCreditsOrDeathEvent;
     private UnityAction onCinematic;
+    private UnityAction onInteract;
 
     private void Awake()
     {
@@ -34,6 +39,9 @@ public class InputManager : MonoBehaviour
 
         onCinematic = () => { SwitchActionMap(ActionMapName.Cinematics); };
         onCinematicStartEvent.OnEventRaised += onCinematic;
+
+        // onInteract = () => { SwitchActionMap(ActionMapName.Interact); };
+        // onInteractEvent.OnEventRaised += onInteract;
     }
 
     public void ToggleActionMap(bool isPaused)
@@ -59,5 +67,6 @@ public class InputManager : MonoBehaviour
         onTogglePauseEvent.OnEventRaised -= ToggleActionMap;
         onPlayerDeath.OnEventRaised -= onCreditsOrDeathEvent;
         onCinematicStartEvent.OnEventRaised -= onCinematic;
+        // onInteractEvent.OnEventRaised -= onInteract;
     }
 }

@@ -1318,9 +1318,10 @@ GameObject:
   - component: {fileID: 253364478}
   - component: {fileID: 253364477}
   - component: {fileID: 253364482}
+  - component: {fileID: 253364483}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1496,6 +1497,19 @@ MonoBehaviour:
   attackRange: 1.07
   lightAttackRate: 0
   isAttacking: 0
+--- !u!114 &253364483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 253364473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11c112d8e75c05b48a41e5ce5d88e661, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onInteractEventChannel: {fileID: 11400000, guid: 9c112fb6aa9c92e4aba9ca34b71b4d19, type: 2}
 --- !u!1 &293119356
 GameObject:
   m_ObjectHideFlags: 0
@@ -8470,6 +8484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acf45685407d45749a6cbca8cd63b817, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onInteractEvent: {fileID: 11400000, guid: 9c112fb6aa9c92e4aba9ca34b71b4d19, type: 2}
 --- !u!224 &1507051741 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2265402483902109169, guid: 51a33da2987ce7646ac576a3482e4cd2, type: 3}
@@ -9661,7 +9676,19 @@ MonoBehaviour:
     m_ActionId: e0ca6fed-78bb-4678-b917-a5c3bb1a34a9
     m_ActionName: UIGameOverAndCredits/Quit[/Keyboard/escape]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 253364483}
+        m_TargetAssemblyTypeName: PlayerInteract, Assembly-CSharp
+        m_MethodName: OnInteract
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: fd1c6715-b74e-444f-96ac-30ccc7f2cc5e
     m_ActionName: Player/Speak[/Keyboard/space]
   - m_PersistentCalls:
@@ -9736,6 +9763,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ac700bbe-6968-4a28-baac-429f1a20ac37
     m_ActionName: Player/LightAttack[/Keyboard/c]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 66428289-0d14-47e5-aa4f-33b82fcd6a54
+    m_ActionName: Read/Continue[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -9799,6 +9830,7 @@ MonoBehaviour:
   onTogglePauseEvent: {fileID: 11400000, guid: 0fa3c519969e18e4dbe89ce432a7da12, type: 2}
   onPlayerDeath: {fileID: 11400000, guid: ee804061685d49549a86590b0c280ccd, type: 2}
   onCinematicStartEvent: {fileID: 11400000, guid: 3852b8ec6405a764da438e1b04ab4bd6, type: 2}
+  onInteractEvent: {fileID: 11400000, guid: 9c112fb6aa9c92e4aba9ca34b71b4d19, type: 2}
 --- !u!114 &1736709082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10150,7 +10182,7 @@ GameObject:
   - component: {fileID: 1818295949}
   m_Layer: 0
   m_Name: PlayerContainer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
