@@ -9,6 +9,10 @@ public class PauseManager : MonoBehaviour
 
     public GameObject pauseMenuUI;
 
+    [SerializeField]
+    private StringEventChannel onPlayerInputMapChange;
+
+
     bool isGamePaused = false;
 
     private void Awake()
@@ -39,6 +43,8 @@ public class PauseManager : MonoBehaviour
         isGamePaused = false;
         onTogglePauseEvent.Raise(isGamePaused);
         EventSystem.current.SetSelectedGameObject(null);
+
+        onPlayerInputMapChange.Raise(ActionMapName.Player);
     }
 
     public void OnNavigate(InputAction.CallbackContext ctx)
@@ -65,5 +71,7 @@ public class PauseManager : MonoBehaviour
         pauseMenuUI.SetActive(true);
         EventSystemExtensions.UpdateSelectedGameObject(pauseMenuUI.GetComponentInChildren<Button>().gameObject);
         onTogglePauseEvent.Raise(isGamePaused);
+
+        onPlayerInputMapChange.Raise(ActionMapName.UI);
     }
 }

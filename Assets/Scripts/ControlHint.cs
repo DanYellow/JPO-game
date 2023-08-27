@@ -18,13 +18,10 @@ public class ControlHint : MonoBehaviour
     private BoolEventChannel onInteractRangeEvent;
 
     [SerializeField]
-    private VoidEventChannel onPlayerInteractingEvent;
+    private StringEventChannel onPlayerInputMapChange;
 
     [SerializeField]
     private StringEventChannel onInteract;
-
-    [SerializeField, TextArea]
-    private string text;
 
     [SerializeField]
     private InteractionItemTextValue interactionItemTextValue;
@@ -68,7 +65,7 @@ public class ControlHint : MonoBehaviour
                 return;
             }
             onInteract.Raise(listSentences.Dequeue());
-            onPlayerInteractingEvent.Raise();
+            onPlayerInputMapChange.Raise(ActionMapName.Interact);
         }
     }
 
@@ -93,7 +90,7 @@ public class ControlHint : MonoBehaviour
     }
 
     private void EndDialogue() {
-
+        onPlayerInputMapChange.Raise(ActionMapName.Player);
     }
 
     private void OnDisable()
