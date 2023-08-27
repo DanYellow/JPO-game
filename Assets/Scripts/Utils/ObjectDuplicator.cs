@@ -8,6 +8,13 @@ public class ObjectDuplicator : MonoBehaviour
     public int xSpacing;
     public int ySpacing;
 
+    [SerializeField]
+    private bool xSpread = false;
+
+    
+    [SerializeField]
+    private bool ySpread = false;
+
     public GameObject objectDuplicated; 
 
     private SpriteRenderer sr;
@@ -26,8 +33,8 @@ public class ObjectDuplicator : MonoBehaviour
         for (int i = 0; i < nbDuplicates; i++)
         {
             Vector2 nextPos = new(
-                startPosX ,
-                (ySpacing * i) + startPosY + (sr.bounds.size.y * i)
+                (xSpacing * i) + startPosX + (sr.bounds.size.x * i * (xSpread ? 1 : 0)),
+                (ySpacing * i) + startPosY + (sr.bounds.size.y * i * (ySpread ? 1 : 0))
             );
 
             Vector2 offset = new(startPosX, startPosY);
