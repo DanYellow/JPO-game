@@ -7,7 +7,6 @@ public class PlayerStatsValue : ScriptableObject
 {
     public float moveSpeed;
 
-    [Range(1, 99)]
     public int maxLifePoints = 250;
     public int currentLifePoints;
 
@@ -21,6 +20,7 @@ public class PlayerStatsValue : ScriptableObject
     public InvulnerableDataValue invulnerableData;
 
     private void OnEnable() {
-        currentLifePoints = maxLifePoints;
+        currentLifePoints = 20;
+        // currentLifePoints = maxLifePoints;
     }
 }

@@ -1,9 +1,10 @@
+using System;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField]
-    private VoidEventChannel isHurtVoidEventChannel;
+    private VoidEventChannel onHealthUpdated;
 
     [SerializeField]
     private CinemachineShakeEventChannel onCinemachineShake;
@@ -13,6 +14,9 @@ public class PlayerHealth : MonoBehaviour
 
     [SerializeField]
     private CameraShakeTypeValue deathCameraShake;
+
+    [SerializeField]
+    private PotionEventChannel onPotionPicked;
 
     private Animator animator;
     private SpriteRenderer sr;
@@ -32,6 +36,7 @@ public class PlayerHealth : MonoBehaviour
         animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
         onPlayerDeathVoidEventChannel.OnEventRaised += OnDeath;
+        onPotionPicked.OnEventRaised += OnHeal;
     }
 
     private void Update()
@@ -53,7 +58,7 @@ public class PlayerHealth : MonoBehaviour
             playerStatsValue.maxLifePoints
         );
 
-        isHurtVoidEventChannel.Raise();
+        onHealthUpdated.Raise();
         if (playerStatsValue.currentLifePoints <= 0)
         {
             onPlayerDeathVoidEventChannel.Raise();
@@ -62,6 +67,17 @@ public class PlayerHealth : MonoBehaviour
         else
         {
             onCinemachineShake.Raise(hurtCameraShake);
+        }
+    }
+
+    private void OnHeal(PotionValue potionTypeValue) {
+        if(potionTypeValue.type == PotionType.Heal) {
+            playerStatsValue.currentLifePoints = Math.Clamp(
+                playerStatsValue.currentLifePoints + potionTypeValue.value,
+                0,
+                playerStatsValue.maxJumpCount
+            );
+            onHealthUpdated.Raise();
         }
     }
 
@@ -76,6 +92,6 @@ public class PlayerHealth : MonoBehaviour
     private void OnDisable()
     {
         onPlayerDeathVoidEventChannel.OnEventRaised -= OnDeath;
-
+        onPotionPicked.OnEventRaised -= OnHeal;
     }
 }

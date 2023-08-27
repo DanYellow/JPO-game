@@ -579,6 +579,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onPotionPicked: {fileID: 11400000, guid: 3066caa819c806b49acc478c6b31b461, type: 2}
+  potionTypeValue: {fileID: 11400000, guid: a48afc6edf310b448b03b9f2b3f9ee0f, type: 2}
 --- !u!95 &128447994
 Animator:
   serializedVersion: 5
@@ -1649,10 +1650,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04699c8e0b0d77440b10ee86a3318d02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isHurtVoidEventChannel: {fileID: 11400000, guid: 03eb6c1b9f1a7ae4dac9b654d5a925a8, type: 2}
+  onHealthUpdated: {fileID: 11400000, guid: 03eb6c1b9f1a7ae4dac9b654d5a925a8, type: 2}
   onCinemachineShake: {fileID: 11400000, guid: 235824e89124e6d44baf6f4647dac34f, type: 2}
   hurtCameraShake: {fileID: 11400000, guid: 40f81f8a9ee7d7f4681c2c2cb2015fb3, type: 2}
   deathCameraShake: {fileID: 11400000, guid: fc3b3f289b44e9447a860057dedb2e11, type: 2}
+  onPotionPicked: {fileID: 11400000, guid: 3066caa819c806b49acc478c6b31b461, type: 2}
   onPlayerDeathVoidEventChannel: {fileID: 11400000, guid: ee804061685d49549a86590b0c280ccd, type: 2}
   deathEffectPrefab: {fileID: 1992304688091250534, guid: 44fb5dd6c04248741b0fdac87cf0d958, type: 3}
   playerStatsValue: {fileID: 11400000, guid: 4d8b9f9261ee27f47ad567a2af8e73c2, type: 2}
@@ -10490,18 +10492,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1736709076}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd5c0eab679b19f47a0f30024d63bcb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isHurtVoidEventChannel: {fileID: 11400000, guid: 03eb6c1b9f1a7ae4dac9b654d5a925a8, type: 2}
+  onHealthUpdated: {fileID: 11400000, guid: 03eb6c1b9f1a7ae4dac9b654d5a925a8, type: 2}
   playerStatsValue: {fileID: 11400000, guid: 4d8b9f9261ee27f47ad567a2af8e73c2, type: 2}
-  heartUI: {fileID: 8523994437467737665, guid: 6407de21ddfd9934484262df5e8b6636, type: 3}
+  healthBar: {fileID: 1698436748}
   playerHUDUI: {fileID: 396025082}
-  timeBar: {fileID: 1698436748}
-  timeBarValue: {fileID: 11400000, guid: 56994dd132ec4334781b2af9c25d9382, type: 2}
-  decreaseTimeBarStep: 0.001
   onPlayerDeathVoidEventChannel: {fileID: 11400000, guid: ee804061685d49549a86590b0c280ccd, type: 2}
   onTogglePauseEvent: {fileID: 11400000, guid: 0fa3c519969e18e4dbe89ce432a7da12, type: 2}
 --- !u!114 &1736709080

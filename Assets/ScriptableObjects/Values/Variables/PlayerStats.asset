@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
   moveSpeed: 15
-  nbMaxLifes: 3
-  nbCurrentLifes: 3
+  maxLifePoints: 250
+  currentLifePoints: 60
   jumpForce: 5
   maxJumpCount: 1
   gravityScaleGrounded: 10

@@ -4,9 +4,9 @@ using UnityEngine.Events;
 [CreateAssetMenu(fileName = "PotionEventChannel", menuName = "ScriptableObjects/Events/PotionEventChannel", order = 0)]
 public class PotionEventChannel : ScriptableObject
 {
-    public UnityAction<PotionTypeValue> OnEventRaised;
+    public UnityAction<PotionValue> OnEventRaised;
 
-    public void Raise(PotionTypeValue potionTypeValue)
+    public void Raise(PotionValue potionTypeValue)
     {
         if (OnEventRaised != null)
             OnEventRaised.Invoke(potionTypeValue);

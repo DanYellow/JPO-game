@@ -7,9 +7,9 @@ public enum PotionType
 
 
 [CreateAssetMenu(fileName = "New PotionTypeValue", menuName = "ScriptableObjects/Values/PotionTypeValue", order = 0)]
-public class PotionTypeValue : ScriptableObject
+public class PotionValue : ScriptableObject
 {
-    public PotionType potionType;
+    public PotionType type;
     public int value;
 
     #pragma warning disable 0414
