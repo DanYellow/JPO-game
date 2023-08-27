@@ -1,14 +1,11 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class PlayerMaterialManager : MonoBehaviour
+public class MaterialManager : MonoBehaviour
 {
     private Material originalMaterial;
-    private float originalAlpha;
     private SpriteRenderer sr;
-
-    [SerializeField]
-    private MaterialEventChannel onMaterialChange;
 
     private float currentTime;
 
@@ -16,15 +13,9 @@ public class PlayerMaterialManager : MonoBehaviour
     {
         sr = GetComponent<SpriteRenderer>();
         originalMaterial = sr.material;
-        originalAlpha = sr.color.a;
     }
 
-    private void OnEnable()
-    {
-        onMaterialChange.OnEventRaised += ChangeMaterialProxy;
-    }
-
-    private void ChangeMaterialProxy(MaterialChangeValue materialChange)
+    public void ChangeMaterialProxy(MaterialChangeValue materialChange)
     {
         StartCoroutine(ChangeMaterial(materialChange));
     }
@@ -63,10 +54,5 @@ public class PlayerMaterialManager : MonoBehaviour
             currentTime += Time.deltaTime;
             yield return null;
         }
-    }
-
-    private void OnDisable()
-    {
-        onMaterialChange.OnEventRaised -= ChangeMaterialProxy;
     }
 }

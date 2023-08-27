@@ -9,9 +9,15 @@ public class Destructable : MonoBehaviour, IDamageable
 
     private int currentLifePoints = 3;
 
+    [SerializeField]
+    private MaterialChangeValue materialChange;
+
+    private MaterialManager materialManager;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        materialManager = GetComponent<MaterialManager>();
 
         foreach (Transform g in transform.GetComponentsInChildren<Transform>())
         {
@@ -34,6 +40,7 @@ public class Destructable : MonoBehaviour, IDamageable
     public void TakeDamage(int damage)
     {
         currentLifePoints -= damage;
+        materialManager.ChangeMaterialProxy(materialChange);
         // animator.SetTrigger(AnimationStrings.isHit);
         if (currentLifePoints <= 0)
         {

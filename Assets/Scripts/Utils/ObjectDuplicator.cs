@@ -25,11 +25,17 @@ public class ObjectDuplicator : MonoBehaviour
 
         for (int i = 0; i < nbDuplicates; i++)
         {
-            Vector2 nextPos = new Vector2(
-                xSpacing == 0 ? gameObject.transform.position.x : (sr.bounds.size.x * i) + (xSpacing * i) + startPosX,
-                ySpacing == 0 ? gameObject.transform.position.y : (sr.bounds.size.y * i) + (ySpacing * i) + startPosY
-                // gameObject.transform.position.y
+            Vector2 nextPos = new(
+                startPosX ,
+                (ySpacing * i) + startPosY + (sr.bounds.size.y * i)
             );
+
+            Vector2 offset = new(startPosX, startPosY);
+            // Vector2 nextPos = new Vector2(
+            //     xSpacing == 0 ? gameObject.transform.position.x : (sr.bounds.size.x * i) + (xSpacing * i) + startPosX,
+            //     ySpacing == 0 ? gameObject.transform.position.y : (sr.bounds.size.y * i) + (ySpacing * i) + startPosY
+            //     // gameObject.transform.position.y
+            // );
             GameObject duplicate = Instantiate(objectDuplicated, nextPos, Quaternion.identity);
             duplicate.SetActive(true);
         }
