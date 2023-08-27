@@ -26,7 +26,7 @@ public class VolumeEventManager : MonoBehaviour
     private void OnEnable() {
         
 
-        onPlayerHurtEvent.OnEventRaised += onPlayerHurt;
+        // onPlayerHurtEvent.OnEventRaised += onPlayerHurt;
     }
 
     IEnumerator Hurt() {
@@ -36,6 +36,6 @@ public class VolumeEventManager : MonoBehaviour
     }
 
     private void OnDisable() {
-        onPlayerHurtEvent.OnEventRaised -= onPlayerHurt;
+        // onPlayerHurtEvent.OnEventRaised -= onPlayerHurt;
     }
 }

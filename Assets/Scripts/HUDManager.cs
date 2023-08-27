@@ -4,6 +4,7 @@ using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using System.Collections;
+using TMPro;
 
 public class HUDManager : MonoBehaviour
 {
@@ -16,7 +17,12 @@ public class HUDManager : MonoBehaviour
     [SerializeField]
     private Image healthBar;
 
+    [SerializeField]
+    private Gradient healthBarGradient;
+
     public GameObject playerHUDUI;
+
+
 
 
     [SerializeField]
@@ -27,6 +33,9 @@ public class HUDManager : MonoBehaviour
     private UnityAction<bool> onPause;
     private bool isGamePaused = false;
 
+    [SerializeField]
+    private TextMeshProUGUI lifePointsText;
+
     private GameObject barContainer;
 
     private void Awake()
@@ -35,6 +44,10 @@ public class HUDManager : MonoBehaviour
         playerHUDUI.SetActive(true);
         barContainer = playerHUDUI.transform.Find("BarContainer").gameObject;
         // barContainer.SetActive(false);
+    }
+
+    private void Start() {
+        lifePointsText.SetText($"{playerStatsValue.currentLifePoints}/{playerStatsValue.maxLifePoints}");
     }
 
     private void OnEnable()
@@ -58,8 +71,10 @@ public class HUDManager : MonoBehaviour
 
     private void UpdateHealth()
     {
-        float rate = (float)playerStatsValue.currentLifePoints / (float)playerStatsValue.maxLifePoints;
+        float rate = (float) playerStatsValue.currentLifePoints / (float) playerStatsValue.maxLifePoints;
         healthBar.fillAmount = rate;
+        healthBar.color = healthBarGradient.Evaluate(rate);
+        lifePointsText.SetText($"{playerStatsValue.currentLifePoints}/{playerStatsValue.maxLifePoints}");
     }
 
 

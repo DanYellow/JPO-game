@@ -579,7 +579,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onPotionPicked: {fileID: 11400000, guid: 3066caa819c806b49acc478c6b31b461, type: 2}
-  potionTypeValue: {fileID: 11400000, guid: a48afc6edf310b448b03b9f2b3f9ee0f, type: 2}
+  potionTypeValue: {fileID: 11400000, guid: e2db95169b852ba4ca52044aac3da4ce, type: 2}
 --- !u!95 &128447994
 Animator:
   serializedVersion: 5
@@ -9617,7 +9617,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1588566094
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10500,9 +10500,40 @@ MonoBehaviour:
   onHealthUpdated: {fileID: 11400000, guid: 03eb6c1b9f1a7ae4dac9b654d5a925a8, type: 2}
   playerStatsValue: {fileID: 11400000, guid: 4d8b9f9261ee27f47ad567a2af8e73c2, type: 2}
   healthBar: {fileID: 1698436748}
+  healthBarGradient:
+    serializedVersion: 2
+    key0: {r: 1, g: 0.019607844, b: 0, a: 1}
+    key1: {r: 0.46226418, g: 0, b: 0, a: 1}
+    key2: {r: 1, g: 0.019607844, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 31804
+    ctime2: 65535
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 3
+    m_NumAlphaKeys: 2
   playerHUDUI: {fileID: 396025082}
   onPlayerDeathVoidEventChannel: {fileID: 11400000, guid: ee804061685d49549a86590b0c280ccd, type: 2}
   onTogglePauseEvent: {fileID: 11400000, guid: 0fa3c519969e18e4dbe89ce432a7da12, type: 2}
+  lifePointsText: {fileID: 1607934055}
 --- !u!114 &1736709080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10783,7 +10814,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9056604, g: 0.66560537, b: 0, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

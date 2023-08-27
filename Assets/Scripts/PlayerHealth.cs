@@ -75,7 +75,7 @@ public class PlayerHealth : MonoBehaviour
             playerStatsValue.currentLifePoints = Math.Clamp(
                 playerStatsValue.currentLifePoints + potionTypeValue.value,
                 0,
-                playerStatsValue.maxJumpCount
+                playerStatsValue.maxLifePoints
             );
             onHealthUpdated.Raise();
         }
