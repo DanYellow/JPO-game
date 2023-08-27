@@ -63,6 +63,7 @@ public class ControlHint : MonoBehaviour
                 EndDialogue();
                 return;
             }
+            onInteractRangeEvent.Raise(true);
             onInteract.Raise(listSentences.Dequeue());
             onPlayerInputMapChange.Raise(ActionMapName.Interact);
         }

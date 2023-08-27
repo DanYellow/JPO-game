@@ -184,6 +184,7 @@ GameObject:
   - component: {fileID: 4197264773244502542}
   - component: {fileID: 4197264773244502541}
   - component: {fileID: 4197264773244502538}
+  - component: {fileID: -8185693015523522531}
   m_Layer: 0
   m_Name: Crate
   m_TagString: Untagged
@@ -319,8 +320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b091951cb7b1c84ca1f305403557a45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  materialChange: {fileID: 11400000, guid: f83f25e3727d3074ea00996d2bdcfb3d, type: 2}
-  onMaterialChange: {fileID: 11400000, guid: 1ef143ed0456178448a9a26f8fb8dd48, type: 2}
+  materialChange: {fileID: 11400000, guid: 1786a2b8d8188b14b89a1a941bd5c390, type: 2}
 --- !u!114 &4197264773244502538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,7 +333,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9759ce8b209e33641a08cc6e598f63d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onMaterialChange: {fileID: 11400000, guid: 1ef143ed0456178448a9a26f8fb8dd48, type: 2}
+--- !u!50 &-8185693015523522531
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4197264773244502512}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1000
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &4197264773259668536
 GameObject:
   m_ObjectHideFlags: 0
