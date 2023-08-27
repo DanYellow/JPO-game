@@ -50,7 +50,6 @@ public class ControlHint : MonoBehaviour
         }
     }
 
-
     private void OnEnable()
     {
         onPlayerStartInteractEvent.OnEventRaised += Display;
@@ -90,12 +89,15 @@ public class ControlHint : MonoBehaviour
     }
 
     private void EndDialogue() {
+        onInteractRangeEvent.Raise(false);
         onPlayerInputMapChange.Raise(ActionMapName.Player);
+        Load();
     }
 
     private void OnDisable()
     {
         onPlayerStartInteractEvent.OnEventRaised -= Display;
+        
     }
 
     // public void OnSpeak(InputAction.CallbackContext ctx)

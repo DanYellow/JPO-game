@@ -13,11 +13,9 @@ public class ActionMapName
 [CreateAssetMenu(fileName = "PlayerInputMapEventChannel", menuName = "ScriptableObjects/Events/PlayerInputMapEventChannel", order = 0)]
 public class PlayerInputMapEventChannel : ScriptableObject
 {
+    public UnityAction<string> OnEventRaised;
 
-
-    public UnityAction<ActionMapName> OnEventRaised;
-
-    public void Raise(ActionMapName value)
+    public void Raise(string value)
     {
         if (OnEventRaised != null)
             OnEventRaised.Invoke(value);
