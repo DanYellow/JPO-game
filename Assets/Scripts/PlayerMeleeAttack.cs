@@ -27,7 +27,7 @@ public class PlayerMeleeAttack : MonoBehaviour
         if (ctx.phase == InputActionPhase.Performed && !isAttacking)
         {
             lightAttackEventChannel.Raise();
-            Collider2D[] listHitItems = Physics2D.OverlapCircleAll(attackPoint.position, attackRange);
+            Collider2D[] listHitItems = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, listDamageableLayers);
 
             foreach (var hitItem in listHitItems)
             {

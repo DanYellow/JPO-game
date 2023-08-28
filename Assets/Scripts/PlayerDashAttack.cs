@@ -44,6 +44,7 @@ public class PlayerDashAttack : MonoBehaviour
     {
         if (ctx.phase == InputActionPhase.Performed)
         {
+            playerHealth.TakeDamage(1);
             StartCoroutine(Dash());
         }
     }
@@ -78,6 +79,7 @@ public class PlayerDashAttack : MonoBehaviour
         {
             if (item.TryGetComponent(out IDamageable iDamageable))
             {
+                print("fffee");
                 iDamageable.TakeDamage(playerData.dashDamage);
             }
         }
@@ -99,11 +101,7 @@ public class PlayerDashAttack : MonoBehaviour
         // // Time.timeScale = 0.5f;
         playerIsDashing.CurrentValue = true;
         DisableCollisions(true);
-        playerHealth.TakeDamage(1);
-        // rb.AddForce(
-        //     new Vector2(transform.right.normalized.x * playerData.dashVelocity, 0),
-        //     ForceMode2D.Impulse
-        // );
+        
         rb.velocity = new Vector2(transform.right.normalized.x * playerData.dashVelocity, 0);
         yield return new WaitForSecondsRealtime(0.25f);
         rb.gravityScale = originalGravity;

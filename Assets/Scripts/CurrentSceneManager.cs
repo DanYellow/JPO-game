@@ -12,6 +12,9 @@ public class CurrentSceneManager : MonoBehaviour
 
     private SceneTransition sceneTransition;
 
+    [SerializeField]
+    private BoolValue playerIsDashing;
+
     private void Awake()
     {
         sceneTransition = GetComponent<SceneTransition>();
@@ -19,10 +22,15 @@ public class CurrentSceneManager : MonoBehaviour
 
     void Start()
     {
-        timeBarValue.CurrentValue = 1f;
         Application.targetFrameRate = 60;
-
+        Initialize();
         StartCoroutine(sceneTransition.Show());
+    }
+
+    private void Initialize()
+    {
+         timeBarValue.CurrentValue = 1f;
+         playerIsDashing.CurrentValue = false;
     }
 
     public void LoadLevel(int levelName = 1)

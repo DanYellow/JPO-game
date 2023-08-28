@@ -37,6 +37,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         sr = GetComponent<SpriteRenderer>();
         onPlayerDeathVoidEventChannel.OnEventRaised += OnDeath;
         onPotionPicked.OnEventRaised += OnHeal;
+
+        playerStatsValue.currentLifePoints = 50;
     }
 
     private void Update()
