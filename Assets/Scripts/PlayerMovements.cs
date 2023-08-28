@@ -48,6 +48,10 @@ public class PlayerMovements : MonoBehaviour
     [SerializeField]
     private VectorEventChannel playerPositionEventChannel;
 
+    [SerializeField]
+    private float coyoteTime = 0.2f;
+    private float coyoteTimeCounter;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -69,10 +73,19 @@ public class PlayerMovements : MonoBehaviour
 
         Flip();
 
-        if (isGrounded && rb.velocity.y < 0.1f)
+        if (isGrounded)
         {
-            jumpCount = 0;
+            coyoteTimeCounter = coyoteTime;
         }
+        else
+        {
+            coyoteTimeCounter -= Time.deltaTime;
+        }
+
+        // if (isGrounded && rb.velocity.y < 0.1f)
+        // {
+        //     jumpCount = 0;
+        // }
 
         if (rb.velocity.y >= 0)
         {
@@ -136,14 +149,17 @@ public class PlayerMovements : MonoBehaviour
     {
         if (
             ctx.phase == InputActionPhase.Performed &&
-            jumpCount < playerData.maxJumpCount &&
-            !playerIsDashing.CurrentValue
+            // jumpCount < playerData.maxJumpCount &&
+            !playerIsDashing.CurrentValue &&
+            coyoteTimeCounter > 0f
         )
         {
             jumpCount++;
             float jumpForce = Mathf.Sqrt(playerData.jumpForce * (Physics2D.gravity.y * rb.gravityScale) * -2) * rb.mass;
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             // rb.velocity = new Vector2(moveInput.x * playerData.moveSpeed, playerData.jumpForce);
+        } else if (ctx.phase == InputActionPhase.Canceled) {
+            coyoteTimeCounter = 0f;
         }
     }
 

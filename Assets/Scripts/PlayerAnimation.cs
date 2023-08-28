@@ -31,7 +31,7 @@ public class PlayerAnimation : MonoBehaviour
         onLightAttackEvent = () =>
         {
             if(!playerIsDashing.CurrentValue) {
-                animator.SetTrigger(AnimationStrings.lightAttack);
+                animator.SetBool(AnimationStrings.lightAttack, true);
             }
         };
         lightAttackEventChannel.OnEventRaised += onLightAttackEvent;
@@ -40,7 +40,7 @@ public class PlayerAnimation : MonoBehaviour
     private void UpdateMovement(Vector3 direction)
     {
         animator.SetFloat("VelocityX", Mathf.Abs(direction.x));
-        animator.SetFloat("VelocityY", Mathf.Abs(direction.y));
+        animator.SetFloat("VelocityY", direction.y);
     }
 
     private void OnDisable()

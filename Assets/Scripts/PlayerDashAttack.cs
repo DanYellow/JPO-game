@@ -79,7 +79,6 @@ public class PlayerDashAttack : MonoBehaviour
         {
             if (item.TryGetComponent(out IDamageable iDamageable))
             {
-                print("fffee");
                 iDamageable.TakeDamage(playerData.dashDamage);
             }
         }

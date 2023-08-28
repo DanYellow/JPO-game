@@ -43,4 +43,8 @@ public class PlayerMeleeAttack : MonoBehaviour
     {
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
+
+    public void OnAttackEnds() {
+        GetComponent<Animator>().SetBool(AnimationStrings.lightAttack, false);
+    }
 }
