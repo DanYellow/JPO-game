@@ -1,6 +1,5 @@
 using UnityEngine.InputSystem;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class ActionMapName
 {
@@ -20,17 +19,11 @@ public class InputManager : MonoBehaviour
 
     private void Awake()
     {
-        // onCreditsOrDeathEvent = () => { SwitchActionMap(ActionMapName.UIGameOverAndCredits); };
-        // onTogglePauseEvent.OnEventRaised += ToggleActionMap;
-        // onPlayerDeath.OnEventRaised += onCreditsOrDeathEvent;
-
-        // onCinematic = () => { SwitchActionMap(ActionMapName.Cinematics); };
-        // onCinematicStartEvent.OnEventRaised += onCinematic;
-
-        // onInteract = () => { SwitchActionMap(ActionMapName.Interact); };
-        // onPlayerInteractingEvent.OnEventRaised += onInteract;
-
         onPlayerInputMapChange.OnEventRaised += SwitchActionMap;
+    }
+
+    private void Start() {
+        SwitchActionMap(ActionMapName.Player);
     }
 
     private void SwitchActionMap(string mapName = null)
@@ -39,19 +32,8 @@ public class InputManager : MonoBehaviour
         playerInput.SwitchCurrentActionMap(mapName.ToString());
     }
 
-    // private void SwitchActionMap(string mapName = null)
-    // {
-    //     mapName = mapName ?? ActionMapName.Player;
-    //     playerInput.SwitchCurrentActionMap(mapName);
-    // }
-
     private void OnDisable()
     {
-        // onTogglePauseEvent.OnEventRaised -= ToggleActionMap;
-        // onPlayerDeath.OnEventRaised -= onCreditsOrDeathEvent;
-        // onCinematicStartEvent.OnEventRaised -= onCinematic;
-        // onPlayerInteractingEvent.OnEventRaised -= onInteract;
-
         onPlayerInputMapChange.OnEventRaised -= SwitchActionMap;
     }
 }

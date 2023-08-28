@@ -136,7 +136,8 @@ public class PlayerMovements : MonoBehaviour
     {
         if (
             ctx.phase == InputActionPhase.Performed &&
-            jumpCount < playerData.maxJumpCount
+            jumpCount < playerData.maxJumpCount &&
+            !playerIsDashing.CurrentValue
         )
         {
             jumpCount++;

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth : MonoBehaviour, IDamageable
 {
     [SerializeField]
     private VoidEventChannel onHealthUpdated;
@@ -44,13 +44,13 @@ public class PlayerHealth : MonoBehaviour
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.H))
         {
-            TakeDamage();
+            TakeDamage(1);
         }
 #endif
     }
 
     // Update is called once per frame
-    public void TakeDamage()
+    public void TakeDamage(int damage)
     {
         playerStatsValue.currentLifePoints = Mathf.Clamp(
             playerStatsValue.currentLifePoints - 1,

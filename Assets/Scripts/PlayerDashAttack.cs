@@ -19,6 +19,9 @@ public class PlayerDashAttack : MonoBehaviour
 
     private string originalLayerName;
 
+    [SerializeField]
+    private PlayerHealth playerHealth;
+
     private BoxCollider2D bc2d;
 
     private float originalGravity;
@@ -28,22 +31,13 @@ public class PlayerDashAttack : MonoBehaviour
         dashTrailRenderer = GetComponent<DashTrailRenderer>();
         rb = GetComponentInParent<Rigidbody2D>();
         bc2d = GetComponentInParent<BoxCollider2D>();
+        playerHealth = GetComponent<PlayerHealth>();
     }
 
     private void Start()
     {
         originalGravity = rb.gravityScale;
         originalLayerName = LayerMask.LayerToName(gameObject.layer);
-
-        // print(LayerMask.GetMask(listDashableLayers));
-    }
-
-    private void Update()
-    {
-        if (playerIsDashing.CurrentValue)
-        {
-            // rb.velocity = new Vector2(transform.right.normalized.x * playerData.dashVelocity, 0);
-        }
     }
 
     public void OnDash(InputAction.CallbackContext ctx)
@@ -64,7 +58,7 @@ public class PlayerDashAttack : MonoBehaviour
 
     private void DisableCollisions(bool enabled)
     {
-        string[] layers = new string[] { "Enemy", "Props" };
+        string[] layers = new string[] { "Enemy", "Props", "Traps" };
         foreach (var layer in layers)
         {
             Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Default"), LayerMask.NameToLayer(layer), enabled);
@@ -105,7 +99,7 @@ public class PlayerDashAttack : MonoBehaviour
         // // Time.timeScale = 0.5f;
         playerIsDashing.CurrentValue = true;
         DisableCollisions(true);
-
+        playerHealth.TakeDamage(1);
         // rb.AddForce(
         //     new Vector2(transform.right.normalized.x * playerData.dashVelocity, 0),
         //     ForceMode2D.Impulse
@@ -115,8 +109,6 @@ public class PlayerDashAttack : MonoBehaviour
         rb.gravityScale = originalGravity;
 
         gameObject.layer = LayerMask.NameToLayer(originalLayerName);
-        // isDashing = false;
-        // Time.timeScale = 1f;
         dashTrailRenderer.emit = false;
         rb.velocity = Vector2.zero;
         DisableCollisions(false);
