@@ -38,6 +38,9 @@ public class PlayerMovements : MonoBehaviour
     [SerializeField]
     private VectorEventChannel vectorEventChannel;
 
+    [SerializeField]
+    private VectorEventChannel playerPositionEventChannel;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -51,6 +54,7 @@ public class PlayerMovements : MonoBehaviour
     void Update()
     {
         vectorEventChannel.Raise(rb.velocity);
+        playerPositionEventChannel.Raise(transform.position);
 
         Flip();
 

@@ -1,6 +1,5 @@
 
 using UnityEngine;
-using System;
 
 [CreateAssetMenu(fileName = "New Player Stats", menuName = "ScriptableObjects/Values/PlayerStatsValue", order = 0)]
 public class PlayerStatsValue : ScriptableObject
@@ -21,6 +20,12 @@ public class PlayerStatsValue : ScriptableObject
 
     private void OnEnable() {
         currentLifePoints = 20;
+        Debug.Log("ffeeee " + currentLifePoints);
         // currentLifePoints = maxLifePoints;
+    }
+
+    void Reset()
+    {
+        currentLifePoints = 20;
     }
 }

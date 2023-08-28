@@ -7,5 +7,6 @@ public class AnimationStrings
    public static string isGrounded = "IsGrounded";
    public static string moveDirectionX = "MoveDirectionX";
    public static string moveDirectionY = "MoveDirectionY";
+   public static string disabled = "Disabled";
 
 }

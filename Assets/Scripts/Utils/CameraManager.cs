@@ -1,3 +1,4 @@
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -12,9 +13,22 @@ public class CameraManager : MonoBehaviour
     private VoidEventChannel onPlayerDeathVoidEventChannel;
     private UnityAction onPlayerDeathVoid;
 
+    [SerializeField]
+    private BoolEventChannel onToggleCinemachineEventChannel;
+
+    private CinemachineVirtualCamera[] listVCam;
+
     private void Awake()
     {
+        listVCam = FindObjectsOfType<CinemachineVirtualCamera>();
         camera = GetComponent<Camera>();
+    }
+
+    private void ToggleVCam(bool enabled) {
+        foreach (var vCam in listVCam)
+        {
+            vCam.enabled = enabled;
+        }
     }
 
     private void OnEnable()
@@ -27,11 +41,14 @@ public class CameraManager : MonoBehaviour
 
         onPlayerDeathVoid = () => { camera.enabled = false; };
         // onPlayerDeathVoidEventChannel.OnEventRaised += onPlayerDeathVoid;
+
+        onToggleCinemachineEventChannel.OnEventRaised += ToggleVCam;
     }
 
     private void OnDisable()
     {
         onTogglePauseEvent.OnEventRaised -= onPause;
         onPlayerDeathVoidEventChannel.OnEventRaised -= onPlayerDeathVoid;
+        onToggleCinemachineEventChannel.OnEventRaised -= ToggleVCam;
     }
 }
