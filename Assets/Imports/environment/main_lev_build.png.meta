@@ -2549,7 +2549,11 @@ TextureImporter:
         - {x: -8, y: -8}
         - {x: 8, y: 0}
         - {x: 8, y: 8}
-      physicsShape: []
+      physicsShape:
+      - - {x: -8, y: 8}
+        - {x: -8, y: -8}
+        - {x: 8, y: 0}
+        - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
       spriteID: 46dc583a3dd041a4b96f4b760feda23f
@@ -2813,7 +2817,11 @@ TextureImporter:
         - {x: -8, y: 0}
         - {x: 8, y: -8}
         - {x: 8, y: 8}
-      physicsShape: []
+      physicsShape:
+      - - {x: -8, y: 8}
+        - {x: -8, y: 0}
+        - {x: 8, y: -8}
+        - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
       spriteID: 4d13385df773bea48b323b4f3d1a8c8f
@@ -3328,7 +3336,10 @@ TextureImporter:
       - - {x: -8, y: 8}
         - {x: -8, y: 0}
         - {x: 8, y: 8}
-      physicsShape: []
+      physicsShape:
+      - - {x: -8, y: 8}
+        - {x: -8, y: 0}
+        - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
       spriteID: 0604370aee761ce4d946ae22c72704ef
@@ -3718,7 +3729,10 @@ TextureImporter:
       - - {x: -8, y: 8}
         - {x: 8, y: 0}
         - {x: 8, y: 8}
-      physicsShape: []
+      physicsShape:
+      - - {x: -8, y: 8}
+        - {x: 8, y: 0}
+        - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
       spriteID: b3bfe9f74862e9f49bd3256d9fc39882
@@ -3743,7 +3757,11 @@ TextureImporter:
         - {x: -8, y: 0}
         - {x: 8, y: -8}
         - {x: 8, y: 8}
-      physicsShape: []
+      physicsShape:
+      - - {x: -8, y: 8}
+        - {x: -8, y: 0}
+        - {x: 8, y: -8}
+        - {x: 8, y: 8}
       tessellationDetail: 0
       bones: []
       spriteID: 12e40323219b1b4449b48c08486f5dd1
@@ -37910,8 +37928,8 @@ TextureImporter:
       main_lev_build_1460: 1358838206
       main_lev_build_1110: -1048421917
       main_lev_build_56: 2042111908
-      main_lev_build_1757: 420879096
       main_lev_build_1295: -1096011139
+      main_lev_build_1757: 420879096
       main_lev_build_523: 196707588
       main_lev_build_1732: 1627700366
       main_lev_build_970: 1282921704

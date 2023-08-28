@@ -60,8 +60,12 @@ public class PlayerMovements : MonoBehaviour
 
     void Update()
     {
-        vectorEventChannel.Raise(rb.velocity);
+        if (playerIsDashing.CurrentValue)
+        {
+            return;
+        }
         playerPositionEventChannel.Raise(transform.position);
+        vectorEventChannel.Raise(rb.velocity);
 
         Flip();
 

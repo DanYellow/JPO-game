@@ -12,6 +12,9 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField]
     private VoidEventChannel lightAttackEventChannel;
 
+    [SerializeField]
+    private BoolValue playerIsDashing;
+
 
     private UnityAction onLightAttackEvent;
 
@@ -27,7 +30,9 @@ public class PlayerAnimation : MonoBehaviour
 
         onLightAttackEvent = () =>
         {
-            animator.SetTrigger(AnimationStrings.lightAttack);
+            if(!playerIsDashing.CurrentValue) {
+                animator.SetTrigger(AnimationStrings.lightAttack);
+            }
         };
         lightAttackEventChannel.OnEventRaised += onLightAttackEvent;
     }

@@ -18,6 +18,7 @@ public class PlayerDashAttack : MonoBehaviour
     private BoolValue playerIsDashing;
 
     private float originalGravity;
+    private float originalMass;
 
     private void Awake()
     {
@@ -28,6 +29,7 @@ public class PlayerDashAttack : MonoBehaviour
     private void Start()
     {
         originalGravity = rb.gravityScale;
+        originalMass = rb.mass;
 
         // print(LayerMask.GetMask(listDashableLayers));
     }
@@ -60,23 +62,28 @@ public class PlayerDashAttack : MonoBehaviour
 
     public IEnumerator Dash()
     {
-        // onPlayerDash.Raise(true);
         dashTrailRenderer.emit = true;
         // // canDash = false;
         rb.gravityScale = 0f;
+        // rb.mass = 0;
         // // Time.timeScale = 0.5f;
         playerIsDashing.CurrentValue = true;
         DisableCollisions(true);
-        rb.velocity = new Vector2(transform.right.normalized.x * playerData.dashVelocity, rb.velocity.y);
+        rb.AddForce(
+            new Vector2(transform.right.normalized.x * playerData.dashVelocity, rb.velocity.y),
+            ForceMode2D.Impulse
+        );
+        // rb.velocity = new Vector2(transform.right.normalized.x * playerData.dashVelocity, rb.velocity.y);
 
         yield return new WaitForSecondsRealtime(0.5f);
-        playerIsDashing.CurrentValue = false;
         rb.gravityScale = originalGravity;
+        rb.mass = originalMass;
         // isDashing = false;
         // Time.timeScale = 1f;
-        // onPlayerDash.Raise(false);
         dashTrailRenderer.emit = false;
+        rb.velocity = Vector2.zero;
         DisableCollisions(false);
+        playerIsDashing.CurrentValue = false;
         // yield return new WaitForSecondsRealtime(0.5f);
         // canDash = true;
     }
