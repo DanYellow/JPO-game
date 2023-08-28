@@ -43,16 +43,19 @@ public class Portal : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             animatorFX.SetTrigger(AnimationStrings.disabled);
-            StartCoroutine(Teleport(other.transform));
+            other.transform.GetComponentInChildren<SpriteRenderer>().enabled = false;
+            
+            StartCoroutine(Teleport(other.gameObject));
         }
     }
 
-    IEnumerator Teleport(Transform target)
+    IEnumerator Teleport(GameObject target)
     {
         yield return null;
         yield return new WaitForSeconds(animatorFX.GetCurrentAnimatorStateInfo(0).length);
         onToggleCinemachineEvent.Raise(false);
-        target.position = destination.position;
+        target.transform.position = destination.position;
+        target.transform.GetComponentInChildren<SpriteRenderer>().enabled = true;
         StartCoroutine(RenableVCams());
     }
 

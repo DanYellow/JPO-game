@@ -12,6 +12,8 @@ public class PlayerStatsValue : ScriptableObject
     public float jumpForce = 5.5f;
     public int maxJumpCount = 1;
 
+    public int dashVelocity = 30;
+
     public int gravityScaleGrounded = 2;
     public int gravityScaleFalling = 8;
 

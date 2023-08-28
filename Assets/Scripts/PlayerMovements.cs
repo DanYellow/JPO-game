@@ -14,13 +14,20 @@ public class PlayerMovements : MonoBehaviour
 
     [Space(15), Tooltip("Position checks"), SerializeField]
     private bool isGrounded;
-    public LayerMask listGroundLayers;
-    public Transform groundCheck;
-    public float groundCheckRadius;
+
+    [SerializeField]
+    private LayerMask listGroundLayers;
+    [SerializeField]
+    private Transform groundCheck;
+    [SerializeField]
+    private float groundCheckRadius;
     private float moveSpeed;
     private Vector2 nextPosition;
 
     private BoxCollider2D bc2d;
+
+    [SerializeField]
+    private BoolValue playerIsDashing;
 
 
     [SerializeField]
@@ -87,8 +94,11 @@ public class PlayerMovements : MonoBehaviour
 
     private void FixedUpdate()
     {
-        nextPosition = new Vector2(moveInput.x * playerData.moveSpeed, rb.velocity.y);
-        rb.velocity = nextPosition;
+        if (!playerIsDashing.CurrentValue)
+        {
+            nextPosition = new Vector2(moveInput.x * playerData.moveSpeed, rb.velocity.y);
+            rb.velocity = nextPosition;
+        }
         isGrounded = IsGrounded();
     }
 
