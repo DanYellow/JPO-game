@@ -16,22 +16,26 @@ public class Portal : MonoBehaviour
 
     [SerializeField]
     private Animator animatorFX;
-    
-    private void OnEnable() {
+
+    private void OnEnable()
+    {
         onPlayerMoveEvent.OnEventRaised += CheckPlayerPosition;
         animatorFX = GetComponentInChildren<Animator>(true);
     }
 
-    private void CheckPlayerPosition(Vector3 pos) {
-        if(Vector3.Distance(pos, destination.position) < 0.1f) {
+    private void CheckPlayerPosition(Vector3 pos)
+    {
+        if (Vector3.Distance(pos, destination.position) < 0.1f)
+        {
             StartCoroutine(RenableVCams());
-            // onToggleCinemachineEvent.Raise(true);
         }
     }
 
-    IEnumerator RenableVCams() {
-        yield return null;
+    IEnumerator RenableVCams()
+    {
+        yield return 0.3f;
         onToggleCinemachineEvent.Raise(true);
+        animatorFX.ResetTrigger(AnimationStrings.disabled);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -39,12 +43,21 @@ public class Portal : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             animatorFX.SetTrigger(AnimationStrings.disabled);
-            onToggleCinemachineEvent.Raise(false);
-            other.transform.position = destination.position;
+            StartCoroutine(Teleport(other.transform));
         }
     }
 
-    private void OnDisable() {
+    IEnumerator Teleport(Transform target)
+    {
+        yield return null;
+        yield return new WaitForSeconds(animatorFX.GetCurrentAnimatorStateInfo(0).length);
+        onToggleCinemachineEvent.Raise(false);
+        target.position = destination.position;
+        StartCoroutine(RenableVCams());
+    }
+
+    private void OnDisable()
+    {
         onPlayerMoveEvent.OnEventRaised -= CheckPlayerPosition;
     }
 }
