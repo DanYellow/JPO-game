@@ -13,6 +13,7 @@ public class PlayerStatsValue : ScriptableObject
     public int maxJumpCount = 1;
 
     public int dashVelocity = 30;
+    public int dashDamage = 2;
 
     public int gravityScaleGrounded = 2;
     public int gravityScaleFalling = 8;
@@ -22,7 +23,6 @@ public class PlayerStatsValue : ScriptableObject
 
     private void OnEnable() {
         currentLifePoints = 20;
-        Debug.Log("ffeeee " + currentLifePoints);
         // currentLifePoints = maxLifePoints;
     }
 
