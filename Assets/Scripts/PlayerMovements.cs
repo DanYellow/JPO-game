@@ -43,7 +43,7 @@ public class PlayerMovements : MonoBehaviour
 
     [Header("Events")]
     [SerializeField]
-    private VectorEventChannel vectorEventChannel;
+    private VectorEventChannel rbVelocityEventChannel;
 
     [SerializeField]
     private VectorEventChannel playerPositionEventChannel;
@@ -69,7 +69,7 @@ public class PlayerMovements : MonoBehaviour
             return;
         }
         playerPositionEventChannel.Raise(transform.position);
-        vectorEventChannel.Raise(rb.velocity);
+        rbVelocityEventChannel.Raise(rb.velocity);
 
         Flip();
 
@@ -96,7 +96,7 @@ public class PlayerMovements : MonoBehaviour
             rb.gravityScale = playerData.gravityScaleFalling;
         }
 
-        if (Mathf.Abs(rb.velocity.x) > 0 && isGrounded && rb.velocity.y < 0.1f)
+        if (Mathf.Abs(rb.velocity.x) > 0.1f && isGrounded && rb.velocity.y < 0.1f)
         {
             if (!dust.isEmitting)
             {

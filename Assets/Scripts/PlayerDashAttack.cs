@@ -26,6 +26,9 @@ public class PlayerDashAttack : MonoBehaviour
     [SerializeField]
     private StringEventChannel countdownEvent; 
 
+    [SerializeField]
+    private VectorEventChannel rbVelocityEventChannel;
+
     private float originalGravity;
 
     private void Awake()
@@ -101,7 +104,9 @@ public class PlayerDashAttack : MonoBehaviour
         playerIsDashing.CurrentValue = true;
         DisableCollisions(true);
         
-        rb.velocity = new Vector2(transform.right.normalized.x * playerData.dashVelocity, 0);
+        float speedFactor = Mathf.Abs(rb.velocity.x) > 0 ? 1.25f : 1;
+        rb.velocity = new Vector2(transform.right.normalized.x * playerData.dashVelocity * speedFactor, 0);
+        rbVelocityEventChannel.Raise(rb.velocity);
         yield return new WaitForSecondsRealtime(0.25f);
         rb.gravityScale = originalGravity;
 

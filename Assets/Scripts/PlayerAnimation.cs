@@ -7,7 +7,7 @@ public class PlayerAnimation : MonoBehaviour
     private Animator animator;
 
     [SerializeField]
-    private VectorEventChannel vectorEventChannel;
+    private VectorEventChannel rbVelocityEventChannel;
 
     [SerializeField]
     private VoidEventChannel lightAttackEventChannel;
@@ -26,7 +26,7 @@ public class PlayerAnimation : MonoBehaviour
 
     private void OnEnable()
     {
-        vectorEventChannel.OnEventRaised += UpdateMovement;
+        rbVelocityEventChannel.OnEventRaised += UpdateMovement;
 
         onLightAttackEvent = () =>
         {
@@ -46,7 +46,7 @@ public class PlayerAnimation : MonoBehaviour
 
     private void OnDisable()
     {
-        vectorEventChannel.OnEventRaised -= UpdateMovement;
+        rbVelocityEventChannel.OnEventRaised -= UpdateMovement;
         lightAttackEventChannel.OnEventRaised -= onLightAttackEvent;
     }
 }
