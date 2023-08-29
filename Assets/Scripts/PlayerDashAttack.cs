@@ -24,10 +24,16 @@ public class PlayerDashAttack : MonoBehaviour
     private bool canDash = true;
 
     [SerializeField]
-    private StringEventChannel countdownEvent; 
+    private StringEventChannel countdownEvent;
 
     [SerializeField]
     private VectorEventChannel rbVelocityEventChannel;
+
+    [SerializeField]
+    private CinemachineShakeEventChannel onCinemachineShake;
+
+    [SerializeField]
+    private CameraShakeTypeValue dashCameraShake;
 
     private float originalGravity;
 
@@ -95,7 +101,6 @@ public class PlayerDashAttack : MonoBehaviour
 
     public IEnumerator Dash()
     {
-        dashTrailRenderer.emit = true;
         canDash = false;
         rb.gravityScale = 0f;
         gameObject.layer = LayerMask.NameToLayer("AttackArea");
@@ -103,9 +108,11 @@ public class PlayerDashAttack : MonoBehaviour
         // // Time.timeScale = 0.5f;
         playerCanMove.CurrentValue = false;
         DisableCollisions(true);
-        
+        // onCinemachineShake.Raise(dashCameraShake);
+
         float speedFactor = Mathf.Abs(rb.velocity.x) > 0 ? 1.25f : 1;
         rb.velocity = new Vector2(transform.right.normalized.x * playerData.dashVelocity * speedFactor, 0);
+        dashTrailRenderer.emit = true;
         rbVelocityEventChannel.Raise(rb.velocity);
         yield return new WaitForSecondsRealtime(0.35f);
         rb.gravityScale = originalGravity;
@@ -120,9 +127,11 @@ public class PlayerDashAttack : MonoBehaviour
         // canDash = true;
     }
 
-    public IEnumerator Countdown() {
+    public IEnumerator Countdown()
+    {
         int start = playerData.dashCooldown;
-        while(start > 0) {
+        while (start > 0)
+        {
             countdownEvent.Raise(start.ToString());
             start--;
             yield return new WaitForSeconds(1);

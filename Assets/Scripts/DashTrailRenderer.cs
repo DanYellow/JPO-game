@@ -21,6 +21,9 @@ public class DashTrailRenderer : MonoBehaviour
     [SerializeField]
     private bool useColor = false;
 
+    [SerializeField]
+    private Material material;
+
     private IObjectPool<GameObject> pool;
 
     void Awake()
@@ -28,10 +31,7 @@ public class DashTrailRenderer : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
 
         pool = new ObjectPool<GameObject>(
-                () =>
-                {
-                    return CreateFunc();
-                },
+                () => CreateFunc(),
                 ActionOnGet,
                 ActionOnRelease,
                 ActionOnDestroy,
@@ -48,16 +48,25 @@ public class DashTrailRenderer : MonoBehaviour
         clone.transform.position = transform.position;
         clone.transform.right = transform.right.normalized;
 
-        SpriteRenderer cloneRend = clone.AddComponent<SpriteRenderer>();
-        cloneRend.sprite = sr.sprite;
-        cloneRend.color = colorPerSecond;
-        cloneRend.sortingOrder = sr.sortingOrder - 1;
+        SpriteRenderer srClone = clone.AddComponent<SpriteRenderer>();
+        srClone.sprite = sr.sprite;
+        srClone.material = material;
+        // srClone.color = colorPerSecond;
+        srClone.sortingOrder = sr.sortingOrder - 1;
 
         return clone;
     }
 
-    IEnumerator DisableClone(GameObject go) {
-        yield return new WaitForSeconds(0.25f);
+    IEnumerator DisableClone(GameObject go)
+    {
+        SpriteRenderer srClone = go.GetComponent<SpriteRenderer>();
+        var startTime = Time.time;
+
+        while ((Time.time - startTime) < 0.25f)
+        {
+            srClone.color -= colorPerSecond * Time.deltaTime;
+            yield return null;
+        }
 
         pool.Release(go);
     }
@@ -66,6 +75,9 @@ public class DashTrailRenderer : MonoBehaviour
     {
         item.transform.position = transform.position;
         item.transform.right = transform.right.normalized;
+        SpriteRenderer srClone = item.GetComponent<SpriteRenderer>();
+        // srClone.color = colorPerSecond;
+
         item.SetActive(true);
         StartCoroutine(DisableClone(item));
     }
@@ -113,9 +125,8 @@ public class DashTrailRenderer : MonoBehaviour
         {
             if (emit)
             {
-                pool.Get();
-                // GameObject clone = pool.Get();
-                // clone.name = $"TrailClone_{i}";
+                GameObject clone = pool.Get();
+                clone.name = $"TrailClone_{i}";
 
                 i++;
             }

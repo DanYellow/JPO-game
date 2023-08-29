@@ -44,7 +44,7 @@ public class Portal : MonoBehaviour
         {
             animatorFX.SetTrigger(AnimationStrings.disabled);
             other.transform.GetComponentInChildren<SpriteRenderer>().enabled = false;
-            
+            print(other.gameObject.name);
             StartCoroutine(Teleport(other.gameObject));
         }
     }
