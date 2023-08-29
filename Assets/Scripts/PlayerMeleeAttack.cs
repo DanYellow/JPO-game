@@ -19,14 +19,19 @@ public class PlayerMeleeAttack : MonoBehaviour
     private float lightAttackRate;
     private float nextLightAttackTime = 0;
 
+    [SerializeField]
+    private BoolValue playerCanMove;
+
+
     // [HideInInspector]
     public bool isAttacking = false;
 
     public void OnLightAttack(InputAction.CallbackContext ctx)
     {
-        if (ctx.phase == InputActionPhase.Performed && !isAttacking)
+        if (ctx.phase == InputActionPhase.Performed)
         {
             lightAttackEventChannel.Raise();
+            playerCanMove.CurrentValue = false;
             Collider2D[] listHitItems = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, listDamageableLayers);
 
             foreach (var hitItem in listHitItems)
@@ -46,5 +51,6 @@ public class PlayerMeleeAttack : MonoBehaviour
 
     public void OnAttackEnds() {
         GetComponent<Animator>().SetBool(AnimationStrings.lightAttack, false);
+        playerCanMove.CurrentValue = true;
     }
 }

@@ -15,7 +15,7 @@ public class PlayerDashAttack : MonoBehaviour
     private PlayerStatsValue playerData;
 
     [SerializeField]
-    private BoolValue playerIsDashing;
+    private BoolValue playerCanMove;
 
     private string originalLayerName;
 
@@ -54,7 +54,7 @@ public class PlayerDashAttack : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (playerIsDashing.CurrentValue)
+        if (!playerCanMove.CurrentValue && !canDash)
         {
             InflictDamage();
         }
@@ -101,7 +101,7 @@ public class PlayerDashAttack : MonoBehaviour
         gameObject.layer = LayerMask.NameToLayer("AttackArea");
 
         // // Time.timeScale = 0.5f;
-        playerIsDashing.CurrentValue = true;
+        playerCanMove.CurrentValue = false;
         DisableCollisions(true);
         
         float speedFactor = Mathf.Abs(rb.velocity.x) > 0 ? 1.25f : 1;
@@ -114,7 +114,7 @@ public class PlayerDashAttack : MonoBehaviour
         dashTrailRenderer.emit = false;
         rb.velocity = Vector2.zero;
         DisableCollisions(false);
-        playerIsDashing.CurrentValue = false;
+        playerCanMove.CurrentValue = true;
         StartCoroutine(Countdown());
         // yield return new WaitForSecondsRealtime(playerData.dashCooldown);
         // canDash = true;

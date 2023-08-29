@@ -27,7 +27,7 @@ public class PlayerMovements : MonoBehaviour
     private BoxCollider2D bc2d;
 
     [SerializeField]
-    private BoolValue playerIsDashing;
+    private BoolValue playerCanMove;
 
 
     [SerializeField]
@@ -62,12 +62,16 @@ public class PlayerMovements : MonoBehaviour
         gameObject.SetActive(showOnStart);
     }
 
+    private void Start() {
+        playerCanMove.CurrentValue = true;
+    }
+
     void Update()
     {
-        if (playerIsDashing.CurrentValue)
-        {
-            return;
-        }
+        // if (!playerCanMove.CurrentValue)
+        // {
+        //     return;
+        // }
         playerPositionEventChannel.Raise(transform.position);
         rbVelocityEventChannel.Raise(rb.velocity);
 
@@ -111,7 +115,7 @@ public class PlayerMovements : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!playerIsDashing.CurrentValue)
+        if (playerCanMove.CurrentValue)
         {
             nextPosition = new Vector2(moveInput.x * playerData.moveSpeed, rb.velocity.y);
             rb.velocity = nextPosition;
@@ -150,7 +154,7 @@ public class PlayerMovements : MonoBehaviour
         if (
             ctx.phase == InputActionPhase.Performed &&
             // jumpCount < playerData.maxJumpCount &&
-            !playerIsDashing.CurrentValue &&
+            !playerCanMove.CurrentValue &&
             coyoteTimeCounter > 0f
         )
         {

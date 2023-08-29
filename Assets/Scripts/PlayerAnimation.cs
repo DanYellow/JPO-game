@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-
 public class PlayerAnimation : MonoBehaviour
 {
     private Animator animator;
@@ -13,8 +12,7 @@ public class PlayerAnimation : MonoBehaviour
     private VoidEventChannel lightAttackEventChannel;
 
     [SerializeField]
-    private BoolValue playerIsDashing;
-
+    private BoolValue playerCanMove;
 
     private UnityAction onLightAttackEvent;
 
@@ -30,7 +28,7 @@ public class PlayerAnimation : MonoBehaviour
 
         onLightAttackEvent = () =>
         {
-            if(!playerIsDashing.CurrentValue) {
+            if(playerCanMove.CurrentValue) {
                 // animator.SetTrigger("LightAttack2");
                 animator.SetBool(AnimationStrings.lightAttack, true);
             }
