@@ -24,6 +24,11 @@ public class PlayerDashAttack : MonoBehaviour
 
     private BoxCollider2D bc2d;
 
+    private bool canDash = true;
+
+    [SerializeField]
+    private StringEventChannel countdownEvent; 
+
     private float originalGravity;
 
     private void Awake()
@@ -42,7 +47,7 @@ public class PlayerDashAttack : MonoBehaviour
 
     public void OnDash(InputAction.CallbackContext ctx)
     {
-        if (ctx.phase == InputActionPhase.Performed)
+        if (ctx.phase == InputActionPhase.Performed && canDash)
         {
             playerHealth.TakeDamage(1);
             StartCoroutine(Dash());
@@ -86,14 +91,14 @@ public class PlayerDashAttack : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireCube(bc2d.bounds.center, bc2d.bounds.size);
+        // Gizmos.color = Color.yellow;
+        // Gizmos.DrawWireCube(bc2d.bounds.center, bc2d.bounds.size);
     }
 
     public IEnumerator Dash()
     {
         dashTrailRenderer.emit = true;
-        // // canDash = false;
+        canDash = false;
         rb.gravityScale = 0f;
         gameObject.layer = LayerMask.NameToLayer("AttackArea");
 
@@ -110,7 +115,20 @@ public class PlayerDashAttack : MonoBehaviour
         rb.velocity = Vector2.zero;
         DisableCollisions(false);
         playerIsDashing.CurrentValue = false;
-        // yield return new WaitForSecondsRealtime(0.5f);
+        StartCoroutine(Countdown());
+        // yield return new WaitForSecondsRealtime(playerData.dashCooldown);
         // canDash = true;
+    }
+
+    public IEnumerator Countdown() {
+        int start = playerData.dashCooldown;
+        while(start > 0) {
+            countdownEvent.Raise(start.ToString());
+            start--;
+            yield return new WaitForSeconds(1);
+        }
+        countdownEvent.Raise(start.ToString());
+
+        canDash = true;
     }
 }

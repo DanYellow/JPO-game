@@ -14,6 +14,7 @@ public class PlayerStatsValue : ScriptableObject
 
     public int dashVelocity = 30;
     public int dashDamage = 2;
+    public int dashCooldown = 3;
 
     public int gravityScaleGrounded = 2;
     public int gravityScaleFalling = 8;

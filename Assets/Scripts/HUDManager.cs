@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using System.Collections;
 using TMPro;
+using System;
 
 public class HUDManager : MonoBehaviour
 {
@@ -22,9 +23,6 @@ public class HUDManager : MonoBehaviour
 
     public GameObject playerHUDUI;
 
-
-
-
     [SerializeField]
     private VoidEventChannel onPlayerDeathVoidEventChannel;
 
@@ -38,11 +36,24 @@ public class HUDManager : MonoBehaviour
 
     private GameObject barContainer;
 
+    private GameObject cooldownContainer;
+    private Image cooldownBackground;
+    private TextMeshProUGUI cooldownText;
+
+    [SerializeField]
+    private StringEventChannel countdownEvent; 
+
     private void Awake()
     {
         UpdateHealth();
         playerHUDUI.SetActive(true);
         barContainer = playerHUDUI.transform.Find("BarContainer").gameObject;
+        cooldownContainer = playerHUDUI.transform.Find("Special/Cooldown").gameObject;
+        cooldownContainer.SetActive(false);
+        cooldownBackground = cooldownContainer.GetComponent<Image>();
+
+        cooldownText = cooldownContainer.GetComponentInChildren<TextMeshProUGUI>();
+
         // barContainer.SetActive(false);
     }
 
@@ -54,12 +65,22 @@ public class HUDManager : MonoBehaviour
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
         onHealthUpdated.OnEventRaised += UpdateHealth;
+        countdownEvent.OnEventRaised += UpdateCountdown;
 
         onPause = (bool isPaused) =>
         {
             isGamePaused = isPaused;
         };
         onTogglePauseEvent.OnEventRaised += onPause;
+    }
+
+    private void UpdateCountdown(string val)
+    {
+        if (int.TryParse(val, out int i)) {
+            cooldownContainer.SetActive(i != 0);
+            cooldownBackground.enabled = i != 0;
+        }
+        cooldownText.SetText(val);
     }
 
     public void StartGame()
@@ -88,6 +109,7 @@ public class HUDManager : MonoBehaviour
         onHealthUpdated.OnEventRaised -= UpdateHealth;
         SceneManager.sceneLoaded -= OnSceneLoaded;
         onTogglePauseEvent.OnEventRaised -= onPause;
+        countdownEvent.OnEventRaised -= UpdateCountdown;
     }
 
     private void OnValidate()

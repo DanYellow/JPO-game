@@ -31,6 +31,7 @@ public class PlayerAnimation : MonoBehaviour
         onLightAttackEvent = () =>
         {
             if(!playerIsDashing.CurrentValue) {
+                // animator.SetTrigger("LightAttack2");
                 animator.SetBool(AnimationStrings.lightAttack, true);
             }
         };
