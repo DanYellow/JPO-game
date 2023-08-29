@@ -47,15 +47,14 @@ public class DashTrailRenderer : MonoBehaviour
 
     GameObject CreateFunc()
     {
-        GameObject clone = new GameObject($"trailClone ()");
+        GameObject clone = new GameObject();
         clone.transform.position = tf.position;
         clone.transform.right = tf.right.normalized;
 
         SpriteRenderer cloneRend = clone.AddComponent<SpriteRenderer>();
         cloneRend.sprite = sr.sprite;
+        cloneRend.color = colorPerSecond;
         cloneRend.sortingOrder = sr.sortingOrder - 1;
-
-        StartCoroutine(DisableClone(clone));
 
         return clone;
     }
@@ -63,17 +62,20 @@ public class DashTrailRenderer : MonoBehaviour
     IEnumerator DisableClone(GameObject go) {
         yield return new WaitForSeconds(0.25f);
 
-        go.SetActive(false);
+        pool.Release(go);
     }
 
     void ActionOnGet(GameObject item)
     {
-        item.gameObject.SetActive(true);
+        item.transform.position = tf.position;
+        item.transform.right = tf.right.normalized;
+        item.SetActive(true);
+        StartCoroutine(DisableClone(item));
     }
 
     void ActionOnRelease(GameObject item)
     {
-        item.gameObject.SetActive(false);
+        item.SetActive(false);
     }
 
     void ActionOnDestroy(GameObject item)
@@ -105,16 +107,6 @@ public class DashTrailRenderer : MonoBehaviour
         // }
     }
 
-    // public IEnumerator Clear()
-    // {
-    //     for (int i = 0; i < clones.Count; i++)
-    //     {
-    //         Destroy(clones[i].gameObject);
-    //         clones.RemoveAt(i);
-    //     }
-
-    //     yield return new WaitUntil(() => clones.Count == 0);
-    // }
 
     IEnumerator Trail()
     {
@@ -125,14 +117,9 @@ public class DashTrailRenderer : MonoBehaviour
             if (emit)
             {
                 pool.Get();
-                // GameObject clone = new GameObject($"trailClone ({i})");
-                // clone.transform.position = tf.position;
-                // clone.transform.right = tf.right.normalized;
+                // GameObject clone = pool.Get();
+                // clone.name = $"TrailClone_{i}";
 
-                // SpriteRenderer cloneRend = clone.AddComponent<SpriteRenderer>();
-                // cloneRend.sprite = sr.sprite;
-                // cloneRend.sortingOrder = sr.sortingOrder - 1;
-                // clones.Add(cloneRend);
                 i++;
             }
 
