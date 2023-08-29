@@ -107,7 +107,7 @@ public class PlayerDashAttack : MonoBehaviour
         float speedFactor = Mathf.Abs(rb.velocity.x) > 0 ? 1.25f : 1;
         rb.velocity = new Vector2(transform.right.normalized.x * playerData.dashVelocity * speedFactor, 0);
         rbVelocityEventChannel.Raise(rb.velocity);
-        yield return new WaitForSecondsRealtime(0.25f);
+        yield return new WaitForSecondsRealtime(0.35f);
         rb.gravityScale = originalGravity;
 
         gameObject.layer = LayerMask.NameToLayer(originalLayerName);

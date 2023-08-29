@@ -68,10 +68,10 @@ public class PlayerMovements : MonoBehaviour
 
     void Update()
     {
-        // if (!playerCanMove.CurrentValue)
-        // {
-        //     return;
-        // }
+        if (!playerCanMove.CurrentValue)
+        {
+            return;
+        }
         playerPositionEventChannel.Raise(transform.position);
         rbVelocityEventChannel.Raise(rb.velocity);
 
@@ -154,7 +154,7 @@ public class PlayerMovements : MonoBehaviour
         if (
             ctx.phase == InputActionPhase.Performed &&
             // jumpCount < playerData.maxJumpCount &&
-            !playerCanMove.CurrentValue &&
+            playerCanMove.CurrentValue &&
             coyoteTimeCounter > 0f
         )
         {

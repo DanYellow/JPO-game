@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class DashTrailRenderer : MonoBehaviour
 {
@@ -20,66 +22,117 @@ public class DashTrailRenderer : MonoBehaviour
     [SerializeField]
     private bool useColor = false;
 
+    private IObjectPool<GameObject> pool;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         tf = GetComponent<Transform>();
         sr = GetComponent<SpriteRenderer>();
-        
+
+        pool = new ObjectPool<GameObject>(
+                () =>
+                {
+                    return CreateFunc();
+                },
+                ActionOnGet,
+                ActionOnRelease,
+                ActionOnDestroy,
+                true
+            );
+
         clones = new List<SpriteRenderer>();
         StartCoroutine(Trail());
     }
 
+    GameObject CreateFunc()
+    {
+        GameObject clone = new GameObject($"trailClone ()");
+        clone.transform.position = tf.position;
+        clone.transform.right = tf.right.normalized;
+
+        SpriteRenderer cloneRend = clone.AddComponent<SpriteRenderer>();
+        cloneRend.sprite = sr.sprite;
+        cloneRend.sortingOrder = sr.sortingOrder - 1;
+
+        StartCoroutine(DisableClone(clone));
+
+        return clone;
+    }
+
+    IEnumerator DisableClone(GameObject go) {
+        yield return new WaitForSeconds(0.25f);
+
+        go.SetActive(false);
+    }
+
+    void ActionOnGet(GameObject item)
+    {
+        item.gameObject.SetActive(true);
+    }
+
+    void ActionOnRelease(GameObject item)
+    {
+        item.gameObject.SetActive(false);
+    }
+
+    void ActionOnDestroy(GameObject item)
+    {
+        Destroy(item);
+    }
+
     void Update()
     {
-        for (int i = 0; i < clones.Count; i++)
-        {
-            clones[i].sortingOrder = 9;
-            if (useColor)
-            {
-                clones[i].color -= colorPerSecond * Time.deltaTime;
-            }
+        // for (int i = 0; i < clones.Count; i++)
+        // {
+        //     clones[i].sortingOrder = 9;
+        //     if (useColor)
+        //     {
+        //         clones[i].color -= colorPerSecond * Time.deltaTime;
+        //     }
 
-            if (useScale)
-            {
-                clones[i].transform.localScale -= scalePerSecond * Time.deltaTime;
-            }
+        //     if (useScale)
+        //     {
+        //         clones[i].transform.localScale -= scalePerSecond * Time.deltaTime;
+        //     }
 
-            if (clones[i].color.a <= 0f || clones[i].transform.localScale == Vector3.zero)
-            {
-                Destroy(clones[i].gameObject);
-                clones.RemoveAt(i);
-                i--;
-            }
-        }
+        //     if (clones[i].color.a <= 0f || clones[i].transform.localScale == Vector3.zero)
+        //     {
+        //         Destroy(clones[i].gameObject);
+        //         clones.RemoveAt(i);
+        //         i--;
+        //     }
+        // }
     }
 
-    public IEnumerator Clear()
-    {
-        for (int i = 0; i < clones.Count; i++)
-        {
-            Destroy(clones[i].gameObject);
-            clones.RemoveAt(i);
-        }
+    // public IEnumerator Clear()
+    // {
+    //     for (int i = 0; i < clones.Count; i++)
+    //     {
+    //         Destroy(clones[i].gameObject);
+    //         clones.RemoveAt(i);
+    //     }
 
-        yield return new WaitUntil(() => clones.Count == 0);
-    }
+    //     yield return new WaitUntil(() => clones.Count == 0);
+    // }
 
     IEnumerator Trail()
     {
         int i = 0;
+
         while (true)
         {
             if (emit)
             {
-                GameObject clone = new GameObject($"trailClone ({i})");
-                clone.transform.position = tf.position;
-                clone.transform.right = tf.right.normalized;
+                pool.Get();
+                // GameObject clone = new GameObject($"trailClone ({i})");
+                // clone.transform.position = tf.position;
+                // clone.transform.right = tf.right.normalized;
 
-                SpriteRenderer cloneRend = clone.AddComponent<SpriteRenderer>();
-                cloneRend.sprite = sr.sprite;
-                cloneRend.sortingOrder = sr.sortingOrder - 1;
-                clones.Add(cloneRend);
+                // SpriteRenderer cloneRend = clone.AddComponent<SpriteRenderer>();
+                // cloneRend.sprite = sr.sprite;
+                // cloneRend.sortingOrder = sr.sortingOrder - 1;
+                // clones.Add(cloneRend);
                 i++;
             }
 
