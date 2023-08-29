@@ -19,9 +19,6 @@ public class PlayerDashAttack : MonoBehaviour
 
     private string originalLayerName;
 
-    [SerializeField]
-    private PlayerHealth playerHealth;
-
     private BoxCollider2D bc2d;
 
     private bool canDash = true;
@@ -36,7 +33,6 @@ public class PlayerDashAttack : MonoBehaviour
         dashTrailRenderer = GetComponent<DashTrailRenderer>();
         rb = GetComponentInParent<Rigidbody2D>();
         bc2d = GetComponentInParent<BoxCollider2D>();
-        playerHealth = GetComponent<PlayerHealth>();
     }
 
     private void Start()
@@ -49,7 +45,6 @@ public class PlayerDashAttack : MonoBehaviour
     {
         if (ctx.phase == InputActionPhase.Performed && canDash)
         {
-            playerHealth.TakeDamage(1);
             StartCoroutine(Dash());
         }
     }
