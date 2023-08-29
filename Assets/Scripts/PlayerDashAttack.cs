@@ -123,8 +123,6 @@ public class PlayerDashAttack : MonoBehaviour
         DisableCollisions(false);
         playerCanMove.CurrentValue = true;
         StartCoroutine(Countdown());
-        // yield return new WaitForSecondsRealtime(playerData.dashCooldown);
-        // canDash = true;
     }
 
     public IEnumerator Countdown()
