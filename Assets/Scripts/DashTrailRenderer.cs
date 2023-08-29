@@ -10,7 +10,6 @@ public class DashTrailRenderer : MonoBehaviour
     private int clonesPerSecond = 3;
     private SpriteRenderer sr;
 
-    private List<SpriteRenderer> clones;
     public Vector3 scalePerSecond = new Vector3(1f, 1f, 1f);
     public Color colorPerSecond = new Color(255, 255, 255, 1f);
     [HideInInspector]
@@ -38,8 +37,7 @@ public class DashTrailRenderer : MonoBehaviour
                 true
             );
 
-        clones = new List<SpriteRenderer>();
-        StartCoroutine(Trail());
+        StartCoroutine(GenerateClones());
     }
 
     GameObject CreateFunc()
@@ -60,11 +58,12 @@ public class DashTrailRenderer : MonoBehaviour
     IEnumerator DisableClone(GameObject go)
     {
         SpriteRenderer srClone = go.GetComponent<SpriteRenderer>();
-        var startTime = Time.time;
+        float startTime = Time.time;
 
         while ((Time.time - startTime) < 0.25f)
         {
-            srClone.color -= colorPerSecond * Time.deltaTime;
+            // srClone.color -= colorPerSecond * Time.deltaTime;
+            // .transform.localScale -= scalePerSecond * Time.deltaTime;
             yield return null;
         }
 
@@ -76,7 +75,9 @@ public class DashTrailRenderer : MonoBehaviour
         item.transform.position = transform.position;
         item.transform.right = transform.right.normalized;
         SpriteRenderer srClone = item.GetComponent<SpriteRenderer>();
-        // srClone.color = colorPerSecond;
+        // Color color = srClone.color;
+        // color.a = 1;
+        // srClone.color = color;
 
         item.SetActive(true);
         StartCoroutine(DisableClone(item));
@@ -92,32 +93,7 @@ public class DashTrailRenderer : MonoBehaviour
         Destroy(item);
     }
 
-    void Update()
-    {
-        // for (int i = 0; i < clones.Count; i++)
-        // {
-        //     clones[i].sortingOrder = 9;
-        //     if (useColor)
-        //     {
-        //         clones[i].color -= colorPerSecond * Time.deltaTime;
-        //     }
-
-        //     if (useScale)
-        //     {
-        //         clones[i].transform.localScale -= scalePerSecond * Time.deltaTime;
-        //     }
-
-        //     if (clones[i].color.a <= 0f || clones[i].transform.localScale == Vector3.zero)
-        //     {
-        //         Destroy(clones[i].gameObject);
-        //         clones.RemoveAt(i);
-        //         i--;
-        //     }
-        // }
-    }
-
-
-    IEnumerator Trail()
+    IEnumerator GenerateClones()
     {
         int i = 0;
 
