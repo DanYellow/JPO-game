@@ -9,8 +9,7 @@ public class DashTrailRenderer : MonoBehaviour
     [SerializeField]
     private int clonesPerSecond = 3;
     private SpriteRenderer sr;
-    private Rigidbody2D rb;
-    private Transform tf;
+
     private List<SpriteRenderer> clones;
     public Vector3 scalePerSecond = new Vector3(1f, 1f, 1f);
     public Color colorPerSecond = new Color(255, 255, 255, 1f);
@@ -26,8 +25,6 @@ public class DashTrailRenderer : MonoBehaviour
 
     void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-        tf = GetComponent<Transform>();
         sr = GetComponent<SpriteRenderer>();
 
         pool = new ObjectPool<GameObject>(
@@ -48,8 +45,8 @@ public class DashTrailRenderer : MonoBehaviour
     GameObject CreateFunc()
     {
         GameObject clone = new GameObject();
-        clone.transform.position = tf.position;
-        clone.transform.right = tf.right.normalized;
+        clone.transform.position = transform.position;
+        clone.transform.right = transform.right.normalized;
 
         SpriteRenderer cloneRend = clone.AddComponent<SpriteRenderer>();
         cloneRend.sprite = sr.sprite;
@@ -67,8 +64,8 @@ public class DashTrailRenderer : MonoBehaviour
 
     void ActionOnGet(GameObject item)
     {
-        item.transform.position = tf.position;
-        item.transform.right = tf.right.normalized;
+        item.transform.position = transform.position;
+        item.transform.right = transform.right.normalized;
         item.SetActive(true);
         StartCoroutine(DisableClone(item));
     }
