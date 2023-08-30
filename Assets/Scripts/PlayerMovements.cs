@@ -161,9 +161,9 @@ public class PlayerMovements : MonoBehaviour
         )
         {
             jumpCount++;
-            float jumpForce = Mathf.Sqrt(playerData.jumpForce * (Physics2D.gravity.y * rb.gravityScale) * -2) * rb.mass;
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            // rb.velocity = new Vector2(moveInput.x * playerData.moveSpeed, playerData.jumpForce);
+            // float jumpForce = Mathf.Sqrt(playerData.jumpForce * (Physics2D.gravity.y * rb.gravityScale) * -2) * rb.mass;
+            // rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            rb.velocity = new Vector2(moveInput.x * playerData.moveSpeed, playerData.jumpForce);
         } else if (ctx.phase == InputActionPhase.Canceled) {
             coyoteTimeCounter = 0f;
         }

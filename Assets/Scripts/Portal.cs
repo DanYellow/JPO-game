@@ -1,6 +1,5 @@
-using System;
+using UnityEngine.Rendering.Universal;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Portal : MonoBehaviour
@@ -8,6 +7,8 @@ public class Portal : MonoBehaviour
 
     [SerializeField]
     private Transform destination;
+
+     private Transform target;
 
     [SerializeField]
     private VectorEventChannel onPlayerMoveEvent;
@@ -21,13 +22,18 @@ public class Portal : MonoBehaviour
     private float fxMaxScale = 2.2f;
     private float fxMinScale = 0.5f;
 
-    private float holdDuration = 0.3f;
+    private float holdDuration = 0.2f;
 
     private Animator animatorFX;
 
+    private new Light2D light;
+
     [SerializeField, TextArea]
     private string interactionText;
-// Appuyez sur <sprite="touches-spritesheet" anim="0, 1, 2" tint=1> pour interagir
+
+    [SerializeField]
+    private AnimationCurve curve;
+
     [Header("Events")]
     [SerializeField]
     private BoolEventChannel onToggleCinemachineEvent;
@@ -48,8 +54,13 @@ public class Portal : MonoBehaviour
 
     private void Awake()
     {
+        light = GetComponentInChildren<Light2D>(true);
         animatorFX = portalFX.GetComponent<Animator>();
         portalFX.transform.localScale = new Vector3(fxMinScale, fxMinScale, fxMinScale);
+    }
+
+    private void Start() {
+        light.enabled = false;
     }
 
     private void OnEnable()
@@ -82,7 +93,7 @@ public class Portal : MonoBehaviour
         float currentTime = 0;
         while (portalFX.transform.localScale.x < fxMaxScale)
         {
-            currentTime += Time.deltaTime;
+            currentTime += Time.deltaTime * curve.Evaluate(portalFX.transform.localScale.x / fxMaxScale);
             portalFX.transform.localScale = new Vector3(
                 Mathf.Clamp(currentTime / holdDuration, fxMinScale, fxMaxScale), 
                 Mathf.Clamp(currentTime / holdDuration, fxMinScale, fxMaxScale), 
@@ -91,12 +102,13 @@ public class Portal : MonoBehaviour
 
             yield return null;
         }
-
-        print("teleport");
+        light.enabled = true;
+        StartCoroutine(Teleport());
     }
 
     IEnumerator DecreasePortal()
     {
+        light.enabled = false;
         float currentTime = portalFX.transform.localScale.x / fxMaxScale;
 
         while (portalFX.transform.localScale.x > 0.1f)
@@ -131,8 +143,9 @@ public class Portal : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && other.transform.parent == null)
         {
+            target = other.transform;
             isPlayerInRange = true;
             onInteractRangeEvent.Raise(isPlayerInRange);
             onInteract.Raise(interactionText);
@@ -144,21 +157,21 @@ public class Portal : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && other.transform.parent == null)
         {
+            target = other.transform;
             isPlayerInRange = false;
             onInteractRangeEvent.Raise(isPlayerInRange);
-
         }
     }
 
-    IEnumerator Teleport(GameObject target)
+    IEnumerator Teleport()
     {
         yield return null;
-        yield return new WaitForSeconds(animatorFX.GetCurrentAnimatorStateInfo(0).length);
+        // yield return new WaitForSeconds(animatorFX.GetCurrentAnimatorStateInfo(0).length);
         onToggleCinemachineEvent.Raise(false);
-        target.transform.position = destination.position;
-        target.transform.GetComponentInChildren<SpriteRenderer>().enabled = true;
+        target.position = destination.position;
+        target.GetComponentInChildren<SpriteRenderer>().enabled = true;
         StartCoroutine(RenableVCams());
     }
 
