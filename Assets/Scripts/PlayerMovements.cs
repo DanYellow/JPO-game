@@ -119,6 +119,8 @@ public class PlayerMovements : MonoBehaviour
         {
             nextPosition = new Vector2(moveInput.x * playerData.moveSpeed, rb.velocity.y);
             rb.velocity = nextPosition;
+        } else {
+            // rb.velocity = Vector2.zero;
         }
         isGrounded = IsGrounded();
     }
