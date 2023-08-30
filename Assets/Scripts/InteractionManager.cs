@@ -11,17 +11,17 @@ public class InteractionManager : MonoBehaviour
     [SerializeField]
     private StringEventChannel onInteractingEvent;
 
+
     [SerializeField]
     public GameObject interactionUI;
 
     private TMP_Text textContainer;
 
+    [SerializeField]
     private string initialString;
 
     private void Awake() {
         textContainer = interactionUI.GetComponentInChildren<TMP_Text>();
-        initialString = textContainer.text;
-
         interactionUI.SetActive(false);
     }
 

@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   listSentences:
   - "En utilisant la touche <sprite=\"touches-spritesheet\" anim=\"4, 5, 2\"> ou
-    le clic droit, vous pouvez effectuer un dash aussi bien au sol qu'en l'air.\t"
+    <sprite=\"mouse-right-spritesheet\" anim=\"0, 1, 2\" tint=1>, vous pouvez effectuer
+    un dash aussi bien au sol qu'en l'air.\t"
   - "Le Dash est tr\xE8s utile pour traverser les pi\xE8ges et attaquer les ennemis."
   - "Durant le dash, vous \xEAtes invulnerable. Pratique."
   OnConversationEnd: {fileID: 0}
