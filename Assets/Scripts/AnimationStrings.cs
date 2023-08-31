@@ -1,6 +1,7 @@
 public static class AnimationStrings
 {
    public static string lightAttack = "LightAttack";
+   public static string attack = "Attack";
    public static string isHit = "IsHit";
    public static string hurt = "Hurt";
    public static string isDead = "IsDead";
