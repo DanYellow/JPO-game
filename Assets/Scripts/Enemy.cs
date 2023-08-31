@@ -70,9 +70,8 @@ public class Enemy : MonoBehaviour, IDamageable
         if (animator)
         {
             animator.SetBool(AnimationStrings.isDead, true);
-            // yield return null;
-            print(animator.GetCurrentAnimatorClipInfo(0)[0].clip.name);
-            yield return new WaitUntil(() => animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == $"{enemyData.name}Die");
+            yield return null;
+            // yield return new WaitUntil(() => animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == $"{enemyData.name}Die");
             yield return new WaitWhile(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1);
             yield return Helpers.GetWait(0.25f);
         }
