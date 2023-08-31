@@ -11,10 +11,6 @@ public class EnemyPatrol : MonoBehaviour
     [SerializeField]
     private EnemyStats stats;
 
-
-    [SerializeField]
-    private float walkSpeed;
-
     public bool isFacingRight = false;
 
     private bool isIdle = true;
@@ -33,8 +29,7 @@ public class EnemyPatrol : MonoBehaviour
 
     private bool hasCollisionWithObstacle;
     private bool hasCollisionWithGround;
-    [SerializeField]
-    private float obstacleCheckRadius = 0.25f;
+
     private bool isFlipping = false;
 
     [SerializeField]
@@ -57,9 +52,6 @@ public class EnemyPatrol : MonoBehaviour
         if(isFacingRight) {
             offset.x *= -1;
         }
-
-        walkTimeWait = new WaitForSeconds(walkTime);
-        idleTimeWait = new WaitForSeconds(idleTime);
 
         detectorPosition += offset;
         idleTime = Mathf.Round(Random.Range(0, 3.5f));
@@ -140,12 +132,12 @@ public class EnemyPatrol : MonoBehaviour
 
     private bool HasCollision(LayerMask layerMask)
     {
-        return Physics2D.OverlapCircle((Vector2) transform.position - detectorPosition, obstacleCheckRadius, layerMask);
+        return Physics2D.OverlapCircle((Vector2) transform.position - detectorPosition, stats.obstacleCheckRadius, layerMask);
     }
 
     void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere((Vector2) transform.position - detectorPosition, obstacleCheckRadius);
+        Gizmos.DrawWireSphere((Vector2) transform.position - detectorPosition, stats.obstacleCheckRadius);
     }
 
     private IEnumerator Flip()
