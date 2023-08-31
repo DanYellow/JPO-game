@@ -27,7 +27,6 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        // canvas = transform.parent.GetComponentInChildren<Canvas>();
         healthBar = canvas.transform.Find("Bar").GetComponent<Image>();
         canvas.SetActive(false);
     }
@@ -54,7 +53,6 @@ public class Enemy : MonoBehaviour, IDamageable
         {
             StartCoroutine(Die());
         }
-        else { }
     }
 
     private void UpdateHealth()
@@ -70,8 +68,8 @@ public class Enemy : MonoBehaviour, IDamageable
         if (animator)
         {
             animator.SetBool(AnimationStrings.isDead, true);
+
             yield return null;
-            // yield return new WaitUntil(() => animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == $"{enemyData.name}Die");
             yield return new WaitWhile(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1);
             yield return Helpers.GetWait(0.25f);
         }
