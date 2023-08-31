@@ -45,7 +45,6 @@ public class HUDManager : MonoBehaviour
 
     private void Awake()
     {
-        UpdateHealth();
         playerHUDUI.SetActive(true);
         barContainer = playerHUDUI.transform.Find("BarContainer").gameObject;
         cooldownContainer = playerHUDUI.transform.Find("Special/Cooldown").gameObject;
@@ -53,11 +52,10 @@ public class HUDManager : MonoBehaviour
         cooldownBackground = cooldownContainer.GetComponent<Image>();
 
         cooldownText = cooldownContainer.GetComponentInChildren<TextMeshProUGUI>();
-
-        // barContainer.SetActive(false);
     }
 
     private void Start() {
+        UpdateHealth();
         lifePointsText.SetText($"{playerStatsValue.currentLifePoints}/{playerStatsValue.maxLifePoints}");
     }
 
@@ -92,7 +90,7 @@ public class HUDManager : MonoBehaviour
 
     private void UpdateHealth()
     {
-        float rate = (float) playerStatsValue.currentLifePoints / (float) playerStatsValue.maxLifePoints;
+        float rate = (float) playerStatsValue.currentLifePoints / playerStatsValue.maxLifePoints;
         healthBar.fillAmount = rate;
         healthBar.color = healthBarGradient.Evaluate(rate);
         lifePointsText.SetText($"{playerStatsValue.currentLifePoints}/{playerStatsValue.maxLifePoints}");
