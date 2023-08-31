@@ -10,37 +10,43 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField]
     private LayerMask targetLayerMask;
 
+    public Rect box;
+
     private BoxCollider2D bc;
 
     [SerializeField]
     private bool isFacingRight = false;
 
-    private Vector3 offset;
+    [SerializeField]
+    private bool isAttacking = false;
+    private Animator animator;
+    //  public ContactFilter2D ContactFilter;
 
     private void Awake()
     {
         // We don't want the script to be enabled by default
         bc = GetComponent<BoxCollider2D>();
+        animator = GetComponent<Animator>();
     }
 
-    private void Start() {
-        offset = new((bc.bounds.extents.x * 1.5f) + bc.offset.x, 0, 0);
+    private void Start()
+    {
     }
 
     private void FixedUpdate()
     {
         RaycastHit2D hitObstacle = Physics2D.BoxCast(
-           transform.position + offset,
-           new Vector2(1, bc.bounds.max.y),
+           transform.position,
+           new Vector2(1, bc.size.y),
            0,
-           transform.right,
-           3,
+           Vector2.right,
+           2f,
            targetLayerMask
        );
 
-        if (hitObstacle)
+        if (hitObstacle && !isAttacking)
         {
-            print(hitObstacle.collider.name);
+            StartCoroutine(Attack());
         }
     }
 
@@ -52,12 +58,29 @@ public class EnemyAttack : MonoBehaviour
         }
     }
 
+    IEnumerator Attack()
+    {
+        isAttacking = true;
+        animator.SetTrigger(AnimationStrings.attack);
+        yield return null;
+        yield return new WaitWhile(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1);
+        isAttacking = false;
+
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireCube(
-            transform.position + offset,
+            new Vector2(transform.position.x + 2, transform.position.y),
             new Vector2(1, bc.size.y)
         );
+
+        // Gizmos.color = Color.green;
+        //  Gizmos.matrix = Matrix4x4.TRS(
+        //     transform.position,
+        //     transform.rotation,
+        //     Vector2.one
+        //  );
     }
 }

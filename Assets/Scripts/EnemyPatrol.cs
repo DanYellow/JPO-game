@@ -11,7 +11,8 @@ public class EnemyPatrol : MonoBehaviour
     [SerializeField]
     private EnemyData enemyData;
 
-    public bool isFacingRight = false;
+    [SerializeField]
+    private bool isFacingRight = false;
 
     private bool isIdle = true;
 
@@ -85,7 +86,7 @@ public class EnemyPatrol : MonoBehaviour
         {
             Move();
         }
-        animator.SetFloat("VelocityX", Mathf.Abs(rb.velocity.x));
+        animator.SetFloat(AnimationStrings.velocityX, Mathf.Abs(rb.velocity.x));
     }
 
     private void FixedUpdate()

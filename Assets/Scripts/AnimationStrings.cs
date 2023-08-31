@@ -7,7 +7,7 @@ public static class AnimationStrings
    public static string isDead = "IsDead";
    public static string isFalling = "IsFalling";
    public static string isGrounded = "IsGrounded";
-   public static string moveDirectionX = "MoveDirectionX";
+   public static string velocityX = "VelocityX";
    public static string moveDirectionY = "MoveDirectionY";
    public static string disabled = "Disabled";
 
