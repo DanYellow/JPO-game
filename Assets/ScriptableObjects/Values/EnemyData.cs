@@ -8,6 +8,8 @@ public class EnemyData : ScriptableObject
     [Range(0, 9)]
     public float walkSpeed = 3;
 
+    public float attackRate = 1;
+
     public new string name = "";
 
     public float obstacleCheckRadius = 0.25f;

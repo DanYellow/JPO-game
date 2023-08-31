@@ -11,8 +11,8 @@ public class EnemyPatrol : MonoBehaviour
     [SerializeField]
     private EnemyData enemyData;
 
-    [SerializeField]
-    private bool isFacingRight = false;
+    [field: SerializeField]
+    public bool isFacingRight { get; private set; } = false ;
 
     private bool isIdle = true;
 
@@ -98,7 +98,8 @@ public class EnemyPatrol : MonoBehaviour
         Debug.DrawLine(startCast, endCast, Color.green);
 
         RaycastHit2D hitObstacle = Physics2D.Linecast(startCast, endCast, obstacleLayersMask);
-        if (!isFlipping && (hitObstacle.collider != null || hasCollisionWithObstacle || !hasCollisionWithGround))
+        // hitObstacle.collider != null || 
+        if (!isFlipping && (hasCollisionWithObstacle || !hasCollisionWithGround))
         {
             StartCoroutine(Flip());
         }

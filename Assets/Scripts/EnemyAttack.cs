@@ -10,23 +10,26 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField]
     private LayerMask targetLayerMask;
 
-    public Rect box;
-
-    private BoxCollider2D bc;
-
     [SerializeField]
-    private bool isFacingRight = false;
+    private EnemyData enemyData;
+   
+    private BoxCollider2D bc;
 
     [SerializeField]
     private bool isAttacking = false;
     private Animator animator;
+    private EnemyPatrol enemyPatrol;
     //  public ContactFilter2D ContactFilter;
+
+    [SerializeField]
+    private float distance = 2f;
 
     private void Awake()
     {
         // We don't want the script to be enabled by default
         bc = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
+        enemyPatrol = GetComponent<EnemyPatrol>();
     }
 
     private void Start()
@@ -39,8 +42,8 @@ public class EnemyAttack : MonoBehaviour
            transform.position,
            new Vector2(1, bc.size.y),
            0,
-           Vector2.right,
-           2f,
+           enemyPatrol.isFacingRight ? Vector2.right : Vector2.left,
+           distance,
            targetLayerMask
        );
 
@@ -64,15 +67,16 @@ public class EnemyAttack : MonoBehaviour
         animator.SetTrigger(AnimationStrings.attack);
         yield return null;
         yield return new WaitWhile(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1);
+        yield return Helpers.GetWait(enemyData.attackRate);
         isAttacking = false;
-
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireCube(
-            new Vector2(transform.position.x + 2, transform.position.y),
+            new Vector2(enemyPatrol.isFacingRight ? (bc.bounds.max.x + distance) : (bc.bounds.min.x - distance) , transform.position.y),
+            // new Vector2((transform.position.x + distance), transform.position.y),
             new Vector2(1, bc.size.y)
         );
 
