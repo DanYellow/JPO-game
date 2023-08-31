@@ -54,7 +54,7 @@ public class Destructable : MonoBehaviour, IDamageable
         {
             collider.enabled = false;
         }
-        // animator.SetTrigger(AnimationStrings.isDead);
+        // animator.SetTrigger(AnimationStrings.die);
         foreach (var item in children)
         {
             item.SetActive(true);

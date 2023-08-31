@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerInteract : MonoBehaviour
 {
-    // Appuyez sur <sprite="touches-spritesheet" anim="0, 1, 2" tint=1> pour interagir
+    // Appuyez sur <sprite="touches-spritesheet" anim="0, 1, 2"> pour interagir
     [SerializeField]
     private VoidEventChannel onInteractEventChannel;
 
