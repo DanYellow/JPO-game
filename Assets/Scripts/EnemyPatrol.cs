@@ -39,6 +39,9 @@ public class EnemyPatrol : MonoBehaviour
     [SerializeField]
     private LayerMask groundLayersMask;
 
+    private WaitForSeconds walkTimeWait;
+    private WaitForSeconds idleTimeWait;
+
     private void Awake()
     {
         // We don't want the script to be enabled by default
@@ -49,14 +52,19 @@ public class EnemyPatrol : MonoBehaviour
 
     private void Start()
     {
-        detectorPosition = new Vector2(bc.bounds.center.x + (bc.bounds.extents.x * (isFacingRight ? -1 : 1)), bc.bounds.center.y - bc.bounds.extents.y);
+        detectorPosition = new Vector3(bc.bounds.extents.x * (isFacingRight ? -1 : 1), bc.bounds.extents.y, 0);
+        if(isFacingRight) {
+            offset.x *= -1;
+        }
+
+        walkTimeWait = new WaitForSeconds(walkTime);
+        idleTimeWait = new WaitForSeconds(idleTime);
+
         detectorPosition += offset;
-        // offset = new Vector3(bc.bounds.extents.x * (isFacingRight ? -1 : 1), bc.bounds.extents.y, 0);  * (isFacingRight ? -1 : 1)
         idleTime = Mathf.Round(Random.Range(0, 3.5f));
+
         StartCoroutine(ChangeState());
         StartCoroutine(UpdateLastKnownPosition());
-
-        // InvokeRepeating(nameof(UpdateLastKnownPosition), 3.0f, 3f);
     }
 
     IEnumerator UpdateLastKnownPosition()
@@ -96,10 +104,10 @@ public class EnemyPatrol : MonoBehaviour
         Debug.DrawLine(startCast, endCast, Color.green);
 
         RaycastHit2D hitObstacle = Physics2D.Linecast(startCast, endCast, obstacleLayersMask);
-        // if (hitObstacle.collider != null || hasCollisionWithObstacle || !hasCollisionWithGround)
-        // {
-        //     StartCoroutine(Flip());
-        // }
+        if (!isFlipping && (hitObstacle.collider != null || hasCollisionWithObstacle || !hasCollisionWithGround))
+        {
+            StartCoroutine(Flip());
+        }
     }
 
     IEnumerator ChangeState()
@@ -108,11 +116,11 @@ public class EnemyPatrol : MonoBehaviour
         {
             // Enemy will walk during X seconds...
             isIdle = false;
-            yield return new WaitForSeconds(walkTime);
+            yield return walkTimeWait;
 
             // ...then wait during X seconds...
             isIdle = true;
-            yield return new WaitForSeconds(idleTime);
+            yield return idleTimeWait;
         }
     }
 
@@ -135,21 +143,19 @@ public class EnemyPatrol : MonoBehaviour
 
     private bool HasCollision(LayerMask layerMask)
     {
-        return Physics2D.OverlapCircle(detectorPosition, obstacleCheckRadius, layerMask);
+        return Physics2D.OverlapCircle((Vector2) transform.position - detectorPosition, obstacleCheckRadius, layerMask);
     }
 
     void OnDrawGizmos()
     {
-        detectorPosition = new Vector2(bc.bounds.center.x - (bc.bounds.extents.x * (isFacingRight ? -1 : 1)), bc.bounds.center.y - bc.bounds.extents.y);
-        // Gizmos.DrawWireSphere(new Vector3(bc.bounds.min.x * (isFacingRight ? -1 : 1), bc.bounds.min.y, 0), obstacleCheckRadius);
-        Gizmos.DrawWireSphere(detectorPosition, obstacleCheckRadius);
-        // Gizmos.DrawWireSphere(transform.position - offset, obstacleCheckRadius);
+        Gizmos.DrawWireSphere((Vector2) transform.position - detectorPosition, obstacleCheckRadius);
     }
 
     private IEnumerator Flip()
     {
-        offset.x *= -1;
         isFlipping = true;
+        yield return new WaitForSeconds(0.2f);
+        detectorPosition.x *= -1;
         isFacingRight = !isFacingRight;
         transform.Rotate(0f, 180f, 0f);
         lastKnownPosition = Vector3.zero;

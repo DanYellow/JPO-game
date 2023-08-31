@@ -38,7 +38,7 @@ public class Enemy : MonoBehaviour, IDamageable
         if (currentLifePoints <= 0)
         {
             StartCoroutine(Die());
-        }
+        } else {}
     }
 
     private IEnumerator Die()
@@ -47,9 +47,17 @@ public class Enemy : MonoBehaviour, IDamageable
         onDeath?.Invoke();
 
         if(animator) {
+            // yield return null;
+            // print("hurt " + animator.GetCurrentAnimatorStateInfo(0).length);
             animator.SetBool(AnimationStrings.isDead, true);
-            yield return null;
-            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length * 1.5f);
+
+            // yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+            print(animator.GetCurrentAnimatorClipInfo(0)[0].clip.name);
+            yield return new WaitWhile(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1);
+            yield return Helpers.GetWait(0.25f);
+
+
+            // print("hurt " + animator.GetCurrentAnimatorStateInfo(0).length);
             Destroy(gameObject);
         } else {
             yield return null;
