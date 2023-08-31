@@ -217,7 +217,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.30732727, y: -0.05929184}
+  m_Offset: {x: 0.30732727, y: -0.034111023}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -228,7 +228,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.6758728, y: 3.185463}
+  m_Size: {x: 2.0377793, y: 3.2358246}
   m_EdgeRadius: 0
 --- !u!50 &535411357999783335
 Rigidbody2D:
@@ -269,7 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 705fab3d0eadb3c4ba4af5061a2a4e96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: 8544b65f824576745ad01ffdf0fa4644, type: 2}
+  enemyData: {fileID: 11400000, guid: 8544b65f824576745ad01ffdf0fa4644, type: 2}
   isFacingRight: 1
   walkTime: 2
   offset: {x: 0.95, y: 0}
@@ -291,7 +291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d79ccf8786e91044ab8dda383436065, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyStats: {fileID: 11400000, guid: 539661e55911e954294e8b21e0211a6c, type: 2}
+  enemyData: {fileID: 11400000, guid: 8544b65f824576745ad01ffdf0fa4644, type: 2}
   currentLifePoints: 0
   onDeath:
     m_PersistentCalls:

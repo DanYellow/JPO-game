@@ -9,7 +9,7 @@ public class EnemyPatrol : MonoBehaviour
     private BoxCollider2D bc;
 
     [SerializeField]
-    private EnemyStats stats;
+    private EnemyData enemyData;
 
     public bool isFacingRight = false;
 
@@ -125,19 +125,19 @@ public class EnemyPatrol : MonoBehaviour
     private void Move()
     {
         rb.velocity = new Vector2(
-            stats.walkSpeed * (isFacingRight ? 1 : -1), 
+            enemyData.walkSpeed * (isFacingRight ? 1 : -1), 
             rb.velocity.y
         );
     }
 
     private bool HasCollision(LayerMask layerMask)
     {
-        return Physics2D.OverlapCircle((Vector2) transform.position - detectorPosition, stats.obstacleCheckRadius, layerMask);
+        return Physics2D.OverlapCircle((Vector2) transform.position - detectorPosition, enemyData.obstacleCheckRadius, layerMask);
     }
 
     void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere((Vector2) transform.position - detectorPosition, stats.obstacleCheckRadius);
+        Gizmos.DrawWireSphere((Vector2) transform.position - detectorPosition, enemyData.obstacleCheckRadius);
     }
 
     private IEnumerator Flip()

@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class Enemy : MonoBehaviour, IDamageable
 {
     [SerializeField]
-    private EnemyStats enemyStats;
+    private EnemyData enemyData;
 
     [SerializeField]
     private int currentLifePoints;
@@ -34,7 +34,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private void Start()
     {
-        currentLifePoints = enemyStats.maxLifePoints;
+        currentLifePoints = enemyData.maxLifePoints;
         UpdateHealth();
     }
 
@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour, IDamageable
         currentLifePoints = Mathf.Clamp(
             currentLifePoints - damage,
             0,
-            enemyStats.maxLifePoints
+            enemyData.maxLifePoints
         );
         UpdateHealth();
 
@@ -59,7 +59,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private void UpdateHealth()
     {
-        float rate = (float)currentLifePoints / enemyStats.maxLifePoints;
+        float rate = (float)currentLifePoints / enemyData.maxLifePoints;
         healthBar.fillAmount = rate;
     }
 
@@ -67,10 +67,12 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         rb.bodyType = RigidbodyType2D.Static;
         onDeath?.Invoke();
-
         if (animator)
         {
             animator.SetBool(AnimationStrings.isDead, true);
+            // yield return null;
+            print(animator.GetCurrentAnimatorClipInfo(0)[0].clip.name);
+            yield return new WaitUntil(() => animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == $"{enemyData.name}Die");
             yield return new WaitWhile(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1);
             yield return Helpers.GetWait(0.25f);
         }
@@ -78,6 +80,7 @@ public class Enemy : MonoBehaviour, IDamageable
         {
             yield return null;
         }
+        canvas.SetActive(false);
         Destroy(gameObject.transform.parent.gameObject);
     }
 }
