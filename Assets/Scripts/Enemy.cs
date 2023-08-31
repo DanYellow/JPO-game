@@ -47,21 +47,12 @@ public class Enemy : MonoBehaviour, IDamageable
         onDeath?.Invoke();
 
         if(animator) {
-            // yield return null;
-            // print("hurt " + animator.GetCurrentAnimatorStateInfo(0).length);
             animator.SetBool(AnimationStrings.isDead, true);
-
-            // yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
-            print(animator.GetCurrentAnimatorClipInfo(0)[0].clip.name);
             yield return new WaitWhile(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1);
             yield return Helpers.GetWait(0.25f);
-
-
-            // print("hurt " + animator.GetCurrentAnimatorStateInfo(0).length);
-            Destroy(gameObject);
         } else {
             yield return null;
-            Destroy(gameObject);
         }
+        Destroy(gameObject);
     }
 }

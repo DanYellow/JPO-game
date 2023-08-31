@@ -1,4 +1,4 @@
-public class AnimationStrings
+public static class AnimationStrings
 {
    public static string lightAttack = "LightAttack";
    public static string isHit = "IsHit";

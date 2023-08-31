@@ -9,6 +9,10 @@ public class EnemyPatrol : MonoBehaviour
     private BoxCollider2D bc;
 
     [SerializeField]
+    private EnemyStats stats;
+
+
+    [SerializeField]
     private float walkSpeed;
 
     public bool isFacingRight = false;
@@ -39,9 +43,6 @@ public class EnemyPatrol : MonoBehaviour
     [SerializeField]
     private LayerMask groundLayersMask;
 
-    private WaitForSeconds walkTimeWait;
-    private WaitForSeconds idleTimeWait;
-
     private void Awake()
     {
         // We don't want the script to be enabled by default
@@ -69,7 +70,7 @@ public class EnemyPatrol : MonoBehaviour
 
     IEnumerator UpdateLastKnownPosition()
     {
-        yield return new WaitForSeconds(3);
+        yield return Helpers.GetWait(2);
 
         while (enabled)
         {
@@ -78,7 +79,7 @@ public class EnemyPatrol : MonoBehaviour
                 StartCoroutine(Flip());
             }
             lastKnownPosition = transform.position;
-            yield return new WaitForSeconds(3);
+            yield return Helpers.GetWait(2f);
         }
     }
 
@@ -99,7 +100,7 @@ public class EnemyPatrol : MonoBehaviour
     {
         hasCollisionWithObstacle = HasCollision(obstacleLayersMask);
         hasCollisionWithGround = HasCollision(groundLayersMask);
-        Vector3 startCast = transform.position - new Vector3(offset.x, 0, 0); ;
+        Vector3 startCast = transform.position - new Vector3(offset.x, 0, 0);
         Vector3 endCast = transform.position + (isFacingRight ? Vector3.right : Vector3.left) * 0.9f;
         Debug.DrawLine(startCast, endCast, Color.green);
 
@@ -116,11 +117,11 @@ public class EnemyPatrol : MonoBehaviour
         {
             // Enemy will walk during X seconds...
             isIdle = false;
-            yield return walkTimeWait;
+            yield return Helpers.GetWait(walkTime);
 
             // ...then wait during X seconds...
             isIdle = true;
-            yield return idleTimeWait;
+            yield return Helpers.GetWait(idleTime);
         }
     }
 
@@ -131,14 +132,10 @@ public class EnemyPatrol : MonoBehaviour
 
     private void Move()
     {
-        if (isFacingRight)
-        {
-            rb.velocity = new Vector2(walkSpeed, rb.velocity.y);
-        }
-        else
-        {
-            rb.velocity = new Vector2(-walkSpeed, rb.velocity.y);
-        }
+        rb.velocity = new Vector2(
+            stats.walkSpeed * (isFacingRight ? 1 : -1), 
+            rb.velocity.y
+        );
     }
 
     private bool HasCollision(LayerMask layerMask)
@@ -154,12 +151,12 @@ public class EnemyPatrol : MonoBehaviour
     private IEnumerator Flip()
     {
         isFlipping = true;
-        yield return new WaitForSeconds(0.2f);
+        yield return Helpers.GetWait(0.25f);
         detectorPosition.x *= -1;
         isFacingRight = !isFacingRight;
         transform.Rotate(0f, 180f, 0f);
         lastKnownPosition = Vector3.zero;
-        yield return new WaitForSeconds(0.2f);
+        yield return Helpers.GetWait(0.25f);
         isFlipping = false;
     }
 
