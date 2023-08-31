@@ -20,7 +20,10 @@ public class EnemyPatrol : MonoBehaviour
     [Tooltip("Define how long the enemy will walk"), SerializeField]
     private float walkTime = 5f;
 
-    private Vector3 offset;
+    [SerializeField]
+    private Vector2 offset = Vector2.zero;
+
+    private Vector2 detectorPosition;
 
     private Vector3 lastKnownPosition = Vector3.zero;
 
@@ -46,7 +49,9 @@ public class EnemyPatrol : MonoBehaviour
 
     private void Start()
     {
-        offset = new Vector3(bc.bounds.extents.x * (isFacingRight ? -1 : 1), bc.bounds.extents.y, 0);
+        detectorPosition = new Vector2(bc.bounds.center.x + (bc.bounds.extents.x * (isFacingRight ? -1 : 1)), bc.bounds.center.y - bc.bounds.extents.y);
+        detectorPosition += offset;
+        // offset = new Vector3(bc.bounds.extents.x * (isFacingRight ? -1 : 1), bc.bounds.extents.y, 0);  * (isFacingRight ? -1 : 1)
         idleTime = Mathf.Round(Random.Range(0, 3.5f));
         StartCoroutine(ChangeState());
         StartCoroutine(UpdateLastKnownPosition());
@@ -130,13 +135,15 @@ public class EnemyPatrol : MonoBehaviour
 
     private bool HasCollision(LayerMask layerMask)
     {
-        return Physics2D.OverlapCircle(transform.position - offset, obstacleCheckRadius, layerMask);
+        return Physics2D.OverlapCircle(detectorPosition, obstacleCheckRadius, layerMask);
     }
 
     void OnDrawGizmos()
     {
+        detectorPosition = new Vector2(bc.bounds.center.x - (bc.bounds.extents.x * (isFacingRight ? -1 : 1)), bc.bounds.center.y - bc.bounds.extents.y);
         // Gizmos.DrawWireSphere(new Vector3(bc.bounds.min.x * (isFacingRight ? -1 : 1), bc.bounds.min.y, 0), obstacleCheckRadius);
-        Gizmos.DrawWireSphere(transform.position - offset, obstacleCheckRadius);
+        Gizmos.DrawWireSphere(detectorPosition, obstacleCheckRadius);
+        // Gizmos.DrawWireSphere(transform.position - offset, obstacleCheckRadius);
     }
 
     private IEnumerator Flip()
