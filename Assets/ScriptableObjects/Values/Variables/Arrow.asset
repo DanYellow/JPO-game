@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f40d396fbaddce149b5cdde7f1afc66c, type: 3}
   m_Name: Arrow
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 15
   torque: 0.15
   damage: 1
   knockback: {x: 0, y: 0}
   shootDirection: 1
+  isFacingRight: 1

@@ -3,12 +3,21 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Pool;
 
+
+public enum ShootDirection
+{
+    Right,
+    Left
+}
+
 public class ProjectileLauncher : MonoBehaviour
 {
     public IObjectPool<Projectile> pool;
 
     [SerializeField]
     ProjectileLauncherData projectileLauncherData;
+
+    public ShootDirection shootDirection;
 
     void Awake()
     {
@@ -33,7 +42,7 @@ public class ProjectileLauncher : MonoBehaviour
         while (true)
         {
             pool.Get();
-            
+
             yield return Helpers.GetWait(10);
             // yield return Helpers.GetWait(projectileLauncherData.cadency);
         }
@@ -41,8 +50,8 @@ public class ProjectileLauncher : MonoBehaviour
 
     Projectile CreateFunc()
     {
-        Projectile _projectile = Instantiate(projectileLauncherData.projectile, transform.position, Quaternion.identity);
-        _projectile.projectileData.shootDirection = projectileLauncherData.shootDirection;
+        Projectile _projectile = Instantiate(projectileLauncherData.projectile);
+        _projectile.projectileData.shootDirection = shootDirection;
         _projectile.pool = pool;
 
         return _projectile;
@@ -50,8 +59,14 @@ public class ProjectileLauncher : MonoBehaviour
 
     void ActionOnGet(Projectile _projectile)
     {
+        int rotationAngle = 0;
+        if (shootDirection == ShootDirection.Left && _projectile.projectileData.isFacingRight)
+        {
+            rotationAngle = 180;
+        }
+        Quaternion quaternion = Quaternion.Euler(0, rotationAngle, 0);
         _projectile.transform.position = transform.position;
-        _projectile.transform.rotation = transform.rotation;
+        _projectile.transform.rotation = quaternion;
         _projectile.gameObject.SetActive(true);
     }
 
@@ -67,7 +82,6 @@ public class ProjectileLauncher : MonoBehaviour
 
     private void OnBecameVisible()
     {
-        // print("He");
         StartCoroutine(Shoot());
     }
 

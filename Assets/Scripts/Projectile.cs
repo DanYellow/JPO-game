@@ -62,10 +62,6 @@ public class Projectile : MonoBehaviour
         pool.Release(this);
     }
 
-    public void Initialize()
-    {
-        
-    }
 
     private void OnEnable() {
         rb.constraints = RigidbodyConstraints2D.FreezePositionY;
