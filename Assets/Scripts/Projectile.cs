@@ -1,28 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
+using UnityEngine.Pool;
 
 public class Projectile : MonoBehaviour
 {
     private Rigidbody2D rb;
     private BoxCollider2D bc2d;
 
-    [SerializeField]
-    private ProjectileData projectileData;
+    public ProjectileData projectileData;
 
     [SerializeField]
     private LayerMask collisionLayers;
 
+    [HideInInspector]
+    public IObjectPool<Projectile> pool;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.constraints = RigidbodyConstraints2D.FreezePositionY;
+
         bc2d = GetComponent<BoxCollider2D>();
     }
 
     void Start()
     {
-        rb.AddForce(Vector2.left * projectileData.speed, ForceMode2D.Impulse);
+        // Initialize();
+        // rb.AddForce(Vector2.left * projectileData.speed, ForceMode2D.Impulse);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -36,6 +41,7 @@ public class Projectile : MonoBehaviour
             IDamageable iDamageable = other.transform.GetComponentInChildren<IDamageable>();
             iDamageable.TakeDamage(projectileData.damage);
         }
+        StartCoroutine(Disable());
     }
 
     private void OnDrawGizmos()
@@ -50,8 +56,31 @@ public class Projectile : MonoBehaviour
         Gizmos.DrawLine(new Vector2(bc2d.bounds.min.x, bc2d.bounds.center.y), new Vector2(bc2d.bounds.min.x + (10 * Mathf.Sign(rb.velocity.x)), bc2d.bounds.center.y));
     }
 
-    private void OnBecameInvisible()
+    IEnumerator Disable()
     {
-        gameObject.SetActive(false);
+        yield return Helpers.GetWait(1.5f);
+        pool.Release(this);
+    }
+
+    public void Initialize()
+    {
+        
+    }
+
+    private void OnEnable() {
+        rb.constraints = RigidbodyConstraints2D.FreezePositionY;
+        rb.AddForce(Vector2.left * projectileData.speed, ForceMode2D.Impulse);
+    }
+
+    // private void OnBecameInvisible()
+    // {
+    //     print("ffff");
+    //     pool.Release(this);
+    //     // gameObject.SetActive(false);
+    // }
+
+    private void OnDisable() {
+        bc2d.isTrigger = false;
+        rb.velocity = Vector2.zero;
     }
 }

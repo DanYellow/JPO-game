@@ -164,7 +164,6 @@ public class PlayerMovements : MonoBehaviour
             bc2dChild.offset.y
         );
         bc2d.size = bc2dChild.size;
-        print(bc2dChild.size);
     }
 
     private void Flip()

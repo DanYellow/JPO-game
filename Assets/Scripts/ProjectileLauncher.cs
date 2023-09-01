@@ -5,7 +5,7 @@ using UnityEngine.Pool;
 
 public class ProjectileLauncher : MonoBehaviour
 {
-    private IObjectPool<Projectile> pool;
+    public IObjectPool<Projectile> pool;
 
     [SerializeField]
     ProjectileLauncherData projectileLauncherData;
@@ -21,7 +21,8 @@ public class ProjectileLauncher : MonoBehaviour
             );
     }
 
-    private void Start() {
+    private void Start()
+    {
         StartCoroutine(Shoot());
     }
 
@@ -32,17 +33,25 @@ public class ProjectileLauncher : MonoBehaviour
         while (true)
         {
             pool.Get();
-            yield return Helpers.GetWait(projectileLauncherData.cadency);
+            
+            yield return Helpers.GetWait(10);
+            // yield return Helpers.GetWait(projectileLauncherData.cadency);
         }
     }
 
     Projectile CreateFunc()
     {
-        return Instantiate(projectileLauncherData.projectile);
+        Projectile _projectile = Instantiate(projectileLauncherData.projectile, transform.position, Quaternion.identity);
+        _projectile.projectileData.shootDirection = projectileLauncherData.shootDirection;
+        _projectile.pool = pool;
+
+        return _projectile;
     }
 
     void ActionOnGet(Projectile _projectile)
     {
+        _projectile.transform.position = transform.position;
+        _projectile.transform.rotation = transform.rotation;
         _projectile.gameObject.SetActive(true);
     }
 
@@ -56,12 +65,14 @@ public class ProjectileLauncher : MonoBehaviour
         Destroy(_projectile.gameObject);
     }
 
-    private void OnBecameVisible() {
-        print("He");
+    private void OnBecameVisible()
+    {
+        // print("He");
         StartCoroutine(Shoot());
     }
 
-    private void OnBecameInvisible() {
+    private void OnBecameInvisible()
+    {
         StopAllCoroutines();
     }
 }
