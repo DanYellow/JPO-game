@@ -55,7 +55,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     public void TakeDamage(int damage)
     {
         playerStatsValue.currentLifePoints = Mathf.Clamp(
-            playerStatsValue.currentLifePoints - 1,
+            playerStatsValue.currentLifePoints - damage,
             0,
             playerStatsValue.maxLifePoints
         );

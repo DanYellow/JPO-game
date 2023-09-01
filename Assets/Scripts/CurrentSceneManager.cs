@@ -10,21 +10,21 @@ public class CurrentSceneManager : MonoBehaviour
     [SerializeField]
     private FloatValue timeBarValue;
 
-    private SceneTransition sceneTransition;
+    // private SceneTransition sceneTransition;
 
     [SerializeField]
     private BoolValue playerIsDashing;
 
     private void Awake()
     {
-        sceneTransition = GetComponent<SceneTransition>();
+        // sceneTransition = GetComponent<SceneTransition>();
     }
 
     void Start()
     {
         Application.targetFrameRate = 60;
         Initialize();
-        StartCoroutine(sceneTransition.Show());
+        // StartCoroutine(sceneTransition.Show());
     }
 
     private void Initialize()
