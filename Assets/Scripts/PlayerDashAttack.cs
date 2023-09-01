@@ -58,6 +58,16 @@ public class PlayerDashAttack : MonoBehaviour
         }
     }
 
+    public void OnDashCancel(InputAction.CallbackContext ctx)
+    {
+        if (ctx.phase == InputActionPhase.Performed && !canDash)
+        {
+            // StopAllCoroutines();
+            rb.velocity = Vector2.zero;
+            // rbVelocityEventChannel.Raise(rb.velocity);
+        }
+    }
+
     private void FixedUpdate()
     {
         if (!playerCanMove.CurrentValue && !canDash)
@@ -99,7 +109,7 @@ public class PlayerDashAttack : MonoBehaviour
         // Gizmos.DrawWireCube(bc2d.bounds.center, bc2d.bounds.size);
     }
 
-    public IEnumerator Dash()
+    private IEnumerator Dash()
     {
         canDash = false;
         rb.gravityScale = 0f;
@@ -115,6 +125,12 @@ public class PlayerDashAttack : MonoBehaviour
         dashTrailRenderer.emit = true;
         rbVelocityEventChannel.Raise(rb.velocity);
         yield return new WaitForSecondsRealtime(0.35f);
+        DashEnd();
+        StartCoroutine(Countdown());
+    }
+
+    private void DashEnd()
+    {
         rb.gravityScale = originalGravity;
 
         gameObject.layer = LayerMask.NameToLayer(originalLayerName);
@@ -122,7 +138,6 @@ public class PlayerDashAttack : MonoBehaviour
         rb.velocity = Vector2.zero;
         DisableCollisions(false);
         playerCanMove.CurrentValue = true;
-        StartCoroutine(Countdown());
     }
 
     public IEnumerator Countdown()
