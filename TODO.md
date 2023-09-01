@@ -14,7 +14,7 @@
 // https://unity.com/how-to/unity-ui-optimization-tips#avoid-layout-groups-when-possible
 // https://www.slideshare.net/secret/xLig7llwdlRQIp
 // https://unity.com/how-to/unity-ui-optimization-tips
-
+// https://forum.unity.com/threads/weird-behavior-applying-force-to-component-spawned-from-object-pool.1308858/
 
 Appuyez sur <sprite="MV Icons Keyboard - ALL" name="Key_Space_1"><sprite="MV Icons Keyboard - ALL" name="Key_Space_2"><sprite="MV Icons Keyboard - ALL" name="Key_Space_3"> pour interagir
 

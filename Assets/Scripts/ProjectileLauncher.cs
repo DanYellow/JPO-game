@@ -19,10 +19,19 @@ public class ProjectileLauncher : MonoBehaviour
 
 
     [SerializeField]
+    private LayerMask collisionLayers;
+
+    [SerializeField]
     private ShootDirection shootDirection;
 
     private Animator animator;
+    private SpriteRenderer sr;
 
+    private Vector2 firePoint;
+
+    private RaycastHit2D hitInfo;
+
+    public float angle = 236.5f;
 
     void Awake()
     {
@@ -34,14 +43,42 @@ public class ProjectileLauncher : MonoBehaviour
                 false
             );
         animator = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
+
+        firePoint = new Vector2(sr.bounds.min.x, sr.bounds.center.y);
     }
 
 
     private void Start()
     {
+        print(transform.right.normalized);
         // StartCoroutine(Shoot());
-        pool.Clear();
     }
+
+    
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        // if (bc2d == null)
+        // {
+        //     bc2d = GetComponent<BoxCollider2D>();
+        // } 
+        
+        Gizmos.DrawLine(new Vector2(sr.bounds.min.x, sr.bounds.center.y), new Vector2(sr.bounds.min.x + (10 * (shootDirection == ShootDirection.Right ? 1 : -1)), sr.bounds.center.y));
+    }
+
+    private void FixedUpdate() {
+        print(transform.right.normalized);
+        hitInfo = Physics2D.Raycast(firePoint, Vector3.left, 10, collisionLayers);
+
+        if(hitInfo) {
+            print(hitInfo.transform.name);
+            Debug.DrawRay(transform.position, Quaternion.Euler(0, 0, angle) * hitInfo.point, Color.white);
+        } else {
+            Debug.DrawRay(transform.position, Vector3.left * 5, Color.cyan);
+        }
+    }
+
 
     private IEnumerator Shoot()
     {
@@ -92,7 +129,7 @@ public class ProjectileLauncher : MonoBehaviour
 
     private void OnBecameVisible()
     {
-        StartCoroutine(Shoot());
+        // StartCoroutine(Shoot());
     }
 
     private void OnBecameInvisible()

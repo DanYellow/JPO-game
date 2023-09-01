@@ -20,7 +20,6 @@ public class Projectile : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-
         bc2d = GetComponent<BoxCollider2D>();
     }
 
@@ -42,18 +41,6 @@ public class Projectile : MonoBehaviour
             iDamageable.TakeDamage(projectileData.damage);
         }
         StartCoroutine(Disable());
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        if (bc2d == null)
-        {
-            bc2d = GetComponent<BoxCollider2D>();
-            rb = GetComponent<Rigidbody2D>();
-        }
-
-        Gizmos.DrawLine(new Vector2(bc2d.bounds.min.x, bc2d.bounds.center.y), new Vector2(bc2d.bounds.min.x + (10 * Mathf.Sign(rb.velocity.x)), bc2d.bounds.center.y));
     }
 
     IEnumerator Disable()
