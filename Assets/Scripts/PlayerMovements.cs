@@ -74,9 +74,6 @@ public class PlayerMovements : MonoBehaviour
     void Update()
     {
         Flip();
-        if(Input.GetKeyDown(KeyCode.DownArrow)) {
-            print(bc2dChild.size);
-        }
 
         if (!playerCanMove.CurrentValue)
         {
@@ -149,6 +146,7 @@ public class PlayerMovements : MonoBehaviour
         {
             playerCrouchEventChannel.OnEventRaised(true);
             playerCanMove.CurrentValue = false;
+            rb.velocity = Vector2.zero;
         }
         else if (ctx.phase == InputActionPhase.Canceled)
         {

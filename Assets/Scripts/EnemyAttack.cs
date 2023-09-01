@@ -66,6 +66,12 @@ public class EnemyAttack : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.magenta;
+
+        if (bc == null)
+        {
+            bc = GetComponent<BoxCollider2D>();
+        }
+
         Gizmos.DrawWireCube(
             new Vector2(enemyPatrol.isFacingRight ? (bc.bounds.max.x + distance) : (bc.bounds.min.x - distance) , transform.position.y),
             // new Vector2((transform.position.x + distance), transform.position.y),

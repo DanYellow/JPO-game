@@ -19,7 +19,7 @@ public class Projectile : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.FreezePositionY;
         bc2d = GetComponent<BoxCollider2D>();
     }
-    // Start is called before the first frame update
+
     void Start()
     {
         rb.AddForce(Vector2.left * projectileData.speed, ForceMode2D.Impulse);
@@ -41,6 +41,12 @@ public class Projectile : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
+        if (bc2d == null)
+        {
+            bc2d = GetComponent<BoxCollider2D>();
+            rb = GetComponent<Rigidbody2D>();
+        }
+
         Gizmos.DrawLine(new Vector2(bc2d.bounds.min.x, bc2d.bounds.center.y), new Vector2(bc2d.bounds.min.x + (10 * Mathf.Sign(rb.velocity.x)), bc2d.bounds.center.y));
     }
 
