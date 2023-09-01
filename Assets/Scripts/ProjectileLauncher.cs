@@ -43,8 +43,8 @@ public class ProjectileLauncher : MonoBehaviour
         {
             pool.Get();
 
-            yield return Helpers.GetWait(10);
-            // yield return Helpers.GetWait(projectileLauncherData.cadency);
+            // yield return Helpers.GetWait(10);
+            yield return Helpers.GetWait(projectileLauncherData.cadency);
         }
     }
 
