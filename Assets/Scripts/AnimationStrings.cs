@@ -11,5 +11,6 @@ public static class AnimationStrings
    public static string moveDirectionY = "MoveDirectionY";
    public static string disabled = "Disabled";
    public static string isCrouched = "IsCrouched";
+   public static string shoot = "Shoot";
 
 }

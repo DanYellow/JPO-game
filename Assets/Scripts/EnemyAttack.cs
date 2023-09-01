@@ -73,8 +73,7 @@ public class EnemyAttack : MonoBehaviour
         }
 
         Gizmos.DrawWireCube(
-            new Vector2(enemyPatrol.isFacingRight ? (bc.bounds.max.x + distance) : (bc.bounds.min.x - distance) , transform.position.y),
-            // new Vector2((transform.position.x + distance), transform.position.y),
+            new Vector2(enemyPatrol.isFacingRight ? (bc.bounds.max.x + distance) : (bc.bounds.min.x - distance), transform.position.y),
             new Vector2(1, bc.size.y)
         );
 

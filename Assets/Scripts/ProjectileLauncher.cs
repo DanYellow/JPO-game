@@ -21,6 +21,8 @@ public class ProjectileLauncher : MonoBehaviour
     [SerializeField]
     private ShootDirection shootDirection;
 
+    private Animator animator;
+
 
     void Awake()
     {
@@ -29,14 +31,16 @@ public class ProjectileLauncher : MonoBehaviour
                 ActionOnGet,
                 ActionOnRelease,
                 ActionOnDestroy,
-                true
+                false
             );
+        animator = GetComponent<Animator>();
     }
 
 
     private void Start()
     {
-        StartCoroutine(Shoot());
+        // StartCoroutine(Shoot());
+        pool.Clear();
     }
 
     private IEnumerator Shoot()
@@ -45,8 +49,9 @@ public class ProjectileLauncher : MonoBehaviour
 
         while (true)
         {
+            // print("Shoot");
+            animator.SetTrigger(AnimationStrings.shoot);
             pool.Get();
-
             // yield return Helpers.GetWait(10);
             yield return Helpers.GetWait(projectileLauncherData.cadency);
         }
@@ -68,6 +73,7 @@ public class ProjectileLauncher : MonoBehaviour
         {
             rotationAngle = 180;
         }
+
         Quaternion quaternion = Quaternion.Euler(0, rotationAngle, 0);
         _projectile.transform.position = transform.position;
         _projectile.transform.rotation = quaternion;
@@ -92,5 +98,9 @@ public class ProjectileLauncher : MonoBehaviour
     private void OnBecameInvisible()
     {
         StopAllCoroutines();
+    }
+
+    private void OnDestroy() {
+       StopAllCoroutines();
     }
 }
