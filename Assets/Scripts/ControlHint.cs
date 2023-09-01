@@ -63,6 +63,7 @@ public class ControlHint : MonoBehaviour
                 EndDialogue();
                 return;
             }
+            Time.timeScale = 0;
             onInteractRangeEvent.Raise(true);
             onInteract.Raise(listSentences.Dequeue());
             onPlayerInputMapChange.Raise(ActionMapName.Interact);
@@ -90,6 +91,7 @@ public class ControlHint : MonoBehaviour
     }
 
     private void EndDialogue() {
+        Time.timeScale = 1;
         onInteractRangeEvent.Raise(false);
         onPlayerInputMapChange.Raise(ActionMapName.Player);
         Load();

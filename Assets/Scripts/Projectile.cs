@@ -65,7 +65,7 @@ public class Projectile : MonoBehaviour
 
     private void OnEnable() {
         rb.constraints = RigidbodyConstraints2D.FreezePositionY;
-        rb.AddForce(Vector2.left * projectileData.speed, ForceMode2D.Impulse);
+        rb.AddForce(transform.right.normalized * projectileData.speed, ForceMode2D.Impulse);
     }
 
     // private void OnBecameInvisible()

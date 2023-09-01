@@ -17,7 +17,10 @@ public class ProjectileLauncher : MonoBehaviour
     [SerializeField]
     ProjectileLauncherData projectileLauncherData;
 
-    public ShootDirection shootDirection;
+
+    [SerializeField]
+    private ShootDirection shootDirection;
+
 
     void Awake()
     {
@@ -29,6 +32,7 @@ public class ProjectileLauncher : MonoBehaviour
                 true
             );
     }
+
 
     private void Start()
     {
