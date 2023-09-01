@@ -21,7 +21,7 @@ public class PlayerMovements : MonoBehaviour
     private Transform groundCheck;
     [SerializeField]
     private float groundCheckRadius;
-    private float moveSpeed;
+    private bool isCrouched;
     private Vector2 nextPosition;
 
     private BoxCollider2D bc2d;
@@ -41,6 +41,10 @@ public class PlayerMovements : MonoBehaviour
     [SerializeField]
     private bool showOnStart = true;
 
+    [SerializeField]
+    private float coyoteTime = 0.2f;
+    private float coyoteTimeCounter;
+
     [Header("Events")]
     [SerializeField]
     private VectorEventChannel rbVelocityEventChannel;
@@ -49,8 +53,7 @@ public class PlayerMovements : MonoBehaviour
     private VectorEventChannel playerPositionEventChannel;
 
     [SerializeField]
-    private float coyoteTime = 0.2f;
-    private float coyoteTimeCounter;
+    private BoolEventChannel playerCrouchEventChannel;
 
     private void Awake()
     {
@@ -58,16 +61,17 @@ public class PlayerMovements : MonoBehaviour
         dust = GetComponentInChildren<ParticleSystem>();
         bc2d = GetComponent<BoxCollider2D>();
 
-        moveSpeed = playerData.moveSpeed;
         gameObject.SetActive(showOnStart);
     }
 
-    private void Start() {
+    private void Start()
+    {
         playerCanMove.CurrentValue = true;
     }
 
     void Update()
     {
+        Flip();
         if (!playerCanMove.CurrentValue)
         {
             return;
@@ -75,7 +79,6 @@ public class PlayerMovements : MonoBehaviour
         playerPositionEventChannel.Raise(transform.position);
         rbVelocityEventChannel.Raise(rb.velocity);
 
-        Flip();
 
         if (isGrounded)
         {
@@ -119,7 +122,9 @@ public class PlayerMovements : MonoBehaviour
         {
             nextPosition = new Vector2(moveInput.x * playerData.moveSpeed, rb.velocity.y);
             rb.velocity = nextPosition;
-        } else {
+        }
+        else
+        {
             // rb.velocity = Vector2.zero;
         }
         isGrounded = IsGrounded();
@@ -128,6 +133,17 @@ public class PlayerMovements : MonoBehaviour
     public void OnMove(InputAction.CallbackContext ctx)
     {
         moveInput = (Vector3)ctx.ReadValue<Vector2>();
+    }
+
+    public void OnCrouch(InputAction.CallbackContext ctx)
+    {
+        if(ctx.phase == InputActionPhase.Performed) {
+            playerCrouchEventChannel.OnEventRaised(true);
+            playerCanMove.CurrentValue = false;
+        } else if (ctx.phase == InputActionPhase.Canceled) {
+            playerCrouchEventChannel.OnEventRaised(false);
+            playerCanMove.CurrentValue = true;
+        }
     }
 
     private void Flip()
@@ -144,7 +160,7 @@ public class PlayerMovements : MonoBehaviour
     {
         return Physics2D.OverlapBox(
            groundCheck.position - new Vector3(bc2d.offset.x, 0, 0),
-            new Vector3(bc2d.bounds.size.x * 0.8f, 0.5f, 0),
+            new Vector3(bc2d.bounds.size.x * 0.95f, 0.5f, 0),
             0,
             listGroundLayers
         );
@@ -164,7 +180,9 @@ public class PlayerMovements : MonoBehaviour
             // float jumpForce = Mathf.Sqrt(playerData.jumpForce * (Physics2D.gravity.y * rb.gravityScale) * -2) * rb.mass;
             // rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             rb.velocity = new Vector2(moveInput.x * playerData.moveSpeed, playerData.jumpForce);
-        } else if (ctx.phase == InputActionPhase.Canceled) {
+        }
+        else if (ctx.phase == InputActionPhase.Canceled)
+        {
             coyoteTimeCounter = 0f;
         }
     }
@@ -182,7 +200,7 @@ public class PlayerMovements : MonoBehaviour
             {
                 bc2d = GetComponent<BoxCollider2D>();
             }
-            Gizmos.DrawWireCube(groundCheck.position - new Vector3(bc2d.offset.x, 0, 0), new Vector3(bc2d.bounds.size.x * 0.8f, 0.5f, 0));
+            Gizmos.DrawWireCube(groundCheck.position - new Vector3(bc2d.offset.x, 0, 0), new Vector3(bc2d.bounds.size.x * 0.95f, 0.5f, 0));
             // Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
         }
 

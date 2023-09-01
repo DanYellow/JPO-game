@@ -12,7 +12,11 @@ public class PlayerAnimation : MonoBehaviour
     private VoidEventChannel lightAttackEventChannel;
 
     [SerializeField]
+    private BoolEventChannel playerCrouchEventChannel;
+
+    [SerializeField]
     private BoolValue playerCanMove;
+    private UnityAction<bool> playerCrouch;
 
     private UnityAction onLightAttackEvent;
 
@@ -34,17 +38,26 @@ public class PlayerAnimation : MonoBehaviour
             }
         };
         lightAttackEventChannel.OnEventRaised += onLightAttackEvent;
+
+
+        playerCrouch = (bool isCrouched) => {
+            animator.SetBool(AnimationStrings.isCrouched, isCrouched);
+        };
+
+        playerCrouchEventChannel.OnEventRaised += playerCrouch;
     }
 
     private void UpdateMovement(Vector3 direction)
     {
-        animator.SetFloat("VelocityX", Mathf.Abs(direction.x));
-        animator.SetFloat("VelocityY", direction.y);
+        animator.SetFloat(AnimationStrings.velocityX, Mathf.Abs(direction.x));
+        // animator.SetFloat("VelocityY", direction.y);
+        // animator.SetBool(AnimationStrings.isCrouched, true);
     }
 
     private void OnDisable()
     {
         rbVelocityEventChannel.OnEventRaised -= UpdateMovement;
         lightAttackEventChannel.OnEventRaised -= onLightAttackEvent;
+        playerCrouchEventChannel.OnEventRaised -= playerCrouch;
     }
 }
