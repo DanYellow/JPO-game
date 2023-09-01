@@ -1,12 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
-    [SerializeField]
-    private Transform target;
-
     [SerializeField]
     private LayerMask targetLayerMask;
 
@@ -30,10 +26,6 @@ public class EnemyAttack : MonoBehaviour
         bc = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
         enemyPatrol = GetComponent<EnemyPatrol>();
-    }
-
-    private void Start()
-    {
     }
 
     private void FixedUpdate()

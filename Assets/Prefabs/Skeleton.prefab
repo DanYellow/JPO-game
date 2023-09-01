@@ -273,7 +273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyData: {fileID: 11400000, guid: 8544b65f824576745ad01ffdf0fa4644, type: 2}
-  isFacingRight: 1
+  <isFacingRight>k__BackingField: 1
   walkTime: 2
   offset: {x: 0.95, y: 0}
   obstacleLayersMask:
@@ -366,8 +366,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   enemyData: {fileID: 11400000, guid: 8544b65f824576745ad01ffdf0fa4644, type: 2}
-  isFacingRight: 1
   isAttacking: 0
+  distance: 2
 --- !u!1 &773076004606349416
 GameObject:
   m_ObjectHideFlags: 0

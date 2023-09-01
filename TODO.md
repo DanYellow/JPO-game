@@ -17,3 +17,7 @@
 
 
 Appuyez sur <sprite="MV Icons Keyboard - ALL" name="Key_Space_1"><sprite="MV Icons Keyboard - ALL" name="Key_Space_2"><sprite="MV Icons Keyboard - ALL" name="Key_Space_3"> pour interagir
+
+
+# Ressources
+- https://arydian.itch.io/simple-wooden-bow-and-arrows?download

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -25,6 +26,7 @@ public class PlayerMovements : MonoBehaviour
     private Vector2 nextPosition;
 
     private BoxCollider2D bc2d;
+    private BoxCollider2D bc2dChild;
 
     [SerializeField]
     private BoolValue playerCanMove;
@@ -60,7 +62,7 @@ public class PlayerMovements : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         dust = GetComponentInChildren<ParticleSystem>();
         bc2d = GetComponent<BoxCollider2D>();
-
+        bc2dChild = GetComponentsInChildren<BoxCollider2D>()[1];
         gameObject.SetActive(showOnStart);
     }
 
@@ -72,6 +74,10 @@ public class PlayerMovements : MonoBehaviour
     void Update()
     {
         Flip();
+        if(Input.GetKeyDown(KeyCode.DownArrow)) {
+            print(bc2dChild.size);
+        }
+
         if (!playerCanMove.CurrentValue)
         {
             return;
@@ -93,6 +99,8 @@ public class PlayerMovements : MonoBehaviour
         // {
         //     jumpCount = 0;
         // }
+
+        
 
         if (rb.velocity.y >= 0)
         {
@@ -137,13 +145,28 @@ public class PlayerMovements : MonoBehaviour
 
     public void OnCrouch(InputAction.CallbackContext ctx)
     {
-        if(ctx.phase == InputActionPhase.Performed) {
+        if (ctx.phase == InputActionPhase.Performed)
+        {
             playerCrouchEventChannel.OnEventRaised(true);
             playerCanMove.CurrentValue = false;
-        } else if (ctx.phase == InputActionPhase.Canceled) {
+        }
+        else if (ctx.phase == InputActionPhase.Canceled)
+        {
             playerCrouchEventChannel.OnEventRaised(false);
             playerCanMove.CurrentValue = true;
         }
+        StartCoroutine(CrouchProxy());
+    }
+
+    IEnumerator CrouchProxy() {
+        yield return null;
+
+        bc2d.offset = new Vector2( 
+            bc2d.offset.x,
+            bc2dChild.offset.y
+        );
+        bc2d.size = bc2dChild.size;
+        print(bc2dChild.size);
     }
 
     private void Flip()
