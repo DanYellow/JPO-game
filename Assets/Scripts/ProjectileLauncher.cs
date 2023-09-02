@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 
 using UnityEngine;
@@ -6,9 +7,19 @@ using UnityEngine.Pool;
 
 public enum ShootDirection
 {
+    Left,
     Right,
-    Left
+    Up,
+    Down,
 }
+
+// public static class ShootDirection
+// {
+//     public static readonly Vector3 left = Vector3.left;
+//     public static readonly Vector3 right = Vector3.right;
+//     public static readonly Vector3 up = Vector3.up;
+//     public static readonly Vector3 down = Vector3.down;
+// }
 
 public class ProjectileLauncher : MonoBehaviour
 {
@@ -16,7 +27,6 @@ public class ProjectileLauncher : MonoBehaviour
 
     [SerializeField]
     ProjectileLauncherData projectileLauncherData;
-
 
     [SerializeField]
     private LayerMask collisionLayers;
@@ -26,7 +36,7 @@ public class ProjectileLauncher : MonoBehaviour
 
     private Animator animator;
 
-    private Vector2 firePoint;
+    private Vector2 fireDirection;
     private BoxCollider2D bc2d;
 
     private RaycastHit2D hitInfo;
@@ -35,6 +45,8 @@ public class ProjectileLauncher : MonoBehaviour
 
     [SerializeField]
     private int lengthDetection = 10;
+
+    private Vector3[] listDirection = new Vector3[] { Vector3.left, Vector3.right, Vector3.up, Vector3.down };
 
     void Awake()
     {
@@ -48,7 +60,8 @@ public class ProjectileLauncher : MonoBehaviour
         bc2d = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
 
-        firePoint = new Vector2(bc2d.bounds.min.x, bc2d.bounds.center.y);
+        fireDirection = listDirection[(int) shootDirection]; //shootDirection == ShootDirection.Left ? Vector3.left : Vector3.right;
+        print(fireDirection);
     }
 
 
@@ -57,26 +70,13 @@ public class ProjectileLauncher : MonoBehaviour
         StartCoroutine(Shoot());
     }
 
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        // if (bc2d == null)
-        // {
-        //     bc2d = GetComponent<BoxCollider2D>();
-        // } 
-
-        // Gizmos.DrawLine(new Vector2(sr.bounds.min.x, sr.bounds.center.y), new Vector2(sr.bounds.min.x + (10 * (shootDirection == ShootDirection.Right ? 1 : -1)), sr.bounds.center.y));
-    }
-
     private void FixedUpdate()
     {
         hitInfo = Physics2D.BoxCast(
             new Vector2(bc2d.bounds.center.x - 0.5f, bc2d.bounds.center.y),
-            // new Vector2(bc2d.bounds.min.x - 0.5f, bc2d.bounds.max.y), 
             bc2d.bounds.size,
             0,
-            Vector3.left,
+            fireDirection,
             lengthDetection,
             collisionLayers
         );
@@ -89,8 +89,8 @@ public class ProjectileLauncher : MonoBehaviour
         // }
 
         targetInSight = hitInfo.collider != null;
-        Debug.DrawRay(new Vector2(bc2d.bounds.min.x - 0.25f, bc2d.bounds.min.y), Vector3.left * lengthDetection, Color.cyan);
-        Debug.DrawRay(new Vector2(bc2d.bounds.min.x - 0.25f, bc2d.bounds.max.y), Vector3.left * lengthDetection, Color.cyan);
+        Debug.DrawRay(new Vector2(bc2d.bounds.min.x - 0.25f, bc2d.bounds.min.y), fireDirection * lengthDetection, Color.cyan);
+        Debug.DrawRay(new Vector2(bc2d.bounds.min.x - 0.25f, bc2d.bounds.max.y), fireDirection * lengthDetection, Color.cyan);
     }
 
 
@@ -141,16 +141,6 @@ public class ProjectileLauncher : MonoBehaviour
     void ActionOnDestroy(Projectile _projectile)
     {
         Destroy(_projectile.gameObject);
-    }
-
-    private void OnBecameVisible()
-    {
-        // StartCoroutine(Shoot());
-    }
-
-    private void OnBecameInvisible()
-    {
-        StopAllCoroutines();
     }
 
     private void OnDestroy()
