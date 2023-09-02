@@ -12,7 +12,7 @@ public class EnemyPatrol : MonoBehaviour
     private EnemyData enemyData;
 
     [field: SerializeField]
-    public bool isFacingRight { get; private set; } = false ;
+    public bool isFacingRight { get; private set; } = false;
 
     private bool isIdle = true;
 
@@ -30,6 +30,9 @@ public class EnemyPatrol : MonoBehaviour
 
     private bool hasCollisionWithObstacle;
     private bool hasCollisionWithGround;
+
+    [SerializeField]
+    private bool canMove = true;
 
     private bool isFlipping = false;
 
@@ -50,7 +53,8 @@ public class EnemyPatrol : MonoBehaviour
     private void Start()
     {
         detectorPosition = new Vector3(bc.bounds.extents.x * (isFacingRight ? -1 : 1), bc.bounds.extents.y, 0);
-        if(isFacingRight) {
+        if (isFacingRight)
+        {
             offset.x *= -1;
         }
 
@@ -82,10 +86,6 @@ public class EnemyPatrol : MonoBehaviour
         {
             Idle();
         }
-        else
-        {
-            Move();
-        }
         animator.SetFloat(AnimationStrings.velocityX, Mathf.Abs(rb.velocity.x));
     }
 
@@ -102,6 +102,10 @@ public class EnemyPatrol : MonoBehaviour
         if (!isFlipping && (hasCollisionWithObstacle || !hasCollisionWithGround))
         {
             StartCoroutine(Flip());
+        }
+
+        if(!isIdle) {
+            Move();
         }
     }
 
@@ -126,20 +130,32 @@ public class EnemyPatrol : MonoBehaviour
 
     private void Move()
     {
-        rb.velocity = new Vector2(
-            enemyData.walkSpeed * (isFacingRight ? 1 : -1), 
-            rb.velocity.y
-        );
+        if (canMove)
+        {
+            rb.velocity = new Vector2(
+                enemyData.walkSpeed * (isFacingRight ? 1 : -1),
+                rb.velocity.y
+            );
+        }
+        else
+        {
+            rb.velocity = Vector2.zero;
+        }
     }
 
     private bool HasCollision(LayerMask layerMask)
     {
-        return Physics2D.OverlapCircle((Vector2) transform.position - detectorPosition, enemyData.obstacleCheckRadius, layerMask);
+        return Physics2D.OverlapCircle((Vector2)transform.position - detectorPosition, enemyData.obstacleCheckRadius, layerMask);
     }
 
     void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere((Vector2) transform.position - detectorPosition, enemyData.obstacleCheckRadius);
+        Gizmos.DrawWireSphere((Vector2)transform.position - detectorPosition, enemyData.obstacleCheckRadius);
+    }
+
+    public void ToggleMovement(bool val)
+    {
+        canMove = val;
     }
 
     private IEnumerator Flip()
