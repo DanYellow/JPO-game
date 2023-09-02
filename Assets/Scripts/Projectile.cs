@@ -51,6 +51,7 @@ public class Projectile : MonoBehaviour, IRecycleable
         // rb.velocity = transform.right.normalized * projectileData.speed;
         // print(rb.velocity);
         
+        // rb.constraints = RigidbodyConstraints2D.None;
         rb.constraints = RigidbodyConstraints2D.FreezePositionY;
     }
 }

@@ -67,15 +67,15 @@ public class EnemyAttack : MonoBehaviour
     {
         Gizmos.color = Color.magenta;
 
-        if (bc == null)
-        {
-            bc = GetComponent<BoxCollider2D>();
-        }
+        // if (bc == null)
+        // {
+        //     bc = GetComponent<BoxCollider2D>();
+        // }
 
-        Gizmos.DrawWireCube(
-            new Vector2(enemyPatrol.isFacingRight ? (bc.bounds.max.x + distance) : (bc.bounds.min.x - distance), transform.position.y),
-            new Vector2(1, bc.size.y)
-        );
+        // Gizmos.DrawWireCube(
+        //     new Vector2(enemyPatrol.isFacingRight ? (bc.bounds.max.x + distance) : (bc.bounds.min.x - distance), transform.position.y),
+        //     new Vector2(1, bc.size.y)
+        // );
 
         // Gizmos.color = Color.green;
         //  Gizmos.matrix = Matrix4x4.TRS(
