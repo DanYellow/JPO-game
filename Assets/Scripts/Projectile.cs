@@ -31,6 +31,9 @@ public class Projectile : MonoBehaviour, IRecycleable
         {
             IDamageable iDamageable = other.transform.GetComponentInChildren<IDamageable>();
             iDamageable.TakeDamage(projectileData.damage);
+            if(other.gameObject.TryGetComponent(out Knockback knockback)) {
+                knockback.Apply(gameObject, projectileData.knockbackForce);
+            }
         }
         StartCoroutine(Disable());
     }
