@@ -22,7 +22,7 @@ public class PlayerMovements : MonoBehaviour
     private Transform groundCheck;
     [SerializeField]
     private float groundCheckRadius;
-    private bool isCrouched;
+
     private Vector2 nextPosition;
 
     private BoxCollider2D bc2d;

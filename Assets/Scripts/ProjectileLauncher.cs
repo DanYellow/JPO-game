@@ -72,22 +72,25 @@ public class ProjectileLauncher : MonoBehaviour
     private void FixedUpdate()
     {
         hitInfo = Physics2D.BoxCast(
-            new Vector2(bc2d.bounds.min.x - 0.5f, bc2d.bounds.max.y), 
-            bc2d.bounds.size, 
+            new Vector2(bc2d.bounds.center.x - 0.5f, bc2d.bounds.center.y),
+            // new Vector2(bc2d.bounds.min.x - 0.5f, bc2d.bounds.max.y), 
+            bc2d.bounds.size,
             0,
             Vector3.left,
-            lengthDetection, 
+            lengthDetection,
             collisionLayers
         );
 
-        if(hitInfo) {
-            print(hitInfo.transform.name);
-            // Debug.DrawRay(firePoint, Vector3.left * lengthDetection, Color.white);
-        } else {
-            // Debug.DrawRay(firePoint, Vector3.left * lengthDetection, Color.cyan);
-        }
-            Debug.DrawRay(new Vector2(bc2d.bounds.min.x - 0.25f, bc2d.bounds.min.y), Vector3.left * lengthDetection, Color.cyan);
-            Debug.DrawRay(new Vector2(bc2d.bounds.min.x - 0.25f, bc2d.bounds.max.y), Vector3.left * lengthDetection, Color.cyan);
+        // if(hitInfo) {
+        //     print(hitInfo.transform.name);
+        //     // Debug.DrawRay(firePoint, Vector3.left * lengthDetection, Color.white);
+        // } else {
+        //     // Debug.DrawRay(firePoint, Vector3.left * lengthDetection, Color.cyan);
+        // }
+
+        targetInSight = hitInfo.collider != null;
+        Debug.DrawRay(new Vector2(bc2d.bounds.min.x - 0.25f, bc2d.bounds.min.y), Vector3.left * lengthDetection, Color.cyan);
+        Debug.DrawRay(new Vector2(bc2d.bounds.min.x - 0.25f, bc2d.bounds.max.y), Vector3.left * lengthDetection, Color.cyan);
     }
 
 
