@@ -15,13 +15,20 @@ public class InteractionManager : MonoBehaviour
     [SerializeField]
     public GameObject interactionUI;
 
+    private GameObject continueText;
+
     private TMP_Text textContainer;
 
     [SerializeField, TextArea]
     private string initialString;
 
+    private int nbCalls = 0;
+
     private void Awake() {
         textContainer = interactionUI.GetComponentInChildren<TMP_Text>();
+        continueText = interactionUI.transform.Find("Container/Background/Continue").gameObject;
+
+        continueText.SetActive(false);
         interactionUI.SetActive(false);
     }
 

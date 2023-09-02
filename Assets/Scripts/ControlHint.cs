@@ -26,6 +26,9 @@ public class ControlHint : MonoBehaviour
     [SerializeField]
     private InteractionItemTextValue interactionItemTextValue;
 
+    [SerializeField]
+    CanvasGroup playerHUDCanvasGroup;
+
     private Queue<string> listSentences;
 
     private void Awake()
@@ -63,8 +66,9 @@ public class ControlHint : MonoBehaviour
                 EndDialogue();
                 return;
             }
-            // Time.timeScale = 0;
             onInteractRangeEvent.Raise(true);
+            // Time.timeScale = 0;
+            playerHUDCanvasGroup.alpha = 0.05f;
             onInteract.Raise(listSentences.Dequeue());
             onPlayerInputMapChange.Raise(ActionMapName.Interact);
         }
@@ -92,7 +96,9 @@ public class ControlHint : MonoBehaviour
 
     private void EndDialogue() {
         Time.timeScale = 1;
+        playerHUDCanvasGroup.alpha = 1f;
         onInteractRangeEvent.Raise(false);
+        onInteractRangeEvent.Raise(true);
         onPlayerInputMapChange.Raise(ActionMapName.Player);
         Load();
     }
@@ -102,12 +108,4 @@ public class ControlHint : MonoBehaviour
         onPlayerStartInteractEvent.OnEventRaised -= Display;
         
     }
-
-    // public void OnSpeak(InputAction.CallbackContext ctx)
-    // {
-    //     if (ctx.phase == InputActionPhase.Performed && isPlayerInRange)
-    //     {
-    //         onSpeakEvent.Raise();
-    //     }
-    // }
 }
