@@ -62,7 +62,6 @@ public class PlayerDashAttack : MonoBehaviour
     {
         if (ctx.phase == InputActionPhase.Performed && !canDash)
         {
-            // StopAllCoroutines();
             rb.velocity = Vector2.zero;
             // rbVelocityEventChannel.Raise(rb.velocity);
         }

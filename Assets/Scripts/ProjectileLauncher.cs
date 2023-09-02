@@ -1,9 +1,7 @@
-using System;
 using System.Collections;
 
 using UnityEngine;
 using UnityEngine.Pool;
-
 
 public enum ShootDirection
 {
@@ -12,14 +10,6 @@ public enum ShootDirection
     Up,
     Down,
 }
-
-// public static class ShootDirection
-// {
-//     public static readonly Vector3 left = Vector3.left;
-//     public static readonly Vector3 right = Vector3.right;
-//     public static readonly Vector3 up = Vector3.up;
-//     public static readonly Vector3 down = Vector3.down;
-// }
 
 public class ProjectileLauncher : MonoBehaviour
 {
@@ -104,6 +94,7 @@ public class ProjectileLauncher : MonoBehaviour
                 animator.SetTrigger(AnimationStrings.shoot);
                 pool.Get();
                 yield return Helpers.GetWait(projectileLauncherData.cadency);
+                // yield return Helpers.GetWait(5);
             }
             yield return null;
         }
@@ -128,8 +119,8 @@ public class ProjectileLauncher : MonoBehaviour
         Quaternion quaternion = Quaternion.Euler(0, rotationAngle, 0);
         _projectile.transform.position = transform.position;
         _projectile.transform.rotation = quaternion;
-        _projectile.ResetThyself();
         _projectile.gameObject.SetActive(true);
+        _projectile.ResetThyself();
     }
 
     void ActionOnRelease(Projectile _projectile)

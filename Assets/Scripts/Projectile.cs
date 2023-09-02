@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 using UnityEngine.Pool;
 
 public class Projectile : MonoBehaviour, IRecycleable
@@ -45,12 +43,14 @@ public class Projectile : MonoBehaviour, IRecycleable
 
     private void OnDisable() {
         bc2d.isTrigger = false;
-        rb.velocity = Vector2.zero;
     }
 
     public void ResetThyself()
     {
         rb.AddForce(transform.right.normalized * projectileData.speed, ForceMode2D.Impulse);
+        // rb.velocity = transform.right.normalized * projectileData.speed;
+        // print(rb.velocity);
+        
         rb.constraints = RigidbodyConstraints2D.FreezePositionY;
     }
 }
