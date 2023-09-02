@@ -60,8 +60,7 @@ public class ProjectileLauncher : MonoBehaviour
         bc2d = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
 
-        fireDirection = listDirection[(int) shootDirection]; //shootDirection == ShootDirection.Left ? Vector3.left : Vector3.right;
-        print(fireDirection);
+        fireDirection = listDirection[(int) shootDirection];
     }
 
 

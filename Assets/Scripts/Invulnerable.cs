@@ -9,11 +9,12 @@ public class Invulnerable : MonoBehaviour
     [SerializeField]
     private InvulnerableDataValue invulnerableDataValue;
     [SerializeField]
-    private LayerMask listLayerToIgnoreAfterHit;
+    private LayerMask layersToIgnoreAfterHit;
     private List<int> listLayers = new List<int>();
 
     [SerializeField]
-    private VoidEventChannel isHurtVoidEventChannel;
+    private BoolEventChannel onHealthUpdated;
+
 
     [SerializeField]
     private MaterialEventChannel onMaterialChange;
@@ -31,53 +32,57 @@ public class Invulnerable : MonoBehaviour
     {
         CheckMasks();
 
-        isHurtVoidEventChannel.OnEventRaised += OnCollision;
+        onHealthUpdated.OnEventRaised += OnCollision;
 
+        
+    }
+
+    private void DisableCollisions(bool enabled)
+    {
         foreach (var layerIndex in listLayers)
         {
-            Physics2D.IgnoreLayerCollision(gameObject.layer, layerIndex, false);
+            Physics2D.IgnoreLayerCollision(gameObject.layer, layerIndex, enabled);
         }
     }
+
 
     private void CheckMasks()
     {
         for (int i = 0; i < 32; i++)
         {
-            if (listLayerToIgnoreAfterHit == (listLayerToIgnoreAfterHit | (1 << i)))
+            if (layersToIgnoreAfterHit == (layersToIgnoreAfterHit | (1 << i)))
             {
                 listLayers.Add(i);
             }
         }
     }
 
-    private void OnCollision()
+    private void OnCollision(bool isTakingDamage)
     {
-
-    }
-
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        LayerMask otherLayer = other.gameObject.layer;
-        bool isInLayer = ((listLayerToIgnoreAfterHit & (1 << otherLayer)) != 0);
-
-        if (!isInvulnerable && isInLayer)
+        if (isTakingDamage && !isInvulnerable)
         {
-            StartCoroutine(HandleInvunlnerableDelay(otherLayer.value));
-            onMaterialChange.Raise(materialChange);
+            if (!isInvulnerable)
+            {
+                StartCoroutine(HandleInvunlnerableDelay());
+                onMaterialChange.Raise(materialChange);
+            }
         }
     }
 
-    public IEnumerator HandleInvunlnerableDelay(int layerId)
+
+    public IEnumerator HandleInvunlnerableDelay()
     {
-        Physics2D.IgnoreLayerCollision(gameObject.layer, layerId, true);
+        DisableCollisions(true);
+        // Physics2D.IgnoreLayerCollision(gameObject.layer, layerId, true);
         isInvulnerable = true;
         yield return new WaitForSeconds(invulnerableDataValue.duration);
         isInvulnerable = false;
-        Physics2D.IgnoreLayerCollision(gameObject.layer, layerId, false);
+        DisableCollisions(false);
+        // Physics2D.IgnoreLayerCollision(gameObject.layer, layerId, false);
     }
 
     private void OnDisable()
     {
-        isHurtVoidEventChannel.OnEventRaised -= OnCollision;
+        onHealthUpdated.OnEventRaised -= OnCollision;
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour, IDamageable
 {
     [SerializeField]
-    private VoidEventChannel onHealthUpdated;
+    private BoolEventChannel onHealthUpdated;
 
     [SerializeField]
     private CinemachineShakeEventChannel onCinemachineShake;
@@ -60,7 +60,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
             playerStatsValue.maxLifePoints
         );
 
-        onHealthUpdated.Raise();
+        onHealthUpdated.Raise(true);
         if (playerStatsValue.currentLifePoints <= 0)
         {
             onPlayerDeathVoidEventChannel.Raise();
@@ -79,7 +79,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
                 0,
                 playerStatsValue.maxLifePoints
             );
-            onHealthUpdated.Raise();
+            onHealthUpdated.Raise(false);
         }
     }
 

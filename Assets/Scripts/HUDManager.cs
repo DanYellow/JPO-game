@@ -10,7 +10,7 @@ using System;
 public class HUDManager : MonoBehaviour
 {
     [SerializeField]
-    private VoidEventChannel onHealthUpdated;
+    private BoolEventChannel onHealthUpdated;
 
     [SerializeField]
     private PlayerStatsValue playerStatsValue;
@@ -88,7 +88,7 @@ public class HUDManager : MonoBehaviour
     }
 
 
-    private void UpdateHealth()
+    private void UpdateHealth(bool _tmp = false)
     {
         float rate = (float) playerStatsValue.currentLifePoints / playerStatsValue.maxLifePoints;
         healthBar.fillAmount = rate;
