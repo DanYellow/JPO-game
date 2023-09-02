@@ -25,13 +25,16 @@ public class ProjectileLauncher : MonoBehaviour
     private ShootDirection shootDirection;
 
     private Animator animator;
-    private SpriteRenderer sr;
 
     private Vector2 firePoint;
+    private BoxCollider2D bc2d;
 
     private RaycastHit2D hitInfo;
 
-    public float angle = 236.5f;
+    private bool targetInSight;
+
+    [SerializeField]
+    private int lengthDetection = 10;
 
     void Awake()
     {
@@ -42,20 +45,20 @@ public class ProjectileLauncher : MonoBehaviour
                 ActionOnDestroy,
                 false
             );
+        bc2d = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
-        sr = GetComponent<SpriteRenderer>();
 
-        firePoint = new Vector2(sr.bounds.min.x, sr.bounds.center.y);
+        firePoint = new Vector2(bc2d.bounds.min.x, bc2d.bounds.center.y);
     }
 
 
     private void Start()
     {
         print(transform.right.normalized);
-        // StartCoroutine(Shoot());
+        StartCoroutine(Shoot());
     }
 
-    
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -63,34 +66,36 @@ public class ProjectileLauncher : MonoBehaviour
         // {
         //     bc2d = GetComponent<BoxCollider2D>();
         // } 
-        
-        Gizmos.DrawLine(new Vector2(sr.bounds.min.x, sr.bounds.center.y), new Vector2(sr.bounds.min.x + (10 * (shootDirection == ShootDirection.Right ? 1 : -1)), sr.bounds.center.y));
+
+        // Gizmos.DrawLine(new Vector2(sr.bounds.min.x, sr.bounds.center.y), new Vector2(sr.bounds.min.x + (10 * (shootDirection == ShootDirection.Right ? 1 : -1)), sr.bounds.center.y));
     }
 
-    private void FixedUpdate() {
-        print(transform.right.normalized);
-        hitInfo = Physics2D.Raycast(firePoint, Vector3.left, 10, collisionLayers);
+    private void FixedUpdate()
+    {
+        targetInSight = Physics2D.Raycast(firePoint, Vector3.left, lengthDetection, collisionLayers);
 
-        if(hitInfo) {
-            print(hitInfo.transform.name);
-            Debug.DrawRay(transform.position, Quaternion.Euler(0, 0, angle) * hitInfo.point, Color.white);
-        } else {
-            Debug.DrawRay(transform.position, Vector3.left * 5, Color.cyan);
-        }
+        // if(hitInfo) {
+        //     print(hitInfo.transform.name);
+        //     Debug.DrawRay(firePoint, Vector3.left * lengthDetection, Color.white);
+        // } else {
+            Debug.DrawRay(firePoint, Vector3.left * lengthDetection, Color.cyan);
+        // }
     }
 
 
     private IEnumerator Shoot()
     {
-        yield return Helpers.GetWait(projectileLauncherData.startDelay);
+        // yield return Helpers.GetWait(projectileLauncherData.startDelay);
 
         while (true)
         {
-            // print("Shoot");
-            animator.SetTrigger(AnimationStrings.shoot);
-            pool.Get();
-            // yield return Helpers.GetWait(10);
-            yield return Helpers.GetWait(projectileLauncherData.cadency);
+            if (targetInSight)
+            {
+                animator.SetTrigger(AnimationStrings.shoot);
+                pool.Get();
+                yield return Helpers.GetWait(projectileLauncherData.cadency);
+            }
+            yield return null;
         }
     }
 
@@ -137,7 +142,8 @@ public class ProjectileLauncher : MonoBehaviour
         StopAllCoroutines();
     }
 
-    private void OnDestroy() {
-       StopAllCoroutines();
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
     }
 }

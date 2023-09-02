@@ -6,4 +6,5 @@ public class ProjectileLauncherData : ScriptableObject
     public Projectile projectile;
     public float cadency;
     public float startDelay = 0;
+    
 }
