@@ -17,7 +17,7 @@ public class InteractionManager : MonoBehaviour
 
     private TMP_Text textContainer;
 
-    [SerializeField]
+    [SerializeField, TextArea]
     private string initialString;
 
     private void Awake() {
