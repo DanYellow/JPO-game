@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.Pool;
 
-public class Projectile : MonoBehaviour
+public class Projectile : MonoBehaviour, IRecycleable
 {
     private Rigidbody2D rb;
     private BoxCollider2D bc2d;
@@ -21,12 +21,6 @@ public class Projectile : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         bc2d = GetComponent<BoxCollider2D>();
-    }
-
-    void Start()
-    {
-        // Initialize();
-        // rb.AddForce(Vector2.left * projectileData.speed, ForceMode2D.Impulse);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -49,21 +43,14 @@ public class Projectile : MonoBehaviour
         pool.Release(this);
     }
 
-
-    private void OnEnable() {
-        rb.constraints = RigidbodyConstraints2D.FreezePositionY;
-        rb.AddForce(transform.right.normalized * projectileData.speed, ForceMode2D.Impulse);
-    }
-
-    // private void OnBecameInvisible()
-    // {
-    //     print("ffff");
-    //     pool.Release(this);
-    //     // gameObject.SetActive(false);
-    // }
-
     private void OnDisable() {
         bc2d.isTrigger = false;
         rb.velocity = Vector2.zero;
+    }
+
+    public void ResetThyself()
+    {
+        rb.AddForce(transform.right.normalized * projectileData.speed, ForceMode2D.Impulse);
+        rb.constraints = RigidbodyConstraints2D.FreezePositionY;
     }
 }

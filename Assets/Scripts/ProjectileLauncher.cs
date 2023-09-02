@@ -112,7 +112,6 @@ public class ProjectileLauncher : MonoBehaviour
     Projectile CreateFunc()
     {
         Projectile _projectile = Instantiate(projectileLauncherData.projectile);
-        _projectile.projectileData.shootDirection = shootDirection;
         _projectile.pool = pool;
 
         return _projectile;
@@ -129,6 +128,7 @@ public class ProjectileLauncher : MonoBehaviour
         Quaternion quaternion = Quaternion.Euler(0, rotationAngle, 0);
         _projectile.transform.position = transform.position;
         _projectile.transform.rotation = quaternion;
+        _projectile.ResetThyself();
         _projectile.gameObject.SetActive(true);
     }
 
