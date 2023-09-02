@@ -15,26 +15,34 @@ public class Invulnerable : MonoBehaviour
     [SerializeField]
     private BoolEventChannel onHealthUpdated;
 
-
     [SerializeField]
     private MaterialEventChannel onMaterialChange;
 
     [SerializeField]
     private MaterialChangeValue materialChange;
 
+    private MaterialManager materialManager;
+
     private void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
+        materialManager = GetComponent<MaterialManager>();
+
+        materialChange = ScriptableObject.CreateInstance<MaterialChangeValue>();
+        materialChange.material = invulnerableDataValue.material;
+        materialChange.interval = invulnerableDataValue.flashDelay;
+        materialChange.duration = invulnerableDataValue.duration;
+    }
+
+    private void OnEnable()
+    {
+        onHealthUpdated.OnEventRaised += OnCollision;
     }
 
     // Start is called before the first frame update
     private void Start()
     {
         CheckMasks();
-
-        onHealthUpdated.OnEventRaised += OnCollision;
-
-        
     }
 
     private void DisableCollisions(bool enabled)
@@ -44,7 +52,6 @@ public class Invulnerable : MonoBehaviour
             Physics2D.IgnoreLayerCollision(gameObject.layer, layerIndex, enabled);
         }
     }
-
 
     private void CheckMasks()
     {
@@ -64,21 +71,18 @@ public class Invulnerable : MonoBehaviour
             if (!isInvulnerable)
             {
                 StartCoroutine(HandleInvunlnerableDelay());
-                onMaterialChange.Raise(materialChange);
+                materialManager.ChangeMaterialProxy(materialChange);
             }
         }
     }
 
-
     public IEnumerator HandleInvunlnerableDelay()
     {
-        DisableCollisions(true);
-        // Physics2D.IgnoreLayerCollision(gameObject.layer, layerId, true);
         isInvulnerable = true;
+        DisableCollisions(true);
         yield return new WaitForSeconds(invulnerableDataValue.duration);
         isInvulnerable = false;
         DisableCollisions(false);
-        // Physics2D.IgnoreLayerCollision(gameObject.layer, layerId, false);
     }
 
     private void OnDisable()

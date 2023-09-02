@@ -8,8 +8,11 @@ public class InvulnerableDataValue : ScriptableObject
     [Tooltip("Duration during which the player will be considered as invulnerable")]
     public float duration = 0.75f;
 
-    #pragma warning disable 0414
+    [Tooltip("Material to switch with to during invicibility")]
+    public Material material;
+
+#pragma warning disable 0414
     [Multiline, SerializeField]
     private string DeveloperDescription = "";
-    #pragma warning restore 0414
+#pragma warning restore 0414
 }

@@ -15,12 +15,15 @@ public class PlayerAnimation : MonoBehaviour
     private BoolEventChannel playerCrouchEventChannel;
 
     [SerializeField]
+    private BoolEventChannel onHealthUpdated;
+
+    [SerializeField]
     private BoolValue playerCanMove;
     private UnityAction<bool> playerCrouch;
+    private UnityAction<bool> healthUpdated;
 
     private UnityAction onLightAttackEvent;
 
-    // https://forum.unity.com/threads/unsubscribe-from-an-event-using-a-lambda-expression.1287587/
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -45,6 +48,13 @@ public class PlayerAnimation : MonoBehaviour
         };
 
         playerCrouchEventChannel.OnEventRaised += playerCrouch;
+
+        healthUpdated = (bool isTakingDamage) => {
+            if(isTakingDamage) {
+                animator.SetTrigger(AnimationStrings.hurt);
+            }
+        };
+        onHealthUpdated.OnEventRaised += healthUpdated;
     }
 
     private void UpdateMovement(Vector3 direction)
@@ -59,5 +69,6 @@ public class PlayerAnimation : MonoBehaviour
         rbVelocityEventChannel.OnEventRaised -= UpdateMovement;
         lightAttackEventChannel.OnEventRaised -= onLightAttackEvent;
         playerCrouchEventChannel.OnEventRaised -= playerCrouch;
+        onHealthUpdated.OnEventRaised -= healthUpdated;
     }
 }
