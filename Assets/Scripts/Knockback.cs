@@ -7,7 +7,7 @@ public class Knockback : MonoBehaviour
     private Rigidbody2D rb;
     public UnityEvent OnBegin, OnDone;
 
-    private float delay = 0.05f;
+    private float delay = 0.15f;
 
     private void Awake() {
         rb = GetComponent<Rigidbody2D>();

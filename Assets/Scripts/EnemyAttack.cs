@@ -55,9 +55,15 @@ public class EnemyAttack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.TryGetComponent(out IDamageable iDamageable) && other.CompareTag("Player"))
-        {
-            iDamageable.TakeDamage(2);
+        if (other.gameObject.CompareTag("Player"))
+        {            
+            if(other.gameObject.TryGetComponent(out Knockback knockback)) {
+                knockback.Apply(gameObject, enemyData.knockbackForce);
+            }
+
+            if(other.gameObject.TryGetComponent(out IDamageable iDamageable)) {
+               iDamageable.TakeDamage(enemyData.damage);
+            }
         }
     }
 
