@@ -12,7 +12,6 @@ public class PauseManager : MonoBehaviour
     [SerializeField]
     private StringEventChannel onPlayerInputMapChange;
 
-
     bool isGamePaused = false;
 
     private void Awake()

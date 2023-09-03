@@ -8,6 +8,13 @@ public class GameOverManager : MonoBehaviour
 {
     [SerializeField]
     private VoidEventChannel onPlayerDeathVoidEventChannel;
+
+    [SerializeField]
+    private VoidEventChannel onResetLastCheckPoint;
+
+    [SerializeField]
+    private StringEventChannel onPlayerInputMapChange;
+
     public GameObject gameoverMenuUI;
     public GameObject playerHUDUI;
 
@@ -21,8 +28,12 @@ public class GameOverManager : MonoBehaviour
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.N))
         {
-            Debug.Log("Time spent : " + (int)Time.timeSinceLevelLoad);
+            print(EventSystem.current.currentSelectedGameObject);
+            // gameoverMenuUI.GetComponentInChildren<Button>().Select();
+            // Debug.Log("Time spent : " + (int)Time.timeSinceLevelLoad);
         }
+
+
 #endif
     }
 
@@ -30,11 +41,16 @@ public class GameOverManager : MonoBehaviour
     void Start()
     {
         onPlayerDeathVoidEventChannel.OnEventRaised += DisplayGameOverScreen;
+        onResetLastCheckPoint.OnEventRaised += HideGameOverScreen;
     }
 
     private void DisplayGameOverScreen()
     {
-        StartCoroutine(DisplayGameOverScreenProxy());
+        playerHUDUI.SetActive(false);
+        gameoverMenuUI.SetActive(true);
+        EventSystemExtensions.UpdateSelectedGameObject(gameoverMenuUI.GetComponentInChildren<Button>().gameObject);
+        onPlayerInputMapChange.Raise(ActionMapName.UI);
+        // StartCoroutine(DisplayGameOverScreenProxy());
     }
 
     private string GetGameTime()
@@ -52,21 +68,22 @@ public class GameOverManager : MonoBehaviour
     IEnumerator DisplayGameOverScreenProxy()
     {
         playerHUDUI.SetActive(false);
+        gameoverMenuUI.SetActive(true);
+        EventSystemExtensions.UpdateSelectedGameObject(gameoverMenuUI.GetComponentInChildren<Button>().gameObject);
+        onPlayerInputMapChange.Raise(ActionMapName.UI);
         yield return new WaitForSeconds(0.75f);
 
-        foreach (var item in gameoverMenuUI.GetComponentsInChildren<Button>())
-        {
-            item.interactable = false;
-        }
+        // foreach (var item in gameoverMenuUI.GetComponentsInChildren<Button>())
+        // {
+        //     item.interactable = false;
+        // }
 
-        gameoverMenuUI.SetActive(true);
 
-        foreach (var item in gameoverMenuUI.GetComponentsInChildren<Button>())
-        {
-            item.interactable = true;
-        }
-
-        StartCoroutine(TriggerInputAction());
+        // foreach (var item in gameoverMenuUI.GetComponentsInChildren<Button>())
+        // {
+        //     item.interactable = true;
+        // }
+        // StartCoroutine(TriggerInputAction());
     }
 
     IEnumerator TriggerInputAction()
@@ -86,7 +103,12 @@ public class GameOverManager : MonoBehaviour
 
     public void OnNavigate(InputAction.CallbackContext ctx)
     {
-        if (gameoverMenuUI != null && gameoverMenuUI.activeInHierarchy && ctx.phase == InputActionPhase.Performed && EventSystem.current.currentSelectedGameObject == null)
+        if (
+            gameoverMenuUI != null && 
+            gameoverMenuUI.activeInHierarchy && 
+            ctx.phase == InputActionPhase.Performed && 
+            EventSystem.current.currentSelectedGameObject == null
+        )
         {
             gameoverMenuUI.GetComponentInChildren<Button>().Select();
         }
@@ -94,6 +116,8 @@ public class GameOverManager : MonoBehaviour
 
     public void HideGameOverScreen()
     {
+        onPlayerInputMapChange.Raise(ActionMapName.Player);
+
         EventSystem.current.SetSelectedGameObject(null);
         gameoverMenuUI.SetActive(false);
     }
@@ -101,5 +125,6 @@ public class GameOverManager : MonoBehaviour
     private void OnDisable()
     {
         onPlayerDeathVoidEventChannel.OnEventRaised -= DisplayGameOverScreen;
+        onResetLastCheckPoint.OnEventRaised -= HideGameOverScreen;
     }
 }

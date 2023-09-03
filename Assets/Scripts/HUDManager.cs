@@ -1,11 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Events;
 using UnityEngine.SceneManagement;
-using System.Collections.Generic;
-using System.Collections;
 using TMPro;
-using System;
 
 public class HUDManager : MonoBehaviour
 {
@@ -25,11 +21,6 @@ public class HUDManager : MonoBehaviour
 
     [SerializeField]
     private VoidEventChannel onPlayerDeathVoidEventChannel;
-
-    [SerializeField]
-    private BoolEventChannel onTogglePauseEvent;
-    private UnityAction<bool> onPause;
-    private bool isGamePaused = false;
 
     [SerializeField]
     private TextMeshProUGUI lifePointsText;
@@ -64,12 +55,6 @@ public class HUDManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
         onHealthUpdated.OnEventRaised += UpdateHealth;
         countdownEvent.OnEventRaised += UpdateCountdown;
-
-        onPause = (bool isPaused) =>
-        {
-            isGamePaused = isPaused;
-        };
-        onTogglePauseEvent.OnEventRaised += onPause;
     }
 
     private void UpdateCountdown(string val)
@@ -99,20 +84,12 @@ public class HUDManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // FillHearts();
     }
 
     private void OnDisable()
     {
         onHealthUpdated.OnEventRaised -= UpdateHealth;
         SceneManager.sceneLoaded -= OnSceneLoaded;
-        onTogglePauseEvent.OnEventRaised -= onPause;
         countdownEvent.OnEventRaised -= UpdateCountdown;
     }
-
-    private void OnValidate()
-    {
-        // FillHearts();
-    }
-
 }

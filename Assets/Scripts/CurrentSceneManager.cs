@@ -10,6 +10,10 @@ public class CurrentSceneManager : MonoBehaviour
     [SerializeField]
     private FloatValue timeBarValue;
 
+
+    [SerializeField]
+    private VoidEventChannel resetLastCheckPoint;
+
     // private SceneTransition sceneTransition;
 
     [SerializeField]
@@ -29,8 +33,8 @@ public class CurrentSceneManager : MonoBehaviour
 
     private void Initialize()
     {
-         timeBarValue.CurrentValue = 1f;
-         playerIsDashing.CurrentValue = false;
+        timeBarValue.CurrentValue = 1f;
+        playerIsDashing.CurrentValue = false;
     }
 
     public void LoadLevel(int levelName = 1)
@@ -38,6 +42,11 @@ public class CurrentSceneManager : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(null);
         Time.timeScale = 1f;
         SceneManager.LoadScene(levelName, LoadSceneMode.Single);
+    }
+
+    public void RestartLastCheckpoint()
+    {
+        resetLastCheckPoint.Raise();
     }
 
     public void QuitGame()

@@ -6,15 +6,19 @@ public class PlayerStatsValue : ScriptableObject
 {
     public float moveSpeed;
 
+    [Space(20)]
     public int maxLifePoints = 250;
     public int currentLifePoints;
+    [Space(20)]
 
     public float jumpForce = 5.5f;
     public int maxJumpCount = 1;
 
+    [Space(20)]
     public int dashVelocity = 30;
     public int dashDamage = 2;
     public int dashCooldown = 3;
+    [Space(20)]
 
     public int gravityScaleGrounded = 2;
     public int gravityScaleFalling = 8;
@@ -23,7 +27,9 @@ public class PlayerStatsValue : ScriptableObject
     public InvulnerableDataValue invulnerableData;
 
     private void OnEnable() {
-        currentLifePoints = 20;
+        if(currentLifePoints <= 0) {
+            currentLifePoints = 1;
+        }
         // currentLifePoints = maxLifePoints;
     }
 

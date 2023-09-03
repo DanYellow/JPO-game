@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerHealth : MonoBehaviour, IDamageable
 {
@@ -28,6 +29,9 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     [SerializeField]
     private PlayerStatsValue playerStatsValue;
+
+    [SerializeField]
+    private UnityEvent onDeathEvent;
 
 
     private void Awake()
@@ -86,6 +90,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     private void OnDeath()
     {
         onCinemachineShake.Raise(deathCameraShake);
+        onDeathEvent?.Invoke();
         // GameObject deathEffect = Instantiate(deathEffectPrefab, transform.position, Quaternion.identity);
         // Destroy(deathEffect, deathEffect.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
         // Destroy(gameObject);

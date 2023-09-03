@@ -5,7 +5,6 @@ public class Checkpoint : MonoBehaviour
 {
     private BoxCollider2D bc2d;
     private Animator animator;
-
     private new Light2D light;
 
     private void Awake()
