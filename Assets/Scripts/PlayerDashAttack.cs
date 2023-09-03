@@ -66,9 +66,10 @@ public class PlayerDashAttack : MonoBehaviour
 
     private void DisableCollisions(bool enabled)
     {
+        
         foreach (var layerIndex in listLayers)
         {
-            Physics2D.IgnoreLayerCollision(gameObject.layer, layerIndex, enabled);
+            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Default"), layerIndex, enabled);
         }
     }
 
@@ -100,8 +101,8 @@ public class PlayerDashAttack : MonoBehaviour
     private void InflictDamage()
     {
         Collider2D[] hits = Physics2D.OverlapBoxAll(
-           bc2d.bounds.center,
-           bc2d.bounds.size,
+            bc2d.bounds.center,
+            bc2d.bounds.size,
             0,
             listDashableLayers
         );
@@ -110,13 +111,13 @@ public class PlayerDashAttack : MonoBehaviour
         {
             if (item.TryGetComponent(out IGuardable iGuardable))
             {
-                print(item.transform.right.x);
-                print(transform.right.x);
                 if (iGuardable.isGuarding && item.transform.right.x != transform.right.x) {
+                    DashEnd();
                     Knockback knockback = GetComponentInParent<Knockback>();
-                    knockback.Apply(item.gameObject, 250);
+                    knockback.Apply(item.gameObject, 950);
+                
                     return;
-                };
+                }
             }
 
             if (item.TryGetComponent(out IDamageable iDamageable))

@@ -71,7 +71,7 @@ public class Invulnerable : MonoBehaviour
             if (!isInvulnerable)
             {
                 StartCoroutine(HandleInvunlnerableDelay());
-                // materialManager.ChangeMaterialProxy(materialChange);
+                materialManager.ChangeMaterialProxy(materialChange);
             }
         }
     }
