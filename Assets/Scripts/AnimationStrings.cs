@@ -13,5 +13,6 @@ public static class AnimationStrings
    public static string isCrouched = "IsCrouched";
    public static string shoot = "Shoot";
    public static string isGuarding = "IsGuarding";
+   public static string activate = "Activate";
 
 }
