@@ -53,7 +53,6 @@ public class ProjectileLauncher : MonoBehaviour
         fireDirection = listDirection[(int) shootDirection];
     }
 
-
     private void Start()
     {
         StartCoroutine(Shoot());
@@ -70,12 +69,12 @@ public class ProjectileLauncher : MonoBehaviour
             collisionLayers
         );
 
-        if(hitInfo) {
-            print(hitInfo.transform.name);
-            // Debug.DrawRay(firePoint, Vector3.left * lengthDetection, Color.white);
-        } else {
-            // Debug.DrawRay(firePoint, Vector3.left * lengthDetection, Color.cyan);
-        }
+        // if(hitInfo) {
+        //     print(hitInfo.transform.name);
+        //     // Debug.DrawRay(firePoint, Vector3.left * lengthDetection, Color.white);
+        // } else {
+        //     // Debug.DrawRay(firePoint, Vector3.left * lengthDetection, Color.cyan);
+        // }
 
         targetInSight = hitInfo.collider != null;
         Debug.DrawRay(new Vector2(bc2d.bounds.min.x - 0.25f, bc2d.bounds.min.y), fireDirection * lengthDetection, Color.cyan);

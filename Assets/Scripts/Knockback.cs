@@ -17,6 +17,7 @@ public class Knockback : MonoBehaviour
         StopAllCoroutines();
         OnBegin?.Invoke();
         Vector2 direction = (transform.position - target.transform.position).normalized;
+        print(direction * strength);
         rb.AddForce(direction * strength);
         StartCoroutine(Reset());
     }

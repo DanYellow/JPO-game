@@ -12,13 +12,14 @@ public class ActionMapName
 
 public class InputManager : MonoBehaviour
 {
-    public PlayerInput playerInput;
+    private PlayerInput playerInput;
 
     [SerializeField]
     private StringEventChannel onPlayerInputMapChange;
 
     private void Awake()
     {
+        playerInput = GetComponent<PlayerInput>();
         onPlayerInputMapChange.OnEventRaised += SwitchActionMap;
     }
 
@@ -29,7 +30,8 @@ public class InputManager : MonoBehaviour
     private void SwitchActionMap(string mapName = null)
     {
         mapName = mapName ?? ActionMapName.Player;
-        playerInput.SwitchCurrentActionMap(mapName.ToString());
+        if(playerInput) 
+            playerInput.SwitchCurrentActionMap(mapName.ToString());
     }
 
     private void OnDisable()

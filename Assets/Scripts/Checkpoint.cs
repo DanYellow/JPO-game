@@ -7,6 +7,9 @@ public class Checkpoint : MonoBehaviour
     private Animator animator;
     private new Light2D light;
 
+    [SerializeField]
+    private Vector2Value lastCheckpointPosition;
+
     private void Awake()
     {
         bc2d = GetComponent<BoxCollider2D>();
@@ -21,6 +24,7 @@ public class Checkpoint : MonoBehaviour
         {
             animator.SetTrigger(AnimationStrings.activate);
             playerSpawn.currentSpawnPosition = transform.position;
+            lastCheckpointPosition.CurrentValue = transform.position;
             bc2d.enabled = false;
             light.enabled = true;
         }

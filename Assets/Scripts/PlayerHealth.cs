@@ -33,6 +33,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     [SerializeField]
     private UnityEvent onDeathEvent;
 
+   
+
 
     private void Awake()
     {
@@ -42,7 +44,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         onPlayerDeath.OnEventRaised += OnDeath;
         onPotionPicked.OnEventRaised += OnHeal;
 
-        // playerStatsValue.currentLifePoints = 50;
+        playerStatsValue.currentLifePoints = 20;
     }
 
     private void Update()

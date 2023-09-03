@@ -46,7 +46,7 @@ public class CurrentSceneManager : MonoBehaviour
 
     public void RestartLastCheckpoint()
     {
-        resetLastCheckPoint.Raise();
+        LoadLevel();
     }
 
     public void QuitGame()

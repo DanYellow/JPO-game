@@ -9,24 +9,15 @@ public class PlayerSpawn : MonoBehaviour
     public Vector3 initialSpawnPosition;
 
     [SerializeField]
-    private VoidEventChannel resetLastCheckPoint;
-
-    private void OnEnable() {
-        resetLastCheckPoint.OnEventRaised += RestartLastCheckpoint;
-    }
+    private Vector2Value lastCheckpointPosition;
 
     private void Awake()
     {
+        if(lastCheckpointPosition.CurrentValue != null) {
+            gameObject.transform.position = (Vector3) lastCheckpointPosition.CurrentValue;
+            lastCheckpointPosition.CurrentValue = null;
+        }
         currentSpawnPosition = gameObject.transform.position;
         initialSpawnPosition = gameObject.transform.position;
-    }
-
-    void RestartLastCheckpoint()
-    {
-        transform.position = currentSpawnPosition;
-    }
-
-    private void OnDisable() {
-        resetLastCheckPoint.OnEventRaised -= RestartLastCheckpoint;
     }
 }
