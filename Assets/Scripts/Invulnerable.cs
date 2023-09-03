@@ -42,7 +42,7 @@ public class Invulnerable : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        CheckMasks();
+        CreateListLayers();
     }
 
     private void DisableCollisions(bool enabled)
@@ -53,7 +53,7 @@ public class Invulnerable : MonoBehaviour
         }
     }
 
-    private void CheckMasks()
+    private void CreateListLayers()
     {
         for (int i = 0; i < 32; i++)
         {

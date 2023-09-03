@@ -37,6 +37,8 @@ public class PlayerDashAttack : MonoBehaviour
 
     private float originalGravity;
 
+    private List<int> listLayers = new List<int>();
+
     private void Awake()
     {
         dashTrailRenderer = GetComponent<DashTrailRenderer>();
@@ -48,6 +50,26 @@ public class PlayerDashAttack : MonoBehaviour
     {
         originalGravity = rb.gravityScale;
         originalLayerName = LayerMask.LayerToName(gameObject.layer);
+        CreateListLayers();
+    }
+
+    private void CreateListLayers()
+    {
+        for (int i = 0; i < 32; i++)
+        {
+            if (listDashableLayers == (listDashableLayers | (1 << i)))
+            {
+                listLayers.Add(i);
+            }
+        }
+    }
+
+    private void DisableCollisions(bool enabled)
+    {
+        foreach (var layerIndex in listLayers)
+        {
+            Physics2D.IgnoreLayerCollision(gameObject.layer, layerIndex, enabled);
+        }
     }
 
     public void OnDash(InputAction.CallbackContext ctx)
@@ -72,15 +94,6 @@ public class PlayerDashAttack : MonoBehaviour
         if (!playerCanMove.CurrentValue && !canDash)
         {
             InflictDamage();
-        }
-    }
-
-    private void DisableCollisions(bool enabled)
-    {
-        string[] layers = new string[] { "Enemy", "Props", "Traps" };
-        foreach (var layer in layers)
-        {
-            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Default"), LayerMask.NameToLayer(layer), enabled);
         }
     }
 
