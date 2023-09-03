@@ -22,7 +22,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     private SpriteRenderer sr;
 
     [SerializeField]
-    private VoidEventChannel onPlayerDeathVoidEventChannel;
+    private VoidEventChannel onPlayerDeath;
 
     public GameObject deathEffectPrefab;
 
@@ -35,10 +35,10 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         // playerStatsValue.nbCurrentLifes = playerStatsValue.nbMaxLifes;
         animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
-        onPlayerDeathVoidEventChannel.OnEventRaised += OnDeath;
+        onPlayerDeath.OnEventRaised += OnDeath;
         onPotionPicked.OnEventRaised += OnHeal;
 
-        playerStatsValue.currentLifePoints = 50;
+        // playerStatsValue.currentLifePoints = 50;
     }
 
     private void Update()
@@ -63,7 +63,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         onHealthUpdated.Raise(true);
         if (playerStatsValue.currentLifePoints <= 0)
         {
-            onPlayerDeathVoidEventChannel.Raise();
+            onPlayerDeath.Raise();
             OnDeath();
         }
         else
@@ -86,14 +86,14 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     private void OnDeath()
     {
         onCinemachineShake.Raise(deathCameraShake);
-        GameObject deathEffect = Instantiate(deathEffectPrefab, transform.position, Quaternion.identity);
-        Destroy(deathEffect, deathEffect.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-        Destroy(gameObject);
+        // GameObject deathEffect = Instantiate(deathEffectPrefab, transform.position, Quaternion.identity);
+        // Destroy(deathEffect, deathEffect.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+        // Destroy(gameObject);
     }
 
     private void OnDisable()
     {
-        onPlayerDeathVoidEventChannel.OnEventRaised -= OnDeath;
+        onPlayerDeath.OnEventRaised -= OnDeath;
         onPotionPicked.OnEventRaised -= OnHeal;
     }
 }

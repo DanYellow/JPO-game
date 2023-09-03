@@ -95,6 +95,11 @@ public class PlayerDashAttack : MonoBehaviour
 
         foreach (var item in hits)
         {
+            if (item.TryGetComponent(out IGuardable iGuardable))
+            {
+                if (iGuardable.isGuarding && item.transform.right.x != transform.right.x) return;
+            }
+
             if (item.TryGetComponent(out IDamageable iDamageable))
             {
                 iDamageable.TakeDamage(playerData.dashDamage);

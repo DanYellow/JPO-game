@@ -39,7 +39,7 @@ public class PlayerMeleeAttack : MonoBehaviour, IAttackable
             foreach (var hitItem in listHitItems)
             {
                 if (hitItem.transform.TryGetComponent(out IGuardable iGuardable)) {
-                    if(iGuardable.isGuarding) return;
+                    if(iGuardable.isGuarding && hitItem.transform.right.x != transform.right.x) return;
                 }
                 if (hitItem.transform.TryGetComponent(out IDamageable iDamageable))
                 {

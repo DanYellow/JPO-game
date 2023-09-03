@@ -18,43 +18,56 @@ public class PlayerAnimation : MonoBehaviour
     private BoolEventChannel onHealthUpdated;
 
     [SerializeField]
+    private VoidEventChannel onPlayerDeath;
+
+    [SerializeField]
     private BoolValue playerCanMove;
     private UnityAction<bool> playerCrouch;
     private UnityAction<bool> healthUpdated;
 
     private UnityAction onLightAttackEvent;
+    private UnityAction onPlayerDeathEvent;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
+
+        playerCrouch = (bool isCrouched) =>
+        {
+            animator.SetBool(AnimationStrings.isCrouched, isCrouched);
+        };
+
+        onLightAttackEvent = () =>
+        {
+            if (playerCanMove.CurrentValue)
+            {
+                // animator.SetTrigger("LightAttack2");
+                animator.SetBool(AnimationStrings.lightAttack, true);
+            }
+        };
+
+        healthUpdated = (bool isTakingDamage) =>
+        {
+            if (isTakingDamage)
+            {
+                animator.SetTrigger(AnimationStrings.hurt);
+            }
+        };
+
+        onPlayerDeathEvent = () =>
+        {
+           animator.SetBool(AnimationStrings.isDead, true);
+        };
     }
 
     private void OnEnable()
     {
         rbVelocityEventChannel.OnEventRaised += UpdateMovement;
-
-        onLightAttackEvent = () =>
-        {
-            if(playerCanMove.CurrentValue) {
-                // animator.SetTrigger("LightAttack2");
-                animator.SetBool(AnimationStrings.lightAttack, true);
-            }
-        };
         lightAttackEventChannel.OnEventRaised += onLightAttackEvent;
-
-
-        playerCrouch = (bool isCrouched) => {
-            animator.SetBool(AnimationStrings.isCrouched, isCrouched);
-        };
-
         playerCrouchEventChannel.OnEventRaised += playerCrouch;
-
-        healthUpdated = (bool isTakingDamage) => {
-            if(isTakingDamage) {
-                animator.SetTrigger(AnimationStrings.hurt);
-            }
-        };
         onHealthUpdated.OnEventRaised += healthUpdated;
+
+        onPlayerDeath.OnEventRaised += onPlayerDeathEvent;
     }
 
     private void UpdateMovement(Vector3 direction)
@@ -70,5 +83,6 @@ public class PlayerAnimation : MonoBehaviour
         lightAttackEventChannel.OnEventRaised -= onLightAttackEvent;
         playerCrouchEventChannel.OnEventRaised -= playerCrouch;
         onHealthUpdated.OnEventRaised -= healthUpdated;
+        onPlayerDeath.OnEventRaised -= onPlayerDeathEvent;
     }
 }

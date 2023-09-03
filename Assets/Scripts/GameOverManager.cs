@@ -3,7 +3,6 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using System.Collections;
-using TMPro;
 
 public class GameOverManager : MonoBehaviour
 {
@@ -11,14 +10,6 @@ public class GameOverManager : MonoBehaviour
     private VoidEventChannel onPlayerDeathVoidEventChannel;
     public GameObject gameoverMenuUI;
     public GameObject playerHUDUI;
-
-    public TMP_Text timerText;
-
-    [SerializeField]
-    private ScoreIndicator[] listScoreIndicator;
-
-    [SerializeField, Range(1, 60)]
-    private int scoreThreshold = 42;
 
     private void Awake()
     {
@@ -68,22 +59,7 @@ public class GameOverManager : MonoBehaviour
             item.interactable = false;
         }
 
-        timerText.SetText($"Vous avez tenu : <b>{GetGameTime()} secondes !</b>");
         gameoverMenuUI.SetActive(true);
-
-        int nbScoreIndicatorsEarned = Mathf.FloorToInt(Time.timeSinceLevelLoad / scoreThreshold);
-
-        int nbScoreIndicatorsMax = Mathf.Clamp(nbScoreIndicatorsEarned, 0, listScoreIndicator.Length);
-
-        for (int i = 0; i < nbScoreIndicatorsMax; i++)
-        {
-            if (i > listScoreIndicator.Length)
-            {
-                yield break;
-            }
-            yield return new WaitForSeconds(0.75f);
-            listScoreIndicator[i].Activate();
-        }
 
         foreach (var item in gameoverMenuUI.GetComponentsInChildren<Button>())
         {
