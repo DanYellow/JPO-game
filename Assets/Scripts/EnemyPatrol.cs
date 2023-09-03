@@ -71,7 +71,7 @@ public class EnemyPatrol : MonoBehaviour
 
         while (enabled)
         {
-            if (lastKnownPosition == transform.position && !isFlipping && rb.velocity.y > -0.1f && rb.velocity.y < 0.1f)
+            if (canMove && lastKnownPosition == transform.position && !isFlipping && rb.velocity.y > -0.1f && rb.velocity.y < 0.1f)
             {
                 StartCoroutine(Flip());
             }

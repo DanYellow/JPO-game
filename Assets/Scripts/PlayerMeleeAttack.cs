@@ -2,7 +2,7 @@ using UnityEngine.InputSystem;
 using UnityEngine;
 using System.Collections;
 
-public class PlayerMeleeAttack : MonoBehaviour
+public class PlayerMeleeAttack : MonoBehaviour, IAttackable
 {
     [SerializeField]
     private VoidEventChannel lightAttackEventChannel;
@@ -25,23 +25,28 @@ public class PlayerMeleeAttack : MonoBehaviour
 
 
     // [HideInInspector]
-    public bool isAttacking = false;
+    public bool isAttacking { get; set; } = false;
 
     public void OnLightAttack(InputAction.CallbackContext ctx)
     {
         if (ctx.phase == InputActionPhase.Performed)
         {
+            isAttacking = true;
             lightAttackEventChannel.Raise();
             playerCanMove.CurrentValue = false;
             Collider2D[] listHitItems = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, listDamageableLayers);
 
             foreach (var hitItem in listHitItems)
             {
-                if (hitItem.transform.TryGetComponent<IDamageable>(out IDamageable iDamageable))
+                if (hitItem.transform.TryGetComponent(out IGuardable iGuardable)) {
+                    if(iGuardable.isGuarding) return;
+                }
+                if (hitItem.transform.TryGetComponent(out IDamageable iDamageable))
                 {
                     iDamageable.TakeDamage(1);
                 }
             }
+            
         }
     }
 
@@ -53,5 +58,6 @@ public class PlayerMeleeAttack : MonoBehaviour
     public void OnAttackEnds() {
         GetComponent<Animator>().SetBool(AnimationStrings.lightAttack, false);
         playerCanMove.CurrentValue = true;
+        isAttacking = false;
     }
 }

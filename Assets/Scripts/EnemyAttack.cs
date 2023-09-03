@@ -28,8 +28,6 @@ public class EnemyAttack : MonoBehaviour
         bc2d = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
         enemyPatrol = GetComponent<EnemyPatrol>();
-
-        print(enemyPatrol.isFacingRight);
     }
 
     private void FixedUpdate()
@@ -49,13 +47,13 @@ public class EnemyAttack : MonoBehaviour
 
         if (hitObstacle && !isAttacking)
         {
-            StartCoroutine(Attack());
+            // StartCoroutine(Attack());
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") && isAttacking)
         {            
             if(other.gameObject.TryGetComponent(out Knockback knockback)) {
                 knockback.Apply(gameObject, enemyData.knockbackForce);
