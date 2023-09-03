@@ -7,7 +7,7 @@ public class Knockback : MonoBehaviour
     private Rigidbody2D rb;
     public UnityEvent OnBegin, OnDone;
 
-    private float delay = 0.15f;
+    private float delay = .2f;
 
     private void Awake() {
         rb = GetComponent<Rigidbody2D>();
@@ -17,7 +17,6 @@ public class Knockback : MonoBehaviour
         StopAllCoroutines();
         OnBegin?.Invoke();
         Vector2 direction = (transform.position - target.transform.position).normalized;
-        print(direction * strength);
         rb.AddForce(direction * strength);
         StartCoroutine(Reset());
     }

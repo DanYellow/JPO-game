@@ -21,17 +21,34 @@ public class Projectile : MonoBehaviour, IRecycleable
         bc2d = GetComponent<BoxCollider2D>();
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    // private void OnCollisionEnter2D(Collision2D other)
+    // {
+    //     rb.constraints = 0;
+    //     rb.AddTorque(projectileData.torque, ForceMode2D.Impulse);
+    //     bc2d.isTrigger = true;
+
+    //     if (other.gameObject.CompareTag("Player"))
+    //     {
+    //         IDamageable iDamageable = other.transform.GetComponentInChildren<IDamageable>();
+    //         iDamageable.TakeDamage(projectileData.damage);
+    //         if(other.gameObject.TryGetComponent(out Knockback knockback)) {
+    //             knockback.Apply(gameObject, projectileData.knockbackForce);
+    //         }
+    //     }
+    //     StartCoroutine(Disable());
+    // }
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         rb.constraints = 0;
         rb.AddTorque(projectileData.torque, ForceMode2D.Impulse);
         bc2d.isTrigger = true;
 
-        if (other.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            IDamageable iDamageable = other.transform.GetComponentInChildren<IDamageable>();
+            IDamageable iDamageable = collision.transform.GetComponentInChildren<IDamageable>();
             iDamageable.TakeDamage(projectileData.damage);
-            if(other.gameObject.TryGetComponent(out Knockback knockback)) {
+            if(collision.gameObject.TryGetComponent(out Knockback knockback)) {
                 knockback.Apply(gameObject, projectileData.knockbackForce);
             }
         }

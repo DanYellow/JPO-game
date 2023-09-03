@@ -243,7 +243,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5528627662263019259}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 93bb89fb7acaada46a1f9ac3190b6a15, type: 3}
   m_Name: 
@@ -5417,8 +5417,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentSpawnPosition: {x: 0, y: 0, z: 0}
   initialSpawnPosition: {x: 0, y: 0, z: 0}
-  resetLastCheckPoint: {fileID: 11400000, guid: 06cb50babb594014dbe2d33cb428b805, type: 2}
-  playerInstance: {fileID: 5528627662856065166}
+  lastCheckpointPosition: {fileID: 11400000, guid: 6dffc05ea99bd734bb88b2efddeeed60, type: 2}
 --- !u!1 &5528627663215432658
 GameObject:
   m_ObjectHideFlags: 0
