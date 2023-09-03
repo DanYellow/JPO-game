@@ -36,6 +36,9 @@ public class ProjectileLauncher : MonoBehaviour
     [SerializeField]
     private int lengthDetection = 10;
 
+    [SerializeField]
+    private VoidEventChannel resetPlayerPosition;
+
     private Vector3[] listDirection = new Vector3[] { Vector3.left, Vector3.right, Vector3.up, Vector3.down };
 
     void Awake()
@@ -50,7 +53,7 @@ public class ProjectileLauncher : MonoBehaviour
         bc2d = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
 
-        fireDirection = listDirection[(int) shootDirection];
+        fireDirection = listDirection[(int)shootDirection];
     }
 
     private void Start()
@@ -99,6 +102,11 @@ public class ProjectileLauncher : MonoBehaviour
         }
     }
 
+    void CancelAllProjectiles()
+    {
+        // pool.Clear();
+    }
+
     Projectile CreateFunc()
     {
         Projectile _projectile = Instantiate(projectileLauncherData.projectile);
@@ -131,6 +139,12 @@ public class ProjectileLauncher : MonoBehaviour
     {
         Destroy(_projectile.gameObject);
     }
+
+    private void OnDisable()
+    {
+        resetPlayerPosition.OnEventRaised -= CancelAllProjectiles;
+    }
+
 
     private void OnDestroy()
     {

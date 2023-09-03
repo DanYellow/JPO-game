@@ -15,10 +15,18 @@ public class Projectile : MonoBehaviour, IRecycleable
     [HideInInspector]
     public IObjectPool<Projectile> pool;
 
+    [SerializeField]
+    private VoidEventChannel resetPlayerPosition;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         bc2d = GetComponent<BoxCollider2D>();
+    }
+
+     private void OnEnable()
+    {
+        resetPlayerPosition.OnEventRaised += CancelAllProjectiles;
     }
 
     // private void OnCollisionEnter2D(Collision2D other)
@@ -55,6 +63,11 @@ public class Projectile : MonoBehaviour, IRecycleable
         StartCoroutine(Disable());
     }
 
+    void CancelAllProjectiles()
+    {
+        pool.Release(this);
+    }
+
     IEnumerator Disable()
     {
         yield return Helpers.GetWait(1.5f);
@@ -62,7 +75,8 @@ public class Projectile : MonoBehaviour, IRecycleable
     }
 
     private void OnDisable() {
-        bc2d.isTrigger = false;
+        // bc2d.isTrigger = false;
+        resetPlayerPosition.OnEventRaised -= CancelAllProjectiles;
     }
 
     public void ResetThyself()

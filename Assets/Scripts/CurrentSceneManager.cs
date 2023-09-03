@@ -5,30 +5,19 @@ using UnityEngine.Events;
 
 public class CurrentSceneManager : MonoBehaviour
 {
-    private UnityAction onDisplayCreditsScreen;
-
     [SerializeField]
     private FloatValue timeBarValue;
-
-
-    [SerializeField]
-    private VoidEventChannel resetLastCheckPoint;
-
-    // private SceneTransition sceneTransition;
 
     [SerializeField]
     private BoolValue playerIsDashing;
 
-    private void Awake()
-    {
-        // sceneTransition = GetComponent<SceneTransition>();
+    private void Awake() {
+        Application.targetFrameRate = 60;
     }
 
     void Start()
     {
-        Application.targetFrameRate = 60;
         Initialize();
-        // StartCoroutine(sceneTransition.Show());
     }
 
     private void Initialize()

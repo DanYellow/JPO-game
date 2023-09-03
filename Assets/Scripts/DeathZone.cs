@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class DeathZone : MonoBehaviour
 {
+    [SerializeField]
+    private VoidEventChannel resetPlayerPosition;
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -15,6 +18,7 @@ public class DeathZone : MonoBehaviour
                 other.transform.position = playerSpawn.currentSpawnPosition;
                 // We "stop" the player on respawn
                 other.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                resetPlayerPosition.Raise();
             }
         }
         else
