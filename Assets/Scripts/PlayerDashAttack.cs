@@ -110,7 +110,13 @@ public class PlayerDashAttack : MonoBehaviour
         {
             if (item.TryGetComponent(out IGuardable iGuardable))
             {
-                if (iGuardable.isGuarding && item.transform.right.x != transform.right.x) return;
+                print(item.transform.right.x);
+                print(transform.right.x);
+                if (iGuardable.isGuarding && item.transform.right.x != transform.right.x) {
+                    Knockback knockback = GetComponentInParent<Knockback>();
+                    knockback.Apply(item.gameObject, 250);
+                    return;
+                };
             }
 
             if (item.TryGetComponent(out IDamageable iDamageable))
