@@ -80,7 +80,7 @@ public class Invulnerable : MonoBehaviour
     {
         isInvulnerable = true;
         DisableCollisions(true);
-        yield return new WaitForSeconds(invulnerableDataValue.duration);
+        yield return Helpers.GetWait(invulnerableDataValue.duration);
         isInvulnerable = false;
         DisableCollisions(false);
     }
