@@ -33,11 +33,16 @@ public class ProjectileLauncher : MonoBehaviour
 
     private bool targetInSight;
 
+    #nullable enable
+    [SerializeField]
+    private Transform? firePoint = null;
+    #nullable disable
+
     [SerializeField]
     private int lengthDetection = 10;
 
     [SerializeField]
-    private VoidEventChannel resetPlayerPosition;
+    private bool isMoving = false;
 
     private Vector3[] listDirection = new Vector3[] { Vector3.left, Vector3.right, Vector3.up, Vector3.down };
 
@@ -67,7 +72,7 @@ public class ProjectileLauncher : MonoBehaviour
             new Vector2(bc2d.bounds.center.x - 0.5f, bc2d.bounds.center.y),
             bc2d.bounds.size,
             0,
-            fireDirection,
+            fireDirection * (isMoving ? transform.right.normalized : Vector3.one),
             lengthDetection,
             collisionLayers
         );
@@ -76,12 +81,12 @@ public class ProjectileLauncher : MonoBehaviour
         //     print(hitInfo.transform.name);
         //     // Debug.DrawRay(firePoint, Vector3.left * lengthDetection, Color.white);
         // } else {
-        //     // Debug.DrawRay(firePoint, Vector3.left * lengthDetection, Color.cyan);
+        // //     // Debug.DrawRay(firePoint, Vector3.left * lengthDetection, Color.cyan);
         // }
 
         targetInSight = hitInfo.collider != null;
-        Debug.DrawRay(new Vector2(bc2d.bounds.min.x - 0.25f, bc2d.bounds.min.y), fireDirection * lengthDetection, Color.cyan);
-        Debug.DrawRay(new Vector2(bc2d.bounds.min.x - 0.25f, bc2d.bounds.max.y), fireDirection * lengthDetection, Color.cyan);
+        Debug.DrawRay(new Vector2(bc2d.bounds.min.x - 0.25f, bc2d.bounds.min.y), fireDirection * lengthDetection * (isMoving ? transform.right.normalized : Vector3.one), Color.cyan);
+        Debug.DrawRay(new Vector2(bc2d.bounds.min.x - 0.25f, bc2d.bounds.max.y), fireDirection * lengthDetection * (isMoving ? transform.right.normalized : Vector3.one), Color.cyan);
     }
 
 
@@ -118,13 +123,19 @@ public class ProjectileLauncher : MonoBehaviour
     void ActionOnGet(Projectile _projectile)
     {
         int rotationAngle = 0;
-        if (shootDirection == ShootDirection.Left && _projectile.projectileData.isFacingRight)
+        if (!isMoving && shootDirection == ShootDirection.Left && _projectile.projectileData.isFacingRight)
         {
             rotationAngle = 180;
         }
 
+        if(isMoving && transform.right.normalized.x == -1) {
+            rotationAngle = 180;
+        }
+
         Quaternion quaternion = Quaternion.Euler(0, rotationAngle, 0);
-        _projectile.transform.position = transform.position;
+        // _projectile.transform.position = transform.position;
+        // print(firePoint != null);
+        _projectile.transform.position = firePoint != null ? firePoint.position : transform.position;
         _projectile.transform.rotation = quaternion;
         _projectile.gameObject.SetActive(true);
         _projectile.ResetThyself();
@@ -138,11 +149,6 @@ public class ProjectileLauncher : MonoBehaviour
     void ActionOnDestroy(Projectile _projectile)
     {
         Destroy(_projectile.gameObject);
-    }
-
-    private void OnDisable()
-    {
-        resetPlayerPosition.OnEventRaised -= CancelAllProjectiles;
     }
 
 

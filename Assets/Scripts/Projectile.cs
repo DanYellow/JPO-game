@@ -5,7 +5,7 @@ using UnityEngine.Pool;
 public class Projectile : MonoBehaviour, IRecycleable
 {
     private Rigidbody2D rb;
-    private BoxCollider2D bc2d;
+    private new Collider2D collider;
 
     public ProjectileData projectileData;
 
@@ -15,51 +15,48 @@ public class Projectile : MonoBehaviour, IRecycleable
     [HideInInspector]
     public IObjectPool<Projectile> pool;
 
+    private bool isStartedTriggered = true;
+
     [SerializeField]
     private VoidEventChannel resetPlayerPosition;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        bc2d = GetComponent<BoxCollider2D>();
+        collider = GetComponent<Collider2D>();
+        isStartedTriggered = collider.isTrigger;
     }
 
-     private void OnEnable()
+    private void OnEnable()
     {
         resetPlayerPosition.OnEventRaised += CancelAllProjectiles;
     }
 
-    // private void OnCollisionEnter2D(Collision2D other)
-    // {
-    //     rb.constraints = 0;
-    //     rb.AddTorque(projectileData.torque, ForceMode2D.Impulse);
-    //     bc2d.isTrigger = true;
-
-    //     if (other.gameObject.CompareTag("Player"))
-    //     {
-    //         IDamageable iDamageable = other.transform.GetComponentInChildren<IDamageable>();
-    //         iDamageable.TakeDamage(projectileData.damage);
-    //         if(other.gameObject.TryGetComponent(out Knockback knockback)) {
-    //             knockback.Apply(gameObject, projectileData.knockbackForce);
-    //         }
-    //     }
-    //     StartCoroutine(Disable());
-    // }
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        Contact();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        rb.constraints = 0;
-        rb.AddTorque(projectileData.torque, ForceMode2D.Impulse);
-        bc2d.isTrigger = true;
-
         if (collision.gameObject.CompareTag("Player"))
         {
+            Contact();
             IDamageable iDamageable = collision.transform.GetComponentInChildren<IDamageable>();
             iDamageable.TakeDamage(projectileData.damage);
-            if(collision.gameObject.TryGetComponent(out Knockback knockback)) {
+            if (collision.gameObject.TryGetComponent(out Knockback knockback))
+            {
                 knockback.Apply(gameObject, projectileData.knockbackForce);
             }
         }
+    }
+
+    void Contact()
+    {
+        rb.constraints = 0;
+        rb.AddTorque(projectileData.torque, ForceMode2D.Impulse);
+        collider.isTrigger = true;
+
         StartCoroutine(Disable());
     }
 
@@ -74,17 +71,19 @@ public class Projectile : MonoBehaviour, IRecycleable
         pool.Release(this);
     }
 
-    private void OnDisable() {
-        // bc2d.isTrigger = false;
+    private void OnDisable()
+    {
+        // collider.isTrigger = false;
         resetPlayerPosition.OnEventRaised -= CancelAllProjectiles;
     }
 
     public void ResetThyself()
     {
         rb.AddForce(transform.right.normalized * projectileData.speed, ForceMode2D.Impulse);
+        collider.isTrigger = isStartedTriggered;
         // rb.velocity = transform.right.normalized * projectileData.speed;
         // print(rb.velocity);
-        
+
         // rb.constraints = RigidbodyConstraints2D.None;
         rb.constraints = RigidbodyConstraints2D.FreezePositionY;
     }
