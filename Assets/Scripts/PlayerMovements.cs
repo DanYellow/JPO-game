@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
 // https://www.youtube.com/watch?v=xx1oKVTU_gM
 
@@ -42,10 +43,17 @@ public class PlayerMovements : MonoBehaviour
 
     [SerializeField]
     private bool showOnStart = true;
+    private bool isSliding = false;
 
     [SerializeField]
     private float coyoteTime = 0.2f;
     private float coyoteTimeCounter;
+
+     [SerializeField]
+    private LayerMask listSlidingLayers;
+
+    private List<int> listLayers = new List<int>();
+    private string layer;
 
     [Header("Events")]
     [SerializeField]
@@ -64,6 +72,9 @@ public class PlayerMovements : MonoBehaviour
         bc2d = GetComponent<BoxCollider2D>();
         bc2dChild = GetComponentsInChildren<BoxCollider2D>()[1];
         gameObject.SetActive(showOnStart);
+
+        layer = LayerMask.LayerToName(gameObject.layer);
+        listLayers = Helpers.GetLayersIndexFromLayerMask(listSlidingLayers);
     }
 
     private void Start()
@@ -96,8 +107,6 @@ public class PlayerMovements : MonoBehaviour
         // {
         //     jumpCount = 0;
         // }
-
-        
 
         if (rb.velocity.y >= 0)
         {
@@ -144,22 +153,55 @@ public class PlayerMovements : MonoBehaviour
     {
         if (ctx.phase == InputActionPhase.Performed)
         {
+
             playerCrouchEventChannel.OnEventRaised(true);
+            
+            // if(rb.velocity.x > 1 && !isSliding) {
+            //     isSliding = true;
+            //     rb.AddForce(transform.right.normalized * 10);
+            //     StartCoroutine(StopSlide());
+            // } 
+            // else
+            // {
+            //     // rb.velocity = Vector2.zero;
+
+            // }
             playerCanMove.CurrentValue = false;
-            rb.velocity = Vector2.zero;
         }
         else if (ctx.phase == InputActionPhase.Canceled)
         {
+            isSliding = false;
+            DisableCollisions(false);
             playerCrouchEventChannel.OnEventRaised(false);
             playerCanMove.CurrentValue = true;
+        }
+        else if (ctx.phase == InputActionPhase.Started)
+        {
+            playerCrouchEventChannel.OnEventRaised(true);
+            if (Mathf.Abs(rb.velocity.x) > 1 && !isSliding)
+            {
+                DisableCollisions(true);
+                
+                isSliding = true;
+                rb.AddForce(transform.right.normalized * 5);
+                StartCoroutine(StopSlide());
+            }
         }
         StartCoroutine(CrouchProxy());
     }
 
-    IEnumerator CrouchProxy() {
+    private IEnumerator StopSlide()
+    {
+        yield return Helpers.GetWait(0.45f);
+        rb.velocity = Vector2.zero;
+        DisableCollisions(false);
+    }
+
+    IEnumerator CrouchProxy()
+    {
         yield return null;
 
-        bc2d.offset = new Vector2( 
+        bc2d.offset = new Vector2(
             bc2d.offset.x,
             bc2dChild.offset.y
         );
@@ -185,6 +227,19 @@ public class PlayerMovements : MonoBehaviour
             listGroundLayers
         );
         return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, listGroundLayers);
+    }
+
+    private void DisableCollisions(bool enabled)
+    {
+        foreach (var layerIndex in listLayers)
+        {
+            //  Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Default"), layerIndex, enabled);
+            Physics2D.IgnoreLayerCollision(
+                LayerMask.NameToLayer(layer), 
+                layerIndex, 
+                enabled
+            );
+        }
     }
 
     public void OnJump(InputAction.CallbackContext ctx)

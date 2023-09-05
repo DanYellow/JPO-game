@@ -99,7 +99,6 @@ public class EnemyPatrol : MonoBehaviour
 
         RaycastHit2D hitObstacle = Physics2D.Linecast(startCast, endCast, obstacleLayersMask);
         // hitObstacle.collider != null || 
-        Debug.Log(hasCollisionWithObstacle, this);
         if (!isFlipping && (hasCollisionWithObstacle || !hasCollisionWithGround))
         {
             StartCoroutine(Flip());

@@ -39,37 +39,30 @@ public class PlayerDashAttack : MonoBehaviour
 
     private List<int> listLayers = new List<int>();
 
+    private string layer;
+
     private void Awake()
     {
         dashTrailRenderer = GetComponent<DashTrailRenderer>();
         rb = GetComponentInParent<Rigidbody2D>();
         bc2d = GetComponentInParent<BoxCollider2D>();
-    }
 
-    private void Start()
-    {
+        layer = LayerMask.LayerToName(gameObject.layer);
         originalGravity = rb.gravityScale;
         originalLayerName = LayerMask.LayerToName(gameObject.layer);
-        CreateListLayers();
-    }
-
-    private void CreateListLayers()
-    {
-        for (int i = 0; i < 32; i++)
-        {
-            if (listDashableLayers == (listDashableLayers | (1 << i)))
-            {
-                listLayers.Add(i);
-            }
-        }
+        listLayers = Helpers.GetLayersIndexFromLayerMask(listDashableLayers);
     }
 
     private void DisableCollisions(bool enabled)
     {
-        
         foreach (var layerIndex in listLayers)
         {
-            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Default"), layerIndex, enabled);
+            //  Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Default"), layerIndex, enabled);
+            Physics2D.IgnoreLayerCollision(
+                LayerMask.NameToLayer(originalLayerName), 
+                layerIndex, 
+                enabled
+            );
         }
     }
 
@@ -111,11 +104,12 @@ public class PlayerDashAttack : MonoBehaviour
         {
             if (item.TryGetComponent(out IGuardable iGuardable))
             {
-                if (iGuardable.isGuarding && item.transform.right.x != transform.right.x) {
+                if (iGuardable.isGuarding && item.transform.right.x != transform.right.x)
+                {
                     DashEnd();
                     Knockback knockback = GetComponentInParent<Knockback>();
                     knockback.Apply(item.gameObject, 950);
-                
+
                     return;
                 }
             }
