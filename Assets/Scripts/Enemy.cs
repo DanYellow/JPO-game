@@ -39,7 +39,6 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public void TakeDamage(int damage)
     {
-        print("Prout");
         canvas.SetActive(true);
         currentLifePoints = Mathf.Clamp(
             currentLifePoints - damage,

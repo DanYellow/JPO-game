@@ -52,7 +52,7 @@ public class PlayerMovements : MonoBehaviour
      [SerializeField]
     private LayerMask listSlidingLayers;
 
-    private List<int> listLayers = new List<int>();
+    private List<int> listLayersToIgnoreDuringSlide = new List<int>();
     private string layer;
 
     [Header("Events")]
@@ -74,7 +74,7 @@ public class PlayerMovements : MonoBehaviour
         gameObject.SetActive(showOnStart);
 
         layer = LayerMask.LayerToName(gameObject.layer);
-        listLayers = Helpers.GetLayersIndexFromLayerMask(listSlidingLayers);
+        listLayersToIgnoreDuringSlide = Helpers.GetLayersIndexFromLayerMask(listSlidingLayers);
     }
 
     private void Start()
@@ -153,25 +153,13 @@ public class PlayerMovements : MonoBehaviour
     {
         if (ctx.phase == InputActionPhase.Performed)
         {
-
             playerCrouchEventChannel.OnEventRaised(true);
-            
-            // if(rb.velocity.x > 1 && !isSliding) {
-            //     isSliding = true;
-            //     rb.AddForce(transform.right.normalized * 10);
-            //     StartCoroutine(StopSlide());
-            // } 
-            // else
-            // {
-            //     // rb.velocity = Vector2.zero;
-
-            // }
             playerCanMove.CurrentValue = false;
         }
         else if (ctx.phase == InputActionPhase.Canceled)
         {
             isSliding = false;
-            DisableCollisions(false);
+            Helpers.DisableCollisions(layer, listLayersToIgnoreDuringSlide, false);
             playerCrouchEventChannel.OnEventRaised(false);
             playerCanMove.CurrentValue = true;
         }
@@ -180,7 +168,7 @@ public class PlayerMovements : MonoBehaviour
             playerCrouchEventChannel.OnEventRaised(true);
             if (Mathf.Abs(rb.velocity.x) > 1 && !isSliding)
             {
-                DisableCollisions(true);
+                Helpers.DisableCollisions(layer, listLayersToIgnoreDuringSlide, true);
                 
                 isSliding = true;
                 rb.AddForce(transform.right.normalized * 5);
@@ -192,9 +180,9 @@ public class PlayerMovements : MonoBehaviour
 
     private IEnumerator StopSlide()
     {
-        yield return Helpers.GetWait(0.45f);
+        yield return Helpers.GetWait(0.5f);
         rb.velocity = Vector2.zero;
-        DisableCollisions(false);
+        Helpers.DisableCollisions(layer, listLayersToIgnoreDuringSlide, false);
     }
 
     IEnumerator CrouchProxy()
@@ -227,19 +215,6 @@ public class PlayerMovements : MonoBehaviour
             listGroundLayers
         );
         return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, listGroundLayers);
-    }
-
-    private void DisableCollisions(bool enabled)
-    {
-        foreach (var layerIndex in listLayers)
-        {
-            //  Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Default"), layerIndex, enabled);
-            Physics2D.IgnoreLayerCollision(
-                LayerMask.NameToLayer(layer), 
-                layerIndex, 
-                enabled
-            );
-        }
     }
 
     public void OnJump(InputAction.CallbackContext ctx)
