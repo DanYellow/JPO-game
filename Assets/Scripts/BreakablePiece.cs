@@ -13,6 +13,6 @@ public class BreakablePiece : MonoBehaviour
         rb.AddForce(Random.insideUnitCircle * (Random.Range(0.0f, 1.0f) > 0.5f ? -15 : 15), ForceMode2D.Impulse);
         rb.AddTorque(Random.Range(0.0f, 1.0f) > 0.5f ? -70 : 70);
 
-        Destroy(gameObject, Random.Range(2, 7));
+        Destroy(gameObject, Random.Range(2, 5));
     }
 }

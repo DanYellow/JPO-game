@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Destructable : MonoBehaviour, IDamageable
 {
@@ -12,6 +13,12 @@ public class Destructable : MonoBehaviour, IDamageable
     private MaterialChangeValue materialChange;
 
     private MaterialManager materialManager;
+
+    [SerializeField]
+    private GameObject treasure; 
+
+    [SerializeField]
+    public UnityEvent onDone;
 
     private void Awake()
     {
@@ -60,6 +67,11 @@ public class Destructable : MonoBehaviour, IDamageable
             item.transform.SetParent(null);
         }
 
+        if(treasure != null) {
+            Instantiate(treasure, transform.position, Quaternion.identity);
+        }
+
+        onDone?.Invoke();
         Destroy(gameObject);
     }
 

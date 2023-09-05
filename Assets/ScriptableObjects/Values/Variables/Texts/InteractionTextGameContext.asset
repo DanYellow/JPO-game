@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaa054f8c30a3b944b44806a80b2cf81, type: 3}
+  m_Name: InteractionTextGameContext
+  m_EditorClassIdentifier: 
+  listSentences:
+  - Visiblement, vous avez pris le jeu en main. Bravo !
+  - "Bienvenue aux JPO de l'IUT de Sarcelles dans le d\xE9partement M\xE9tiers du
+    Multim\xE9dia et de l'Internet"
+  - "Ce jeu a \xE9t\xE9 d\xE9velopp\xE9 avec le logiciel Unity.\t"
+  - "Cet enseignement fait partie des cours exclusifs au parcours d\xE9veloppement."
+  - "Si le jeu a \xE9t\xE9 d\xE9velopp\xE9 par l'enseignant charg\xE9 du cours"
+  - "Sa r\xE9alisation est accessible gr\xE2ce \xE0 un travail personnel de l'\xE9tudiant."
+  - "Quelque soit le parcours, le travail sur le temps personnel est indispensable
+    \xE0 la r\xE9ussite en MMI et dans l'insertion dans le monde du travail"
+  OnConversationEnd: {fileID: 0}
