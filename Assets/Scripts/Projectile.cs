@@ -39,9 +39,9 @@ public class Projectile : MonoBehaviour, IRecycleable
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Contact();
         if (collision.gameObject.CompareTag("Player"))
         {
-            Contact();
             IDamageable iDamageable = collision.transform.GetComponentInChildren<IDamageable>();
             iDamageable.TakeDamage(projectileData.damage);
             if (collision.gameObject.TryGetComponent(out Knockback knockback))

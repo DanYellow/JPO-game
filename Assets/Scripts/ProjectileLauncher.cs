@@ -99,6 +99,8 @@ public class ProjectileLauncher : MonoBehaviour
             if (targetInSight)
             {
                 animator.SetTrigger(AnimationStrings.shoot);
+                yield return null;
+                yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
                 pool.Get();
                 yield return Helpers.GetWait(projectileLauncherData.cadency);
                 // yield return Helpers.GetWait(5);
