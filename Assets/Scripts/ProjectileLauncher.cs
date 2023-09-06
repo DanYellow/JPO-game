@@ -85,8 +85,14 @@ public class ProjectileLauncher : MonoBehaviour
         // }
 
         targetInSight = hitInfo.collider != null;
-        Debug.DrawRay(new Vector2(bc2d.bounds.min.x - 0.25f, bc2d.bounds.min.y), fireDirection * lengthDetection * (isMoving ? transform.right.normalized : Vector3.one), Color.cyan);
-        Debug.DrawRay(new Vector2(bc2d.bounds.min.x - 0.25f, bc2d.bounds.max.y), fireDirection * lengthDetection * (isMoving ? transform.right.normalized : Vector3.one), Color.cyan);
+        if(transform.right.normalized.x == -1) {
+            Debug.DrawRay(new Vector2(bc2d.bounds.min.x - 0.15f, bc2d.bounds.min.y), fireDirection * lengthDetection * (isMoving ? transform.right.normalized : Vector3.one), Color.cyan);
+            Debug.DrawRay(new Vector2(bc2d.bounds.min.x - 0.15f, bc2d.bounds.max.y), fireDirection * lengthDetection * (isMoving ? transform.right.normalized : Vector3.one), Color.cyan);
+        } else {
+            Debug.DrawRay(new Vector2(bc2d.bounds.max.x - 0.15f, bc2d.bounds.min.y), fireDirection * lengthDetection * (isMoving ? transform.right.normalized : Vector3.one), Color.cyan);
+            Debug.DrawRay(new Vector2(bc2d.bounds.max.x - 0.15f, bc2d.bounds.max.y), fireDirection * lengthDetection * (isMoving ? transform.right.normalized : Vector3.one), Color.cyan);
+
+        }
     }
 
 
