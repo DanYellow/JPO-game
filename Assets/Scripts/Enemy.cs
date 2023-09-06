@@ -17,6 +17,12 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField]
     private UnityEvent onDeath;
 
+    [SerializeField]
+    private UnityEvent onHurtBegin;
+
+    [SerializeField]
+    private UnityEvent onHurtDone;
+
     private Image healthBar;
 
     [SerializeField]
@@ -40,6 +46,7 @@ public class Enemy : MonoBehaviour, IDamageable
     public void TakeDamage(int damage)
     {
         canvas.SetActive(true);
+        onHurtBegin?.Invoke();
         currentLifePoints = Mathf.Clamp(
             currentLifePoints - damage,
             0,
@@ -48,6 +55,7 @@ public class Enemy : MonoBehaviour, IDamageable
         UpdateHealth();
 
         animator.SetTrigger(AnimationStrings.hurt);
+        StartCoroutine(Hurt());
 
         if (currentLifePoints <= 0)
         {
@@ -59,6 +67,12 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         float rate = (float)currentLifePoints / enemyData.maxLifePoints;
         healthBar.fillAmount = rate;
+    }
+
+    private IEnumerator Hurt()
+    {
+        yield return Helpers.GetWait(0.75f);
+        onHurtDone?.Invoke();
     }
 
     private IEnumerator Die()
