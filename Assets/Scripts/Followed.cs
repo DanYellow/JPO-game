@@ -3,10 +3,10 @@ using UnityEngine;
 public class Followed : MonoBehaviour
 {
     [SerializeField] Transform follower;
-    private BoxCollider2D bc;
+    private Collider2D bc;
     private void Awake()
     {
-        bc = GetComponent<BoxCollider2D>();
+        bc = GetComponent<Collider2D>();
     }
 
     void Update()
