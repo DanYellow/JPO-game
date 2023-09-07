@@ -14,6 +14,9 @@ public class Teleport : MonoBehaviour
     [SerializeField]
     private UnityEvent OnBegin, OnDone;
 
+    [SerializeField]
+    private float delay = 7;
+    private float timer;
 
     private void Awake()
     {
@@ -23,7 +26,9 @@ public class Teleport : MonoBehaviour
     }
 
     private void Update() {
-        if (Vector2.Distance(startingPosition, transform.position) > distanceBeforeTeleport && !isTeleporting)
+        timer += Time.deltaTime;
+
+        if (Vector2.Distance(startingPosition, transform.position) > distanceBeforeTeleport && !isTeleporting && timer > delay)
         {
             StartCoroutine(ReturnToStartPoint());
         }
@@ -31,6 +36,7 @@ public class Teleport : MonoBehaviour
 
     IEnumerator ReturnToStartPoint()
     {
+        timer = 0;
         OnBegin?.Invoke();
         isTeleporting = true;
         animator.SetTrigger(AnimationStrings.teleportIn);

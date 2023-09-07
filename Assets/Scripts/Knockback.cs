@@ -18,6 +18,7 @@ public class Knockback : MonoBehaviour
         rb.velocity = Vector2.zero;
         OnBegin?.Invoke();
         Vector2 direction = (transform.position - target.transform.position).normalized;
+        // print("kno " + direction * strength);
         rb.AddForce(direction * strength);
         StartCoroutine(Reset());
     }

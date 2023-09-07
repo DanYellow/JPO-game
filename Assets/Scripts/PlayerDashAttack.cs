@@ -142,7 +142,7 @@ public class PlayerDashAttack : MonoBehaviour
         rb.velocity = new Vector2(transform.right.normalized.x * playerData.dashVelocity * speedFactor, 0);
         dashTrailRenderer.emit = true;
         rbVelocityEventChannel.Raise(rb.velocity);
-        yield return new WaitForSecondsRealtime(0.35f);
+        yield return Helpers.GetWait(0.35f);
         DashEnd();
         StartCoroutine(Countdown());
     }
@@ -165,7 +165,7 @@ public class PlayerDashAttack : MonoBehaviour
         {
             countdownEvent.Raise(start.ToString());
             start--;
-            yield return new WaitForSeconds(1);
+            yield return Helpers.GetWait(1);
         }
         countdownEvent.Raise(start.ToString());
 
