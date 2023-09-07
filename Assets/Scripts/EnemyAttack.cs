@@ -76,26 +76,4 @@ public class EnemyAttack : MonoBehaviour
         yield return Helpers.GetWait(enemyData.attackRate);
         isAttacking = false;
     }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.magenta;
-
-        // if (bc == null)
-        // {
-        //     bc = GetComponent<BoxCollider2D>();
-        // }
-
-        // Gizmos.DrawWireCube(
-        //     new Vector2(enemyPatrol.isFacingRight ? (bc.bounds.max.x + distance) : (bc.bounds.min.x - distance), transform.position.y),
-        //     new Vector2(1, bc.size.y)
-        // );
-
-        // Gizmos.color = Color.green;
-        //  Gizmos.matrix = Matrix4x4.TRS(
-        //     transform.position,
-        //     transform.rotation,
-        //     Vector2.one
-        //  );
-    }
 }

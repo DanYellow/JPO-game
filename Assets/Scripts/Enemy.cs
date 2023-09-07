@@ -85,7 +85,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
             yield return null;
             yield return new WaitWhile(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1);
-            yield return Helpers.GetWait(0.25f);
+            yield return Helpers.GetWait(0.3f);
         }
         else
         {
