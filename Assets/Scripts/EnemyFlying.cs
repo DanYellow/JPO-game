@@ -14,11 +14,11 @@ public class EnemyFlying : MonoBehaviour
     [SerializeField]
     private LayerMask targetLayerMask;
 
-    int distance = 6;
-
-    bool isTeleporting = false;
+    int distance = 15;
+    int dashDistance = 10;
 
     private bool isDashing = false;
+    private bool canDash = true;
 
     [field: SerializeField]
     public bool isFacingRight { get; private set; } = false;
@@ -37,6 +37,12 @@ public class EnemyFlying : MonoBehaviour
         startingPosition = transform.position;
     }
 
+    private void Update() {
+        if(Input.GetKeyDown(KeyCode.K)) {
+            rb.AddForce(Vector2.right * -1000);
+        }
+    }
+
     private void FixedUpdate()
     {
         target = Physics2D.BoxCast(
@@ -51,18 +57,19 @@ public class EnemyFlying : MonoBehaviour
         if (target)
         {
             if (
-                target.collider.transform.position.x > transform.position.x && !isFacingRight ||
-                target.collider.transform.position.x < transform.position.x && isFacingRight
+                (target.collider.transform.position.x > transform.position.x && !isFacingRight ||
+                target.collider.transform.position.x < transform.position.x && isFacingRight) &&
+                !isDashing
             )
             {
                 Flip();
             }
 
-            if(!isDashing && Vector2.Distance(target.collider.transform.position, transform.position) < 4) {
-                StartCoroutine(Dash());
+            if (canDash && Vector2.Distance(target.collider.bounds.min, transform.position) <= dashDistance)
+            {
+                
+                StartCoroutine(Dash(target.collider.transform.position));
             }
-        } else if(Vector2.Distance(startingPosition, transform.position) > 15 && !isTeleporting && !isDashing) {
-            StartCoroutine(ReturnToStartPoint());
         }
 
         targetCollider = Physics2D.OverlapCircle(
@@ -70,57 +77,63 @@ public class EnemyFlying : MonoBehaviour
             1.75f,
             targetLayerMask
         );
-        if(targetCollider) {
+        if (targetCollider)
+        {
             animator.SetTrigger(AnimationStrings.attack);
         }
 
+        DrawRectDebug(distance);
+        DrawRectDebug(dashDistance);
+    }
+
+    private void DrawRectDebug(float _distance)
+    {
         #region DrawLine
         Debug.DrawLine(
             new Vector2(
-                collider.bounds.center.x - distance - (collider.bounds.size.x / 2),
-                collider.bounds.center.y - distance - (collider.bounds.size.y / 2)
+                collider.bounds.center.x - _distance - (collider.bounds.size.x / 2),
+                collider.bounds.center.y - _distance - (collider.bounds.size.y / 2)
             ),
             new Vector2(
-                collider.bounds.center.x + distance + (collider.bounds.size.x / 2),
-                collider.bounds.center.y - distance - (collider.bounds.size.y / 2)
+                collider.bounds.center.x + _distance + (collider.bounds.size.x / 2),
+                collider.bounds.center.y - _distance - (collider.bounds.size.y / 2)
             ),
             Color.magenta
         );
         Debug.DrawLine(
             new Vector2(
-                collider.bounds.center.x - distance - (collider.bounds.size.x / 2),
-                collider.bounds.center.y + distance + (collider.bounds.size.y / 2)
+                collider.bounds.center.x - _distance - (collider.bounds.size.x / 2),
+                collider.bounds.center.y + _distance + (collider.bounds.size.y / 2)
             ),
             new Vector2(
-                collider.bounds.center.x + distance + (collider.bounds.size.x / 2),
-                collider.bounds.center.y + distance + (collider.bounds.size.y / 2)
+                collider.bounds.center.x + _distance + (collider.bounds.size.x / 2),
+                collider.bounds.center.y + _distance + (collider.bounds.size.y / 2)
             ),
             Color.green
         );
         Debug.DrawLine(
             new Vector2(
-                collider.bounds.center.x - distance - (collider.bounds.size.x / 2),
-                collider.bounds.center.y + distance + (collider.bounds.size.y / 2)
+                collider.bounds.center.x - _distance - (collider.bounds.size.x / 2),
+                collider.bounds.center.y + _distance + (collider.bounds.size.y / 2)
             ),
             new Vector2(
-                collider.bounds.center.x - distance - (collider.bounds.size.x / 2),
-                collider.bounds.center.y - distance - (collider.bounds.size.y / 2)
+                collider.bounds.center.x - _distance - (collider.bounds.size.x / 2),
+                collider.bounds.center.y - _distance - (collider.bounds.size.y / 2)
             ),
             Color.red
         );
         Debug.DrawLine(
             new Vector2(
-                collider.bounds.center.x + distance + (collider.bounds.size.x / 2),
-                collider.bounds.center.y + distance + (collider.bounds.size.y / 2)
+                collider.bounds.center.x + _distance + (collider.bounds.size.x / 2),
+                collider.bounds.center.y + _distance + (collider.bounds.size.y / 2)
             ),
             new Vector2(
-                collider.bounds.center.x + distance + (collider.bounds.size.x / 2),
-                collider.bounds.center.y - distance - (collider.bounds.size.y / 2)
+                collider.bounds.center.x + _distance + (collider.bounds.size.x / 2),
+                collider.bounds.center.y - _distance - (collider.bounds.size.y / 2)
             ),
             Color.yellow
         );
         #endregion
-
     }
 
     private void Flip()
@@ -128,31 +141,32 @@ public class EnemyFlying : MonoBehaviour
         isFacingRight = !isFacingRight;
         transform.Rotate(0f, 180f, 0f);
     }
-    private IEnumerator Dash()
+    private IEnumerator Dash(Vector3 targetPos)
     {
         isDashing = true;
-        rb.velocity = new Vector2(transform.right.normalized.x * 15, rb.velocity.y);
-        yield return new WaitForSecondsRealtime(0.35f);
+        canDash = false;
+        rb.velocity = (targetPos - transform.position).normalized * 20;
+        yield return Helpers.GetWait(1.5f);
         isDashing = false;
         rb.velocity = Vector2.zero;
+        yield return Helpers.GetWait(2.25f);
+        canDash = true;
     }
 
-    IEnumerator ReturnToStartPoint()
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        isTeleporting = true;
-        animator.SetTrigger("TeleportIn");
-        yield return null;
-        yield return new WaitWhile(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1);
-        transform.position = startingPosition;
-        animator.SetTrigger("TeleportOut");
-        yield return null;
-        yield return new WaitWhile(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1);
-        isTeleporting = false;
-    }
+        if (isDashing)
+        {
+            rb.velocity = Vector2.zero;
+            knockback.Apply(other.gameObject, 1000);
+            if (other.gameObject.TryGetComponent(out Knockback _knockback))
+            {
+                _knockback.Apply(gameObject, 100);
+            }
 
-    private void OnCollisionEnter2D(Collision2D other) {
-        if(isDashing) {
-            print(other.transform.name);
+            // if(other.gameObject.TryGetComponent(out IDamageable iDamageable)) {
+            //    iDamageable.TakeDamage(enemyData.damage);
+            // }
         }
     }
 
@@ -160,9 +174,7 @@ public class EnemyFlying : MonoBehaviour
     // {
     //     if (animator.GetTrig)
     //     {            
-    //         if(other.gameObject.TryGetComponent(out Knockback knockback)) {
-    //             knockback.Apply(gameObject, 10);
-    //         }
+
 
     //         if(other.gameObject.TryGetComponent(out IDamageable iDamageable)) {
     //            iDamageable.TakeDamage(enemyData.damage);
@@ -170,8 +182,10 @@ public class EnemyFlying : MonoBehaviour
     //     }
     // }
 
-    private void OnDrawGizmos() {
-        if(collider) {
+    private void OnDrawGizmos()
+    {
+        if (collider)
+        {
             Gizmos.DrawWireSphere(collider.transform.position, 1.75f);
         }
     }

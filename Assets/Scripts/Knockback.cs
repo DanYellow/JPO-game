@@ -15,6 +15,7 @@ public class Knockback : MonoBehaviour
 
     public void Apply(GameObject target, int strength) {
         StopAllCoroutines();
+        rb.velocity = Vector2.zero;
         OnBegin?.Invoke();
         Vector2 direction = (transform.position - target.transform.position).normalized;
         rb.AddForce(direction * strength);

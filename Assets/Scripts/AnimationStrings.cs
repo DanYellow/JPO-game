@@ -15,5 +15,7 @@ public static class AnimationStrings
    public static string shoot = "Shoot";
    public static string isGuarding = "IsGuarding";
    public static string activate = "Activate";
+   public static string teleportIn = "TeleportIn";
+   public static string teleportOut = "TeleportOut";
 
 }

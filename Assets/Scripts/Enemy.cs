@@ -65,7 +65,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private void UpdateHealth()
     {
-        float rate = (float)currentLifePoints / enemyData.maxLifePoints;
+        float rate = (float) currentLifePoints / enemyData.maxLifePoints;
         healthBar.fillAmount = rate;
     }
 
