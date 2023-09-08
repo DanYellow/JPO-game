@@ -47,6 +47,8 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public void TakeDamage(int damage)
     {
+        if(isDying) return;
+
         canvas.SetActive(true);
         onHurtBegin?.Invoke();
         currentLifePoints = Mathf.Clamp(
@@ -59,7 +61,7 @@ public class Enemy : MonoBehaviour, IDamageable
         animator.SetTrigger(AnimationStrings.hurt);
         StartCoroutine(Hurt());
 
-        if (currentLifePoints <= 0 && !isDying)
+        if (currentLifePoints <= 0)
         {
             isDying = true;
             StartCoroutine(Die());

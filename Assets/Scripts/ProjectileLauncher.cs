@@ -69,7 +69,7 @@ public class ProjectileLauncher : MonoBehaviour
     private void FixedUpdate()
     {
         hitInfo = Physics2D.BoxCast(
-            new Vector2(bc2d.bounds.center.x - 0.5f, bc2d.bounds.center.y),
+            bc2d.bounds.center,
             bc2d.bounds.size,
             0,
             fireDirection * (isMoving ? transform.right.normalized : Vector3.one),
@@ -89,8 +89,8 @@ public class ProjectileLauncher : MonoBehaviour
             Debug.DrawRay(new Vector2(bc2d.bounds.min.x - 0.15f, bc2d.bounds.min.y), fireDirection * lengthDetection * (isMoving ? transform.right.normalized : Vector3.one), Color.cyan);
             Debug.DrawRay(new Vector2(bc2d.bounds.min.x - 0.15f, bc2d.bounds.max.y), fireDirection * lengthDetection * (isMoving ? transform.right.normalized : Vector3.one), Color.cyan);
         } else {
-            Debug.DrawRay(new Vector2(bc2d.bounds.max.x - 0.15f, bc2d.bounds.min.y), fireDirection * lengthDetection * (isMoving ? transform.right.normalized : Vector3.one), Color.cyan);
-            Debug.DrawRay(new Vector2(bc2d.bounds.max.x - 0.15f, bc2d.bounds.max.y), fireDirection * lengthDetection * (isMoving ? transform.right.normalized : Vector3.one), Color.cyan);
+            Debug.DrawRay(new Vector2(bc2d.bounds.max.x + 0.15f, bc2d.bounds.min.y), fireDirection * lengthDetection * (isMoving ? transform.right.normalized : Vector3.one), Color.cyan);
+            Debug.DrawRay(new Vector2(bc2d.bounds.max.x + 0.15f, bc2d.bounds.max.y), fireDirection * lengthDetection * (isMoving ? transform.right.normalized : Vector3.one), Color.cyan);
 
         }
     }

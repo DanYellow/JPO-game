@@ -52,7 +52,7 @@ public class PlayerAnimation : MonoBehaviour
 
         onPlayerDeathEvent = () =>
         {
-           animator.SetBool(AnimationStrings.isDead, true);
+            animator.SetBool(AnimationStrings.isDead, true);
         };
     }
 
