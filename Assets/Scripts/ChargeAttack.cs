@@ -19,6 +19,8 @@ public class ChargeAttack : MonoBehaviour
     int dashDistance = 10;
 
     private bool isCharging = false;
+
+    [SerializeField]
     private bool canCharge = true;
 
     [field: SerializeField]
@@ -26,6 +28,9 @@ public class ChargeAttack : MonoBehaviour
 
     [SerializeField]
     private UnityEvent onBegin, onDone;
+
+    [SerializeField]
+    private EnemyData enemyData;
 
 
     private Knockback knockback;
@@ -36,6 +41,11 @@ public class ChargeAttack : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         knockback = GetComponent<Knockback>();
+    }
+
+    private void Update()
+    {
+        animator.SetFloat(AnimationStrings.velocityX, Mathf.Abs(rb.velocity.x));
     }
 
     private void FixedUpdate()
@@ -77,54 +87,55 @@ public class ChargeAttack : MonoBehaviour
         //     animator.SetTrigger(AnimationStrings.attack);
         // }
 
-        DrawRectDebug(distance);
+        DrawRectDebug(distance, distance);
         DrawRectDebug(dashDistance);
     }
 
-    private void DrawRectDebug(float _distance)
+    private void DrawRectDebug(float width, float height = 0)
     {
         #region DrawLine
         Debug.DrawLine(
             new Vector2(
-                collider.bounds.center.x - _distance - (collider.bounds.size.x / 2),
-                collider.bounds.center.y - _distance - (collider.bounds.size.y / 2)
+                collider.bounds.center.x - width - (collider.bounds.size.x / 2),
+                collider.bounds.center.y - height - (collider.bounds.size.y / 2)
             ),
             new Vector2(
-                collider.bounds.center.x + _distance + (collider.bounds.size.x / 2),
-                collider.bounds.center.y - _distance - (collider.bounds.size.y / 2)
+                collider.bounds.center.x + width + (collider.bounds.size.x / 2),
+                collider.bounds.center.y - height - (collider.bounds.size.y / 2)
             ),
             Color.magenta
         );
         Debug.DrawLine(
             new Vector2(
-                collider.bounds.center.x - _distance - (collider.bounds.size.x / 2),
-                collider.bounds.center.y + _distance + (collider.bounds.size.y / 2)
+                collider.bounds.center.x - width - (collider.bounds.size.x / 2),
+                collider.bounds.center.y + height + (collider.bounds.size.y / 2)
             ),
             new Vector2(
-                collider.bounds.center.x + _distance + (collider.bounds.size.x / 2),
-                collider.bounds.center.y + _distance + (collider.bounds.size.y / 2)
+                collider.bounds.center.x + width + (collider.bounds.size.x / 2),
+                collider.bounds.center.y + height + (collider.bounds.size.y / 2)
             ),
             Color.green
         );
+
         Debug.DrawLine(
             new Vector2(
-                collider.bounds.center.x - _distance - (collider.bounds.size.x / 2),
-                collider.bounds.center.y + _distance + (collider.bounds.size.y / 2)
+                collider.bounds.center.x - width - (collider.bounds.size.x / 2),
+                collider.bounds.center.y + height + (collider.bounds.size.y / 2)
             ),
             new Vector2(
-                collider.bounds.center.x - _distance - (collider.bounds.size.x / 2),
-                collider.bounds.center.y - _distance - (collider.bounds.size.y / 2)
+                collider.bounds.center.x - width - (collider.bounds.size.x / 2),
+                collider.bounds.center.y - height - (collider.bounds.size.y / 2)
             ),
             Color.red
         );
         Debug.DrawLine(
             new Vector2(
-                collider.bounds.center.x + _distance + (collider.bounds.size.x / 2),
-                collider.bounds.center.y + _distance + (collider.bounds.size.y / 2)
+                collider.bounds.center.x + width + (collider.bounds.size.x / 2),
+                collider.bounds.center.y + height + (collider.bounds.size.y / 2)
             ),
             new Vector2(
-                collider.bounds.center.x + _distance + (collider.bounds.size.x / 2),
-                collider.bounds.center.y - _distance - (collider.bounds.size.y / 2)
+                collider.bounds.center.x + width + (collider.bounds.size.x / 2),
+                collider.bounds.center.y - height - (collider.bounds.size.y / 2)
             ),
             Color.yellow
         );
@@ -140,15 +151,18 @@ public class ChargeAttack : MonoBehaviour
     {
         onBegin?.Invoke();
         animator.SetBool(AnimationStrings.attack, true);
+        yield return null;
+        yield return new WaitWhile(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1);
 
         isCharging = true;
         canCharge = false;
         rb.velocity = (targetPos - transform.position).normalized * 20;
         yield return Helpers.GetWait(0.75f);
-        onDone?.Invoke();
         isCharging = false;
         rb.velocity = Vector2.zero;
-        yield return Helpers.GetWait(2.25f);
+        animator.SetBool(AnimationStrings.attack, false);
+        yield return Helpers.GetWait(2.75f);
+        onDone?.Invoke();
         canCharge = true;
     }
 
@@ -158,15 +172,16 @@ public class ChargeAttack : MonoBehaviour
         {
             rb.velocity = Vector2.zero;
             knockback.Apply(other.gameObject, 1500);
-            animator.SetBool(AnimationStrings.attack, false);
             if (other.gameObject.TryGetComponent(out Knockback _knockback))
             {
-                _knockback.Apply(gameObject, 100);
+                _knockback.Apply(gameObject, enemyData.knockbackForce);
             }
 
-            // if(other.gameObject.TryGetComponent(out IDamageable iDamageable)) {
-            //    iDamageable.TakeDamage(enemyData.damage);
-            // }
+            if (other.gameObject.CompareTag("Player"))
+            {
+                IDamageable iDamageable = other.transform.GetComponentInChildren<IDamageable>();
+                iDamageable.TakeDamage(enemyData.damage);
+            }
         }
     }
 
