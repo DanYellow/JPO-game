@@ -41,8 +41,8 @@ public class PlayerAnimation : MonoBehaviour
         {
             if (playerCanMove.CurrentValue)
             {
-                // animator.SetTrigger("LightAttack2");
-                animator.SetBool(AnimationStrings.lightAttack, true);
+                animator.SetTrigger(AnimationStrings.attack);
+                // animator.SetBool(AnimationStrings.lightAttack, true);
             }
         };
 

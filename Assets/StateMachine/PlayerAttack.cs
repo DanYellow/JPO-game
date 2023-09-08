@@ -2,13 +2,16 @@ using UnityEngine;
 
 public class PlayerAttack : StateMachineBehaviour
 {
+    [SerializeField]
+    private BoolValue playerCanMove;
+
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.GetComponent<PlayerMeleeAttack>().isAttacking = true;
+        playerCanMove.CurrentValue = false;
     }
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.GetComponent<PlayerMeleeAttack>().isAttacking = false;
+        playerCanMove.CurrentValue = true;
     }
 }

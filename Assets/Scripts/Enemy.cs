@@ -28,6 +28,8 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField]
     private GameObject canvas;
 
+    private bool isDying = false;
+
 
     private void Awake()
     {
@@ -57,8 +59,9 @@ public class Enemy : MonoBehaviour, IDamageable
         animator.SetTrigger(AnimationStrings.hurt);
         StartCoroutine(Hurt());
 
-        if (currentLifePoints <= 0)
+        if (currentLifePoints <= 0 && !isDying)
         {
+            isDying = true;
             StartCoroutine(Die());
         }
     }
@@ -92,7 +95,7 @@ public class Enemy : MonoBehaviour, IDamageable
             yield return null;
         }
 
-        if (enemyData.dropItem != null)
+        if (enemyData.dropItem != null && Random.Range(0, 1) < enemyData.dropProbability)
         {
             Instantiate(enemyData.dropItem, transform.position, Quaternion.identity);
         }

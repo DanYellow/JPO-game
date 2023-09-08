@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2456756d375de3a40aebc4b7516abfa3, type: 3}
   m_Name: CyclopsBat
   m_EditorClassIdentifier: 
-  maxLifePoints: 15
+  maxLifePoints: 1
   walkSpeed: 4.5
   attackRate: 1.5
   damage: 3
   name: Skeleton
   obstacleCheckRadius: 0.25
   knockbackForce: 1000
-  dropItem: {fileID: 0}
+  dropItem: {fileID: 3937099146850842964, guid: 7fbb80a07163cd64a92d31adbd0ec343, type: 3}
   dropProbability: 0.35

@@ -33,19 +33,19 @@ public class PlayerMeleeAttack : MonoBehaviour, IAttackable
         {
             isAttacking = true;
             lightAttackEventChannel.Raise();
-            playerCanMove.CurrentValue = false;
-            Collider2D[] listHitItems = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, listDamageableLayers);
+            // playerCanMove.CurrentValue = false;
+            // Collider2D[] listHitItems = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, listDamageableLayers);
 
-            foreach (var hitItem in listHitItems)
-            {
-                if (hitItem.transform.TryGetComponent(out IGuardable iGuardable)) {
-                    if(iGuardable.isGuarding && hitItem.transform.right.x != transform.right.x) return;
-                }
-                if (hitItem.transform.TryGetComponent(out IDamageable iDamageable))
-                {
-                    iDamageable.TakeDamage(1);
-                }
-            }
+            // foreach (var hitItem in listHitItems)
+            // {
+            //     if (hitItem.transform.TryGetComponent(out IGuardable iGuardable)) {
+            //         if(iGuardable.isGuarding && hitItem.transform.right.x != transform.right.x) return;
+            //     }
+            //     if (hitItem.transform.TryGetComponent(out IDamageable iDamageable))
+            //     {
+            //         iDamageable.TakeDamage(1);
+            //     }
+            // }
             
         }
     }

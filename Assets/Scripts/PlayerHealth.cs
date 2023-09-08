@@ -17,12 +17,6 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     private CameraShakeTypeValue deathCameraShake;
 
     [SerializeField]
-    private PotionEventChannel onPotionPicked;
-
-    private Animator animator;
-    private SpriteRenderer sr;
-
-    [SerializeField]
     private VoidEventChannel onPlayerDeath;
 
     public GameObject deathEffectPrefab;
@@ -33,16 +27,11 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     [SerializeField]
     private UnityEvent onDeathEvent;
 
-   
-
 
     private void Awake()
     {
         // playerStatsValue.nbCurrentLifes = playerStatsValue.nbMaxLifes;
-        animator = GetComponent<Animator>();
-        sr = GetComponent<SpriteRenderer>();
         onPlayerDeath.OnEventRaised += OnDeath;
-        onPotionPicked.OnEventRaised += OnHeal;
 
         playerStatsValue.currentLifePoints = 20;
     }
@@ -78,13 +67,14 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         }
     }
 
-    private void OnHeal(PotionValue potionTypeValue) {
+    public void Heal(PotionValue potionTypeValue) {
         if(potionTypeValue.type == PotionType.Heal) {
-            playerStatsValue.currentLifePoints = Math.Clamp(
+            int newPointsLife = Math.Clamp(
                 playerStatsValue.currentLifePoints + potionTypeValue.value,
                 0,
                 playerStatsValue.maxLifePoints
             );
+            playerStatsValue.currentLifePoints = newPointsLife;
             onHealthUpdated.Raise(false);
         }
     }
@@ -101,6 +91,5 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     private void OnDisable()
     {
         onPlayerDeath.OnEventRaised -= OnDeath;
-        onPotionPicked.OnEventRaised -= OnHeal;
     }
 }
