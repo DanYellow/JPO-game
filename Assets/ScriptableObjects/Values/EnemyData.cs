@@ -16,4 +16,8 @@ public class EnemyData : ScriptableObject
     public float obstacleCheckRadius = 0.25f;
 
     public int knockbackForce = 0;
+
+    public GameObject dropItem;
+    [Range(0, 1)]
+    public float dropProbability = 0.25f;
 }

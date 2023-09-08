@@ -51,6 +51,8 @@ public class PlayerDashAttack : MonoBehaviour
         originalGravity = rb.gravityScale;
         originalLayerName = LayerMask.LayerToName(gameObject.layer);
         listLayers = Helpers.GetLayersIndexFromLayerMask(listDashableLayers);
+
+        Helpers.DisableCollisions(layer, listLayers, false);
     }
 
     private void DisableCollisions(bool enabled)
@@ -135,7 +137,7 @@ public class PlayerDashAttack : MonoBehaviour
 
         // // Time.timeScale = 0.5f;
         playerCanMove.CurrentValue = false;
-        DisableCollisions(true);
+        Helpers.DisableCollisions(layer, listLayers, true);
         // onCinemachineShake.Raise(dashCameraShake);
 
         float speedFactor = Mathf.Abs(rb.velocity.x) > 0 ? 1.25f : 1;
@@ -154,7 +156,7 @@ public class PlayerDashAttack : MonoBehaviour
         gameObject.layer = LayerMask.NameToLayer(originalLayerName);
         dashTrailRenderer.emit = false;
         rb.velocity = Vector2.zero;
-        DisableCollisions(false);
+        Helpers.DisableCollisions(layer, listLayers, false);
         playerCanMove.CurrentValue = true;
     }
 

@@ -65,7 +65,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private void UpdateHealth()
     {
-        float rate = (float) currentLifePoints / enemyData.maxLifePoints;
+        float rate = (float)currentLifePoints / enemyData.maxLifePoints;
         healthBar.fillAmount = rate;
     }
 
@@ -91,6 +91,12 @@ public class Enemy : MonoBehaviour, IDamageable
         {
             yield return null;
         }
+
+        if (enemyData.dropItem != null)
+        {
+            Instantiate(enemyData.dropItem, transform.position, Quaternion.identity);
+        }
+
         canvas.SetActive(false);
         Destroy(gameObject.transform.parent.gameObject);
     }
