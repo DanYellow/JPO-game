@@ -69,15 +69,20 @@ public class Guard : MonoBehaviour, IGuardable
 
     private void Reflect()
     {
-        IAttackable iAttackable = hitObstacle.transform.GetComponentInChildren<IAttackable>();
-        if (iAttackable != null && iAttackable.isAttacking)
-        {
-            if (hitObstacle.transform.TryGetComponent(out Knockback knockback))
-            {
-                knockback.Apply(gameObject, 250);
-            }
 
+        if (hitObstacle.transform.TryGetComponent(out Knockback knockback))
+        {
+            knockback.Apply(gameObject, 250);
         }
+        // IAttackable iAttackable = hitObstacle.transform.GetComponentInChildren<IAttackable>();
+        // if (iAttackable != null && iAttackable.isAttacking)
+        // {
+        //     if (hitObstacle.transform.TryGetComponent(out Knockback knockback))
+        //     {
+        //         knockback.Apply(gameObject, 250);
+        //     }
+
+        // }
     }
 
 }

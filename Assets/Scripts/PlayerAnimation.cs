@@ -39,11 +39,7 @@ public class PlayerAnimation : MonoBehaviour
 
         onLightAttackEvent = () =>
         {
-            if (playerCanMove.CurrentValue)
-            {
-                animator.SetTrigger(AnimationStrings.attack);
-                // animator.SetBool(AnimationStrings.lightAttack, true);
-            }
+            animator.SetTrigger(AnimationStrings.attack);
         };
 
         healthUpdated = (bool isTakingDamage) =>

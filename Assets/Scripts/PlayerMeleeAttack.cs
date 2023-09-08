@@ -8,15 +8,6 @@ public class PlayerMeleeAttack : MonoBehaviour, IAttackable
     private VoidEventChannel lightAttackEventChannel;
 
     [SerializeField]
-    private LayerMask listDamageableLayers;
-
-    [SerializeField]
-    private Transform attackPoint;
-
-    [SerializeField]
-    private float attackRange = 0.5f;
-
-    [SerializeField]
     private float lightAttackRate;
     private float nextLightAttackTime = 0;
 
@@ -33,31 +24,14 @@ public class PlayerMeleeAttack : MonoBehaviour, IAttackable
         {
             isAttacking = true;
             lightAttackEventChannel.Raise();
-            // playerCanMove.CurrentValue = false;
-            // Collider2D[] listHitItems = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, listDamageableLayers);
-
-            // foreach (var hitItem in listHitItems)
-            // {
-            //     if (hitItem.transform.TryGetComponent(out IGuardable iGuardable)) {
-            //         if(iGuardable.isGuarding && hitItem.transform.right.x != transform.right.x) return;
-            //     }
-            //     if (hitItem.transform.TryGetComponent(out IDamageable iDamageable))
-            //     {
-            //         iDamageable.TakeDamage(1);
-            //     }
-            // }
-            
+            StartCoroutine(ResetAttackState());
         }
     }
 
-    void OnDrawGizmos()
+    IEnumerator ResetAttackState()
     {
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
-    }
-
-    public void OnAttackEnds() {
-        GetComponent<Animator>().SetBool(AnimationStrings.lightAttack, false);
-        playerCanMove.CurrentValue = true;
+        yield return null;
+        yield return new WaitForSeconds(GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
         isAttacking = false;
     }
 }
