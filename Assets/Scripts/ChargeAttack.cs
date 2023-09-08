@@ -52,7 +52,7 @@ public class ChargeAttack : MonoBehaviour
     {
         target = Physics2D.BoxCast(
            collider.bounds.center,
-           collider.bounds.size * distance,
+           new Vector2(collider.bounds.size.x * distance, collider.bounds.size.y),
            0,
            Vector2.zero,
            0,
@@ -76,16 +76,6 @@ public class ChargeAttack : MonoBehaviour
                 StartCoroutine(Dash(target.collider.transform.position));
             }
         }
-
-        // targetCollider = Physics2D.OverlapCircle(
-        //     collider.bounds.center,
-        //     1.75f,
-        //     targetLayerMask
-        // );
-        // if (targetCollider)
-        // {
-        //     animator.SetTrigger(AnimationStrings.attack);
-        // }
 
         DrawRectDebug(distance, distance);
         DrawRectDebug(dashDistance);
@@ -156,7 +146,7 @@ public class ChargeAttack : MonoBehaviour
 
         isCharging = true;
         canCharge = false;
-        rb.velocity = (targetPos - transform.position).normalized * 20;
+        rb.velocity = (targetPos - transform.position).normalized * 12;
         yield return Helpers.GetWait(0.75f);
         isCharging = false;
         rb.velocity = Vector2.zero;
