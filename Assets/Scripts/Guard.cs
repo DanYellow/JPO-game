@@ -61,7 +61,7 @@ public class Guard : MonoBehaviour, IGuardable
         OnBegin?.Invoke();
         animator.SetBool(AnimationStrings.isGuarding, isGuarding);
         yield return null;
-        yield return Helpers.GetWait(3.25f);
+        yield return Helpers.GetWait(2.15f);
         OnDone?.Invoke();
         isGuarding = false;
         animator.SetBool(AnimationStrings.isGuarding, isGuarding);
@@ -69,7 +69,6 @@ public class Guard : MonoBehaviour, IGuardable
 
     private void Reflect()
     {
-
         if ( hitObstacle.transform.right.x != transform.right.x && hitObstacle.transform.TryGetComponent(out Knockback knockback))
         {
             knockback.Apply(gameObject, 250);

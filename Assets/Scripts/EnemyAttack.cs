@@ -47,7 +47,7 @@ public class EnemyAttack : MonoBehaviour
 
         if (hitObstacle && !isAttacking)
         {
-            // StartCoroutine(Attack());
+            StartCoroutine(Attack());
         }
     }
 

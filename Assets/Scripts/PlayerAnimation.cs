@@ -69,8 +69,7 @@ public class PlayerAnimation : MonoBehaviour
     private void UpdateMovement(Vector3 direction)
     {
         animator.SetFloat(AnimationStrings.velocityX, Mathf.Abs(direction.x));
-        // animator.SetFloat("VelocityY", direction.y);
-        // animator.SetBool(AnimationStrings.isCrouched, true);
+        animator.SetFloat(AnimationStrings.velocityY, direction.y);
     }
 
     private void OnDisable()

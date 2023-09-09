@@ -9,6 +9,7 @@ public static class AnimationStrings
    public static string isGrounded = "IsGrounded";
    // public static string isGrounded = "IsGrounded";
    public static string velocityX = "VelocityX";
+   public static string velocityY = "VelocityY";
    public static string moveDirectionY = "MoveDirectionY";
    public static string disabled = "Disabled";
    public static string isCrouched = "IsCrouched";

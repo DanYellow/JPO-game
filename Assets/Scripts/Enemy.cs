@@ -83,6 +83,7 @@ public class Enemy : MonoBehaviour, IDamageable
     private IEnumerator Die()
     {
         onDeath?.Invoke();
+        rb.velocity = Vector2.zero;
         if (animator)
         {
             animator.SetBool(AnimationStrings.isDead, true);
