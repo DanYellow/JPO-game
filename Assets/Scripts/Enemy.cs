@@ -30,7 +30,6 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private bool isDying = false;
 
-
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -47,7 +46,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public void TakeDamage(int damage)
     {
-        if(isDying) return;
+        if (isDying) return;
 
         canvas.SetActive(true);
         onHurtBegin?.Invoke();
@@ -59,6 +58,7 @@ public class Enemy : MonoBehaviour, IDamageable
         UpdateHealth();
 
         animator.SetTrigger(AnimationStrings.hurt);
+        animator.SetBool(AnimationStrings.canMove, false);
         StartCoroutine(Hurt());
 
         if (currentLifePoints <= 0)
@@ -76,7 +76,10 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private IEnumerator Hurt()
     {
-        yield return Helpers.GetWait(0.75f);
+        yield return null;
+        yield return new WaitWhile(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1);
+        // yield return Helpers.GetWait(0.75f);
+        animator.SetBool(AnimationStrings.canMove, true);
         onHurtDone?.Invoke();
     }
 
@@ -104,11 +107,13 @@ public class Enemy : MonoBehaviour, IDamageable
             Instantiate(enemyData.dropItem, transform.position, Quaternion.identity);
         }
 
-        if(enemyData.blastEffect != null) {
+        if (enemyData.blastEffect != null)
+        {
             Instantiate(enemyData.blastEffect, transform.position, Quaternion.identity);
         }
 
         canvas.SetActive(false);
-        Destroy(gameObject.transform.parent.gameObject);
+        Destroy(gameObject.transform.root.gameObject);
+        // Destroy(gameObject.transform.parent.gameObject);
     }
 }
