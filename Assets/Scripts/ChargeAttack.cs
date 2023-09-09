@@ -77,7 +77,7 @@ public class ChargeAttack : MonoBehaviour
             }
         }
 
-        DrawRectDebug(distance, distance);
+        // DrawRectDebug(distance, distance);
         DrawRectDebug(dashDistance);
     }
 
@@ -120,11 +120,11 @@ public class ChargeAttack : MonoBehaviour
         );
         Debug.DrawLine(
             new Vector2(
-                collider.bounds.center.x + width + (collider.bounds.size.x / 2),
+                collider.bounds.center.x + (width / 3) + (collider.bounds.size.x / 2),
                 collider.bounds.center.y + height + (collider.bounds.size.y / 2)
             ),
             new Vector2(
-                collider.bounds.center.x + width + (collider.bounds.size.x / 2),
+                collider.bounds.center.x + (width / 3) + (collider.bounds.size.x / 2),
                 collider.bounds.center.y - height - (collider.bounds.size.y / 2)
             ),
             Color.yellow

@@ -82,7 +82,6 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private IEnumerator Die()
     {
-        rb.bodyType = RigidbodyType2D.Static;
         onDeath?.Invoke();
         if (animator)
         {
@@ -97,7 +96,9 @@ public class Enemy : MonoBehaviour, IDamageable
             yield return null;
         }
 
-        if (enemyData.dropItem != null && Random.Range(0, 1) < enemyData.dropProbability)
+        float drop = Random.Range(0f, 1f);
+
+        if (enemyData.dropItem != null && drop < enemyData.dropProbability)
         {
             Instantiate(enemyData.dropItem, transform.position, Quaternion.identity);
         }

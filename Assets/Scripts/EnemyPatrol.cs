@@ -104,7 +104,8 @@ public class EnemyPatrol : MonoBehaviour
             StartCoroutine(Flip());
         }
 
-        if(!isIdle) {
+        if (!isIdle)
+        {
             Move();
         }
     }

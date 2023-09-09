@@ -23,3 +23,5 @@ Appuyez sur <sprite="MV Icons Keyboard - ALL" name="Key_Space_1"><sprite="MV Ico
 - https://arydian.itch.io/simple-wooden-bow-and-arrows?download
 - https://luizmelo.itch.io/fire-worm
 - https://luizmelo.itch.io/monsters-creatures-fantasy
+- https://henrysoftware.itch.io/pixel-food
+- https://szadiart.itch.io/pixel-dark-forest
