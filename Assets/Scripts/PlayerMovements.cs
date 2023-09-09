@@ -55,6 +55,8 @@ public class PlayerMovements : MonoBehaviour
     private List<int> listLayersToIgnoreDuringSlide = new List<int>();
     private string layer;
 
+    private PlayerSpawn playerSpawn;
+
     [Header("Events")]
     [SerializeField]
     private VectorEventChannel rbVelocityEventChannel;
@@ -70,6 +72,7 @@ public class PlayerMovements : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         dust = GetComponentInChildren<ParticleSystem>();
         bc2d = GetComponent<BoxCollider2D>();
+        playerSpawn = GetComponent<PlayerSpawn>();
         bc2dChild = GetComponentsInChildren<BoxCollider2D>()[1];
         gameObject.SetActive(showOnStart);
 
@@ -142,6 +145,9 @@ public class PlayerMovements : MonoBehaviour
             // rb.velocity = Vector2.zero;
         }
         isGrounded = IsGrounded();
+        if(isGrounded) {
+            playerSpawn.SetLastGroundPosition(transform.position);
+        }
     }
 
     public void OnMove(InputAction.CallbackContext ctx)
@@ -210,7 +216,7 @@ public class PlayerMovements : MonoBehaviour
     {
         return Physics2D.OverlapBox(
            groundCheck.position - new Vector3(bc2d.offset.x, 0, 0),
-            new Vector3(bc2d.bounds.size.x * 0.95f, 0.5f, 0),
+            new Vector3(bc2d.bounds.size.x * 0.5f, 0.5f, 0),
             0,
             listGroundLayers
         );
@@ -250,7 +256,7 @@ public class PlayerMovements : MonoBehaviour
             {
                 bc2d = GetComponent<BoxCollider2D>();
             }
-            Gizmos.DrawWireCube(groundCheck.position - new Vector3(bc2d.offset.x, 0, 0), new Vector3(bc2d.bounds.size.x * 0.95f, 0.5f, 0));
+            Gizmos.DrawWireCube(groundCheck.position - new Vector3(bc2d.offset.x, 0, 0), new Vector3(bc2d.bounds.size.x * 0.5f, 0.5f, 0));
             // Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
         }
 
