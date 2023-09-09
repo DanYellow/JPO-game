@@ -20,6 +20,7 @@ public class EnemyData : ScriptableObject
     public int knockbackForce = 0;
 
     public GameObject dropItem;
+    public GameObject blastEffect;
     [Range(0, 1)]
     public float dropProbability = 0.25f;
 }

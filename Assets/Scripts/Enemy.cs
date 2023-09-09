@@ -104,6 +104,10 @@ public class Enemy : MonoBehaviour, IDamageable
             Instantiate(enemyData.dropItem, transform.position, Quaternion.identity);
         }
 
+        if(enemyData.blastEffect != null) {
+            Instantiate(enemyData.blastEffect, transform.position, Quaternion.identity);
+        }
+
         canvas.SetActive(false);
         Destroy(gameObject.transform.parent.gameObject);
     }

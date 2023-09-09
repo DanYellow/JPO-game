@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemyFall : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class EnemyFall : MonoBehaviour
     private new Collider2D collider;
     private Rigidbody2D rb;
     private EnemyPatrol enemyPatrol;
+
+    [SerializeField]
+    private UnityEvent onBegin;
 
     [SerializeField]
     private EnemyData enemyData;
@@ -53,6 +57,7 @@ public class EnemyFall : MonoBehaviour
 
     IEnumerator Fall()
     {
+        onBegin?.Invoke();
         isFalling = true;
         yield return null;
         transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -60,12 +65,18 @@ public class EnemyFall : MonoBehaviour
         enemyPatrol.UpdateDetector();
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        print("ffeee");
-        if (other.gameObject.CompareTag("Player") && other.gameObject.TryGetComponent(out IDamageable iDamageable))
+        if (isFalling && other.gameObject.CompareTag("Player") && other.gameObject.TryGetComponent(out IDamageable iDamageable))
         {
             iDamageable.TakeDamage(enemyData.damage);
+        }
+        
+    }
+
+    private void OnCollisionEnter2D(Collision2D other) {
+        if(isFalling && TryGetComponent(out IDamageable iDamageable)) {
+            iDamageable.TakeDamage(int.MaxValue);
         }
     }
 }

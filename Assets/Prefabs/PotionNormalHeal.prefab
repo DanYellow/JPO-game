@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3937099146850842967}
   - component: {fileID: 3937099146850842971}
   - component: {fileID: 3937099146850842968}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PotionNormalHeal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -164,5 +164,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3661a9178b2ebf94dabe25c286d916ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onPotionPicked: {fileID: 11400000, guid: 3066caa819c806b49acc478c6b31b461, type: 2}
   potionTypeValue: {fileID: 11400000, guid: a48afc6edf310b448b03b9f2b3f9ee0f, type: 2}

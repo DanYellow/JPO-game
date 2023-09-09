@@ -17,8 +17,9 @@ MonoBehaviour:
   attackRate: 1.5
   damage: 3
   name: FireWorm
-  distanceDetector: 7
+  distanceDetector: 11
   obstacleCheckRadius: 0.25
-  knockbackForce: 10
+  knockbackForce: 0
   dropItem: {fileID: 0}
+  blastEffect: {fileID: 2950220700420839362, guid: e6ad62ac11e10d6478c213c5a963f145, type: 3}
   dropProbability: 0.25
