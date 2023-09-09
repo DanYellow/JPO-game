@@ -25,3 +25,5 @@ Appuyez sur <sprite="MV Icons Keyboard - ALL" name="Key_Space_1"><sprite="MV Ico
 - https://luizmelo.itch.io/monsters-creatures-fantasy
 - https://henrysoftware.itch.io/pixel-food
 - https://szadiart.itch.io/pixel-dark-forest
+- https://luizmelo.itch.io/evil-wizard-2
+- https://rvros.itch.io/pixel-art-animated-slime

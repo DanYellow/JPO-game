@@ -65,6 +65,15 @@ public class EnemyPatrol : MonoBehaviour
         StartCoroutine(UpdateLastKnownPosition());
     }
 
+    public void UpdateDetector() {
+        detectorPosition = new Vector3(bc.bounds.extents.x * (isFacingRight ? -1 : 1), bc.bounds.extents.y, 0);
+        if (isFacingRight)
+        {
+            offset.x *= -1;
+        }
+        detectorPosition += offset;
+    } 
+
     IEnumerator UpdateLastKnownPosition()
     {
         yield return Helpers.GetWait(2);

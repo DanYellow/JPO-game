@@ -13,6 +13,8 @@ public class EnemyData : ScriptableObject
 
     public new string name = "";
 
+    public float distanceDetector = 0;
+
     public float obstacleCheckRadius = 0.25f;
 
     public int knockbackForce = 0;
