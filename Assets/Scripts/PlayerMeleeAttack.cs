@@ -8,12 +8,7 @@ public class PlayerMeleeAttack : MonoBehaviour, IAttackable
     private VoidEventChannel lightAttackEventChannel;
 
     [SerializeField]
-    private float lightAttackRate;
-    private float nextLightAttackTime = 0;
-
-    [SerializeField]
     private BoolValue playerCanMove;
-
 
     // [HideInInspector]
     public bool isAttacking { get; set; } = false;
