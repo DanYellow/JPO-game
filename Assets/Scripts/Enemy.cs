@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using System;
 
 public class Enemy : MonoBehaviour, IDamageable
 {
@@ -27,6 +28,9 @@ public class Enemy : MonoBehaviour, IDamageable
 
     [SerializeField]
     private GameObject canvas;
+
+    [HideInInspector]
+    public Action<GameObject> deathNotify;
 
     private bool isDying = false;
 
@@ -86,6 +90,7 @@ public class Enemy : MonoBehaviour, IDamageable
     private IEnumerator Die()
     {
         onDeath?.Invoke();
+        deathNotify?.Invoke(gameObject.transform.root.gameObject);
         rb.velocity = Vector2.zero;
         if (animator)
         {
@@ -100,7 +105,7 @@ public class Enemy : MonoBehaviour, IDamageable
             yield return null;
         }
 
-        float drop = Random.Range(0f, 1f);
+        float drop = UnityEngine.Random.Range(0f, 1f);
 
         if (enemyData.dropItem != null && drop < enemyData.dropProbability)
         {
@@ -115,5 +120,9 @@ public class Enemy : MonoBehaviour, IDamageable
         canvas.SetActive(false);
         Destroy(gameObject.transform.root.gameObject);
         // Destroy(gameObject.transform.parent.gameObject);
+    }
+
+    private void OnDestroy() {
+        
     }
 }

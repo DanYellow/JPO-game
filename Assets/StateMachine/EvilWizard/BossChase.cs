@@ -8,23 +8,25 @@ public class BossChase : StateMachineBehaviour
     private Transform target;
     private LookAtTarget lookAtTarget;
     private EvilWizard evilWizard;
+    private IsGrounded isGrounded;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         rb = animator.GetComponent<Rigidbody2D>();
+        isGrounded = animator.GetComponent<IsGrounded>();
         evilWizard = animator.GetComponent<EvilWizard>();
         lookAtTarget = animator.GetComponent<LookAtTarget>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
 
-        animator.ResetTrigger(AnimationStrings.invoke);
+        animator.SetBool(AnimationStrings.invoke, false);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         lookAtTarget.Face(target);
-        if (evilWizard.invoking) return;
+        if (evilWizard.invoking || !isGrounded.isGrounded) return;
         if (
             Vector2.Distance(target.position, rb.position) > 10 &&
             Vector2.Distance(target.position, rb.position) < 25 &&
@@ -48,7 +50,7 @@ public class BossChase : StateMachineBehaviour
 
         if (rb.velocity == Vector2.zero && evilWizard.canInvoke && !evilWizard.invoking)
         {
-            animator.SetTrigger(AnimationStrings.invoke);
+            animator.SetBool(AnimationStrings.invoke, true);
         }
     }
 

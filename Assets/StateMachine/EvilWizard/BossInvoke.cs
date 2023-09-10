@@ -12,7 +12,7 @@ public class BossInvoke : StateMachineBehaviour
     {
         evilWizard = animator.GetComponent<EvilWizard>();
         evilWizard.Invoke();
-        return;
+        animator.SetBool(AnimationStrings.invoke, false);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -33,7 +33,7 @@ public class BossInvoke : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         // Debug.Log("Helloppz");
-        animator.ResetTrigger(AnimationStrings.invoke);
+        // animator.ResetTrigger(AnimationStrings.invoke);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
