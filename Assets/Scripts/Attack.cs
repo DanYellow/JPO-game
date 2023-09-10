@@ -32,7 +32,7 @@ public class Attack : MonoBehaviour
 
         Knockback selfKnockback = GetComponentInParent<Knockback>();
         if(selfKnockback != null) {
-            selfKnockback.Apply(other.gameObject, attackData.knockbackForce / 2);
+            selfKnockback.Apply(other.gameObject, -attackData.knockbackForce / 2);
         }
     }
 }

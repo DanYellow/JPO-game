@@ -34,6 +34,8 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private IsGrounded isGrounded;
 
+    private Invulnerable invulnerable;
+
     private bool isDying = false;
 
     private void Awake()
@@ -41,6 +43,8 @@ public class Enemy : MonoBehaviour, IDamageable
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         isGrounded = GetComponent<IsGrounded>();
+        invulnerable = GetComponent<Invulnerable>();
+
         healthBar = canvas.transform.Find("Bar").GetComponent<Image>();
         canvas.SetActive(false);
     }
@@ -54,7 +58,8 @@ public class Enemy : MonoBehaviour, IDamageable
     private void Update()
     {
         animator.SetFloat(AnimationStrings.velocityY, rb.velocity.y);
-        if(isGrounded != null) {
+        if (isGrounded != null)
+        {
             animator.SetBool(AnimationStrings.isGrounded, isGrounded.isGrounded);
         }
     }
@@ -62,6 +67,10 @@ public class Enemy : MonoBehaviour, IDamageable
     public void TakeDamage(int damage)
     {
         if (isDying) return;
+        if (invulnerable != null)
+        {
+            invulnerable.Trigger();
+        }
 
         canvas.SetActive(true);
         onHurtBegin?.Invoke();

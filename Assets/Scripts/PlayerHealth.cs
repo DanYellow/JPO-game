@@ -26,10 +26,14 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     [SerializeField]
     private UnityEvent onDeathEvent;
 
+    private Invulnerable invulnerable;
+
     private void Awake()
     {
         // playerStatsValue.nbCurrentLifes = playerStatsValue.nbMaxLifes;
         onPlayerDeath.OnEventRaised += OnDeath;
+
+        invulnerable = GetComponent<Invulnerable>();
 
         playerStatsValue.currentLifePoints = 20;
     }
@@ -52,6 +56,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
             0,
             playerStatsValue.maxLifePoints
         );
+        invulnerable.Trigger();
 
         onHealthUpdated.Raise(true);
         if (playerStatsValue.currentLifePoints <= 0)

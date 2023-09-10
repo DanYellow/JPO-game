@@ -36,22 +36,19 @@ public class BossChase : StateMachineBehaviour
             speed = enemyData.runSpeed;
         }
 
-        // if (animator.GetBool(AnimationStrings.canMove) == true)
-        // {
-        //     if (
-        //         Vector2.Distance(target.position, rb.position) > 10 &&
-        //         Vector2.Distance(target.position, rb.position) < 25
-        //     )
-        //     {
-        //         Vector2 targetPos = new Vector2(target.position.x, rb.position.y);
-        //         var dir = (targetPos - rb.position).normalized * speed;
-        //         rb.velocity = dir;
-        //     }
-        //     else
-        //     {
-        //         rb.velocity = Vector2.zero;
-        //     }
-        // }
+        if (
+                Vector2.Distance(target.position, rb.position) > 10 &&
+                Vector2.Distance(target.position, rb.position) < 25
+            )
+        {
+            Vector2 targetPos = new Vector2(target.position.x, rb.position.y);
+            var dir = (targetPos - rb.position).normalized * speed;
+            rb.velocity = dir;
+        }
+        else
+        {
+            rb.velocity = Vector2.zero;
+        }
         animator.SetFloat(AnimationStrings.velocityX, Mathf.Abs(rb.velocity.x));
 
         if (Vector2.Distance(target.position, rb.position) < 15 && evilWizard.canAttack)

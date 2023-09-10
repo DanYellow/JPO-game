@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -40,7 +39,6 @@ public class Guard : MonoBehaviour, IGuardable
 
         Debug.DrawRay(new Vector2(enemyPatrol.isFacingRight ? bc2d.bounds.max.x : bc2d.bounds.min.x, bc2d.bounds.min.y), (enemyPatrol.isFacingRight ? Vector2.right : Vector2.left) * distance, Color.cyan);
         Debug.DrawRay(new Vector2(enemyPatrol.isFacingRight ? bc2d.bounds.max.x : bc2d.bounds.min.x, bc2d.bounds.max.y), (enemyPatrol.isFacingRight ? Vector2.right : Vector2.left) * distance, Color.cyan);
-        // Debug.DrawRay(new Vector2(bc2d.bounds.min.x - 0.25f, bc2d.bounds.max.y), enemyPatrol.isFacingRight ? Vector2.right : Vector2.left * distance, Color.cyan);
 
         if (hitObstacle)
         {
@@ -69,9 +67,9 @@ public class Guard : MonoBehaviour, IGuardable
 
     private void Reflect()
     {
-        if ( hitObstacle.transform.right.x != transform.right.x && hitObstacle.transform.TryGetComponent(out Knockback knockback))
+        if (hitObstacle.transform.right.x != transform.right.x && hitObstacle.transform.TryGetComponent(out Knockback knockback))
         {
-            // knockback.Apply(gameObject, 250);
+            knockback.Apply(gameObject, 250);
         }
         // IAttackable iAttackable = hitObstacle.transform.GetComponentInChildren<IAttackable>();
         // if (iAttackable != null && iAttackable.isAttacking)

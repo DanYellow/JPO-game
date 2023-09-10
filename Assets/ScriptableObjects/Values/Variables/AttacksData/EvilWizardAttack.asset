@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: EvilWizardAttack
   m_EditorClassIdentifier: 
   damage: 4
-  knockbackForce: 15
-  rate: 0
+  knockbackForce: {x: 10, y: 5}
   isKnockingSelf: 1
   DeveloperDescription: 

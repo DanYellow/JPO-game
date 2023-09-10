@@ -11,10 +11,6 @@ public class Invulnerable : MonoBehaviour
     private LayerMask layersToIgnoreAfterHit;
     private List<int> listLayers = new List<int>();
 
-    [SerializeField]
-    private BoolEventChannel onHealthUpdated;
-
-    [SerializeField]
     private MaterialChangeValue materialChange;
 
     private MaterialManager materialManager;
@@ -29,10 +25,6 @@ public class Invulnerable : MonoBehaviour
         materialChange.duration = invulnerableDataValue.duration;
     }
 
-    private void OnEnable()
-    {
-        onHealthUpdated.OnEventRaised += OnCollision;
-    }
 
     // Start is called before the first frame update
     private void Start()
@@ -59,15 +51,12 @@ public class Invulnerable : MonoBehaviour
         }
     }
 
-    private void OnCollision(bool isTakingDamage)
+    public void Trigger()
     {
-        if (isTakingDamage && !isInvulnerable)
+        if (!isInvulnerable)
         {
-            if (!isInvulnerable)
-            {
-                StartCoroutine(HandleInvunlnerableDelay());
-                materialManager.ChangeMaterialProxy(materialChange);
-            }
+            StartCoroutine(HandleInvunlnerableDelay());
+            materialManager.ChangeMaterialProxy(materialChange);
         }
     }
 
@@ -78,10 +67,5 @@ public class Invulnerable : MonoBehaviour
         yield return Helpers.GetWait(invulnerableDataValue.duration);
         isInvulnerable = false;
         DisableCollisions(false);
-    }
-
-    private void OnDisable()
-    {
-        onHealthUpdated.OnEventRaised -= OnCollision;
     }
 }
