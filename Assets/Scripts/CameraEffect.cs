@@ -10,7 +10,6 @@ public class CameraEffect : MonoBehaviour
 
     private void OnRenderImage(RenderTexture src, RenderTexture dest)
     {
-        Debug.Log("Graphics 2");
         if (material == null) {
             Graphics.Blit(src, dest);
             return;

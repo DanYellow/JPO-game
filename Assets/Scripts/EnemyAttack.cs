@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -75,5 +76,6 @@ public class EnemyAttack : MonoBehaviour
         OnDone?.Invoke();
         yield return Helpers.GetWait(enemyData.attackRate);
         isAttacking = false;
+        
     }
 }

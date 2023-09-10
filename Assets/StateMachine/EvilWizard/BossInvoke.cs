@@ -6,17 +6,19 @@ public class BossInvoke : StateMachineBehaviour
 {
 
     private Rigidbody2D rb;
-    private Transform target;
+    private EvilWizard evilWizard;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        rb = animator.GetComponent<Rigidbody2D>();
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+        evilWizard = animator.GetComponent<EvilWizard>();
+        evilWizard.Invoke();
+        return;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        // return;
         // Vector2 targetPos = new Vector2(target.position.x, rb.position.y);
         // var dir = (targetPos - rb.position).normalized * 3.5f;
         // rb.velocity = dir;
@@ -30,7 +32,8 @@ public class BossInvoke : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        // Debug.Log("Helloppz");
+        animator.ResetTrigger(AnimationStrings.invoke);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

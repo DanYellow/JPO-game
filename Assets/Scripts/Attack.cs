@@ -24,5 +24,10 @@ public class Attack : MonoBehaviour
         {
             iDamageable.TakeDamage(attackData.damage);
         }
+
+        if (other.gameObject.TryGetComponent(out Knockback knockback))
+        {
+            knockback.Apply(gameObject, attackData.knockbackForce);
+        }
     }
 }

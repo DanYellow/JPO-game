@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Invulnerable : MonoBehaviour
 {
-    private SpriteRenderer sr;
     private bool isInvulnerable = false;
     [SerializeField]
     private InvulnerableDataValue invulnerableDataValue;
@@ -16,16 +15,12 @@ public class Invulnerable : MonoBehaviour
     private BoolEventChannel onHealthUpdated;
 
     [SerializeField]
-    private MaterialEventChannel onMaterialChange;
-
-    [SerializeField]
     private MaterialChangeValue materialChange;
 
     private MaterialManager materialManager;
 
     private void Awake()
     {
-        sr = GetComponent<SpriteRenderer>();
         materialManager = GetComponent<MaterialManager>();
 
         materialChange = ScriptableObject.CreateInstance<MaterialChangeValue>();

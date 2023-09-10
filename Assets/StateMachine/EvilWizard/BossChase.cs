@@ -7,19 +7,24 @@ public class BossChase : StateMachineBehaviour
     private Rigidbody2D rb;
     private Transform target;
     private LookAtTarget lookAtTarget;
+    private EvilWizard evilWizard;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         rb = animator.GetComponent<Rigidbody2D>();
+        evilWizard = animator.GetComponent<EvilWizard>();
         lookAtTarget = animator.GetComponent<LookAtTarget>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
+
+        animator.ResetTrigger(AnimationStrings.invoke);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         lookAtTarget.Face(target);
+        if (evilWizard.invoking) return;
         if (
             Vector2.Distance(target.position, rb.position) > 10 &&
             Vector2.Distance(target.position, rb.position) < 25 &&
@@ -36,9 +41,14 @@ public class BossChase : StateMachineBehaviour
         }
         animator.SetFloat(AnimationStrings.velocityX, Mathf.Abs(rb.velocity.x));
 
-        if (Vector2.Distance(target.position, rb.position) < 10)
+        if (Vector2.Distance(target.position, rb.position) < 8 && evilWizard.canAttack)
         {
             animator.SetTrigger(AnimationStrings.attack);
+        }
+
+        if (rb.velocity == Vector2.zero && evilWizard.canInvoke && !evilWizard.invoking)
+        {
+            animator.SetTrigger(AnimationStrings.invoke);
         }
     }
 
