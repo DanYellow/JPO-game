@@ -22,6 +22,7 @@ public class PlayerDashAttack : MonoBehaviour
     private BoxCollider2D bc2d;
 
     private bool canDash = true;
+    private bool isDashing = false;
 
     [SerializeField]
     private StringEventChannel countdownEvent;
@@ -55,19 +56,6 @@ public class PlayerDashAttack : MonoBehaviour
         Helpers.DisableCollisions(layer, listLayers, false);
     }
 
-    private void DisableCollisions(bool enabled)
-    {
-        foreach (var layerIndex in listLayers)
-        {
-            //  Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Default"), layerIndex, enabled);
-            Physics2D.IgnoreLayerCollision(
-                LayerMask.NameToLayer(originalLayerName), 
-                layerIndex, 
-                enabled
-            );
-        }
-    }
-
     public void OnDash(InputAction.CallbackContext ctx)
     {
         if (ctx.phase == InputActionPhase.Performed && canDash)
@@ -87,7 +75,7 @@ public class PlayerDashAttack : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!playerCanMove.CurrentValue && !canDash)
+        if (isDashing)
         {
             InflictDamage();
         }
@@ -116,7 +104,7 @@ public class PlayerDashAttack : MonoBehaviour
                 }
             }
 
-            if (item.TryGetComponent(out IDamageable iDamageable))
+            if (item.gameObject != gameObject && item.TryGetComponent(out IDamageable iDamageable))
             {
                 iDamageable.TakeDamage(playerData.dashDamage);
             }
@@ -131,13 +119,14 @@ public class PlayerDashAttack : MonoBehaviour
 
     private IEnumerator Dash()
     {
+        Helpers.DisableCollisions(layer, listLayers, true);
+        isDashing = true;
         canDash = false;
         rb.gravityScale = 0f;
         gameObject.layer = LayerMask.NameToLayer("AttackArea");
 
         // // Time.timeScale = 0.5f;
         playerCanMove.CurrentValue = false;
-        Helpers.DisableCollisions(layer, listLayers, true);
         // onCinemachineShake.Raise(dashCameraShake);
 
         float speedFactor = Mathf.Abs(rb.velocity.x) > 0 ? 1.25f : 1;
@@ -152,12 +141,12 @@ public class PlayerDashAttack : MonoBehaviour
     private void DashEnd()
     {
         rb.gravityScale = originalGravity;
-
+        isDashing = false;
         gameObject.layer = LayerMask.NameToLayer(originalLayerName);
         dashTrailRenderer.emit = false;
         rb.velocity = Vector2.zero;
-        Helpers.DisableCollisions(layer, listLayers, false);
         playerCanMove.CurrentValue = true;
+        Helpers.DisableCollisions(layer, listLayers, false);
     }
 
     public IEnumerator Countdown()

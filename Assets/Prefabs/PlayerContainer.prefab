@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6191884925985965911}
   - component: {fileID: 6365887741875590223}
+  - component: {fileID: 5006990317910432888}
   m_Layer: 0
   m_Name: RunAttack
   m_TagString: Untagged
@@ -85,6 +86,19 @@ PolygonCollider2D:
       - {x: 1.5790879, y: -1.5525167}
       - {x: 2.69831, y: -0.3601418}
   m_UseDelaunayMesh: 0
+--- !u!114 &5006990317910432888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2543574926952080237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caf0d2287269c604983598a3767c087d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackData: {fileID: 11400000, guid: f4b45465482e851419ac605f4c040df6, type: 2}
 --- !u!1 &5250848669414670382
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,6 +109,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7684302561726279681}
   - component: {fileID: 3499494344518931931}
+  - component: {fileID: 7374311294023772451}
   m_Layer: 10
   m_Name: HeavyAttack
   m_TagString: Untagged
@@ -172,6 +187,19 @@ PolygonCollider2D:
       - {x: 1.6529541, y: 0.12252045}
       - {x: 1.347846, y: 0.5632133}
   m_UseDelaunayMesh: 0
+--- !u!114 &7374311294023772451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5250848669414670382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caf0d2287269c604983598a3767c087d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackData: {fileID: 11400000, guid: 5f9145df73002e1429a12d468683961e, type: 2}
 --- !u!1 &5528627662263019259
 GameObject:
   m_ObjectHideFlags: 0
@@ -425,7 +453,7 @@ MonoBehaviour:
   invulnerableDataValue: {fileID: 11400000, guid: 9ab98fc8a64673b4593d13bd345651eb, type: 2}
   layersToIgnoreAfterHit:
     serializedVersion: 2
-    m_Bits: 640
+    m_Bits: 1664
   onHealthUpdated: {fileID: 11400000, guid: 03eb6c1b9f1a7ae4dac9b654d5a925a8, type: 2}
   onMaterialChange: {fileID: 11400000, guid: 1ef143ed0456178448a9a26f8fb8dd48, type: 2}
   materialChange: {fileID: 11400000, guid: f83f25e3727d3074ea00996d2bdcfb3d, type: 2}
@@ -484,7 +512,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   listDashableLayers:
     serializedVersion: 2
-    m_Bits: 896
+    m_Bits: 1920
   playerData: {fileID: 11400000, guid: 4d8b9f9261ee27f47ad567a2af8e73c2, type: 2}
   playerCanMove: {fileID: 11400000, guid: d4070e2f3c65e5f48a143aca81e93fbb, type: 2}
   countdownEvent: {fileID: 11400000, guid: a31a1a1a97a094e47a11c5778956307f, type: 2}
@@ -5589,7 +5617,6 @@ MonoBehaviour:
   currentSpawnPosition: {x: 0, y: 0, z: 0}
   initialSpawnPosition: {x: 0, y: 0, z: 0}
   lastCheckpointPosition: {fileID: 11400000, guid: 6dffc05ea99bd734bb88b2efddeeed60, type: 2}
-  lastGroundPosition: {fileID: 11400000, guid: 6a38f45b23314be4e83dcada65291ba5, type: 2}
 --- !u!1 &5528627663215432658
 GameObject:
   m_ObjectHideFlags: 0
@@ -5631,6 +5658,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1722706159981301843}
   - component: {fileID: 7905917352640085220}
+  - component: {fileID: 851044298035746303}
   m_Layer: 10
   m_Name: LightAttack
   m_TagString: Untagged
@@ -5708,3 +5736,16 @@ PolygonCollider2D:
       - {x: 1.4040833, y: -0.79190826}
       - {x: 1.8934393, y: -0.32337195}
   m_UseDelaunayMesh: 0
+--- !u!114 &851044298035746303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7548311465255658314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caf0d2287269c604983598a3767c087d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackData: {fileID: 11400000, guid: 66d55e4e06398e740a27e290e04fc9b1, type: 2}
