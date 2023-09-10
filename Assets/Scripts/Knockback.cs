@@ -9,21 +9,34 @@ public class Knockback : MonoBehaviour
 
     private float delay = .2f;
 
-    private void Awake() {
+    private void Awake()
+    {
         rb = GetComponent<Rigidbody2D>();
     }
 
-    public void Apply(GameObject target, int strength) {
+    public void Apply(GameObject target, Vector2 _direction)
+    {
         StopAllCoroutines();
         rb.velocity = Vector2.zero;
         OnBegin?.Invoke();
         Vector2 direction = (transform.position - target.transform.position).normalized;
-        // print("kno " + direction * strength);
-        rb.AddForce(direction * strength);
+        // rb.AddForce(direction * strength);
+        rb.velocity = new Vector2(direction.x * _direction.x, _direction.y);
         StartCoroutine(Reset());
     }
 
-    private IEnumerator Reset() {
+    public void Apply(GameObject target, int strength)
+    {
+        StopAllCoroutines();
+        rb.velocity = Vector2.zero;
+        OnBegin?.Invoke();
+        Vector2 direction = (transform.position - target.transform.position).normalized;
+        rb.velocity = new Vector2(direction.x * strength, rb.velocity.y);
+        StartCoroutine(Reset());
+    }
+
+    private IEnumerator Reset()
+    {
         yield return Helpers.GetWait(delay);
         rb.velocity = Vector2.zero;
         OnDone?.Invoke();

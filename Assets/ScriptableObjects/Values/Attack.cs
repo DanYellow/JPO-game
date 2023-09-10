@@ -2,13 +2,12 @@ using UnityEngine;
 
 namespace MyScriptableObject
 {
-    [CreateAssetMenu(fileName = "New AttackValue", menuName = "ScriptableObjects/Values/AttackValue", order = 0)]
+    [CreateAssetMenu(fileName = "New Attack Value", menuName = "ScriptableObjects/Values/AttackValue", order = 0)]
     public class Attack : ScriptableObject
     {
         public int damage;
-        public int knockbackForce = 0;
-
-        public int rate = 0;
+        public Vector2 knockbackForce = Vector2.zero;
+        public bool isKnockingSelf = false;
 
 #pragma warning disable 0414
         [Multiline, SerializeField]

@@ -4,7 +4,7 @@ public class SetBoolBehavior : StateMachineBehaviour
 {
     [ReadOnlyInspector]
     private string animParameter = "CanMove";
-    
+
     [SerializeField]
     private bool valueOnEnter;
 
@@ -26,7 +26,8 @@ public class SetBoolBehavior : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (updateState)
+        {
             animator.SetBool(AnimationStrings.canMove, valueOnExit);
-
+        }
     }
 }

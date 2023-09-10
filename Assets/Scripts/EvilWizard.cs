@@ -5,9 +5,10 @@ using UnityEngine;
 // https://game.courses/c-events-vs-unityevents/
 public class EvilWizard : MonoBehaviour
 {
+    [SerializeField]
     private float invokeTimer;
     [SerializeField]
-    private float invokeDelay = 20;
+    private float invokeDelay = 17.5f;
 
     public bool canInvoke { get; private set; } = true;
 
@@ -30,22 +31,29 @@ public class EvilWizard : MonoBehaviour
     [SerializeField]
     List<GameObject> listMobsInvocables = new List<GameObject>();
 
-    [SerializeField]
     List<GameObject> listMobsInvocated = new List<GameObject>();
+
+    [SerializeField]
+    private GameObject blastEffect;
+
+    private new Collider2D collider;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        collider = GetComponent<Collider2D>();
 
         animator.SetBool(AnimationStrings.invoke, false);
     }
 
     private void Update()
     {
-        invokeTimer += Time.deltaTime;
+        if(!invoking) {
+            invokeTimer += Time.deltaTime;
+        }
         canInvoke = invokeTimer > invokeDelay;
-        if (canInvoke && !invoking) //  && !invoking
+        if (canInvoke)
         {
             invokeTimer = 0;
         }
@@ -97,13 +105,20 @@ public class EvilWizard : MonoBehaviour
 
         if (listMobsInvocated.Count == 0)
         {
-            EndInvocation();
+            StartCoroutine(EndInvocation());
         }
     }
 
-    IEnumerator EndInvocation() {
+    IEnumerator EndInvocation()
+    {
         yield return Helpers.GetWait(0.75f);
         rb.bodyType = RigidbodyType2D.Dynamic;
         invoking = false;
+    }
+
+    public void InvokeBlast()
+    {
+        GameObject blast = Instantiate(blastEffect, new Vector2(collider.bounds.center.x, collider.bounds.min.y), Quaternion.identity);
+        blast.transform.localScale *= 1.5f;
     }
 }

@@ -32,12 +32,15 @@ public class Enemy : MonoBehaviour, IDamageable
     [HideInInspector]
     public Action<GameObject> deathNotify;
 
+    private IsGrounded isGrounded;
+
     private bool isDying = false;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        isGrounded = GetComponent<IsGrounded>();
         healthBar = canvas.transform.Find("Bar").GetComponent<Image>();
         canvas.SetActive(false);
     }
@@ -46,6 +49,14 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         currentLifePoints = enemyData.maxLifePoints;
         UpdateHealth();
+    }
+
+    private void Update()
+    {
+        animator.SetFloat(AnimationStrings.velocityY, rb.velocity.y);
+        if(isGrounded != null) {
+            animator.SetBool(AnimationStrings.isGrounded, isGrounded.isGrounded);
+        }
     }
 
     public void TakeDamage(int damage)
@@ -122,7 +133,8 @@ public class Enemy : MonoBehaviour, IDamageable
         // Destroy(gameObject.transform.parent.gameObject);
     }
 
-    private void OnDestroy() {
-        
+    private void OnDestroy()
+    {
+
     }
 }

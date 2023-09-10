@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -26,7 +25,6 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     [SerializeField]
     private UnityEvent onDeathEvent;
-
 
     private void Awake()
     {
@@ -69,7 +67,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     public void Heal(PotionValue potionTypeValue) {
         if(potionTypeValue.type == PotionType.Heal) {
-            int newPointsLife = Math.Clamp(
+            int newPointsLife = Mathf.Clamp(
                 playerStatsValue.currentLifePoints + potionTypeValue.value,
                 0,
                 playerStatsValue.maxLifePoints

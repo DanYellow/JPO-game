@@ -71,7 +71,7 @@ public class Guard : MonoBehaviour, IGuardable
     {
         if ( hitObstacle.transform.right.x != transform.right.x && hitObstacle.transform.TryGetComponent(out Knockback knockback))
         {
-            knockback.Apply(gameObject, 250);
+            // knockback.Apply(gameObject, 250);
         }
         // IAttackable iAttackable = hitObstacle.transform.GetComponentInChildren<IAttackable>();
         // if (iAttackable != null && iAttackable.isAttacking)

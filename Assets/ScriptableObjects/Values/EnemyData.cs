@@ -7,6 +7,9 @@ public class EnemyData : ScriptableObject
     public int maxLifePoints = 25;
     [Range(0, 9)]
     public float walkSpeed = 3;
+    
+    [Range(0, 9)]
+    public float runSpeed = 3;
 
     public float attackRate = 1;
     public int damage = 1;

@@ -161,10 +161,10 @@ public class ChargeAttack : MonoBehaviour
         if (isCharging)
         {
             rb.velocity = Vector2.zero;
-            knockback.Apply(other.gameObject, 1500);
+            // knockback.Apply(other.gameObject, 1500);
             if (other.gameObject.TryGetComponent(out Knockback _knockback))
             {
-                _knockback.Apply(gameObject, enemyData.knockbackForce);
+                // _knockback.Apply(gameObject, enemyData.knockbackForce);
             }
 
             if (other.gameObject.CompareTag("Player"))

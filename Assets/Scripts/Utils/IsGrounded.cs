@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class IsGrounded : MonoBehaviour
 {
-    [Space(15), Tooltip("Position checks"), SerializeField]
-    public bool isGrounded;
+    [field:SerializeField]
+    public bool isGrounded { private set; get; } = false;
 
     [SerializeField]
     private LayerMask listGroundLayers;
@@ -14,7 +14,8 @@ public class IsGrounded : MonoBehaviour
     [SerializeField]
     private float groundCheckRadius;
 
-    private void FixedUpdate() {
+    private void FixedUpdate()
+    {
         isGrounded = _IsGrounded();
     }
 

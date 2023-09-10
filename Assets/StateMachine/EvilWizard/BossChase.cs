@@ -10,6 +10,9 @@ public class BossChase : StateMachineBehaviour
     private EvilWizard evilWizard;
     private IsGrounded isGrounded;
 
+    [SerializeField]
+    EnemyData enemyData;
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -18,8 +21,6 @@ public class BossChase : StateMachineBehaviour
         evilWizard = animator.GetComponent<EvilWizard>();
         lookAtTarget = animator.GetComponent<LookAtTarget>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
-
-        animator.SetBool(AnimationStrings.invoke, false);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -27,28 +28,38 @@ public class BossChase : StateMachineBehaviour
     {
         lookAtTarget.Face(target);
         if (evilWizard.invoking || !isGrounded.isGrounded) return;
-        if (
-            Vector2.Distance(target.position, rb.position) > 10 &&
-            Vector2.Distance(target.position, rb.position) < 25 &&
-            animator.GetBool(AnimationStrings.canMove) == true
-        )
+
+        // animator.GetBool(AnimationStrings.canMove) == true
+        float speed = enemyData.walkSpeed;
+        if (Vector2.Distance(target.position, rb.position) < 15)
         {
-            Vector2 targetPos = new Vector2(target.position.x, rb.position.y);
-            var dir = (targetPos - rb.position).normalized * 3.5f;
-            rb.velocity = dir;
+            speed = enemyData.runSpeed;
         }
-        else
-        {
-            rb.velocity = Vector2.zero;
-        }
+
+        // if (animator.GetBool(AnimationStrings.canMove) == true)
+        // {
+        //     if (
+        //         Vector2.Distance(target.position, rb.position) > 10 &&
+        //         Vector2.Distance(target.position, rb.position) < 25
+        //     )
+        //     {
+        //         Vector2 targetPos = new Vector2(target.position.x, rb.position.y);
+        //         var dir = (targetPos - rb.position).normalized * speed;
+        //         rb.velocity = dir;
+        //     }
+        //     else
+        //     {
+        //         rb.velocity = Vector2.zero;
+        //     }
+        // }
         animator.SetFloat(AnimationStrings.velocityX, Mathf.Abs(rb.velocity.x));
 
-        if (Vector2.Distance(target.position, rb.position) < 8 && evilWizard.canAttack)
+        if (Vector2.Distance(target.position, rb.position) < 15 && evilWizard.canAttack)
         {
             animator.SetTrigger(AnimationStrings.attack);
         }
 
-        if (rb.velocity == Vector2.zero && evilWizard.canInvoke && !evilWizard.invoking)
+        if (evilWizard.canInvoke && !evilWizard.invoking)
         {
             animator.SetBool(AnimationStrings.invoke, true);
         }
