@@ -28,6 +28,8 @@ public class Enemy : MonoBehaviour, IDamageable
 
     [SerializeField]
     private GameObject canvas;
+    [SerializeField]
+    private string barImagePath = "Bar";
 
     [HideInInspector]
     public Action<GameObject> deathNotify;
@@ -45,8 +47,11 @@ public class Enemy : MonoBehaviour, IDamageable
         isGrounded = GetComponent<IsGrounded>();
         invulnerable = GetComponent<Invulnerable>();
 
-        healthBar = canvas.transform.Find("Bar").GetComponent<Image>();
-        canvas.SetActive(false);
+        if (canvas != null)
+        {
+            healthBar = canvas.transform.Find(barImagePath).GetComponent<Image>();
+            canvas.SetActive(false);
+        }
     }
 
     private void Start()
@@ -68,7 +73,10 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         if (isDying) return;
 
-        canvas.SetActive(true);
+        if (canvas != null)
+        {
+            canvas.SetActive(true);
+        }
         onHurtBegin?.Invoke();
         currentLifePoints = Mathf.Clamp(
             currentLifePoints - damage,
