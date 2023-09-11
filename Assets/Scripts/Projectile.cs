@@ -7,6 +7,8 @@ public class Projectile : MonoBehaviour, IRecycleable
     private Rigidbody2D rb;
     private new Collider2D collider;
 
+    private bool gotContact = false;
+
     public ProjectileData projectileData;
 
     [SerializeField]
@@ -20,6 +22,9 @@ public class Projectile : MonoBehaviour, IRecycleable
     [SerializeField]
     private VoidEventChannel resetPlayerPosition;
 
+    [SerializeField]
+    private BoolEventChannel onInteractRangeEvent;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -30,6 +35,7 @@ public class Projectile : MonoBehaviour, IRecycleable
     private void OnEnable()
     {
         resetPlayerPosition.OnEventRaised += CancelAllProjectiles;
+        onInteractRangeEvent.OnEventRaised += ToggleTime;
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -54,6 +60,7 @@ public class Projectile : MonoBehaviour, IRecycleable
     void Contact()
     {
         rb.constraints = 0;
+        gotContact = true;
         rb.AddTorque(projectileData.torque, ForceMode2D.Impulse);
         collider.isTrigger = true;
 
@@ -71,20 +78,39 @@ public class Projectile : MonoBehaviour, IRecycleable
         pool.Release(this);
     }
 
+    void ToggleTime(bool isPaused)
+    {
+        if (isPaused)
+        {
+            rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        }
+        else
+        {
+            if (!gotContact)
+            {
+                rb.constraints = RigidbodyConstraints2D.FreezePositionY;
+                rb.velocity = Vector2.zero;
+                rb.AddForce(transform.right.normalized * projectileData.speed, ForceMode2D.Impulse);
+            }
+            else
+            {
+                rb.constraints = 0;
+                // rb.AddTorque(projectileData.torque, ForceMode2D.Impulse);
+            }
+        }
+    }
+
     private void OnDisable()
     {
-        // collider.isTrigger = false;
         resetPlayerPosition.OnEventRaised -= CancelAllProjectiles;
+        onInteractRangeEvent.OnEventRaised -= ToggleTime;
     }
 
     public void ResetThyself()
     {
+        gotContact = false;
         rb.AddForce(transform.right.normalized * projectileData.speed, ForceMode2D.Impulse);
         collider.isTrigger = isStartedTriggered;
-        // rb.velocity = transform.right.normalized * projectileData.speed;
-        // print(rb.velocity);
-
-        // rb.constraints = RigidbodyConstraints2D.None;
         rb.constraints = RigidbodyConstraints2D.FreezePositionY;
     }
 }

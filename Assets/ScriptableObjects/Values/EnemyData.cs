@@ -5,9 +5,15 @@ using UnityEngine;
 public class EnemyData : CharacterData
 {
     [Range(0, 9)]
+    public float baseWalkSpeed = 3;
+
+    [HideInInspector]
     public float walkSpeed = 3;
-    
+
     [Range(0, 9)]
+    public float baseRunSpeed = 3;
+
+    [HideInInspector]
     public float runSpeed = 3;
 
     public float attackRate = 1;
@@ -25,4 +31,29 @@ public class EnemyData : CharacterData
     public GameObject blastEffect;
     [Range(0, 1)]
     public float dropProbability = 0.25f;
+
+    [SerializeField]
+    private BoolEventChannel onInteractRangeEvent;
+
+    private void Awake()
+    {
+        walkSpeed = baseWalkSpeed;
+        runSpeed = baseRunSpeed;
+    }
+
+    private void OnEnable()
+    {
+        onInteractRangeEvent.OnEventRaised += ToggleTime;
+    }
+
+    void ToggleTime(bool isPaused)
+    {
+        runSpeed = isPaused ? 0 : baseRunSpeed;
+        walkSpeed = isPaused ? 0 : baseRunSpeed;
+    }
+
+    private void OnDisable()
+    {
+        onInteractRangeEvent.OnEventRaised -= ToggleTime;
+    }
 }
