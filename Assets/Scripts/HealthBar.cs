@@ -23,24 +23,32 @@ public class HealthBar : MonoBehaviour
 
     void Start()
     {
-        if(nameText != null) {
+        if (nameText != null)
+        {
             nameText.SetText(enemyData.name);
         }
     }
 
-    public void UpdateBar(int currentLifePoints)
+    public void UpdateContent(int currentLifePoints)
     {
-        if(displayWhenFull || currentLifePoints != enemyData.maxLifePoints) {
+        if (displayWhenFull || currentLifePoints != enemyData.maxLifePoints)
+        {
             container.SetActive(true);
+        } else {
+            container.SetActive(false);
         }
+
         float rate = (float)currentLifePoints / enemyData.maxLifePoints;
         bar.fillAmount = rate;
-        if(lifePointsText != null) {
+
+        if (lifePointsText != null)
+        {
             lifePointsText.SetText($"{currentLifePoints}/{enemyData.maxLifePoints}");
         }
     }
 
-    public void Hide() {
+    public void Hide()
+    {
         container.SetActive(false);
     }
 }

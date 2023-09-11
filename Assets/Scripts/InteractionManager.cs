@@ -22,8 +22,6 @@ public class InteractionManager : MonoBehaviour
     [SerializeField, TextArea]
     private string initialString;
 
-    private int nbCalls = 0;
-
     private void Awake() {
         textContainer = interactionUI.GetComponentInChildren<TMP_Text>();
         continueText = interactionUI.transform.Find("Container/Background/Continue").gameObject;
@@ -40,12 +38,12 @@ public class InteractionManager : MonoBehaviour
 
     private void ToggleDisplay(bool show)
     {
-        textContainer.SetText(initialString);
+        textContainer.SetText(initialString.Trim());
         interactionUI.SetActive(show);
     }
 
     private void UpdateText(string text) {
-        textContainer.SetText(text);
+        textContainer.SetText(text.Trim());
     }
 
     private void OnDisable()

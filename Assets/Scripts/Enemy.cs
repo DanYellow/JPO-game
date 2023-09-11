@@ -24,12 +24,6 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField]
     private UnityEvent onHurtDone;
 
-    private Image healthBar;
-
-    // [SerializeField]
-    // private GameObject canvas;
-    // [SerializeField]
-    // private string barImagePath = "Bar";
 
     [HideInInspector]
     public Action<GameObject> deathNotify;
@@ -40,7 +34,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private bool isDying = false;
 
-    private HealthBar _healthBar;
+    private HealthBar healthBar;
 
     private void Awake()
     {
@@ -48,23 +42,14 @@ public class Enemy : MonoBehaviour, IDamageable
         rb = GetComponent<Rigidbody2D>();
         isGrounded = GetComponent<IsGrounded>();
         invulnerable = GetComponent<Invulnerable>();
-        _healthBar = GetComponent<HealthBar>();
-
-        // if (canvas != null)
-        // {
-        //     healthBar = canvas.transform.Find(barImagePath).GetComponent<Image>();
-        //     canvas.SetActive(false);
-        // }
+        healthBar = GetComponent<HealthBar>();
     }
 
     private void Start()
     {
         currentLifePoints = enemyData.maxLifePoints;
-        // UpdateHealth();
-        if (_healthBar != null)
-        {
-            _healthBar.UpdateBar(currentLifePoints);
-        }
+
+        healthBar.UpdateContent(currentLifePoints);
     }
 
     private void Update()
@@ -80,21 +65,14 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         if (isDying) return;
 
-        // if (canvas != null)
-        // {
-        //     canvas.SetActive(true);
-        // }
         onHurtBegin?.Invoke();
         currentLifePoints = Mathf.Clamp(
             currentLifePoints - damage,
             0,
             enemyData.maxLifePoints
         );
-        // UpdateHealth();
-        if (_healthBar != null)
-        {
-            _healthBar.UpdateBar(currentLifePoints);
-        }
+
+        healthBar.UpdateContent(currentLifePoints);
 
         animator.SetTrigger(AnimationStrings.hurt);
         animator.SetBool(AnimationStrings.canMove, false);
@@ -112,12 +90,6 @@ public class Enemy : MonoBehaviour, IDamageable
                 invulnerable.Trigger();
             }
         }
-    }
-
-    private void UpdateHealth()
-    {
-        float rate = (float)currentLifePoints / enemyData.maxLifePoints;
-        healthBar.fillAmount = rate;
     }
 
     private IEnumerator Hurt()
