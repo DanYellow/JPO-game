@@ -67,10 +67,6 @@ public class Enemy : MonoBehaviour, IDamageable
     public void TakeDamage(int damage)
     {
         if (isDying) return;
-        if (invulnerable != null)
-        {
-            invulnerable.Trigger();
-        }
 
         canvas.SetActive(true);
         onHurtBegin?.Invoke();
@@ -89,6 +85,13 @@ public class Enemy : MonoBehaviour, IDamageable
         {
             isDying = true;
             StartCoroutine(Die());
+        }
+        else
+        {
+            if (invulnerable != null)
+            {
+                invulnerable.Trigger();
+            }
         }
     }
 

@@ -56,7 +56,6 @@ public class PlayerHealth : MonoBehaviour, IDamageable
             0,
             playerStatsValue.maxLifePoints
         );
-        invulnerable.Trigger();
 
         onHealthUpdated.Raise(true);
         if (playerStatsValue.currentLifePoints <= 0)
@@ -66,6 +65,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         }
         else
         {
+            invulnerable.Trigger();
             onCinemachineShake.Raise(hurtCameraShake);
         }
     }
