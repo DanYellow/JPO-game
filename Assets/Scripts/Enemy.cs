@@ -26,10 +26,10 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private Image healthBar;
 
-    [SerializeField]
-    private GameObject canvas;
-    [SerializeField]
-    private string barImagePath = "Bar";
+    // [SerializeField]
+    // private GameObject canvas;
+    // [SerializeField]
+    // private string barImagePath = "Bar";
 
     [HideInInspector]
     public Action<GameObject> deathNotify;
@@ -40,24 +40,31 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private bool isDying = false;
 
+    private HealthBar _healthBar;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         isGrounded = GetComponent<IsGrounded>();
         invulnerable = GetComponent<Invulnerable>();
+        _healthBar = GetComponent<HealthBar>();
 
-        if (canvas != null)
-        {
-            healthBar = canvas.transform.Find(barImagePath).GetComponent<Image>();
-            canvas.SetActive(false);
-        }
+        // if (canvas != null)
+        // {
+        //     healthBar = canvas.transform.Find(barImagePath).GetComponent<Image>();
+        //     canvas.SetActive(false);
+        // }
     }
 
     private void Start()
     {
         currentLifePoints = enemyData.maxLifePoints;
-        UpdateHealth();
+        // UpdateHealth();
+        if (_healthBar != null)
+        {
+            _healthBar.UpdateBar(currentLifePoints);
+        }
     }
 
     private void Update()
@@ -73,17 +80,21 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         if (isDying) return;
 
-        if (canvas != null)
-        {
-            canvas.SetActive(true);
-        }
+        // if (canvas != null)
+        // {
+        //     canvas.SetActive(true);
+        // }
         onHurtBegin?.Invoke();
         currentLifePoints = Mathf.Clamp(
             currentLifePoints - damage,
             0,
             enemyData.maxLifePoints
         );
-        UpdateHealth();
+        // UpdateHealth();
+        if (_healthBar != null)
+        {
+            _healthBar.UpdateBar(currentLifePoints);
+        }
 
         animator.SetTrigger(AnimationStrings.hurt);
         animator.SetBool(AnimationStrings.canMove, false);
@@ -148,9 +159,7 @@ public class Enemy : MonoBehaviour, IDamageable
             Instantiate(enemyData.blastEffect, transform.position, Quaternion.identity);
         }
 
-        canvas.SetActive(false);
         Destroy(gameObject.transform.root.gameObject);
-        // Destroy(gameObject.transform.parent.gameObject);
     }
 
     private void OnDestroy()
