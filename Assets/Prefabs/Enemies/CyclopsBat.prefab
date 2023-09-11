@@ -384,6 +384,7 @@ GameObject:
   - component: {fileID: 333606217336487867}
   - component: {fileID: 333606217336487864}
   - component: {fileID: 333606217336487865}
+  - component: {fileID: 8255617519728770758}
   m_Layer: 7
   m_Name: Core
   m_TagString: Untagged
@@ -647,7 +648,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-  canvas: {fileID: 333606217128731262}
 --- !u!114 &333606217336487856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -762,3 +762,21 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
   enemyData: {fileID: 11400000, guid: 9211e3b652a9ce24b90ac3a694d8e017, type: 2}
+--- !u!114 &8255617519728770758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 333606217336487858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d883a5ab2c5929840ab13b60e7204b0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  container: {fileID: 333606217128731262}
+  displayWhenFull: 0
+  bar: {fileID: 333606217021266099}
+  enemyData: {fileID: 11400000, guid: 9211e3b652a9ce24b90ac3a694d8e017, type: 2}
+  lifePointsText: {fileID: 0}
+  nameText: {fileID: 0}

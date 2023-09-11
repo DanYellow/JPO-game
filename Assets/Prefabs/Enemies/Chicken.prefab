@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 8709898328987692945}
   - component: {fileID: 8709898328987693039}
   - component: {fileID: 8709898328987693032}
+  - component: {fileID: 5576962487196452422}
   m_Layer: 7
   m_Name: Core
   m_TagString: Untagged
@@ -261,7 +262,6 @@ MonoBehaviour:
   onHurtDone:
     m_PersistentCalls:
       m_Calls: []
-  canvas: {fileID: 8709898330065531666}
 --- !u!114 &8709898328987692945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,6 +318,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   follower: {fileID: 8709898330065531758}
+--- !u!114 &5576962487196452422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8709898328987692944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d883a5ab2c5929840ab13b60e7204b0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  container: {fileID: 8709898330065531666}
+  displayWhenFull: 0
+  bar: {fileID: 8709898328743107505}
+  enemyData: {fileID: 11400000, guid: 4125ce838d8cfb545adc6583a1f98b6d, type: 2}
+  lifePointsText: {fileID: 0}
+  nameText: {fileID: 0}
 --- !u!1 &8709898329481113575
 GameObject:
   m_ObjectHideFlags: 0
@@ -349,7 +367,7 @@ Transform:
   - {fileID: 8709898330065531758}
   - {fileID: 8709898328987693038}
   m_Father: {fileID: 0}
-  m_RootOrder: 40
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8709898330065531666
 GameObject:

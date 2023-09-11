@@ -413,6 +413,7 @@ GameObject:
   - component: {fileID: 331785431521071026}
   - component: {fileID: 3304298747280523627}
   - component: {fileID: 3304298747280523626}
+  - component: {fileID: 8838257750597778021}
   m_Layer: 7
   m_Name: Core
   m_TagString: Untagged
@@ -707,4 +708,21 @@ MonoBehaviour:
   onHurtDone:
     m_PersistentCalls:
       m_Calls: []
-  canvas: {fileID: 6562245534549360179}
+--- !u!114 &8838257750597778021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8817931127010823324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d883a5ab2c5929840ab13b60e7204b0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  container: {fileID: 6562245534549360179}
+  displayWhenFull: 0
+  bar: {fileID: 6562245534375854925}
+  enemyData: {fileID: 11400000, guid: a11b561a632a79142a3edcc229160819, type: 2}
+  lifePointsText: {fileID: 0}
+  nameText: {fileID: 0}

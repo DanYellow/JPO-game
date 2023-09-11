@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 1251782101685074590}
   - component: {fileID: 8326672840565800367}
   - component: {fileID: 6700112674598342834}
+  - component: {fileID: 640144507801315206}
   m_Layer: 7
   m_Name: Skeleton
   m_TagString: Untagged
@@ -355,7 +356,6 @@ MonoBehaviour:
   onHurtDone:
     m_PersistentCalls:
       m_Calls: []
-  canvas: {fileID: 9164056070615354050}
 --- !u!114 &1251782101685074590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -511,6 +511,24 @@ MonoBehaviour:
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 1
+--- !u!114 &640144507801315206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535411357999783340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d883a5ab2c5929840ab13b60e7204b0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  container: {fileID: 9164056070615354050}
+  displayWhenFull: 0
+  bar: {fileID: 3238038683020122875}
+  enemyData: {fileID: 11400000, guid: 8544b65f824576745ad01ffdf0fa4644, type: 2}
+  lifePointsText: {fileID: 0}
+  nameText: {fileID: 0}
 --- !u!1 &773076004606349416
 GameObject:
   m_ObjectHideFlags: 0

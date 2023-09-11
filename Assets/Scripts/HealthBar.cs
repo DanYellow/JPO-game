@@ -15,6 +15,7 @@ public class HealthBar : MonoBehaviour
     [SerializeField]
     private EnemyData enemyData;
 
+    [Header("Texts")]
     [SerializeField]
     private TextMeshProUGUI lifePointsText;
     [SerializeField]
