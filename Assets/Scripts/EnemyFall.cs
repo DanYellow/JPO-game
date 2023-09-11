@@ -28,11 +28,6 @@ public class EnemyFall : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         enemyPatrol = GetComponent<EnemyPatrol>();
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     private void FixedUpdate()
     {
@@ -52,7 +47,6 @@ public class EnemyFall : MonoBehaviour
 
         Debug.DrawRay(new Vector2(collider.bounds.max.x, collider.bounds.min.y), Vector3.down * enemyData.distanceDetector, Color.cyan);
         Debug.DrawRay(new Vector2(collider.bounds.min.x, collider.bounds.min.y), Vector3.down * enemyData.distanceDetector, Color.red);
-        // Debug.DrawRay(new Vector2(collider.bounds.min.x - 0.15f, collider.bounds.max.y), fireDirection * lengthDetection * (isMoving ? transform.right.normalized : Vector3.one), Color.cyan);
     }
 
     IEnumerator Fall()
@@ -63,15 +57,6 @@ public class EnemyFall : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, 0);
         rb.gravityScale = 15;
         enemyPatrol.UpdateDetector();
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (isFalling && other.gameObject.CompareTag("Player") && other.gameObject.TryGetComponent(out IDamageable iDamageable))
-        {
-            iDamageable.TakeDamage(enemyData.damage);
-        }
-        
     }
 
     private void OnCollisionEnter2D(Collision2D other) {

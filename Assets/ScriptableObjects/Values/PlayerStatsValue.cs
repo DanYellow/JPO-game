@@ -2,13 +2,11 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Player Stats", menuName = "ScriptableObjects/Values/PlayerStatsValue", order = 0)]
-public class PlayerStatsValue : ScriptableObject
+public class PlayerStatsValue : CharacterData
 {
-    public float moveSpeed;
-
-    [Space(20)]
-    public int maxLifePoints = 250;
     public int currentLifePoints;
+    [Space(20)]
+    public float moveSpeed;
     [Space(20)]
 
     public float jumpForce = 5.5f;
