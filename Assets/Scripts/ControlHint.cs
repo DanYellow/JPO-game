@@ -5,7 +5,6 @@ using UnityEngine.Rendering.Universal;
 public class ControlHint : MonoBehaviour
 {
     private bool isPlayerInRange = false;
-    private bool isStarted = false;
 
     private new Light2D light;
 

@@ -95,7 +95,7 @@ public class Projectile : MonoBehaviour, IRecycleable
             else
             {
                 rb.constraints = 0;
-                // rb.AddTorque(projectileData.torque, ForceMode2D.Impulse);
+                rb.AddTorque(projectileData.torque, ForceMode2D.Impulse);
             }
         }
     }
