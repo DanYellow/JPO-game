@@ -216,7 +216,7 @@ public class PlayerMovements : MonoBehaviour
     {
         return Physics2D.OverlapBox(
            groundCheck.position - new Vector3(bc2d.offset.x, 0, 0),
-            new Vector3(bc2d.bounds.size.x * 0.5f, 0.5f, 0),
+            new Vector3(bc2d.bounds.size.x * 0.5f, 0.95f, 0),
             0,
             listGroundLayers
         );
@@ -256,7 +256,7 @@ public class PlayerMovements : MonoBehaviour
             {
                 bc2d = GetComponent<BoxCollider2D>();
             }
-            Gizmos.DrawWireCube(groundCheck.position - new Vector3(bc2d.offset.x, 0, 0), new Vector3(bc2d.bounds.size.x * 0.5f, 0.5f, 0));
+            Gizmos.DrawWireCube(groundCheck.position - new Vector3(bc2d.offset.x, 0, 0), new Vector3(bc2d.bounds.size.x * 0.95f, 0.5f, 0));
             // Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
         }
 

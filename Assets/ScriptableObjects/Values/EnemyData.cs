@@ -44,12 +44,14 @@ public class EnemyData : CharacterData
     private void OnEnable()
     {
         onInteractRangeEvent.OnEventRaised += ToggleTime;
+        ToggleTime(false);
     }
 
     void ToggleTime(bool isPaused)
     {
         runSpeed = isPaused ? 0 : baseRunSpeed;
-        walkSpeed = isPaused ? 0 : baseRunSpeed;
+        walkSpeed = isPaused ? 0 : baseWalkSpeed;
+        Debug.Log("walkSpeed " + walkSpeed);
     }
 
     private void OnDisable()
