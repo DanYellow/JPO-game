@@ -79,7 +79,7 @@ public class EvilWizard : MonoBehaviour
     IEnumerator InvokeCoroutine()
     {
         rb.bodyType = RigidbodyType2D.Static;
-        invulnerable.Trigger(false);
+        invulnerable.Enable();
         yield return null;
         yield return new WaitWhile(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1);
 
@@ -115,6 +115,7 @@ public class EvilWizard : MonoBehaviour
 
     IEnumerator EndInvocation()
     {
+        invulnerable.Disable();
         yield return Helpers.GetWait(0.75f);
         rb.bodyType = RigidbodyType2D.Dynamic;
         invoking = false;

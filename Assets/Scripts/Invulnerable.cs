@@ -32,14 +32,6 @@ public class Invulnerable : MonoBehaviour
         CreateListLayers();
     }
 
-    private void DisableCollisions(bool enabled)
-    {
-        foreach (var layerIndex in listLayers)
-        {
-            Physics2D.IgnoreLayerCollision(gameObject.layer, layerIndex, enabled);
-        }
-    }
-
     private void CreateListLayers()
     {
         for (int i = 0; i < 32; i++)
@@ -51,21 +43,27 @@ public class Invulnerable : MonoBehaviour
         }
     }
 
-    public void Trigger(bool changeMaterial = true)
+    public void Enable() {
+        Helpers.DisableCollisions(LayerMask.LayerToName(gameObject.layer), listLayers, true);
+    }
+
+    public void Disable() {
+        Helpers.DisableCollisions(LayerMask.LayerToName(gameObject.layer), listLayers, false);
+    }
+
+    public void Trigger()
     {
         StopAllCoroutines();
         StartCoroutine(HandleInvunlnerableDelay());
-        if(changeMaterial) {
-            materialManager.ChangeMaterialProxy(materialChange);
-        }
+        materialManager.ChangeMaterialProxy(materialChange);
     }
 
-    public IEnumerator HandleInvunlnerableDelay()
+    private IEnumerator HandleInvunlnerableDelay()
     {
         isInvulnerable = true;
-        DisableCollisions(true);
+        Helpers.DisableCollisions(LayerMask.LayerToName(gameObject.layer), listLayers, isInvulnerable);
         yield return Helpers.GetWait(invulnerableDataValue.duration);
         isInvulnerable = false;
-        DisableCollisions(false);
+        Helpers.DisableCollisions(LayerMask.LayerToName(gameObject.layer), listLayers, isInvulnerable);
     }
 }

@@ -36,8 +36,6 @@ public class BossChase : StateMachineBehaviour
             speed = enemyData.runSpeed;
         }
 
-        Debug.Log("speed " + speed);
-
         if (
                 Vector2.Distance(target.position, rb.position) > 10 &&
                 Vector2.Distance(target.position, rb.position) < 25
