@@ -4,13 +4,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Enemy Data", menuName = "ScriptableObjects/Values/EnemyData", order = 0)]
 public class EnemyData : CharacterData
 {
-    [Range(0, 9)]
+    [Range(0, 35)]
     public float baseWalkSpeed = 3;
 
     [HideInInspector]
     public float walkSpeed = 3;
 
-    [Range(0, 9)]
+    [Range(0, 35)]
     public float baseRunSpeed = 3;
 
     [HideInInspector]
@@ -51,7 +51,6 @@ public class EnemyData : CharacterData
     {
         runSpeed = isPaused ? 0 : baseRunSpeed;
         walkSpeed = isPaused ? 0 : baseWalkSpeed;
-        Debug.Log("walkSpeed " + walkSpeed);
     }
 
     private void OnDisable()

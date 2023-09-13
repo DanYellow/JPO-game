@@ -51,11 +51,11 @@ public class Invulnerable : MonoBehaviour
         }
     }
 
-    public void Trigger()
+    public void Trigger(bool changeMaterial = true)
     {
-        if (!isInvulnerable)
-        {
-            StartCoroutine(HandleInvunlnerableDelay());
+        StopAllCoroutines();
+        StartCoroutine(HandleInvunlnerableDelay());
+        if(changeMaterial) {
             materialManager.ChangeMaterialProxy(materialChange);
         }
     }

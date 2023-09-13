@@ -36,6 +36,8 @@ public class BossChase : StateMachineBehaviour
             speed = enemyData.runSpeed;
         }
 
+        Debug.Log("speed " + speed);
+
         if (
                 Vector2.Distance(target.position, rb.position) > 10 &&
                 Vector2.Distance(target.position, rb.position) < 25
@@ -51,14 +53,14 @@ public class BossChase : StateMachineBehaviour
         }
         animator.SetFloat(AnimationStrings.velocityX, Mathf.Abs(rb.velocity.x));
 
-        if (Vector2.Distance(target.position, rb.position) < 15 && evilWizard.canAttack)
-        {
-            animator.SetTrigger(AnimationStrings.attack);
-        }
-
         if (evilWizard.canInvoke && !evilWizard.invoking)
         {
             animator.SetBool(AnimationStrings.invoke, true);
+        }
+
+        if (Vector2.Distance(target.position, rb.position) < 15 && evilWizard.canAttack)
+        {
+            animator.SetTrigger(AnimationStrings.attack);
         }
     }
 
