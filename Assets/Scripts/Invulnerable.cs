@@ -60,6 +60,7 @@ public class Invulnerable : MonoBehaviour
 
     private IEnumerator HandleInvunlnerableDelay()
     {
+        yield return Helpers.GetWait(invulnerableDataValue.delay);
         isInvulnerable = true;
         Helpers.DisableCollisions(LayerMask.LayerToName(gameObject.layer), listLayers, isInvulnerable);
         yield return Helpers.GetWait(invulnerableDataValue.duration);

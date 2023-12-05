@@ -49,7 +49,7 @@ public class PlayerMovements : MonoBehaviour
     private float coyoteTime = 0.2f;
     private float coyoteTimeCounter;
 
-     [SerializeField]
+    [SerializeField]
     private LayerMask listSlidingLayers;
 
     private List<int> listLayersToIgnoreDuringSlide = new List<int>();
@@ -145,7 +145,8 @@ public class PlayerMovements : MonoBehaviour
             // rb.velocity = Vector2.zero;
         }
         isGrounded = IsGrounded();
-        if(isGrounded) {
+        if (isGrounded)
+        {
             playerSpawn.SetLastGroundPosition(transform.position);
         }
     }
@@ -175,7 +176,7 @@ public class PlayerMovements : MonoBehaviour
             if (Mathf.Abs(rb.velocity.x) > 1 && !isSliding)
             {
                 Helpers.DisableCollisions(layer, listLayersToIgnoreDuringSlide, true);
-                
+
                 isSliding = true;
                 rb.AddForce(transform.right.normalized * 5);
                 StartCoroutine(StopSlide());
@@ -226,16 +227,17 @@ public class PlayerMovements : MonoBehaviour
     public void OnJump(InputAction.CallbackContext ctx)
     {
         if (
-            ctx.phase == InputActionPhase.Performed &&
+            (ctx.phase == InputActionPhase.Performed || ctx.phase == InputActionPhase.Started) &&
             // jumpCount < playerData.maxJumpCount &&
-            playerCanMove.CurrentValue &&
+            playerCanMove.CurrentValue 
+            &&
             coyoteTimeCounter > 0f
         )
         {
             jumpCount++;
             // float jumpForce = Mathf.Sqrt(playerData.jumpForce * (Physics2D.gravity.y * rb.gravityScale) * -2) * rb.mass;
-            // rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             rb.velocity = new Vector2(moveInput.x * playerData.moveSpeed, playerData.jumpForce);
+
         }
         else if (ctx.phase == InputActionPhase.Canceled)
         {
