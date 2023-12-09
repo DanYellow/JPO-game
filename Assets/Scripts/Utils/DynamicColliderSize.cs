@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class DynamicColliderSize : MonoBehaviour
 {
-    SpriteRenderer sr;
-    BoxCollider2D bc2d;
+    private SpriteRenderer sr;
+    private BoxCollider2D bc2d;
     private void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
