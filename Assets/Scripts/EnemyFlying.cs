@@ -16,6 +16,5 @@ public class EnemyFlying : MonoBehaviour
     {
         float newY = (Mathf.Sin(Time.time * 5) * 0.2f) + startingPosition.y;
         transform.position = new Vector3(transform.position.x, newY, transform.position.z);
-
     }
 }
