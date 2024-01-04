@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class EnemyFlying : MonoBehaviour
 {
-    [SerializeField]
-    private LayerMask targetLayerMask;
+    // https://forum.unity.com/threads/how-can-i-cause-my-rigidbody2d-to-float-up-and-down-in-script.1243708/
 
     private Vector2 startingPosition;
 
