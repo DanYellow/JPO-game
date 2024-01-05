@@ -158,6 +158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyData: {fileID: 11400000, guid: 73d08d34c57d19c44a1dbbf7163956e7, type: 2}
+  onTogglePauseEvent: {fileID: 11400000, guid: 60dbe44ce27ccee45aa3d37c3832cdb3, type: 2}
 --- !u!114 &4187034440961342092
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -206,20 +207,20 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -8086468904176305986}
-    m_Position: {x: -180, y: 240, z: 0}
+    m_Position: {x: -180, y: 210, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 354718824600595449}
     m_Position: {x: -180, y: 100, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6004426005953921570}
-    m_Position: {x: -180, y: 330, z: 0}
+    m_Position: {x: -180, y: 300, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: 2588471737833527256}
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 100, y: 340, z: 0}
+  m_AnyStatePosition: {x: 110, y: 310, z: 0}
   m_EntryPosition: {x: -400, y: 100, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}

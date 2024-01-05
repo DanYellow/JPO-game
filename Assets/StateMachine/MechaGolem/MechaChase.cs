@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.Playables;
 public class MechaChase : StateMachineBehaviour
 {
     private Rigidbody2D rb;
@@ -8,7 +10,23 @@ public class MechaChase : StateMachineBehaviour
     // private IsGrounded isGrounded;
 
     [SerializeField]
-    EnemyData enemyData;
+    private EnemyData enemyData;
+
+    [SerializeField]
+    private BoolEventChannel onTogglePauseEvent;
+
+    private bool hasFightStarted = false;
+
+    private void OnEnable()
+    {
+        onTogglePauseEvent.OnEventRaised += FightStart;
+    }
+
+    private void FightStart(bool arg0)
+    {
+        hasFightStarted = arg0;
+    }
+
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -22,6 +40,8 @@ public class MechaChase : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        if(!hasFightStarted) return;
+        
         lookAtTarget.Face(target);
 
         float speed = enemyData.walkSpeed;
@@ -30,11 +50,21 @@ public class MechaChase : StateMachineBehaviour
             speed = enemyData.runSpeed;
         }
 
-        Vector2 targetPos = new Vector2(target.position.x, rb.position.y);
-        var dir = (targetPos - rb.position) * speed;
-        rb.velocity = Vector2.left * 3;
+        if (
+                // Vector2.Distance(target.position, rb.position) > 10 &&
+                Vector2.Distance(target.position, rb.position) < 25
+            )
+        {
+            Vector2 targetPos = new Vector2(target.position.x, rb.position.y);
+            Vector2 newPos = Vector2.MoveTowards(rb.position, targetPos, speed * Time.fixedDeltaTime);
+            rb.MovePosition(newPos);
+        }
 
-        Debug.Log("rb.velocity " + rb.velocity);
+        animator.SetFloat(AnimationStrings.velocityX, Mathf.Abs(rb.velocity.x));
+        // var dir = (targetPos - rb.position) * speed;
+        // rb.velocity = Vector2.left * 3;
+
+        // Debug.Log("rb.velocity " + rb.velocity);
 
         // if (
         //         Vector2.Distance(target.position, rb.position) > 10 &&
@@ -49,6 +79,12 @@ public class MechaChase : StateMachineBehaviour
         //     rb.velocity = Vector2.zero;
         // }
     }
+
+    private void OnDisable()
+    {
+        onTogglePauseEvent.OnEventRaised -= FightStart;
+    }
+
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
