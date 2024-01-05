@@ -7,7 +7,7 @@ public class MechaChase : StateMachineBehaviour
     private Transform target;
     private LookAtTarget lookAtTarget;
 
-    // private IsGrounded isGrounded;
+    private IsGrounded isGrounded;
 
     [SerializeField]
     private EnemyData enemyData;
@@ -32,7 +32,7 @@ public class MechaChase : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         rb = animator.GetComponent<Rigidbody2D>();
-        // isGrounded = animator.GetComponent<IsGrounded>();
+        isGrounded = animator.GetComponent<IsGrounded>();
         lookAtTarget = animator.GetComponent<LookAtTarget>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
     }
@@ -41,7 +41,7 @@ public class MechaChase : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if(!hasFightStarted) return;
-        
+
         lookAtTarget.Face(target);
 
         float speed = enemyData.walkSpeed;
@@ -51,7 +51,7 @@ public class MechaChase : StateMachineBehaviour
         }
 
         if (
-                // Vector2.Distance(target.position, rb.position) > 10 &&
+                Vector2.Distance(target.position, rb.position) > 10 &&
                 Vector2.Distance(target.position, rb.position) < 25
             )
         {
@@ -61,23 +61,6 @@ public class MechaChase : StateMachineBehaviour
         }
 
         animator.SetFloat(AnimationStrings.velocityX, Mathf.Abs(rb.velocity.x));
-        // var dir = (targetPos - rb.position) * speed;
-        // rb.velocity = Vector2.left * 3;
-
-        // Debug.Log("rb.velocity " + rb.velocity);
-
-        // if (
-        //         Vector2.Distance(target.position, rb.position) > 10 &&
-        //         Vector2.Distance(target.position, rb.position) < 25
-        //     )
-        // {
-
-        //     Debug.Log(rb.velocity);
-        // }
-        // else
-        // {
-        //     rb.velocity = Vector2.zero;
-        // }
     }
 
     private void OnDisable()
