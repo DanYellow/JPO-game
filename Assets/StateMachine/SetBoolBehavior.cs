@@ -2,9 +2,6 @@ using UnityEngine;
 
 public class SetBoolBehavior : StateMachineBehaviour
 {
-    [ReadOnlyInspector]
-    private string animParameter = "CanMove";
-
     [SerializeField]
     private bool valueOnEnter;
 

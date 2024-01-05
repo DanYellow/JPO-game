@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BossChase : StateMachineBehaviour
@@ -66,6 +64,5 @@ public class BossChase : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.ResetTrigger(AnimationStrings.attack);
-
     }
 }

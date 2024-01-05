@@ -11,7 +11,9 @@ AnimatorState:
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 3285428750786951227}
+  - {fileID: 4187034440961342092}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -143,32 +145,34 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
---- !u!1102 &2858799146925003083
-AnimatorState:
-  serializedVersion: 6
+--- !u!114 &3285428750786951227
+MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MechaBossEnabled
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 337dd925dbc3e2d4ebd3d487ddf4357c, type: 2}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3432e09e61b47743b5e681051ef4b93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyData: {fileID: 11400000, guid: 73d08d34c57d19c44a1dbbf7163956e7, type: 2}
+--- !u!114 &4187034440961342092
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb0e987a2baa8cc4781137f4f54feba2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  valueOnEnter: 1
+  valueOnExit: 0
+  updateState: 1
 --- !u!1101 &4720214668758017980
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -209,9 +213,6 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: 6004426005953921570}
     m_Position: {x: -180, y: 330, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 2858799146925003083}
-    m_Position: {x: 40, y: 140, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: 2588471737833527256}
