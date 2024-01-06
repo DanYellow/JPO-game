@@ -39,21 +39,24 @@ public class MechaChaseBehaviour : StateMachineBehaviour
         mechaGolemBoss = animator.GetComponent<MechaGolemBoss>();
 
         target = GameObject.FindGameObjectWithTag("Player").transform;
+
+        mechaGolemBoss.StartShieldGenerationChecking();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(!hasFightStarted) return;
+        if (!hasFightStarted) return;
 
-        if(mechaGolemBoss.needsToActivateShield) {
+        if (mechaGolemBoss.needsToActivateShield)
+        {
             animator.SetBool(AnimationStrings.isGuarding, true);
         }
 
         lookAtTarget.Face(target);
 
         float speed = enemyData.walkSpeed;
-        // Debug.Log(enemy.GetHealth());
+
         if (Vector2.Distance(target.position, rb.position) < 15)
         {
             speed = enemyData.runSpeed;
@@ -70,8 +73,6 @@ public class MechaChaseBehaviour : StateMachineBehaviour
         }
 
         animator.SetFloat(AnimationStrings.velocityX, Mathf.Abs(rb.velocity.x));
-
-        // isGuarding
     }
 
     private void OnDisable()
@@ -81,8 +82,8 @@ public class MechaChaseBehaviour : StateMachineBehaviour
 
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        mechaGolemBoss.StopShieldGenerationChecking();
+    }
 }

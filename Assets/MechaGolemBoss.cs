@@ -3,15 +3,16 @@ using UnityEngine;
 
 public class MechaGolemBoss : MonoBehaviour
 {
+    private IEnumerator checkShieldGenerationCo;
 
     public bool needsToActivateShield = false;
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(Routine());
+        checkShieldGenerationCo = CheckShieldGeneration();
     }
 
-    private IEnumerator Routine()
+    private IEnumerator CheckShieldGeneration()
     {
         // yield return Helpers.GetWait(1.75f);
         while (true)
@@ -21,4 +22,12 @@ public class MechaGolemBoss : MonoBehaviour
             needsToActivateShield = Random.value < 0.35f;
         }
     }
+
+    public void StartShieldGenerationChecking() {
+        StartCoroutine(checkShieldGenerationCo);
+    } 
+
+    public void StopShieldGenerationChecking() {
+        StopCoroutine(checkShieldGenerationCo);
+    } 
 }

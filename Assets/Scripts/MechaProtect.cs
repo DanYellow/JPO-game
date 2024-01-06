@@ -24,13 +24,11 @@ public class MechaProtect : MonoBehaviour, IGuardable
     }
 
     private void OnEnable() {
-        // shield.SetActive(true);
+        isGuarding = true;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        isGuarding = true;
+    private void OnDisable() {
+        isGuarding = false;
     }
 
     private void Reflect()
