@@ -6,9 +6,11 @@ using UnityEngine.Events;
 public class MechaProtect : MonoBehaviour, IGuardable
 {
     public bool isGuarding { get; set; } = false;
+    public bool hasTotalGuard { get; } = true;
 
     private RaycastHit2D hitObstacle;
     private BoxCollider2D bc2d;
+    private SpriteRenderer sr;
 
     [SerializeField]
     private LayerMask targetLayerMask;
@@ -16,6 +18,7 @@ public class MechaProtect : MonoBehaviour, IGuardable
     private void Awake()
     {
         bc2d = GetComponent<BoxCollider2D>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
     // Start is called before the first frame update
@@ -28,8 +31,15 @@ public class MechaProtect : MonoBehaviour, IGuardable
     {
         if (hitObstacle.transform.TryGetComponent(out Knockback knockback))
         {
-            // knockback.Apply(gameObject, 5);
+            knockback.Apply(gameObject, 20);
+            StartCoroutine(Flash());
         }
+    }
+
+    private IEnumerator Flash() {
+        sr.color = new Color(0.3f, 0.4f, 0.6f, 1f);
+        yield return new WaitForSeconds(0.35f);
+        sr.color = Color.white;
     }
 
     private void FixedUpdate()

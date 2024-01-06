@@ -94,7 +94,7 @@ public class PlayerDashAttack : MonoBehaviour
         {
             if (item.TryGetComponent(out IGuardable iGuardable))
             {
-                if (iGuardable.isGuarding && item.transform.right.x != transform.right.x)
+                if (iGuardable.isGuarding && (item.transform.right.x != transform.right.x || iGuardable.hasTotalGuard))
                 {
                     DashEnd();
                     Knockback knockback = GetComponentInParent<Knockback>();

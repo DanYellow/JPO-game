@@ -16,6 +16,7 @@ public class Guard : MonoBehaviour, IGuardable
     private LayerMask targetLayerMask;
 
     public bool isGuarding { get; set; } = false;
+    public bool hasTotalGuard { get; } = false;
 
     private RaycastHit2D hitObstacle;
 

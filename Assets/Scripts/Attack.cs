@@ -16,7 +16,7 @@ public class Attack : MonoBehaviour
     {
         if (other.transform.TryGetComponent(out IGuardable iGuardable))
         {
-            if (iGuardable.isGuarding && other.transform.right.x != transform.right.x) return;
+            if (iGuardable.isGuarding && (other.transform.right.x != transform.right.x || iGuardable.hasTotalGuard)) return;
         }
         if (other.transform.TryGetComponent(out IDamageable iDamageable))
         {
