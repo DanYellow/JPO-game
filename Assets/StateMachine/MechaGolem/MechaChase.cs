@@ -42,7 +42,10 @@ public class MechaChase : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if(!hasFightStarted) return;
-        animator.SetBool(AnimationStrings.isGuarding, true);
+
+        if(Random.value < 1) {
+            animator.SetBool(AnimationStrings.isGuarding, true);
+        }
 
         lookAtTarget.Face(target);
 

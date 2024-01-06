@@ -28,7 +28,7 @@ public class MechaProtect : MonoBehaviour, IGuardable
     {
         if (hitObstacle.transform.TryGetComponent(out Knockback knockback))
         {
-            knockback.Apply(gameObject, 5);
+            // knockback.Apply(gameObject, 5);
         }
     }
 
