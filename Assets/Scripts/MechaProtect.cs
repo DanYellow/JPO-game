@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -12,8 +11,8 @@ public class MechaProtect : MonoBehaviour, IGuardable
     private BoxCollider2D bc2d;
     private SpriteRenderer sr;
 
-    [SerializeField]
-    private GameObject shield;
+    [HideInInspector]
+    public GameObject shield;
 
     [SerializeField]
     private LayerMask targetLayerMask;
@@ -25,7 +24,7 @@ public class MechaProtect : MonoBehaviour, IGuardable
     }
 
     private void OnEnable() {
-        shield.SetActive(true);
+        // shield.SetActive(true);
     }
 
     // Start is called before the first frame update

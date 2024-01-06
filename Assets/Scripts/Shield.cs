@@ -25,15 +25,13 @@ public class Shield : MonoBehaviour, IDamageable, IReflectable
     private void Awake()
     {
         invulnerable = GetComponent<Invulnerable>();
-
         healthBar = GetComponent<HealthBar>();
-        healthBarContainer.SetActive(true);
     }
 
-    private void Start()
-    {
+    private void OnEnable() {
         currentLifePoints = enemyData.maxLifePoints;
         healthBar.UpdateContent(currentLifePoints);
+        healthBarContainer.SetActive(true);
     }
 
     public void TakeDamage(int damage)
