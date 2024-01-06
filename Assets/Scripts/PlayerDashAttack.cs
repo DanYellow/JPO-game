@@ -98,7 +98,7 @@ public class PlayerDashAttack : MonoBehaviour
                 {
                     DashEnd();
                     Knockback knockback = GetComponentInParent<Knockback>();
-                    knockback.Apply(item.gameObject, 50);
+                    knockback.Apply(item.gameObject, KnockbackValues.dashAttack);
 
                     return;
                 }

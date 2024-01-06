@@ -31,7 +31,7 @@ public class MechaProtect : MonoBehaviour, IGuardable
     {
         if (hitObstacle.transform.TryGetComponent(out Knockback knockback))
         {
-            knockback.Apply(gameObject, 20);
+            knockback.Apply(gameObject, KnockbackValues.lightAttack);
             StartCoroutine(Flash());
         }
     }

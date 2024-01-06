@@ -164,7 +164,7 @@ AnimatorController:
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 0
+    m_DefaultBool: 1
     m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
@@ -282,9 +282,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 434cd48e2bdef9749b1ce3093d2b0e9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetLayerMask:
-    serializedVersion: 2
-    m_Bits: 1
 --- !u!114 &4187034440961342092
 MonoBehaviour:
   m_ObjectHideFlags: 1

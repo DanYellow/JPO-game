@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Events;
 using System;
 
@@ -54,6 +53,10 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private void Update()
     {
+        if(animator == null) {
+            return;
+        }
+
         animator.SetFloat(AnimationStrings.velocityY, rb.velocity.y);
         if (isGrounded != null)
         {
@@ -74,14 +77,17 @@ public class Enemy : MonoBehaviour, IDamageable
 
         healthBar.UpdateContent(currentLifePoints);
 
-        animator.SetTrigger(AnimationStrings.hurt);
-        animator.SetBool(AnimationStrings.canMove, false);
-        StartCoroutine(Hurt());
+        if(animator != null) {
+            animator.SetTrigger(AnimationStrings.hurt);
+            animator.SetBool(AnimationStrings.canMove, false);
+    
+            StartCoroutine(Hurt());
+        }
 
         if (currentLifePoints <= 0)
         {
             isDying = true;
-            // StartCoroutine(Die());
+            StartCoroutine(Die());
         }
         else
         {
