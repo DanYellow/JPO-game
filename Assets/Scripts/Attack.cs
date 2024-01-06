@@ -14,10 +14,18 @@ public class Attack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        Knockback selfKnockback = GetComponentInParent<Knockback>();
+
         if (other.transform.TryGetComponent(out IGuardable iGuardable))
         {
-            if (iGuardable.isGuarding && (other.transform.right.x != transform.right.x || iGuardable.hasTotalGuard)) return;
+            selfKnockback.Apply(other.gameObject, 20);
+
+            if (iGuardable.isGuarding && (other.transform.right.x != transform.right.x || iGuardable.hasTotalGuard))
+            {
+                return;
+            }
         }
+
         if (other.transform.TryGetComponent(out IDamageable iDamageable))
         {
             iDamageable.TakeDamage(attackData.damage);
@@ -28,9 +36,11 @@ public class Attack : MonoBehaviour
             knockback.Apply(gameObject, attackData.knockbackForce);
         }
 
-        Knockback selfKnockback = GetComponentInParent<Knockback>();
-        if(selfKnockback != null) {
+        
+        if (selfKnockback != null)
+        {
             selfKnockback.Apply(other.gameObject, -attackData.knockbackForce / 2);
         }
+
     }
 }

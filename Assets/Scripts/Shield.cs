@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shield : MonoBehaviour, IDamageable
+public class Shield : MonoBehaviour, IDamageable, IReflectable
 {
     [ReadOnlyInspector]
     private int currentLifePoints;
@@ -10,12 +10,19 @@ public class Shield : MonoBehaviour, IDamageable
     private HealthBar healthBar;
 
     [SerializeField]
+    private GameObject healthBarContainer;
+
+    [SerializeField]
     private EnemyData enemyData;
+
+    public bool isReflecting { get; set; } = true;
+
+    public bool hasTotalReflection => true;
 
     private void Awake()
     {
         healthBar = GetComponent<HealthBar>();
-        healthBar.gameObject.SetActive(true);
+        healthBarContainer.SetActive(true);
     }
 
     private void Start()
@@ -37,7 +44,7 @@ public class Shield : MonoBehaviour, IDamageable
 
         if (currentLifePoints <= 0)
         {
-            healthBar.gameObject.SetActive(false);
+            healthBarContainer.SetActive(false);
             gameObject.SetActive(false);
         }
     }
