@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.Events;
 using UnityEngine;
 
 public class Shield : MonoBehaviour, IDamageable, IReflectable
@@ -14,8 +13,10 @@ public class Shield : MonoBehaviour, IDamageable, IReflectable
 
     [SerializeField]
     private EnemyData enemyData;
-    private SpriteRenderer sr;
     private Invulnerable invulnerable;
+
+    [SerializeField]
+    private UnityEvent onDestruction;
 
     public bool isReflecting { get; set; } = true;
 
@@ -23,7 +24,6 @@ public class Shield : MonoBehaviour, IDamageable, IReflectable
 
     private void Awake()
     {
-        sr = GetComponent<SpriteRenderer>();
         invulnerable = GetComponent<Invulnerable>();
 
         healthBar = GetComponent<HealthBar>();
@@ -38,7 +38,7 @@ public class Shield : MonoBehaviour, IDamageable, IReflectable
 
     public void TakeDamage(int damage)
     {
-        if(invulnerable.isInvulnerable) return;
+        if (invulnerable.isInvulnerable) return;
 
         currentLifePoints = Mathf.Clamp(
             currentLifePoints - damage,
@@ -46,16 +46,20 @@ public class Shield : MonoBehaviour, IDamageable, IReflectable
             enemyData.maxLifePoints
         );
 
-        // StartCoroutine(Hurt());
-
         healthBar.UpdateContent(currentLifePoints);
 
         if (currentLifePoints <= 0)
         {
             StopAllCoroutines();
+            onDestruction?.Invoke();
             healthBarContainer.SetActive(false);
             gameObject.SetActive(false);
-        } else {
+
+            Animator animator = GetComponentInParent<Animator>();
+            animator.SetBool(AnimationStrings.isGuarding, false);
+        }
+        else
+        {
             invulnerable.Trigger();
         }
     }

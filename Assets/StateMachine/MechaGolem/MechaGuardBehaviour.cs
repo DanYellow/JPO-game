@@ -1,6 +1,7 @@
 using UnityEngine;
+using UnityEngine.Events;
 
-public class MechaGuard : StateMachineBehaviour
+public class MechaGuardBehaviour : StateMachineBehaviour
 {
     private MechaProtect mechaProtect;
 

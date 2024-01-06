@@ -13,12 +13,19 @@ public class MechaProtect : MonoBehaviour, IGuardable
     private SpriteRenderer sr;
 
     [SerializeField]
+    private GameObject shield;
+
+    [SerializeField]
     private LayerMask targetLayerMask;
 
     private void Awake()
     {
         bc2d = GetComponent<BoxCollider2D>();
         sr = GetComponent<SpriteRenderer>();
+    }
+
+    private void OnEnable() {
+        shield.SetActive(true);
     }
 
     // Start is called before the first frame update
