@@ -1,6 +1,5 @@
-using System;
 using UnityEngine;
-using UnityEngine.Playables;
+
 public class MechaChase : StateMachineBehaviour
 {
     private Rigidbody2D rb;
@@ -8,6 +7,7 @@ public class MechaChase : StateMachineBehaviour
     private LookAtTarget lookAtTarget;
 
     private IsGrounded isGrounded;
+    private Enemy enemy;
 
     [SerializeField]
     private EnemyData enemyData;
@@ -31,6 +31,7 @@ public class MechaChase : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        enemy = animator.GetComponent<Enemy>();
         rb = animator.GetComponent<Rigidbody2D>();
         isGrounded = animator.GetComponent<IsGrounded>();
         lookAtTarget = animator.GetComponent<LookAtTarget>();
@@ -45,6 +46,7 @@ public class MechaChase : StateMachineBehaviour
         lookAtTarget.Face(target);
 
         float speed = enemyData.walkSpeed;
+        Debug.Log(enemy.GetHealth());
         if (Vector2.Distance(target.position, rb.position) < 15)
         {
             speed = enemyData.runSpeed;
@@ -61,6 +63,8 @@ public class MechaChase : StateMachineBehaviour
         }
 
         animator.SetFloat(AnimationStrings.velocityX, Mathf.Abs(rb.velocity.x));
+
+        // isGuarding
     }
 
     private void OnDisable()

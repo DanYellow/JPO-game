@@ -81,7 +81,7 @@ public class Enemy : MonoBehaviour, IDamageable
         if (currentLifePoints <= 0)
         {
             isDying = true;
-            StartCoroutine(Die());
+            // StartCoroutine(Die());
         }
         else
         {
@@ -137,5 +137,10 @@ public class Enemy : MonoBehaviour, IDamageable
     private void OnDestroy()
     {
 
+    }
+
+    public int GetHealth()
+    {
+        return currentLifePoints;
     }
 }
