@@ -92,6 +92,9 @@ public class PlayerDashAttack : MonoBehaviour
 
         foreach (var item in hits)
         {
+            if(item.TryGetComponent(out Animator animator)) {
+                Debug.Log(animator.GetBehaviour<MechaGuard>());
+            }
             if (item.TryGetComponent(out IGuardable iGuardable))
             {
                 if (iGuardable.isGuarding && item.transform.right.x != transform.right.x)

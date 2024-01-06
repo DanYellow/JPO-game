@@ -42,11 +42,12 @@ public class MechaChase : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if(!hasFightStarted) return;
+        animator.SetBool(AnimationStrings.isGuarding, true);
 
         lookAtTarget.Face(target);
 
         float speed = enemyData.walkSpeed;
-        Debug.Log(enemy.GetHealth());
+        // Debug.Log(enemy.GetHealth());
         if (Vector2.Distance(target.position, rb.position) < 15)
         {
             speed = enemyData.runSpeed;
