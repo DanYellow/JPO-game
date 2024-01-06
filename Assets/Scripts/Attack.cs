@@ -18,12 +18,15 @@ public class Attack : MonoBehaviour
 
         if (other.transform.TryGetComponent(out IGuardable iGuardable))
         {
-            selfKnockback.Apply(other.gameObject, 20);
-
             if (iGuardable.isGuarding && (other.transform.right.x != transform.right.x || iGuardable.hasTotalGuard))
             {
                 return;
             }
+        }
+
+        if (other.transform.TryGetComponent(out IReflectable iReflectable))
+        {
+            selfKnockback.Apply(other.gameObject, 20);
         }
 
         if (other.transform.TryGetComponent(out IDamageable iDamageable))
@@ -36,11 +39,9 @@ public class Attack : MonoBehaviour
             knockback.Apply(gameObject, attackData.knockbackForce);
         }
 
-        
-        if (selfKnockback != null)
+        if (selfKnockback != null && other.transform.GetComponent<IReflectable>() == null)
         {
             selfKnockback.Apply(other.gameObject, -attackData.knockbackForce / 2);
         }
-
     }
 }

@@ -104,6 +104,12 @@ public class PlayerDashAttack : MonoBehaviour
                 }
             }
 
+            if (item.TryGetComponent(out IReflectable iReflectable))
+            {
+                Knockback knockback = GetComponentInParent<Knockback>();
+                knockback.Apply(item.gameObject, KnockbackValues.dashAttack);
+            }
+
             if (item.gameObject != gameObject && item.TryGetComponent(out IDamageable iDamageable))
             {
                 iDamageable.TakeDamage(playerData.dashDamage);

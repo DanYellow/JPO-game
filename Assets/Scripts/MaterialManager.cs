@@ -41,7 +41,7 @@ public class MaterialManager : MonoBehaviour
             sr.color = originalColor;
             yield return intervalMaterialChange;
         }
-        originalColor.a = 1;
+        // originalColor.a = 1;
         sr.color = originalColor;
         sr.material = originalMaterial;
         StopAllCoroutines();

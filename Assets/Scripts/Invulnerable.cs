@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Invulnerable : MonoBehaviour
 {
-    private bool isInvulnerable = false;
+    public bool isInvulnerable { private set; get; } = false;
     [SerializeField]
     private InvulnerableDataValue invulnerableDataValue;
     [SerializeField]
@@ -43,11 +43,13 @@ public class Invulnerable : MonoBehaviour
         }
     }
 
-    public void Enable() {
+    public void Enable()
+    {
         Helpers.DisableCollisions(LayerMask.LayerToName(gameObject.layer), listLayers, true);
     }
 
-    public void Disable() {
+    public void Disable()
+    {
         Helpers.DisableCollisions(LayerMask.LayerToName(gameObject.layer), listLayers, false);
     }
 
