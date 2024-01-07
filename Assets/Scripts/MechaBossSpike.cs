@@ -11,14 +11,14 @@ public class MechaBossSpike : MonoBehaviour
 
     private bool throwing = false;
 
-    private RotateAround rotateAround;
+    private SpriteRenderer sr;
 
     private Vector3 throwDir;
 
     private void Awake()
     {
-        // rotateAround = GetComponent<RotateAround>();
-        //  rotateAround.enabled = false;    
+        print("mcsss");
+        sr = GetComponent<SpriteRenderer>();   
     }
 
     private void Update()
@@ -31,6 +31,7 @@ public class MechaBossSpike : MonoBehaviour
 
     public void Throw()
     {
+        sr.color = Color.red;
         throwing = true;
         var target = GameObject.Find("Player").transform;
         throwDir = (GameObject.Find("Player").transform.position - transform.position).normalized;
@@ -40,6 +41,7 @@ public class MechaBossSpike : MonoBehaviour
 
     public void Reset() {
         throwing = false;
+        sr.color = Color.white;
     }
  
     private void OnTriggerEnter2D(Collider2D other)

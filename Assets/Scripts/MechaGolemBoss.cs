@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class MechaGolemBoss : MonoBehaviour
 {
@@ -11,11 +12,7 @@ public class MechaGolemBoss : MonoBehaviour
     // Start is called before the first frame update
 
     public List<Transform> listSpikes = new List<Transform>();
-    public List<Transform> listSpikesToThrow = new List<Transform>();
-
-    private void Awake() {
-        
-    }
+    private List<Transform> listSpikesToThrow = new List<Transform>();
 
     void Start()
     {
@@ -24,10 +21,12 @@ public class MechaGolemBoss : MonoBehaviour
         Reset();
     }
 
-    private void Update() {
-       if (Input.GetKeyDown(KeyCode.Space)) {
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
             ThrowSpike();
-       }
+        }
     }
 
     private IEnumerator CheckShieldGeneration()
@@ -42,7 +41,8 @@ public class MechaGolemBoss : MonoBehaviour
         }
     }
 
-    private void Reset() {
+    private void Reset()
+    {
         listSpikesToThrow = new List<Transform>(listSpikes);
         var length = listSpikes.Count;
         var radius = 6;
@@ -50,7 +50,7 @@ public class MechaGolemBoss : MonoBehaviour
         {
             var spike = listSpikes[i];
 
-            var val = Mathf.Lerp(0, 2 * Mathf.PI, (float) i/length);
+            var val = Mathf.Lerp(0, 2 * Mathf.PI, (float)i / length);
             var pos = spike.localPosition;
             pos.x = radius * Mathf.Cos(val);
             pos.y = radius * Mathf.Sin(val);
@@ -62,17 +62,26 @@ public class MechaGolemBoss : MonoBehaviour
         }
     }
 
-    private void ThrowSpike() 
+    private void ThrowSpike()
     {
-        if(listSpikesToThrow.Count == 0) {
+        if (listSpikesToThrow.Count == 0)
+        {
             Reset();
             return;
         }
-        Transform spike = listSpikesToThrow[Random.Range(0, listSpikesToThrow.Count)];
-        spike.GetComponent<RotateAround>().enabled = false;
-        spike.GetComponent<MechaBossSpike>().Throw();
 
-        listSpikesToThrow.Remove(spike);
+        Transform spike = listSpikesToThrow.FirstOrDefault(item =>
+        {
+            return item.localEulerAngles.z >= 270 && item.localEulerAngles.z <= 360;
+        });
+
+        if (spike)
+        {
+            spike.GetComponent<RotateAround>().enabled = false;
+            spike.GetComponent<MechaBossSpike>().Throw();
+            listSpikesToThrow.Remove(spike);
+        }
+
     }
 
     public void StartShieldGenerationChecking()
