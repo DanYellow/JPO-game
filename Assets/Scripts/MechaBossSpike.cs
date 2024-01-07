@@ -17,16 +17,12 @@ public class MechaBossSpike : MonoBehaviour
 
     private void Awake()
     {
-        rotateAround = GetComponent<RotateAround>();        
+        // rotateAround = GetComponent<RotateAround>();
+        //  rotateAround.enabled = false;    
     }
 
     private void Update()
     {
-        // if (Input.GetKeyDown(KeyCode.Space))
-        // {
-        //     Throw();
-        // }
-
         if (throwing)
         {
             transform.position += throwDir * projectileData.speed * Time.deltaTime;
@@ -35,7 +31,6 @@ public class MechaBossSpike : MonoBehaviour
 
     public void Throw()
     {
-        rotateAround.enabled = false;
         throwing = true;
         var target = GameObject.Find("Player").transform;
         throwDir = (GameObject.Find("Player").transform.position - transform.position).normalized;
@@ -43,6 +38,10 @@ public class MechaBossSpike : MonoBehaviour
         transform.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
     }
 
+    public void Reset() {
+        throwing = false;
+    }
+ 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))

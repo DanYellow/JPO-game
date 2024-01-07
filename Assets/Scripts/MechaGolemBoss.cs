@@ -14,24 +14,14 @@ public class MechaGolemBoss : MonoBehaviour
     public List<Transform> listSpikesToThrow = new List<Transform>();
 
     private void Awake() {
-        listSpikesToThrow = new List<Transform>(listSpikes);
+        
     }
 
     void Start()
     {
         checkShieldGenerationCo = CheckShieldGeneration();
 
-        var length = listSpikes.Count;
-        var radius = 6;
-        for (var i = 0; i < length; i++)
-        {
-            var val = Mathf.Lerp(0, 2 * Mathf.PI, (float) i/length);
-            var pos = listSpikes[i].localPosition;
-            pos.x = radius * Mathf.Cos(val);
-            pos.y = radius * Mathf.Sin(val);
-
-            listSpikes[i].localPosition = pos;
-        }
+        Reset();
     }
 
     private void Update() {
@@ -52,13 +42,37 @@ public class MechaGolemBoss : MonoBehaviour
         }
     }
 
+    private void Reset() {
+        listSpikesToThrow = new List<Transform>(listSpikes);
+        var length = listSpikes.Count;
+        var radius = 6;
+        for (var i = 0; i < length; i++)
+        {
+            var spike = listSpikes[i];
+
+            var val = Mathf.Lerp(0, 2 * Mathf.PI, (float) i/length);
+            var pos = spike.localPosition;
+            pos.x = radius * Mathf.Cos(val);
+            pos.y = radius * Mathf.Sin(val);
+
+
+            spike.localPosition = pos;
+            spike.GetComponent<RotateAround>().enabled = true;
+            spike.GetComponent<MechaBossSpike>().Reset();
+        }
+    }
+
     private void ThrowSpike() 
     {
+        if(listSpikesToThrow.Count == 0) {
+            Reset();
+            return;
+        }
         Transform spike = listSpikesToThrow[Random.Range(0, listSpikesToThrow.Count)];
+        spike.GetComponent<RotateAround>().enabled = false;
         spike.GetComponent<MechaBossSpike>().Throw();
 
         listSpikesToThrow.Remove(spike);
-       
     }
 
     public void StartShieldGenerationChecking()

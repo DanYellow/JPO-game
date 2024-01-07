@@ -16,16 +16,15 @@ public class RotateAround : MonoBehaviour
     [SerializeField]
     private Transform pivot;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public bool isAnticlockwise = true; 
 
     // Update is called once per frame
     void Update()
     {
-        transform.RotateAround(pivot.position, -pivot.forward, Time.deltaTime * rotationSpeed);
+        transform.RotateAround(
+            pivot.position, 
+            isAnticlockwise ? -pivot.forward : pivot.forward, 
+            Time.deltaTime * rotationSpeed
+        );
     }
 }
