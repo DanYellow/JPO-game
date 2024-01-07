@@ -25,7 +25,7 @@ public class MechaGolemBoss : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            ThrowSpike();
+            StartCoroutine(ThrowSpike());
         }
     }
 
@@ -49,39 +49,49 @@ public class MechaGolemBoss : MonoBehaviour
         for (var i = 0; i < length; i++)
         {
             var spike = listSpikes[i];
-
             var val = Mathf.Lerp(0, 2 * Mathf.PI, (float)i / length);
             var pos = spike.localPosition;
+            
             pos.x = radius * Mathf.Cos(val);
             pos.y = radius * Mathf.Sin(val);
 
-
-            spike.localPosition = pos;
-            spike.GetComponent<RotateAround>().enabled = true;
             spike.GetComponent<MechaBossSpike>().Reset();
+            spike.GetComponent<RotateAround>().enabled = true;
+ 
+            spike.localPosition = pos;
         }
     }
 
-    private void ThrowSpike()
+    private IEnumerator ThrowSpike()
     {
-        if (listSpikesToThrow.Count == 0)
-        {
-            Reset();
-            return;
-        }
-
         Transform spike = listSpikesToThrow.FirstOrDefault(item =>
         {
-            return item.localEulerAngles.z >= 270 && item.localEulerAngles.z <= 360;
+            return item.localEulerAngles.z >= 290 && item.localEulerAngles.z <= 360;
         });
 
         if (spike)
         {
+            print("test " + (int) spike.localEulerAngles.z);
+            listSpikesToThrow.ForEach((item) => {
+                item.GetComponent<RotateAround>().enabled = false;
+            });
             spike.GetComponent<RotateAround>().enabled = false;
             spike.GetComponent<MechaBossSpike>().Throw();
+
+            yield return Helpers.GetWait(0.75f);
+
             listSpikesToThrow.Remove(spike);
+
+            listSpikesToThrow.ForEach((item) => {
+                item.GetComponent<RotateAround>().enabled = true;
+            });
         }
 
+        if (listSpikesToThrow.Count == 0)
+        {
+            Reset();
+            yield return null;
+        }
     }
 
     public void StartShieldGenerationChecking()

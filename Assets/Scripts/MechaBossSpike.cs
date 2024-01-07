@@ -15,10 +15,12 @@ public class MechaBossSpike : MonoBehaviour
 
     private Vector3 throwDir;
 
+    public Quaternion origRotation { private set; get; }
+
     private void Awake()
     {
-        print("mcsss");
-        sr = GetComponent<SpriteRenderer>();   
+        sr = GetComponent<SpriteRenderer>();
+        origRotation = transform.rotation;
     }
 
     private void Update()
@@ -39,11 +41,13 @@ public class MechaBossSpike : MonoBehaviour
         transform.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
     }
 
-    public void Reset() {
+    public void Reset()
+    {
         throwing = false;
         sr.color = Color.white;
+        transform.rotation = origRotation;
     }
- 
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
