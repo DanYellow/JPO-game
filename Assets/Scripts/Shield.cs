@@ -7,12 +7,15 @@ public class Shield : MonoBehaviour, IDamageable, IReflectable
     private int currentLifePoints;
 
     private HealthBar healthBar;
+    private Enemy boss;
 
     [SerializeField]
     private GameObject healthBarContainer;
 
     [SerializeField]
     private EnemyData enemyData;
+
+    private int maxLifePoints;
     private Invulnerable invulnerable;
 
     [SerializeField]
@@ -26,10 +29,14 @@ public class Shield : MonoBehaviour, IDamageable, IReflectable
     {
         invulnerable = GetComponent<Invulnerable>();
         healthBar = GetComponent<HealthBar>();
+        boss = GetComponentInParent<Enemy>();
     }
 
     private void OnEnable() {
-        currentLifePoints = enemyData.maxLifePoints;
+        float rate = (float)boss.GetHealth() / boss.GetMaxHealth();
+        currentLifePoints = enemyData.maxLifePoints * (int) Mathf.Round(1.25f / rate);
+        maxLifePoints = currentLifePoints;
+        healthBar.maxLifePoints = currentLifePoints;
         healthBar.UpdateContent(currentLifePoints);
         healthBarContainer.SetActive(true);
     }
@@ -41,7 +48,7 @@ public class Shield : MonoBehaviour, IDamageable, IReflectable
         currentLifePoints = Mathf.Clamp(
             currentLifePoints - damage,
             0,
-            enemyData.maxLifePoints
+            maxLifePoints
         );
 
         healthBar.UpdateContent(currentLifePoints);

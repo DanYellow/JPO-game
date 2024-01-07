@@ -21,6 +21,8 @@ public class HealthBar : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI nameText;
 
+    public int? maxLifePoints { private get; set; }
+
     void Start()
     {
         if (nameText != null)
@@ -31,19 +33,22 @@ public class HealthBar : MonoBehaviour
 
     public void UpdateContent(int currentLifePoints)
     {
-        if (displayWhenFull || currentLifePoints != enemyData.maxLifePoints)
+        int _maxLifePoints = maxLifePoints ?? enemyData.maxLifePoints;
+        if (displayWhenFull || currentLifePoints != _maxLifePoints)
         {
             container.SetActive(true);
-        } else {
+        }
+        else
+        {
             container.SetActive(false);
         }
 
-        float rate = (float)currentLifePoints / enemyData.maxLifePoints;
+        float rate = (float)currentLifePoints / _maxLifePoints;
         bar.fillAmount = rate;
 
         if (lifePointsText != null)
         {
-            lifePointsText.SetText($"{currentLifePoints}/{enemyData.maxLifePoints}");
+            lifePointsText.SetText($"{currentLifePoints}/{_maxLifePoints}");
         }
     }
 

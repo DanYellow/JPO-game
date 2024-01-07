@@ -42,13 +42,15 @@ public class Enemy : MonoBehaviour, IDamageable
         isGrounded = GetComponent<IsGrounded>();
         invulnerable = GetComponent<Invulnerable>();
         healthBar = GetComponent<HealthBar>();
+
+        currentLifePoints = enemyData.maxLifePoints;
+
+        healthBar.UpdateContent(currentLifePoints);
     }
 
     private void Start()
     {
-        currentLifePoints = enemyData.maxLifePoints;
-
-        healthBar.UpdateContent(currentLifePoints);
+        
     }
 
     private void Update()
@@ -148,5 +150,10 @@ public class Enemy : MonoBehaviour, IDamageable
     public int GetHealth()
     {
         return currentLifePoints;
+    }
+
+    public int GetMaxHealth()
+    {
+        return enemyData.maxLifePoints;
     }
 }

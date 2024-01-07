@@ -5,6 +5,7 @@ public class Followed : MonoBehaviour
     [SerializeField] Transform follower;
     private Collider2D bc;
 
+    [SerializeField]
     private float yDelta = 0;
     private void Awake()
     {

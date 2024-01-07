@@ -18,9 +18,10 @@ public class MechaGolemBoss : MonoBehaviour
         yield return Helpers.GetWait(1.75f);
         while (true)
         {
+            // yield return Helpers.GetWait(1f); // For tests
             yield return Helpers.GetWait(4.15f);
-
-            needsToActivateShield = Random.value < 0.38f;
+            bool randVal = Random.value < 0.35f;
+            needsToActivateShield = randVal;
         }
     }
 
