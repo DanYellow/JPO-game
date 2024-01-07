@@ -28,7 +28,7 @@ public class GameOverManager : MonoBehaviour
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.N))
         {
-            print(EventSystem.current.currentSelectedGameObject);
+            // print(EventSystem.current.currentSelectedGameObject);
             // gameoverMenuUI.GetComponentInChildren<Button>().Select();
             // Debug.Log("Time spent : " + (int)Time.timeSinceLevelLoad);
         }

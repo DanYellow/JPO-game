@@ -23,7 +23,7 @@ public class MechaGolemBoss : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.N))
         {
             StartCoroutine(ThrowSpike());
         }
@@ -51,7 +51,7 @@ public class MechaGolemBoss : MonoBehaviour
             var spike = listSpikes[i];
             var val = Mathf.Lerp(0, 2 * Mathf.PI, (float)i / length);
             var pos = spike.localPosition;
-            
+
             pos.x = radius * Mathf.Cos(val);
             pos.y = radius * Mathf.Sin(val);
 
@@ -64,21 +64,31 @@ public class MechaGolemBoss : MonoBehaviour
 
     private IEnumerator ThrowSpike()
     {
-        Transform spike = listSpikesToThrow.FirstOrDefault(item =>
+        // listSpikesToThrow.ForEach((item) => {
+        //     Vector2 distance = item.position - transform.position;
+        //     float angle = Vector2.SignedAngle(transform.right, distance);
+
+        //     print( angle + " " + item.name);
+        // });
+        // print("---------------");
+        Transform spike = listSpikesToThrow.Find(item =>
         {
-            return item.localEulerAngles.z >= 290 && item.localEulerAngles.z <= 360;
+            Vector2 distance = item.position - transform.position;
+            float angle = Vector2.SignedAngle(transform.right, distance);
+
+            return angle >= -130 && angle <= -50;
         });
 
         if (spike)
         {
-            print("test " + (int) spike.localEulerAngles.z);
+            print(spike.localEulerAngles.z);
             listSpikesToThrow.ForEach((item) => {
                 item.GetComponent<RotateAround>().enabled = false;
             });
             spike.GetComponent<RotateAround>().enabled = false;
             spike.GetComponent<MechaBossSpike>().Throw();
 
-            yield return Helpers.GetWait(0.75f);
+            yield return Helpers.GetWait(0.35f);
 
             listSpikesToThrow.Remove(spike);
 
@@ -87,11 +97,11 @@ public class MechaGolemBoss : MonoBehaviour
             });
         }
 
-        if (listSpikesToThrow.Count == 0)
-        {
-            Reset();
-            yield return null;
-        }
+        // if (listSpikesToThrow.Count == 0)
+        // {
+        //     Reset();
+        //     yield return null;
+        // }
     }
 
     public void StartShieldGenerationChecking()
