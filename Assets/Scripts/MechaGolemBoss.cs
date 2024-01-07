@@ -11,13 +11,18 @@ public class MechaGolemBoss : MonoBehaviour
     // Start is called before the first frame update
 
     public List<Transform> listSpikes = new List<Transform>();
+    public List<Transform> listSpikesToThrow = new List<Transform>();
+
+    private void Awake() {
+        listSpikesToThrow = new List<Transform>(listSpikes);
+    }
 
     void Start()
     {
         checkShieldGenerationCo = CheckShieldGeneration();
 
         var length = listSpikes.Count;
-        var radius = 9;
+        var radius = 6;
         for (var i = 0; i < length; i++)
         {
             var val = Mathf.Lerp(0, 2 * Mathf.PI, (float) i/length);
@@ -27,6 +32,12 @@ public class MechaGolemBoss : MonoBehaviour
 
             listSpikes[i].localPosition = pos;
         }
+    }
+
+    private void Update() {
+       if (Input.GetKeyDown(KeyCode.Space)) {
+            ThrowSpike();
+       }
     }
 
     private IEnumerator CheckShieldGeneration()
@@ -39,6 +50,15 @@ public class MechaGolemBoss : MonoBehaviour
             bool randVal = Random.value < 0.35f;
             needsToActivateShield = randVal;
         }
+    }
+
+    private void ThrowSpike() 
+    {
+        Transform spike = listSpikesToThrow[Random.Range(0, listSpikesToThrow.Count)];
+        spike.GetComponent<MechaBossSpike>().Throw();
+
+        listSpikesToThrow.Remove(spike);
+       
     }
 
     public void StartShieldGenerationChecking()

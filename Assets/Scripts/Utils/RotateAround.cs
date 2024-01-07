@@ -11,7 +11,7 @@ public class RotateAround : MonoBehaviour
 {
 
     [SerializeField]
-    private float rotationSpeed = 1;
+    private float rotationSpeed = 150;
 
     [SerializeField]
     private Transform pivot;
@@ -26,9 +26,6 @@ public class RotateAround : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var subtraction = pivot.position - transform.position;
-        var direction = (pivot.position - transform.position).normalized;
-
-        transform.RotateAround(pivot.position, pivot.forward, Time.deltaTime * rotationSpeed);
+        transform.RotateAround(pivot.position, -pivot.forward, Time.deltaTime * rotationSpeed);
     }
 }
