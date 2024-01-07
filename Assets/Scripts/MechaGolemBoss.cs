@@ -17,12 +17,13 @@ public class MechaGolemBoss : MonoBehaviour
         checkShieldGenerationCo = CheckShieldGeneration();
 
         var length = listSpikes.Count;
+        var radius = 9;
         for (var i = 0; i < length; i++)
         {
             var val = Mathf.Lerp(0, 2 * Mathf.PI, (float) i/length);
             var pos = listSpikes[i].localPosition;
-            pos.x = 4 * Mathf.Cos(val);
-            pos.y = 4 * Mathf.Sin(val);
+            pos.x = radius * Mathf.Cos(val);
+            pos.y = radius * Mathf.Sin(val);
 
             listSpikes[i].localPosition = pos;
         }

@@ -453,10 +453,7 @@ MonoBehaviour:
   invulnerableDataValue: {fileID: 11400000, guid: 9ab98fc8a64673b4593d13bd345651eb, type: 2}
   layersToIgnoreAfterHit:
     serializedVersion: 2
-    m_Bits: 1664
-  onHealthUpdated: {fileID: 11400000, guid: 03eb6c1b9f1a7ae4dac9b654d5a925a8, type: 2}
-  onMaterialChange: {fileID: 11400000, guid: 1ef143ed0456178448a9a26f8fb8dd48, type: 2}
-  materialChange: {fileID: 11400000, guid: f83f25e3727d3074ea00996d2bdcfb3d, type: 2}
+    m_Bits: 5760
 --- !u!114 &5528627662263019263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -482,7 +479,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lightAttackEventChannel: {fileID: 11400000, guid: 2388948892c76f24bac08ee016c41edd, type: 2}
-  lightAttackRate: 0
   playerCanMove: {fileID: 11400000, guid: d4070e2f3c65e5f48a143aca81e93fbb, type: 2}
 --- !u!114 &5528627662263019265
 MonoBehaviour:
