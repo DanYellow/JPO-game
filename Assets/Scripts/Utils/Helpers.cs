@@ -37,10 +37,25 @@ public static class Helpers
         foreach (var layerIndex in layersToIgnore)
         {
             Physics2D.IgnoreLayerCollision(
-                LayerMask.NameToLayer(layerName), 
-                layerIndex, 
+                LayerMask.NameToLayer(layerName),
+                layerIndex,
                 enabled
             );
+        }
+    }
+
+    public static IEnumerable<float> LinearDistribution(float min, float max, int count)
+    {
+        if (count <= 1)
+        {
+            yield return Mathf.Lerp(min, max, 0.5f);
+            yield break;
+        }
+
+        float delta = 1f / (count - 1);
+        for (int i = 0; i < count; i++)
+        {
+            yield return Mathf.Lerp(min, max, delta * (count - 1));
         }
     }
 }
