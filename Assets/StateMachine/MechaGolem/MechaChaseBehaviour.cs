@@ -46,6 +46,7 @@ public class MechaChaseBehaviour : StateMachineBehaviour
     {
         if (!hasFightStarted) return;
         mechaGolemBoss.StartShieldGenerationChecking();
+        // mechaGolemBoss.PrepareProxy();
 
         if (mechaGolemBoss.needsToActivateShield)
         {
@@ -69,6 +70,7 @@ public class MechaChaseBehaviour : StateMachineBehaviour
             Vector2 targetPos = new Vector2(target.position.x, rb.position.y);
             Vector2 newPos = Vector2.MoveTowards(rb.position, targetPos, speed * Time.fixedDeltaTime);
             rb.MovePosition(newPos);
+            mechaGolemBoss.PrepareProxy();
         }
 
         animator.SetFloat(AnimationStrings.velocityX, Mathf.Abs(rb.velocity.x));
