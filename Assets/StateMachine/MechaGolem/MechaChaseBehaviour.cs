@@ -62,15 +62,27 @@ public class MechaChaseBehaviour : StateMachineBehaviour
             speed = enemyData.runSpeed;
         }
 
-        if (
-                Vector2.Distance(target.position, rb.position) > 10 &&
-                Vector2.Distance(target.position, rb.position) < 25
-            )
+        if (Vector2.Distance(target.position, rb.position) < 25)
         {
-            Vector2 targetPos = new Vector2(target.position.x, rb.position.y);
-            Vector2 newPos = Vector2.MoveTowards(rb.position, targetPos, speed * Time.fixedDeltaTime);
-            rb.MovePosition(newPos);
-            mechaGolemBoss.ThrowSpikesProxy();
+
+            if (Vector2.Distance(target.position, rb.position) > 5)
+            {
+                Vector2 targetPos = new Vector2(target.position.x, rb.position.y);
+                Vector2 newPos = Vector2.MoveTowards(rb.position, targetPos, speed * Time.fixedDeltaTime);
+                rb.MovePosition(newPos);
+            }
+
+            if (
+                Vector2.Distance(target.position, rb.position) < 10 &&
+                (enemy.GetHealth() / enemy.GetMaxHealth() < 0.4f)
+            )
+            {
+                // mechaGolemBoss.ThrowAllSpikesProxy();
+            }
+            else
+            {
+                mechaGolemBoss.ThrowSpikesProxy();
+            }
         }
 
         animator.SetFloat(AnimationStrings.velocityX, Mathf.Abs(rb.velocity.x));
