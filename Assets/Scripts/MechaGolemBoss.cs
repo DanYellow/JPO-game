@@ -11,6 +11,8 @@ public class MechaGolemBoss : MonoBehaviour
     private bool spikesReady = false;
     private LookAtTarget lookAtTarget;
 
+    private Transform target;
+
     public float delayBetweenThrows = 3.5f;
     // Start is called before the first frame update
 
@@ -20,6 +22,7 @@ public class MechaGolemBoss : MonoBehaviour
     private void Awake()
     {
         lookAtTarget = GetComponent<LookAtTarget>();
+        target = GameObject.Find("Player").transform;
 
         listSpikes.ForEach((item) =>
         {
@@ -74,7 +77,7 @@ public class MechaGolemBoss : MonoBehaviour
             pos.y = radius * Mathf.Sin(val);
 
             spike.GetComponent<MechaBossSpike>().Reset();
-            // spike.GetComponent<RotateAround>().enabled = true;
+            spike.GetComponent<RotateAround>().enabled = true;
 
             spike.localPosition = pos;
 
@@ -99,11 +102,11 @@ public class MechaGolemBoss : MonoBehaviour
             spike.GetComponent<RotateAround>().enabled = true;
         }
 
-        // while (listSpikesToThrow.Count > 0)
-        // {
-        //     yield return Helpers.GetWait(delayBetweenThrows);
-        //     StartCoroutine(ThrowSpike());
-        // }
+        while (listSpikesToThrow.Count > 0)
+        {
+            yield return Helpers.GetWait(delayBetweenThrows);
+            StartCoroutine(ThrowSpike());
+        }
 
         yield return null;
     }
@@ -114,12 +117,15 @@ public class MechaGolemBoss : MonoBehaviour
         {
             Vector3 delta = (transform.position - item.position).normalized;
             Vector3 cross = Vector3.Cross(delta, transform.up);
-            Vector3 dir = cross.z > 0 ? Vector3.up : Vector3.down;
+            Vector3 rotateDir = cross.z > 0 ? Vector3.up : Vector3.down;
 
-            // item.GetComponent<RotateAround>().enabled = true;
+            // item.GetComponent<RotateAround>().enabled = false;
 
-            Quaternion rotation = Quaternion.LookRotation(transform.position - item.position, transform.TransformDirection(dir));
+            Quaternion rotation = Quaternion.LookRotation(transform.position - item.position, transform.TransformDirection(rotateDir));
             item.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
+
+            Vector3 throwDir = -item.transform.right;
+            item.GetComponent<MechaBossSpike>().Throw(throwDir);
         });
 
         listSpikesToThrow.Clear();
@@ -157,8 +163,16 @@ public class MechaGolemBoss : MonoBehaviour
             {
                 item.GetComponent<RotateAround>().enabled = false;
             });
+
+            Vector3 rotateDir = lookAtTarget.isFacingRight ? Vector3.down : Vector3.up;
+
+            Quaternion rotation = Quaternion.LookRotation(target.position - spike.transform.position, transform.TransformDirection(rotateDir));
+            spike.transform.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
+
             spike.GetComponent<RotateAround>().enabled = false;
-            spike.GetComponent<MechaBossSpike>().Throw(lookAtTarget.isFacingRight ? Vector3.down : Vector3.up);
+
+            Vector3 throwDir = (target.position - spike.transform.position).normalized;
+            spike.GetComponent<MechaBossSpike>().Throw(throwDir);
 
             yield return Helpers.GetWait(0.35f);
 
