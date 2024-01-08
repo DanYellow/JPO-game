@@ -31,14 +31,15 @@ public class MechaBossSpike : MonoBehaviour
         }
     }
 
-    public void Throw()
+    public void Throw(Vector3? dir = null)
     {
+        dir ??= Vector3.up;
         sr.color = Color.red;
         throwing = true;
         var target = GameObject.Find("Player").transform;
         throwDir = (GameObject.Find("Player").transform.position - transform.position).normalized;
         
-        Quaternion rotation = Quaternion.LookRotation(target.position - transform.position, transform.TransformDirection(Vector3.up));
+        Quaternion rotation = Quaternion.LookRotation(target.position - transform.position, transform.TransformDirection((Vector3) dir));
         transform.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
     }
 

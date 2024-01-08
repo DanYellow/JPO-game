@@ -128,7 +128,7 @@ public class MechaGolemBoss : MonoBehaviour
                 item.GetComponent<RotateAround>().enabled = false;
             });
             spike.GetComponent<RotateAround>().enabled = false;
-            spike.GetComponent<MechaBossSpike>().Throw();
+            spike.GetComponent<MechaBossSpike>().Throw(lookAtTarget.isFacingRight ? Vector3.down : Vector3.up);
 
             yield return Helpers.GetWait(0.35f);
 
