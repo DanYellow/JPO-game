@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 // https://www.youtube.com/watch?v=IGDrF1Cq9Q0
@@ -9,7 +7,7 @@ public class MechaBossSpike : MonoBehaviour
     [SerializeField]
     ProjectileData projectileData;
 
-    public bool throwing = false;
+    private bool throwing = false;
 
     private SpriteRenderer sr;
 
@@ -27,7 +25,6 @@ public class MechaBossSpike : MonoBehaviour
     {
         if (throwing)
         {
-            // transform.position += projectileData.speed * Time.deltaTime * -transform.right;
             transform.position += projectileData.speed * Time.deltaTime * throwDir;
         }
     }
@@ -38,7 +35,6 @@ public class MechaBossSpike : MonoBehaviour
         throwing = true;
 
         sr.color = Color.red;
-        // throwDir = (GameObject.Find("Player").transform.position - transform.position).normalized;
     }
 
     public void Reset()

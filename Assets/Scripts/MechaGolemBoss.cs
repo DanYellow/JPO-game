@@ -34,14 +34,14 @@ public class MechaGolemBoss : MonoBehaviour
     void Start()
     {
         checkShieldGenerationCo = CheckShieldGeneration();
-        StartCoroutine(Prepare());
+        // StartCoroutine(PrepareSpikes());
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.N))
         {
-            StartCoroutine(Expulse());
+            StartCoroutine(ExpulseSpikes());
             // StartCoroutine(ThrowSpike());
         }
     }
@@ -59,7 +59,7 @@ public class MechaGolemBoss : MonoBehaviour
         }
     }
 
-    private IEnumerator Prepare()
+    private IEnumerator PrepareSpikes()
     {
         listSpikesToThrow = new List<Transform>(listSpikes);
         var length = listSpikes.Count;
@@ -90,16 +90,17 @@ public class MechaGolemBoss : MonoBehaviour
             spike.GetComponent<RotateAround>().enabled = true;
         }
 
-        while (listSpikesToThrow.Count > 0)
-        {
-            yield return Helpers.GetWait(delayBetweenThrows);
-            StartCoroutine(ThrowSpike());
-        }
+        
+        // while (listSpikesToThrow.Count > 0)
+        // {
+        //     yield return Helpers.GetWait(delayBetweenThrows);
+        //     StartCoroutine(ThrowSpike());
+        // }
 
         yield return null;
     }
 
-    public IEnumerator Expulse()
+    public IEnumerator ExpulseSpikes()
     {
         yield return null;
         for (var i = 0; i < listSpikesToThrow.Count; i++)
@@ -117,16 +118,25 @@ public class MechaGolemBoss : MonoBehaviour
 
             Vector3 throwDir = -item.transform.right;
             item.GetComponent<MechaBossSpike>().Throw(throwDir);
+
             yield return Helpers.GetWait(0.15f);
         }
-
 
         listSpikesToThrow.Clear();
     }
 
     private IEnumerator ThrowSpike()
     {
-        yield return null;
+        if (listSpikesToThrow.Count == 0) {
+            yield break;
+        }
+
+        yield return Helpers.GetWait(delayBetweenThrows);
+        //         while (listSpikesToThrow.Count > 0)
+        // {
+        //     yield return Helpers.GetWait(delayBetweenThrows);
+        //     StartCoroutine(ThrowSpike());
+        // }
 
         int[] anglesLimit = { -130, -50 };
         if (lookAtTarget.isFacingRight)
@@ -177,10 +187,12 @@ public class MechaGolemBoss : MonoBehaviour
             });
         }
 
-        if (listSpikesToThrow.Count == 0)
-        {
-            StartCoroutine(Prepare());
-        }
+        yield return StartCoroutine(ThrowSpike());
+
+        // if (listSpikesToThrow.Count == 0)
+        // {
+        //     StartCoroutine(Prepare());
+        // }
     }
 
     public void StartShieldGenerationChecking()
@@ -197,15 +209,15 @@ public class MechaGolemBoss : MonoBehaviour
         needsToActivateShield = false;
     }
 
-    public void PrepareProxy()
+    public void PrepareSpikesProxy()
     {
         if (spikesReady) return;
-        StartCoroutine(Prepare());
+        StartCoroutine(PrepareSpikes());
     }
 
-    public void ExpulseProxy()
+    public void ExpulseSpikesProxy()
     {
         if (spikesReady) return;
-        StartCoroutine(Expulse());
+        StartCoroutine(ExpulseSpikes());
     }
 }
