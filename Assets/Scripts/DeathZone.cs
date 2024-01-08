@@ -21,11 +21,9 @@ public class DeathZone : MonoBehaviour
                 resetPlayerPosition.Raise();
             }
         }
-        else
+        else if (other.transform.parent == null)
         {
-            if(other.transform.parent == null) {
-                Destroy(other.gameObject);
-            }
+            Destroy(other.gameObject);
         }
     }
 }

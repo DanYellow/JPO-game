@@ -20,7 +20,7 @@ public class MechaGolemBoss : MonoBehaviour
 
     public float delayBetweenThrows = 3.75f;
     // Start is called before the first frame update
-// Juste à régler la caméra et je devrais être bon.
+
     public List<Transform> listSpikes = new List<Transform>();
     private List<Transform> listSpikesToThrow = new List<Transform>();
 
@@ -144,9 +144,9 @@ public class MechaGolemBoss : MonoBehaviour
         {
             var item = listSpikesToThrow[i];
 
+            item.parent = null;
             Vector3 throwDir = -item.transform.right;
             item.GetComponent<MechaBossSpike>().Throw(throwDir);
-            item.parent = null;
         }
 
         var lastSpike = listSpikesToThrow.Last();
@@ -258,13 +258,13 @@ public class MechaGolemBoss : MonoBehaviour
 
         if (spike)
         {
+            spike.parent = null;
             listSpikesToThrow.ForEach((item) =>
             {
                 item.GetComponent<RotateAround>().enabled = false;
             });
 
             spike.transform.rotation = GetSpikeOrientation(spike.transform.position);
-            spike.parent = null;
 
             spike.GetComponent<RotateAround>().enabled = false;
 
