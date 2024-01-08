@@ -37,6 +37,7 @@ public class MechaBossSpike : MonoBehaviour
         throwing = true;
         var target = GameObject.Find("Player").transform;
         throwDir = (GameObject.Find("Player").transform.position - transform.position).normalized;
+        
         Quaternion rotation = Quaternion.LookRotation(target.position - transform.position, transform.TransformDirection(Vector3.up));
         transform.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
     }
@@ -48,13 +49,13 @@ public class MechaBossSpike : MonoBehaviour
         transform.rotation = origRotation;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            IDamageable iDamageable = other.transform.GetComponentInChildren<IDamageable>();
+            IDamageable iDamageable = collision.transform.GetComponentInChildren<IDamageable>();
             iDamageable.TakeDamage(projectileData.damage);
-            if (other.gameObject.TryGetComponent(out Knockback knockback))
+            if (collision.gameObject.TryGetComponent(out Knockback knockback))
             {
                 knockback.Apply(gameObject, projectileData.knockbackForce);
             }

@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 
 public class MechaGolemBoss : MonoBehaviour
 {
@@ -11,7 +10,6 @@ public class MechaGolemBoss : MonoBehaviour
     public bool needsToActivateShield = false;
     private bool spikesReady = false;
     private LookAtTarget lookAtTarget;
-
 
     public float delayBetweenThrows = 3.5f;
     // Start is called before the first frame update
@@ -26,6 +24,7 @@ public class MechaGolemBoss : MonoBehaviour
         listSpikes.ForEach((item) =>
         {
             item.gameObject.SetActive(false);
+            item.GetComponent<RotateAround>().enabled = false;
         });
     }
 
@@ -37,10 +36,10 @@ public class MechaGolemBoss : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            StartCoroutine(ThrowSpike());
-        }
+        // if (Input.GetKeyDown(KeyCode.N))
+        // {
+        //     StartCoroutine(ThrowSpike());
+        // }
     }
 
     private IEnumerator CheckShieldGeneration()
@@ -61,6 +60,8 @@ public class MechaGolemBoss : MonoBehaviour
         listSpikesToThrow = new List<Transform>(listSpikes);
         var length = listSpikes.Count;
         var radius = 7;
+        spikesReady = true;
+        yield return Helpers.GetWait(3.95f);
         for (var i = 0; i < length; i++)
         {
             var spike = listSpikes[i];
@@ -72,11 +73,18 @@ public class MechaGolemBoss : MonoBehaviour
             pos.y = radius * Mathf.Sin(val);
 
             spike.GetComponent<MechaBossSpike>().Reset();
-            spike.GetComponent<RotateAround>().enabled = true;
+            // spike.GetComponent<RotateAround>().enabled = true;
 
             spike.localPosition = pos;
+
+            yield return Helpers.GetWait(0.2f);
         }
-        spikesReady = true;
+
+        for (var i = 0; i < length; i++)
+        {
+            var spike = listSpikes[i];
+            spike.GetComponent<RotateAround>().enabled = true;
+        }
 
         while (listSpikesToThrow.Count > 0)
         {
@@ -91,8 +99,9 @@ public class MechaGolemBoss : MonoBehaviour
     {
         yield return null;
 
-        int[] anglesLimit = {-130, -50};
-        if(lookAtTarget.isFacingRight) {
+        int[] anglesLimit = { -130, -50 };
+        if (lookAtTarget.isFacingRight)
+        {
             anglesLimit[0] = 0;
             anglesLimit[1] = 90;
         }
@@ -133,7 +142,6 @@ public class MechaGolemBoss : MonoBehaviour
 
         if (listSpikesToThrow.Count == 0)
         {
-            yield return Helpers.GetWait(5.35f);
             StartCoroutine(Prepare());
         }
     }
