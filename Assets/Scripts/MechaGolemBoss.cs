@@ -18,7 +18,7 @@ public class MechaGolemBoss : MonoBehaviour
 
     private Transform target;
 
-    public float delayBetweenThrows = 3.5f;
+    public float delayBetweenThrows = 3.75f;
     // Start is called before the first frame update
 
     public List<Transform> listSpikes = new List<Transform>();
@@ -58,7 +58,8 @@ public class MechaGolemBoss : MonoBehaviour
         }
     }
 
-    public bool IsPerformingAction() {
+    public bool IsPerformingAction()
+    {
 
         return !isExpulsingSpikes && !isThrowingSpike;
     }
@@ -66,15 +67,14 @@ public class MechaGolemBoss : MonoBehaviour
     private IEnumerator CheckShieldGeneration()
     {
         yield return null;
-        yield return Helpers.GetWait(0.85f);
-        while (mechaProtect.isGuarding == false)
-        {
-            // yield return Helpers.GetWait(1f); // For tests
-            yield return Helpers.GetWait(4.15f);
-            print("shild");
-            bool randVal = Random.value < 0.15f;
-            needsToActivateShield = randVal;
-        }
+        // yield return Helpers.GetWait(0.85f);
+        // while (mechaProtect.isGuarding == false)
+        // {
+        //     // yield return Helpers.GetWait(1f); // For tests
+        //     yield return Helpers.GetWait(4.15f);
+        //     bool randVal = Random.value < 0.15f;
+        //     needsToActivateShield = randVal;
+        // }
     }
 
     private IEnumerator PrepareSpikes()
@@ -237,13 +237,24 @@ public class MechaGolemBoss : MonoBehaviour
             anglesLimit[1] = 90;
         }
 
-        Transform spike = listSpikesToThrow.Find(item =>
-        {
-            Vector2 distance = item.position - transform.position;
-            float angle = Vector2.SignedAngle(transform.right, distance);
 
-            return angle >= anglesLimit[0] && angle <= anglesLimit[1];
+        Transform spike = null;
+        int indexSpike = -1;
+        // Transform spike = ;
+
+        yield return new WaitUntil(() =>
+        {
+            indexSpike = listSpikesToThrow.FindIndex(item =>
+            {
+                Vector2 distance = item.position - transform.position;
+                float angle = Vector2.SignedAngle(transform.right, distance);
+
+                return angle >= anglesLimit[0] && angle <= anglesLimit[1];
+            });
+
+            return indexSpike > -1;
         });
+        spike = listSpikesToThrow[indexSpike];
 
         if (spike)
         {
@@ -270,7 +281,10 @@ public class MechaGolemBoss : MonoBehaviour
             });
         }
 
-        yield return Helpers.GetWait(delayBetweenThrows);
+        var delay = delayBetweenThrows;
+        // var delay = listSpikesToThrow.Count == 0 ? 0 : delayBetweenThrows * (1 / listSpikesToThrow.Count);
+
+        yield return Helpers.GetWait(delay);
 
         if (spike && listSpikesToThrow.Count == 0)
         {
