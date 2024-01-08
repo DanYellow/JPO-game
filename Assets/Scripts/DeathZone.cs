@@ -23,7 +23,9 @@ public class DeathZone : MonoBehaviour
         }
         else
         {
-            Destroy(other.gameObject);
+            if(other.transform.parent == null) {
+                Destroy(other.gameObject);
+            }
         }
     }
 }
