@@ -41,7 +41,7 @@ public class MechaGolemBoss : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.N))
         {
-            Expulse();
+            StartCoroutine(Expulse());
             // StartCoroutine(ThrowSpike());
         }
     }
@@ -65,7 +65,7 @@ public class MechaGolemBoss : MonoBehaviour
         var length = listSpikes.Count;
         var radius = 7;
         spikesReady = true;
-        yield return Helpers.GetWait(3.95f);
+        // yield return Helpers.GetWait(3.95f);
         for (var i = 0; i < length; i++)
         {
             var spike = listSpikes[i];
@@ -77,23 +77,11 @@ public class MechaGolemBoss : MonoBehaviour
             pos.y = radius * Mathf.Sin(val);
 
             spike.GetComponent<MechaBossSpike>().Reset();
-            spike.GetComponent<RotateAround>().enabled = true;
+            // spike.GetComponent<RotateAround>().enabled = true;
 
             spike.localPosition = pos;
 
-            // print("ffe " + (transform.position - spike.position));
-
-            // Vector3 delta = (transform.position - spike.position).normalized;
-            // Vector3 cross = Vector3.Cross(delta, transform.up);
-
-            // Vector3 dir = cross.z > 0 ? Vector3.up : Vector3.down;
-
-            // Quaternion rotation = Quaternion.LookRotation(transform.position - spike.position, transform.TransformDirection(dir));
-            // spike.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
-
-            // spike.GetComponent<MechaBossSpike>().throwing = true;
-
-            yield return Helpers.GetWait(0.2f);
+            yield return Helpers.GetWait(0.15f);
         }
 
         for (var i = 0; i < length; i++)
@@ -111,22 +99,27 @@ public class MechaGolemBoss : MonoBehaviour
         yield return null;
     }
 
-    private void Expulse()
+    public IEnumerator Expulse()
     {
-        listSpikesToThrow.ForEach((item) =>
+        yield return null;
+        for (var i = 0; i < listSpikesToThrow.Count; i++)
         {
+            var item = listSpikesToThrow[i];
+
             Vector3 delta = (transform.position - item.position).normalized;
             Vector3 cross = Vector3.Cross(delta, transform.up);
             Vector3 rotateDir = cross.z > 0 ? Vector3.up : Vector3.down;
 
-            // item.GetComponent<RotateAround>().enabled = false;
+            item.GetComponent<RotateAround>().enabled = false;
 
             Quaternion rotation = Quaternion.LookRotation(transform.position - item.position, transform.TransformDirection(rotateDir));
             item.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
 
             Vector3 throwDir = -item.transform.right;
             item.GetComponent<MechaBossSpike>().Throw(throwDir);
-        });
+            yield return Helpers.GetWait(0.15f);
+        }
+
 
         listSpikesToThrow.Clear();
     }
@@ -208,5 +201,11 @@ public class MechaGolemBoss : MonoBehaviour
     {
         if (spikesReady) return;
         StartCoroutine(Prepare());
+    }
+
+    public void ExpulseProxy()
+    {
+        if (spikesReady) return;
+        StartCoroutine(Expulse());
     }
 }
