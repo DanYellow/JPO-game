@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MechaGolemBoss : MonoBehaviour
@@ -9,6 +10,7 @@ public class MechaGolemBoss : MonoBehaviour
 
     public bool needsToActivateShield = false;
     private bool spikesReady = false;
+    private bool isExpulsingSpikes = false;
     private LookAtTarget lookAtTarget;
 
     private Transform target;
@@ -34,7 +36,7 @@ public class MechaGolemBoss : MonoBehaviour
     void Start()
     {
         checkShieldGenerationCo = CheckShieldGeneration();
-        // StartCoroutine(PrepareSpikes());
+        StartCoroutine(PrepareSpikes());
     }
 
     private void Update()
@@ -90,7 +92,7 @@ public class MechaGolemBoss : MonoBehaviour
             spike.GetComponent<RotateAround>().enabled = true;
         }
 
-        
+
         // while (listSpikesToThrow.Count > 0)
         // {
         //     yield return Helpers.GetWait(delayBetweenThrows);
@@ -102,7 +104,14 @@ public class MechaGolemBoss : MonoBehaviour
 
     public IEnumerator ExpulseSpikes()
     {
+        isExpulsingSpikes = true;
         yield return null;
+
+        listSpikesToThrow.ForEach((item) =>
+        {
+            item.GetComponent<RotateAround>().enabled = false;
+        });
+
         for (var i = 0; i < listSpikesToThrow.Count; i++)
         {
             var item = listSpikesToThrow[i];
@@ -110,8 +119,6 @@ public class MechaGolemBoss : MonoBehaviour
             Vector3 delta = (transform.position - item.position).normalized;
             Vector3 cross = Vector3.Cross(delta, transform.up);
             Vector3 rotateDir = cross.z > 0 ? Vector3.up : Vector3.down;
-
-            item.GetComponent<RotateAround>().enabled = false;
 
             Quaternion rotation = Quaternion.LookRotation(transform.position - item.position, transform.TransformDirection(rotateDir));
             item.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
@@ -122,12 +129,20 @@ public class MechaGolemBoss : MonoBehaviour
             yield return Helpers.GetWait(0.15f);
         }
 
+        var lastSpike = listSpikesToThrow.Last();
+
         listSpikesToThrow.Clear();
+
+        yield return new WaitUntil(() => Vector3.Distance(lastSpike.position, transform.position) >= 20);
+
+        // yield return Helpers.GetWait(3.15f);
+        isExpulsingSpikes = false;
     }
 
     private IEnumerator ThrowSpike()
     {
-        if (listSpikesToThrow.Count == 0) {
+        if (listSpikesToThrow.Count == 0)
+        {
             yield break;
         }
 
@@ -217,7 +232,7 @@ public class MechaGolemBoss : MonoBehaviour
 
     public void ExpulseSpikesProxy()
     {
-        if (spikesReady) return;
+        if (isExpulsingSpikes) return;
         StartCoroutine(ExpulseSpikes());
     }
 }
