@@ -34,7 +34,7 @@ public class Shield : MonoBehaviour, IDamageable, IReflectable
 
     private void OnEnable() {
         float rate = (float)boss.GetHealth() / boss.GetMaxHealth();
-        currentLifePoints = enemyData.maxLifePoints * (int) Mathf.Round(1.25f / rate);
+        currentLifePoints = enemyData.maxLifePoints * (int) Mathf.Round(1.05f / rate);
         maxLifePoints = currentLifePoints;
         healthBar.maxLifePoints = currentLifePoints;
         healthBar.UpdateContent(currentLifePoints);

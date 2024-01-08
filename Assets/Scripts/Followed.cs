@@ -10,7 +10,7 @@ public class Followed : MonoBehaviour
     private void Awake()
     {
         bc = GetComponent<Collider2D>();
-        yDelta = Mathf.Abs(bc.bounds.center.y - follower.position.y);
+        yDelta += Mathf.Abs(bc.bounds.center.y - follower.position.y);
     }
 
     void Update()

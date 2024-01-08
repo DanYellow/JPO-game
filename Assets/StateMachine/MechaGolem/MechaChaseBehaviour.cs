@@ -18,6 +18,8 @@ public class MechaChaseBehaviour : StateMachineBehaviour
 
     private bool hasFightStarted = false;
 
+    private float throwAllSpikesAttackThreshold = 0.52f;
+
     private void OnEnable()
     {
         onTogglePauseEvent.OnEventRaised += FightStart;
@@ -72,17 +74,13 @@ public class MechaChaseBehaviour : StateMachineBehaviour
                 rb.MovePosition(newPos);
             }
 
-            if (
-                Vector2.Distance(target.position, rb.position) < 10 &&
-                (enemy.GetHealth() / enemy.GetMaxHealth() < 0.4f)
-            )
+            if (Vector2.Distance(target.position, rb.position) < 10 && (float)enemy.GetHealth() / enemy.GetMaxHealth() <= throwAllSpikesAttackThreshold)
             {
-                // mechaGolemBoss.ThrowAllSpikesProxy();
+                mechaGolemBoss.ThrowAllSpikesProxy();
+                return;
             }
-            else
-            {
-                mechaGolemBoss.ThrowSpikesProxy();
-            }
+
+            mechaGolemBoss.ThrowSpikeProxy();
         }
 
         animator.SetFloat(AnimationStrings.velocityX, Mathf.Abs(rb.velocity.x));

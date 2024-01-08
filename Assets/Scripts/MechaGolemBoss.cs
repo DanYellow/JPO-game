@@ -9,7 +9,8 @@ public class MechaGolemBoss : MonoBehaviour
     private bool isCheckingShieldGeneration = false;
 
     public bool needsToActivateShield = false;
-    private bool spikesReady = false;
+    private bool areSpikesReady = false;
+    private bool areSpikesPreparing = false;
     private bool isExpulsingSpikes = false;
     private bool isThrowingSpike = false;
     private LookAtTarget lookAtTarget;
@@ -50,17 +51,28 @@ public class MechaGolemBoss : MonoBehaviour
             // StartCoroutine(ExpulseSpikes());
             // StartCoroutine(ThrowSpike());
         }
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            needsToActivateShield = true;
+        }
+    }
+
+    public bool IsPerformingAction() {
+
+        return !isExpulsingSpikes && !isThrowingSpike;
     }
 
     private IEnumerator CheckShieldGeneration()
     {
         yield return null;
-        yield return Helpers.GetWait(1.75f);
-        while (true)
+        yield return Helpers.GetWait(0.85f);
+        while (mechaProtect.isGuarding == false)
         {
-            yield return Helpers.GetWait(1f); // For tests
+            // yield return Helpers.GetWait(1f); // For tests
             yield return Helpers.GetWait(4.15f);
-            bool randVal = Random.value < 0.25f;
+            print("shild");
+            bool randVal = Random.value < 0.15f;
             needsToActivateShield = randVal;
         }
     }
@@ -70,11 +82,13 @@ public class MechaGolemBoss : MonoBehaviour
         listSpikesToThrow = new List<Transform>(listSpikes);
         var length = listSpikes.Count;
         var radius = 7;
-        spikesReady = true;
+        areSpikesReady = false;
+        areSpikesPreparing = true;
         // yield return Helpers.GetWait(3.95f);
         for (var i = 0; i < length; i++)
         {
             var spike = listSpikes[i];
+            spike.parent = transform;
             spike.gameObject.SetActive(true);
             var val = Mathf.Lerp(0, 2 * Mathf.PI, (float)i / length);
             var pos = spike.localPosition;
@@ -90,20 +104,15 @@ public class MechaGolemBoss : MonoBehaviour
             yield return Helpers.GetWait(0.15f);
         }
 
+
         for (var i = 0; i < length; i++)
         {
             var spike = listSpikes[i];
             spike.GetComponent<RotateAround>().enabled = true;
         }
 
-
-        // while (listSpikesToThrow.Count > 0)
-        // {
-        //     yield return Helpers.GetWait(delayBetweenThrows);
-        //     StartCoroutine(ThrowSpike());
-        // }
-
-        yield return null;
+        yield return Helpers.GetWait(1.15f);
+        areSpikesReady = true;
     }
 
     private IEnumerator ExpulseSpikes()
@@ -137,6 +146,7 @@ public class MechaGolemBoss : MonoBehaviour
 
             Vector3 throwDir = -item.transform.right;
             item.GetComponent<MechaBossSpike>().Throw(throwDir);
+            item.parent = null;
         }
 
         var lastSpike = listSpikesToThrow.Last();
@@ -243,6 +253,7 @@ public class MechaGolemBoss : MonoBehaviour
             });
 
             spike.transform.rotation = GetSpikeOrientation(spike.transform.position);
+            spike.parent = null;
 
             spike.GetComponent<RotateAround>().enabled = false;
 
@@ -264,6 +275,10 @@ public class MechaGolemBoss : MonoBehaviour
         if (spike && listSpikesToThrow.Count == 0)
         {
             yield return new WaitUntil(() => Vector3.Distance(spike.position, transform.position) >= 20);
+        }
+
+        if (listSpikesToThrow.Count == 0)
+        {
             yield return StartCoroutine(PrepareSpikes());
         }
 
@@ -279,6 +294,7 @@ public class MechaGolemBoss : MonoBehaviour
             listSpikesToThrow.ForEach((spike) =>
             {
                 spike.GetComponent<RotateAround>().enabled = false;
+                spike.parent = null;
 
                 spike.transform.rotation = GetSpikeOrientation(spike.transform.position);
 
@@ -322,25 +338,25 @@ public class MechaGolemBoss : MonoBehaviour
 
     public void PrepareSpikesProxy()
     {
-        if (spikesReady) return;
+        if (areSpikesPreparing || areSpikesReady) return;
         StartCoroutine(PrepareSpikes());
     }
 
-    public void ThrowSpikesProxy()
+    public void ThrowSpikeProxy()
     {
-        if (isThrowingSpike || mechaProtect.isGuarding) return;
+        if (!areSpikesReady || isThrowingSpike || mechaProtect.isGuarding) return;
         StartCoroutine(ThrowSpike());
     }
 
     public void ThrowAllSpikesProxy()
     {
-        if (isThrowingSpike || mechaProtect.isGuarding) return;
+        if (!areSpikesReady || isThrowingSpike || mechaProtect.isGuarding) return;
         StartCoroutine(ThrowAllSpikes());
     }
 
     public void ExpulseSpikesProxy()
     {
-        if (isExpulsingSpikes || !mechaProtect.isGuarding) return;
+        if (!areSpikesReady || isExpulsingSpikes || !mechaProtect.isGuarding) return;
         bool randVal = Random.value < 0.05f;
         if (randVal)
         {
