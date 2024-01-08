@@ -9,11 +9,11 @@ public class MechaBossSpike : MonoBehaviour
     [SerializeField]
     ProjectileData projectileData;
 
-    private bool throwing = false;
+    public bool throwing = false;
 
     private SpriteRenderer sr;
 
-    private Vector3 throwDir;
+    public Vector3 throwDir;
 
     public Quaternion origRotation { private set; get; }
 
@@ -27,19 +27,20 @@ public class MechaBossSpike : MonoBehaviour
     {
         if (throwing)
         {
-            transform.position += throwDir * projectileData.speed * Time.deltaTime;
+            transform.position += projectileData.speed * Time.deltaTime * -transform.right;
+            // transform.position += projectileData.speed * Time.deltaTime * throwDir;
         }
     }
 
-    public void Throw(Vector3? dir = null)
+    public void Throw(Vector3? rotateDir = null)
     {
-        dir ??= Vector3.up;
+        rotateDir ??= Vector3.up;
         sr.color = Color.red;
         throwing = true;
         var target = GameObject.Find("Player").transform;
         throwDir = (GameObject.Find("Player").transform.position - transform.position).normalized;
         
-        Quaternion rotation = Quaternion.LookRotation(target.position - transform.position, transform.TransformDirection((Vector3) dir));
+        Quaternion rotation = Quaternion.LookRotation(target.position - transform.position, transform.TransformDirection((Vector3) rotateDir));
         transform.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
     }
 

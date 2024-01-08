@@ -31,15 +31,16 @@ public class MechaGolemBoss : MonoBehaviour
     void Start()
     {
         checkShieldGenerationCo = CheckShieldGeneration();
-        //  StartCoroutine(Prepare());
+        StartCoroutine(Prepare());
     }
 
     private void Update()
     {
-        // if (Input.GetKeyDown(KeyCode.N))
-        // {
-        //     StartCoroutine(ThrowSpike());
-        // }
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            Expulse();
+            // StartCoroutine(ThrowSpike());
+        }
     }
 
     private IEnumerator CheckShieldGeneration()
@@ -77,6 +78,18 @@ public class MechaGolemBoss : MonoBehaviour
 
             spike.localPosition = pos;
 
+            // print("ffe " + (transform.position - spike.position));
+
+            // Vector3 delta = (transform.position - spike.position).normalized;
+            // Vector3 cross = Vector3.Cross(delta, transform.up);
+
+            // Vector3 dir = cross.z > 0 ? Vector3.up : Vector3.down;
+
+            // Quaternion rotation = Quaternion.LookRotation(transform.position - spike.position, transform.TransformDirection(dir));
+            // spike.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
+
+            // spike.GetComponent<MechaBossSpike>().throwing = true;
+
             yield return Helpers.GetWait(0.2f);
         }
 
@@ -86,13 +99,30 @@ public class MechaGolemBoss : MonoBehaviour
             spike.GetComponent<RotateAround>().enabled = true;
         }
 
-        while (listSpikesToThrow.Count > 0)
-        {
-            yield return Helpers.GetWait(delayBetweenThrows);
-            StartCoroutine(ThrowSpike());
-        }
+        // while (listSpikesToThrow.Count > 0)
+        // {
+        //     yield return Helpers.GetWait(delayBetweenThrows);
+        //     StartCoroutine(ThrowSpike());
+        // }
 
         yield return null;
+    }
+
+    private void Expulse()
+    {
+        listSpikesToThrow.ForEach((item) =>
+        {
+            Vector3 delta = (transform.position - item.position).normalized;
+            Vector3 cross = Vector3.Cross(delta, transform.up);
+            Vector3 dir = cross.z > 0 ? Vector3.up : Vector3.down;
+
+            // item.GetComponent<RotateAround>().enabled = true;
+
+            Quaternion rotation = Quaternion.LookRotation(transform.position - item.position, transform.TransformDirection(dir));
+            item.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
+        });
+
+        listSpikesToThrow.Clear();
     }
 
     private IEnumerator ThrowSpike()
