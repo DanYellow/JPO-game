@@ -15,6 +15,7 @@ public class MechaGuardBehaviour : StateMachineBehaviour
 
 
         mechaGolemBoss = animator.GetComponent<MechaGolemBoss>();
+        mechaGolemBoss.PrepareSpikesProxy();
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -26,6 +27,7 @@ public class MechaGuardBehaviour : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         mechaProtect.shield.SetActive(false);
+        mechaGolemBoss.StopExpulseSpikes();
         mechaProtect.isGuarding = false;
         mechaProtect.enabled = false;
     }

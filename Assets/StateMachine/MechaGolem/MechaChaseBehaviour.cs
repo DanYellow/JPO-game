@@ -41,6 +41,8 @@ public class MechaChaseBehaviour : StateMachineBehaviour
         mechaGolemBoss = animator.GetComponent<MechaGolemBoss>();
 
         target = GameObject.FindGameObjectWithTag("Player").transform;
+
+        mechaGolemBoss.PrepareSpikesProxy();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -48,7 +50,6 @@ public class MechaChaseBehaviour : StateMachineBehaviour
     {
         if (!hasFightStarted) return;
         mechaGolemBoss.StartShieldGenerationChecking();
-        mechaGolemBoss.PrepareSpikesProxy();
 
         if (mechaGolemBoss.needsToActivateShield)
         {
@@ -91,10 +92,11 @@ public class MechaChaseBehaviour : StateMachineBehaviour
         onTogglePauseEvent.OnEventRaised -= FightStart;
     }
 
-
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         mechaGolemBoss.StopShieldGenerationChecking();
+        mechaGolemBoss.StopThrowAllSpikes();
+        mechaGolemBoss.StopThrowSpike();
     }
 }
