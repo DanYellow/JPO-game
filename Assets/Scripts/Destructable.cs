@@ -7,7 +7,7 @@ public class Destructable : MonoBehaviour, IDamageable
     private Animator animator;
     private List<GameObject> children = new List<GameObject>();
 
-    private int currentLifePoints = 3;
+    private int currentLifePoints = 1;
 
     [SerializeField]
     private MaterialChangeValue materialChange;

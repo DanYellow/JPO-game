@@ -1,6 +1,6 @@
 using System.Collections;
-
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Pool;
 
 public enum ShootDirection
@@ -32,6 +32,12 @@ public class ProjectileLauncher : MonoBehaviour
     private RaycastHit2D hitInfo;
 
     private bool targetInSight;
+
+    [SerializeField]
+    private UnityEvent onShootStart;
+
+    [SerializeField]
+    private UnityEvent onShootEnd;
 
     #nullable enable
     [SerializeField]
@@ -106,8 +112,10 @@ public class ProjectileLauncher : MonoBehaviour
                 animator.SetTrigger(AnimationStrings.shoot);
                 yield return null;
                 yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+                onShootStart?.Invoke();
                 pool.Get();
                 yield return Helpers.GetWait(projectileLauncherData.cadency);
+                onShootEnd?.Invoke();
                 // yield return Helpers.GetWait(5);
             }
             yield return null;

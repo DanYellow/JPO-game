@@ -621,6 +621,36 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   shootDirection: 1
+  onShootStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3304298747280523625}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+  onShootEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3304298747280523625}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 1
   firePoint: {fileID: 260304816204220668}
   lengthDetection: 10
   isMoving: 1
@@ -637,6 +667,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   follower: {fileID: 6562245534549360183}
+  yDelta: 0
 --- !u!114 &3304298747280523626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -702,12 +733,15 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onDeathEnd: {fileID: 0}
   onHurtBegin:
     m_PersistentCalls:
       m_Calls: []
   onHurtDone:
     m_PersistentCalls:
       m_Calls: []
+  destroyOnDeath: 1
+  delayBeforeDeathEndEvent: 0
 --- !u!114 &8838257750597778021
 MonoBehaviour:
   m_ObjectHideFlags: 0
