@@ -18,10 +18,16 @@ public class Enemy : MonoBehaviour, IDamageable
     private UnityEvent onDeath;
 
     [SerializeField]
+    private UnityEvent onDeathEnd;
+
+    [SerializeField]
     private UnityEvent onHurtBegin;
 
     [SerializeField]
     private UnityEvent onHurtDone;
+
+    [SerializeField]
+    private bool destroyOnDeath = true;
 
 
     [HideInInspector]
@@ -46,11 +52,6 @@ public class Enemy : MonoBehaviour, IDamageable
         currentLifePoints = enemyData.maxLifePoints;
 
         healthBar.UpdateContent(currentLifePoints);
-    }
-
-    private void Start()
-    {
-        
     }
 
     private void Update()
@@ -79,7 +80,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
         healthBar.UpdateContent(currentLifePoints);
 
-        if(animator != null) {
+        if(animator != null ) {
             animator.SetTrigger(AnimationStrings.hurt);
             animator.SetBool(AnimationStrings.canMove, false);
     
@@ -139,7 +140,11 @@ public class Enemy : MonoBehaviour, IDamageable
             Instantiate(enemyData.blastEffect, transform.position, Quaternion.identity);
         }
 
-        // Destroy(gameObject.transform.root.gameObject);
+        onDeathEnd?.Invoke();
+
+        if(destroyOnDeath) {
+            Destroy(gameObject.transform.root.gameObject);
+        }
     }
 
     private void OnDestroy()
