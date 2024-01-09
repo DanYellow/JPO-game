@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour, IDamageable
     private UnityEvent onDeath;
 
     [SerializeField]
-    private UnityEvent onDeathEnd;
+    private VoidEventChannel onDeathEnd;
 
     [SerializeField]
     private UnityEvent onHurtBegin;
@@ -40,6 +40,9 @@ public class Enemy : MonoBehaviour, IDamageable
     private bool isDying = false;
 
     private HealthBar healthBar;
+
+    [SerializeField]
+    private float delayBeforeDeathEndEvent = 0;
 
     private void Awake()
     {
@@ -117,11 +120,12 @@ public class Enemy : MonoBehaviour, IDamageable
         rb.velocity = Vector2.zero;
         if (animator)
         {
+            animator.SetTrigger(AnimationStrings.isDead);
             animator.SetBool(AnimationStrings.isDead, true);
 
             yield return null;
             yield return new WaitWhile(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1);
-            yield return Helpers.GetWait(0.3f);
+            yield return Helpers.GetWait(0.45f);
         }
         else
         {
@@ -140,7 +144,8 @@ public class Enemy : MonoBehaviour, IDamageable
             Instantiate(enemyData.blastEffect, transform.position, Quaternion.identity);
         }
 
-        onDeathEnd?.Invoke();
+        yield return Helpers.GetWait(delayBeforeDeathEndEvent);
+        onDeathEnd?.Raise();
 
         if(destroyOnDeath) {
             Destroy(gameObject.transform.root.gameObject);
