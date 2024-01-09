@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BossChase : StateMachineBehaviour
+public class BossChaseBehaviour : StateMachineBehaviour
 {
     private Rigidbody2D rb;
     private Transform target;
