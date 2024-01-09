@@ -51,9 +51,9 @@ public class Projectile : MonoBehaviour, IRecycleable
             if (projectileData.blastEffectData)
             {
                 BlastEffectData blastEffectData = projectileData.blastEffectData;
-                GameObject blast = Instantiate(blastEffectData.blastEffect, new Vector2(collider.bounds.center.x, collider.bounds.min.y), Quaternion.identity);
+                GameObject blast = Instantiate(blastEffectData.effect, new Vector2(collider.bounds.center.x, collider.bounds.min.y), Quaternion.identity);
                 blast.GetComponent<BlastEffect>().SetEffectData(blastEffectData);
-                blast.GetComponent<SpriteRenderer>().color = blastEffectData.blastEffectColor;
+                blast.GetComponent<SpriteRenderer>().color = blastEffectData.color;
                 blast.transform.localScale *= blastEffectData.scale;
             }
 

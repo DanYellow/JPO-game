@@ -9,6 +9,6 @@ public class BlastEffectData : ScriptableObject
     public int knockbackForce = 0;
     public float scale = 1;
 
-    public GameObject blastEffect;
-    public Color blastEffectColor = Color.white;
+    public GameObject effect;
+    public Color color = Color.white;
 }

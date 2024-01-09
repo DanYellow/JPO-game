@@ -34,9 +34,6 @@ public class EvilWizard : MonoBehaviour
     List<GameObject> listMobsInvocated = new List<GameObject>();
 
     [SerializeField]
-    private GameObject blastEffect;
-
-    [SerializeField]
     private BlastEffectData blastEffectData;
 
     private new Collider2D collider;
@@ -126,8 +123,9 @@ public class EvilWizard : MonoBehaviour
 
     public void InvokeBlast()
     {
-        GameObject blast = Instantiate(blastEffect, new Vector2(collider.bounds.center.x, collider.bounds.min.y), Quaternion.identity);
+        GameObject blast = Instantiate(blastEffectData.effect, new Vector2(collider.bounds.center.x, collider.bounds.min.y), Quaternion.identity);
         blast.GetComponent<BlastEffect>().SetEffectData(blastEffectData);
-        blast.transform.localScale *= 1.5f;
+        blast.GetComponent<SpriteRenderer>().color = blastEffectData.color;
+        blast.transform.localScale *= blastEffectData.scale;
     }
 }
