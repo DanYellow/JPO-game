@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class BossIntroBehaviour : StateMachineBehaviour
+public class EvilWizardIntroBehaviour : StateMachineBehaviour
 {
     private Rigidbody2D rb;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state

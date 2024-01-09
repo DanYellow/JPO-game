@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BossInvokeBehaviour : StateMachineBehaviour
+public class EvilWizardInvokeBehaviour : StateMachineBehaviour
 {
     private EvilWizard evilWizard;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
