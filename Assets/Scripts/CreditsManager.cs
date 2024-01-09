@@ -2,6 +2,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+using System.Numerics;
 
 public class CreditsManager : MonoBehaviour
 {
@@ -14,12 +15,16 @@ public class CreditsManager : MonoBehaviour
     [SerializeField]
     private StringEventChannel onPlayerInputMapChange;
 
+    [SerializeField]
+    private Vector2Value lastCheckpoint;
+
     private void Awake()
     {
         creditsUI.SetActive(false);
     }
 
     private void ShowCredits() {
+        lastCheckpoint.CurrentValue = null;
         creditsUI.SetActive(true);
         onPlayerInputMapChange.Raise(ActionMapName.UI);
         EventSystemExtensions.UpdateSelectedGameObject(creditsUI.GetComponentInChildren<Button>().gameObject);

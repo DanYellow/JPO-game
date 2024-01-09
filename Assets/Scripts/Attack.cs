@@ -24,7 +24,7 @@ public class Attack : MonoBehaviour
             }
         }
 
-        if (other.transform.TryGetComponent(out IReflectable iReflectable))
+        if (other.transform.GetComponent<IReflectable>() != null)
         {
             selfKnockback.Apply(other.gameObject, 20);
         }

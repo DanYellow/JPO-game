@@ -91,7 +91,6 @@ public class ProjectileLauncher : MonoBehaviour
         } else {
             Debug.DrawRay(new Vector2(bc2d.bounds.max.x + 0.15f, bc2d.bounds.min.y), fireDirection * lengthDetection * (isMoving ? transform.right.normalized : Vector3.one), Color.cyan);
             Debug.DrawRay(new Vector2(bc2d.bounds.max.x + 0.15f, bc2d.bounds.max.y), fireDirection * lengthDetection * (isMoving ? transform.right.normalized : Vector3.one), Color.cyan);
-
         }
     }
 

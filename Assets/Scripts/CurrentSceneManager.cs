@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
-using UnityEngine.Events;
 
 public class CurrentSceneManager : MonoBehaviour
 {
@@ -11,7 +10,11 @@ public class CurrentSceneManager : MonoBehaviour
     [SerializeField]
     private BoolValue playerIsDashing;
 
-    private void Awake() {
+    [SerializeField]
+    private Vector2Value lastCheckpoint;
+
+    private void Awake()
+    {
         Application.targetFrameRate = 60;
     }
 
@@ -26,11 +29,15 @@ public class CurrentSceneManager : MonoBehaviour
         playerIsDashing.CurrentValue = false;
     }
 
-    public void LoadLevel(int levelName = 1)
+    public void LoadLevel(int levelIndex = 1)
     {
         EventSystem.current.SetSelectedGameObject(null);
         Time.timeScale = 1f;
-        SceneManager.LoadScene(levelName, LoadSceneMode.Single);
+        if (levelIndex == 0)
+        {
+            lastCheckpoint.CurrentValue = null;
+        }
+        SceneManager.LoadScene(levelIndex, LoadSceneMode.Single);
     }
 
     public void RestartLastCheckpoint()
@@ -40,6 +47,7 @@ public class CurrentSceneManager : MonoBehaviour
 
     public void QuitGame()
     {
+        lastCheckpoint.CurrentValue = null;
         Application.Quit();
     }
 
