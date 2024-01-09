@@ -48,12 +48,13 @@ public class Projectile : MonoBehaviour, IRecycleable
         Contact();
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (projectileData.blastEffect)
+            if (projectileData.blastEffectData)
             {
-                GameObject blast = Instantiate(projectileData.blastEffect, new Vector2(collider.bounds.center.x, collider.bounds.min.y), Quaternion.identity);
-                blast.GetComponent<BlastEffect>().SetEffectData(projectileData.blastEffectData);
-                blast.GetComponent<SpriteRenderer>().color = projectileData.blastEffectColor;
-                blast.transform.localScale *= 0.85f;
+                BlastEffectData blastEffectData = projectileData.blastEffectData;
+                GameObject blast = Instantiate(blastEffectData.blastEffect, new Vector2(collider.bounds.center.x, collider.bounds.min.y), Quaternion.identity);
+                blast.GetComponent<BlastEffect>().SetEffectData(blastEffectData);
+                blast.GetComponent<SpriteRenderer>().color = blastEffectData.blastEffectColor;
+                blast.transform.localScale *= blastEffectData.scale;
             }
 
             IDamageable iDamageable = collision.transform.GetComponentInChildren<IDamageable>();
@@ -82,7 +83,7 @@ public class Projectile : MonoBehaviour, IRecycleable
 
     IEnumerator Disable()
     {
-        yield return Helpers.GetWait(projectileData.blastEffect ? 0 : 1.5f);
+        yield return Helpers.GetWait(projectileData.blastEffectData ? 0 : 1.5f);
         pool.Release(this);
     }
 

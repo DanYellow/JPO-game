@@ -8,8 +8,5 @@ public class ProjectileData : ScriptableObject
     public int damage = 1;
     public int knockbackForce = 0;
     public bool isFacingRight = true;
-
-    public GameObject blastEffect;
-    public Color blastEffectColor = Color.white;
-    public BlastEffectData blastEffectData;
+    public BlastEffectData blastEffectData = null;
 }
