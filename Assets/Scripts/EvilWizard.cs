@@ -36,6 +36,9 @@ public class EvilWizard : MonoBehaviour
     [SerializeField]
     private GameObject blastEffect;
 
+    [SerializeField]
+    private BlastEffectData blastEffectData;
+
     private new Collider2D collider;
 
     private Invulnerable invulnerable;
@@ -124,6 +127,7 @@ public class EvilWizard : MonoBehaviour
     public void InvokeBlast()
     {
         GameObject blast = Instantiate(blastEffect, new Vector2(collider.bounds.center.x, collider.bounds.min.y), Quaternion.identity);
+        blast.GetComponent<BlastEffect>().SetEffectData(blastEffectData);
         blast.transform.localScale *= 1.5f;
     }
 }

@@ -141,7 +141,8 @@ public class Enemy : MonoBehaviour, IDamageable
 
         if (enemyData.blastEffect != null)
         {
-            Instantiate(enemyData.blastEffect, transform.position, Quaternion.identity);
+            GameObject blast = Instantiate(enemyData.blastEffect, transform.position, Quaternion.identity);
+            blast.GetComponent<BlastEffect>().SetEffectData(enemyData.blastEffectData);
         }
 
         yield return Helpers.GetWait(delayBeforeDeathEndEvent);

@@ -1,11 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class EnemyFall : MonoBehaviour
 {
-
     private new Collider2D collider;
     private Rigidbody2D rb;
     private EnemyPatrol enemyPatrol;

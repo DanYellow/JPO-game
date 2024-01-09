@@ -29,6 +29,7 @@ public class EnemyData : CharacterData
 
     public GameObject dropItem;
     public GameObject blastEffect;
+    public BlastEffectData blastEffectData;
     [Range(0, 1)]
     public float dropProbability = 0.25f;
 

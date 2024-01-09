@@ -11,4 +11,5 @@ public class ProjectileData : ScriptableObject
 
     public GameObject blastEffect;
     public Color blastEffectColor = Color.white;
+    public BlastEffectData blastEffectData;
 }
