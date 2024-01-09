@@ -10,6 +10,7 @@ public class Attack : MonoBehaviour
     {
         collider = GetComponent<Collider2D>();
         collider.enabled = false;
+        print("fefzfz");
     }
 
     private void OnTriggerEnter2D(Collider2D other)
