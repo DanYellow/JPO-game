@@ -84,7 +84,8 @@ public class MechaGolemBoss : MonoBehaviour
 
     private IEnumerator PrepareSpikes()
     {
-        if(listSpikesToThrow.Count > 0) {
+        if (listSpikesToThrow.Count > 0)
+        {
             yield break;
         }
         listSpikesToThrow = new List<Transform>(listSpikes);
@@ -332,6 +333,17 @@ public class MechaGolemBoss : MonoBehaviour
 
         yield return StartCoroutine(PrepareSpikes());
         isThrowingSpike = false;
+    }
+
+    public void DestroyAllSpikes()
+    {
+        listSpikesToThrow.ForEach((spike) =>
+        {
+            spike.GetComponent<RotateAround>().enabled = false;
+            spike.GetComponent<Collider2D>().enabled = false;
+            spike.GetComponent<MechaBossSpike>().Destroy();
+            spike.parent = null;
+        });
     }
 
     private Quaternion GetSpikeOrientation(Vector3 position)

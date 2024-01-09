@@ -8,6 +8,7 @@ public class MechaBossSpike : MonoBehaviour
     ProjectileData projectileData;
 
     private bool throwing = false;
+    private bool isDestroyed = false;
 
     private SpriteRenderer sr;
 
@@ -23,12 +24,20 @@ public class MechaBossSpike : MonoBehaviour
 
     private void Update()
     {
-        if (throwing)
+        if (throwing && !isDestroyed)
         {
             transform.position += projectileData.speed * Time.deltaTime * throwDir;
         }
+
+        if(isDestroyed) {
+            transform.position += projectileData.speed / 2 * Time.deltaTime * Vector3.down;
+        }
     }
 
+    public void Destroy() {
+        isDestroyed = true;
+    }
+    
     public void Throw(Vector3 _throwDir)
     {
         throwDir = _throwDir;

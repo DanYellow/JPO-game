@@ -139,7 +139,7 @@ public class Enemy : MonoBehaviour, IDamageable
             Instantiate(enemyData.blastEffect, transform.position, Quaternion.identity);
         }
 
-        Destroy(gameObject.transform.root.gameObject);
+        // Destroy(gameObject.transform.root.gameObject);
     }
 
     private void OnDestroy()

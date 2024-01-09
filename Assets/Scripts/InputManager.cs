@@ -20,6 +20,9 @@ public class InputManager : MonoBehaviour
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
+    }
+
+    private void OnEnable() {
         onPlayerInputMapChange.OnEventRaised += SwitchActionMap;
     }
 
