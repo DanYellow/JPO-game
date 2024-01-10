@@ -21,15 +21,22 @@ public class Shield : MonoBehaviour, IDamageable, IReflectable
     [SerializeField]
     private UnityEvent onDestruction;
 
+    private SpriteRenderer sr;
+
     public bool isReflecting { get; set; } = true;
 
     public bool hasTotalReflection => true;
+
+    [SerializeField, GradientUsage(true)]
+    Gradient colorLevel;
 
     private void Awake()
     {
         invulnerable = GetComponent<Invulnerable>();
         healthBar = GetComponent<HealthBar>();
         boss = GetComponentInParent<Enemy>();
+        sr = GetComponent<SpriteRenderer>();
+        
     }
 
     private void OnEnable() {
@@ -50,6 +57,8 @@ public class Shield : MonoBehaviour, IDamageable, IReflectable
             0,
             maxLifePoints
         );
+
+        sr.material.SetColor("_Color", colorLevel.Evaluate(currentLifePoints/maxLifePoints));
 
         healthBar.UpdateContent(currentLifePoints);
 
