@@ -9,6 +9,7 @@ public class MechaGolemBoss : MonoBehaviour
     private Coroutine expulseSpikesCo;
     private Coroutine throwAllSpikesCo;
     private Coroutine throwSpikeCo;
+    private Coroutine checkExpulsingSpikesAttackCo;
 
     private bool isCheckingShieldGeneration = false;
 
@@ -16,7 +17,7 @@ public class MechaGolemBoss : MonoBehaviour
     private bool areSpikesReady = false;
     private bool areSpikesPreparing = false;
     [SerializeField]
-    private bool isExpulsingSpikes = false;
+    public bool isExpulsingSpikes = false;
     private bool isThrowingSpike = false;
     private LookAtTarget lookAtTarget;
     private MechaProtect mechaProtect;
@@ -77,8 +78,20 @@ public class MechaGolemBoss : MonoBehaviour
             yield return Helpers.GetWait(4.15f);
             // bool randVal = Random.value < 0.5f;
             bool randVal = Random.value < 0.2f;
-            print("shield " + randVal);
             needsToActivateShield = randVal;
+        }
+    }
+
+    private IEnumerator CheckExpulsingSpikesAttack()
+    {
+        while (mechaProtect.isGuarding == true)
+        {
+            yield return Helpers.GetWait(3.05f);
+            if (Random.value < 0.5f && isExpulsingSpikes == false)
+            {
+                // expulseSpikesCo = StartCoroutine(ExpulseSpikes());
+                yield return StartCoroutine(ExpulseSpikes());
+            }
         }
     }
 
@@ -104,6 +117,7 @@ public class MechaGolemBoss : MonoBehaviour
 
             pos.x = radius * Mathf.Cos(val);
             pos.y = radius * Mathf.Sin(val);
+            pos.z = 0;
 
             spike.GetComponent<MechaBossSpike>().Reset();
 
@@ -124,8 +138,6 @@ public class MechaGolemBoss : MonoBehaviour
 
     private IEnumerator ExpulseSpikes()
     {
-        isExpulsingSpikes = true;
-
         yield return Helpers.GetWait(3.5f);
 
         listSpikesToThrow.ForEach((item) =>
@@ -155,15 +167,15 @@ public class MechaGolemBoss : MonoBehaviour
             Vector3 throwDir = -item.transform.right;
             item.GetComponent<MechaBossSpike>().Throw(throwDir);
         }
-
         var lastSpike = listSpikesToThrow?.Last();
         listSpikesToThrow.Clear();
 
         if (lastSpike)
         {
-            yield return new WaitUntil(() => Vector3.Distance(lastSpike.position, transform.position) >= 25);
+            yield return new WaitUntil(() => Vector3.Distance(transform.position, lastSpike.position) >= 150);
+            // yield return new WaitUntil(() => lastSpike.gameObject.activeSelf == false);
         }
-        yield return Helpers.GetWait(6.15f);
+        yield return Helpers.GetWait(3.85f);
         yield return StartCoroutine(PrepareSpikes());
 
         isExpulsingSpikes = false;
@@ -389,15 +401,22 @@ public class MechaGolemBoss : MonoBehaviour
         throwAllSpikesCo = StartCoroutine(ThrowAllSpikes());
     }
 
-    public void ExpulseSpikesProxy()
+    public void StartExpulseSpikesChecking()
     {
-        if (!areSpikesReady || isExpulsingSpikes) return;
-        bool randVal = Random.value < 0.05f;
-        if (randVal)
-        {
-            expulseSpikesCo = StartCoroutine(ExpulseSpikes());
-        }
+        checkExpulsingSpikesAttackCo = StartCoroutine(CheckExpulsingSpikesAttack());
+
+        // if (!areSpikesReady) return;
+        // // isExpulsingSpikes = true;
+        // // bool randVal = Random.value < 0.05f;
+        // Debug.Log("Proxy " + listSpikesToThrow.Count);
+        // expulseSpikesCo = StartCoroutine(ExpulseSpikes());
     }
+
+    public void StopExpulseSpikesChecking()
+    {
+        StopCoroutine(checkExpulsingSpikesAttackCo);
+    }
+
 
     public void StopExpulseSpikes()
     {

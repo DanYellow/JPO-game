@@ -2,6 +2,8 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
+// https://www.youtube.com/watch?v=hrvWkMimY1k
+
 public class Guard : MonoBehaviour, IGuardable
 {
     private Animator animator;
@@ -79,7 +81,6 @@ public class Guard : MonoBehaviour, IGuardable
         //     {
         //         knockback.Apply(gameObject, 250);
         //     }
-
         // }
     }
 

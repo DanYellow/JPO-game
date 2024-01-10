@@ -16,11 +16,12 @@ public class MechaGuardBehaviour : StateMachineBehaviour
 
         mechaGolemBoss = animator.GetComponent<MechaGolemBoss>();
         mechaGolemBoss.PrepareSpikesProxy();
+        mechaGolemBoss.StartExpulseSpikesChecking();
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        mechaGolemBoss.ExpulseSpikesProxy();
+
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
@@ -28,6 +29,7 @@ public class MechaGuardBehaviour : StateMachineBehaviour
     {
         mechaProtect.shield.SetActive(false);
         mechaGolemBoss.StopExpulseSpikes();
+        mechaGolemBoss.StopExpulseSpikesChecking();
         mechaProtect.isGuarding = false;
         mechaProtect.enabled = false;
     }

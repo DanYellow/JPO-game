@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 // https://www.youtube.com/watch?v=IGDrF1Cq9Q0
@@ -15,6 +17,8 @@ public class MechaBossSpike : MonoBehaviour
     public Vector3 throwDir;
 
     public Quaternion origRotation { private set; get; }
+    private Vector3 originPosition = Vector3.zero;
+    private Coroutine autoDestroyCo;
 
     private void Awake()
     {
@@ -32,6 +36,24 @@ public class MechaBossSpike : MonoBehaviour
         if(isDestroyed) {
             transform.position += projectileData.speed / 2 * Time.deltaTime * Vector3.down;
         }
+    }
+
+    private void OnEnable() {
+        // originPosition = transform.position;
+        // autoDestroyCo = StartCoroutine(AutoDestroy());
+    }
+
+    private void OnDisable() {
+        // StopCoroutine(autoDestroyCo);
+    }
+
+    private IEnumerator AutoDestroy()
+    {
+        yield return null;
+        // yield return new WaitUntil(() => {
+        //     return Vector3.Distance(transform.position, originPosition) >= 150;
+        // });
+        // gameObject.SetActive(false);
     }
 
     public void Destroy() {
