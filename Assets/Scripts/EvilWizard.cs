@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // https://game.courses/c-events-vs-unityevents/
+// https://forum.unity.com/threads/what-is-the-best-way-to-delay-my-attack-method.999343/
 public class EvilWizard : MonoBehaviour
 {
     [SerializeField]

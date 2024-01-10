@@ -39,10 +39,10 @@ public class ProjectileLauncher : MonoBehaviour
     [SerializeField]
     private UnityEvent onShootEnd;
 
-    #nullable enable
+#nullable enable
     [SerializeField]
     private Transform? firePoint = null;
-    #nullable disable
+#nullable disable
 
     [SerializeField]
     private int lengthDetection = 10;
@@ -83,28 +83,22 @@ public class ProjectileLauncher : MonoBehaviour
             collisionLayers
         );
 
-        // if(hitInfo) {
-        //     print(hitInfo.transform.name);
-        //     // Debug.DrawRay(firePoint, Vector3.left * lengthDetection, Color.white);
-        // } else {
-        // //     // Debug.DrawRay(firePoint, Vector3.left * lengthDetection, Color.cyan);
-        // }
-
         targetInSight = hitInfo.collider != null;
-        if(transform.right.normalized.x == -1) {
-            Debug.DrawRay(new Vector2(bc2d.bounds.min.x - 0.15f, bc2d.bounds.min.y), fireDirection * lengthDetection * (isMoving ? transform.right.normalized : Vector3.one), Color.cyan);
-            Debug.DrawRay(new Vector2(bc2d.bounds.min.x - 0.15f, bc2d.bounds.max.y), fireDirection * lengthDetection * (isMoving ? transform.right.normalized : Vector3.one), Color.cyan);
-        } else {
-            Debug.DrawRay(new Vector2(bc2d.bounds.max.x + 0.15f, bc2d.bounds.min.y), fireDirection * lengthDetection * (isMoving ? transform.right.normalized : Vector3.one), Color.cyan);
-            Debug.DrawRay(new Vector2(bc2d.bounds.max.x + 0.15f, bc2d.bounds.max.y), fireDirection * lengthDetection * (isMoving ? transform.right.normalized : Vector3.one), Color.cyan);
+
+        float xBounds = bc2d.bounds.min.x;
+        if (shootDirection == ShootDirection.Right)
+        {
+            xBounds = bc2d.bounds.max.x;
         }
+
+        Debug.DrawRay(new Vector2(xBounds, bc2d.bounds.min.y), fireDirection * lengthDetection * (isMoving ? transform.right.normalized : Vector3.one), Color.cyan);
+        Debug.DrawRay(new Vector2(xBounds, bc2d.bounds.max.y), fireDirection * lengthDetection * (isMoving ? transform.right.normalized : Vector3.one), Color.cyan);
+
     }
 
 
     private IEnumerator Shoot()
     {
-        // yield return Helpers.GetWait(projectileLauncherData.startDelay);
-
         while (true)
         {
             if (targetInSight)
@@ -116,15 +110,9 @@ public class ProjectileLauncher : MonoBehaviour
                 pool.Get();
                 yield return Helpers.GetWait(projectileLauncherData.cadency);
                 onShootEnd?.Invoke();
-                // yield return Helpers.GetWait(5);
             }
             yield return null;
         }
-    }
-
-    void CancelAllProjectiles()
-    {
-        // pool.Clear();
     }
 
     Projectile CreateFunc()
@@ -143,13 +131,12 @@ public class ProjectileLauncher : MonoBehaviour
             rotationAngle = 180;
         }
 
-        if(isMoving && transform.right.normalized.x == -1) {
+        if (isMoving && transform.right.normalized.x == -1)
+        {
             rotationAngle = 180;
         }
 
         Quaternion quaternion = Quaternion.Euler(0, rotationAngle, 0);
-        // _projectile.transform.position = transform.position;
-        // print(firePoint != null);
         _projectile.transform.position = firePoint != null ? firePoint.position : transform.position;
         _projectile.transform.rotation = quaternion;
         _projectile.gameObject.SetActive(true);
@@ -165,7 +152,6 @@ public class ProjectileLauncher : MonoBehaviour
     {
         Destroy(_projectile.gameObject);
     }
-
 
     private void OnDestroy()
     {
