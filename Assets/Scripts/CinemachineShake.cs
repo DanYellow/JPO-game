@@ -10,11 +10,14 @@ public class CinemachineShake : MonoBehaviour
     private CinemachineVirtualCamera cinemachineVirtualCamera;
     private void Awake() {
         cinemachineVirtualCamera = GetComponent<CinemachineVirtualCamera>();
+    }
 
+    private void OnEnable() {
         onCinemachineShake.OnEventRaised += ShakeCameraProxy;
     }
 
     public void ShakeCameraProxy(CameraShakeTypeValue value) {
+        print("grzzzz");
         StartCoroutine(ShakeCamera(value.intensity, value.duration));
     }
 

@@ -29,7 +29,7 @@ public class Attack : MonoBehaviour
 
             if (attackData.recoveryTime > 0 && GetComponentInParent<IStunnable>() != null && !isRecovering)
             {
-                onCinemachineShake?.OnEventRaised(attackData.cameraShake);
+                onCinemachineShake.Raise(attackData.cameraShake);
                 IStunnable iStunnable = GetComponentInParent<IStunnable>();
                 yield return StartCoroutine(iStunnable.Stun(attackData.recoveryTime, EndAttack));
             }

@@ -30,6 +30,8 @@ public class PlayerDashAttack : MonoBehaviour
     [SerializeField]
     private VectorEventChannel rbVelocityEventChannel;
 
+    [Space(10)]
+
     [SerializeField]
     private CinemachineShakeEventChannel onCinemachineShake;
 
@@ -112,6 +114,7 @@ public class PlayerDashAttack : MonoBehaviour
 
             if (item.gameObject != gameObject && item.TryGetComponent(out IDamageable iDamageable))
             {
+                
                 iDamageable.TakeDamage(playerData.dashDamage);
             }
         }
@@ -148,6 +151,7 @@ public class PlayerDashAttack : MonoBehaviour
     {
         rb.gravityScale = originalGravity;
         isDashing = false;
+        onCinemachineShake.Raise(dashCameraShake);
         // gameObject.layer = LayerMask.NameToLayer(originalLayerName);
         dashTrailRenderer.emit = false;
         rb.velocity = Vector2.zero;

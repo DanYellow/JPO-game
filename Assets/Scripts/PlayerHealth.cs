@@ -7,15 +7,6 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     private BoolEventChannel onHealthUpdated;
 
     [SerializeField]
-    private CinemachineShakeEventChannel onCinemachineShake;
-
-    [SerializeField]
-    private CameraShakeTypeValue hurtCameraShake;
-
-    [SerializeField]
-    private CameraShakeTypeValue deathCameraShake;
-
-    [SerializeField]
     private VoidEventChannel onPlayerDeath;
 
     public GameObject deathEffectPrefab;
@@ -27,6 +18,16 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     private UnityEvent onDeathEvent;
 
     private Invulnerable invulnerable;
+
+    [Space(10)]
+
+    [SerializeField]
+    private CinemachineShakeEventChannel onCinemachineShake;
+
+    [SerializeField]
+    private CameraShakeTypeValue hurtCameraShake;
+    [SerializeField]
+    private CameraShakeTypeValue deathCameraShake;
 
     private void Awake()
     {
@@ -65,8 +66,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         }
         else
         {
-            invulnerable.Trigger();
             onCinemachineShake.Raise(hurtCameraShake);
+            invulnerable.Trigger();
         }
     }
 

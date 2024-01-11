@@ -40,24 +40,20 @@ public class Projectile : MonoBehaviour, IRecycleable
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Contact();
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Contact();
-        if (collision.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
-            IDamageable iDamageable = collision.transform.GetComponentInChildren<IDamageable>();
+            IDamageable iDamageable = other.transform.GetComponentInChildren<IDamageable>();
             iDamageable.TakeDamage(projectileData.damage);
-            if (collision.gameObject.TryGetComponent(out Knockback knockback))
+            if (other.gameObject.TryGetComponent(out Knockback knockback))
             {
                 knockback.Apply(gameObject, projectileData.knockbackForce);
             }
            
-            IStunnable iStunnable = collision.transform.GetComponent<IStunnable>();
+            IStunnable iStunnable = other.transform.GetComponent<IStunnable>();
             StartCoroutine(iStunnable.Stun(projectileData.stunTime, () => {}));
         }
+
+        Contact();
     }
 
     void Contact()
