@@ -60,9 +60,8 @@ public class EnemyAttack : MonoBehaviour
                 knockback.Apply(gameObject, enemyData.knockbackForce);
             }
 
-            if(other.gameObject.TryGetComponent(out IDamageable iDamageable)) {
-               iDamageable.TakeDamage(enemyData.damage);
-            }
+            IDamageable iDamageable = other.transform.GetComponentInChildren<IDamageable>();
+            iDamageable.TakeDamage(enemyData.damage);
         }
     }
 

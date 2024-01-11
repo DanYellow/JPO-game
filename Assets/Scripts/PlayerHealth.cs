@@ -67,6 +67,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         }
         else
         {
+            print("Tteee");
             onCinemachineShake.Raise(hurtCameraShake);
             invulnerable.Trigger();
         }

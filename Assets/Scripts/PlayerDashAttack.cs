@@ -117,7 +117,6 @@ public class PlayerDashAttack : MonoBehaviour
                 onCinemachineShake.Raise(dashCameraShake);
                 iDamageable.TakeDamage(playerData.dashDamage);
             }
-            print(item.name);
         }
     }
 

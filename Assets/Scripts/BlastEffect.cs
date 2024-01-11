@@ -31,6 +31,11 @@ public class BlastEffect : MonoBehaviour
             iDamageable.TakeDamage(blastEffectData.damage);
         }
 
+        // if(other.transform.GetComponentInChildren<IDamageable>() != null) {
+        //     IDamageable iDamageableChild = other.transform.GetComponentInChildren<IDamageable>();
+        //     iDamageableChild.TakeDamage(blastEffectData.damage);
+        // }
+
         if (other.gameObject.TryGetComponent(out Knockback knockback))
         {
             knockback.Apply(gameObject, blastEffectData.knockbackForce);
