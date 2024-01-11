@@ -54,6 +54,9 @@ public class Projectile : MonoBehaviour, IRecycleable
             {
                 knockback.Apply(gameObject, projectileData.knockbackForce);
             }
+           
+            IStunnable iStunnable = collision.transform.GetComponent<IStunnable>();
+            StartCoroutine(iStunnable.Stun(projectileData.stunTime));
         }
     }
 

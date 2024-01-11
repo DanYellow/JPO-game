@@ -33,17 +33,20 @@ public class MechaBossSpike : MonoBehaviour
             transform.position += projectileData.speed * Time.deltaTime * throwDir;
         }
 
-        if(isDestroyed) {
+        if (isDestroyed)
+        {
             transform.position += projectileData.speed / 2 * Time.deltaTime * Vector3.down;
         }
     }
 
-    private void OnEnable() {
+    private void OnEnable()
+    {
         // originPosition = transform.position;
         // autoDestroyCo = StartCoroutine(AutoDestroy());
     }
 
-    private void OnDisable() {
+    private void OnDisable()
+    {
         // StopCoroutine(autoDestroyCo);
     }
 
@@ -56,10 +59,11 @@ public class MechaBossSpike : MonoBehaviour
         // gameObject.SetActive(false);
     }
 
-    public void Destroy() {
+    public void Destroy()
+    {
         isDestroyed = true;
     }
-    
+
     public void Throw(Vector3 _throwDir)
     {
         throwDir = _throwDir;
@@ -85,6 +89,9 @@ public class MechaBossSpike : MonoBehaviour
             {
                 knockback.Apply(gameObject, projectileData.knockbackForce);
             }
+
+            IStunnable iStunnable = collision.transform.GetComponent<IStunnable>();
+            StartCoroutine(iStunnable.Stun(projectileData.stunTime));
         }
     }
 }

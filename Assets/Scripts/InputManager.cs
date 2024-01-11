@@ -8,6 +8,7 @@ public class ActionMapName
     public static string UIGameOverAndCredits = "UIGameOverAndCredits";
     public static string Cinematics = "Cinematics";
     public static string Interact = "Interact";
+    public static string PlayerStunned = "PlayerStunned";
 }
 
 public class InputManager : MonoBehaviour

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 // https://www.youtube.com/watch?v=xx1oKVTU_gM
 
-public class PlayerMovements : MonoBehaviour
+public class PlayerMovements : MonoBehaviour, IStunnable
 {
     private Rigidbody2D rb;
 
@@ -66,6 +66,9 @@ public class PlayerMovements : MonoBehaviour
 
     [SerializeField]
     private BoolEventChannel playerCrouchEventChannel;
+
+    [SerializeField]
+    private StringEventChannel onPlayerInputMapChange;
 
     private void Awake()
     {
@@ -264,5 +267,15 @@ public class PlayerMovements : MonoBehaviour
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(bc2d.bounds.center, bc2d.bounds.size);
+    }
+
+    public IEnumerator Stun(float stunTime)
+    {
+        onPlayerInputMapChange.Raise(ActionMapName.PlayerStunned);
+        // rb.velocity = Vector2.zero;
+        playerCanMove.CurrentValue = false;
+        yield return Helpers.GetWait(stunTime);
+        onPlayerInputMapChange.Raise(ActionMapName.Player);
+        playerCanMove.CurrentValue = true;
     }
 }

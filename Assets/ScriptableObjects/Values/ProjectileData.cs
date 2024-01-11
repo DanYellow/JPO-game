@@ -9,4 +9,5 @@ public class ProjectileData : ScriptableObject
     public int knockbackForce = 0;
     public bool isFacingRight = true;
     public BlastEffectData blastEffectData = null;
+    public float stunTime = 0; 
 }

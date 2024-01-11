@@ -58,7 +58,7 @@ public class Shield : MonoBehaviour, IDamageable, IReflectable
             maxLifePoints
         );
 
-        sr.material.SetColor("_Color", colorLevel.Evaluate(currentLifePoints/maxLifePoints));
+        sr.material.SetColor("_Color", colorLevel.Evaluate(currentLifePoints / maxLifePoints));
 
         healthBar.UpdateContent(currentLifePoints);
 
