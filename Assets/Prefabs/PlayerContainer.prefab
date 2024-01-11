@@ -5423,7 +5423,7 @@ MonoBehaviour:
   isGrounded: 0
   listGroundLayers:
     serializedVersion: 2
-    m_Bits: 8200
+    m_Bits: 136
   groundCheck: {fileID: 5528627663215432659}
   groundCheckRadius: 0.25
   playerCanMove: {fileID: 11400000, guid: d4070e2f3c65e5f48a143aca81e93fbb, type: 2}
@@ -5437,6 +5437,7 @@ MonoBehaviour:
   rbVelocityEventChannel: {fileID: 11400000, guid: 6635956797fede24d9522b8c3237406c, type: 2}
   playerPositionEventChannel: {fileID: 11400000, guid: dc2fec5e1250e804593265cfa5db37c0, type: 2}
   playerCrouchEventChannel: {fileID: 11400000, guid: c6ad727367d95d04e93a5ec0ed33fd47, type: 2}
+  onPlayerInputMapChange: {fileID: 11400000, guid: 615fe6bbef2ad3c40a72765390994e93, type: 2}
 --- !u!61 &5528627662856065164
 BoxCollider2D:
   m_ObjectHideFlags: 0
