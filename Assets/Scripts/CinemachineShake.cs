@@ -17,7 +17,6 @@ public class CinemachineShake : MonoBehaviour
     }
 
     public void ShakeCameraProxy(CameraShakeTypeValue value) {
-        print("grzzzz");
         StartCoroutine(ShakeCamera(value.intensity, value.duration));
     }
 

@@ -395,9 +395,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onHealthUpdated: {fileID: 11400000, guid: 03eb6c1b9f1a7ae4dac9b654d5a925a8, type: 2}
-  onCinemachineShake: {fileID: 11400000, guid: 235824e89124e6d44baf6f4647dac34f, type: 2}
-  hurtCameraShake: {fileID: 11400000, guid: 40f81f8a9ee7d7f4681c2c2cb2015fb3, type: 2}
-  deathCameraShake: {fileID: 11400000, guid: fc3b3f289b44e9447a860057dedb2e11, type: 2}
   onPlayerDeath: {fileID: 11400000, guid: ee804061685d49549a86590b0c280ccd, type: 2}
   deathEffectPrefab: {fileID: 1992304688091250534, guid: 44fb5dd6c04248741b0fdac87cf0d958, type: 3}
   playerStatsValue: {fileID: 11400000, guid: 4d8b9f9261ee27f47ad567a2af8e73c2, type: 2}
@@ -440,6 +437,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onCinemachineShake: {fileID: 11400000, guid: 235824e89124e6d44baf6f4647dac34f, type: 2}
+  hurtCameraShake: {fileID: 11400000, guid: 40f81f8a9ee7d7f4681c2c2cb2015fb3, type: 2}
+  deathCameraShake: {fileID: 11400000, guid: fc3b3f289b44e9447a860057dedb2e11, type: 2}
 --- !u!114 &5528627662263019260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5440,6 +5440,36 @@ MonoBehaviour:
   playerPositionEventChannel: {fileID: 11400000, guid: dc2fec5e1250e804593265cfa5db37c0, type: 2}
   playerCrouchEventChannel: {fileID: 11400000, guid: c6ad727367d95d04e93a5ec0ed33fd47, type: 2}
   onPlayerInputMapChange: {fileID: 11400000, guid: 615fe6bbef2ad3c40a72765390994e93, type: 2}
+  onStunStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  onStunEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!61 &5528627662856065164
 BoxCollider2D:
   m_ObjectHideFlags: 0

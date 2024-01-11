@@ -1,8 +1,9 @@
 using System.Collections;
-using UnityEngine;
-using UnityEngine.InputSystem;
 using System.Collections.Generic;
 using System;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 // https://www.youtube.com/watch?v=xx1oKVTU_gM
 
@@ -71,6 +72,11 @@ public class PlayerMovements : MonoBehaviour, IStunnable
     [SerializeField]
     private StringEventChannel onPlayerInputMapChange;
 
+    [SerializeField]
+    private UnityEvent onStunStart;
+    [SerializeField]
+    private UnityEvent onStunEnd;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -87,6 +93,8 @@ public class PlayerMovements : MonoBehaviour, IStunnable
     private void Start()
     {
         playerCanMove.CurrentValue = true;
+
+        // StartCoroutine(Stun(2, () => {}));
     }
 
     void Update()
@@ -272,10 +280,14 @@ public class PlayerMovements : MonoBehaviour, IStunnable
 
     public IEnumerator Stun(float stunTime, Action callback)
     {
+        if(stunTime > 0) {
+            onStunStart?.Invoke();
+        }
         onPlayerInputMapChange.Raise(ActionMapName.PlayerStunned);
         yield return Helpers.GetWait(stunTime);
         rbVelocityEventChannel.Raise(transform.right);
         onPlayerInputMapChange.Raise(ActionMapName.Player);
+        onStunEnd?.Invoke();
         callback?.Invoke();
     }
 }
