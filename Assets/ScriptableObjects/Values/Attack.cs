@@ -11,6 +11,8 @@ namespace MyScriptableObject
         public float stunTime;
         public float recoveryTime;
 
+        public CameraShakeTypeValue cameraShake;
+
 #pragma warning disable 0414
         [Multiline, SerializeField]
         private string DeveloperDescription = "";

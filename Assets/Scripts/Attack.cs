@@ -7,8 +7,10 @@ public class Attack : MonoBehaviour
     [SerializeField]
     private MyScriptableObject.Attack attackData;
 
-    private bool isRecovering = false;
+    [SerializeField]
+    private CinemachineShakeEventChannel onCinemachineShake;
 
+    private bool isRecovering = false;
 
     private void Awake()
     {
@@ -27,6 +29,7 @@ public class Attack : MonoBehaviour
 
             if (attackData.recoveryTime > 0 && GetComponentInParent<IStunnable>() != null && !isRecovering)
             {
+                onCinemachineShake?.OnEventRaised(attackData.cameraShake);
                 IStunnable iStunnable = GetComponentInParent<IStunnable>();
                 yield return StartCoroutine(iStunnable.Stun(attackData.recoveryTime, EndAttack));
             }

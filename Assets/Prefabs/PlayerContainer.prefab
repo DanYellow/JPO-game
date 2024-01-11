@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackData: {fileID: 11400000, guid: f4b45465482e851419ac605f4c040df6, type: 2}
+  onCinemachineShake: {fileID: 11400000, guid: 235824e89124e6d44baf6f4647dac34f, type: 2}
 --- !u!1 &5250848669414670382
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,6 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackData: {fileID: 11400000, guid: 5f9145df73002e1429a12d468683961e, type: 2}
+  onCinemachineShake: {fileID: 0}
 --- !u!1 &5528627662263019259
 GameObject:
   m_ObjectHideFlags: 0
@@ -5767,3 +5769,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackData: {fileID: 11400000, guid: 66d55e4e06398e740a27e290e04fc9b1, type: 2}
+  onCinemachineShake: {fileID: 0}
