@@ -114,9 +114,10 @@ public class PlayerDashAttack : MonoBehaviour
 
             if (item.gameObject != gameObject && item.TryGetComponent(out IDamageable iDamageable))
             {
-                
+                onCinemachineShake.Raise(dashCameraShake);
                 iDamageable.TakeDamage(playerData.dashDamage);
             }
+            print(item.name);
         }
     }
 
@@ -136,7 +137,6 @@ public class PlayerDashAttack : MonoBehaviour
 
         // // Time.timeScale = 0.5f;
         playerCanMove.CurrentValue = false;
-        // onCinemachineShake.Raise(dashCameraShake);
 
         float speedFactor = Mathf.Abs(rb.velocity.x) > 0 ? 1.25f : 1;
         rb.velocity = new Vector2(transform.right.normalized.x * playerData.dashVelocity * speedFactor, 0);
@@ -151,7 +151,6 @@ public class PlayerDashAttack : MonoBehaviour
     {
         rb.gravityScale = originalGravity;
         isDashing = false;
-        onCinemachineShake.Raise(dashCameraShake);
         // gameObject.layer = LayerMask.NameToLayer(originalLayerName);
         dashTrailRenderer.emit = false;
         rb.velocity = Vector2.zero;

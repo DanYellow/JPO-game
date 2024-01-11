@@ -9,10 +9,9 @@ public class DeathZone : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (other.gameObject.TryGetComponent(out IDamageable iDamageable))
-            {
-                iDamageable.TakeDamage(1);
-            }
+            IDamageable iDamageable = other.transform.GetComponentInChildren<IDamageable>();
+            iDamageable.TakeDamage(1);
+
             if (other.gameObject.TryGetComponent(out PlayerSpawn playerSpawn))
             {
                 other.transform.position = playerSpawn.currentSpawnPosition;
@@ -20,6 +19,9 @@ public class DeathZone : MonoBehaviour
                 other.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                 resetPlayerPosition.Raise();
             }
+
+            IStunnable iStunnable = other.transform.GetComponent<IStunnable>();
+            StartCoroutine(iStunnable.Stun(2, () => {}));
         }
         else if (other.transform.parent == null)
         {
