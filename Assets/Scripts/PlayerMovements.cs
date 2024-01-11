@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
+using System;
 
 // https://www.youtube.com/watch?v=xx1oKVTU_gM
 
@@ -269,13 +270,12 @@ public class PlayerMovements : MonoBehaviour, IStunnable
         Gizmos.DrawWireCube(bc2d.bounds.center, bc2d.bounds.size);
     }
 
-    public IEnumerator Stun(float stunTime)
+    public IEnumerator Stun(float stunTime, Action callback)
     {
         onPlayerInputMapChange.Raise(ActionMapName.PlayerStunned);
-        // rb.velocity = Vector2.zero;
-        playerCanMove.CurrentValue = false;
         yield return Helpers.GetWait(stunTime);
+        rbVelocityEventChannel.Raise(transform.right);
         onPlayerInputMapChange.Raise(ActionMapName.Player);
-        playerCanMove.CurrentValue = true;
+        callback?.Invoke();
     }
 }

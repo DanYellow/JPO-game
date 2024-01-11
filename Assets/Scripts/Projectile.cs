@@ -56,7 +56,7 @@ public class Projectile : MonoBehaviour, IRecycleable
             }
            
             IStunnable iStunnable = collision.transform.GetComponent<IStunnable>();
-            StartCoroutine(iStunnable.Stun(projectileData.stunTime));
+            StartCoroutine(iStunnable.Stun(projectileData.stunTime, () => {}));
         }
     }
 

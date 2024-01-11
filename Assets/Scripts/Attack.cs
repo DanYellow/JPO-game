@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class Attack : MonoBehaviour
 {
@@ -6,10 +7,35 @@ public class Attack : MonoBehaviour
     [SerializeField]
     private MyScriptableObject.Attack attackData;
 
+    private bool isRecovering = false;
+
+
     private void Awake()
     {
         collider = GetComponent<Collider2D>();
         collider.enabled = false;
+
+        StartCoroutine(ColliderCheck());
+    }
+
+    IEnumerator ColliderCheck()
+    {
+        while (true)
+        {
+            isRecovering = false;
+            yield return new WaitUntil(() => collider.enabled == true);
+
+            if (attackData.recoveryTime > 0 && GetComponentInParent<IStunnable>() != null && !isRecovering)
+            {
+                IStunnable iStunnable = GetComponentInParent<IStunnable>();
+                yield return StartCoroutine(iStunnable.Stun(attackData.recoveryTime, EndAttack));
+            }
+        }
+    }
+
+    private void EndAttack()
+    {
+        isRecovering = true;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -26,7 +52,7 @@ public class Attack : MonoBehaviour
 
         if (other.transform.GetComponent<IReflectable>() != null)
         {
-            selfKnockback.Apply(other.gameObject, 20);
+            selfKnockback.Apply(other.gameObject, 15);
         }
 
         if (other.transform.TryGetComponent(out IDamageable iDamageable))

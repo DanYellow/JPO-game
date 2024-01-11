@@ -8,6 +8,8 @@ namespace MyScriptableObject
         public int damage;
         public Vector2 knockbackForce = Vector2.zero;
         public bool isKnockingSelf = false;
+        public float stunTime;
+        public float recoveryTime;
 
 #pragma warning disable 0414
         [Multiline, SerializeField]
