@@ -46,6 +46,7 @@ public class Shield : MonoBehaviour, IDamageable, IReflectable
         healthBar.maxLifePoints = currentLifePoints;
         healthBar.UpdateContent(currentLifePoints);
         healthBarContainer.SetActive(true);
+        sr.material.SetColor("_Color", colorLevel.Evaluate(currentLifePoints / maxLifePoints));
     }
 
     public void TakeDamage(int damage)

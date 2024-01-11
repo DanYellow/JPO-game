@@ -32,8 +32,6 @@ public class GameOverManager : MonoBehaviour
             // gameoverMenuUI.GetComponentInChildren<Button>().Select();
             // Debug.Log("Time spent : " + (int)Time.timeSinceLevelLoad);
         }
-
-
 #endif
     }
 
@@ -49,7 +47,9 @@ public class GameOverManager : MonoBehaviour
         playerHUDUI.SetActive(false);
         gameoverMenuUI.SetActive(true);
         EventSystemExtensions.UpdateSelectedGameObject(gameoverMenuUI.GetComponentInChildren<Button>().gameObject);
-        onPlayerInputMapChange.Raise(ActionMapName.UI);
+        
+        print("dead");
+        onPlayerInputMapChange.Raise(ActionMapName.UIGameOverAndCredits);
         // StartCoroutine(DisplayGameOverScreenProxy());
     }
 

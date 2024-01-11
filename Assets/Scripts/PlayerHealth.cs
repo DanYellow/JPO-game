@@ -32,12 +32,12 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     private void Awake()
     {
         // playerStatsValue.nbCurrentLifes = playerStatsValue.nbMaxLifes;
-        onPlayerDeath.OnEventRaised += OnDeath;
+        // onPlayerDeath.OnEventRaised += OnDeath;
 
         invulnerable = GetComponent<Invulnerable>();
 
 
-        playerStatsValue.currentLifePoints = 20;
+        playerStatsValue.currentLifePoints = 1;
     }
 
     private void Update()
@@ -46,6 +46,11 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         if (Input.GetKeyDown(KeyCode.H))
         {
             TakeDamage(1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            TakeDamage(int.MaxValue);
         }
 #endif
     }
@@ -62,12 +67,10 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         onHealthUpdated.Raise(true);
         if (playerStatsValue.currentLifePoints <= 0)
         {
-            onPlayerDeath.Raise();
-            OnDeath();
+            Death();
         }
         else
         {
-            print("Tteee");
             onCinemachineShake.Raise(hurtCameraShake);
             invulnerable.Trigger();
         }
@@ -85,10 +88,12 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         }
     }
 
-    private void OnDeath()
+    private void Death()
     {
-        onCinemachineShake.Raise(deathCameraShake);
+        print("Death");
         onDeathEvent?.Invoke();
+        onPlayerDeath?.Raise();
+        onCinemachineShake.Raise(deathCameraShake);
         // GameObject deathEffect = Instantiate(deathEffectPrefab, transform.position, Quaternion.identity);
         // Destroy(deathEffect, deathEffect.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
         // Destroy(gameObject);
@@ -96,6 +101,6 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     private void OnDisable()
     {
-        onPlayerDeath.OnEventRaised -= OnDeath;
+        // onPlayerDeath.OnEventRaised -= OnDeath;
     }
 }

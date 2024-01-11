@@ -15,7 +15,6 @@ public class MechaGolemBoss : MonoBehaviour
 
     public bool needsToActivateShield = false;
     private bool areSpikesReady = false;
-    private bool areSpikesPreparing = false;
     [SerializeField]
     public bool isExpulsingSpikes = false;
     private bool isThrowingSpike = false;
@@ -26,6 +25,9 @@ public class MechaGolemBoss : MonoBehaviour
 
     public float delayBetweenThrows = 3.75f;
     // Start is called before the first frame update
+
+    [SerializeField]
+    private VoidEventChannel onPlayerDeathVoidEventChannel;
 
     public List<Transform> listSpikes = new List<Transform>();
     private List<Transform> listSpikesToThrow = new List<Transform>();
@@ -44,13 +46,22 @@ public class MechaGolemBoss : MonoBehaviour
         });
     }
 
-    void Start()
-    {
-        // StartCoroutine(PrepareSpikes());
+    private void OnEnable() {
+        onPlayerDeathVoidEventChannel.OnEventRaised += OnPlayerDeath;
     }
+
+    private void OnPlayerDeath() {
+        StopAllCoroutines();
+    }
+
+    private void OnDisable() {
+        onPlayerDeathVoidEventChannel.OnEventRaised -= OnPlayerDeath;
+    }
+
 
     private void Update()
     {
+        #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.N))
         {
             // StartCoroutine(ExpulseSpikes());
@@ -61,11 +72,7 @@ public class MechaGolemBoss : MonoBehaviour
         {
             needsToActivateShield = true;
         }
-    }
-
-    public bool IsPerformingAction()
-    {
-        return !isExpulsingSpikes && !isThrowingSpike;
+        #endif
     }
 
     private IEnumerator CheckShieldGeneration()
@@ -105,7 +112,6 @@ public class MechaGolemBoss : MonoBehaviour
         var length = listSpikes.Count;
         var radius = 7;
         areSpikesReady = false;
-        areSpikesPreparing = true;
 
         for (var i = 0; i < length; i++)
         {
