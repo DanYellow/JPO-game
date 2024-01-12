@@ -13,11 +13,16 @@ MonoBehaviour:
   m_Name: InteractionTextMovementControls
   m_EditorClassIdentifier: 
   listSentences:
-  - "Si une biblioth\xE8que s'allume \xE0 votre passage, c'est qu'elle a quel que
+  - "Si une biblioth\xE8que s'allume \xE0 votre passage, c'est qu'elle a quelque
     chose \xE0 vous apprendre."
   - "N'h\xE9sitez pas \xE0 les consulter."
-  - "D\xE9placez vous avec les touches <sprite=\"arrows-spritesheet\" anim=\"0, 1,
-    2\"> et <sprite=\"arrows-spritesheet\" anim=\"2, 3, 2\">"
+  - "D\xE9placez vous avec les touches <sprite=\"direction-spritesheet\" anim=\"0,
+    1, 2\">/<sprite=\"direction-spritesheet\" anim=\"4, 5, 2\"> et <sprite=\"direction-spritesheet\"
+    anim=\"2, 3, 2\">/<sprite=\"direction-spritesheet\" anim=\"6, 7, 2\">"
   - Sautez avec la touche <sprite="keyboard-space" anim="0, 1, 2"><sprite="keyboard-space"
     anim="2, 3, 2"><sprite="keyboard-space" anim="4, 5, 2">
+  - "C'est tout pour cette biblioth\xE8que."
+  - "Le monde d'<color=#ead8b5><b>Unknown Territories</b></color> regorge de nombreuses
+    connaissances enferm\xE9es dans des biblioth\xE8ques."
+  - "Mais rien ne vous emp\xEAche d'acqu\xE9rir ces connaissances sans ces biblioth\xE8ques."
   OnConversationEnd: {fileID: 0}
