@@ -35,8 +35,6 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         // onPlayerDeath.OnEventRaised += OnDeath;
 
         invulnerable = GetComponent<Invulnerable>();
-
-
         playerStatsValue.currentLifePoints = 1;
     }
 
@@ -96,6 +94,10 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         // GameObject deathEffect = Instantiate(deathEffectPrefab, transform.position, Quaternion.identity);
         // Destroy(deathEffect, deathEffect.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
         // Destroy(gameObject);
+    }
+
+    public int GetHealth() {
+        return playerStatsValue.currentLifePoints;
     }
 
     private void OnDisable()

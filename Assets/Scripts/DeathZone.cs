@@ -12,7 +12,9 @@ public class DeathZone : MonoBehaviour
             IDamageable iDamageable = other.transform.GetComponentInChildren<IDamageable>();
             iDamageable.TakeDamage(1);
 
-            if (other.gameObject.TryGetComponent(out PlayerSpawn playerSpawn))
+            PlayerHealth playerHealth = other.gameObject.GetComponentInChildren<PlayerHealth>();
+
+            if (other.gameObject.TryGetComponent(out PlayerSpawn playerSpawn) ) // && playerHealth.GetHealth() > 0
             {
                 other.transform.position = playerSpawn.currentSpawnPosition;
                 // We "stop" the player on respawn

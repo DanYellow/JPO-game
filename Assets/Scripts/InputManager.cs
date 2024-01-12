@@ -21,14 +21,11 @@ public class InputManager : MonoBehaviour
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
+        SwitchActionMap(ActionMapName.Player);
     }
 
     private void OnEnable() {
         onPlayerInputMapChange.OnEventRaised += SwitchActionMap;
-    }
-
-    private void Start() {
-        SwitchActionMap(ActionMapName.Player);
     }
 
     private void SwitchActionMap(string mapName = null)

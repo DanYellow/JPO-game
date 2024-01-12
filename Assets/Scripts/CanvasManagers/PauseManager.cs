@@ -43,7 +43,7 @@ public class PauseManager : MonoBehaviour
         onTogglePauseEvent.Raise(isGamePaused);
         EventSystem.current.SetSelectedGameObject(null);
 
-        onPlayerInputMapChange.Raise(ActionMapName.Player);
+        // onPlayerInputMapChange.Raise(ActionMapName.Player);
     }
 
     public void OnNavigate(InputAction.CallbackContext ctx)

@@ -287,7 +287,7 @@ public class PlayerMovements : MonoBehaviour, IStunnable
         onPlayerInputMapChange.Raise(ActionMapName.PlayerStunned);
         yield return Helpers.GetWait(stunTime);
         rbVelocityEventChannel.Raise(transform.right);
-        onPlayerInputMapChange.Raise(ActionMapName.Player);
+        // onPlayerInputMapChange.Raise(ActionMapName.Player);
         onStunEnd?.Invoke();
         callback?.Invoke();
     }

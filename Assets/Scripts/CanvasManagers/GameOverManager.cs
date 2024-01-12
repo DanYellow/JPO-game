@@ -45,7 +45,7 @@ public class GameOverManager : MonoBehaviour
     private void DisplayGameOverScreen()
     {
         EventSystemExtensions.UpdateSelectedGameObject(gameoverMenuUI.GetComponentInChildren<Button>().gameObject);
-        onPlayerInputMapChange.Raise(ActionMapName.UI);
+        onPlayerInputMapChange.Raise(ActionMapName.UIGameOverAndCredits);
 
         StartCoroutine(DisplayGameOverScreenProxy());
     }
@@ -93,10 +93,10 @@ public class GameOverManager : MonoBehaviour
 
     public void HideGameOverScreen()
     {
-        onPlayerInputMapChange.Raise(ActionMapName.Player);
+        // onPlayerInputMapChange.Raise(ActionMapName.Player);
 
-        EventSystem.current.SetSelectedGameObject(null);
-        gameoverMenuUI.SetActive(false);
+        // EventSystem.current.SetSelectedGameObject(null);
+        // gameoverMenuUI.SetActive(false);
     }
 
     private void OnDisable()
