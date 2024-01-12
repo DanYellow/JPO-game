@@ -13,5 +13,9 @@ MonoBehaviour:
   m_Name: PlayerHeavyAttack
   m_EditorClassIdentifier: 
   damage: 4
-  knockbackForce: 10
+  knockbackForce: {x: 3, y: 0}
+  isKnockingSelf: 0
+  stunTime: 0
+  recoveryTime: 0
+  cameraShake: {fileID: 0}
   DeveloperDescription: 

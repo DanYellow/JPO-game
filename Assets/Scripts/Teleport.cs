@@ -43,7 +43,6 @@ public class Teleport : MonoBehaviour
         yield return null;
         yield return new WaitWhile(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1);
         transform.position = startingPosition;
-        animator.SetTrigger(AnimationStrings.teleportOut);
         yield return null;
         yield return new WaitWhile(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1);
         isTeleporting = false;
