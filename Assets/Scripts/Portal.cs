@@ -122,8 +122,6 @@ public class Portal : MonoBehaviour
 
             yield return null;
         }
-
-        print("Cancel teleport");
     }
 
     private void CheckPlayerPosition(Vector3 pos)
