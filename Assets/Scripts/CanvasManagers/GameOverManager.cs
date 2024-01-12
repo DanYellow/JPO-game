@@ -10,9 +10,6 @@ public class GameOverManager : MonoBehaviour
     private VoidEventChannel onPlayerDeathVoidEventChannel;
 
     [SerializeField]
-    private VoidEventChannel onResetLastCheckPoint;
-
-    [SerializeField]
     private StringEventChannel onPlayerInputMapChange;
 
     public GameObject gameoverMenuUI;
@@ -36,10 +33,9 @@ public class GameOverManager : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void OnEnable()
     {
         onPlayerDeathVoidEventChannel.OnEventRaised += DisplayGameOverScreen;
-        onResetLastCheckPoint.OnEventRaised += HideGameOverScreen;
     }
 
     private void DisplayGameOverScreen()
@@ -91,17 +87,9 @@ public class GameOverManager : MonoBehaviour
         }
     }
 
-    public void HideGameOverScreen()
-    {
-        // onPlayerInputMapChange.Raise(ActionMapName.Player);
-
-        // EventSystem.current.SetSelectedGameObject(null);
-        // gameoverMenuUI.SetActive(false);
-    }
 
     private void OnDisable()
     {
         onPlayerDeathVoidEventChannel.OnEventRaised -= DisplayGameOverScreen;
-        onResetLastCheckPoint.OnEventRaised -= HideGameOverScreen;
     }
 }
