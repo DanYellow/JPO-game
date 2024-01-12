@@ -280,9 +280,10 @@ public class PlayerMovements : MonoBehaviour, IStunnable
 
     public IEnumerator Stun(float stunTime, Action callback)
     {
-        if(stunTime > 0) {
-            onStunStart?.Invoke();
+        if(stunTime == 0 || playerData.currentLifePoints == 0) {
+            yield break;
         }
+        onStunStart?.Invoke();
         onPlayerInputMapChange.Raise(ActionMapName.PlayerStunned);
         yield return Helpers.GetWait(stunTime);
         rbVelocityEventChannel.Raise(transform.right);

@@ -18,6 +18,7 @@ public class MechaGolemBoss : MonoBehaviour
     [SerializeField]
     public bool isExpulsingSpikes = false;
     private bool isThrowingSpike = false;
+    public bool isPlayerDead = false;
     private LookAtTarget lookAtTarget;
     private MechaProtect mechaProtect;
 
@@ -46,22 +47,29 @@ public class MechaGolemBoss : MonoBehaviour
         });
     }
 
-    private void OnEnable() {
+    private void OnEnable()
+    {
         onPlayerDeathVoidEventChannel.OnEventRaised += OnPlayerDeath;
     }
 
-    private void OnPlayerDeath() {
-        StopAllCoroutines();
+    private void OnPlayerDeath()
+    {
+        isPlayerDead = true;
+        StopExpulseSpikesChecking();
+        StopExpulseSpikes();
+        StopThrowAllSpikes();
+        StopThrowSpike();
+        StopShieldGenerationChecking();
     }
 
-    private void OnDisable() {
+    private void OnDisable()
+    {
         onPlayerDeathVoidEventChannel.OnEventRaised -= OnPlayerDeath;
     }
 
-
     private void Update()
     {
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.N))
         {
             // StartCoroutine(ExpulseSpikes());
@@ -72,7 +80,7 @@ public class MechaGolemBoss : MonoBehaviour
         {
             needsToActivateShield = true;
         }
-        #endif
+#endif
     }
 
     private IEnumerator CheckShieldGeneration()
@@ -420,9 +428,11 @@ public class MechaGolemBoss : MonoBehaviour
 
     public void StopExpulseSpikesChecking()
     {
-        StopCoroutine(checkExpulsingSpikesAttackCo);
+        if (checkExpulsingSpikesAttackCo != null)
+        {
+            StopCoroutine(checkExpulsingSpikesAttackCo);
+        }
     }
-
 
     public void StopExpulseSpikes()
     {

@@ -44,13 +44,10 @@ public class GameOverManager : MonoBehaviour
 
     private void DisplayGameOverScreen()
     {
-        playerHUDUI.SetActive(false);
-        gameoverMenuUI.SetActive(true);
         EventSystemExtensions.UpdateSelectedGameObject(gameoverMenuUI.GetComponentInChildren<Button>().gameObject);
-        
-        print("dead");
-        onPlayerInputMapChange.Raise(ActionMapName.UIGameOverAndCredits);
-        // StartCoroutine(DisplayGameOverScreenProxy());
+        onPlayerInputMapChange.Raise(ActionMapName.UI);
+
+        StartCoroutine(DisplayGameOverScreenProxy());
     }
 
     private string GetGameTime()
@@ -67,30 +64,10 @@ public class GameOverManager : MonoBehaviour
 
     IEnumerator DisplayGameOverScreenProxy()
     {
+        yield return new WaitForSeconds(0.85f);
         playerHUDUI.SetActive(false);
         gameoverMenuUI.SetActive(true);
-        EventSystemExtensions.UpdateSelectedGameObject(gameoverMenuUI.GetComponentInChildren<Button>().gameObject);
-        onPlayerInputMapChange.Raise(ActionMapName.UI);
-        yield return new WaitForSeconds(0.75f);
-
-        // foreach (var item in gameoverMenuUI.GetComponentsInChildren<Button>())
-        // {
-        //     item.interactable = false;
-        // }
-
-
-        // foreach (var item in gameoverMenuUI.GetComponentsInChildren<Button>())
-        // {
-        //     item.interactable = true;
-        // }
-        // StartCoroutine(TriggerInputAction());
-    }
-
-    IEnumerator TriggerInputAction()
-    {
-        yield return new WaitForSeconds(0.5f);
-
-        EventSystemExtensions.UpdateSelectedGameObject(gameoverMenuUI.GetComponentInChildren<Button>().gameObject);
+        
     }
 
     public void OnControlsChanged(PlayerInput input)
@@ -104,9 +81,9 @@ public class GameOverManager : MonoBehaviour
     public void OnNavigate(InputAction.CallbackContext ctx)
     {
         if (
-            gameoverMenuUI != null && 
-            gameoverMenuUI.activeInHierarchy && 
-            ctx.phase == InputActionPhase.Performed && 
+            gameoverMenuUI != null &&
+            gameoverMenuUI.activeInHierarchy &&
+            ctx.phase == InputActionPhase.Performed &&
             EventSystem.current.currentSelectedGameObject == null
         )
         {

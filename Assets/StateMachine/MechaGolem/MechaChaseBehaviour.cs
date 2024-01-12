@@ -65,7 +65,7 @@ public class MechaChaseBehaviour : StateMachineBehaviour
             speed = enemyData.runSpeed;
         }
 
-        if (Vector2.Distance(target.position, rb.position) < 25)
+        if (Vector2.Distance(target.position, rb.position) < 25 && !mechaGolemBoss.isPlayerDead)
         {
 
             if (Vector2.Distance(target.position, rb.position) > 5)

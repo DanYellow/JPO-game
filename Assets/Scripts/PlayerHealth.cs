@@ -90,7 +90,6 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     private void Death()
     {
-        print("Death");
         onDeathEvent?.Invoke();
         onPlayerDeath?.Raise();
         onCinemachineShake.Raise(deathCameraShake);
