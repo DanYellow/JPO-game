@@ -26,7 +26,7 @@ public class CreditsManager : MonoBehaviour
     private void ShowCredits() {
         lastCheckpoint.CurrentValue = null;
         creditsUI.SetActive(true);
-        onPlayerInputMapChange.Raise(ActionMapName.UI);
+        onPlayerInputMapChange.Raise(ActionMapName.UIGameOverAndCredits);
         EventSystemExtensions.UpdateSelectedGameObject(creditsUI.GetComponentInChildren<Button>().gameObject);
     }
 
