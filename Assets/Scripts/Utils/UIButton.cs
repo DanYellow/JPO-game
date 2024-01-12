@@ -2,7 +2,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;  
 
-public class UIButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
+public class UIButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, ISelectHandler
 {
     private TextMeshProUGUI text;
 
@@ -33,5 +33,14 @@ public class UIButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         text.color = pressedColor;
+    }
+
+    public void OnSelect(BaseEventData eventData)
+    {
+        print(eventData.selectedObject == gameObject);
+        // if(eventData.selectedObject == ButtonGameObject)
+        // {
+        //     Debug.Log(this.ButtonGameObject.name + " was selected");
+        // }
     }
 }
