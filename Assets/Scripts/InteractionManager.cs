@@ -38,7 +38,6 @@ public class InteractionManager : MonoBehaviour
     {
         textContainer.SetText(initialString.Trim());
         interactionUI.SetActive(show);
-        // continueText.SetActive(show);
     }
 
     private void UpdateText(string text) {

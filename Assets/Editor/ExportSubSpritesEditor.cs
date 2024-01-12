@@ -15,7 +15,6 @@ public class ExportSubSpritesEditor : Editor {
             var extracted = ExtractAndName(sprite);
             SaveSubSprite(extracted, folder);
         }
-
     }
 
     [MenuItem("Assets/Export Sub-Sprites", true)]
@@ -32,6 +31,7 @@ public class ExportSubSpritesEditor : Editor {
         output.SetPixels(pixels);
         output.Apply();
         output.name = sprite.texture.name + " " + sprite.name;
+        
         return output;
     }
 
