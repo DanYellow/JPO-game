@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -14,8 +15,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     [SerializeField]
     private PlayerStatsValue playerStatsValue;
 
-    [SerializeField]
-    private UnityEvent onDeathEvent;
+    [SerializeField, UnityEngine.Serialization.FormerlySerializedAs("onDeathEvent")] 
+    private UnityEvent onDeathUnityEvent;
 
     private Invulnerable invulnerable;
 
@@ -56,6 +57,10 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     // Update is called once per frame
     public void TakeDamage(int damage)
     {
+        if (playerStatsValue.currentLifePoints == 0)
+        {
+            return;
+        }
         playerStatsValue.currentLifePoints = Mathf.Clamp(
             playerStatsValue.currentLifePoints - damage,
             0,
@@ -74,8 +79,10 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         }
     }
 
-    public void Heal(PotionValue potionTypeValue) {
-        if(potionTypeValue.type == PotionType.Heal) {
+    public void Heal(PotionValue potionTypeValue)
+    {
+        if (potionTypeValue.type == PotionType.Heal)
+        {
             int newPointsLife = Mathf.Clamp(
                 playerStatsValue.currentLifePoints + potionTypeValue.value,
                 0,
@@ -88,20 +95,22 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     private void Death()
     {
-        onDeathEvent?.Invoke();
         onPlayerDeath?.Raise();
         onCinemachineShake.Raise(deathCameraShake);
-        // GameObject deathEffect = Instantiate(deathEffectPrefab, transform.position, Quaternion.identity);
-        // Destroy(deathEffect, deathEffect.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-        // Destroy(gameObject);
+        StartCoroutine(ActivateKinematic());
     }
 
-    public int GetHealth() {
-        return playerStatsValue.currentLifePoints;
-    }
-
-    private void OnDisable()
+    IEnumerator ActivateKinematic()
     {
-        // onPlayerDeath.OnEventRaised -= OnDeath;
+        Animator animator = GetComponent<Animator>();
+        yield return new WaitUntil(() => animator.GetBool(AnimationStrings.isDead) == true);
+        yield return new WaitWhile(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1);
+        yield return new WaitUntil(() => GetComponentInParent<PlayerMovements>().IsGrounded() == true);
+        onDeathUnityEvent?.Invoke();
+    }
+
+    public int GetHealth()
+    {
+        return playerStatsValue.currentLifePoints;
     }
 }
