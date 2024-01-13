@@ -79,7 +79,7 @@ public class MainMenuManager : MonoBehaviour
         {
             btn.interactable = false;
         }
-        // LoadLevel(1);
+        LoadLevel(1);
     }
 
     public void LoadLevel(int index)

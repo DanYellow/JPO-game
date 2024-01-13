@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Pool;
 
-
 public enum ShootDirection
 {
     Left,
@@ -138,7 +137,9 @@ public class ProjectileLauncher : MonoBehaviour
         }
 
         Quaternion quaternion = Quaternion.Euler(0, rotationAngle, 0);
-        _projectile.transform.position = firePoint != null ? firePoint.position : transform.position;
+        Vector3 nextPosition = firePoint != null ? firePoint.position : transform.position;
+        nextPosition.z = 0;
+        _projectile.transform.position = nextPosition;
         _projectile.transform.rotation = quaternion;
         _projectile.gameObject.SetActive(true);
         _projectile.ResetThyself();
