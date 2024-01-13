@@ -14,6 +14,7 @@ public class EnemyPatrol : MonoBehaviour
     [field: SerializeField]
     public bool isFacingRight { get; private set; } = false;
 
+    [SerializeField]
     private bool isIdle = true;
 
     private float idleTime;
