@@ -149,7 +149,7 @@ public class Enemy : MonoBehaviour, IDamageable
         onDeathEnd?.Raise();
 
         if(destroyOnDeath) {
-            Destroy(gameObject.transform.root.gameObject);
+            Destroy(gameObject.transform.parent.gameObject);
         }
     }
 

@@ -52,7 +52,7 @@ public class EnemyFall : MonoBehaviour
         onBegin?.Invoke();
         isFalling = true;
         yield return null;
-        transform.rotation = Quaternion.Euler(0, 0, 0);
+        // transform.rotation = Quaternion.Euler(0, 0, 0);
         rb.gravityScale = 15;
         enemyPatrol.UpdateDetector();
     }
