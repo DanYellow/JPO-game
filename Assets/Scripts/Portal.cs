@@ -172,7 +172,7 @@ public class Portal : MonoBehaviour
     {
         yield return null;
         // yield return new WaitForSeconds(animatorFX.GetCurrentAnimatorStateInfo(0).length);
-        onCinemachineShake.Raise(teleportShake);
+        onCinemachineShake?.Raise(teleportShake);
         onToggleCinemachineEvent.Raise(false);
         target.position = destination.position;
         target.GetComponentInChildren<SpriteRenderer>().enabled = true;

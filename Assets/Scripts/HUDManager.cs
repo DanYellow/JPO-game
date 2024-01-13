@@ -72,7 +72,6 @@ public class HUDManager : MonoBehaviour
         barContainer.SetActive(true);
     }
 
-
     private void UpdateHealth(bool _tmp = false)
     {
         float rate = (float) playerStatsValue.currentLifePoints / playerStatsValue.maxLifePoints;

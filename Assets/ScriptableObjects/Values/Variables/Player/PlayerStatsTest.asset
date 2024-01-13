@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31e396c6d09ebea458d18d9107564468, type: 3}
   m_Name: PlayerStatsTest
   m_EditorClassIdentifier: 
+  maxLifePoints: 250
+  currentLifePoints: 1
   moveSpeed: 6
-  maxLifePoints: 500
-  currentLifePoints: 0
   jumpForce: 5.5
   maxJumpCount: 1
   dashVelocity: 30

@@ -66,7 +66,7 @@ public class ControlHint : MonoBehaviour
             onInteractRangeEvent.Raise(true);
             // Time.timeScale = 0;
             playerHUDCanvasGroup.alpha = 0.05f;
-            onInteract.Raise(listSentences.Dequeue() + "\n ▼");
+            onInteract.Raise(listSentences.Dequeue() + "\n <color=#ead8b5>▼</color>");
             onPlayerInputMapChange.Raise(ActionMapName.Interact);
         }
     }
