@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1368387693918634467}
   - component: {fileID: 1368387693918634464}
   - component: {fileID: 1368387693918634471}
+  - component: {fileID: 1768920919499295278}
   m_Layer: 7
   m_Name: ArrowLauncher
   m_TagString: Untagged
@@ -33,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!212 &1368387693918634466
 SpriteRenderer:
@@ -124,7 +125,15 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   shootDirection: 1
+  onShootStart:
+    m_PersistentCalls:
+      m_Calls: []
+  onShootEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  firePoint: {fileID: 0}
   lengthDetection: 25
+  isMoving: 0
 --- !u!61 &1368387693918634471
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -170,3 +179,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.7816331, y: 0.810359}
   m_EdgeRadius: 0
+--- !u!114 &1768920919499295278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1368387693918634396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0dd54e519a3f94499f07de23aca72b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

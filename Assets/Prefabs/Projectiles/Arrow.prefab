@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4745725179083569647}
   - component: {fileID: 4745725179083569634}
   - component: {fileID: 4745725179083569646}
+  - component: {fileID: -8892062072344231496}
   m_Layer: 7
   m_Name: Arrow
   m_TagString: Untagged
@@ -177,3 +178,15 @@ MonoBehaviour:
     m_Bits: 1
   resetPlayerPosition: {fileID: 11400000, guid: 06cb50babb594014dbe2d33cb428b805, type: 2}
   onInteractRangeEvent: {fileID: 11400000, guid: 980ecdfb3784b454db0a1d2846a566a0, type: 2}
+--- !u!114 &-8892062072344231496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4745725179083569641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0dd54e519a3f94499f07de23aca72b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

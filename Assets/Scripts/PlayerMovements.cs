@@ -88,6 +88,9 @@ public class PlayerMovements : MonoBehaviour, IStunnable
 
         layer = LayerMask.LayerToName(gameObject.layer);
         listLayersToIgnoreDuringSlide = Helpers.GetLayersIndexFromLayerMask(listSlidingLayers);
+    }
+
+    private void Start() {
         playerCanMove.CurrentValue = true;
     }
 

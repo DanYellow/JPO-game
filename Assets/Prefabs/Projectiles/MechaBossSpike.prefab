@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3691224845191092198}
   - component: {fileID: 3691224845191092199}
   - component: {fileID: 3691224845191092216}
+  - component: {fileID: 6020938733310379941}
   m_Layer: 12
   m_Name: MechaBossSpike
   m_TagString: Untagged
@@ -148,6 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileData: {fileID: 11400000, guid: 23c1155f2d577c0428e0c386e244c94f, type: 2}
+  throwDir: {x: 0, y: 0, z: 0}
 --- !u!114 &3691224845191092216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,3 +164,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 195
   pivot: {fileID: 0}
+  isAnticlockwise: 1
+--- !u!114 &6020938733310379941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3691224845191092218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0dd54e519a3f94499f07de23aca72b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
