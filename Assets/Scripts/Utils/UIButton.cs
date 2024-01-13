@@ -1,46 +1,69 @@
 using UnityEngine;  
 using TMPro;
-using UnityEngine.EventSystems;  
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class UIButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, ISelectHandler
+[RequireComponent(typeof(Button))]
+public class UIButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, ISelectHandler, IDeselectHandler
 {
-    private TextMeshProUGUI text;
+    private TextMeshProUGUI textContainer;
 
     [SerializeField]
     private Color hoverColor = Color.red;
 
     [SerializeField]
     private Color pressedColor = Color.red;
+    private Color disabledColor = Color.gray;
+
+    private string originalText;
 
     private Color originalColor;
 
+    private bool isDisabled = false;
+    private Button button;
+
     private void Awake() {
-        text = GetComponentInChildren<TextMeshProUGUI>();
-        // Button button = GetComponent<Button>();
-        originalColor = text.color;
+        textContainer = GetComponentInChildren<TextMeshProUGUI>();
+        button = GetComponent<Button>();
+
+        originalColor = textContainer.color;
+        originalText = textContainer.text;
+    }
+
+    private void Update() {
+        if(button.interactable == false) {
+            textContainer.color = disabledColor;
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        text.color = hoverColor;
+        textContainer.color = hoverColor;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        text.color = originalColor;
+        textContainer.color = originalColor;
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        text.color = pressedColor;
+        textContainer.color = pressedColor;
     }
 
     public void OnSelect(BaseEventData eventData)
     {
-        print(eventData.selectedObject == gameObject);
-        // if(eventData.selectedObject == ButtonGameObject)
-        // {
-        //     Debug.Log(this.ButtonGameObject.name + " was selected");
-        // }
+        if(eventData.selectedObject == gameObject) {
+            textContainer.color = hoverColor;
+            textContainer.SetText($"►{originalText}◄");
+        }
+    }
+
+    public void OnDeselect(BaseEventData eventData)
+    {
+        if(eventData.selectedObject == gameObject) {
+            textContainer.color = originalColor;
+            textContainer.SetText(originalText);
+        }
     }
 }

@@ -9,6 +9,7 @@ public class ActionMapName
     public static string Cinematics = "Cinematics";
     public static string Interact = "Interact";
     public static string PlayerStunned = "PlayerStunned";
+    public static string Loading = "Loading";
 }
 
 public class InputManager : MonoBehaviour

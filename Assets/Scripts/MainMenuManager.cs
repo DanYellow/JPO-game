@@ -21,6 +21,9 @@ public class MainMenuManager : MonoBehaviour
 
     private SceneTransition sceneTransition;
 
+    [SerializeField]
+    private StringEventChannel onPlayerInputMapChange;
+
     private void Awake()
     {
         Time.timeScale = 1f;
@@ -40,7 +43,8 @@ public class MainMenuManager : MonoBehaviour
         OnFirstLevelStart.OnEventRaised += onFirstLevelLoadEvent;
     }
 
-    private void EnableControls() {
+    private void EnableControls()
+    {
         pi.enabled = true;
     }
 
@@ -68,13 +72,24 @@ public class MainMenuManager : MonoBehaviour
         }
     }
 
+    public void StartGame(Button btn)
+    {
+        onPlayerInputMapChange?.Raise(ActionMapName.Loading);
+        if (btn != null)
+        {
+            btn.interactable = false;
+        }
+        // LoadLevel(1);
+    }
+
     public void LoadLevel(int index)
     {
         EventSystem.current.SetSelectedGameObject(null);
         SceneManager.LoadScene(index, LoadSceneMode.Single);
     }
 
-    public void TransitionToScene(int levelIndex) {
+    public void TransitionToScene(int levelIndex)
+    {
         StartCoroutine(sceneTransition.Hide());
     }
 

@@ -181,7 +181,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "COMMENCER\u25B4"
+  m_text: COMMENCER
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -662,7 +662,7 @@ GameObject:
   - component: {fileID: 654801330}
   - component: {fileID: 654801329}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: MainMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -971,7 +971,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -150}
-  m_SizeDelta: {x: 496.6736, y: 74.3679}
+  m_SizeDelta: {x: 553.45, y: 74.37}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &901297798
 MonoBehaviour:
@@ -986,7 +986,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: -4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -1016,7 +1016,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 901297799}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 994623166}
+        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
+        m_MethodName: StartGame
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 901297798}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &901297799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1067,8 +1079,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e983b2596c59904686e56528ee8dda9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverColor: {r: 1, g: 0.43137255, b: 0, a: 1}
-  pressedColor: {r: 0.764151, g: 0.32963377, b: 0, a: 1}
+  hoverColor: {r: 0.47843137, g: 0.20784314, b: 0, a: 1}
+  pressedColor: {r: 0.38039216, g: 0, b: 0, a: 1}
 --- !u!1 &986255831
 GameObject:
   m_ObjectHideFlags: 0
@@ -1180,9 +1192,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7917c452f0d7574394fa8317b00a270, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMenu: {fileID: 0}
+  mainMenu: {fileID: 654801327}
   pi: {fileID: 994623168}
   OnFirstLevelStart: {fileID: 11400000, guid: 408e20dca0cbd46448b484b3000fcc8e, type: 2}
+  onPlayerInputMapChange: {fileID: 11400000, guid: 615fe6bbef2ad3c40a72765390994e93, type: 2}
 --- !u!4 &994623167
 Transform:
   m_ObjectHideFlags: 0
@@ -1277,8 +1290,8 @@ MonoBehaviour:
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
+      - m_Target: {fileID: 994623166}
+        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
         m_MethodName: OnNavigate
         m_Mode: 0
         m_Arguments:
@@ -1297,10 +1310,10 @@ MonoBehaviour:
     m_ActionName: Player/Start/Resume[/Keyboard/escape]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
-        m_MethodName: TogglePause
-        m_Mode: 0
+      - m_Target: {fileID: 994623166}
+        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
+        m_MethodName: Test
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1415,6 +1428,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 278ef2d5-07d8-4356-aec8-d6652eb1c6d1
     m_ActionName: PlayerStunned/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 97c4ecc4-7002-4013-9cfe-a67d0c1351bc
+    m_ActionName: UI/Point[/Mouse/position]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: UI
