@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Teleport : MonoBehaviour
+public class BackToOriginalPosition : MonoBehaviour
 {
     private Animator animator;
 
@@ -30,11 +30,11 @@ public class Teleport : MonoBehaviour
 
         if (Vector2.Distance(startingPosition, transform.position) > distanceBeforeTeleport && !isTeleporting && timer > delay)
         {
-            StartCoroutine(ReturnToStartPoint());
+            StartCoroutine(Return());
         }
     }
 
-    IEnumerator ReturnToStartPoint()
+    IEnumerator Return()
     {
         timer = 0;
         OnBegin?.Invoke();
