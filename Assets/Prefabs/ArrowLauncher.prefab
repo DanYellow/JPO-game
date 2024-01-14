@@ -34,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!212 &1368387693918634466
 SpriteRenderer:
@@ -132,7 +132,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   firePoint: {fileID: 0}
-  lengthDetection: 25
+  lengthDetection: 8
   isMoving: 0
 --- !u!61 &1368387693918634471
 BoxCollider2D:

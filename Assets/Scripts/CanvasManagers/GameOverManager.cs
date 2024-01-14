@@ -39,10 +39,8 @@ public class GameOverManager : MonoBehaviour
     }
 
     private void DisplayGameOverScreen()
-    {
-        EventSystemExtensions.UpdateSelectedGameObject(gameoverMenuUI.GetComponentInChildren<Button>().gameObject);
+    {        
         onPlayerInputMapChange.Raise(ActionMapName.UIGameOverAndCredits);
-
         StartCoroutine(DisplayGameOverScreenProxy());
     }
 
@@ -63,6 +61,7 @@ public class GameOverManager : MonoBehaviour
         yield return new WaitForSeconds(0.85f);
         playerHUDUI.SetActive(false);
         gameoverMenuUI.SetActive(true);
+        EventSystemExtensions.UpdateSelectedGameObject(gameoverMenuUI.GetComponentInChildren<Button>().gameObject);
         
     }
 

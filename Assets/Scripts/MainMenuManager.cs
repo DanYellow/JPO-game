@@ -24,12 +24,19 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField]
     private StringEventChannel onPlayerInputMapChange;
 
+    [SerializeField]
+    private Vector2Value lastCheckpoint;
+
+    [SerializeField]
+    private PlayerStatsValue playerStatsValue;
+
     private void Awake()
     {
         Time.timeScale = 1f;
 
         sceneTransition = GetComponent<SceneTransition>();
         // pi.enabled = false;
+        playerStatsValue.currentLifePoints = 20;
     }
 
     private void Start()
@@ -79,6 +86,7 @@ public class MainMenuManager : MonoBehaviour
         {
             btn.interactable = false;
         }
+        lastCheckpoint.CurrentValue = null;
         LoadLevel(1);
     }
 

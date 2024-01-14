@@ -31,11 +31,16 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     [SerializeField]
     private CameraShakeTypeValue deathCameraShake;
 
+    [SerializeField]
+    private int testStartHealthPoints = 20;
+
     private void Awake()
     {
         // playerStatsValue.nbCurrentLifes = playerStatsValue.nbMaxLifes;
         invulnerable = GetComponent<Invulnerable>();
-        playerStatsValue.currentLifePoints = 1; // 20
+        #if UNITY_EDITOR
+        playerStatsValue.currentLifePoints = testStartHealthPoints;
+        #endif
     }
 
     private void Update()

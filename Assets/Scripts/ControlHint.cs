@@ -46,7 +46,8 @@ public class ControlHint : MonoBehaviour
 
     private void Update() {
         if(isPlayerInRange) {
-            light.intensity = Math.Clamp(Mathf.Sin(Time.time * 1.5f) * defaultLightIntensity, 0.85f, defaultLightIntensity);
+            light.intensity = Mathf.Lerp(0.85f, defaultLightIntensity, Mathf.PingPong(Time.time / 2, 1));
+            // light.intensity = Math.Clamp(Mathf.Sin(Time.time * 1.5f) * defaultLightIntensity, 0.85f, defaultLightIntensity);
         }
     }
 
