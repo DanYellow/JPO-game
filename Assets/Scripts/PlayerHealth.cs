@@ -19,9 +19,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     private Invulnerable invulnerable;
 
     [SerializeField]
-    private LayerMask listLayerToIgnoreAfterDeath;
-
-    private List<int> listLayerToIgnoreAfterDeathIndexes = new List<int>();
+    private LayerMask layerAfterDeath;
 
     [Space(10)]
 
@@ -36,12 +34,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     private void Awake()
     {
         // playerStatsValue.nbCurrentLifes = playerStatsValue.nbMaxLifes;
-        // onPlayerDeath.OnEventRaised += OnDeath;
-
         invulnerable = GetComponent<Invulnerable>();
-        playerStatsValue.currentLifePoints = 1;
-        listLayerToIgnoreAfterDeathIndexes = Helpers.GetLayersIndexFromLayerMask(listLayerToIgnoreAfterDeath);
-        Helpers.DisableCollisions(LayerMask.LayerToName(gameObject.layer), listLayerToIgnoreAfterDeathIndexes, false);
+        playerStatsValue.currentLifePoints = 1; // 20
     }
 
     private void Update()
@@ -102,7 +96,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     {
         onPlayerDeath?.Raise();
         onCinemachineShake.Raise(deathCameraShake);
-        Helpers.DisableCollisions(LayerMask.LayerToName(gameObject.layer), listLayerToIgnoreAfterDeathIndexes, true);
+        gameObject.layer = Helpers.GetLayerIndex(layerAfterDeath.value);
+        transform.parent.gameObject.layer = Helpers.GetLayerIndex(layerAfterDeath.value);
     }
 
     public int GetHealth()

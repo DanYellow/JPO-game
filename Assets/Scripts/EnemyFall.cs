@@ -54,7 +54,7 @@ public class EnemyFall : MonoBehaviour
         yield return null;
         // transform.rotation = Quaternion.Euler(0, 0, 0);
         rb.gravityScale = 15;
-        enemyPatrol.UpdateDetector();
+        // enemyPatrol.UpdateDetector();
     }
 
     private void OnCollisionEnter2D(Collision2D other) {

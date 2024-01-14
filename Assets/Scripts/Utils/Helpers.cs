@@ -58,4 +58,20 @@ public static class Helpers
             yield return Mathf.Lerp(min, max, delta * (count - 1));
         }
     }
+
+    public static int GetLayerIndex(int bitmask)
+    {
+        int result = bitmask > 0 ? 0 : 31;
+        while (bitmask > 1)
+        {
+            bitmask = bitmask >> 1;
+            result++;
+        }
+        return result;
+    }
+
+    public static string GetLayerName(int layerNumber)
+    {
+        return LayerMask.LayerToName(GetLayerIndex(layerNumber));
+    }
 }
