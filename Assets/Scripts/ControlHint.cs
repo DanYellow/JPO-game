@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -28,15 +29,25 @@ public class ControlHint : MonoBehaviour
 
     private Queue<string> listSentences;
 
+    private float defaultLightIntensity;
+
     private void Awake()
     {
         light = GetComponentInChildren<Light2D>(true);
         light.gameObject.SetActive(false);
+
+        defaultLightIntensity = light.intensity;
     }
 
     void Start()
     {
         Load();
+    }
+
+    private void Update() {
+        if(isPlayerInRange) {
+            light.intensity = Math.Clamp(Mathf.Sin(Time.time * 1.5f) * defaultLightIntensity, 0.85f, defaultLightIntensity);
+        }
     }
 
     private void Load()
@@ -85,6 +96,7 @@ public class ControlHint : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            light.intensity = defaultLightIntensity;
             isPlayerInRange = false;
             light.gameObject.SetActive(false);
             onInteractRangeEvent.Raise(isPlayerInRange);
