@@ -2,7 +2,6 @@ using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
-using System.Numerics;
 
 public class CreditsManager : MonoBehaviour
 {
@@ -24,7 +23,7 @@ public class CreditsManager : MonoBehaviour
     }
 
     private void ShowCredits() {
-        lastCheckpoint.CurrentValue = null;
+        lastCheckpoint.CurrentValue = new Vector2(-15.02f, -3.43f);
         creditsUI.SetActive(true);
         onPlayerInputMapChange.Raise(ActionMapName.UIGameOverAndCredits);
         EventSystemExtensions.UpdateSelectedGameObject(creditsUI.GetComponentInChildren<Button>().gameObject);

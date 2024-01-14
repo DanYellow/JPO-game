@@ -86,7 +86,7 @@ public class MainMenuManager : MonoBehaviour
         {
             btn.interactable = false;
         }
-        lastCheckpoint.CurrentValue = null;
+        lastCheckpoint.CurrentValue = new Vector2(-15.02f, -3.43f);
         LoadLevel(1);
     }
 
