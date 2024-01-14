@@ -1,5 +1,6 @@
 using UnityEngine.Events;
 using UnityEngine;
+using System;
 
 public class Shield : MonoBehaviour, IDamageable, IReflectable
 {
@@ -43,7 +44,8 @@ public class Shield : MonoBehaviour, IDamageable, IReflectable
             return;
         }
         float rate = (float)boss.GetHealth() / boss.GetMaxHealth();
-        currentLifePoints = enemyData.maxLifePoints * (int) Mathf.Round(1.05f / rate);
+        currentLifePoints = Math.Clamp((int) (enemyData.maxLifePoints * (0.3f / rate)), enemyData.maxLifePoints, enemyData.maxLifePoints * 3);
+        
         maxLifePoints = currentLifePoints;
         healthBar.maxLifePoints = currentLifePoints;
         healthBar.UpdateContent(currentLifePoints);

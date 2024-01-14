@@ -152,7 +152,12 @@ public class MechaGolemBoss : MonoBehaviour
 
     private IEnumerator ExpulseSpikes()
     {
-        yield return Helpers.GetWait(3.5f);
+        if (listSpikesToThrow.Count == 0)
+        {
+            yield return StartCoroutine(PrepareSpikes());
+        } else {
+            yield return Helpers.GetWait(3.5f);
+        }
 
         listSpikesToThrow.ForEach((item) =>
         {
@@ -181,16 +186,15 @@ public class MechaGolemBoss : MonoBehaviour
             Vector3 throwDir = -item.transform.right;
             item.GetComponent<MechaBossSpike>().Throw(throwDir);
         }
+        
         var lastSpike = listSpikesToThrow?.Last();
         listSpikesToThrow.Clear();
 
         if (lastSpike)
         {
             yield return new WaitUntil(() => Vector3.Distance(transform.position, lastSpike.position) >= 150);
-            // yield return new WaitUntil(() => lastSpike.gameObject.activeSelf == false);
         }
-        yield return Helpers.GetWait(3.85f);
-        yield return StartCoroutine(PrepareSpikes());
+        yield return Helpers.GetWait(2.85f);
 
         isExpulsingSpikes = false;
     }
