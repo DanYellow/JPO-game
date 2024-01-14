@@ -6,7 +6,6 @@ public class MechaChaseBehaviour : StateMachineBehaviour
     private Transform target;
     private LookAtTarget lookAtTarget;
 
-    private IsGrounded isGrounded;
     private Enemy enemy;
     private MechaGolemBoss mechaGolemBoss;
 
@@ -36,7 +35,6 @@ public class MechaChaseBehaviour : StateMachineBehaviour
     {
         enemy = animator.GetComponent<Enemy>();
         rb = animator.GetComponent<Rigidbody2D>();
-        isGrounded = animator.GetComponent<IsGrounded>();
         lookAtTarget = animator.GetComponent<LookAtTarget>();
         mechaGolemBoss = animator.GetComponent<MechaGolemBoss>();
 

@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 4197264773244502542}
   - component: {fileID: 4197264773244502541}
   - component: {fileID: 4197264773244502538}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Crate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -209,7 +209,7 @@ Transform:
   - {fileID: 4197264772827177389}
   - {fileID: 4197264773823957796}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4197264773244502543
 SpriteRenderer:
@@ -348,6 +348,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   materialChange: {fileID: 11400000, guid: 1786a2b8d8188b14b89a1a941bd5c390, type: 2}
+  treasure: {fileID: 0}
+  onDone:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &4197264773244502538
 MonoBehaviour:
   m_ObjectHideFlags: 0

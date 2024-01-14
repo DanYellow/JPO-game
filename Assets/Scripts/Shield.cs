@@ -36,7 +36,6 @@ public class Shield : MonoBehaviour, IDamageable, IReflectable
         healthBar = GetComponent<HealthBar>();
         boss = GetComponentInParent<Enemy>();
         sr = GetComponent<SpriteRenderer>();
-        
     }
 
     private void OnEnable() {
@@ -47,6 +46,10 @@ public class Shield : MonoBehaviour, IDamageable, IReflectable
         healthBar.UpdateContent(currentLifePoints);
         healthBarContainer.SetActive(true);
         sr.material.SetColor("_Color", colorLevel.Evaluate(currentLifePoints / maxLifePoints));
+    }
+
+    public int GetHealth() {
+        return currentLifePoints;
     }
 
     public void TakeDamage(int damage)

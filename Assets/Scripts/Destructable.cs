@@ -54,6 +54,10 @@ public class Destructable : MonoBehaviour, IDamageable
         }
     }
 
+    public int GetHealth() {
+        return currentLifePoints;
+    }
+
     private void Dead()
     {
         foreach (Collider2D collider in gameObject.GetComponents<Collider2D>())

@@ -38,7 +38,8 @@ public class Projectile : MonoBehaviour, IRecycleable
         onInteractRangeEvent.OnEventRaised += ToggleTime;
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
+    private void OnTriggerEnter2D(Collider2D other)
+    {
         if (other.gameObject.CompareTag("Player"))
         {
             IDamageable iDamageable = other.transform.GetComponentInChildren<IDamageable>();
@@ -47,9 +48,9 @@ public class Projectile : MonoBehaviour, IRecycleable
             {
                 knockback.Apply(gameObject, projectileData.knockbackForce);
             }
-           
+
             IStunnable iStunnable = other.transform.GetComponent<IStunnable>();
-            StartCoroutine(iStunnable.Stun(projectileData.stunTime, () => {}));
+            StartCoroutine(iStunnable.Stun(projectileData.stunTime, () => { }));
         }
 
         Contact();
@@ -60,14 +61,17 @@ public class Projectile : MonoBehaviour, IRecycleable
         if (other.gameObject.CompareTag("Player"))
         {
             IDamageable iDamageable = other.transform.GetComponentInChildren<IDamageable>();
-            iDamageable.TakeDamage(projectileData.damage);
-            if (other.gameObject.TryGetComponent(out Knockback knockback))
+            if (iDamageable.GetHealth() > 0)
             {
-                knockback.Apply(gameObject, projectileData.knockbackForce);
+                iDamageable.TakeDamage(projectileData.damage);
+                if (other.gameObject.TryGetComponent(out Knockback knockback))
+                {
+                    knockback.Apply(gameObject, projectileData.knockbackForce);
+                }
+
+                IStunnable iStunnable = other.transform.GetComponent<IStunnable>();
+                StartCoroutine(iStunnable.Stun(projectileData.stunTime, () => { }));
             }
-           
-            IStunnable iStunnable = other.transform.GetComponent<IStunnable>();
-            StartCoroutine(iStunnable.Stun(projectileData.stunTime, () => {}));
         }
 
         Contact();

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -15,10 +16,12 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     [SerializeField]
     private PlayerStatsValue playerStatsValue;
 
-    [SerializeField, UnityEngine.Serialization.FormerlySerializedAs("onDeathEvent")] 
-    private UnityEvent onDeathUnityEvent;
-
     private Invulnerable invulnerable;
+
+    [SerializeField]
+    private LayerMask listLayerToIgnoreAfterDeath;
+
+    private List<int> listLayerToIgnoreAfterDeathIndexes = new List<int>();
 
     [Space(10)]
 
@@ -37,6 +40,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
         invulnerable = GetComponent<Invulnerable>();
         playerStatsValue.currentLifePoints = 1;
+        listLayerToIgnoreAfterDeathIndexes = Helpers.GetLayersIndexFromLayerMask(listLayerToIgnoreAfterDeath);
+        Helpers.DisableCollisions(LayerMask.LayerToName(gameObject.layer), listLayerToIgnoreAfterDeathIndexes, false);
     }
 
     private void Update()
@@ -97,16 +102,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     {
         onPlayerDeath?.Raise();
         onCinemachineShake.Raise(deathCameraShake);
-        StartCoroutine(ActivateKinematic());
-    }
-
-    IEnumerator ActivateKinematic()
-    {
-        Animator animator = GetComponent<Animator>();
-        yield return new WaitUntil(() => animator.GetBool(AnimationStrings.isDead) == true);
-        yield return new WaitWhile(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1);
-        yield return new WaitUntil(() => GetComponentInParent<PlayerMovements>().IsGrounded() == true);
-        onDeathUnityEvent?.Invoke();
+        Helpers.DisableCollisions(LayerMask.LayerToName(gameObject.layer), listLayerToIgnoreAfterDeathIndexes, true);
     }
 
     public int GetHealth()
