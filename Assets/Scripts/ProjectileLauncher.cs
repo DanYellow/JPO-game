@@ -125,20 +125,26 @@ public class ProjectileLauncher : MonoBehaviour
 
     void ActionOnGet(Projectile _projectile)
     {
-        int rotationAngle = 0;
-        if (!isMoving && shootDirection == ShootDirection.Left && _projectile.projectileData.isFacingRight)
+        int yRotation = 0;
+        int zRotation = 0;
+        if (
+            (!isMoving && shootDirection == ShootDirection.Left && _projectile.projectileData.isFacingRight) ||
+            (isMoving && transform.right.normalized.x == -1)
+        )
         {
-            rotationAngle = 180;
+            yRotation = 180;
         }
 
-        if (isMoving && transform.right.normalized.x == -1)
-        {
-            rotationAngle = 180;
+        if(shootDirection == ShootDirection.Down) {
+            zRotation = -90;
+        } else if(shootDirection == ShootDirection.Up) {
+            zRotation = 90;
         }
 
-        Quaternion quaternion = Quaternion.Euler(0, rotationAngle, 0);
+        Quaternion quaternion = Quaternion.Euler(0, yRotation, zRotation);
         Vector3 nextPosition = firePoint != null ? firePoint.position : transform.position;
         nextPosition.z = 0;
+
         _projectile.transform.position = nextPosition;
         _projectile.transform.rotation = quaternion;
         _projectile.gameObject.SetActive(true);

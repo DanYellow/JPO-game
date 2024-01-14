@@ -82,7 +82,7 @@ public class Projectile : MonoBehaviour, IRecycleable
         rb.constraints = 0;
         gotContact = true;
         rb.AddTorque(projectileData.torque, ForceMode2D.Impulse);
-        collider.isTrigger = true;
+        collider.enabled = false;
 
         StartCoroutine(Disable());
     }
@@ -137,8 +137,15 @@ public class Projectile : MonoBehaviour, IRecycleable
     public void ResetThyself()
     {
         gotContact = false;
+        collider.enabled = true;
+        
+        if (Vector3.Dot(transform.up, Vector3.down) > 0) {
+            rb.constraints = RigidbodyConstraints2D.FreezePositionX;
+        } else {
+            rb.constraints = RigidbodyConstraints2D.FreezePositionY;
+        }
+
         rb.AddForce(transform.right.normalized * projectileData.speed, ForceMode2D.Impulse);
         collider.isTrigger = isStartedTriggered;
-        rb.constraints = RigidbodyConstraints2D.FreezePositionY;
     }
 }
