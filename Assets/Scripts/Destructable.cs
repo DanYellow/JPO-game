@@ -50,7 +50,7 @@ public class Destructable : MonoBehaviour, IDamageable
         // animator.SetTrigger(AnimationStrings.isHit);
         if (currentLifePoints <= 0)
         {
-            Dead();
+            Destroyed();
         }
     }
 
@@ -58,7 +58,7 @@ public class Destructable : MonoBehaviour, IDamageable
         return currentLifePoints;
     }
 
-    private void Dead()
+    private void Destroyed()
     {
         foreach (Collider2D collider in gameObject.GetComponents<Collider2D>())
         {
@@ -77,11 +77,5 @@ public class Destructable : MonoBehaviour, IDamageable
 
         onDone?.Invoke();
         Destroy(gameObject);
-    }
-
-    void OnGUI()
-    {
-        //Output the first Animation speed to the screen
-        // GUI.Label(new Rect(25, 25, 200, 20),  "fullPathHash of State : " + animator.GetCurrentAnimatorStateInfo(0).fullPathHash);
     }
 }

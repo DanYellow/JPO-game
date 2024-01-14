@@ -1,20 +1,24 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraBackgroundArea : MonoBehaviour
 {
     [SerializeField]
-    private GameObject background;
+    private List<GameObject> listBackgrounds = new List<GameObject>();
 
     [SerializeField]
     private GameObject player;
 
     private void Awake()
     {
-        background.SetActive(false);
-        
+        listBackgrounds.ForEach((item) =>
+        {
+            item.SetActive(false);
+        });
     }
 
-    private void Update() {
+    private void Update()
+    {
         // Vector3 nextPosition = new Vector3(player.transform.position.x, background.transform.position.y, background.transform.position.z);
         // background.transform.position = nextPosition;
     }
@@ -23,7 +27,10 @@ public class CameraBackgroundArea : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            background.SetActive(true);
+            listBackgrounds.ForEach((item) =>
+            {
+                item.SetActive(true);
+            });
         }
     }
 
@@ -31,7 +38,14 @@ public class CameraBackgroundArea : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            background.SetActive(false);
+            IDamageable iDamageable = other.transform.GetComponentInChildren<IDamageable>();
+            if (iDamageable.GetHealth() > 0)
+            {
+                listBackgrounds.ForEach((item) =>
+                {
+                    item.SetActive(false);
+                });
+            }
         }
     }
 }
