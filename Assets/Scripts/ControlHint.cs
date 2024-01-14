@@ -46,7 +46,7 @@ public class ControlHint : MonoBehaviour
 
         foreach (string sentence in interactionItemTextValue.listSentences) //for each sentence, enqueue it
         {
-            listSentences.Enqueue(sentence);
+            listSentences.Enqueue(sentence.Trim());
         }
     }
 
@@ -64,7 +64,7 @@ public class ControlHint : MonoBehaviour
                 return;
             }
             onInteractRangeEvent.Raise(true);
-            // Time.timeScale = 0;
+            Time.timeScale = 0;
             playerHUDCanvasGroup.alpha = 0.05f;
             onInteract.Raise(listSentences.Dequeue() + "\n <color=#ead8b5>▼</color>");
             onPlayerInputMapChange.Raise(ActionMapName.Interact);

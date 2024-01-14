@@ -135,9 +135,12 @@ public class ProjectileLauncher : MonoBehaviour
             yRotation = 180;
         }
 
-        if(shootDirection == ShootDirection.Down) {
+        if (shootDirection == ShootDirection.Down)
+        {
             zRotation = -90;
-        } else if(shootDirection == ShootDirection.Up) {
+        }
+        else if (shootDirection == ShootDirection.Up)
+        {
             zRotation = 90;
         }
 
