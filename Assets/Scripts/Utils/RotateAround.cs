@@ -12,11 +12,16 @@ public class RotateAround : MonoBehaviour
 
     [SerializeField]
     private float rotationSpeed = 150;
+    private float baseSpeed;
 
     [SerializeField]
     private Transform pivot;
 
-    public bool isAnticlockwise = true; 
+    public bool isAnticlockwise = true;
+
+    private void Awake() {
+        baseSpeed = rotationSpeed;
+    }
 
     // Update is called once per frame
     void Update()
@@ -26,5 +31,17 @@ public class RotateAround : MonoBehaviour
             isAnticlockwise ? -pivot.forward : pivot.forward, 
             Time.deltaTime * rotationSpeed
         );
+    }
+
+    public float GetSpeed() {
+        return rotationSpeed;
+    }
+
+    public float GetBaseSpeed() {
+        return baseSpeed;
+    }
+
+    public void SetSpeed(float speed) {
+        rotationSpeed = speed;
     }
 }

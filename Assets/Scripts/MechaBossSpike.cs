@@ -17,8 +17,6 @@ public class MechaBossSpike : MonoBehaviour
     public Vector3 throwDir;
 
     public Quaternion origRotation { private set; get; }
-    private Vector3 originPosition = Vector3.zero;
-    private Coroutine autoDestroyCo;
 
     private void Awake()
     {

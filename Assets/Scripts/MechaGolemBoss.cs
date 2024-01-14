@@ -23,6 +23,7 @@ public class MechaGolemBoss : MonoBehaviour
     private MechaProtect mechaProtect;
 
     private Transform target;
+    private Invulnerable targetInvulnerable;
 
     public float delayBetweenThrows = 3.75f;
     // Start is called before the first frame update
@@ -33,12 +34,16 @@ public class MechaGolemBoss : MonoBehaviour
     public List<Transform> listSpikes = new List<Transform>();
     private List<Transform> listSpikesToThrow = new List<Transform>();
 
+    private Enemy boss;
+
     private void Awake()
     {
         lookAtTarget = GetComponent<LookAtTarget>();
         mechaProtect = GetComponent<MechaProtect>();
 
         target = GameObject.Find("Player").transform;
+        targetInvulnerable = target.GetComponent<Invulnerable>();
+        boss = GetComponent<Enemy>();
 
         listSpikes.ForEach((item) =>
         {
@@ -143,7 +148,17 @@ public class MechaGolemBoss : MonoBehaviour
         for (var i = 0; i < length; i++)
         {
             var spike = listSpikes[i];
-            spike.GetComponent<RotateAround>().enabled = true;
+
+            RotateAround rotateAround = spike.GetComponent<RotateAround>();
+            float rotateAroundBaseSpeed = rotateAround.GetBaseSpeed();
+            rotateAround.enabled = true;
+            rotateAround.SetSpeed(
+                Mathf.Lerp(
+                    rotateAroundBaseSpeed * 1.25f, 
+                    rotateAroundBaseSpeed, 
+                    (float)boss.GetHealth() / boss.GetMaxHealth()
+                )
+            );
         }
 
         yield return Helpers.GetWait(1.15f);
@@ -223,7 +238,7 @@ public class MechaGolemBoss : MonoBehaviour
                 return angle >= anglesLimit[0] && angle <= anglesLimit[1];
             });
 
-            return indexSpike > -1;
+            return indexSpike > -1 && targetInvulnerable.isInvulnerable == false;
         });
         spike = listSpikesToThrow[indexSpike];
 
