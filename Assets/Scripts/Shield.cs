@@ -4,7 +4,7 @@ using System;
 
 public class Shield : MonoBehaviour, IDamageable, IReflectable
 {
-    [ReadOnlyInspector]
+    [SerializeField]
     private int currentLifePoints;
 
     private HealthBar healthBar;
@@ -44,8 +44,8 @@ public class Shield : MonoBehaviour, IDamageable, IReflectable
             return;
         }
         float rate = (float)boss.GetHealth() / boss.GetMaxHealth();
-        currentLifePoints = Math.Clamp((int) (enemyData.maxLifePoints * (0.3f / rate)), enemyData.maxLifePoints, enemyData.maxLifePoints * 3);
-        
+        currentLifePoints = Math.Clamp((int) (enemyData.maxLifePoints * (1 / rate)), enemyData.maxLifePoints, enemyData.maxLifePoints * 2);
+   
         maxLifePoints = currentLifePoints;
         healthBar.maxLifePoints = currentLifePoints;
         healthBar.UpdateContent(currentLifePoints);

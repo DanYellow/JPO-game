@@ -186,7 +186,7 @@ public class MechaGolemBoss : MonoBehaviour
             Vector3 throwDir = -item.transform.right;
             item.GetComponent<MechaBossSpike>().Throw(throwDir);
         }
-        
+
         var lastSpike = listSpikesToThrow?.Last();
         listSpikesToThrow.Clear();
 
@@ -198,72 +198,6 @@ public class MechaGolemBoss : MonoBehaviour
 
         isExpulsingSpikes = false;
     }
-
-    // private IEnumerator ThrowSpike()
-    // {
-    //     if (listSpikesToThrow.Count == 0)
-    //     {
-    //         yield return StartCoroutine(PrepareSpikes());
-    //     }
-
-    //     yield return Helpers.GetWait(delayBetweenThrows);
-
-    //     int[] anglesLimit = { -130, -50 };
-    //     if (lookAtTarget.isFacingRight)
-    //     {
-    //         anglesLimit[0] = 0;
-    //         anglesLimit[1] = 90;
-    //     } 
-
-    //     // listSpikesToThrow.ForEach((item) => {
-    //     //     Vector2 distance = item.position - transform.position;
-    //     //     float angle = Vector2.SignedAngle(transform.right, distance);
-
-    //     //     print(angle + " " + item.name);
-    //     // });
-
-    //     Transform spike = listSpikesToThrow.Find(item =>
-    //     {
-    //         Vector2 distance = item.position - transform.position;
-    //         float angle = Vector2.SignedAngle(transform.right, distance);
-
-    //         return angle >= anglesLimit[0] && angle <= anglesLimit[1];
-    //     });
-
-    //     if (spike)
-    //     {
-    //         listSpikesToThrow.ForEach((item) =>
-    //         {
-    //             item.GetComponent<RotateAround>().enabled = false;
-    //         });
-
-    //         Vector3 rotateDir = lookAtTarget.isFacingRight ? Vector3.down : Vector3.up;
-
-    //         Quaternion rotation = Quaternion.LookRotation(target.position - spike.transform.position, transform.TransformDirection(rotateDir));
-    //         spike.transform.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
-
-    //         spike.GetComponent<RotateAround>().enabled = false;
-
-    //         Vector3 throwDir = (target.position - spike.transform.position).normalized;
-    //         spike.GetComponent<MechaBossSpike>().Throw(throwDir);
-
-    //         yield return Helpers.GetWait(0.35f);
-
-    //         listSpikesToThrow.Remove(spike);
-
-    //         listSpikesToThrow.ForEach((item) =>
-    //         {
-    //             item.GetComponent<RotateAround>().enabled = true;
-    //         });
-    //     }
-
-    //     yield return StartCoroutine(ThrowSpike());
-
-    //     // if (listSpikesToThrow.Count == 0)
-    //     // {
-    //     //     StartCoroutine(Prepare());
-    //     // }
-    // }
 
     private IEnumerator ThrowSpike()
     {
@@ -374,6 +308,7 @@ public class MechaGolemBoss : MonoBehaviour
             spike.GetComponent<MechaBossSpike>().Destroy();
             spike.parent = null;
         });
+        StopAllCoroutines();
     }
 
     private Quaternion GetSpikeOrientation(Vector3 position)
