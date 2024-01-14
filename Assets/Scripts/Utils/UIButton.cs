@@ -13,18 +13,22 @@ public class UIButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     [SerializeField]
     private Color pressedColor = Color.red;
+    [SerializeField]
     private Color disabledColor = Color.gray;
 
     private string originalText;
 
     private Color originalColor;
 
-    private bool isDisabled = false;
+    [SerializeField]
+    private bool keepImageButton = false;
+
     private Button button;
 
     private void Awake() {
         textContainer = GetComponentInChildren<TextMeshProUGUI>();
         button = GetComponent<Button>();
+        button.GetComponent<Image>().enabled = keepImageButton;
 
         originalColor = textContainer.color;
         originalText = textContainer.text;
