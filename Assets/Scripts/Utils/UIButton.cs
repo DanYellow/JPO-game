@@ -60,6 +60,7 @@ public class UIButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if(eventData.selectedObject == gameObject) {
             textContainer.color = hoverColor;
             textContainer.SetText($"►{originalText}◄");
+            print("fefezfz");
         }
     }
 
