@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: InteractionTextAttackControls
   m_EditorClassIdentifier: 
   listSentences:
-  - Utilisez la touche <sprite="touches-spritesheet" anim="2, 3, 2"> ou le <color=#ead8b5>clic
-    gauche</color> pour attaquer vos ennemis et briser des obstacles
+  - Utilisez la touche <sprite="touches-spritesheet" anim="2, 3, 2"> ou le <color=#ead8b5><b>clic
+    gauche</b></color> pour attaquer vos ennemis ou briser des obstacles
+  - "Comme ces caisses en bois juste \xE0 c\xF4t\xE9."
   OnConversationEnd: {fileID: 0}

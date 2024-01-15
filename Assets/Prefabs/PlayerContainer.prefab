@@ -398,51 +398,13 @@ MonoBehaviour:
   onPlayerDeath: {fileID: 11400000, guid: ee804061685d49549a86590b0c280ccd, type: 2}
   deathEffectPrefab: {fileID: 1992304688091250534, guid: 44fb5dd6c04248741b0fdac87cf0d958, type: 3}
   playerStatsValue: {fileID: 11400000, guid: 4d8b9f9261ee27f47ad567a2af8e73c2, type: 2}
-  onDeathUnityEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5528627662263019268}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 5528627662856065167}
-        m_TargetAssemblyTypeName: UnityEngine.Rigidbody2D, UnityEngine
-        m_MethodName: set_isKinematic
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 5528627662856065164}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  listLayerToIgnoreAfterDeath:
+  layerAfterDeath:
     serializedVersion: 2
-    m_Bits: 4992
+    m_Bits: 0
   onCinemachineShake: {fileID: 11400000, guid: 235824e89124e6d44baf6f4647dac34f, type: 2}
   hurtCameraShake: {fileID: 11400000, guid: 17638771ad1816b498352c97a18d460f, type: 2}
   deathCameraShake: {fileID: 11400000, guid: a838dc81d2934924e8453c7e6230bd18, type: 2}
+  testStartHealthPoints: 20
 --- !u!114 &5528627662263019260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5429,7 +5391,7 @@ MonoBehaviour:
   isGrounded: 0
   listGroundLayers:
     serializedVersion: 2
-    m_Bits: 136
+    m_Bits: 67720
   groundCheck: {fileID: 5528627663215432659}
   groundCheckRadius: 0.25
   playerCanMove: {fileID: 11400000, guid: d4070e2f3c65e5f48a143aca81e93fbb, type: 2}
