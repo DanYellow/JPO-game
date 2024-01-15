@@ -29,7 +29,7 @@ public class Attack : MonoBehaviour
 
             if (attackData.recoveryTime > 0 && GetComponentInParent<IStunnable>() != null && !isRecovering)
             {
-                onCinemachineShake.Raise(attackData.cameraShake);
+                onCinemachineShake?.Raise(attackData.cameraShake);
                 IStunnable iStunnable = GetComponentInParent<IStunnable>();
                 yield return StartCoroutine(iStunnable.Stun(attackData.recoveryTime, EndAttack));
             }
@@ -58,7 +58,8 @@ public class Attack : MonoBehaviour
             selfKnockback.Apply(other.gameObject, 15);
         }
 
-        if (other.transform.TryGetComponent(out IDamageable iDamageable))
+        IDamageable iDamageable = other.transform.GetComponentInChildren<IDamageable>();
+        if (iDamageable != null)
         {
             iDamageable.TakeDamage(attackData.damage);
         }

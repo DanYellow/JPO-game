@@ -6,14 +6,26 @@ public class EnemyFlying : MonoBehaviour
 
     private Vector2 startingPosition;
 
+    private Rigidbody2D rb;
+
+    [SerializeField]
+    private float floatStrength = 0.2f;
+    [SerializeField]
+    private float speed = 5;
+
     private void Awake()
     {
-        startingPosition = transform.position;
+        rb = GetComponent<Rigidbody2D>();
+        startingPosition = rb.position;
     }
 
-    private void Update()
-    {
-        float newY = (Mathf.Sin(Time.time * 5) * 0.2f) + startingPosition.y;
-        transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+    private void FixedUpdate() {
+        float newY = (Mathf.Sin(Time.time * speed) * floatStrength) + startingPosition.y;
+        Vector2 position = new Vector2(rb.position.x, newY);
+        rb.MovePosition(position);
+    }
+
+    public void SetStartingPosition(Vector2 pos) {
+        startingPosition = pos;
     }
 }
