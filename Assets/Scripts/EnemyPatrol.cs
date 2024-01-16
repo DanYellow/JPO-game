@@ -62,8 +62,8 @@ public class EnemyPatrol : MonoBehaviour
         detectorPosition += offset;
         idleTime = Mathf.Round(Random.Range(0, 3.5f));
 
-        StartCoroutine(ChangeState());
-        StartCoroutine(UpdateLastKnownPosition());
+        // StartCoroutine(ChangeState());
+        // StartCoroutine(UpdateLastKnownPosition());
     }
 
     public void UpdateDetector() {
@@ -92,10 +92,10 @@ public class EnemyPatrol : MonoBehaviour
 
     private void Update()
     {
-        if (isIdle)
-        {
-            Idle();
-        }
+        // if (isIdle)
+        // {
+        //     Idle();
+        // }
         animator.SetFloat(AnimationStrings.velocityX, Mathf.Abs(rb.velocity.x));
     }
 
@@ -109,15 +109,15 @@ public class EnemyPatrol : MonoBehaviour
 
         RaycastHit2D hitObstacle = Physics2D.Linecast(startCast, endCast, obstacleLayersMask);
         // hitObstacle.collider != null || 
-        if (!isFlipping && (hasCollisionWithObstacle || !hasCollisionWithGround))
-        {
-            StartCoroutine(Flip());
-        }
+        // if (!isFlipping && (hasCollisionWithObstacle || !hasCollisionWithGround))
+        // {
+        //     StartCoroutine(Flip());
+        // }
 
-        if (!isIdle)
-        {
-            Move();
-        }
+        // if (!isIdle)
+        // {
+        //     Move();
+        // }
     }
 
     IEnumerator ChangeState()
@@ -154,7 +154,15 @@ public class EnemyPatrol : MonoBehaviour
         }
     }
 
-    private bool HasCollision(LayerMask layerMask)
+    public bool HasTouchedGround() {
+        return HasCollision(obstacleLayersMask);
+    }
+
+    public bool HasTouchedObstacle() {
+        return HasCollision(obstacleLayersMask);
+    }
+
+    public bool HasCollision(LayerMask layerMask)
     {
         return Physics2D.OverlapCircle((Vector2)transform.position - detectorPosition, enemyData.obstacleCheckRadius, layerMask);
     }

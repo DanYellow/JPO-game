@@ -58,8 +58,8 @@ public class Attack : MonoBehaviour
             selfKnockback.Apply(other.gameObject, 15);
         }
 
-        IDamageable iDamageable = other.transform.GetComponentInChildren<IDamageable>();
-        if (iDamageable != null && other.transform.parent != null)
+        IDamageable iDamageable = other.transform.GetComponent<IDamageable>();
+        if (iDamageable != null)
         {
             iDamageable.TakeDamage(attackData.damage);
         }
