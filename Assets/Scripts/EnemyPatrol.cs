@@ -43,6 +43,8 @@ public class EnemyPatrol : MonoBehaviour
     [SerializeField]
     private LayerMask groundLayersMask;
 
+    public Vector2 lastPosition = Vector2.zero;
+
     private void Awake()
     {
         // We don't want the script to be enabled by default
@@ -58,6 +60,8 @@ public class EnemyPatrol : MonoBehaviour
         {
             offset.x *= -1;
         }
+
+        lastPosition = rb.position;
 
         detectorPosition += offset;
         idleTime = Mathf.Round(Random.Range(0, 3.5f));
@@ -208,13 +212,14 @@ public class EnemyPatrol : MonoBehaviour
 
     private IEnumerator Flip()
     {
+        float pauseTime = 1.75f;
         isFlipping = true;
-        yield return Helpers.GetWait(0.75f);
+        yield return Helpers.GetWait(pauseTime);
         detectorPosition.x *= -1;
         isFacingRight = !isFacingRight;
         transform.Rotate(0f, 180f, 0f);
         lastKnownPosition = Vector3.zero;
-        yield return Helpers.GetWait(0.75f);
+        yield return Helpers.GetWait(pauseTime);
         isFlipping = false;
     }
 
