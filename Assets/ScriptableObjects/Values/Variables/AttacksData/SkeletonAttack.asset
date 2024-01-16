@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc40447e81ba781448b3a88d390ca896, type: 3}
   m_Name: SkeletonAttack
   m_EditorClassIdentifier: 
-  damage: 1
-  knockbackForce: 2
-  rate: 15
+  damage: 2
+  knockbackForce: {x: 0, y: 0}
   isKnockingSelf: 0
+  stunTime: 0
+  recoveryTime: 0
+  cameraShake: {fileID: 0}
   DeveloperDescription: 

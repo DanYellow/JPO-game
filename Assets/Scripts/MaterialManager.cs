@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class MaterialManager : MonoBehaviour
 {
@@ -23,7 +22,7 @@ public class MaterialManager : MonoBehaviour
     IEnumerator ChangeMaterial(MaterialChangeValue materialChange)
     {
         currentTime = 0;
-        StartCoroutine(StartTimer());
+        StartCoroutine(StartTimer(materialChange.duration));
         sr.material = originalMaterial;
 
         Color targetColor = sr.color;
@@ -31,23 +30,24 @@ public class MaterialManager : MonoBehaviour
 
         Color originalColor = sr.color;
 
-        WaitForSeconds intervalMaterialChange = new WaitForSeconds(materialChange.interval);
-        while (currentTime < materialChange.duration)
+        while (currentTime <= materialChange.duration)
         {
-            sr.material = materialChange.material;
-            sr.color = targetColor;
-            yield return intervalMaterialChange;
             sr.material = originalMaterial;
             sr.color = originalColor;
-            yield return intervalMaterialChange;
+            yield return Helpers.GetWait(materialChange.interval);
+            sr.material = materialChange.material;
+            sr.color = targetColor;
+     
+            yield return Helpers.GetWait(materialChange.interval);
         }
+
         // originalColor.a = 1;
         sr.color = originalColor;
         sr.material = originalMaterial;
         StopAllCoroutines();
     }
 
-    IEnumerator StartTimer()
+    IEnumerator StartTimer(float duration)
     {
         while (true)
         {

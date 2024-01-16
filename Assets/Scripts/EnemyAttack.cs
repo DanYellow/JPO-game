@@ -52,19 +52,6 @@ public class EnemyAttack : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Player") && isAttacking)
-        {            
-            if(other.gameObject.TryGetComponent(out Knockback knockback)) {
-                knockback.Apply(gameObject, enemyData.knockbackForce);
-            }
-
-            IDamageable iDamageable = other.transform.GetComponentInChildren<IDamageable>();
-            iDamageable.TakeDamage(enemyData.damage);
-        }
-    }
-
     IEnumerator Attack()
     {
         isAttacking = true;
@@ -75,6 +62,5 @@ public class EnemyAttack : MonoBehaviour
         OnDone?.Invoke();
         yield return Helpers.GetWait(enemyData.attackRate);
         isAttacking = false;
-        
     }
 }

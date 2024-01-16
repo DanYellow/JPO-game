@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// https://www.aleksandrhovhannisyan.com/blog/invulnerability-frames-in-unity/
+
 public class Invulnerable : MonoBehaviour
 {
+    [field: SerializeField]
     public bool isInvulnerable { private set; get; } = false;
     [SerializeField]
     private InvulnerableDataValue invulnerableDataValue;
@@ -57,15 +60,40 @@ public class Invulnerable : MonoBehaviour
     {
         StopAllCoroutines();
         StartCoroutine(HandleInvunlnerableDelay());
-        materialManager.ChangeMaterialProxy(materialChange);
     }
 
     private IEnumerator HandleInvunlnerableDelay()
     {
-        yield return Helpers.GetWait(invulnerableDataValue.delay);
         isInvulnerable = true;
+
         Helpers.DisableCollisions(LayerMask.LayerToName(gameObject.layer), listLayers, isInvulnerable);
-        yield return Helpers.GetWait(invulnerableDataValue.duration);
+        float invincibilityDeltaTime = 0.15f;
+
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        Material originalMaterial = sr.material;
+        Color targetColor = sr.color;
+        targetColor.a = materialChange.opacity;
+
+        Color originalColor = sr.color;
+
+        for (float i = 0; i < invulnerableDataValue.duration; i += invincibilityDeltaTime)
+        {
+            if (sr.material == originalMaterial)
+            {
+                sr.material = materialChange.material;
+                sr.color = originalColor;
+            }
+            else
+            {
+                sr.material = originalMaterial;
+                sr.color = targetColor;
+            }
+
+            yield return Helpers.GetWait(invincibilityDeltaTime);
+        }
+
+        sr.color = originalColor;
+        sr.material = originalMaterial;
         isInvulnerable = false;
         Helpers.DisableCollisions(LayerMask.LayerToName(gameObject.layer), listLayers, isInvulnerable);
     }

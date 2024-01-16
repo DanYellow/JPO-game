@@ -59,7 +59,7 @@ public class Attack : MonoBehaviour
         }
 
         IDamageable iDamageable = other.transform.GetComponentInChildren<IDamageable>();
-        if (iDamageable != null)
+        if (iDamageable != null && other.transform.parent != null)
         {
             iDamageable.TakeDamage(attackData.damage);
         }
