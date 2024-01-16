@@ -35,7 +35,7 @@ public class EnemyPatrol : MonoBehaviour
     [SerializeField]
     private bool canMove = true;
 
-    private bool isFlipping = false;
+    public bool isFlipping = false;
 
     [SerializeField]
     private LayerMask obstacleLayersMask;
@@ -66,14 +66,15 @@ public class EnemyPatrol : MonoBehaviour
         // StartCoroutine(UpdateLastKnownPosition());
     }
 
-    public void UpdateDetector() {
+    public void UpdateDetector()
+    {
         detectorPosition = new Vector3(bc.bounds.extents.x * (isFacingRight ? -1 : 1), bc.bounds.extents.y, 0);
         if (isFacingRight)
         {
             offset.x *= -1;
         }
         detectorPosition += offset;
-    } 
+    }
 
     IEnumerator UpdateLastKnownPosition()
     {
@@ -96,7 +97,7 @@ public class EnemyPatrol : MonoBehaviour
         // {
         //     Idle();
         // }
-        animator.SetFloat(AnimationStrings.velocityX, Mathf.Abs(rb.velocity.x));
+        // animator.SetFloat(AnimationStrings.velocityX, Mathf.Abs(rb.velocity.x));
     }
 
     private void FixedUpdate()
@@ -154,12 +155,18 @@ public class EnemyPatrol : MonoBehaviour
         }
     }
 
-    public bool HasTouchedGround() {
+    public bool HasTouchedGround()
+    {
         return HasCollision(obstacleLayersMask);
     }
 
-    public bool HasTouchedObstacle() {
-        return HasCollision(obstacleLayersMask);
+    public bool HasTouchedObstacle()
+    {
+        return Physics2D.Linecast(
+            new Vector3(transform.position.x + animator.transform.right.x, bc.bounds.min.y + (bc.size.y * 0.10f), 0),
+            new Vector3(transform.position.x + (animator.transform.right.x * 3), bc.bounds.min.y + (bc.size.y * 0.10f), 0),
+            obstacleLayersMask
+        );
     }
 
     public bool HasCollision(LayerMask layerMask)
@@ -170,6 +177,23 @@ public class EnemyPatrol : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere((Vector2)transform.position - detectorPosition, enemyData.obstacleCheckRadius);
+        // print(transform.right);
+
+        if (bc != null)
+        {
+            Gizmos.color = Color.red;
+
+            Gizmos.DrawLine(
+                new Vector3(transform.position.x + animator.transform.right.x, bc.bounds.min.y + (bc.size.y * 0.10f), 0),
+                new Vector3(transform.position.x + (animator.transform.right.x * 3), bc.bounds.min.y + (bc.size.y * 0.10f), 0)
+            );
+
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(
+                new Vector3(transform.position.x + animator.transform.right.x, bc.bounds.max.y + (bc.size.y * 0.10f), 0),
+                new Vector3(transform.position.x + (animator.transform.right.x * 3), bc.bounds.max.y + (bc.size.y * 0.10f), 0)
+            );
+        }
     }
 
     public void ToggleMovement(bool val)
@@ -177,15 +201,20 @@ public class EnemyPatrol : MonoBehaviour
         canMove = val;
     }
 
+    public void Flipp()
+    {
+        StartCoroutine(Flip());
+    }
+
     private IEnumerator Flip()
     {
         isFlipping = true;
-        yield return Helpers.GetWait(0.25f);
+        yield return Helpers.GetWait(0.75f);
         detectorPosition.x *= -1;
         isFacingRight = !isFacingRight;
         transform.Rotate(0f, 180f, 0f);
         lastKnownPosition = Vector3.zero;
-        yield return Helpers.GetWait(0.25f);
+        yield return Helpers.GetWait(0.75f);
         isFlipping = false;
     }
 
@@ -200,5 +229,10 @@ public class EnemyPatrol : MonoBehaviour
         // it might continue to run but whoen be able to change direction
         Idle();
         enabled = false;
+    }
+
+    public EnemyData GetData()
+    {
+        return enemyData;
     }
 }

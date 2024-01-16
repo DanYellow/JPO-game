@@ -33,23 +33,23 @@ public class EnemyAttack : MonoBehaviour
 
     private void FixedUpdate()
     {
-        RaycastHit2D hitObstacle = Physics2D.BoxCast(
-           new Vector2(bc2d.bounds.center.x - 0.5f, bc2d.bounds.center.y),
-           bc2d.bounds.size,
-           0,
-           enemyPatrol.isFacingRight ? Vector2.right : Vector2.left,
-           distance,
-           targetLayerMask
-       );
+    //     RaycastHit2D hitObstacle = Physics2D.BoxCast(
+    //        new Vector2(bc2d.bounds.center.x - 0.5f, bc2d.bounds.center.y),
+    //        bc2d.bounds.size,
+    //        0,
+    //        enemyPatrol.isFacingRight ? Vector2.right : Vector2.left,
+    //        distance,
+    //        targetLayerMask
+    //    );
 
-        Debug.DrawRay(new Vector2(enemyPatrol.isFacingRight ? bc2d.bounds.max.x : bc2d.bounds.min.x, bc2d.bounds.min.y), (enemyPatrol.isFacingRight ? Vector2.right : Vector2.left) * distance, Color.cyan);
-        Debug.DrawRay(new Vector2(enemyPatrol.isFacingRight ? bc2d.bounds.max.x : bc2d.bounds.min.x, bc2d.bounds.max.y), (enemyPatrol.isFacingRight ? Vector2.right : Vector2.left) * distance, Color.cyan);
-        // Debug.DrawRay(new Vector2(bc2d.bounds.min.x - 0.25f, bc2d.bounds.max.y), enemyPatrol.isFacingRight ? Vector2.right : Vector2.left * distance, Color.cyan);
+    //     Debug.DrawRay(new Vector2(enemyPatrol.isFacingRight ? bc2d.bounds.max.x : bc2d.bounds.min.x, bc2d.bounds.min.y), (enemyPatrol.isFacingRight ? Vector2.right : Vector2.left) * distance, Color.cyan);
+    //     Debug.DrawRay(new Vector2(enemyPatrol.isFacingRight ? bc2d.bounds.max.x : bc2d.bounds.min.x, bc2d.bounds.max.y), (enemyPatrol.isFacingRight ? Vector2.right : Vector2.left) * distance, Color.cyan);
+    //     // Debug.DrawRay(new Vector2(bc2d.bounds.min.x - 0.25f, bc2d.bounds.max.y), enemyPatrol.isFacingRight ? Vector2.right : Vector2.left * distance, Color.cyan);
 
-        if (hitObstacle && !isAttacking)
-        {
-            StartCoroutine(Attack());
-        }
+    //     if (hitObstacle && !isAttacking)
+    //     {
+    //         StartCoroutine(Attack());
+    //     }
     }
 
     IEnumerator Attack()
