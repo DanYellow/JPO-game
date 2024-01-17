@@ -107,6 +107,10 @@ public class EnemyPatrol : MonoBehaviour
         //     Idle();
         // }
         // animator.SetFloat(AnimationStrings.velocityX, Mathf.Abs(rb.velocity.x));
+
+        if(Input.GetKeyDown(KeyCode.Space)) {
+            Flipp();
+        }
     }
 
     private void FixedUpdate()
@@ -203,30 +207,64 @@ public class EnemyPatrol : MonoBehaviour
 
         if (bc != null)
         {
+            // Detect top obstacle
             Gizmos.color = Color.red;
-
             Gizmos.DrawLine(
                 new Vector3(transform.position.x + transform.right.x, bc.bounds.min.y + (bc.size.y * 0.10f), 0),
                 new Vector3(transform.position.x + (transform.right.x * obstacleDetectionDistance), bc.bounds.min.y + (bc.size.y * 0.10f), 0)
             );
 
+            // Detect bottom obstacle
             Gizmos.color = Color.green;
             Gizmos.DrawLine(
-                new Vector3(transform.position.x + transform.right.x, bc.bounds.max.y + (bc.size.y * 0.10f), 0),
-                new Vector3(transform.position.x + (transform.right.x * obstacleDetectionDistance), bc.bounds.max.y + (bc.size.y * 0.10f), 0)
+                new Vector3(transform.position.x + transform.right.x, bc.bounds.max.y - (bc.size.y * 0.10f), 0),
+                new Vector3(transform.position.x + (transform.right.x * obstacleDetectionDistance), bc.bounds.max.y - (bc.size.y * 0.10f), 0)
             );
 
-            Gizmos.color = Color.cyan;
+            float xOffset = transform.right.x == -1 ? bc.bounds.min.x : bc.bounds.max.x;
+            // Detect attack area
+            Gizmos.color = Color.magenta;
             Gizmos.DrawWireCube(
-                new Vector3(bc.bounds.max.x + (bc.size.x / 2), bc.bounds.center.y, 0),
+                new Vector3(xOffset + bc.size.x * 1 / 2 * transform.right.x, bc.bounds.center.y, 0),
                 bc.size
             );
 
-            Gizmos.color = Color.magenta;
+            // Detect run area
+            Gizmos.color = Color.cyan;
+            // Gizmos.DrawWireCube(
+            //     new Vector3(xOffset + (bc.size.x * 4 / 2) * transform.right.x, bc.bounds.center.y, 0),
+            //     new Vector2(bc.size.x * 4, bc.size.y)
+            // );
+            float factor = 3;
             Gizmos.DrawWireCube(
-                new Vector3(bc.bounds.max.x + (bc.size.x / 2), bc.bounds.center.y, 0),
-                bc.size + ((Vector2)transform.right * 2)
+                new Vector3(xOffset + (bc.size.x * factor / 2) * transform.right.x, bc.bounds.center.y, 0),
+                new Vector2(bc.size.x * factor, bc.size.y)
             );
+
+            
+
+            // Gizmos.color = Color.yellow;
+            // Gizmos.DrawWireCube(
+            //     new Vector3(bc.bounds.min.x - (bc.size.x * 1 / 2), bc.bounds.center.y, 0),
+            //     bc.size
+            // );
+            // print("left " + new Vector3(bc.bounds.min.x - (bc.size.x * 1 / 2), bc.bounds.center.y, 0));
+
+            //  Gizmos.DrawWireCube(
+            //     new Vector3(Helpers.GetBoxCollider2DCorners(gameObject, Corner.TopRight).x + (bc.size.x * 2), bc.bounds.center.y, 0),
+            //     bc.size
+            // );
+
+            // Gizmos.DrawWireCube(
+            //     new Vector3(transform.right.x == -1 ? bc.bounds.max.x : bc.bounds.min.x + (bc.size.x / 2), bc.bounds.center.y, 0),
+            //     bc.size
+            // );
+
+            // Gizmos.color = Color.magenta;
+            // Gizmos.DrawWireCube(
+            //     new Vector3(bc.bounds.center.x + (bc.size.x * 4 / 2), bc.bounds.center.y, 0),
+            //     bc.size + ((Vector2)transform.right * 4)
+            // );
         }
     }
 

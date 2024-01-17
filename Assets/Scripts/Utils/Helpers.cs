@@ -1,6 +1,14 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+public enum Corner
+{
+    TopLeft,
+    TopRight,
+    BottomLeft,
+    BottomRight
+}
+
 public static class Helpers
 {
     private static readonly Dictionary<float, WaitForSeconds> waitForSecondsDictionary = new Dictionary<float, WaitForSeconds>();
@@ -73,5 +81,37 @@ public static class Helpers
     public static string GetLayerName(int layerNumber)
     {
         return LayerMask.LayerToName(GetLayerIndex(layerNumber));
+    }
+
+    public static Vector3 GetBoxCollider2DCorners(GameObject go, Corner corner)
+    {
+        BoxCollider2D collider = go.GetComponent<BoxCollider2D>();
+
+        Vector2 size = collider.size;
+
+        Vector3 worldPos = go.transform.TransformPoint(collider.offset);
+
+        float top = worldPos.y + (size.y / 2f);
+        float btm = worldPos.y - (size.y / 2f);
+        float left = worldPos.x - (size.x / 2f);
+        float right = worldPos.x + (size.x / 2f);
+
+        if(corner == Corner.TopLeft) {
+            return new Vector3(left, top, worldPos.z);
+        }
+
+        if(corner == Corner.TopRight) {
+            return new Vector3(left, top, worldPos.z);
+        }
+
+        if(corner == Corner.BottomLeft) {
+            return new Vector3( left, btm, worldPos.z);
+        }
+
+        if(corner == Corner.BottomLeft) {
+            return new Vector3(right, btm, worldPos.z);
+        }
+
+        return new Vector3(left, top, worldPos.z);
     }
 }
