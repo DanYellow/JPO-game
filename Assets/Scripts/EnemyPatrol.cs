@@ -49,6 +49,8 @@ public class EnemyPatrol : MonoBehaviour
     public Vector2 lastPosition = Vector2.zero;
 
     private float obstacleDetectionDistance = 1.95f;
+    private float runDetectionDistance = 3.55f;
+    private float attackRange = 1.4f;
 
     private void Awake()
     {
@@ -182,12 +184,23 @@ public class EnemyPatrol : MonoBehaviour
         );
     }
 
-    public bool HasTouchedEnemy()
+    public bool HasDetectedEnemy()
     {
-        // enemyLayersMask//
         return Physics2D.BoxCast(
-            new Vector3(bc.bounds.max.x + (bc.size.x / 2), bc.bounds.center.y, 0),
-            bc.size,
+            new Vector3(bc.bounds.max.x + (bc.size.x * runDetectionDistance / 2), bc.bounds.center.y, 0),
+            new Vector2(bc.size.x * runDetectionDistance, bc.size.y),
+            0,
+            transform.right,
+            0,
+            enemyLayersMask
+        );
+    }
+
+    public bool HasEnemyInAttackRange()
+    {
+        return Physics2D.BoxCast(
+            new Vector3(bc.bounds.max.x + (bc.size.x * attackRange / 2), bc.bounds.center.y, 0),
+            new Vector2(bc.size.x * attackRange, bc.size.y),
             0,
             transform.right,
             0,
@@ -223,48 +236,19 @@ public class EnemyPatrol : MonoBehaviour
 
             float xOffset = transform.right.x == -1 ? bc.bounds.min.x : bc.bounds.max.x;
             // Detect attack area
-            Gizmos.color = Color.magenta;
-            Gizmos.DrawWireCube(
-                new Vector3(xOffset + bc.size.x * 1 / 2 * transform.right.x, bc.bounds.center.y, 0),
-                bc.size
-            );
-
-            // Detect run area
-            Gizmos.color = Color.cyan;
-            // Gizmos.DrawWireCube(
-            //     new Vector3(xOffset + (bc.size.x * 4 / 2) * transform.right.x, bc.bounds.center.y, 0),
-            //     new Vector2(bc.size.x * 4, bc.size.y)
-            // );
-            float factor = 3;
-            Gizmos.DrawWireCube(
-                new Vector3(xOffset + (bc.size.x * factor / 2) * transform.right.x, bc.bounds.center.y, 0),
-                new Vector2(bc.size.x * factor, bc.size.y)
-            );
-
-            
-
-            // Gizmos.color = Color.yellow;
-            // Gizmos.DrawWireCube(
-            //     new Vector3(bc.bounds.min.x - (bc.size.x * 1 / 2), bc.bounds.center.y, 0),
-            //     bc.size
-            // );
-            // print("left " + new Vector3(bc.bounds.min.x - (bc.size.x * 1 / 2), bc.bounds.center.y, 0));
-
-            //  Gizmos.DrawWireCube(
-            //     new Vector3(Helpers.GetBoxCollider2DCorners(gameObject, Corner.TopRight).x + (bc.size.x * 2), bc.bounds.center.y, 0),
-            //     bc.size
-            // );
-
-            // Gizmos.DrawWireCube(
-            //     new Vector3(transform.right.x == -1 ? bc.bounds.max.x : bc.bounds.min.x + (bc.size.x / 2), bc.bounds.center.y, 0),
-            //     bc.size
-            // );
-
             // Gizmos.color = Color.magenta;
             // Gizmos.DrawWireCube(
-            //     new Vector3(bc.bounds.center.x + (bc.size.x * 4 / 2), bc.bounds.center.y, 0),
-            //     bc.size + ((Vector2)transform.right * 4)
+            //     new Vector3(xOffset + bc.size.x * 1 / 2 * transform.right.x, bc.bounds.center.y, 0),
+            //     bc.size
             // );
+
+            // Detect attack area
+            Gizmos.color = Color.cyan;
+            float factor = 3;
+            Gizmos.DrawWireCube(
+                new Vector3(xOffset + bc.size.x * attackRange / 2 * transform.right.x, bc.bounds.center.y, 0),
+                new Vector2(bc.size.x * attackRange, bc.size.y)
+            );
         }
     }
 

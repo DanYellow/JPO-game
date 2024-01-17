@@ -8,7 +8,8 @@ public class PatrollingBehaviour : StateMachineBehaviour
     Rigidbody2D rb;
     Vector2 trackVelocity = Vector2.zero;
     bool hasCollisionWithObstacle = false;
-    bool hasCollisionWithEnemy = false;
+    bool hasDetectedEnemy = false;
+    bool hasEnemyInAttackRange = false;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -20,18 +21,21 @@ public class PatrollingBehaviour : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         hasCollisionWithObstacle = enemyPatrol.HasTouchedObstacle();
-        hasCollisionWithEnemy = enemyPatrol.HasTouchedEnemy();
+        hasEnemyInAttackRange = enemyPatrol.HasEnemyInAttackRange();
+        hasDetectedEnemy = enemyPatrol.HasDetectedEnemy();
 
-        Debug.Log("hasCollisionWithEnemy " + hasCollisionWithEnemy);
+        Debug.Log("hasDetectedEnemy " + hasDetectedEnemy);
         
         // rb.MovePosition(rb.position + (Vector2)animator.transform.right * enemyPatrol.GetData().walkSpeed * Time.fixedDeltaTime);
         // trackVelocity = (rb.position - enemyPatrol.lastPosition) / Time.deltaTime;
         // enemyPatrol.lastPosition = rb.position;
+
+        float moveSpeed = hasDetectedEnemy ? enemyPatrol.GetData().walkSpeed : enemyPatrol.GetData().runSpeed;
    
-        // rb.velocity = new Vector2(
-        //     (hasCollisionWithObstacle ? 0 : enemyPatrol.GetData().walkSpeed) * animator.transform.right.x, 
-        //     rb.velocity.y
-        // ); 
+        rb.velocity = new Vector2(
+            (hasCollisionWithObstacle ? 0 : moveSpeed) * animator.transform.right.x, 
+            rb.velocity.y
+        ); 
 
         animator.SetFloat(AnimationStrings.velocityX, Mathf.Abs(rb.velocity.x));
 
