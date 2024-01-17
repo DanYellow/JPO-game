@@ -39,12 +39,14 @@ public class PatrollingBehaviour : StateMachineBehaviour
 
         animator.SetFloat(AnimationStrings.velocityX, Mathf.Abs(rb.velocity.x));
 
+        if(hasEnemyInAttackRange) {
+            animator.SetTrigger(AnimationStrings.attack);
+        }
+
         if (hasCollisionWithObstacle && !enemyPatrol.isFlipping)
         {
             enemyPatrol.Flipp();
-        } else {
-            
-        }
+        } 
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
