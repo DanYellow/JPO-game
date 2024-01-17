@@ -20,5 +20,6 @@ public static class AnimationStrings
    public static string teleportOut = "TeleportOut";
    public static string canMove = "CanMove";
    public static string invoke = "Invoke";
+   public static string isPatrolling = "IsPatrolling";
 
 }

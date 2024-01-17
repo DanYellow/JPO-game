@@ -6,15 +6,17 @@ public class PatrollingBehaviour : StateMachineBehaviour
 {
     EnemyPatrol enemyPatrol;
     Rigidbody2D rb;
-    Vector2 trackVelocity = Vector2.zero;
     bool hasCollisionWithObstacle = false;
     bool hasDetectedEnemy = false;
     bool hasEnemyInAttackRange = false;
+    bool canAttack = true;
+    EnemyAttack enemyAttack;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         enemyPatrol = animator.GetComponent<EnemyPatrol>();
         rb = animator.GetComponent<Rigidbody2D>();
+        enemyAttack = animator.GetComponent<EnemyAttack>();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -24,29 +26,34 @@ public class PatrollingBehaviour : StateMachineBehaviour
         hasEnemyInAttackRange = enemyPatrol.HasEnemyInAttackRange();
         hasDetectedEnemy = enemyPatrol.HasDetectedEnemy();
 
-        Debug.Log("hasDetectedEnemy " + hasDetectedEnemy);
-        
         // rb.MovePosition(rb.position + (Vector2)animator.transform.right * enemyPatrol.GetData().walkSpeed * Time.fixedDeltaTime);
         // trackVelocity = (rb.position - enemyPatrol.lastPosition) / Time.deltaTime;
         // enemyPatrol.lastPosition = rb.position;
 
         float moveSpeed = hasDetectedEnemy ? enemyPatrol.GetData().walkSpeed : enemyPatrol.GetData().runSpeed;
-   
-        rb.velocity = new Vector2(
-            (hasCollisionWithObstacle ? 0 : moveSpeed) * animator.transform.right.x, 
-            rb.velocity.y
-        ); 
+
+        
+        if (enemyAttack.canMove)
+        {
+            rb.velocity = new Vector2(
+                (hasCollisionWithObstacle ? 0 : moveSpeed) * animator.transform.right.x,
+                rb.velocity.y
+            );
+        } else {
+            rb.velocity = Vector2.zero;
+        }
 
         animator.SetFloat(AnimationStrings.velocityX, Mathf.Abs(rb.velocity.x));
 
-        if(hasEnemyInAttackRange) {
+        if (hasEnemyInAttackRange && enemyAttack.CanAttack())
+        {
             animator.SetTrigger(AnimationStrings.attack);
         }
 
-        if (hasCollisionWithObstacle && !enemyPatrol.isFlipping)
+        if (!hasEnemyInAttackRange && hasCollisionWithObstacle && !enemyPatrol.isFlipping)
         {
             enemyPatrol.Flipp();
-        } 
+        }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

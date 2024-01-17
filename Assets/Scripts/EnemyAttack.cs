@@ -23,33 +23,29 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField]
     private float distance = 2f;
 
-    private void Awake()
-    {
-        // We don't want the script to be enabled by default
-        bc2d = GetComponent<BoxCollider2D>();
-        animator = GetComponent<Animator>();
-        enemyPatrol = GetComponent<EnemyPatrol>();
+    public float attackCooldown = 0;
+    float attackDelay = 5f;
+
+    public bool canMove = true;
+
+    private void Update() {
+        if(attackCooldown > 0) {
+            attackCooldown -= Time.deltaTime;
+        }
     }
 
-    private void FixedUpdate()
-    {
-    //     RaycastHit2D hitObstacle = Physics2D.BoxCast(
-    //        new Vector2(bc2d.bounds.center.x - 0.5f, bc2d.bounds.center.y),
-    //        bc2d.bounds.size,
-    //        0,
-    //        enemyPatrol.isFacingRight ? Vector2.right : Vector2.left,
-    //        distance,
-    //        targetLayerMask
-    //    );
+    public bool CanAttack() {
+        return attackCooldown <= 0;
+    }
 
-    //     Debug.DrawRay(new Vector2(enemyPatrol.isFacingRight ? bc2d.bounds.max.x : bc2d.bounds.min.x, bc2d.bounds.min.y), (enemyPatrol.isFacingRight ? Vector2.right : Vector2.left) * distance, Color.cyan);
-    //     Debug.DrawRay(new Vector2(enemyPatrol.isFacingRight ? bc2d.bounds.max.x : bc2d.bounds.min.x, bc2d.bounds.max.y), (enemyPatrol.isFacingRight ? Vector2.right : Vector2.left) * distance, Color.cyan);
-    //     // Debug.DrawRay(new Vector2(bc2d.bounds.min.x - 0.25f, bc2d.bounds.max.y), enemyPatrol.isFacingRight ? Vector2.right : Vector2.left * distance, Color.cyan);
+    public void ResetTimer() {
+        attackCooldown = attackDelay;
+        StartCoroutine(ResetMovements());
+    }
 
-    //     if (hitObstacle && !isAttacking)
-    //     {
-    //         StartCoroutine(Attack());
-    //     }
+    IEnumerator ResetMovements() {
+        yield return Helpers.GetWait(distance * 2f);
+        canMove = true;
     }
 
     IEnumerator Attack()
