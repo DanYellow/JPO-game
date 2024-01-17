@@ -49,8 +49,8 @@ public class EnemyPatrol : MonoBehaviour
     public Vector2 lastPosition = Vector2.zero;
 
     private float obstacleDetectionDistance = 1.95f;
-    private float runDetectionDistance = 1; //3.55f;
-    private float attackRange = 1.4f;
+    private float runDetectionDistance = 2.75f; //3.55f;
+    private float attackRange = 0.75f;
 
     private void Awake()
     {
@@ -196,7 +196,7 @@ public class EnemyPatrol : MonoBehaviour
         );
     }
 
-    public bool HasEnemyInAttackRange()
+    public RaycastHit2D HasEnemyInAttackRange()
     {
         float xOffset = transform.right.x == -1 ? bc.bounds.min.x : bc.bounds.max.x;
         return Physics2D.BoxCast(

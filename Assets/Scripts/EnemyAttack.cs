@@ -44,7 +44,7 @@ public class EnemyAttack : MonoBehaviour
     }
 
     IEnumerator ResetMovements() {
-        yield return Helpers.GetWait(distance * 2f);
+        yield return Helpers.GetWait(attackDelay / 2);
         canMove = true;
     }
 
