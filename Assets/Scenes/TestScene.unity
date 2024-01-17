@@ -266,6 +266,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 535411357999783334, guid: 638a69562c37c024dac783e8faaa080e, type: 3}
+      propertyPath: enemyLayersMask.m_Bits
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 535411357999783334, guid: 638a69562c37c024dac783e8faaa080e, type: 3}
       propertyPath: obstacleLayersMask.m_Bits
       value: 520
       objectReference: {fileID: 0}
@@ -344,7 +348,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5528627662856065166, guid: bbf98b5430d1f72498f90e0912a904d9, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5528627662856065170, guid: bbf98b5430d1f72498f90e0912a904d9, type: 3}
       propertyPath: m_RootOrder

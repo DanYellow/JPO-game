@@ -7,6 +7,8 @@ public class PatrollingBehaviour : StateMachineBehaviour
     EnemyPatrol enemyPatrol;
     Rigidbody2D rb;
     Vector2 trackVelocity = Vector2.zero;
+    bool hasCollisionWithObstacle = false;
+    bool hasCollisionWithEnemy = false;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -17,16 +19,27 @@ public class PatrollingBehaviour : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.SetFloat(AnimationStrings.velocityX, Mathf.Abs(trackVelocity.x));
-        rb.MovePosition(rb.position + (Vector2)animator.transform.right * enemyPatrol.GetData().walkSpeed * Time.fixedDeltaTime);
-        trackVelocity = (rb.position - enemyPatrol.lastPosition) / Time.deltaTime;
-        enemyPatrol.lastPosition = rb.position;
-   
-        // rb.velocity = new Vector2(enemyPatrol.GetData().walkSpeed * animator.transform.right.x, rb.velocity.y); 
+        hasCollisionWithObstacle = enemyPatrol.HasTouchedObstacle();
+        hasCollisionWithEnemy = enemyPatrol.HasTouchedEnemy();
 
-        if (enemyPatrol.HasTouchedObstacle() && !enemyPatrol.isFlipping)
+        Debug.Log("hasCollisionWithEnemy " + hasCollisionWithEnemy);
+        
+        // rb.MovePosition(rb.position + (Vector2)animator.transform.right * enemyPatrol.GetData().walkSpeed * Time.fixedDeltaTime);
+        // trackVelocity = (rb.position - enemyPatrol.lastPosition) / Time.deltaTime;
+        // enemyPatrol.lastPosition = rb.position;
+   
+        // rb.velocity = new Vector2(
+        //     (hasCollisionWithObstacle ? 0 : enemyPatrol.GetData().walkSpeed) * animator.transform.right.x, 
+        //     rb.velocity.y
+        // ); 
+
+        animator.SetFloat(AnimationStrings.velocityX, Mathf.Abs(rb.velocity.x));
+
+        if (hasCollisionWithObstacle && !enemyPatrol.isFlipping)
         {
             enemyPatrol.Flipp();
+        } else {
+            
         }
     }
 

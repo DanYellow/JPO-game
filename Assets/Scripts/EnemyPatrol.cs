@@ -43,7 +43,12 @@ public class EnemyPatrol : MonoBehaviour
     [SerializeField]
     private LayerMask groundLayersMask;
 
+    [SerializeField]
+    private LayerMask enemyLayersMask;
+
     public Vector2 lastPosition = Vector2.zero;
+
+    private float obstacleDetectionDistance = 1.95f;
 
     private void Awake()
     {
@@ -106,13 +111,13 @@ public class EnemyPatrol : MonoBehaviour
 
     private void FixedUpdate()
     {
-        hasCollisionWithObstacle = HasCollision(obstacleLayersMask);
-        hasCollisionWithGround = HasCollision(groundLayersMask);
-        Vector3 startCast = transform.position - new Vector3(offset.x, 0, 0);
-        Vector3 endCast = transform.position + (isFacingRight ? Vector3.right : Vector3.left) * 0.9f;
-        Debug.DrawLine(startCast, endCast, Color.green);
+        // hasCollisionWithObstacle = HasCollision(obstacleLayersMask);
+        // hasCollisionWithGround = HasCollision(groundLayersMask);
+        // Vector3 startCast = transform.position - new Vector3(offset.x, 0, 0);
+        // Vector3 endCast = transform.position + (isFacingRight ? Vector3.right : Vector3.left) * 0.9f;
+        // Debug.DrawLine(startCast, endCast, Color.green);
 
-        RaycastHit2D hitObstacle = Physics2D.Linecast(startCast, endCast, obstacleLayersMask);
+        // RaycastHit2D hitObstacle = Physics2D.Linecast(startCast, endCast, obstacleLayersMask);
         // hitObstacle.collider != null || 
         // if (!isFlipping && (hasCollisionWithObstacle || !hasCollisionWithGround))
         // {
@@ -167,9 +172,22 @@ public class EnemyPatrol : MonoBehaviour
     public bool HasTouchedObstacle()
     {
         return Physics2D.Linecast(
-            new Vector3(transform.position.x + animator.transform.right.x, bc.bounds.min.y + (bc.size.y * 0.10f), 0),
-            new Vector3(transform.position.x + (animator.transform.right.x * 3), bc.bounds.min.y + (bc.size.y * 0.10f), 0),
+            new Vector3(transform.position.x + transform.right.x, bc.bounds.min.y + (bc.size.y * 0.10f), 0),
+            new Vector3(transform.position.x + (transform.right.x * obstacleDetectionDistance), bc.bounds.min.y + (bc.size.y * 0.10f), 0),
             obstacleLayersMask
+        );
+    }
+
+    public bool HasTouchedEnemy()
+    {
+        // enemyLayersMask//
+        return Physics2D.BoxCast(
+            new Vector3(bc.bounds.max.x + (bc.size.x / 2), bc.bounds.center.y, 0),
+            bc.size,
+            0,
+            transform.right,
+            0,
+            enemyLayersMask
         );
     }
 
@@ -188,14 +206,26 @@ public class EnemyPatrol : MonoBehaviour
             Gizmos.color = Color.red;
 
             Gizmos.DrawLine(
-                new Vector3(transform.position.x + animator.transform.right.x, bc.bounds.min.y + (bc.size.y * 0.10f), 0),
-                new Vector3(transform.position.x + (animator.transform.right.x * 3), bc.bounds.min.y + (bc.size.y * 0.10f), 0)
+                new Vector3(transform.position.x + transform.right.x, bc.bounds.min.y + (bc.size.y * 0.10f), 0),
+                new Vector3(transform.position.x + (transform.right.x * obstacleDetectionDistance), bc.bounds.min.y + (bc.size.y * 0.10f), 0)
             );
 
             Gizmos.color = Color.green;
             Gizmos.DrawLine(
-                new Vector3(transform.position.x + animator.transform.right.x, bc.bounds.max.y + (bc.size.y * 0.10f), 0),
-                new Vector3(transform.position.x + (animator.transform.right.x * 3), bc.bounds.max.y + (bc.size.y * 0.10f), 0)
+                new Vector3(transform.position.x + transform.right.x, bc.bounds.max.y + (bc.size.y * 0.10f), 0),
+                new Vector3(transform.position.x + (transform.right.x * obstacleDetectionDistance), bc.bounds.max.y + (bc.size.y * 0.10f), 0)
+            );
+
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawWireCube(
+                new Vector3(bc.bounds.max.x + (bc.size.x / 2), bc.bounds.center.y, 0),
+                bc.size
+            );
+
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawWireCube(
+                new Vector3(bc.bounds.max.x + (bc.size.x / 2), bc.bounds.center.y, 0),
+                bc.size + ((Vector2)transform.right * 2)
             );
         }
     }
