@@ -9,18 +9,16 @@ public class PatrollingBehaviour : StateMachineBehaviour
     Rigidbody2D rb;
     bool hasCollisionWithObstacle = false;
     bool hasDetectedEnemy = false;
+    bool hasTouchedVoid = false;
     RaycastHit2D enemyInAttackRange;
-    Guard guard;
     EnemyAttack enemyAttack;
     Enemy enemy;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Debug.Log("enter");
         enemyPatrol = animator.GetComponent<EnemyPatrol>();
         rb = animator.GetComponent<Rigidbody2D>();
         enemyAttack = animator.GetComponent<EnemyAttack>();
-        guard = animator.GetComponent<Guard>();
         enemy = animator.GetComponent<Enemy>();
     }
 
@@ -30,6 +28,7 @@ public class PatrollingBehaviour : StateMachineBehaviour
         hasCollisionWithObstacle = enemyPatrol.HasTouchedObstacle();
         enemyInAttackRange = enemyPatrol.HasEnemyInAttackRange();
         hasDetectedEnemy = enemyPatrol.HasDetectedEnemy();
+        hasTouchedVoid = enemyPatrol.HasTouchedVoid();
 
         // rb.MovePosition(rb.position + (Vector2)animator.transform.right * enemyPatrol.GetData().walkSpeed * Time.fixedDeltaTime);
         // trackVelocity = (rb.position - enemyPatrol.lastPosition) / Time.deltaTime;
@@ -40,17 +39,21 @@ public class PatrollingBehaviour : StateMachineBehaviour
         // No player detected
         if (enemyInAttackRange.collider == null)
         {
-            if (enemyAttack.canMove)
+            if (enemyAttack.canMove && !hasTouchedVoid)
             {
                 rb.velocity = new Vector2(
                     (hasCollisionWithObstacle ? 0 : moveSpeed) * animator.transform.right.x,
                     rb.velocity.y
                 );
             }
-
-            if (hasCollisionWithObstacle && !enemyPatrol.isFlipping)
+            else
             {
-                enemyPatrol.Flipp();
+                rb.velocity = Vector2.zero;
+            }
+
+            if ((hasCollisionWithObstacle || hasTouchedVoid) && !enemyPatrol.isFlipping)
+            {
+                enemyPatrol.Flip(false);
             }
         }
         else
@@ -65,14 +68,10 @@ public class PatrollingBehaviour : StateMachineBehaviour
         {
             bool isFacingEnemy = Math.Sign(enemyInAttackRange.collider.transform.right.x) != Math.Sign(animator.transform.right.x);
 
-            // if(isFacingEnemy) {
-            //     Debug.Log("Geee");
-            //     animator.SetBool(AnimationStrings.isGuarding, true);
-            // }
             if (enemy.canOperate == true)
             {
                 enemy.canOperate = false;
-                bool randVal = UnityEngine.Random.value < 0.5f;
+                bool randVal = UnityEngine.Random.value < 0.45f;
                 if (randVal && isFacingEnemy)
                 {
                     animator.SetBool(AnimationStrings.isGuarding, true);
@@ -82,16 +81,11 @@ public class PatrollingBehaviour : StateMachineBehaviour
                     animator.SetTrigger(AnimationStrings.attack);
                 }
             }
-            // else if (isFacingEnemy && !enemyAttack.CanAttack() && guard.CanGuard()) {
-
-            // }
-
         }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-
-    }
+    // override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    // {
+    // }
 }

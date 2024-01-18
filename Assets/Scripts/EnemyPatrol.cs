@@ -87,20 +87,20 @@ public class EnemyPatrol : MonoBehaviour
         detectorPosition += offset;
     }
 
-    IEnumerator UpdateLastKnownPosition()
-    {
-        yield return Helpers.GetWait(2);
+    // IEnumerator UpdateLastKnownPosition()
+    // {
+    //     yield return Helpers.GetWait(2);
 
-        while (enabled)
-        {
-            if (canMove && lastKnownPosition == transform.position && !isFlipping && rb.velocity.y > -0.1f && rb.velocity.y < 0.1f)
-            {
-                StartCoroutine(Flip());
-            }
-            lastKnownPosition = transform.position;
-            yield return Helpers.GetWait(2f);
-        }
-    }
+    //     while (enabled)
+    //     {
+    //         if (canMove && lastKnownPosition == transform.position && !isFlipping && rb.velocity.y > -0.1f && rb.velocity.y < 0.1f)
+    //         {
+    //             StartCoroutine(Flip());
+    //         }
+    //         lastKnownPosition = transform.position;
+    //         yield return Helpers.GetWait(2f);
+    //     }
+    // }
 
     private void Update()
     {
@@ -111,7 +111,7 @@ public class EnemyPatrol : MonoBehaviour
         // animator.SetFloat(AnimationStrings.velocityX, Mathf.Abs(rb.velocity.x));
 
         if(Input.GetKeyDown(KeyCode.Space)) {
-            Flipp();
+            Flip(false);
         }
     }
 
@@ -170,9 +170,15 @@ public class EnemyPatrol : MonoBehaviour
         }
     }
 
-    public bool HasTouchedGround()
+    public bool HasTouchedVoid()
     {
-        return HasCollision(obstacleLayersMask);
+        // new Vector2(transform.position.x + (transform.right.x * 2), bc.bounds.min.y),
+                // new Vector2(transform.position.x + (transform.right.x * 2), bc.bounds.min.y - 0.75f)
+        return !Physics2D.Linecast(
+            new Vector2(transform.position.x + (transform.right.x * 2), bc.bounds.min.y),
+            new Vector2(transform.position.x + (transform.right.x * 2), bc.bounds.min.y - 0.75f),
+            obstacleLayersMask
+        );
     }
 
     public bool HasTouchedObstacle()
@@ -245,10 +251,16 @@ public class EnemyPatrol : MonoBehaviour
 
             // Detect attack area
             Gizmos.color = Color.cyan;
-            float factor = 3;
             Gizmos.DrawWireCube(
                 new Vector3(xOffset + bc.size.x * attackRange / 2 * transform.right.x, bc.bounds.center.y, 0),
                 new Vector2(bc.size.x * attackRange, bc.size.y)
+            );
+
+            // Detect void area
+            Gizmos.color = Color.black;
+            Gizmos.DrawLine(
+                new Vector2(transform.position.x + (transform.right.x * 2), bc.bounds.min.y),
+                new Vector2(transform.position.x + (transform.right.x * 2), bc.bounds.min.y - 0.75f)
             );
         }
     }
@@ -258,13 +270,18 @@ public class EnemyPatrol : MonoBehaviour
         canMove = val;
     }
 
-    public void Flipp()
+    public void Flip(bool immediate)
     {
-        StartCoroutine(Flip());
+        StartCoroutine(FlipRoutine(immediate));
     }
 
-    private IEnumerator Flip()
+    private IEnumerator FlipRoutine(bool immediate)
     {
+        if(immediate) {
+            transform.Rotate(0f, 180f, 0f);
+            yield break;
+        }
+
         float pauseTime = 1.75f;
         isFlipping = true;
         yield return Helpers.GetWait(pauseTime);

@@ -3,16 +3,19 @@ using UnityEngine;
 public class GuardBehaviour : StateMachineBehaviour
 {
     private Enemy enemy;
+    private LookAtTarget lookAtTarget;
+    private Transform target;
 
     private float guardCountdown = 0;
     [SerializeField]
-    FloatValue guardDuration;
+    FloatValue duration;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         enemy = animator.GetComponent<Enemy>();
-        guardCountdown = guardDuration.CurrentValue;
+        guardCountdown = duration.CurrentValue;
+        target = GameObject.Find("Player").transform;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -28,6 +31,6 @@ public class GuardBehaviour : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        enemy.ResetCanOperate(guardDuration.CurrentValue);
+        enemy.ResetCanOperate(duration.CurrentValue);
     }
 }

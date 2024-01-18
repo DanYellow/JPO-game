@@ -38,25 +38,4 @@ public class EnemyAttack : MonoBehaviour
         return attackCooldown <= 0;
     }
 
-    public void ResetTimer() {
-        attackCooldown = attackDelay;
-        StartCoroutine(ResetMovements());
-    }
-
-    IEnumerator ResetMovements() {
-        yield return Helpers.GetWait(attackDelay / 2);
-        canMove = true;
-    }
-
-    IEnumerator Attack()
-    {
-        isAttacking = true;
-        OnBegin?.Invoke();
-        animator.SetTrigger(AnimationStrings.attack);
-        yield return null;
-        yield return new WaitWhile(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1);
-        OnDone?.Invoke();
-        yield return Helpers.GetWait(enemyData.attackRate);
-        isAttacking = false;
-    }
 }

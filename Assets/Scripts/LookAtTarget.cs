@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class LookAtTarget : MonoBehaviour
@@ -13,4 +14,9 @@ public class LookAtTarget : MonoBehaviour
             transform.Rotate(0f, 180f, 0f);
         }
     }
+
+    public IEnumerator FaceWithDelay(Transform target, float delay = 2) {
+        yield return Helpers.GetWait(delay);
+        Face(target);
+    } 
 }

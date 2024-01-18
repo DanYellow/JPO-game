@@ -161,7 +161,7 @@ public class Enemy : MonoBehaviour, IDamageable
     }
 
     private IEnumerator ResetCanOperateRoutine(float lastOperationDuration) {
-        yield return Helpers.GetWait(lastOperationDuration * 1.25f);
+        yield return Helpers.GetWait(lastOperationDuration * 0.95f);
         canOperate = true;
     }
 
