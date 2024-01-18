@@ -55,6 +55,8 @@ public class Enemy : MonoBehaviour, IDamageable
         healthBar = GetComponent<HealthBar>();
 
         currentLifePoints = enemyData.maxLifePoints;
+        enemyData.walkSpeed = enemyData.baseWalkSpeed;
+        enemyData.runSpeed = enemyData.baseRunSpeed;
 
         healthBar.UpdateContent(currentLifePoints);
     }

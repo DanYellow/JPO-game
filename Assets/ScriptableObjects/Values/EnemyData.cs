@@ -36,11 +36,6 @@ public class EnemyData : CharacterData
     [SerializeField]
     private BoolEventChannel onInteractRangeEvent;
 
-    private void Awake()
-    {
-        walkSpeed = baseWalkSpeed;
-        runSpeed = baseRunSpeed;
-    }
 
     private void OnEnable()
     {

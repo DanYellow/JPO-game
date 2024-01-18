@@ -33,6 +33,7 @@ public class PatrollingBehaviour : StateMachineBehaviour
         // enemyPatrol.lastPosition = rb.position;
 
         float moveSpeed = hasDetectedEnemy ? enemyPatrol.GetData().runSpeed : enemyPatrol.GetData().walkSpeed;
+        
         // No player detected
         if (enemyInAttackRange.collider == null)
         {
@@ -50,11 +51,12 @@ public class PatrollingBehaviour : StateMachineBehaviour
 
             if ((hasCollisionWithObstacle || hasTouchedVoid) && !enemyPatrol.isFlipping)
             {
-                enemyPatrol.Flip(false);
+                enemyPatrol.Flip();
             }
         }
         else
         {
+
             rb.velocity = Vector2.zero;
         }
 

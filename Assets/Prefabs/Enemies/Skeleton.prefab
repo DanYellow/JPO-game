@@ -277,15 +277,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyData: {fileID: 11400000, guid: 8544b65f824576745ad01ffdf0fa4644, type: 2}
   <isFacingRight>k__BackingField: 1
-  canMove: 1
   isFlipping: 0
+  isUpsideDown: 0
   obstacleLayersMask:
     serializedVersion: 2
     m_Bits: 520
   enemyLayersMask:
     serializedVersion: 2
     m_Bits: 1
-  lastPosition: {x: 0, y: 0}
 --- !u!114 &535411357999783333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,7 +358,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   destroyOnDeath: 1
-  canMove: 1
   canOperate: 1
   delayBeforeDeathEndEvent: 0
 --- !u!114 &1251782101685074590
@@ -405,7 +403,6 @@ MonoBehaviour:
     m_Bits: 1
   guardCountdown: 0
   guardDuration: 2.5
-  startCountdown: 0
   canGuard: 1
 --- !u!114 &640144507801315206
 MonoBehaviour:

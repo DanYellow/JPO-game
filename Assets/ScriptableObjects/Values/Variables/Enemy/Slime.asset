@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Slime
   m_EditorClassIdentifier: 
   maxLifePoints: 1
-  baseWalkSpeed: 0.47
-  walkSpeed: 0.47
-  baseRunSpeed: 3
-  runSpeed: 3
+  baseWalkSpeed: 0.25
+  walkSpeed: 0.15
+  baseRunSpeed: 0.25
+  runSpeed: 0.15
   attackRate: 1.5
   damage: 3
-  name: FireWorm
+  name: Slime
   distanceDetector: 17
   obstacleCheckRadius: 0.25
   knockbackForce: 0

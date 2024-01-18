@@ -83,7 +83,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 825935051, guid: 4e003d6a700f1614c9dc15b4b86cd4d3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 2, y: 1.5625}
@@ -213,13 +213,13 @@ MonoBehaviour:
   enemyData: {fileID: 11400000, guid: 993d7d3824dad7e4daee6e68a2a222ce, type: 2}
   <isFacingRight>k__BackingField: 0
   isFlipping: 0
+  isUpsideDown: 1
   obstacleLayersMask:
     serializedVersion: 2
     m_Bits: 512
   enemyLayersMask:
     serializedVersion: 2
     m_Bits: 0
-  lastPosition: {x: 0, y: 0}
 --- !u!114 &4493547249972953205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,7 +281,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   destroyOnDeath: 1
-  canMove: 1
   canOperate: 1
   delayBeforeDeathEndEvent: 0
 --- !u!114 &4493547249972953100
@@ -364,7 +363,7 @@ Transform:
   - {fileID: 4493547251262122036}
   - {fileID: 4493547249972953204}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &8447740536834139962
 PrefabInstance:

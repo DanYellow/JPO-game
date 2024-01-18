@@ -14,6 +14,7 @@ public class EnemyPatrol : MonoBehaviour
     public bool isFacingRight { get; private set; } = false;
 
     public bool isFlipping = false;
+    public bool isUpsideDown = false;
 
     [SerializeField]
     private LayerMask obstacleLayersMask;
@@ -25,7 +26,7 @@ public class EnemyPatrol : MonoBehaviour
     private float obstacleDetectionDistance = 1.95f;
     private float runDetectionDistance = 2.75f;
     private float attackRange = 0.75f;
-    private float voidCheckRadius = 0.25f;
+    private float voidCheckRadius = 0.2f;
 
     private void Awake()
     {
@@ -39,16 +40,16 @@ public class EnemyPatrol : MonoBehaviour
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Flip(false);
+            Flip();
         }
 #endif
     }
 
     public bool HasTouchedVoid()
     {
-        float xOffset = transform.right.x == -1 ? bc.bounds.min.x : bc.bounds.max.x;
+        float xOffset = (transform.right.x == -1) ? bc.bounds.min.x : bc.bounds.max.x;
         return !Physics2D.OverlapCircle(
-            new Vector2(xOffset, bc.bounds.min.y), 
+            new Vector2(xOffset, isUpsideDown ? bc.bounds.max.y : bc.bounds.min.y), 
             enemyData.obstacleCheckRadius, 
             obstacleLayersMask
         );
@@ -74,7 +75,7 @@ public class EnemyPatrol : MonoBehaviour
 
     public bool HasDetectedEnemy()
     {
-        float xOffset = transform.right.x == -1 ? bc.bounds.min.x : bc.bounds.max.x;
+        float xOffset = (transform.right.x == -1) ? bc.bounds.min.x : bc.bounds.max.x;
         return Physics2D.BoxCast(
             new Vector3(xOffset + bc.size.x * runDetectionDistance / 2 * transform.right.x, bc.bounds.center.y, 0),
             new Vector2(bc.size.x * runDetectionDistance, bc.size.y),
@@ -87,7 +88,7 @@ public class EnemyPatrol : MonoBehaviour
 
     public RaycastHit2D HasEnemyInAttackRange()
     {
-        float xOffset = transform.right.x == -1 ? bc.bounds.min.x : bc.bounds.max.x;
+        float xOffset = (transform.right.x == -1) ? bc.bounds.min.x : bc.bounds.max.x;
         return Physics2D.BoxCast(
             new Vector2(xOffset + bc.size.x * attackRange / 2 * transform.right.x, bc.bounds.center.y),
             new Vector2(bc.size.x * attackRange, bc.size.y),
@@ -102,12 +103,12 @@ public class EnemyPatrol : MonoBehaviour
     {
         if (bc != null)
         {
-            float xOffset = transform.right.x == -1 ? bc.bounds.min.x : bc.bounds.max.x;
+            float xOffset = (transform.right.x == -1) ? bc.bounds.min.x : bc.bounds.max.x;
 
             // Detect void area
             Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(
-                new Vector2(xOffset, bc.bounds.min.y),
+                new Vector2(xOffset, isUpsideDown ? bc.bounds.max.y : bc.bounds.min.y),
                 voidCheckRadius
             );
 
@@ -142,19 +143,13 @@ public class EnemyPatrol : MonoBehaviour
         }
     }
 
-    public void Flip(bool immediate)
+    public void Flip()
     {
-        StartCoroutine(FlipRoutine(immediate));
+        StartCoroutine(FlipRoutine());
     }
 
-    private IEnumerator FlipRoutine(bool immediate)
+    private IEnumerator FlipRoutine()
     {
-        if (immediate)
-        {
-            transform.Rotate(0f, 180f, 0f);
-            yield break;
-        }
-
         float pauseTime = 1.75f;
         isFlipping = true;
         yield return Helpers.GetWait(pauseTime);
