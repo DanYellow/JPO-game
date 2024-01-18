@@ -5,7 +5,6 @@ using System.Collections;
 public class EnemyPatrol : MonoBehaviour
 {
     private Rigidbody2D rb;
-    private Animator animator;
     private BoxCollider2D bc;
 
     [SerializeField]
@@ -14,23 +13,10 @@ public class EnemyPatrol : MonoBehaviour
     [field: SerializeField]
     public bool isFacingRight { get; private set; } = false;
 
-    [SerializeField]
-    private bool isIdle = true;
-
-    private float idleTime;
-
-    [Tooltip("Define how long the enemy will walk"), SerializeField]
-    private float walkTime = 5f;
-
-    [SerializeField]
-    private Vector2 offset = Vector2.zero;
-
     private Vector2 detectorPosition;
 
     private Vector3 lastKnownPosition = Vector3.zero;
 
-    private bool hasCollisionWithObstacle;
-    private bool hasCollisionWithGround;
 
     [SerializeField]
     private bool canMove = true;
@@ -40,8 +26,6 @@ public class EnemyPatrol : MonoBehaviour
     [SerializeField]
     private LayerMask obstacleLayersMask;
 
-    [SerializeField]
-    private LayerMask groundLayersMask;
 
     [SerializeField]
     private LayerMask enemyLayersMask;
@@ -49,131 +33,28 @@ public class EnemyPatrol : MonoBehaviour
     public Vector2 lastPosition = Vector2.zero;
 
     private float obstacleDetectionDistance = 1.95f;
-    private float runDetectionDistance = 2.75f; //3.55f;
+    private float runDetectionDistance = 2.75f;
     private float attackRange = 0.75f;
 
     private void Awake()
     {
         // We don't want the script to be enabled by default
         bc = GetComponent<BoxCollider2D>();
-        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
 
-    private void Start()
-    {
-        detectorPosition = new Vector3(bc.bounds.extents.x * (isFacingRight ? -1 : 1), bc.bounds.extents.y, 0);
-        if (isFacingRight)
-        {
-            offset.x *= -1;
-        }
-
-        lastPosition = rb.position;
-
-        detectorPosition += offset;
-        idleTime = Mathf.Round(Random.Range(0, 3.5f));
-
-        // StartCoroutine(ChangeState());
-        // StartCoroutine(UpdateLastKnownPosition());
-    }
-
-    public void UpdateDetector()
-    {
-        detectorPosition = new Vector3(bc.bounds.extents.x * (isFacingRight ? -1 : 1), bc.bounds.extents.y, 0);
-        if (isFacingRight)
-        {
-            offset.x *= -1;
-        }
-        detectorPosition += offset;
-    }
-
-    // IEnumerator UpdateLastKnownPosition()
-    // {
-    //     yield return Helpers.GetWait(2);
-
-    //     while (enabled)
-    //     {
-    //         if (canMove && lastKnownPosition == transform.position && !isFlipping && rb.velocity.y > -0.1f && rb.velocity.y < 0.1f)
-    //         {
-    //             StartCoroutine(Flip());
-    //         }
-    //         lastKnownPosition = transform.position;
-    //         yield return Helpers.GetWait(2f);
-    //     }
-    // }
 
     private void Update()
     {
-        // if (isIdle)
-        // {
-        //     Idle();
-        // }
-        // animator.SetFloat(AnimationStrings.velocityX, Mathf.Abs(rb.velocity.x));
-
+        #if UNITY_EDITOR
         if(Input.GetKeyDown(KeyCode.Space)) {
             Flip(false);
         }
-    }
-
-    private void FixedUpdate()
-    {
-        // hasCollisionWithObstacle = HasCollision(obstacleLayersMask);
-        // hasCollisionWithGround = HasCollision(groundLayersMask);
-        // Vector3 startCast = transform.position - new Vector3(offset.x, 0, 0);
-        // Vector3 endCast = transform.position + (isFacingRight ? Vector3.right : Vector3.left) * 0.9f;
-        // Debug.DrawLine(startCast, endCast, Color.green);
-
-        // RaycastHit2D hitObstacle = Physics2D.Linecast(startCast, endCast, obstacleLayersMask);
-        // hitObstacle.collider != null || 
-        // if (!isFlipping && (hasCollisionWithObstacle || !hasCollisionWithGround))
-        // {
-        //     StartCoroutine(Flip());
-        // }
-
-        // if (!isIdle)
-        // {
-        //     Move();
-        // }
-    }
-
-    IEnumerator ChangeState()
-    {
-        while (enabled)
-        {
-            // Enemy will walk during X seconds...
-            isIdle = false;
-            yield return Helpers.GetWait(walkTime);
-
-            // ...then wait during X seconds...
-            isIdle = true;
-            yield return Helpers.GetWait(idleTime);
-        }
-    }
-
-    private void Idle()
-    {
-        rb.velocity = Vector2.zero;
-    }
-
-    private void Move()
-    {
-        if (canMove)
-        {
-            rb.velocity = new Vector2(
-                enemyData.walkSpeed * (isFacingRight ? 1 : -1),
-                rb.velocity.y
-            );
-        }
-        else
-        {
-            rb.velocity = Vector2.zero;
-        }
+        #endif
     }
 
     public bool HasTouchedVoid()
     {
-        // new Vector2(transform.position.x + (transform.right.x * 2), bc.bounds.min.y),
-                // new Vector2(transform.position.x + (transform.right.x * 2), bc.bounds.min.y - 0.75f)
         return !Physics2D.Linecast(
             new Vector2(transform.position.x + (transform.right.x * 2), bc.bounds.min.y),
             new Vector2(transform.position.x + (transform.right.x * 2), bc.bounds.min.y - 0.75f),
@@ -192,8 +73,9 @@ public class EnemyPatrol : MonoBehaviour
 
     public bool HasDetectedEnemy()
     {
+        float xOffset = transform.right.x == -1 ? bc.bounds.min.x : bc.bounds.max.x;
         return Physics2D.BoxCast(
-            new Vector3(bc.bounds.max.x + (bc.size.x * runDetectionDistance / 2), bc.bounds.center.y, 0),
+            new Vector3(xOffset + bc.size.x * runDetectionDistance / 2 * transform.right.x, bc.bounds.center.y, 0),
             new Vector2(bc.size.x * runDetectionDistance, bc.size.y),
             rb.rotation,
             transform.right,
@@ -213,11 +95,6 @@ public class EnemyPatrol : MonoBehaviour
             0,
             enemyLayersMask
         );
-    }
-
-    public bool HasCollision(LayerMask layerMask)
-    {
-        return Physics2D.OverlapCircle((Vector2)transform.position - detectorPosition, enemyData.obstacleCheckRadius, layerMask);
     }
 
     void OnDrawGizmos()
@@ -302,7 +179,6 @@ public class EnemyPatrol : MonoBehaviour
     {
         // We stop the enemy when is not visible or else
         // it might continue to run but whoen be able to change direction
-        Idle();
         enabled = false;
     }
 

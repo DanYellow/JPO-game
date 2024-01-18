@@ -35,11 +35,10 @@ public class PatrollingBehaviour : StateMachineBehaviour
         // enemyPatrol.lastPosition = rb.position;
 
         float moveSpeed = hasDetectedEnemy ? enemyPatrol.GetData().runSpeed : enemyPatrol.GetData().walkSpeed;
-
         // No player detected
         if (enemyInAttackRange.collider == null)
         {
-            if (enemyAttack.canMove && !hasTouchedVoid)
+            if (!hasTouchedVoid)
             {
                 rb.velocity = new Vector2(
                     (hasCollisionWithObstacle ? 0 : moveSpeed) * animator.transform.right.x,
