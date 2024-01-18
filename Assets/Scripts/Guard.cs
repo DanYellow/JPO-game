@@ -25,7 +25,6 @@ public class Guard : MonoBehaviour, IGuardable
 
     public float guardCountdown = 0;
     public float guardDuration = 2.5f;
-    public bool startCountdown = false;
 
     public bool canGuard = true;
 
@@ -36,29 +35,6 @@ public class Guard : MonoBehaviour, IGuardable
         rb = GetComponent<Rigidbody2D>();
         enemy = GetComponent<Enemy>();
     }
-
-    private void Update() {
-        if(guardCountdown > 0) {
-            guardCountdown -= Time.deltaTime;
-        }
-    }
-
-    public bool CanGuard() {
-        return guardCountdown <= 0;
-    }
-
-    public void ResetTimer() {
-        
-        StartCoroutine(ResetMovements());
-    }
-
-    IEnumerator ResetMovements() {
-        yield return Helpers.GetWait(guardDuration / 2);
-        guardCountdown = guardDuration;
-        // enemy.canMove = true;
-    }
-
-    // public
 
     private void FixedUpdate()
     {
@@ -73,7 +49,7 @@ public class Guard : MonoBehaviour, IGuardable
            targetLayerMask
        );
 
-        if (hitObstacle.collider != null)
+        if (hitObstacle.collider != null && isGuarding)
         {
             Reflect(hitObstacle.collider.transform);
         }
@@ -94,23 +70,23 @@ public class Guard : MonoBehaviour, IGuardable
         //     }
     }
 
-    public void ProtectProxy() {
-        StopAllCoroutines();
-        StartCoroutine(Protect());
-    }
+    // public void ProtectProxy() {
+    //     StopAllCoroutines();
+    //     StartCoroutine(Protect());
+    // }
 
-    IEnumerator Protect()
-    {
-        isGuarding = true;
-        // OnBegin?.Invoke();
-        // animator.SetBool(AnimationStrings.isGuarding, isGuarding);
-        yield return null;
-        yield return Helpers.GetWait(2.15f);
-        print("guard");
-        // OnDone?.Invoke();
-        isGuarding = false;
-        animator.SetBool(AnimationStrings.isGuarding, isGuarding);
-    }
+    // IEnumerator Protect()
+    // {
+    //     isGuarding = true;
+    //     // OnBegin?.Invoke();
+    //     // animator.SetBool(AnimationStrings.isGuarding, isGuarding);
+    //     yield return null;
+    //     yield return Helpers.GetWait(2.15f);
+    //     print("guard");
+    //     // OnDone?.Invoke();
+    //     isGuarding = false;
+    //     animator.SetBool(AnimationStrings.isGuarding, isGuarding);
+    // }
 
     void OnDrawGizmos()
     {

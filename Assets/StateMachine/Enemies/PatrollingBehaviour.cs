@@ -11,14 +11,12 @@ public class PatrollingBehaviour : StateMachineBehaviour
     bool hasDetectedEnemy = false;
     bool hasTouchedVoid = false;
     RaycastHit2D enemyInAttackRange;
-    EnemyAttack enemyAttack;
     Enemy enemy;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         enemyPatrol = animator.GetComponent<EnemyPatrol>();
         rb = animator.GetComponent<Rigidbody2D>();
-        enemyAttack = animator.GetComponent<EnemyAttack>();
         enemy = animator.GetComponent<Enemy>();
     }
 
@@ -50,8 +48,20 @@ public class PatrollingBehaviour : StateMachineBehaviour
                 rb.velocity = Vector2.zero;
             }
 
+            // if(hasTouchedVoid) {
+            //     RaycastHit2D hit = enemyPatrol.HasTouchedVoidWho();
+            //     if(hit.collider != null) {
+            //     Debug.Log("fff " + hit.collider.name);
+
+            //     }
+            // }
+
+            // Debug.Assert(!hasTouchedVoid);
+            // Debug.Log("hasTouchedVoid " + hasTouchedVoid);
             if ((hasCollisionWithObstacle || hasTouchedVoid) && !enemyPatrol.isFlipping)
             {
+                Debug.Log("hasCollisionWithObstacle " + hasCollisionWithObstacle);
+                Debug.Log("hasTouchedVoid " + hasTouchedVoid);
                 enemyPatrol.Flip(false);
             }
         }
@@ -70,15 +80,16 @@ public class PatrollingBehaviour : StateMachineBehaviour
             if (enemy.canOperate == true)
             {
                 enemy.canOperate = false;
-                bool randVal = UnityEngine.Random.value < 0.45f;
-                if (randVal && isFacingEnemy)
-                {
-                    animator.SetBool(AnimationStrings.isGuarding, true);
-                }
-                else
-                {
-                    animator.SetTrigger(AnimationStrings.attack);
-                }
+                animator.SetBool(AnimationStrings.isGuarding, true);
+                // bool randVal = UnityEngine.Random.value < 0.45f;
+                // if (randVal && isFacingEnemy)
+                // {
+                //     animator.SetBool(AnimationStrings.isGuarding, true);
+                // }
+                // else
+                // {
+                //     animator.SetTrigger(AnimationStrings.attack);
+                // }
             }
         }
     }

@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 8326672840565800367}
   - component: {fileID: 6700112674598342834}
   - component: {fileID: 640144507801315206}
+  - component: {fileID: 5321822552450987244}
   m_Layer: 7
   m_Name: Core
   m_TagString: Untagged
@@ -276,16 +277,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyData: {fileID: 11400000, guid: 8544b65f824576745ad01ffdf0fa4644, type: 2}
   <isFacingRight>k__BackingField: 1
-  isIdle: 1
-  walkTime: 2
-  offset: {x: 0.95, y: 0}
   canMove: 1
+  isFlipping: 0
   obstacleLayersMask:
     serializedVersion: 2
-    m_Bits: 512
-  groundLayersMask:
+    m_Bits: 520
+  enemyLayersMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 1
+  lastPosition: {x: 0, y: 0}
 --- !u!114 &535411357999783333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,6 +359,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   destroyOnDeath: 1
+  canMove: 1
+  canOperate: 1
   delayBeforeDeathEndEvent: 0
 --- !u!114 &1251782101685074590
 MonoBehaviour:
@@ -386,66 +388,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78c74e785fe77ba4c877bb79ded23596, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetLayerMask:
-    serializedVersion: 2
-    m_Bits: 1
-  enemyData: {fileID: 11400000, guid: 8544b65f824576745ad01ffdf0fa4644, type: 2}
-  isAttacking: 0
-  OnBegin:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 535411357999783334}
-        m_TargetAssemblyTypeName: EnemyPatrol, Assembly-CSharp
-        m_MethodName: ToggleMovement
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 6700112674598342834}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnDone:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 535411357999783334}
-        m_TargetAssemblyTypeName: EnemyPatrol, Assembly-CSharp
-        m_MethodName: ToggleMovement
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 6700112674598342834}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-  distance: 2
 --- !u!114 &6700112674598342834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -458,64 +400,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c459fbd65feece8458558a28322a9461, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnBegin:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8326672840565800367}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 535411357999783334}
-        m_TargetAssemblyTypeName: EnemyPatrol, Assembly-CSharp
-        m_MethodName: ToggleMovement
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnDone:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8326672840565800367}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 535411357999783334}
-        m_TargetAssemblyTypeName: EnemyPatrol, Assembly-CSharp
-        m_MethodName: ToggleMovement
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-  distance: 0.1
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 1
+  guardCountdown: 0
+  guardDuration: 2.5
+  startCountdown: 0
+  canGuard: 1
 --- !u!114 &640144507801315206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -534,6 +425,19 @@ MonoBehaviour:
   enemyData: {fileID: 11400000, guid: 8544b65f824576745ad01ffdf0fa4644, type: 2}
   lifePointsText: {fileID: 0}
   nameText: {fileID: 0}
+--- !u!114 &5321822552450987244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535411357999783340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a29a684423db5c4cbf3c3fa134869b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <isFacingRight>k__BackingField: 0
 --- !u!1 &773076004606349416
 GameObject:
   m_ObjectHideFlags: 0

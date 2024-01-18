@@ -1,6 +1,6 @@
 public static class KnockbackValues
 {
-   public static int lightAttack = 15;
-   public static int dashAttack = 25;
+   public static int lightAttack = 9;
+   public static int dashAttack = 20;
    
 }

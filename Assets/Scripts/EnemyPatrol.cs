@@ -35,6 +35,7 @@ public class EnemyPatrol : MonoBehaviour
     private float obstacleDetectionDistance = 1.95f;
     private float runDetectionDistance = 2.75f;
     private float attackRange = 0.75f;
+    private float voidCheckRadius = 0.3f;
 
     private void Awake()
     {
@@ -46,16 +47,33 @@ public class EnemyPatrol : MonoBehaviour
 
     private void Update()
     {
-        #if UNITY_EDITOR
-        if(Input.GetKeyDown(KeyCode.Space)) {
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
             Flip(false);
         }
-        #endif
+#endif
     }
 
     public bool HasTouchedVoid()
     {
-        return !Physics2D.Linecast(
+        float xOffset = transform.right.x == -1 ? bc.bounds.min.x : bc.bounds.max.x;
+        return !Physics2D.OverlapCircle(
+            new Vector2(xOffset, bc.bounds.min.y), 
+            enemyData.obstacleCheckRadius, 
+            obstacleLayersMask
+        );
+    
+        // return !Physics2D.Linecast(
+        //     new Vector2(transform.position.x + (transform.right.x * 2), bc.bounds.min.y),
+        //     new Vector2(transform.position.x + (transform.right.x * 2), bc.bounds.min.y - 0.75f),
+        //     obstacleLayersMask
+        // );
+    }
+
+    public RaycastHit2D HasTouchedVoidWho()
+    {
+        return Physics2D.Linecast(
             new Vector2(transform.position.x + (transform.right.x * 2), bc.bounds.min.y),
             new Vector2(transform.position.x + (transform.right.x * 2), bc.bounds.min.y - 0.75f),
             obstacleLayersMask
@@ -99,11 +117,19 @@ public class EnemyPatrol : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere((Vector2)transform.position - detectorPosition, enemyData.obstacleCheckRadius);
+
         // print(transform.right);
 
         if (bc != null)
         {
+            float xOffset = transform.right.x == -1 ? bc.bounds.min.x : bc.bounds.max.x;
+
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(
+                new Vector2(xOffset, bc.bounds.min.y),
+                voidCheckRadius
+            );
+
             // Detect top obstacle
             Gizmos.color = Color.red;
             Gizmos.DrawLine(
@@ -118,7 +144,7 @@ public class EnemyPatrol : MonoBehaviour
                 new Vector3(transform.position.x + (transform.right.x * obstacleDetectionDistance), bc.bounds.max.y - (bc.size.y * 0.10f), 0)
             );
 
-            float xOffset = transform.right.x == -1 ? bc.bounds.min.x : bc.bounds.max.x;
+            
             // Detect run area
             Gizmos.color = Color.magenta;
             Gizmos.DrawWireCube(
@@ -154,7 +180,8 @@ public class EnemyPatrol : MonoBehaviour
 
     private IEnumerator FlipRoutine(bool immediate)
     {
-        if(immediate) {
+        if (immediate)
+        {
             transform.Rotate(0f, 180f, 0f);
             yield break;
         }

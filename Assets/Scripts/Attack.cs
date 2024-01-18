@@ -49,6 +49,7 @@ public class Attack : MonoBehaviour
         {
             if (iGuardable.isGuarding && (other.transform.right.x != transform.right.x || iGuardable.hasTotalGuard))
             {
+                selfKnockback.Apply(other.gameObject, KnockbackValues.lightAttack);
                 return;
             }
         }

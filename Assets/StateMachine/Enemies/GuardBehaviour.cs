@@ -3,6 +3,7 @@ using UnityEngine;
 public class GuardBehaviour : StateMachineBehaviour
 {
     private Enemy enemy;
+    private Guard guard;
     private LookAtTarget lookAtTarget;
     private Transform target;
 
@@ -14,6 +15,9 @@ public class GuardBehaviour : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         enemy = animator.GetComponent<Enemy>();
+        guard = animator.GetComponent<Guard>();
+
+        guard.isGuarding = true;
         guardCountdown = duration.CurrentValue;
         target = GameObject.Find("Player").transform;
     }
@@ -31,6 +35,7 @@ public class GuardBehaviour : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        guard.isGuarding = false;
         enemy.ResetCanOperate(duration.CurrentValue);
     }
 }
