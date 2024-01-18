@@ -28,6 +28,13 @@ public class EnemyPatrol : MonoBehaviour
     private float attackRange = 0.75f;
     private float voidCheckRadius = 0.2f;
 
+    [Space(10)]
+    [SerializeField]
+    private bool enableAttackRange = true;
+
+    [SerializeField]
+    private bool enableEnemyDetection = true;
+
     private void Awake()
     {
         // We don't want the script to be enabled by default
@@ -49,17 +56,8 @@ public class EnemyPatrol : MonoBehaviour
     {
         float xOffset = (transform.right.x == -1) ? bc.bounds.min.x : bc.bounds.max.x;
         return !Physics2D.OverlapCircle(
-            new Vector2(xOffset, isUpsideDown ? bc.bounds.max.y : bc.bounds.min.y), 
-            enemyData.obstacleCheckRadius, 
-            obstacleLayersMask
-        );
-    }
-
-    public RaycastHit2D HasTouchedVoidWho()
-    {
-        return Physics2D.Linecast(
-            new Vector2(transform.position.x + (transform.right.x * 2), bc.bounds.min.y),
-            new Vector2(transform.position.x + (transform.right.x * 2), bc.bounds.min.y - 0.75f),
+            new Vector2(xOffset, isUpsideDown ? bc.bounds.max.y : bc.bounds.min.y),
+            enemyData.obstacleCheckRadius,
             obstacleLayersMask
         );
     }
@@ -75,6 +73,11 @@ public class EnemyPatrol : MonoBehaviour
 
     public bool HasDetectedEnemy()
     {
+        if (!enableEnemyDetection)
+        {
+            return false;
+        }
+
         float xOffset = (transform.right.x == -1) ? bc.bounds.min.x : bc.bounds.max.x;
         return Physics2D.BoxCast(
             new Vector3(xOffset + bc.size.x * runDetectionDistance / 2 * transform.right.x, bc.bounds.center.y, 0),
@@ -88,6 +91,12 @@ public class EnemyPatrol : MonoBehaviour
 
     public RaycastHit2D HasEnemyInAttackRange()
     {
+        if (!enableAttackRange)
+        {
+            RaycastHit2D hit = new RaycastHit2D();
+            return hit;
+        }
+
         float xOffset = (transform.right.x == -1) ? bc.bounds.min.x : bc.bounds.max.x;
         return Physics2D.BoxCast(
             new Vector2(xOffset + bc.size.x * attackRange / 2 * transform.right.x, bc.bounds.center.y),
@@ -126,20 +135,25 @@ public class EnemyPatrol : MonoBehaviour
                 new Vector3(transform.position.x + (transform.right.x * obstacleDetectionDistance), bc.bounds.max.y - (bc.size.y * 0.10f), 0)
             );
 
-            
-            // Detect run area
-            Gizmos.color = Color.magenta;
-            Gizmos.DrawWireCube(
-                new Vector3(xOffset + bc.size.x * runDetectionDistance / 2 * transform.right.x, bc.bounds.center.y, 0),
-                new Vector2(bc.size.x * runDetectionDistance, bc.size.y)
-            );
+            if (enableEnemyDetection)
+            {
+                // Detect run area
+                Gizmos.color = Color.magenta;
+                Gizmos.DrawWireCube(
+                    new Vector3(xOffset + bc.size.x * runDetectionDistance / 2 * transform.right.x, bc.bounds.center.y, 0),
+                    new Vector2(bc.size.x * runDetectionDistance, bc.size.y)
+                );
+            }
 
-            // Detect attack area
-            Gizmos.color = Color.cyan;
-            Gizmos.DrawWireCube(
-                new Vector3(xOffset + bc.size.x * attackRange / 2 * transform.right.x, bc.bounds.center.y, 0),
-                new Vector2(bc.size.x * attackRange, bc.size.y)
-            );
+            if (enableEnemyDetection)
+            {
+                // Detect attack area
+                Gizmos.color = Color.cyan;
+                Gizmos.DrawWireCube(
+                    new Vector3(xOffset + bc.size.x * attackRange / 2 * transform.right.x, bc.bounds.center.y, 0),
+                    new Vector2(bc.size.x * attackRange, bc.size.y)
+                );
+            }
         }
     }
 

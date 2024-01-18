@@ -220,6 +220,8 @@ MonoBehaviour:
   enemyLayersMask:
     serializedVersion: 2
     m_Bits: 0
+  enableAttackRange: 0
+  enableEnemyDetection: 0
 --- !u!114 &4493547249972953205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,21 +297,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c95a7e1d32b42cf4eb1736b2818fadff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onBegin:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4493547249972953100}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   enemyData: {fileID: 11400000, guid: 993d7d3824dad7e4daee6e68a2a222ce, type: 2}
   targetLayers:
     serializedVersion: 2
