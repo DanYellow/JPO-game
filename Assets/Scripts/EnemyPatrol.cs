@@ -25,6 +25,8 @@ public class EnemyPatrol : MonoBehaviour
 
     private float obstacleDetectionDistance = 1.95f;
     private float runDetectionDistance = 2.75f;
+
+    [SerializeField]
     private float attackRange = 0.75f;
     private float voidCheckRadius = 0.2f;
 
@@ -145,7 +147,7 @@ public class EnemyPatrol : MonoBehaviour
                 );
             }
 
-            if (enableEnemyDetection)
+            if (enableAttackRange)
             {
                 // Detect attack area
                 Gizmos.color = Color.cyan;

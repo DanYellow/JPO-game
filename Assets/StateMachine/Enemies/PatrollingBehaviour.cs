@@ -33,7 +33,7 @@ public class PatrollingBehaviour : StateMachineBehaviour
         // enemyPatrol.lastPosition = rb.position;
 
         float moveSpeed = hasDetectedEnemy ? enemyPatrol.GetData().runSpeed : enemyPatrol.GetData().walkSpeed;
-        
+  
         // No player detected
         if (enemyInAttackRange.collider == null)
         {

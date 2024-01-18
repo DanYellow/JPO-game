@@ -32,7 +32,7 @@ Transform:
   - {fileID: 6562245534549360183}
   - {fileID: 4831019697307301128}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3310057335789597386
 MonoBehaviour:
@@ -608,16 +608,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyData: {fileID: 11400000, guid: a11b561a632a79142a3edcc229160819, type: 2}
   <isFacingRight>k__BackingField: 1
-  isIdle: 1
-  walkTime: 5
-  offset: {x: 0.25, y: -0.25}
-  canMove: 1
+  isFlipping: 0
+  isUpsideDown: 0
   obstacleLayersMask:
     serializedVersion: 2
     m_Bits: 640
-  groundLayersMask:
+  enemyLayersMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 1
+  enableAttackRange: 1
+  enableEnemyDetection: 1
 --- !u!114 &331785431521071026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -755,6 +755,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   destroyOnDeath: 1
+  canOperate: 1
   delayBeforeDeathEndEvent: 0
 --- !u!114 &8838257750597778021
 MonoBehaviour:

@@ -96,7 +96,6 @@ public class ProjectileLauncher : MonoBehaviour
 
     }
 
-
     private IEnumerator Shoot()
     {
         while (true)
