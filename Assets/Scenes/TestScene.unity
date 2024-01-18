@@ -610,6 +610,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29bd66432191bf647ad3f301dc407665, type: 3}
+--- !u!4 &1157967540 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 260304816204220668, guid: 89949adaa1aa4d148ae29270e18cb925, type: 3}
+  m_PrefabInstance: {fileID: 1923586943}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1300608438
 GameObject:
   m_ObjectHideFlags: 0
@@ -947,6 +952,25 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a7241b3462829640ad67a722c491077, type: 3}
+--- !u!1 &1644285015 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8817931127010823324, guid: 89949adaa1aa4d148ae29270e18cb925, type: 3}
+  m_PrefabInstance: {fileID: 1923586943}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1644285026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1644285015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74e233ab0810cb54e958ccb4034ffe32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 6111809895942597433, guid: 74dcd00c2b660b8459292c0ae4ab7d86, type: 3}
+  firePoint: {fileID: 1157967540}
 --- !u!1001 &1923586943
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -955,6 +979,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 331785431521071026, guid: 89949adaa1aa4d148ae29270e18cb925, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 331785431521071026, guid: 89949adaa1aa4d148ae29270e18cb925, type: 3}
       propertyPath: onShootEnd.m_PersistentCalls.m_Calls.Array.size
       value: 0
@@ -966,6 +994,14 @@ PrefabInstance:
     - target: {fileID: 331785431521071026, guid: 89949adaa1aa4d148ae29270e18cb925, type: 3}
       propertyPath: onShootStart.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3304298747280523625, guid: 89949adaa1aa4d148ae29270e18cb925, type: 3}
+      propertyPath: attackRange
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3304298747280523625, guid: 89949adaa1aa4d148ae29270e18cb925, type: 3}
+      propertyPath: enableEnemyDetection
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3304298747280523625, guid: 89949adaa1aa4d148ae29270e18cb925, type: 3}
       propertyPath: obstacleLayersMask.m_Bits
@@ -1026,7 +1062,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8817931127010823324, guid: 89949adaa1aa4d148ae29270e18cb925, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1644285026}
   m_SourcePrefab: {fileID: 100100000, guid: 89949adaa1aa4d148ae29270e18cb925, type: 3}
 --- !u!1 &2072060973
 GameObject:
