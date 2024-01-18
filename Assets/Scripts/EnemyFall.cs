@@ -1,15 +1,12 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class EnemyFall : MonoBehaviour
 {
-    private new Collider2D collider;
+    private BoxCollider2D bc;
     private Rigidbody2D rb;
-    private EnemyPatrol enemyPatrol;
 
-    [SerializeField]
-    private UnityEvent onBegin;
+    private Animator animator;
 
     [SerializeField]
     private EnemyData enemyData;
@@ -22,16 +19,16 @@ public class EnemyFall : MonoBehaviour
 
     private void Awake()
     {
-        collider = GetComponent<Collider2D>();
+        bc = GetComponent<BoxCollider2D>();
         rb = GetComponent<Rigidbody2D>();
-        enemyPatrol = GetComponent<EnemyPatrol>();
+        animator = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
     {
         hitInfo = Physics2D.BoxCast(
-            new Vector2(collider.bounds.center.x, collider.bounds.min.y),
-            collider.bounds.size,
+            new Vector2(bc.bounds.center.x, bc.bounds.min.y),
+            new Vector2(bc.bounds.size.x * 1.1f, bc.bounds.size.y),
             0,
             Vector3.down,
             enemyData.distanceDetector,
@@ -42,23 +39,37 @@ public class EnemyFall : MonoBehaviour
         {
             StartCoroutine(Fall());
         }
+    }
 
-        Debug.DrawRay(new Vector2(collider.bounds.max.x, collider.bounds.min.y), Vector3.down * enemyData.distanceDetector, Color.cyan);
-        Debug.DrawRay(new Vector2(collider.bounds.min.x, collider.bounds.min.y), Vector3.down * enemyData.distanceDetector, Color.red);
+    void OnDrawGizmos()
+    {
+        if (bc != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(
+                new Vector2(bc.bounds.min.x - (bc.size.y * 0.05f), bc.bounds.min.y),
+                new Vector2(bc.bounds.min.x - (bc.size.y * 0.05f), bc.bounds.min.y - enemyData.distanceDetector)            
+            );
+            Gizmos.DrawLine(
+                new Vector2(bc.bounds.max.x + (bc.size.y * 0.05f), bc.bounds.min.y),
+                new Vector2(bc.bounds.max.x + (bc.size.y * 0.05f), bc.bounds.min.y - enemyData.distanceDetector)            
+            );
+        }
     }
 
     IEnumerator Fall()
     {
-        onBegin?.Invoke();
+        animator.SetTrigger(AnimationStrings.fall);
         isFalling = true;
         yield return null;
-        // transform.rotation = Quaternion.Euler(0, 0, 0);
         rb.gravityScale = 15;
-        // enemyPatrol.UpdateDetector();
     }
 
-    private void OnCollisionEnter2D(Collision2D other) {
-        if(isFalling && TryGetComponent(out IDamageable iDamageable)) {
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (isFalling && TryGetComponent(out IDamageable iDamageable))
+        {
+            bc.enabled = false;
             iDamageable.TakeDamage(int.MaxValue);
         }
     }

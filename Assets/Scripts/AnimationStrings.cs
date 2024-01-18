@@ -21,5 +21,6 @@ public static class AnimationStrings
    public static string canMove = "CanMove";
    public static string invoke = "Invoke";
    public static string isPatrolling = "IsPatrolling";
+   public static string fall = "Fall";
 
 }
