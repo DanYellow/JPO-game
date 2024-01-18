@@ -39,6 +39,9 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private bool isDying = false;
 
+    public bool canMove = true;
+    public bool canOperate = true;
+
     private HealthBar healthBar;
 
     [SerializeField]
@@ -151,6 +154,15 @@ public class Enemy : MonoBehaviour, IDamageable
         if(destroyOnDeath) {
             Destroy(gameObject.transform.parent.gameObject);
         }
+    }
+
+    public void ResetCanOperate(float lastOperationDuration = 1) {
+        StartCoroutine(ResetCanOperateRoutine(lastOperationDuration));
+    }
+
+    private IEnumerator ResetCanOperateRoutine(float lastOperationDuration) {
+        yield return Helpers.GetWait(lastOperationDuration * 1.25f);
+        canOperate = true;
     }
 
     private void OnDestroy()

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 // https://forum.unity.com/threads/moveposition-velocity.425450/
@@ -9,14 +10,18 @@ public class PatrollingBehaviour : StateMachineBehaviour
     bool hasCollisionWithObstacle = false;
     bool hasDetectedEnemy = false;
     RaycastHit2D enemyInAttackRange;
-    bool canAttack = true;
+    Guard guard;
     EnemyAttack enemyAttack;
+    Enemy enemy;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        Debug.Log("enter");
         enemyPatrol = animator.GetComponent<EnemyPatrol>();
         rb = animator.GetComponent<Rigidbody2D>();
         enemyAttack = animator.GetComponent<EnemyAttack>();
+        guard = animator.GetComponent<Guard>();
+        enemy = animator.GetComponent<Enemy>();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -53,38 +58,35 @@ public class PatrollingBehaviour : StateMachineBehaviour
             rb.velocity = Vector2.zero;
         }
 
-        // if (enemyAttack.canMove)
-        // {
-        //     rb.velocity = new Vector2(
-        //         (hasCollisionWithObstacle ? 0 : moveSpeed) * animator.transform.right.x,
-        //         rb.velocity.y
-        //     );
-        // } else {
-        //     rb.velocity = Vector2.zero;
-        // }
-
         animator.SetFloat(AnimationStrings.velocityX, Mathf.Abs(rb.velocity.x));
 
         // Contact with target
         if (enemyInAttackRange.collider != null)
         {
-            if (enemyAttack.CanAttack())
+            bool isFacingEnemy = Math.Sign(enemyInAttackRange.collider.transform.right.x) != Math.Sign(animator.transform.right.x);
+
+            // if(isFacingEnemy) {
+            //     Debug.Log("Geee");
+            //     animator.SetBool(AnimationStrings.isGuarding, true);
+            // }
+            if (enemy.canOperate == true)
             {
-                animator.SetTrigger(AnimationStrings.attack);
+                enemy.canOperate = false;
+                bool randVal = UnityEngine.Random.value < 0.5f;
+                if (randVal && isFacingEnemy)
+                {
+                    animator.SetBool(AnimationStrings.isGuarding, true);
+                }
+                else
+                {
+                    animator.SetTrigger(AnimationStrings.attack);
+                }
             }
+            // else if (isFacingEnemy && !enemyAttack.CanAttack() && guard.CanGuard()) {
 
-            
+            // }
+
         }
-
-        // if (enemyInAttackRange.collider != null && enemyAttack.CanAttack())
-        // {
-        //     animator.SetTrigger(AnimationStrings.attack);
-        // }
-
-        // if (enemyInAttackRange.collider != null && hasCollisionWithObstacle && !enemyPatrol.isFlipping)
-        // {
-        //     enemyPatrol.Flipp();
-        // }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
