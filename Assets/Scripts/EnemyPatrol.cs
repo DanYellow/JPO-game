@@ -13,14 +13,6 @@ public class EnemyPatrol : MonoBehaviour
     [field: SerializeField]
     public bool isFacingRight { get; private set; } = false;
 
-    private Vector2 detectorPosition;
-
-    private Vector3 lastKnownPosition = Vector3.zero;
-
-
-    [SerializeField]
-    private bool canMove = true;
-
     public bool isFlipping = false;
 
     [SerializeField]
@@ -30,12 +22,10 @@ public class EnemyPatrol : MonoBehaviour
     [SerializeField]
     private LayerMask enemyLayersMask;
 
-    public Vector2 lastPosition = Vector2.zero;
-
     private float obstacleDetectionDistance = 1.95f;
     private float runDetectionDistance = 2.75f;
     private float attackRange = 0.75f;
-    private float voidCheckRadius = 0.3f;
+    private float voidCheckRadius = 0.25f;
 
     private void Awake()
     {
@@ -43,7 +33,6 @@ public class EnemyPatrol : MonoBehaviour
         bc = GetComponent<BoxCollider2D>();
         rb = GetComponent<Rigidbody2D>();
     }
-
 
     private void Update()
     {
@@ -63,12 +52,6 @@ public class EnemyPatrol : MonoBehaviour
             enemyData.obstacleCheckRadius, 
             obstacleLayersMask
         );
-    
-        // return !Physics2D.Linecast(
-        //     new Vector2(transform.position.x + (transform.right.x * 2), bc.bounds.min.y),
-        //     new Vector2(transform.position.x + (transform.right.x * 2), bc.bounds.min.y - 0.75f),
-        //     obstacleLayersMask
-        // );
     }
 
     public RaycastHit2D HasTouchedVoidWho()
@@ -117,13 +100,11 @@ public class EnemyPatrol : MonoBehaviour
 
     void OnDrawGizmos()
     {
-
-        // print(transform.right);
-
         if (bc != null)
         {
             float xOffset = transform.right.x == -1 ? bc.bounds.min.x : bc.bounds.max.x;
 
+            // Detect void area
             Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(
                 new Vector2(xOffset, bc.bounds.min.y),
@@ -158,19 +139,7 @@ public class EnemyPatrol : MonoBehaviour
                 new Vector3(xOffset + bc.size.x * attackRange / 2 * transform.right.x, bc.bounds.center.y, 0),
                 new Vector2(bc.size.x * attackRange, bc.size.y)
             );
-
-            // Detect void area
-            Gizmos.color = Color.black;
-            Gizmos.DrawLine(
-                new Vector2(transform.position.x + (transform.right.x * 2), bc.bounds.min.y),
-                new Vector2(transform.position.x + (transform.right.x * 2), bc.bounds.min.y - 0.75f)
-            );
         }
-    }
-
-    public void ToggleMovement(bool val)
-    {
-        canMove = val;
     }
 
     public void Flip(bool immediate)
@@ -189,10 +158,8 @@ public class EnemyPatrol : MonoBehaviour
         float pauseTime = 1.75f;
         isFlipping = true;
         yield return Helpers.GetWait(pauseTime);
-        detectorPosition.x *= -1;
         isFacingRight = !isFacingRight;
         transform.Rotate(0f, 180f, 0f);
-        lastKnownPosition = Vector3.zero;
         yield return Helpers.GetWait(pauseTime);
         isFlipping = false;
     }

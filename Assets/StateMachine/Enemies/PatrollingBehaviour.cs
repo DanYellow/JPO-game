@@ -48,20 +48,8 @@ public class PatrollingBehaviour : StateMachineBehaviour
                 rb.velocity = Vector2.zero;
             }
 
-            // if(hasTouchedVoid) {
-            //     RaycastHit2D hit = enemyPatrol.HasTouchedVoidWho();
-            //     if(hit.collider != null) {
-            //     Debug.Log("fff " + hit.collider.name);
-
-            //     }
-            // }
-
-            // Debug.Assert(!hasTouchedVoid);
-            // Debug.Log("hasTouchedVoid " + hasTouchedVoid);
             if ((hasCollisionWithObstacle || hasTouchedVoid) && !enemyPatrol.isFlipping)
             {
-                Debug.Log("hasCollisionWithObstacle " + hasCollisionWithObstacle);
-                Debug.Log("hasTouchedVoid " + hasTouchedVoid);
                 enemyPatrol.Flip(false);
             }
         }
@@ -80,16 +68,16 @@ public class PatrollingBehaviour : StateMachineBehaviour
             if (enemy.canOperate == true)
             {
                 enemy.canOperate = false;
-                animator.SetBool(AnimationStrings.isGuarding, true);
-                // bool randVal = UnityEngine.Random.value < 0.45f;
-                // if (randVal && isFacingEnemy)
-                // {
-                //     animator.SetBool(AnimationStrings.isGuarding, true);
-                // }
-                // else
-                // {
-                //     animator.SetTrigger(AnimationStrings.attack);
-                // }
+                // animator.SetBool(AnimationStrings.isGuarding, true);
+                bool randVal = UnityEngine.Random.value < 0.45f;
+                if (randVal && isFacingEnemy)
+                {
+                    animator.SetBool(AnimationStrings.isGuarding, true);
+                }
+                else
+                {
+                    animator.SetTrigger(AnimationStrings.attack);
+                }
             }
         }
     }

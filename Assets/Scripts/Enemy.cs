@@ -39,7 +39,6 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private bool isDying = false;
 
-    public bool canMove = true;
     public bool canOperate = true;
 
     private HealthBar healthBar;
