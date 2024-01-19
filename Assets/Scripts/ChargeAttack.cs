@@ -7,7 +7,6 @@ public class ChargeAttack : MonoBehaviour
     private RaycastHit2D target;
     private Animator animator;
     private new Collider2D collider;
-    private Collider2D targetCollider;
 
     private Rigidbody2D rb;
 
@@ -93,6 +92,7 @@ public class ChargeAttack : MonoBehaviour
     {
         canCharge = false;
         onBegin?.Invoke();
+        rb.velocity = -(targetPos - transform.position).normalized * 5;
         animator.SetBool(AnimationStrings.attack, true);
         yield return Helpers.GetWait(0.75f);
         yield return null;
@@ -120,7 +120,7 @@ public class ChargeAttack : MonoBehaviour
         if (isCharging)
         {
             hasTouchedSomething = true;
-            knockback.Apply(other.gameObject, 1500);
+ 
             if (other.gameObject.TryGetComponent(out Knockback _knockback))
             {
                 _knockback.Apply(gameObject, enemyData.knockbackForce);
