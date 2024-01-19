@@ -33,8 +33,6 @@ public class ChargeAttack : MonoBehaviour
     [SerializeField]
     private EnemyData enemyData;
 
-    private EnemyFlying enemyFlying;
-
     private Knockback knockback;
 
 
@@ -43,7 +41,6 @@ public class ChargeAttack : MonoBehaviour
         collider = GetComponent<Collider2D>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        enemyFlying = GetComponent<EnemyFlying>();
         knockback = GetComponent<Knockback>();
     }
 
