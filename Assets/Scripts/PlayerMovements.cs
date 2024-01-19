@@ -275,11 +275,16 @@ public class PlayerMovements : MonoBehaviour, IStunnable
         Gizmos.DrawWireCube(bc2d.bounds.center, bc2d.bounds.size);
     }
 
-    public IEnumerator Stun(float stunTime, Action callback)
+    public void Stun(float stunTime, Action callback) {
+        StartCoroutine(StunRoutine(stunTime, callback));
+    }
+
+    public IEnumerator StunRoutine(float stunTime, Action callback)
     {
         if(stunTime == 0 || playerData.currentLifePoints == 0) {
             yield break;
         }
+
         onStunStart?.Invoke();
         onPlayerInputMapChange.Raise(ActionMapName.PlayerStunned);
         yield return Helpers.GetWait(Mathf.Clamp(stunTime, 0, 3));

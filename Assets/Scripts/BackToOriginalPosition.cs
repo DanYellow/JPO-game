@@ -5,6 +5,7 @@ using UnityEngine.Events;
 public class BackToOriginalPosition : MonoBehaviour
 {
     private Animator animator;
+    private SpriteRenderer sr;
 
     private Vector2 startingPosition;
     private bool isTeleporting = false;
@@ -21,6 +22,7 @@ public class BackToOriginalPosition : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
 
         startingPosition = transform.position;
     }
@@ -42,8 +44,11 @@ public class BackToOriginalPosition : MonoBehaviour
         animator.SetTrigger(AnimationStrings.teleportIn);
         yield return null;
         yield return new WaitWhile(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1);
+        sr.color = Color.clear;
         transform.position = startingPosition;
-        yield return null;
+        yield return new WaitForSeconds(0.85f);
+        sr.color = Color.white;
+        animator.SetTrigger(AnimationStrings.teleportOut);
         yield return new WaitWhile(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1);
         isTeleporting = false;
         OnDone?.Invoke();

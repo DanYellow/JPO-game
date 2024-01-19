@@ -89,7 +89,7 @@ public class MechaBossSpike : MonoBehaviour
             }
 
             IStunnable iStunnable = collision.transform.GetComponent<IStunnable>();
-            StartCoroutine(iStunnable.Stun(projectileData.stunTime, () => {}));
+            iStunnable.Stun(projectileData.stunTime, () => {});
         }
     }
 }

@@ -50,7 +50,7 @@ public class Projectile : MonoBehaviour, IRecycleable
             }
 
             IStunnable iStunnable = other.transform.GetComponent<IStunnable>();
-            StartCoroutine(iStunnable.Stun(projectileData.stunTime, () => { }));
+            iStunnable.Stun(projectileData.stunTime, () => { });
         }
 
         Contact();
@@ -70,7 +70,7 @@ public class Projectile : MonoBehaviour, IRecycleable
                 }
 
                 IStunnable iStunnable = other.transform.GetComponent<IStunnable>();
-                StartCoroutine(iStunnable.Stun(projectileData.stunTime, () => { }));
+                iStunnable.Stun(projectileData.stunTime, () => { });
             }
         }
 

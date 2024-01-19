@@ -35,7 +35,7 @@ public class PatrollingBehaviour : StateMachineBehaviour
         float moveSpeed = hasDetectedEnemy ? enemyPatrol.GetData().runSpeed : enemyPatrol.GetData().walkSpeed;
   
         // No player detected
-        if (enemyInAttackRange.collider == null || (enemyPatrol.enableLimitMovementDetection && !hasReachedLimitZone && enemy.canMove)) // 
+        if (enemyInAttackRange.collider == null || (enemyPatrol.enableLimitMovementDetection && !hasReachedLimitZone && enemy.canMove))
         {
             if (!hasTouchedVoid)
             {

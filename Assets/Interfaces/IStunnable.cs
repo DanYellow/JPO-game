@@ -3,5 +3,5 @@ using System.Collections;
 
 public interface IStunnable
 {
-    IEnumerator Stun(float stunTime, Action callback);
+    void Stun(float stunTime, Action callback);
 }
