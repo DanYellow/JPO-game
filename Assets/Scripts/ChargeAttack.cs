@@ -109,7 +109,6 @@ public class ChargeAttack : MonoBehaviour
         hasTouchedSomething = false;
         isCharging = false;
         animator.SetBool(AnimationStrings.attack, false);
-        enemyFlying.SetStartingPosition(rb.position);
         onDone?.Invoke();
         yield return Helpers.GetWait(3.75f);
         canCharge = true;

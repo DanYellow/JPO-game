@@ -20,9 +20,9 @@ public class EnemyFlying : MonoBehaviour
     }
 
     private void FixedUpdate() {
-        float newY = (Mathf.Sin(Time.time * speed) * floatStrength) + startingPosition.y;
-        Vector2 position = new Vector2(rb.position.x, newY);
-        rb.MovePosition(position);
+        // float newY = (Mathf.Sin(Time.time * speed) * floatStrength) + startingPosition.y;
+        // Vector2 position = new Vector2(rb.position.x, newY);
+        // rb.MovePosition(position);
     }
 
     public void SetStartingPosition(Vector2 pos) {
