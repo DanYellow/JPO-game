@@ -30,12 +30,19 @@ public class EnemyPatrol : MonoBehaviour
     private float attackRange = 0.75f;
     private float voidCheckRadius = 0.2f;
 
+    [SerializeField]
+    private float limitMovementRange = 1.25f;
+
+
     [Space(10)]
     [SerializeField]
     private bool enableAttackRange = true;
 
     [SerializeField]
     private bool enableEnemyDetection = true;
+
+    [SerializeField]
+    private bool enableLimitMovementDetection = false;
 
     private void Awake()
     {
@@ -70,6 +77,24 @@ public class EnemyPatrol : MonoBehaviour
             new Vector3(transform.position.x + transform.right.x, bc.bounds.min.y + (bc.size.y * 0.10f), 0),
             new Vector3(transform.position.x + (transform.right.x * obstacleDetectionDistance), bc.bounds.min.y + (bc.size.y * 0.10f), 0),
             obstacleLayersMask
+        );
+    }
+
+    public bool HasReachedLimitZone()
+    {
+        if (!enableLimitMovementDetection)
+        {
+            return false;
+        }
+
+        float xOffset = (transform.right.x == -1) ? bc.bounds.min.x : bc.bounds.max.x;
+        return Physics2D.BoxCast(
+            new Vector3(xOffset + bc.size.x * limitMovementRange / 2 * transform.right.x, bc.bounds.center.y, 0),
+            new Vector2(bc.size.x * limitMovementRange, bc.size.y),
+            rb.rotation,
+            transform.right,
+            0,
+            enemyLayersMask
         );
     }
 
@@ -109,7 +134,6 @@ public class EnemyPatrol : MonoBehaviour
             enemyLayersMask
         );
     }
-
     void OnDrawGizmos()
     {
         if (bc != null)
@@ -154,6 +178,16 @@ public class EnemyPatrol : MonoBehaviour
                 Gizmos.DrawWireCube(
                     new Vector3(xOffset + bc.size.x * attackRange / 2 * transform.right.x, bc.bounds.center.y, 0),
                     new Vector2(bc.size.x * attackRange, bc.size.y)
+                );
+            }
+
+            if (enableLimitMovementDetection)
+            {
+                // Limit movement area
+                Gizmos.color = Color.white;
+                Gizmos.DrawWireCube(
+                    new Vector3(xOffset + bc.size.x * limitMovementRange / 2 * transform.right.x, bc.bounds.center.y, 0),
+                    new Vector2(bc.size.x * limitMovementRange, bc.size.y + (bc.size.y * 0.1f))
                 );
             }
         }

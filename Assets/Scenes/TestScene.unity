@@ -480,6 +480,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5528627662263019266, guid: bbf98b5430d1f72498f90e0912a904d9, type: 3}
+      propertyPath: testStartHealthPoints
+      value: 900
+      objectReference: {fileID: 0}
+    - target: {fileID: 5528627662263019268, guid: bbf98b5430d1f72498f90e0912a904d9, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5528627662856065166, guid: bbf98b5430d1f72498f90e0912a904d9, type: 3}
       propertyPath: m_Name
       value: PlayerContainer
@@ -994,18 +1002,6 @@ PrefabInstance:
     - target: {fileID: 331785431521071026, guid: 89949adaa1aa4d148ae29270e18cb925, type: 3}
       propertyPath: onShootStart.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3304298747280523625, guid: 89949adaa1aa4d148ae29270e18cb925, type: 3}
-      propertyPath: attackRange
-      value: 3.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3304298747280523625, guid: 89949adaa1aa4d148ae29270e18cb925, type: 3}
-      propertyPath: enableEnemyDetection
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3304298747280523625, guid: 89949adaa1aa4d148ae29270e18cb925, type: 3}
-      propertyPath: obstacleLayersMask.m_Bits
-      value: 520
       objectReference: {fileID: 0}
     - target: {fileID: 3304298747280523626, guid: 89949adaa1aa4d148ae29270e18cb925, type: 3}
       propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_BoolArgument

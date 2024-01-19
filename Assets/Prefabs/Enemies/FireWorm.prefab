@@ -423,7 +423,6 @@ GameObject:
   - component: {fileID: 8741960665432343748}
   - component: {fileID: 5097651115287497203}
   - component: {fileID: 3304298747280523625}
-  - component: {fileID: 331785431521071026}
   - component: {fileID: 3304298747280523627}
   - component: {fileID: 3304298747280523626}
   - component: {fileID: 8838257750597778021}
@@ -561,7 +560,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.16421509, y: 0.2999668}
+  m_Offset: {x: -0.16421509, y: 0.33391035}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -572,7 +571,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.3760376, y: 2.366413}
+  m_Size: {x: 3.3760376, y: 2.298526}
   m_EdgeRadius: 0
 --- !u!95 &5097651115287497203
 Animator:
@@ -612,62 +611,15 @@ MonoBehaviour:
   isUpsideDown: 0
   obstacleLayersMask:
     serializedVersion: 2
-    m_Bits: 640
+    m_Bits: 520
   enemyLayersMask:
     serializedVersion: 2
     m_Bits: 1
+  attackRange: 3.5
+  limitMovementRange: 1
   enableAttackRange: 1
-  enableEnemyDetection: 1
---- !u!114 &331785431521071026
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8817931127010823324}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d0aa1022cc30d64ba661ba1e0e3fbd3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectileLauncherData: {fileID: 11400000, guid: 1466855678cb0914cbe3beaf774e3db3, type: 2}
-  collisionLayers:
-    serializedVersion: 2
-    m_Bits: 1
-  shootDirection: 1
-  onShootStart:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3304298747280523625}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
-  onShootEnd:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3304298747280523625}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 1
-  firePoint: {fileID: 260304816204220668}
-  lengthDetection: 10
-  isMoving: 1
+  enableEnemyDetection: 0
+  enableLimitMovementDetection: 1
 --- !u!114 &3304298747280523627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -722,30 +674,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 3304298747280523625}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 3304298747280523625}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
         m_CallState: 2
   onDeathEnd: {fileID: 0}
   onHurtBegin:

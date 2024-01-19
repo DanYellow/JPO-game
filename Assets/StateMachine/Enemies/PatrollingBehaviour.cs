@@ -10,6 +10,7 @@ public class PatrollingBehaviour : StateMachineBehaviour
     bool hasCollisionWithObstacle = false;
     bool hasDetectedEnemy = false;
     bool hasTouchedVoid = false;
+    bool hasReachedLimitZone;
     RaycastHit2D enemyInAttackRange;
     Enemy enemy;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -27,15 +28,15 @@ public class PatrollingBehaviour : StateMachineBehaviour
         enemyInAttackRange = enemyPatrol.HasEnemyInAttackRange();
         hasDetectedEnemy = enemyPatrol.HasDetectedEnemy();
         hasTouchedVoid = enemyPatrol.HasTouchedVoid();
+        hasReachedLimitZone = enemyPatrol.HasReachedLimitZone();
 
         // rb.MovePosition(rb.position + (Vector2)animator.transform.right * enemyPatrol.GetData().walkSpeed * Time.fixedDeltaTime);
         // trackVelocity = (rb.position - enemyPatrol.lastPosition) / Time.deltaTime;
         // enemyPatrol.lastPosition = rb.position;
-
         float moveSpeed = hasDetectedEnemy ? enemyPatrol.GetData().runSpeed : enemyPatrol.GetData().walkSpeed;
   
         // No player detected
-        if (enemyInAttackRange.collider == null)
+        if (enemyInAttackRange.collider == null || (!hasReachedLimitZone && !enemy.canOperate))
         {
             if (!hasTouchedVoid)
             {
@@ -56,7 +57,6 @@ public class PatrollingBehaviour : StateMachineBehaviour
         }
         else
         {
-
             rb.velocity = Vector2.zero;
         }
 
@@ -72,7 +72,7 @@ public class PatrollingBehaviour : StateMachineBehaviour
                 enemy.canOperate = false;
                 // animator.SetBool(AnimationStrings.isGuarding, true);
                 bool randVal = UnityEngine.Random.value < 0.45f;
-                if (randVal && isFacingEnemy)
+                if (randVal && isFacingEnemy && animator.ContainsParam(AnimationStrings.isGuarding))
                 {
                     animator.SetBool(AnimationStrings.isGuarding, true);
                 }

@@ -15,6 +15,7 @@ public class AttackBehaviour : StateMachineBehaviour
     {
         animator.ResetTrigger(AnimationStrings.attack);
         enemy.ResetCanOperate(cooldownDuration);
+ 
         if (animator.TryGetComponent(out EnemyShoot enemyShoot))
         {
             enemyShoot.Shoot();
