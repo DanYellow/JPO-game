@@ -96,11 +96,11 @@ public class Projectile : MonoBehaviour, IRecycleable
     {
         if (projectileData.blastEffectData)
         {
-            // BlastEffectData blastEffectData = projectileData.blastEffectData;
-            // GameObject blast = Instantiate(blastEffectData.effect, new Vector2(collider.bounds.center.x, collider.bounds.min.y), Quaternion.identity);
+            BlastEffectData blastEffectData = projectileData.blastEffectData;
+            GameObject blast = Instantiate(blastEffectData.effect, new Vector2(collider.bounds.center.x, collider.bounds.min.y), Quaternion.identity);
             // // blast.GetComponent<BlastEffect>().SetEffectData(blastEffectData);
-            // blast.GetComponent<SpriteRenderer>().color = blastEffectData.color;
-            // blast.transform.localScale *= blastEffectData.scale;
+            blast.GetComponent<SpriteRenderer>().color = blastEffectData.color;
+            blast.transform.localScale *= blastEffectData.scale;
         }
         yield return Helpers.GetWait(projectileData.blastEffectData ? 0 : 1.5f);
         pool.Release(this);

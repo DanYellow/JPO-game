@@ -216,12 +216,16 @@ MonoBehaviour:
   isUpsideDown: 1
   obstacleLayersMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 520
   enemyLayersMask:
     serializedVersion: 2
     m_Bits: 0
+  runDetectionDistance: 2.75
+  attackRange: 0.75
+  limitMovementRange: 1.25
   enableAttackRange: 0
   enableEnemyDetection: 0
+  <enableLimitMovementDetection>k__BackingField: 0
 --- !u!114 &4493547249972953205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,6 +288,7 @@ MonoBehaviour:
       m_Calls: []
   destroyOnDeath: 1
   canOperate: 1
+  canMove: 1
   delayBeforeDeathEndEvent: 0
 --- !u!114 &4493547249972953100
 MonoBehaviour:
