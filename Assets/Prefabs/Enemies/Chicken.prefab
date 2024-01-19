@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 8709898328987693037}
   - component: {fileID: 8709898328987693036}
   - component: {fileID: 8709898328987692947}
+  - component: {fileID: 8709898328987693039}
   - component: {fileID: 8709898328987692946}
   - component: {fileID: 8709898328987692945}
-  - component: {fileID: 8709898328987693039}
   - component: {fileID: 8709898328987693032}
   - component: {fileID: 5576962487196452422}
   m_Layer: 7
@@ -82,7 +82,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: -612428167, guid: 232339a672280264eb5e4ed8eec1e6d4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 2, y: 2}
@@ -163,6 +163,26 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!95 &8709898328987693039
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8709898328987692944}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1786c905f857cd7498101c03738130d0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 1
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &8709898328987692946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,6 +220,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   destroyOnDeath: 1
+  canOperate: 1
+  canMove: 1
   delayBeforeDeathEndEvent: 0
 --- !u!114 &8709898328987692945
 MonoBehaviour:
@@ -215,35 +237,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyData: {fileID: 11400000, guid: 4125ce838d8cfb545adc6583a1f98b6d, type: 2}
   <isFacingRight>k__BackingField: 0
-  walkTime: 5
-  offset: {x: 0.2, y: 0.25}
-  canMove: 1
+  isFlipping: 0
+  isUpsideDown: 0
   obstacleLayersMask:
     serializedVersion: 2
-    m_Bits: 769
-  groundLayersMask:
+    m_Bits: 521
+  enemyLayersMask:
     serializedVersion: 2
-    m_Bits: 8
---- !u!95 &8709898328987693039
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8709898328987692944}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1786c905f857cd7498101c03738130d0, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
+    m_Bits: 0
+  runDetectionDistance: 2.75
+  attackRange: 0.75
+  limitMovementRange: 0.85
+  enableAttackRange: 0
+  enableEnemyDetection: 0
+  <enableLimitMovementDetection>k__BackingField: 0
 --- !u!114 &8709898328987693032
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -39,7 +39,10 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private bool isDying = false;
 
+    [HideInInspector]
     public bool canOperate = true;
+    [HideInInspector]
+    public bool canMove = true;
 
     private HealthBar healthBar;
 
@@ -159,11 +162,17 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public void ResetCanOperate(float lastOperationDuration = 1) {
         StartCoroutine(ResetCanOperateRoutine(lastOperationDuration));
+        StartCoroutine(ResetCanMoveRoutine(lastOperationDuration));
     }
 
     private IEnumerator ResetCanOperateRoutine(float lastOperationDuration) {
-        yield return Helpers.GetWait(lastOperationDuration * 0.95f);
+        yield return Helpers.GetWait(lastOperationDuration * 0.9f);
         canOperate = true;
+    }
+
+    private IEnumerator ResetCanMoveRoutine(float lastOperationDuration) {
+        yield return Helpers.GetWait(lastOperationDuration * 0.45f);
+        canMove = true;
     }
 
     private void OnDestroy()

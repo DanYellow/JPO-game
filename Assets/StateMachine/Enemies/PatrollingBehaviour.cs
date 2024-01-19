@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 // https://forum.unity.com/threads/moveposition-velocity.425450/
@@ -36,7 +35,7 @@ public class PatrollingBehaviour : StateMachineBehaviour
         float moveSpeed = hasDetectedEnemy ? enemyPatrol.GetData().runSpeed : enemyPatrol.GetData().walkSpeed;
   
         // No player detected
-        if (enemyInAttackRange.collider == null || (!hasReachedLimitZone && !enemy.canOperate))
+        if (enemyInAttackRange.collider == null || (enemyPatrol.enableLimitMovementDetection && !hasReachedLimitZone && enemy.canMove)) // 
         {
             if (!hasTouchedVoid)
             {
@@ -63,13 +62,14 @@ public class PatrollingBehaviour : StateMachineBehaviour
         animator.SetFloat(AnimationStrings.velocityX, Mathf.Abs(rb.velocity.x));
 
         // Contact with target
-        if (enemyInAttackRange.collider != null)
+        if (enemyInAttackRange.collider != null && !enemyPatrol.isFlipping)
         {
-            bool isFacingEnemy = Math.Sign(enemyInAttackRange.collider.transform.right.x) != Math.Sign(animator.transform.right.x);
+            bool isFacingEnemy = Mathf.Sign(enemyInAttackRange.collider.transform.right.x) != Mathf.Sign(animator.transform.right.x);
 
             if (enemy.canOperate == true)
             {
                 enemy.canOperate = false;
+                enemy.canMove = false;
                 // animator.SetBool(AnimationStrings.isGuarding, true);
                 bool randVal = UnityEngine.Random.value < 0.45f;
                 if (randVal && isFacingEnemy && animator.ContainsParam(AnimationStrings.isGuarding))

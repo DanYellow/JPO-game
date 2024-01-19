@@ -13,36 +13,41 @@ public class EnemyPatrol : MonoBehaviour
     [field: SerializeField]
     public bool isFacingRight { get; private set; } = false;
 
+    [HideInInspector]
     public bool isFlipping = false;
-    public bool isUpsideDown = false;
+
+    [SerializeField]
+    private bool isUpsideDown = false;
 
     [SerializeField]
     private LayerMask obstacleLayersMask;
 
-
     [SerializeField]
     private LayerMask enemyLayersMask;
 
-    private float obstacleDetectionDistance = 1.95f;
+    private float obstacleDetectionDistance = 1.75f;
+
+    [Header("Raycasts distance")]
+    [SerializeField, Tooltip("From what distance the GO can use run speed")]
     private float runDetectionDistance = 2.75f;
 
-    [SerializeField]
+    [SerializeField, Tooltip("From what distance the GO can attack")]
     private float attackRange = 0.75f;
     private float voidCheckRadius = 0.2f;
 
-    [SerializeField]
+    [SerializeField, Tooltip("From what distance the GO will stop move")]
     private float limitMovementRange = 1.25f;
 
 
     [Space(10)]
-    [SerializeField]
+    [SerializeField, Tooltip("GO cannot attack")]
     private bool enableAttackRange = true;
 
-    [SerializeField]
+    [SerializeField, Tooltip("GO cannot run when detect enemy")]
     private bool enableEnemyDetection = true;
 
-    [SerializeField]
-    private bool enableLimitMovementDetection = false;
+    [field: SerializeField, Tooltip("GO stop until distance defined by \"limitMovementRange\"")]
+    public bool enableLimitMovementDetection { get; private set; } = false;
 
     private void Awake()
     {

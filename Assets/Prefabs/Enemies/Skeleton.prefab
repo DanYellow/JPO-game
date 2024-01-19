@@ -183,7 +183,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 94f6addaf2ffe814abd8cc81ae19cf6a, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 1
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -285,6 +285,12 @@ MonoBehaviour:
   enemyLayersMask:
     serializedVersion: 2
     m_Bits: 1
+  runDetectionDistance: 2.75
+  attackRange: 0.75
+  limitMovementRange: 1.25
+  enableAttackRange: 1
+  enableEnemyDetection: 1
+  <enableLimitMovementDetection>k__BackingField: 0
 --- !u!114 &535411357999783333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,6 +365,7 @@ MonoBehaviour:
       m_Calls: []
   destroyOnDeath: 1
   canOperate: 1
+  canMove: 1
   delayBeforeDeathEndEvent: 0
 --- !u!114 &1251782101685074590
 MonoBehaviour:

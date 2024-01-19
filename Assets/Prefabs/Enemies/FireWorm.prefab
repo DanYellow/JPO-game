@@ -426,6 +426,7 @@ GameObject:
   - component: {fileID: 3304298747280523627}
   - component: {fileID: 3304298747280523626}
   - component: {fileID: 8838257750597778021}
+  - component: {fileID: 6416674938769692425}
   m_Layer: 7
   m_Name: Core
   m_TagString: Untagged
@@ -585,7 +586,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: c35a5a00282b3474d8d1fd24bf70be27, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 1
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -615,11 +616,12 @@ MonoBehaviour:
   enemyLayersMask:
     serializedVersion: 2
     m_Bits: 1
+  runDetectionDistance: 2.75
   attackRange: 3.5
   limitMovementRange: 1
   enableAttackRange: 1
   enableEnemyDetection: 0
-  enableLimitMovementDetection: 1
+  <enableLimitMovementDetection>k__BackingField: 0
 --- !u!114 &3304298747280523627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -684,6 +686,7 @@ MonoBehaviour:
       m_Calls: []
   destroyOnDeath: 1
   canOperate: 1
+  canMove: 1
   delayBeforeDeathEndEvent: 0
 --- !u!114 &8838257750597778021
 MonoBehaviour:
@@ -703,3 +706,17 @@ MonoBehaviour:
   enemyData: {fileID: 11400000, guid: a11b561a632a79142a3edcc229160819, type: 2}
   lifePointsText: {fileID: 0}
   nameText: {fileID: 0}
+--- !u!114 &6416674938769692425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8817931127010823324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74e233ab0810cb54e958ccb4034ffe32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 6111809895942597433, guid: 74dcd00c2b660b8459292c0ae4ab7d86, type: 3}
+  firePoint: {fileID: 260304816204220668}
