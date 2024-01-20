@@ -34,22 +34,33 @@ public class DashTrailRenderer : MonoBehaviour
                 ActionOnGet,
                 ActionOnRelease,
                 ActionOnDestroy,
-                true
+                true,
+                clonesPerSecond,
+                clonesPerSecond
             );
+    }
 
+    private void OnEnable()
+    {
         StartCoroutine(GenerateClones());
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
     }
 
     GameObject CreateFunc()
     {
         GameObject clone = new GameObject();
         clone.transform.position = transform.position;
+        clone.transform.localScale = transform.localScale;
         clone.transform.right = transform.right.normalized;
 
         SpriteRenderer srClone = clone.AddComponent<SpriteRenderer>();
         srClone.sprite = sr.sprite;
         srClone.material = material;
-        // srClone.color = colorPerSecond;
+        srClone.color = colorPerSecond;
         srClone.sortingOrder = sr.sortingOrder - 1;
 
         return clone;
@@ -102,12 +113,12 @@ public class DashTrailRenderer : MonoBehaviour
             if (emit)
             {
                 GameObject clone = pool.Get();
-                clone.name = $"TrailClone_{i}";
+                clone.name = $"{gameObject.name}_TrailClone_{i}";
 
                 i++;
+                yield return new WaitForSecondsRealtime(1f / clonesPerSecond);
             }
-
-            yield return new WaitForSecondsRealtime(1f / clonesPerSecond);
+            yield return null;
         }
     }
 }

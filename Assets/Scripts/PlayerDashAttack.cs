@@ -17,8 +17,6 @@ public class PlayerDashAttack : MonoBehaviour
     [SerializeField]
     private BoolValue playerCanMove;
 
-    private string originalLayerName;
-
     private BoxCollider2D bc2d;
 
     private bool canDash = true;
@@ -52,7 +50,6 @@ public class PlayerDashAttack : MonoBehaviour
 
         layer = LayerMask.LayerToName(gameObject.layer);
         originalGravity = rb.gravityScale;
-        originalLayerName = LayerMask.LayerToName(gameObject.layer);
         listLayers = Helpers.GetLayersIndexFromLayerMask(listDashableLayers);
 
         Helpers.DisableCollisions(LayerMask.LayerToName(gameObject.layer), listLayers, false);
@@ -132,7 +129,6 @@ public class PlayerDashAttack : MonoBehaviour
         isDashing = true;
         canDash = false;
         rb.gravityScale = 0f;
-        // gameObject.layer = LayerMask.NameToLayer("AttackArea");
 
         // // Time.timeScale = 0.5f;
         playerCanMove.CurrentValue = false;
@@ -150,7 +146,6 @@ public class PlayerDashAttack : MonoBehaviour
     {
         rb.gravityScale = originalGravity;
         isDashing = false;
-        // gameObject.layer = LayerMask.NameToLayer(originalLayerName);
         dashTrailRenderer.emit = false;
         rb.velocity = Vector2.zero;
         playerCanMove.CurrentValue = true;

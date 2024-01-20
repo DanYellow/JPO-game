@@ -16,16 +16,20 @@ public class Invulnerable : MonoBehaviour
 
     private MaterialChangeValue materialChange;
 
-    private MaterialManager materialManager;
+
+    private Material originalMaterial;
+    private SpriteRenderer sr;
 
     private void Awake()
     {
-        materialManager = GetComponent<MaterialManager>();
-
         materialChange = ScriptableObject.CreateInstance<MaterialChangeValue>();
         materialChange.material = invulnerableDataValue.material;
         materialChange.interval = invulnerableDataValue.flashDelay;
         materialChange.duration = invulnerableDataValue.duration;
+
+        sr = GetComponent<SpriteRenderer>();
+
+        originalMaterial = sr.material;
     }
 
 
@@ -69,8 +73,6 @@ public class Invulnerable : MonoBehaviour
         Helpers.DisableCollisions(LayerMask.LayerToName(gameObject.layer), listLayers, isInvulnerable);
         float invincibilityDeltaTime = 0.15f;
 
-        SpriteRenderer sr = GetComponent<SpriteRenderer>();
-        Material originalMaterial = sr.material;
         Color targetColor = sr.color;
         targetColor.a = materialChange.opacity;
 
