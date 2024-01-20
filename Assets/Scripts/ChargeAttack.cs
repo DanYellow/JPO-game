@@ -33,15 +33,17 @@ public class ChargeAttack : MonoBehaviour
     [SerializeField]
     private EnemyData enemyData;
 
-    private Knockback knockback;
 
+    [SerializeField, Header("Events")]
+    private UnityEvent onStunStart;
+    [SerializeField]
+    private UnityEvent onStunEnd;
 
     private void Awake()
     {
         collider = GetComponent<Collider2D>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        knockback = GetComponent<Knockback>();
     }
 
     private void Update()
@@ -54,7 +56,6 @@ public class ChargeAttack : MonoBehaviour
         target = Physics2D.BoxCast(
            collider.bounds.center,
            distance * new Vector3(1, 0.5f, 0),
-        //    new Vector2(collider.bounds.size.x * distance, collider.bounds.size.y * distance),
            0,
            Vector2.zero,
            0,
@@ -74,7 +75,6 @@ public class ChargeAttack : MonoBehaviour
 
             if (canCharge && Vector2.Distance(target.collider.bounds.min, transform.position) <= dashDistance)
             {
-
                 StartCoroutine(Dash(target.collider.transform.position));
             }
         }
@@ -95,10 +95,11 @@ public class ChargeAttack : MonoBehaviour
         yield return null;
         isCharging = true;
         rb.velocity = (targetPos - transform.position).normalized * 25;
-        yield return new WaitUntil(() => {
+        yield return new WaitUntil(() =>
+        {
             return (
-                rb.position.x > targetPos.x && isFacingRight || 
-                rb.position.x < targetPos.x && !isFacingRight || 
+                rb.position.x > targetPos.x && isFacingRight ||
+                rb.position.x < targetPos.x && !isFacingRight ||
                 hasTouchedSomething == true
             );
         });
@@ -116,7 +117,7 @@ public class ChargeAttack : MonoBehaviour
         if (isCharging)
         {
             hasTouchedSomething = true;
- 
+
             if (other.gameObject.TryGetComponent(out Knockback _knockback))
             {
                 _knockback.Apply(gameObject, enemyData.knockbackForce);
@@ -127,7 +128,20 @@ public class ChargeAttack : MonoBehaviour
                 IDamageable iDamageable = other.transform.GetComponentInChildren<IDamageable>();
                 iDamageable.TakeDamage(enemyData.damage);
             }
+            Stun(1.15f);
         }
+    }
+
+    private void Stun(float stunTime)
+    {
+        StartCoroutine(StunRoutine(stunTime));
+    }
+
+    public IEnumerator StunRoutine(float stunTime)
+    {
+        onStunStart?.Invoke();
+        yield return Helpers.GetWait(stunTime);
+        onStunEnd?.Invoke();
     }
 
     private void OnDrawGizmos()

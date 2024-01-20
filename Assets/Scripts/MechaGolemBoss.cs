@@ -255,9 +255,10 @@ public class MechaGolemBoss : MonoBehaviour
             spike.GetComponent<RotateAround>().enabled = false;
 
             Vector3 throwDir = (target.position - spike.transform.position).normalized;
+            yield return Helpers.GetWait(0.65f);
             spike.GetComponent<MechaBossSpike>().Throw(throwDir);
 
-            yield return Helpers.GetWait(0.35f);
+            yield return Helpers.GetWait(0.55f);
 
             listSpikesToThrow.Remove(spike);
 
