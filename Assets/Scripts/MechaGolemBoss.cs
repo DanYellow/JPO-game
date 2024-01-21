@@ -125,6 +125,7 @@ public class MechaGolemBoss : MonoBehaviour
         var length = listSpikes.Count;
         var radius = 7;
         areSpikesReady = false;
+        canMove = false;
 
         for (var i = 0; i < length; i++)
         {
@@ -160,6 +161,7 @@ public class MechaGolemBoss : MonoBehaviour
                 )
             );
         }
+        canMove = true;
 
         yield return Helpers.GetWait(1.15f);
         areSpikesReady = true;
@@ -173,13 +175,10 @@ public class MechaGolemBoss : MonoBehaviour
         }
         else
         {
-            yield return Helpers.GetWait(3.5f);
+            yield return Helpers.GetWait(2.5f);
         }
 
-        listSpikesToThrow.ForEach((item) =>
-        {
-            item.GetComponent<RotateAround>().enabled = false;
-        });
+        RotateSpikes(false);
 
         for (var i = 0; i < listSpikesToThrow.Count; i++)
         {
@@ -255,29 +254,23 @@ public class MechaGolemBoss : MonoBehaviour
             spike.GetComponent<RotateAround>().enabled = false;
 
             Vector3 throwDir = (target.position - spike.transform.position).normalized;
+            listSpikesToThrow.Remove(spike);
             yield return Helpers.GetWait(0.65f);
             spike.GetComponent<MechaBossSpike>().Throw(throwDir);
 
-            yield return Helpers.GetWait(0.55f);
-
-            listSpikesToThrow.Remove(spike);
-
             RotateSpikes(true);
+            yield return Helpers.GetWait(0.55f);
         }
         canMove = true;
-
-        var delay = delayBetweenThrows;
-        // var delay = listSpikesToThrow.Count == 0 ? 0 : delayBetweenThrows * (1 / listSpikesToThrow.Count);
-
-        yield return Helpers.GetWait(delay);
-
-        if (spike && listSpikesToThrow.Count == 0)
-        {
-            yield return new WaitUntil(() => Vector3.Distance(spike.position, transform.position) >= 20);
-        }
+        
+        yield return Helpers.GetWait(delayBetweenThrows);
 
         if (listSpikesToThrow.Count == 0)
         {
+            if (spike)
+            {
+                yield return new WaitUntil(() => Vector3.Distance(spike.position, transform.position) >= 20);
+            }
             yield return StartCoroutine(PrepareSpikes());
         }
 

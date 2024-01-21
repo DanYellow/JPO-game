@@ -1,14 +1,15 @@
+using System;
 using UnityEngine;
 
 public class MechaGuardBehaviour : StateMachineBehaviour
 {
     private MechaProtect mechaProtect;
     private MechaGolemBoss mechaGolemBoss;
-
-     private Transform target;
-     private PlayerMovements playerMovements;
-     private BoxCollider2D targetBc;
-     private float trapCountdown = 0;
+    private Enemy enemy;
+    private Transform target;
+    private PlayerMovements playerMovements;
+    private BoxCollider2D targetBc;
+    private float trapCountdown = 0;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -18,6 +19,8 @@ public class MechaGuardBehaviour : StateMachineBehaviour
         mechaProtect.isGuarding = true;
         mechaProtect.enabled = true;
         target = GameObject.FindWithTag("Player").transform;
+
+        enemy = animator.GetComponent<Enemy>();
 
         targetBc = target.GetComponent<BoxCollider2D>();
         playerMovements = target.GetComponent<PlayerMovements>();
@@ -32,8 +35,10 @@ public class MechaGuardBehaviour : StateMachineBehaviour
     {
         trapCountdown -= Time.deltaTime;
 
-        if(trapCountdown <= 0 && playerMovements.isGrounded) {
-            trapCountdown = 1.5f;
+        if (trapCountdown <= 0 && playerMovements.isGrounded)
+        {
+            float lifeRatio = (float)enemy.GetHealth() / enemy.GetMaxHealth();
+            trapCountdown = Mathf.Clamp(lifeRatio * 1.5f, 0.85f, 1.5f);
             mechaGolemBoss.mechaBossSpikeSpawn.transform.position = new Vector3(
                 targetBc.bounds.center.x,
                 targetBc.bounds.min.y - mechaGolemBoss.spikeSpawnBounds.size.y / 2,

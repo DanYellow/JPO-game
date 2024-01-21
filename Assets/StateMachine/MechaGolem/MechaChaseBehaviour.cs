@@ -5,23 +5,17 @@ public class MechaChaseBehaviour : StateMachineBehaviour
     private Rigidbody2D rb;
     private Transform target;
     private LookAtTarget lookAtTarget;
-
     private Enemy enemy;
     private MechaGolemBoss mechaGolemBoss;
-
     [SerializeField]
     private EnemyData enemyData;
-
     [SerializeField]
     private BoolEventChannel onTogglePauseEvent;
-
     [SerializeField]
     private float guardCheckCountDownInitVal = 4.15f;
     private float guardCheckCountDown;
-
-
     private bool hasFightStarted = false;
-    private float throwAllSpikesAttackThreshold = 0.52f;
+    private float throwAllSpikesAttackLifeThreshold = 0.52f;
 
     private void OnEnable()
     {
@@ -54,7 +48,8 @@ public class MechaChaseBehaviour : StateMachineBehaviour
         if (!hasFightStarted) return;
 
         guardCheckCountDown -= Time.deltaTime;
-        if(guardCheckCountDown <= 0) {
+        if (guardCheckCountDown <= 0)
+        {
             guardCheckCountDown = guardCheckCountDownInitVal;
             animator.SetBool(AnimationStrings.isGuarding, Random.value < 0.25f);
         }
@@ -69,7 +64,6 @@ public class MechaChaseBehaviour : StateMachineBehaviour
         }
         if (Vector2.Distance(target.position, rb.position) < 25 && !mechaGolemBoss.isPlayerDead)
         {
-
             if (Vector2.Distance(target.position, rb.position) > 5 && mechaGolemBoss.canMove)
             {
                 Vector2 targetPos = new Vector2(target.position.x, rb.position.y);
@@ -77,7 +71,7 @@ public class MechaChaseBehaviour : StateMachineBehaviour
                 rb.MovePosition(newPos);
             }
 
-            if (Vector2.Distance(target.position, rb.position) < 10 && (float)enemy.GetHealth() / enemy.GetMaxHealth() <= throwAllSpikesAttackThreshold)
+            if (Vector2.Distance(target.position, rb.position) < 10 && (float)enemy.GetHealth() / enemy.GetMaxHealth() <= throwAllSpikesAttackLifeThreshold)
             {
                 mechaGolemBoss.ThrowAllSpikesProxy();
                 return;

@@ -23,22 +23,25 @@ public class TrapTrigger : MonoBehaviour
         bc = GetComponent<BoxCollider2D>();
 
         float size = 0;
-        if (trapPrefab.TryGetComponent(out Collider2D collider))
+        if (trapPrefab.GetComponentInChildren<Collider2D>() != null)
         {
+            Collider2D collider = trapPrefab.GetComponentInChildren<Collider2D>();
             size = collider.bounds.size.y / 2;
         }
-        else if (trapPrefab.TryGetComponent(out SpriteMask spriteMask))
+        else if (trapPrefab.GetComponentInChildren<SpriteMask>() != null)
         {
+            SpriteMask spriteMask = trapPrefab.GetComponentInChildren<SpriteMask>();
             size = spriteMask.bounds.size.y / 2;
         }
-        else if (trapPrefab.TryGetComponent(out SpriteRenderer spriteRenderer))
+        else if (trapPrefab.GetComponentInChildren<SpriteRenderer>() != null)
         {
+            SpriteRenderer spriteRenderer = trapPrefab.GetComponentInChildren<SpriteRenderer>();
             size = spriteRenderer.bounds.size.y / 2;
         }
 
         trapPosition = new Vector3(
-            transform.position.x,
-            transform.position.y - size,
+            bc.bounds.center.x,
+            bc.bounds.min.y - size,
             0
         );
         trap = Instantiate(trapPrefab, trapPosition, trapPrefab.transform.rotation);

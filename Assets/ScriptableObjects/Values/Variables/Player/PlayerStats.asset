@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31e396c6d09ebea458d18d9107564468, type: 3}
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
-  maxLifePoints: 130
-  currentLifePoints: 120
+  maxLifePoints: 110
+  currentLifePoints: 51
   moveSpeed: 15
   jumpForce: 35
   maxJumpCount: 1
   dashVelocity: 45
-  dashDamage: 2
-  dashCooldown: 2
+  dashDamage: 3
+  dashCooldown: 3
   gravityScaleGrounded: 10
   gravityScaleFalling: 30
   invulnerableData: {fileID: 11400000, guid: 9ab98fc8a64673b4593d13bd345651eb, type: 2}

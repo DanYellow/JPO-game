@@ -1,16 +1,13 @@
 using System.Collections;
 using UnityEngine;
-
 public class MechaBossSpikeSpawn : MonoBehaviour
 {
     [SerializeField]
     private MechaBossSpike mechaBossSpikePrefab;
-
     private GameObject mechaBossSpike;
 
     [SerializeField]
     private GameObject indicator;
-
     private float timeElapsed = 0;
     private float animationDuration = 0.6f;
     private Vector3 endPosition;
@@ -18,13 +15,16 @@ public class MechaBossSpikeSpawn : MonoBehaviour
     private SpriteRenderer srIndicator;
     private SpriteMask spriteMask;
 
+    // System.Diagnostics.Stopwatch st;
+
     // Start is called before the first frame update
     void Awake()
     {
         srIndicator = indicator.GetComponent<SpriteRenderer>();
         spriteMask = GetComponentInChildren<SpriteMask>();
-    }
 
+        // st = new System.Diagnostics.Stopwatch();
+    }
     private void OnEnable()
     {
         timeElapsed = 0;
@@ -33,9 +33,10 @@ public class MechaBossSpikeSpawn : MonoBehaviour
         
         endPosition = new Vector3(
             transform.position.x,
-            spriteMask.bounds.max.y + srIndicator.bounds.size.y * 1.05f,
+            spriteMask.bounds.max.y + (srIndicator.bounds.size.y * 0.85f),
             0
         );
+        // st.Start();
 
         indicator.transform.localPosition = indicatorOriginPosition;
         StartCoroutine(ThrowSpikeRoutine());
@@ -77,9 +78,10 @@ public class MechaBossSpikeSpawn : MonoBehaviour
 
         mechaBossSpike = Instantiate(mechaBossSpikePrefab.gameObject, spikePosition, mechaBossSpikePrefab.transform.rotation);
         mechaBossSpike.GetComponent<SpriteRenderer>().sortingOrder = -2;
-        yield return Helpers.GetWait(0.2f);
+        // st.Stop();
+        // Debug.Log(string.Format("MyMethod took {0} ms to complete", st.ElapsedMilliseconds));
+        yield return Helpers.GetWait(0.15f);
         indicator.SetActive(false);
         mechaBossSpike.GetComponent<MechaBossSpike>().Throw(Vector3.up);
-
     }
 }
