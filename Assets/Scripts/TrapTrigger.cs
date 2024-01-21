@@ -19,9 +19,17 @@ public class TrapTrigger : MonoBehaviour
     private void Awake()
     {
         bc = GetComponent<BoxCollider2D>();
+
+        float size = 0;
+        if(trapPrefab.TryGetComponent(out Collider2D collider)) {
+            size = collider.bounds.size.y / 2;
+        } else if(trapPrefab.TryGetComponent(out SpriteMask spriteMask)) {
+            size = spriteMask.bounds.size.y / 2;
+        }
+
         trapPosition = new Vector3(
             bc.bounds.center.x,
-            bc.bounds.min.y,
+            bc.bounds.min.y - size,
             0
         );
         trap = Instantiate(trapPrefab, trapPosition, trapPrefab.transform.rotation);
@@ -35,10 +43,6 @@ public class TrapTrigger : MonoBehaviour
             timer += Time.deltaTime;
             isActivated = timer >= delayBeforeNextTrigger;
         }
-
-        // if(Vector2.Distance(trap.transform.position, transform.position) > 100 && trap.activeSelf) {
-        //     trap.SetActive(false);
-        // }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -49,7 +53,6 @@ public class TrapTrigger : MonoBehaviour
             timer = 0;
             trap.transform.position = trapPosition;
             trap.SetActive(true);
-            // trap.GetComponent<MechaBossSpikeSpawn>().Trigger();
         }
     }
 }

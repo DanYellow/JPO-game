@@ -16,8 +16,10 @@ public class MechaBossSpikeSpawn : MonoBehaviour
     private Vector3 endPosition;
     private Vector3 indicatorOriginPosition;
 
+    private SpriteMask spriteMask;
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         // StartCoroutine(ThrowSpike());
 
@@ -28,6 +30,8 @@ public class MechaBossSpikeSpawn : MonoBehaviour
             0
         );
         indicatorOriginPosition = indicator.transform.localPosition;
+
+        spriteMask = GetComponent<SpriteMask>();
     }
 
     private void OnEnable()
@@ -73,7 +77,7 @@ public class MechaBossSpikeSpawn : MonoBehaviour
     {
         Vector3 spikePosition = new Vector3(
             transform.position.x,
-            transform.position.y - 2.5f,
+            spriteMask.bounds.min.y,
             0
         );
 
