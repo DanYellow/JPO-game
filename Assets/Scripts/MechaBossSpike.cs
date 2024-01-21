@@ -17,6 +17,11 @@ public class MechaBossSpike : MonoBehaviour
     public Vector3 throwDir;
 
     public Quaternion origRotation { private set; get; }
+    private Vector2 originPosition;
+    private bool hasNotifyFarDistance = false;
+
+    [HideInInspector]
+    public Action disableNotify;
 
     private void Awake()
     {
@@ -35,11 +40,16 @@ public class MechaBossSpike : MonoBehaviour
         {
             transform.position += projectileData.speed / 2 * Time.deltaTime * Vector3.down;
         }
+        if(Vector2.Distance(originPosition, transform.position) > 100 && !hasNotifyFarDistance) {
+            hasNotifyFarDistance = true;
+            disableNotify?.Invoke();
+        }
     }
 
     private void OnEnable()
     {
-        // originPosition = transform.position;
+        hasNotifyFarDistance = false;
+        originPosition = transform.position;
         // autoDestroyCo = StartCoroutine(AutoDestroy());
     }
 
