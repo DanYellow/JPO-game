@@ -7,7 +7,7 @@ public class MechaBossSpikeSpawn : MonoBehaviour
     MechaBossSpike mechaBossSpike;
 
     float timeElapsed;
-    float lerpDuration = 1.65f;
+    float lerpDuration = 0.85f;
     Vector3 endPosition;
 
     // Start is called before the first frame update

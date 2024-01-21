@@ -32,7 +32,7 @@ public class BackToOriginalPosition : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if (Vector2.Distance(startingPosition, transform.position) > distanceBeforeTeleport && !isTeleporting && timer > delay)
+        if (Vector2.Distance(startingPosition, transform.position) > distanceBeforeTeleport && !isTeleporting && timer >= delay)
         {
             StartCoroutine(Return());
         }
