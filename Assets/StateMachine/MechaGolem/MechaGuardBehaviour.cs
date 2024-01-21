@@ -24,6 +24,7 @@ public class MechaGuardBehaviour : StateMachineBehaviour
         mechaGolemBoss = animator.GetComponent<MechaGolemBoss>();
         mechaGolemBoss.PrepareSpikesProxy();
         mechaGolemBoss.StartExpulseSpikesChecking();
+        mechaGolemBoss.RotateSpikes(true);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

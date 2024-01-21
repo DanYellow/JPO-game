@@ -37,7 +37,7 @@ public class MechaChaseBehaviour : StateMachineBehaviour
         rb = animator.GetComponent<Rigidbody2D>();
         lookAtTarget = animator.GetComponent<LookAtTarget>();
         mechaGolemBoss = animator.GetComponent<MechaGolemBoss>();
-
+        mechaGolemBoss.canMove = true;
         target = GameObject.FindGameObjectWithTag("Player").transform;
 
         mechaGolemBoss.PrepareSpikesProxy();
@@ -62,11 +62,10 @@ public class MechaChaseBehaviour : StateMachineBehaviour
         {
             speed = enemyData.runSpeed;
         }
-
         if (Vector2.Distance(target.position, rb.position) < 25 && !mechaGolemBoss.isPlayerDead)
         {
 
-            if (Vector2.Distance(target.position, rb.position) > 5)
+            if (Vector2.Distance(target.position, rb.position) > 5 && mechaGolemBoss.canMove)
             {
                 Vector2 targetPos = new Vector2(target.position.x, rb.position.y);
                 Vector2 newPos = Vector2.MoveTowards(rb.position, targetPos, speed * Time.fixedDeltaTime);

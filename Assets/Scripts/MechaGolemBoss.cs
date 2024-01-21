@@ -18,6 +18,7 @@ public class MechaGolemBoss : MonoBehaviour
     [SerializeField]
     public bool isExpulsingSpikes = false;
     private bool isThrowingSpike = false;
+    public bool canMove = true;
     public bool isPlayerDead = false;
     private LookAtTarget lookAtTarget;
     private MechaProtect mechaProtect;
@@ -60,12 +61,12 @@ public class MechaGolemBoss : MonoBehaviour
 
         spikeSpawnBounds = mechaBossSpikeSpawnPrefab.GetComponentInChildren<SpriteMask>().bounds;
         mechaBossSpikeSpawn = Instantiate(
-            mechaBossSpikeSpawnPrefab, 
+            mechaBossSpikeSpawnPrefab,
             new Vector3(
                 0,
                 target.GetComponent<BoxCollider2D>().bounds.min.y - spikeSpawnBounds.size.y / 2,
                 0
-            ), 
+            ),
             mechaBossSpikeSpawnPrefab.transform.rotation
         );
         mechaBossSpikeSpawn.SetActive(false);
@@ -238,6 +239,7 @@ public class MechaGolemBoss : MonoBehaviour
     private IEnumerator ThrowSpike()
     {
         isThrowingSpike = true;
+        canMove = false;
 
         int[] anglesLimit = { -130, -50 };
         if (lookAtTarget.isFacingRight)
@@ -266,10 +268,7 @@ public class MechaGolemBoss : MonoBehaviour
         if (spike)
         {
             spike.parent = null;
-            listSpikesToThrow.ForEach((item) =>
-            {
-                item.GetComponent<RotateAround>().enabled = false;
-            });
+            RotateSpikes(false);
 
             spike.transform.rotation = GetSpikeOrientation(spike.transform.position);
 
@@ -283,11 +282,9 @@ public class MechaGolemBoss : MonoBehaviour
 
             listSpikesToThrow.Remove(spike);
 
-            listSpikesToThrow.ForEach((item) =>
-            {
-                item.GetComponent<RotateAround>().enabled = true;
-            });
+            RotateSpikes(true);
         }
+        canMove = true;
 
         var delay = delayBetweenThrows;
         // var delay = listSpikesToThrow.Count == 0 ? 0 : delayBetweenThrows * (1 / listSpikesToThrow.Count);
@@ -348,6 +345,14 @@ public class MechaGolemBoss : MonoBehaviour
         StopAllCoroutines();
     }
 
+    public void RotateSpikes(bool rotating = true)
+    {
+        listSpikesToThrow.ForEach((item) =>
+        {
+            item.GetComponent<RotateAround>().enabled = rotating;
+        });
+    }
+
     private Quaternion GetSpikeOrientation(Vector3 position)
     {
         Vector3 rotateDir = lookAtTarget.isFacingRight ? Vector3.down : Vector3.up;
@@ -375,7 +380,6 @@ public class MechaGolemBoss : MonoBehaviour
 
     public void PrepareSpikesProxy()
     {
-        // if (areSpikesPreparing || areSpikesReady) return;
         StartCoroutine(PrepareSpikes());
     }
 
@@ -394,12 +398,6 @@ public class MechaGolemBoss : MonoBehaviour
     public void StartExpulseSpikesChecking()
     {
         checkExpulsingSpikesAttackCo = StartCoroutine(CheckExpulsingSpikesAttack());
-
-        // if (!areSpikesReady) return;
-        // // isExpulsingSpikes = true;
-        // // bool randVal = Random.value < 0.05f;
-        // Debug.Log("Proxy " + listSpikesToThrow.Count);
-        // expulseSpikesCo = StartCoroutine(ExpulseSpikes());
     }
 
     public void StopExpulseSpikesChecking()
