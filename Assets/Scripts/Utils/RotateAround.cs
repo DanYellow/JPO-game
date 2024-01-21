@@ -19,29 +19,36 @@ public class RotateAround : MonoBehaviour
 
     public bool isAnticlockwise = true;
 
-    private void Awake() {
+    private void Awake()
+    {
         baseSpeed = rotationSpeed;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.RotateAround(
-            pivot.position, 
-            isAnticlockwise ? -pivot.forward : pivot.forward, 
-            Time.deltaTime * rotationSpeed
-        );
+        if (pivot != null)
+        {
+            transform.RotateAround(
+                pivot.position,
+                isAnticlockwise ? -pivot.forward : pivot.forward,
+                Time.deltaTime * rotationSpeed
+            );
+        }
     }
 
-    public float GetSpeed() {
+    public float GetSpeed()
+    {
         return rotationSpeed;
     }
 
-    public float GetBaseSpeed() {
+    public float GetBaseSpeed()
+    {
         return baseSpeed;
     }
 
-    public void SetSpeed(float speed) {
+    public void SetSpeed(float speed)
+    {
         rotationSpeed = speed;
     }
 }
