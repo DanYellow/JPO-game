@@ -34,7 +34,7 @@ public class MechaGuardBehaviour : StateMachineBehaviour
         if(trapCountdown <= 0) {
             trapCountdown = 1.5f;
             mechaGolemBoss.mechaBossSpikeSpawn.transform.position = new Vector3(
-                target.position.x - targetBc.bounds.size.x / 2,
+                target.position.x + (target.transform.right.normalized.x == -1 ? targetBc.bounds.size.x / 2 : -(targetBc.bounds.size.x / 2)),
                 mechaGolemBoss.mechaBossSpikeSpawn.transform.position.y,
                 0
             );
