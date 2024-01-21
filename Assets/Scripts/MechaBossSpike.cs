@@ -1,8 +1,8 @@
 using System;
-using System.Collections;
 using UnityEngine;
 
 // https://www.youtube.com/watch?v=IGDrF1Cq9Q0
+// https://www.youtube.com/watch?v=U1SdjGUFSAI
 
 public class MechaBossSpike : MonoBehaviour
 {
