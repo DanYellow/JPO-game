@@ -24,7 +24,7 @@ public class MechaBossSpikeSpawn : MonoBehaviour
         SpriteRenderer sr = indicator.GetComponent<SpriteRenderer>();
         endPosition = new Vector3(
             transform.position.x,
-            transform.position.y + sr.bounds.size.y,
+            transform.position.y + sr.bounds.size.y * 1.25f,
             0
         );
         indicatorOriginPosition = indicator.transform.localPosition;

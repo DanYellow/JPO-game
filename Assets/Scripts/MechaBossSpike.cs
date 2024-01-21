@@ -50,23 +50,8 @@ public class MechaBossSpike : MonoBehaviour
     {
         hasNotifyFarDistance = false;
         originPosition = transform.position;
-        // autoDestroyCo = StartCoroutine(AutoDestroy());
     }
-
-    private void OnDisable()
-    {
-        // StopCoroutine(autoDestroyCo);
-    }
-
-    private IEnumerator AutoDestroy()
-    {
-        yield return null;
-        // yield return new WaitUntil(() => {
-        //     return Vector3.Distance(transform.position, originPosition) >= 150;
-        // });
-        // gameObject.SetActive(false);
-    }
-
+    
     public void Destroy()
     {
         isDestroyed = true;
