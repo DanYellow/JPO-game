@@ -21,7 +21,7 @@ public class DeathZone : MonoBehaviour
             }
 
             IStunnable iStunnable = other.transform.GetComponent<IStunnable>();
-            iStunnable.Stun(2, () => {});
+            iStunnable.Stun(0.75f, () => {});
         }
         else if (other.transform.parent == null)
         {
