@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class TrapTrigger : MonoBehaviour
@@ -11,20 +10,30 @@ public class TrapTrigger : MonoBehaviour
 
     private bool isActivated = true;
     [SerializeField]
-    private float delayBeforeNextTrigger = 4.75f;
+    private float delayBeforeNextTrigger = 3.75f;
     private float timer = 0;
 
     Vector3 trapPosition;
+
+    [SerializeField]
+    private bool activatedOnStay = false;
 
     private void Awake()
     {
         bc = GetComponent<BoxCollider2D>();
 
         float size = 0;
-        if(trapPrefab.TryGetComponent(out Collider2D collider)) {
+        if (trapPrefab.TryGetComponent(out Collider2D collider))
+        {
             size = collider.bounds.size.y / 2;
-        } else if(trapPrefab.TryGetComponent(out SpriteMask spriteMask)) {
+        }
+        else if (trapPrefab.TryGetComponent(out SpriteMask spriteMask))
+        {
             size = spriteMask.bounds.size.y / 2;
+        }
+        else if (trapPrefab.TryGetComponent(out SpriteRenderer spriteRenderer))
+        {
+            size = spriteRenderer.bounds.size.y / 2;
         }
 
         trapPosition = new Vector3(
@@ -48,6 +57,17 @@ public class TrapTrigger : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player") && isActivated)
+        {
+            isActivated = false;
+            timer = 0;
+            trap.transform.position = trapPosition;
+            trap.SetActive(true);
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player") && isActivated && activatedOnStay)
         {
             isActivated = false;
             timer = 0;

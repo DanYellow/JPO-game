@@ -12,7 +12,7 @@ public class MechaBossSpikeSpawn : MonoBehaviour
     private GameObject indicator;
 
     private float timeElapsed = 0;
-    private float animationDuration = 0.85f;
+    private float animationDuration = 0.7f;
     private Vector3 endPosition;
     private Vector3 indicatorOriginPosition;
 
@@ -21,8 +21,6 @@ public class MechaBossSpikeSpawn : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        // StartCoroutine(ThrowSpike());
-
         SpriteRenderer sr = indicator.GetComponent<SpriteRenderer>();
         endPosition = new Vector3(
             transform.position.x,
@@ -45,17 +43,6 @@ public class MechaBossSpikeSpawn : MonoBehaviour
     private void OnDisable()
     {
         StopAllCoroutines();
-        // mechaBossSpike.disableNotify -= Disable;
-    }
-
-    private void Disable()
-    {
-        gameObject.SetActive(false);
-    }
-
-    public void Trigger()
-    {
-        // StartCoroutine(ThrowSpikeRoutine());
     }
 
     void Update()
