@@ -40,6 +40,8 @@ public class MechaGolemBoss : MonoBehaviour
 
     private Enemy boss;
 
+    public Bounds spikeSpawnBounds;
+
     private void Awake()
     {
         lookAtTarget = GetComponent<LookAtTarget>();
@@ -56,11 +58,12 @@ public class MechaGolemBoss : MonoBehaviour
             item.GetComponent<RotateAround>().enabled = false;
         });
 
+        spikeSpawnBounds = mechaBossSpikeSpawnPrefab.GetComponentInChildren<SpriteMask>().bounds;
         mechaBossSpikeSpawn = Instantiate(
             mechaBossSpikeSpawnPrefab, 
             new Vector3(
                 0,
-                target.GetComponent<BoxCollider2D>().bounds.min.y - mechaBossSpikeSpawnPrefab.GetComponent<SpriteMask>().bounds.size.y / 2,
+                target.GetComponent<BoxCollider2D>().bounds.min.y - spikeSpawnBounds.size.y / 2,
                 0
             ), 
             mechaBossSpikeSpawnPrefab.transform.rotation

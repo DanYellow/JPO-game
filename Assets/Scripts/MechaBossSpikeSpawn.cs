@@ -28,7 +28,7 @@ public class MechaBossSpikeSpawn : MonoBehaviour
             0
         );
         
-        spriteMask = GetComponent<SpriteMask>();
+        spriteMask = GetComponentInChildren<SpriteMask>();
     }
 
     private void OnEnable()
@@ -65,7 +65,7 @@ public class MechaBossSpikeSpawn : MonoBehaviour
     {
         Vector3 spikePosition = new Vector3(
             transform.position.x,
-            spriteMask.bounds.min.y,
+            spriteMask.bounds.min.y + (mechaBossSpikePrefab.GetComponent<SpriteRenderer>().bounds.size.y / 2),
             0
         );
 
