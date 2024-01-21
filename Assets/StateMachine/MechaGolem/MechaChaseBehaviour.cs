@@ -12,7 +12,7 @@ public class MechaChaseBehaviour : StateMachineBehaviour
     [SerializeField]
     private BoolEventChannel onTogglePauseEvent;
     [SerializeField]
-    private float guardCheckCountDownInitVal = 4.15f;
+    private float guardCheckCountDownInitVal = 3.95f;
     private float guardCheckCountDown;
     private bool hasFightStarted = false;
     private float throwAllSpikesAttackLifeThreshold = 0.52f;
@@ -51,7 +51,7 @@ public class MechaChaseBehaviour : StateMachineBehaviour
         if (guardCheckCountDown <= 0)
         {
             guardCheckCountDown = guardCheckCountDownInitVal;
-            animator.SetBool(AnimationStrings.isGuarding, Random.value < 0.25f);
+            animator.SetBool(AnimationStrings.isGuarding, Random.value <= 0.333f);
         }
 
         lookAtTarget.Face(target);
