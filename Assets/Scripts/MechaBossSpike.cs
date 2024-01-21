@@ -14,7 +14,7 @@ public class MechaBossSpike : MonoBehaviour
 
     private SpriteRenderer sr;
 
-    public Vector3 throwDir;
+    private Vector3 throwDir;
 
     public Quaternion origRotation { private set; get; }
     private Vector2 originPosition;
@@ -51,7 +51,7 @@ public class MechaBossSpike : MonoBehaviour
         hasNotifyFarDistance = false;
         originPosition = transform.position;
     }
-    
+
     public void Destroy()
     {
         isDestroyed = true;
@@ -59,6 +59,7 @@ public class MechaBossSpike : MonoBehaviour
 
     public void Throw(Vector3 _throwDir)
     {
+        _throwDir.z = 0;
         throwDir = _throwDir;
         throwing = true;
 
