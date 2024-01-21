@@ -31,7 +31,7 @@ public class RotateAround : MonoBehaviour
         {
             transform.RotateAround(
                 pivot.position,
-                isAnticlockwise ? -pivot.forward : pivot.forward,
+                isAnticlockwise ? -transform.forward : transform.forward,
                 Time.deltaTime * rotationSpeed
             );
         }
