@@ -12,7 +12,7 @@ public class MechaBossSpikeSpawn : MonoBehaviour
     private GameObject indicator;
 
     private float timeElapsed = 0;
-    private float animationDuration = 0.7f;
+    private float animationDuration = 0.6f;
     private Vector3 endPosition;
     private Vector3 indicatorOriginPosition;
 
@@ -27,8 +27,7 @@ public class MechaBossSpikeSpawn : MonoBehaviour
             transform.position.y + sr.bounds.size.y * 1.25f,
             0
         );
-        indicatorOriginPosition = indicator.transform.localPosition;
-
+        
         spriteMask = GetComponent<SpriteMask>();
     }
 
@@ -36,6 +35,8 @@ public class MechaBossSpikeSpawn : MonoBehaviour
     {
         timeElapsed = 0;
         indicator.SetActive(true);
+        indicatorOriginPosition = Vector3.zero;
+        endPosition.x = transform.position.x;
         indicator.transform.localPosition = indicatorOriginPosition;
         StartCoroutine(ThrowSpikeRoutine());
     }
@@ -74,7 +75,6 @@ public class MechaBossSpikeSpawn : MonoBehaviour
         mechaBossSpike.GetComponent<SpriteRenderer>().sortingOrder = -2;
         yield return Helpers.GetWait(0.2f);
         indicator.SetActive(false);
-        // Destroy(gameObject);
         mechaBossSpike.GetComponent<MechaBossSpike>().Throw(Vector3.up);
 
     }

@@ -37,8 +37,8 @@ public class TrapTrigger : MonoBehaviour
         }
 
         trapPosition = new Vector3(
-            bc.bounds.center.x,
-            bc.bounds.min.y - size,
+            transform.position.x,
+            transform.position.y - size,
             0
         );
         trap = Instantiate(trapPrefab, trapPosition, trapPrefab.transform.rotation);
@@ -60,6 +60,8 @@ public class TrapTrigger : MonoBehaviour
         {
             isActivated = false;
             timer = 0;
+            trapPosition.x = transform.position.x;
+
             trap.transform.position = trapPosition;
             trap.SetActive(true);
         }

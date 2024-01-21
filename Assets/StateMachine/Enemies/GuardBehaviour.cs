@@ -4,7 +4,6 @@ public class GuardBehaviour : StateMachineBehaviour
 {
     private Enemy enemy;
     private Guard guard;
-    private LookAtTarget lookAtTarget;
     private Transform target;
 
     private float guardCountdown = 0;

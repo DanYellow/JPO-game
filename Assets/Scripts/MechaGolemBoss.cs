@@ -25,6 +25,10 @@ public class MechaGolemBoss : MonoBehaviour
     private Transform target;
     private Invulnerable targetInvulnerable;
 
+    [SerializeField]
+    GameObject mechaBossSpikeSpawnPrefab;
+    public GameObject mechaBossSpikeSpawn;
+
     public float delayBetweenThrows = 3.75f;
     // Start is called before the first frame update
 
@@ -42,6 +46,7 @@ public class MechaGolemBoss : MonoBehaviour
         mechaProtect = GetComponent<MechaProtect>();
 
         target = GameObject.Find("Player").transform;
+
         targetInvulnerable = target.GetComponent<Invulnerable>();
         boss = GetComponent<Enemy>();
 
@@ -50,6 +55,17 @@ public class MechaGolemBoss : MonoBehaviour
             item.gameObject.SetActive(false);
             item.GetComponent<RotateAround>().enabled = false;
         });
+
+        mechaBossSpikeSpawn = Instantiate(
+            mechaBossSpikeSpawnPrefab, 
+            new Vector3(
+                0,
+                target.GetComponent<BoxCollider2D>().bounds.min.y - mechaBossSpikeSpawnPrefab.GetComponent<SpriteMask>().bounds.size.y / 2,
+                0
+            ), 
+            mechaBossSpikeSpawnPrefab.transform.rotation
+        );
+        // mechaBossSpikeSpawn.SetActive(false);
     }
 
     private void OnEnable()
@@ -74,6 +90,11 @@ public class MechaGolemBoss : MonoBehaviour
 
     private void Update()
     {
+
+        if (!mechaProtect.isGuarding)
+        {
+            mechaBossSpikeSpawn.SetActive(false);
+        }
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.N))
         {
@@ -91,11 +112,11 @@ public class MechaGolemBoss : MonoBehaviour
     private IEnumerator CheckShieldGeneration()
     {
         yield return null;
-        yield return Helpers.GetWait(0.85f);
         while (mechaProtect.isGuarding == false)
         {
-            // yield return Helpers.GetWait(1f); // For tests
-            yield return Helpers.GetWait(4.15f);
+
+            yield return Helpers.GetWait(1f); // For tests
+            // yield return Helpers.GetWait(4.15f);
             // bool randVal = Random.value < 0.5f;
             bool randVal = Random.value < 0.2f;
             needsToActivateShield = randVal;
@@ -154,8 +175,8 @@ public class MechaGolemBoss : MonoBehaviour
             rotateAround.enabled = true;
             rotateAround.SetSpeed(
                 Mathf.Lerp(
-                    rotateAroundBaseSpeed * 1.25f, 
-                    rotateAroundBaseSpeed, 
+                    rotateAroundBaseSpeed * 1.25f,
+                    rotateAroundBaseSpeed,
                     (float)boss.GetHealth() / boss.GetMaxHealth()
                 )
             );
@@ -170,7 +191,9 @@ public class MechaGolemBoss : MonoBehaviour
         if (listSpikesToThrow.Count == 0)
         {
             yield return StartCoroutine(PrepareSpikes());
-        } else {
+        }
+        else
+        {
             yield return Helpers.GetWait(3.5f);
         }
 
