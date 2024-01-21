@@ -6,6 +6,7 @@ public class MechaGuardBehaviour : StateMachineBehaviour
     private MechaGolemBoss mechaGolemBoss;
 
      private Transform target;
+     private PlayerMovements playerMovements;
      private BoxCollider2D targetBc;
      private float trapCountdown = 0;
 
@@ -16,11 +17,10 @@ public class MechaGuardBehaviour : StateMachineBehaviour
         mechaProtect.shield.SetActive(true);
         mechaProtect.isGuarding = true;
         mechaProtect.enabled = true;
-        target = GameObject.Find("Player").transform;
+        target = GameObject.FindWithTag("Player").transform;
 
         targetBc = target.GetComponent<BoxCollider2D>();
-
-
+        playerMovements = target.GetComponent<PlayerMovements>();
         mechaGolemBoss = animator.GetComponent<MechaGolemBoss>();
         mechaGolemBoss.PrepareSpikesProxy();
         mechaGolemBoss.StartExpulseSpikesChecking();
@@ -31,12 +31,11 @@ public class MechaGuardBehaviour : StateMachineBehaviour
     {
         trapCountdown -= Time.deltaTime;
 
-        if(trapCountdown <= 0) {
+        if(trapCountdown <= 0 && playerMovements.isGrounded) {
             trapCountdown = 1.5f;
             mechaGolemBoss.mechaBossSpikeSpawn.transform.position = new Vector3(
-                target.position.x + (target.transform.right.normalized.x == -1 ? targetBc.bounds.size.x / 2 : -(targetBc.bounds.size.x / 2)),
+                targetBc.bounds.center.x,
                 targetBc.bounds.min.y - mechaGolemBoss.spikeSpawnBounds.size.y / 2,
-                // mechaGolemBoss.mechaBossSpikeSpawn.transform.position.y,
                 0
             );
             mechaGolemBoss.mechaBossSpikeSpawn.SetActive(true);
@@ -49,6 +48,8 @@ public class MechaGuardBehaviour : StateMachineBehaviour
         mechaProtect.shield.SetActive(false);
         mechaGolemBoss.StopExpulseSpikes();
         mechaGolemBoss.StopExpulseSpikesChecking();
+        mechaGolemBoss.mechaBossSpikeSpawn.GetComponent<MechaBossSpikeSpawn>().DestroyChild();
+        mechaGolemBoss.mechaBossSpikeSpawn.SetActive(false);
         mechaProtect.isGuarding = false;
         mechaProtect.enabled = false;
     }

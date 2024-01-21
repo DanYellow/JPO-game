@@ -61,6 +61,10 @@ public class MechaBossSpikeSpawn : MonoBehaviour
         }
     }
 
+    public void DestroyChild() {
+        Destroy(mechaBossSpike);
+    }
+
     IEnumerator ThrowSpikeRoutine()
     {
         Vector3 spikePosition = new Vector3(

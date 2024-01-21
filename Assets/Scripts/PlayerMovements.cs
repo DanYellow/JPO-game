@@ -16,10 +16,9 @@ public class PlayerMovements : MonoBehaviour, IStunnable
     [SerializeField, ReadOnlyInspector]
     private bool isFacingRight = true;
 
-    [Space(15), Tooltip("Position checks"), SerializeField]
-    private bool isGrounded;
-
-    [SerializeField]
+    [field:SerializeField]
+    public bool isGrounded { private set; get; } = false;
+    [SerializeField, Tooltip("Position checks"), Space(15)]
     private LayerMask listGroundLayers;
     [SerializeField]
     private Transform groundCheck;

@@ -68,7 +68,7 @@ public class MechaGolemBoss : MonoBehaviour
             ), 
             mechaBossSpikeSpawnPrefab.transform.rotation
         );
-        // mechaBossSpikeSpawn.SetActive(false);
+        mechaBossSpikeSpawn.SetActive(false);
     }
 
     private void OnEnable()
@@ -93,11 +93,6 @@ public class MechaGolemBoss : MonoBehaviour
 
     private void Update()
     {
-
-        if (!mechaProtect.isGuarding)
-        {
-            mechaBossSpikeSpawn.SetActive(false);
-        }
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.N))
         {
@@ -118,10 +113,10 @@ public class MechaGolemBoss : MonoBehaviour
         while (mechaProtect.isGuarding == false)
         {
 
-            yield return Helpers.GetWait(1f); // For tests
-            // yield return Helpers.GetWait(4.15f);
+            // yield return Helpers.GetWait(1f); // For tests
+            yield return Helpers.GetWait(4.15f);
             // bool randVal = Random.value < 0.5f;
-            bool randVal = Random.value < 0.2f;
+            bool randVal = Random.value < 0.25f;
             needsToActivateShield = randVal;
         }
     }
