@@ -5,15 +5,11 @@ using UnityEngine;
 
 public class MechaGolemBoss : MonoBehaviour
 {
-    private Coroutine checkShieldGenerationCo;
     private Coroutine expulseSpikesCo;
     private Coroutine throwAllSpikesCo;
     private Coroutine throwSpikeCo;
     private Coroutine checkExpulsingSpikesAttackCo;
 
-    private bool isCheckingShieldGeneration = false;
-
-    public bool needsToActivateShield = false;
     private bool areSpikesReady = false;
     [SerializeField]
     public bool isExpulsingSpikes = false;
@@ -27,7 +23,9 @@ public class MechaGolemBoss : MonoBehaviour
     private Invulnerable targetInvulnerable;
 
     [SerializeField]
-    GameObject mechaBossSpikeSpawnPrefab;
+    private GameObject mechaBossSpikeSpawnPrefab;
+
+    [HideInInspector]
     public GameObject mechaBossSpikeSpawn;
 
     public float delayBetweenThrows = 3.75f;
@@ -41,6 +39,7 @@ public class MechaGolemBoss : MonoBehaviour
 
     private Enemy boss;
 
+    [HideInInspector]
     public Bounds spikeSpawnBounds;
 
     private void Awake()
@@ -84,7 +83,6 @@ public class MechaGolemBoss : MonoBehaviour
         StopExpulseSpikes();
         StopThrowAllSpikes();
         StopThrowSpike();
-        StopShieldGenerationChecking();
     }
 
     private void OnDisable()
@@ -101,25 +99,7 @@ public class MechaGolemBoss : MonoBehaviour
             // StartCoroutine(ThrowSpike());
         }
 
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            needsToActivateShield = true;
-        }
 #endif
-    }
-
-    private IEnumerator CheckShieldGeneration()
-    {
-        yield return null;
-        while (mechaProtect.isGuarding == false)
-        {
-
-            // yield return Helpers.GetWait(1f); // For tests
-            yield return Helpers.GetWait(4.15f);
-            // bool randVal = Random.value < 0.5f;
-            bool randVal = Random.value < 0.25f;
-            needsToActivateShield = randVal;
-        }
     }
 
     private IEnumerator CheckExpulsingSpikesAttack()
@@ -359,23 +339,6 @@ public class MechaGolemBoss : MonoBehaviour
         Quaternion rotation = Quaternion.LookRotation(target.position - position, transform.TransformDirection(rotateDir));
 
         return new Quaternion(0, 0, rotation.z, rotation.w);
-    }
-
-    public void StartShieldGenerationChecking()
-    {
-        if (isCheckingShieldGeneration) return;
-        checkShieldGenerationCo = StartCoroutine(CheckShieldGeneration());
-        isCheckingShieldGeneration = true;
-    }
-
-    public void StopShieldGenerationChecking()
-    {
-        isCheckingShieldGeneration = false;
-        needsToActivateShield = false;
-        if (checkShieldGenerationCo != null)
-        {
-            StopCoroutine(checkShieldGenerationCo);
-        }
     }
 
     public void PrepareSpikesProxy()

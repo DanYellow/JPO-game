@@ -15,8 +15,12 @@ public class MechaChaseBehaviour : StateMachineBehaviour
     [SerializeField]
     private BoolEventChannel onTogglePauseEvent;
 
-    private bool hasFightStarted = false;
+    [SerializeField]
+    private float guardCheckCountDownInitVal = 4.15f;
+    private float guardCheckCountDown;
 
+
+    private bool hasFightStarted = false;
     private float throwAllSpikesAttackThreshold = 0.52f;
 
     private void OnEnable()
@@ -41,17 +45,18 @@ public class MechaChaseBehaviour : StateMachineBehaviour
         target = GameObject.FindGameObjectWithTag("Player").transform;
 
         mechaGolemBoss.PrepareSpikesProxy();
+        guardCheckCountDown = guardCheckCountDownInitVal;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (!hasFightStarted) return;
-        mechaGolemBoss.StartShieldGenerationChecking();
 
-        if (mechaGolemBoss.needsToActivateShield)
-        {
-            animator.SetBool(AnimationStrings.isGuarding, true);
+        guardCheckCountDown -= Time.deltaTime;
+        if(guardCheckCountDown <= 0) {
+            guardCheckCountDown = guardCheckCountDownInitVal;
+            animator.SetBool(AnimationStrings.isGuarding, Random.value < 0.25f);
         }
 
         lookAtTarget.Face(target);
@@ -92,7 +97,6 @@ public class MechaChaseBehaviour : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        mechaGolemBoss.StopShieldGenerationChecking();
         mechaGolemBoss.StopThrowAllSpikes();
         mechaGolemBoss.StopThrowSpike();
     }
