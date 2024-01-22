@@ -19,6 +19,9 @@ public class MechaGolemBoss : MonoBehaviour
     private LookAtTarget lookAtTarget;
     private MechaProtect mechaProtect;
 
+    [SerializeField]
+    private Transform pivotPointSpike;
+
     private Transform target;
     private Invulnerable targetInvulnerable;
 
@@ -123,14 +126,14 @@ public class MechaGolemBoss : MonoBehaviour
         }
         listSpikesToThrow = new List<Transform>(listSpikes);
         var length = listSpikes.Count;
-        var radius = 7;
+        var radius = 20;
         areSpikesReady = false;
         canMove = false;
 
         for (var i = 0; i < length; i++)
         {
             var spike = listSpikes[i];
-            spike.parent = transform;
+            spike.parent = pivotPointSpike;
             spike.gameObject.SetActive(true);
             var val = Mathf.Lerp(0, 2 * Mathf.PI, (float)i / length);
             var pos = spike.localPosition;
