@@ -16,7 +16,7 @@ public class HealthBar : MonoBehaviour
     private Image damageBar;
 
     private float damageShrinkTimer;
-    private float damageShrinkTimerMax = 0.95f;
+    private float damageShrinkTimerMax = 1.05f;
 
     [SerializeField]
     private EnemyData enemyData;
