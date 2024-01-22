@@ -197,6 +197,10 @@ public class Enemy : MonoBehaviour, IDamageable
         healthBar.UpdateContent(currentLifePoints);
     }
 
+    public float GetHealthNormalized() {
+        return (float)currentLifePoints / enemyData.maxLifePoints;
+    }
+
     public int GetMaxHealth()
     {
         return enemyData.maxLifePoints;

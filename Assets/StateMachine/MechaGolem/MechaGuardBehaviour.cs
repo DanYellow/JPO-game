@@ -40,7 +40,7 @@ public class MechaGuardBehaviour : StateMachineBehaviour
         trapCountdown -= Time.deltaTime;
         restoreHeathCountdown -= Time.deltaTime;
 
-        float lifeRatio = (float)enemy.GetHealth() / enemy.GetMaxHealth();
+        float lifeRatio = enemy.GetHealthNormalized();
 
         if (restoreHeathCountdown <= 0 && lifeRatio > 0.33f) 
         {
