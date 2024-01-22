@@ -57,7 +57,6 @@ public class HealthBar : MonoBehaviour
 
     public void UpdateContent(int currentLifePoints)
     {
-        damageShrinkTimer = damageShrinkTimerMax;
         int _maxLifePoints = maxLifePoints ?? enemyData.maxLifePoints;
         if (displayWhenFull || currentLifePoints != _maxLifePoints)
         {
@@ -70,6 +69,7 @@ public class HealthBar : MonoBehaviour
 
         float rate = (float)currentLifePoints / _maxLifePoints;
         bar.fillAmount = rate;
+        damageShrinkTimer = damageShrinkTimerMax;
 
         if (lifePointsText != null)
         {
