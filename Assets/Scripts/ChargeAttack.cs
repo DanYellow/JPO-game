@@ -28,16 +28,15 @@ public class ChargeAttack : MonoBehaviour
     public bool isFacingRight { get; private set; } = false;
 
     [SerializeField]
-    private UnityEvent onBegin, onDone;
-
-    [SerializeField]
     private EnemyData enemyData;
-
 
     [SerializeField, Header("Events")]
     private UnityEvent onStunStart;
     [SerializeField]
     private UnityEvent onStunEnd;
+
+    [SerializeField]
+    private UnityEvent onBegin, onDone;
 
     private void Awake()
     {

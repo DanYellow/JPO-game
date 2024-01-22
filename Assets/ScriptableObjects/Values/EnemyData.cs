@@ -1,5 +1,6 @@
 
 using UnityEngine;
+using System;
 
 [CreateAssetMenu(fileName = "New Enemy Data", menuName = "ScriptableObjects/Values/EnemyData", order = 0)]
 public class EnemyData : CharacterData
@@ -36,6 +37,8 @@ public class EnemyData : CharacterData
     [SerializeField]
     private BoolEventChannel onInteractRangeEvent;
 
+     [HideInInspector]
+    public Action<bool> pauseNotify;
 
     private void OnEnable()
     {
@@ -47,6 +50,7 @@ public class EnemyData : CharacterData
     {
         runSpeed = isPaused ? 0 : baseRunSpeed;
         walkSpeed = isPaused ? 0 : baseWalkSpeed;
+        pauseNotify?.Invoke(isPaused);
     }
 
     private void OnDisable()
