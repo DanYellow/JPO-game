@@ -13,6 +13,12 @@ public class HealthBar : MonoBehaviour
     private Image bar;
 
     [SerializeField]
+    private Image damageBar;
+
+    private float damageShrinkTimer;
+    private float damageShrinkTimerMax = 0.95f;
+
+    [SerializeField]
     private EnemyData enemyData;
 
     [Header("Texts")]
@@ -29,10 +35,29 @@ public class HealthBar : MonoBehaviour
         {
             nameText.SetText(enemyData.name);
         }
+
+        if (damageBar != null)
+        {
+            damageBar.fillAmount = bar.fillAmount;
+        }
+    }
+
+    private void Update()
+    {
+        if (damageBar != null)
+        {
+            damageShrinkTimer -= Time.deltaTime;
+            if (damageShrinkTimer < 0 && bar.fillAmount < damageBar.fillAmount)
+            {
+                float shrinkSpeed = 1f;
+                damageBar.fillAmount -= shrinkSpeed * Time.deltaTime;
+            }
+        }
     }
 
     public void UpdateContent(int currentLifePoints)
     {
+        damageShrinkTimer = damageShrinkTimerMax;
         int _maxLifePoints = maxLifePoints ?? enemyData.maxLifePoints;
         if (displayWhenFull || currentLifePoints != _maxLifePoints)
         {

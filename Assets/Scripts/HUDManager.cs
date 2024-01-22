@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using TMPro;
 
 public class HUDManager : MonoBehaviour
@@ -20,7 +19,10 @@ public class HUDManager : MonoBehaviour
     public GameObject playerHUDUI;
 
     [SerializeField]
-    private VoidEventChannel onPlayerDeathVoidEventChannel;
+    private Image damageBar;
+
+    private float damageShrinkTimer;
+    private float damageShrinkTimerMax = 0.95f;
 
     [SerializeField]
     private TextMeshProUGUI lifePointsText;
@@ -31,8 +33,11 @@ public class HUDManager : MonoBehaviour
     private Image cooldownBackground;
     private TextMeshProUGUI cooldownText;
 
-    [SerializeField]
+    [SerializeField, Header("Events")]
     private StringEventChannel countdownEvent; 
+
+    [SerializeField]
+    private VoidEventChannel onPlayerDeathVoidEventChannel;
 
     private void Awake()
     {
@@ -47,12 +52,22 @@ public class HUDManager : MonoBehaviour
 
     private void Start() {
         UpdateHealth();
+        damageBar.fillAmount = healthBar.fillAmount;
         lifePointsText.SetText($"{playerStatsValue.currentLifePoints}/{playerStatsValue.maxLifePoints}");
+    }
+
+    private void Update()
+    {
+        damageShrinkTimer -= Time.deltaTime;
+        if (damageShrinkTimer < 0 && healthBar.fillAmount < damageBar.fillAmount)
+        {
+            float shrinkSpeed = 1f;
+            damageBar.fillAmount -= shrinkSpeed * Time.deltaTime;
+        }
     }
 
     private void OnEnable()
     {
-        SceneManager.sceneLoaded += OnSceneLoaded;
         onHealthUpdated.OnEventRaised += UpdateHealth;
         countdownEvent.OnEventRaised += UpdateCountdown;
     }
@@ -74,21 +89,16 @@ public class HUDManager : MonoBehaviour
 
     private void UpdateHealth(bool _tmp = false)
     {
+        damageShrinkTimer = damageShrinkTimerMax;
         float rate = (float) playerStatsValue.currentLifePoints / playerStatsValue.maxLifePoints;
         healthBar.fillAmount = rate;
         healthBar.color = healthBarGradient.Evaluate(rate);
         lifePointsText.SetText($"{playerStatsValue.currentLifePoints}/{playerStatsValue.maxLifePoints}");
     }
 
-
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-    }
-
     private void OnDisable()
     {
         onHealthUpdated.OnEventRaised -= UpdateHealth;
-        SceneManager.sceneLoaded -= OnSceneLoaded;
         countdownEvent.OnEventRaised -= UpdateCountdown;
     }
 }
