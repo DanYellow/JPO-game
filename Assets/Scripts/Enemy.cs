@@ -185,6 +185,18 @@ public class Enemy : MonoBehaviour, IDamageable
         return currentLifePoints;
     }
 
+    public void RestoreHealth(int amount)
+    {
+        currentLifePoints += amount;
+        currentLifePoints = Mathf.Clamp(
+            currentLifePoints,
+            0,
+            enemyData.maxLifePoints
+        );
+
+        healthBar.UpdateContent(currentLifePoints);
+    }
+
     public int GetMaxHealth()
     {
         return enemyData.maxLifePoints;

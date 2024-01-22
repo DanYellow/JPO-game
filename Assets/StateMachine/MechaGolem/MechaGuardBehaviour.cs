@@ -10,6 +10,8 @@ public class MechaGuardBehaviour : StateMachineBehaviour
     private PlayerMovements playerMovements;
     private BoxCollider2D targetBc;
     private float trapCountdown = 0;
+    private float restoreHeathCountdown = 0;
+    private float restoreHeathDelay = 6;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -28,16 +30,26 @@ public class MechaGuardBehaviour : StateMachineBehaviour
         mechaGolemBoss.PrepareSpikesProxy();
         mechaGolemBoss.StartExpulseSpikesChecking();
         mechaGolemBoss.RotateSpikes(true);
+
+        restoreHeathCountdown = restoreHeathDelay;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         trapCountdown -= Time.deltaTime;
+        restoreHeathCountdown -= Time.deltaTime;
+
+        float lifeRatio = (float)enemy.GetHealth() / enemy.GetMaxHealth();
+
+        if (restoreHeathCountdown <= 0 && lifeRatio > 0.33f) 
+        {
+            restoreHeathCountdown = restoreHeathDelay;
+            enemy.RestoreHealth(4);
+        }
 
         if (trapCountdown <= 0 && playerMovements.isGrounded)
         {
-            float lifeRatio = (float)enemy.GetHealth() / enemy.GetMaxHealth();
             trapCountdown = Mathf.Clamp(lifeRatio * 1.5f, 0.85f, 1.5f);
             mechaGolemBoss.mechaBossSpikeSpawn.transform.position = new Vector3(
                 targetBc.bounds.center.x,

@@ -17,6 +17,7 @@ public class MechaGolemBoss : MonoBehaviour
     public bool canGuardCheck = true;
     public bool canMove = true;
     public bool isPlayerDead = false;
+    private bool isPreparingSpikes = false;
     private LookAtTarget lookAtTarget;
     private MechaProtect mechaProtect;
 
@@ -121,10 +122,11 @@ public class MechaGolemBoss : MonoBehaviour
 
     private IEnumerator PrepareSpikes()
     {
-        if (listSpikesToThrow.Count > 0)
+        if (listSpikesToThrow.Count > 0 || isPreparingSpikes)
         {
             yield break;
         }
+        isPreparingSpikes = true;
         listSpikesToThrow = new List<Transform>(listSpikes);
         var length = listSpikes.Count;
         var radius = Mathf.Clamp(
@@ -175,6 +177,7 @@ public class MechaGolemBoss : MonoBehaviour
 
         yield return Helpers.GetWait(1.15f);
         areSpikesReady = true;
+        isPreparingSpikes = false;
     }
 
     private IEnumerator ExpulseSpikes()
