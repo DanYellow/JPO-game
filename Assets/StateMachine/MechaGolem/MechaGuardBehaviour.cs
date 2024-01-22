@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class MechaGuardBehaviour : StateMachineBehaviour
@@ -13,6 +12,9 @@ public class MechaGuardBehaviour : StateMachineBehaviour
     private float restoreHeathCountdown = 0;
     private float restoreHeathDelay = 5;
 
+    [SerializeField]
+    private ParticleSystem healParticles;
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -21,6 +23,7 @@ public class MechaGuardBehaviour : StateMachineBehaviour
         mechaProtect.isGuarding = true;
         mechaProtect.enabled = true;
         target = GameObject.FindWithTag("Player").transform;
+        healParticles  = animator.GetComponentInChildren<ParticleSystem>();
 
         enemy = animator.GetComponent<Enemy>();
 
@@ -32,6 +35,7 @@ public class MechaGuardBehaviour : StateMachineBehaviour
         mechaGolemBoss.RotateSpikes(true);
 
         restoreHeathCountdown = restoreHeathDelay;
+        healParticles.Play();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -70,5 +74,7 @@ public class MechaGuardBehaviour : StateMachineBehaviour
         mechaGolemBoss.mechaBossSpikeSpawn.SetActive(false);
         mechaProtect.isGuarding = false;
         mechaProtect.enabled = false;
+
+        healParticles.Stop(true, ParticleSystemStopBehavior.StopEmitting);
     }
 }

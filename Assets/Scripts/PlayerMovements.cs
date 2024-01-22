@@ -71,7 +71,7 @@ public class PlayerMovements : MonoBehaviour, IStunnable
     [SerializeField]
     private StringEventChannel onPlayerInputMapChange;
 
-    [SerializeField, Header("Events")]
+    [SerializeField]
     private UnityEvent onStunStart;
     [SerializeField]
     private UnityEvent onStunEnd;
