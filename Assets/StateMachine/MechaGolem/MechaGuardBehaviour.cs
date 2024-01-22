@@ -11,7 +11,7 @@ public class MechaGuardBehaviour : StateMachineBehaviour
     private BoxCollider2D targetBc;
     private float trapCountdown = 0;
     private float restoreHeathCountdown = 0;
-    private float restoreHeathDelay = 6;
+    private float restoreHeathDelay = 5;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -42,10 +42,10 @@ public class MechaGuardBehaviour : StateMachineBehaviour
 
         float lifeRatio = enemy.GetHealthNormalized();
 
-        if (restoreHeathCountdown <= 0 && lifeRatio > 0.33f) 
+        if (restoreHeathCountdown <= 0 && lifeRatio > 0.33f && lifeRatio < 1f) 
         {
             restoreHeathCountdown = restoreHeathDelay;
-            enemy.RestoreHealth(4);
+            enemy.RestoreHealth(2);
         }
 
         if (trapCountdown <= 0 && playerMovements.isGrounded)
