@@ -12,7 +12,7 @@ public class MechaChaseBehaviour : StateMachineBehaviour
     [SerializeField]
     private BoolEventChannel onTogglePauseEvent;
     [SerializeField]
-    private float guardCheckCountDownInitVal = 3.95f;
+    private float guardCheckCountDownInitVal = 3.35f;
     private float guardCheckCountDown;
     private bool hasFightStarted = false;
     private float throwAllSpikesAttackLifeThreshold = 0.52f;
@@ -27,7 +27,6 @@ public class MechaChaseBehaviour : StateMachineBehaviour
         hasFightStarted = arg0;
     }
 
-
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -40,6 +39,7 @@ public class MechaChaseBehaviour : StateMachineBehaviour
 
         mechaGolemBoss.PrepareSpikesProxy();
         guardCheckCountDown = guardCheckCountDownInitVal;
+        mechaGolemBoss.canGuardCheck = true;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -48,10 +48,10 @@ public class MechaChaseBehaviour : StateMachineBehaviour
         if (!hasFightStarted) return;
 
         guardCheckCountDown -= Time.deltaTime;
-        if (guardCheckCountDown <= 0)
+        if (guardCheckCountDown <= 0 && mechaGolemBoss.canGuardCheck)
         {
             guardCheckCountDown = guardCheckCountDownInitVal;
-            animator.SetBool(AnimationStrings.isGuarding, Random.value <= 0.333f);
+            animator.SetBool(AnimationStrings.isGuarding, Random.value <= 0.45f);
         }
 
         lookAtTarget.Face(target);
@@ -64,7 +64,7 @@ public class MechaChaseBehaviour : StateMachineBehaviour
         }
         if (Vector2.Distance(target.position, rb.position) < 25 && !mechaGolemBoss.isPlayerDead)
         {
-            if (Vector2.Distance(target.position, rb.position) > 5 && mechaGolemBoss.canMove)
+            if (Vector2.Distance(target.position, rb.position) > 8 && mechaGolemBoss.canMove)
             {
                 Vector2 targetPos = new Vector2(target.position.x, rb.position.y);
                 Vector2 newPos = Vector2.MoveTowards(rb.position, targetPos, speed * Time.fixedDeltaTime);

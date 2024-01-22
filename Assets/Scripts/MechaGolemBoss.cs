@@ -14,6 +14,7 @@ public class MechaGolemBoss : MonoBehaviour
     [SerializeField]
     public bool isExpulsingSpikes = false;
     private bool isThrowingSpike = false;
+    public bool canGuardCheck = true;
     public bool canMove = true;
     public bool isPlayerDead = false;
     private LookAtTarget lookAtTarget;
@@ -126,9 +127,14 @@ public class MechaGolemBoss : MonoBehaviour
         }
         listSpikesToThrow = new List<Transform>(listSpikes);
         var length = listSpikes.Count;
-        var radius = 20;
+        var radius = Mathf.Clamp(
+            22 * ((float)boss.GetHealth() / boss.GetMaxHealth()),
+            18,
+            22
+        );
         areSpikesReady = false;
         canMove = false;
+        canGuardCheck = true;
 
         for (var i = 0; i < length; i++)
         {
@@ -164,6 +170,7 @@ public class MechaGolemBoss : MonoBehaviour
                 )
             );
         }
+        yield return null;
         canMove = true;
 
         yield return Helpers.GetWait(1.15f);
@@ -222,6 +229,7 @@ public class MechaGolemBoss : MonoBehaviour
     {
         isThrowingSpike = true;
         canMove = false;
+        canGuardCheck = false;
 
         int[] anglesLimit = { -130, -50 };
         if (lookAtTarget.isFacingRight)
@@ -265,6 +273,7 @@ public class MechaGolemBoss : MonoBehaviour
             yield return Helpers.GetWait(0.55f);
         }
         canMove = true;
+        canGuardCheck = true;
         
         yield return Helpers.GetWait(delayBetweenThrows);
 
@@ -285,6 +294,7 @@ public class MechaGolemBoss : MonoBehaviour
         if (listSpikesToThrow.Count > 0)
         {
             isThrowingSpike = true;
+            canGuardCheck = false;
 
             listSpikesToThrow.ForEach((spike) =>
             {
@@ -298,11 +308,11 @@ public class MechaGolemBoss : MonoBehaviour
             });
 
             var lastSpike = listSpikesToThrow.Last();
-
             listSpikesToThrow.Clear();
 
             yield return new WaitUntil(() => Vector3.Distance(lastSpike.position, transform.position) >= 20);
-            yield return Helpers.GetWait(3.15f);
+            canGuardCheck = true;
+            yield return Helpers.GetWait(2.95f);
         }
 
         yield return StartCoroutine(PrepareSpikes());
