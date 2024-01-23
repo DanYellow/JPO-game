@@ -49,6 +49,9 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField]
     private float delayBeforeDeathEndEvent = 0;
 
+    [SerializeField]
+    private LayerMask layerAfterDeath;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -125,6 +128,9 @@ public class Enemy : MonoBehaviour, IDamageable
         onDeath?.Invoke();
         deathNotify?.Invoke(gameObject.transform.root.gameObject);
         rb.velocity = Vector2.zero;
+
+        gameObject.layer = Helpers.GetLayerIndex(layerAfterDeath.value);
+
         if (animator)
         {
             animator.SetTrigger(AnimationStrings.isDead);
