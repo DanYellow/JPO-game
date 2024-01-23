@@ -15,7 +15,7 @@ public class MechaGolemBoss : MonoBehaviour
     public bool isExpulsingSpikes = false;
     private bool isThrowingSpike = false;
     public bool canGuardCheck = true;
-    public bool canMove = true;
+    public bool canMove = false;
     public bool isPlayerDead = false;
     private bool isPreparingSpikes = false;
     private LookAtTarget lookAtTarget;
@@ -33,7 +33,7 @@ public class MechaGolemBoss : MonoBehaviour
     [HideInInspector]
     public GameObject mechaBossSpikeSpawn;
 
-    public float delayBetweenThrows = 3.75f;
+    public float throwCycleCooldown = 3.25f;
     // Start is called before the first frame update
 
     [SerializeField]
@@ -189,7 +189,7 @@ public class MechaGolemBoss : MonoBehaviour
     {
         if (listSpikesToThrow.Count == 0)
         {
-            yield return StartCoroutine(PrepareSpikes());
+            // yield return StartCoroutine(PrepareSpikes());
         }
         else
         {
@@ -237,8 +237,7 @@ public class MechaGolemBoss : MonoBehaviour
 
     private IEnumerator ThrowSpike()
     {
-        isThrowingSpike = true;
-        canMove = false;
+        
         canGuardCheck = false;
 
         int[] anglesLimit = { 30, 150 };
@@ -258,6 +257,8 @@ public class MechaGolemBoss : MonoBehaviour
 
             return indexSpike > -1 && targetInvulnerable.isInvulnerable == false;
         });
+        isThrowingSpike = true;
+        canMove = false;
         spike = listSpikesToThrow[indexSpike];
 
         if (spike)
@@ -274,7 +275,6 @@ public class MechaGolemBoss : MonoBehaviour
             yield return Helpers.GetWait(0.65f);
             spike.GetComponent<MechaBossSpike>().Throw(throwDir);
 
-            // yield return Helpers.GetWait(0.55f);
             RotateSpikes(true);
         }
 
@@ -284,9 +284,8 @@ public class MechaGolemBoss : MonoBehaviour
             {
                 yield return new WaitUntil(() => Vector3.Distance(spike.position, transform.position) >= 20);
             }
+            yield return Helpers.GetWait(throwCycleCooldown);
             yield return StartCoroutine(PrepareSpikes());
-        } else {
-            yield return Helpers.GetWait(delayBetweenThrows);
         }
 
         canGuardCheck = true;
@@ -320,7 +319,7 @@ public class MechaGolemBoss : MonoBehaviour
             yield return Helpers.GetWait(2.95f);
         }
 
-        yield return StartCoroutine(PrepareSpikes());
+        // yield return StartCoroutine(PrepareSpikes());
         isThrowingSpike = false;
     }
 

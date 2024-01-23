@@ -20,6 +20,5 @@ public class MechaBossSetupBehaviour : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         mechaGolemBoss.enabled = true;
-        mechaGolemBoss.PrepareSpikesProxy();
     }
 }

@@ -17,6 +17,9 @@ public class MechaChaseBehaviour : StateMachineBehaviour
     private bool hasFightStarted = false;
     private float throwAllSpikesAttackLifeThreshold = 0.52f;
 
+    private float throwSpikeCountdown = 0;
+    private float throwSpikeCountdownMax = 3.5f;
+
     private void OnEnable()
     {
         onTogglePauseEvent.OnEventRaised += FightStart;
@@ -33,13 +36,17 @@ public class MechaChaseBehaviour : StateMachineBehaviour
         enemy = animator.GetComponent<Enemy>();
         rb = animator.GetComponent<Rigidbody2D>();
         lookAtTarget = animator.GetComponent<LookAtTarget>();
+        
         mechaGolemBoss = animator.GetComponent<MechaGolemBoss>();
         mechaGolemBoss.canMove = true;
+        mechaGolemBoss.canGuardCheck = true;
+        
+        mechaGolemBoss.PrepareSpikesProxy();
+
         target = GameObject.FindGameObjectWithTag("Player").transform;
 
-        mechaGolemBoss.PrepareSpikesProxy();
         guardCheckCountDown = guardCheckCountDownInitVal;
-        mechaGolemBoss.canGuardCheck = true;
+        throwSpikeCountdown = throwSpikeCountdownMax;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -48,11 +55,12 @@ public class MechaChaseBehaviour : StateMachineBehaviour
         if (!hasFightStarted) return;
 
         guardCheckCountDown -= Time.deltaTime;
-        if (guardCheckCountDown <= 0 && mechaGolemBoss.canGuardCheck)
-        {
-            guardCheckCountDown = guardCheckCountDownInitVal;
-            animator.SetBool(AnimationStrings.isGuarding, Random.value <= 0.45f);
-        }
+        throwSpikeCountdown -= Time.deltaTime;
+        // if (guardCheckCountDown <= 0 && mechaGolemBoss.canGuardCheck)
+        // {
+        //     guardCheckCountDown = guardCheckCountDownInitVal;
+        //     animator.SetBool(AnimationStrings.isGuarding, Random.value <= 0.45f);
+        // }
 
         lookAtTarget.Face(target);
 
@@ -62,6 +70,7 @@ public class MechaChaseBehaviour : StateMachineBehaviour
         {
             speed = enemyData.runSpeed;
         }
+        Debug.Log("mechaGolemBoss.canMove: " + mechaGolemBoss.canMove);
         if (Vector2.Distance(target.position, rb.position) < 25 && !mechaGolemBoss.isPlayerDead)
         {
             if (Vector2.Distance(target.position, rb.position) > 8 && mechaGolemBoss.canMove)
@@ -73,11 +82,13 @@ public class MechaChaseBehaviour : StateMachineBehaviour
 
             if (Vector2.Distance(target.position, rb.position) < 10 && (float)enemy.GetHealth() / enemy.GetMaxHealth() <= throwAllSpikesAttackLifeThreshold)
             {
-                mechaGolemBoss.ThrowAllSpikesProxy();
+                // mechaGolemBoss.ThrowAllSpikesProxy();
             }
-            else
+            else if (throwSpikeCountdown <= 0)
             {
+                throwSpikeCountdown = throwSpikeCountdownMax;
                 mechaGolemBoss.ThrowSpikeProxy();
+                // mechaGolemBoss.ThrowSpikeProxy();
             }
 
         }
