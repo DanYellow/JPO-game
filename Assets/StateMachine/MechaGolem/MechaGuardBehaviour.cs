@@ -9,6 +9,7 @@ public class MechaGuardBehaviour : StateMachineBehaviour
     private PlayerMovements playerMovements;
     private BoxCollider2D targetBc;
     private float trapCountdown = 0;
+    private float trapCountdownMax = 3.5f;
     private float restoreHeathCountdown = 0;
     private float restoreHeathDelay = 7;
 
@@ -57,7 +58,7 @@ public class MechaGuardBehaviour : StateMachineBehaviour
 
         if (trapCountdown <= 0 && playerMovements.isGrounded)
         {
-            trapCountdown = Mathf.Clamp(lifeRatio * 1.5f, 0.85f, 1.5f);
+            trapCountdown = Mathf.Clamp(lifeRatio * trapCountdownMax, 1.5f, trapCountdownMax);
             mechaGolemBoss.mechaBossSpikeSpawn.transform.position = new Vector3(
                 targetBc.bounds.center.x,
                 targetBc.bounds.min.y - mechaGolemBoss.spikeSpawnBounds.size.y / 2,
