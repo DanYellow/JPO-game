@@ -12,7 +12,7 @@ public class MechaChaseBehaviour : StateMachineBehaviour
     [SerializeField]
     private BoolEventChannel onTogglePauseEvent;
     [SerializeField]
-    private float guardCheckCountDownInitVal = 3.35f;
+    private float guardCheckCountDownInitVal = 1.35f; // 3.35f
     private float guardCheckCountDown;
     private bool hasFightStarted = false;
     private float throwAllSpikesAttackLifeThreshold = 0.52f;

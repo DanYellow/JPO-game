@@ -13,6 +13,9 @@ public class MechaGuardBehaviour : StateMachineBehaviour
     private float restoreHeathCountdown = 0;
     private float restoreHeathDelay = 7;
 
+    private float expulseSpikeCountdown = 0;
+    private float expulseSpikeCountdownMax = 3.05f;
+
     [SerializeField]
     private ParticleSystem healParticles;
 
@@ -24,7 +27,7 @@ public class MechaGuardBehaviour : StateMachineBehaviour
         mechaProtect.isGuarding = true;
         mechaProtect.enabled = true;
         target = GameObject.FindWithTag("Player").transform;
-        healParticles  = animator.GetComponentInChildren<ParticleSystem>();
+        healParticles = animator.GetComponentInChildren<ParticleSystem>();
 
         enemy = animator.GetComponent<Enemy>();
 
@@ -32,11 +35,11 @@ public class MechaGuardBehaviour : StateMachineBehaviour
         playerMovements = target.GetComponent<PlayerMovements>();
         mechaGolemBoss = animator.GetComponent<MechaGolemBoss>();
         mechaGolemBoss.PrepareSpikesProxy();
-        mechaGolemBoss.StartExpulseSpikesChecking();
-        mechaGolemBoss.RotateSpikes(true);
+        // mechaGolemBoss.StartExpulseSpikesChecking();
+        // mechaGolemBoss.RotateSpikes(true);
 
         restoreHeathCountdown = restoreHeathDelay;
-        
+        expulseSpikeCountdown = expulseSpikeCountdownMax;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -44,16 +47,28 @@ public class MechaGuardBehaviour : StateMachineBehaviour
     {
         trapCountdown -= Time.deltaTime;
         restoreHeathCountdown -= Time.deltaTime;
+        expulseSpikeCountdown -= Time.deltaTime;
 
         float lifeRatio = enemy.GetHealthNormalized();
 
-        if (restoreHeathCountdown <= 0 && lifeRatio > 0.25f && lifeRatio < 1f) 
+        if (restoreHeathCountdown <= 0 && lifeRatio > 0.25f && lifeRatio < 1f)
         {
             restoreHeathCountdown = restoreHeathDelay;
-            if(!healParticles.isEmitting) {
+            if (!healParticles.isEmitting)
+            {
                 healParticles.Play();
             }
             enemy.RestoreHealth(2);
+        }
+
+        if (expulseSpikeCountdown <= 0)
+        {
+            // Debug.Log("Hllo");
+            // expulseSpikeCountdown = expulseSpikeCountdownMax;
+            // if (Random.value < 0.5f && !mechaGolemBoss.isExpulsingSpikes)
+            // {
+            //     mechaGolemBoss.ExpulseSpikesRoutine();
+            // }
         }
 
         if (trapCountdown <= 0 && playerMovements.isGrounded)
@@ -72,8 +87,9 @@ public class MechaGuardBehaviour : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         mechaProtect.shield.SetActive(false);
-        mechaGolemBoss.StopExpulseSpikes();
-        mechaGolemBoss.StopExpulseSpikesChecking();
+        // mechaGolemBoss.StopExpulseSpikes();
+        // mechaGolemBoss.StopExpulseSpikesChecking();
+        // mechaGolemBoss.ResetAllSpikes();
         mechaGolemBoss.mechaBossSpikeSpawn.GetComponent<MechaBossSpikeSpawn>().DestroyChild();
         mechaGolemBoss.mechaBossSpikeSpawn.SetActive(false);
         mechaProtect.isGuarding = false;
