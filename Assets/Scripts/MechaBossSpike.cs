@@ -16,6 +16,8 @@ public class MechaBossSpike : MonoBehaviour
 
     private Vector3 throwDir;
 
+    private Collider2D collider;
+
     public Quaternion origRotation { private set; get; }
     private Vector2 originPosition;
     private bool hasNotifyFarDistance = false;
@@ -26,6 +28,7 @@ public class MechaBossSpike : MonoBehaviour
     private void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
+        collider = GetComponent<Collider2D>();
         origRotation = transform.rotation;
     }
 

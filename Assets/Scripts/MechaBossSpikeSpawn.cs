@@ -78,10 +78,12 @@ public class MechaBossSpikeSpawn : MonoBehaviour
 
         mechaBossSpike = Instantiate(mechaBossSpikePrefab.gameObject, spikePosition, mechaBossSpikePrefab.transform.rotation);
         mechaBossSpike.GetComponent<SpriteRenderer>().sortingOrder = -2;
+        mechaBossSpike.GetComponent<Collider2D>().enabled = false;
         // st.Stop();
         // Debug.Log(string.Format("MyMethod took {0} ms to complete", st.ElapsedMilliseconds));
         yield return Helpers.GetWait(0.15f);
         indicator.SetActive(false);
+        mechaBossSpike.GetComponent<Collider2D>().enabled = true;
         mechaBossSpike.GetComponent<MechaBossSpike>().Throw(Vector3.up);
     }
 }

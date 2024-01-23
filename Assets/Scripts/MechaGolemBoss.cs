@@ -190,7 +190,7 @@ public class MechaGolemBoss : MonoBehaviour
         {
             yield break;
         }
-        
+
         isExpulsingSpikes = true;
         canMove = false;
 
@@ -290,7 +290,7 @@ public class MechaGolemBoss : MonoBehaviour
         isThrowingSpike = false;
     }
 
-    public IEnumerator ThrowAllSpikes()
+    private IEnumerator ThrowAllSpikes()
     {
         if (listSpikesToThrow.Count > 0)
         {
@@ -312,11 +312,11 @@ public class MechaGolemBoss : MonoBehaviour
             listSpikesToThrow.Clear();
 
             yield return new WaitUntil(() => Vector3.Distance(lastSpike.position, transform.position) >= 20);
-            canGuardCheck = true;
-            yield return Helpers.GetWait(2.95f);
+            yield return Helpers.GetWait(2f);
         }
 
-        // yield return StartCoroutine(PrepareSpikes());
+        yield return StartCoroutine(PrepareSpikes());
+        canGuardCheck = true;
         isThrowingSpike = false;
     }
 
@@ -361,7 +361,7 @@ public class MechaGolemBoss : MonoBehaviour
         throwSpikeCo = StartCoroutine(ThrowSpike());
     }
 
-    public void ThrowAllSpikesProxy()
+    public void ThrowAllSpikesRoutine()
     {
         if (!areSpikesReady || isThrowingSpike) return;
         throwAllSpikesCo = StartCoroutine(ThrowAllSpikes());
@@ -414,12 +414,5 @@ public class MechaGolemBoss : MonoBehaviour
     public void ExpulseSpikesRoutine()
     {
         StartCoroutine(ExpulseSpikes());
-    }
-
-    public void PrepareSpikesRoutine()
-    {
-        // if(!isPreparingSpikes) {
-        //     StartCoroutine(PrepareSpikes());
-        // }
     }
 }

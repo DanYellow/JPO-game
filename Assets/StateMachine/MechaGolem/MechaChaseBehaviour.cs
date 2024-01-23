@@ -12,7 +12,7 @@ public class MechaChaseBehaviour : StateMachineBehaviour
     [SerializeField]
     private BoolEventChannel onTogglePauseEvent;
     [SerializeField]
-    private float guardCheckCountDownInitVal = 1.35f; // 3.85f
+    private float guardCheckCountDownInitVal = 3.85f;
     private float guardCheckCountDown;
     private bool hasFightStarted = false;
     private float throwAllSpikesAttackLifeThreshold = 0.52f;
@@ -36,11 +36,11 @@ public class MechaChaseBehaviour : StateMachineBehaviour
         enemy = animator.GetComponent<Enemy>();
         rb = animator.GetComponent<Rigidbody2D>();
         lookAtTarget = animator.GetComponent<LookAtTarget>();
-        
+
         mechaGolemBoss = animator.GetComponent<MechaGolemBoss>();
         mechaGolemBoss.canMove = true;
         mechaGolemBoss.canGuardCheck = true;
-        
+
         mechaGolemBoss.PrepareSpikesProxy();
 
         target = GameObject.FindGameObjectWithTag("Player").transform;
@@ -80,19 +80,23 @@ public class MechaChaseBehaviour : StateMachineBehaviour
                 rb.MovePosition(newPos);
             }
 
-            if (
-                Vector2.Distance(target.position, rb.position) < 10 && 
-                (float)enemy.GetHealth() / enemy.GetMaxHealth() <= throwAllSpikesAttackLifeThreshold &&
-                throwSpikeCountdown <= 0
-            )
-            {
-                // mechaGolemBoss.ThrowAllSpikesProxy();
-            }
-            else if (throwSpikeCountdown <= 0)
+            if (throwSpikeCountdown <= 0)
             {
                 throwSpikeCountdown = throwSpikeCountdownMax;
-                mechaGolemBoss.ThrowSpikeRoutine();
+                if (
+                    Vector2.Distance(target.position, rb.position) < 10 &&
+                    (float)enemy.GetHealth() / enemy.GetMaxHealth() <= throwAllSpikesAttackLifeThreshold
+                )
+                {
+                    mechaGolemBoss.ThrowAllSpikesRoutine();
+                }
+                else
+                {
+                    mechaGolemBoss.ThrowSpikeRoutine();
+                }
             }
+
+
         }
 
         animator.SetFloat(AnimationStrings.velocityX, Mathf.Abs(rb.velocity.x));
