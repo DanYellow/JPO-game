@@ -43,6 +43,7 @@ public class MechaGolemBoss : MonoBehaviour
     private List<Transform> listSpikesToThrow = new List<Transform>();
 
     private Enemy boss;
+    private int nbPrepareCalls = 0;
 
     [HideInInspector]
     public Bounds spikeSpawnBounds;
@@ -136,12 +137,13 @@ public class MechaGolemBoss : MonoBehaviour
         );
         areSpikesReady = false;
         canMove = false;
-        canGuardCheck = true;
+        canGuardCheck = false;
 
         for (var i = 0; i < length; i++)
         {
             var spike = listSpikes[i];
             spike.parent = pivotPointSpike;
+            spike.name = $"nb{i} - p:{nbPrepareCalls}";
             spike.gameObject.SetActive(true);
             var val = Mathf.Lerp(0, 2 * Mathf.PI, (float)i / length);
             var pos = spike.localPosition;
@@ -156,6 +158,7 @@ public class MechaGolemBoss : MonoBehaviour
 
             yield return Helpers.GetWait(0.15f);
         }
+        nbPrepareCalls++;
 
         for (var i = 0; i < length; i++)
         {
@@ -174,6 +177,7 @@ public class MechaGolemBoss : MonoBehaviour
         }
         yield return null;
         canMove = true;
+        canGuardCheck = true;
 
         yield return Helpers.GetWait(1.05f);
         areSpikesReady = true;
@@ -216,10 +220,10 @@ public class MechaGolemBoss : MonoBehaviour
             item.GetComponent<MechaBossSpike>().Throw(throwDir);
         }
 
-        var lastSpike = listSpikesToThrow?.Last();
+        var lastSpike = listSpikesToThrow.DefaultIfEmpty(null).Last();
         listSpikesToThrow.Clear();
 
-        if (lastSpike)
+        if (lastSpike != null)
         {
             yield return new WaitUntil(() => Vector3.Distance(transform.position, lastSpike.position) >= 150);
         }
@@ -326,8 +330,10 @@ public class MechaGolemBoss : MonoBehaviour
             spike.GetComponent<RotateAround>().enabled = false;
             spike.GetComponent<Collider2D>().enabled = false;
             spike.GetComponent<MechaBossSpike>().Destroy();
+        
             spike.parent = null;
         });
+
         StopAllCoroutines();
     }
 

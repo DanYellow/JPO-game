@@ -74,10 +74,12 @@ public class MechaChaseBehaviour : StateMachineBehaviour
             if (Vector2.Distance(target.position, rb.position) < 10 && (float)enemy.GetHealth() / enemy.GetMaxHealth() <= throwAllSpikesAttackLifeThreshold)
             {
                 mechaGolemBoss.ThrowAllSpikesProxy();
-                return;
+            }
+            else
+            {
+                mechaGolemBoss.ThrowSpikeProxy();
             }
 
-            mechaGolemBoss.ThrowSpikeProxy();
         }
 
         animator.SetFloat(AnimationStrings.velocityX, Mathf.Abs(rb.velocity.x));
