@@ -234,12 +234,7 @@ public class MechaGolemBoss : MonoBehaviour
         canMove = false;
         canGuardCheck = false;
 
-        int[] anglesLimit = { -130, -50 };
-        if (lookAtTarget.isFacingRight)
-        {
-            anglesLimit[0] = 0;
-            anglesLimit[1] = 90;
-        }
+        int[] anglesLimit = { 30, 150 };
 
         Transform spike = null;
         int indexSpike = -1;
@@ -248,8 +243,8 @@ public class MechaGolemBoss : MonoBehaviour
         {
             indexSpike = listSpikesToThrow.FindIndex(item =>
             {
-                Vector2 distance = item.position - transform.position;
-                float angle = Vector2.SignedAngle(transform.right, distance);
+                Vector2 distance = item.position - pivotPointSpike.position;
+                float angle = Vector2.SignedAngle(pivotPointSpike.right, distance);
 
                 return angle >= anglesLimit[0] && angle <= anglesLimit[1];
             });
