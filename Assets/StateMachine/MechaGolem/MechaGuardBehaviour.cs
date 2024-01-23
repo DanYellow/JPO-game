@@ -10,8 +10,8 @@ public class MechaGuardBehaviour : StateMachineBehaviour
     private BoxCollider2D targetBc;
     private float trapCountdown = 0;
     private float trapCountdownMax = 3.5f;
-    private float restoreHeathCountdown = 0;
-    private float restoreHeathDelay = 7;
+    private float restoreHealthCountdown = 0;
+    private float restoreHealthDelay = 7;
 
     private float expulseSpikeCountdown = 0;
     private float expulseSpikeCountdownMax = 3.05f;
@@ -38,7 +38,7 @@ public class MechaGuardBehaviour : StateMachineBehaviour
         // mechaGolemBoss.StartExpulseSpikesChecking();
         // mechaGolemBoss.RotateSpikes(true);
 
-        restoreHeathCountdown = restoreHeathDelay;
+        restoreHealthCountdown = restoreHealthDelay;
         expulseSpikeCountdown = expulseSpikeCountdownMax;
     }
 
@@ -46,14 +46,15 @@ public class MechaGuardBehaviour : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         trapCountdown -= Time.deltaTime;
-        restoreHeathCountdown -= Time.deltaTime;
+        restoreHealthCountdown -= Time.deltaTime;
         expulseSpikeCountdown -= Time.deltaTime;
 
         float lifeRatio = enemy.GetHealthNormalized();
-
-        if (restoreHeathCountdown <= 0 && lifeRatio > 0.25f && lifeRatio < 1f)
+        bool isInRestoreHealthRange = lifeRatio >= 0.25f && lifeRatio <= 1f;
+        
+        if (restoreHealthCountdown <= 0 && isInRestoreHealthRange)
         {
-            restoreHeathCountdown = restoreHeathDelay;
+            restoreHealthCountdown = restoreHealthDelay;
             if (!healParticles.isEmitting)
             {
                 healParticles.Play();
@@ -87,9 +88,7 @@ public class MechaGuardBehaviour : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         mechaProtect.shield.SetActive(false);
-        // mechaGolemBoss.StopExpulseSpikes();
-        // mechaGolemBoss.StopExpulseSpikesChecking();
-        // mechaGolemBoss.ResetAllSpikes();
+        mechaGolemBoss.ExpulseSpikesRoutine();
         mechaGolemBoss.mechaBossSpikeSpawn.GetComponent<MechaBossSpikeSpawn>().DestroyChild();
         mechaGolemBoss.mechaBossSpikeSpawn.SetActive(false);
         mechaProtect.isGuarding = false;
