@@ -175,7 +175,7 @@ public class MechaGolemBoss : MonoBehaviour
         yield return null;
         canMove = true;
 
-        yield return Helpers.GetWait(1.15f);
+        yield return Helpers.GetWait(1.05f);
         areSpikesReady = true;
         isPreparingSpikes = false;
     }
@@ -225,6 +225,8 @@ public class MechaGolemBoss : MonoBehaviour
         }
         yield return Helpers.GetWait(2.85f);
 
+        RotateSpikes(true);
+
         isExpulsingSpikes = false;
     }
 
@@ -267,8 +269,8 @@ public class MechaGolemBoss : MonoBehaviour
             yield return Helpers.GetWait(0.65f);
             spike.GetComponent<MechaBossSpike>().Throw(throwDir);
 
+            // yield return Helpers.GetWait(0.55f);
             RotateSpikes(true);
-            yield return Helpers.GetWait(0.55f);
         }
         canMove = true;
         canGuardCheck = true;

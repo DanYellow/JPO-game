@@ -10,7 +10,7 @@ public class MechaGuardBehaviour : StateMachineBehaviour
     private BoxCollider2D targetBc;
     private float trapCountdown = 0;
     private float restoreHeathCountdown = 0;
-    private float restoreHeathDelay = 5;
+    private float restoreHeathDelay = 7;
 
     [SerializeField]
     private ParticleSystem healParticles;
