@@ -35,7 +35,7 @@ public class MechaGuardBehaviour : StateMachineBehaviour
         mechaGolemBoss.RotateSpikes(true);
 
         restoreHeathCountdown = restoreHeathDelay;
-        healParticles.Play();
+        
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -46,9 +46,12 @@ public class MechaGuardBehaviour : StateMachineBehaviour
 
         float lifeRatio = enemy.GetHealthNormalized();
 
-        if (restoreHeathCountdown <= 0 && lifeRatio > 0.33f && lifeRatio < 1f) 
+        if (restoreHeathCountdown <= 0 && lifeRatio > 0.25f && lifeRatio < 1f) 
         {
             restoreHeathCountdown = restoreHeathDelay;
+            if(!healParticles.isEmitting) {
+                healParticles.Play();
+            }
             enemy.RestoreHealth(2);
         }
 
