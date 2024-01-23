@@ -23,6 +23,7 @@ public class CreditsManager : MonoBehaviour
     }
 
     private void ShowCredits() {
+        Cursor.visible = true;
         lastCheckpoint.CurrentValue = new Vector2(-15.02f, -3.43f);
         creditsUI.SetActive(true);
         onPlayerInputMapChange.Raise(ActionMapName.UIGameOverAndCredits);

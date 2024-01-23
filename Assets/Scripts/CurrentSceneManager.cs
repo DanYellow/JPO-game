@@ -21,6 +21,7 @@ public class CurrentSceneManager : MonoBehaviour
     void Start()
     {
         Initialize();
+        Cursor.visible = false;
     }
 
     private void Initialize()

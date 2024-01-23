@@ -41,7 +41,7 @@ public class GameOverManager : MonoBehaviour
     private void DisplayGameOverScreen()
     {        
         onPlayerInputMapChange.Raise(ActionMapName.UIGameOverAndCredits);
-        StartCoroutine(DisplayGameOverScreenProxy());
+        StartCoroutine(DisplayGameOverScreenRoutine());
     }
 
     private string GetGameTime()
@@ -56,13 +56,13 @@ public class GameOverManager : MonoBehaviour
         return string.Format("{0}:{1}", minutes.ToString("00"), seconds.ToString("00"));
     }
 
-    IEnumerator DisplayGameOverScreenProxy()
+    IEnumerator DisplayGameOverScreenRoutine()
     {
+        Cursor.visible = true;
         yield return new WaitForSeconds(0.85f);
         playerHUDUI.SetActive(false);
         gameoverMenuUI.SetActive(true);
         EventSystemExtensions.UpdateSelectedGameObject(gameoverMenuUI.GetComponentInChildren<Button>().gameObject);
-        
     }
 
     public void OnControlsChanged(PlayerInput input)

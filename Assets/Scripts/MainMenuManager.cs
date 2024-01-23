@@ -45,7 +45,7 @@ public class MainMenuManager : MonoBehaviour
         {
             // LoadLevel(1); 
         };
-
+        Cursor.visible = true;
         StartCoroutine(sceneTransition.Show());
         OnFirstLevelStart.OnEventRaised += onFirstLevelLoadEvent;
     }

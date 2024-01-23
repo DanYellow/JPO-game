@@ -31,6 +31,7 @@ public class PauseManager : MonoBehaviour
             {
                 Pause();
             }
+            Cursor.visible = isGamePaused;
         }
     }
 
