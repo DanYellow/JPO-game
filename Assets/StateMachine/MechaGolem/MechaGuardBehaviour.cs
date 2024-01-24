@@ -50,7 +50,7 @@ public class MechaGuardBehaviour : StateMachineBehaviour
         expulseSpikeCountdown -= Time.deltaTime;
 
         float lifeRatio = enemy.GetHealthNormalized();
-        bool isInRestoreHealthRange = lifeRatio >= 0.25f && lifeRatio <= 1f;
+        bool isInRestoreHealthRange = lifeRatio >= 0.2f && lifeRatio <= 1f;
         
         if (restoreHealthCountdown <= 0 && isInRestoreHealthRange)
         {
@@ -59,7 +59,7 @@ public class MechaGuardBehaviour : StateMachineBehaviour
             {
                 healParticles.Play();
             }
-            enemy.RestoreHealth(2);
+            enemy.RestoreHealth(3);
         }
 
         if (expulseSpikeCountdown <= 0)

@@ -127,6 +127,10 @@ public class MechaGolemBoss : MonoBehaviour
             yield break;
         }
         isPreparingSpikes = true;
+        areSpikesReady = false;
+        canMove = false;
+        canGuardCheck = false;
+
         listSpikesToThrow = new List<Transform>(listSpikes);
         var length = listSpikes.Count;
         float maxSpikeRadius = 25;
@@ -135,10 +139,7 @@ public class MechaGolemBoss : MonoBehaviour
             18,
             maxSpikeRadius
         );
-        areSpikesReady = false;
-        canMove = false;
-        canGuardCheck = false;
-
+        
         for (var i = 0; i < length; i++)
         {
             var spike = listSpikes[i];
@@ -365,11 +366,6 @@ public class MechaGolemBoss : MonoBehaviour
     {
         if (!areSpikesReady || isThrowingSpike) return;
         throwAllSpikesCo = StartCoroutine(ThrowAllSpikes());
-    }
-
-    public void StartExpulseSpikesChecking()
-    {
-        checkExpulsingSpikesAttackCo = StartCoroutine(CheckExpulsingSpikesAttack());
     }
 
     public void StopExpulseSpikesChecking()

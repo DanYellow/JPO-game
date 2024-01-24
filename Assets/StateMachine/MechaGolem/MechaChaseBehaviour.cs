@@ -12,7 +12,7 @@ public class MechaChaseBehaviour : StateMachineBehaviour
     [SerializeField]
     private BoolEventChannel onTogglePauseEvent;
     [SerializeField]
-    private float guardCheckCountDownInitVal = 3.85f;
+    private float guardCheckCountDownInitVal = 4.95f;
     private float guardCheckCountDown;
     private bool hasFightStarted = false;
     private float throwAllSpikesAttackLifeThreshold = 0.52f;
@@ -84,7 +84,7 @@ public class MechaChaseBehaviour : StateMachineBehaviour
             {
                 throwSpikeCountdown = throwSpikeCountdownMax;
                 if (
-                    Vector2.Distance(target.position, rb.position) < 10 &&
+                    Vector2.Distance(target.position, rb.position) < 8 &&
                     (float)enemy.GetHealth() / enemy.GetMaxHealth() <= throwAllSpikesAttackLifeThreshold
                 )
                 {
