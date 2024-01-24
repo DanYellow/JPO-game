@@ -18,7 +18,7 @@ public class MechaChaseBehaviour : StateMachineBehaviour
     private float throwAllSpikesAttackLifeThreshold = 0.52f;
 
     private float throwSpikeCountdown = 0;
-    private float throwSpikeCountdownMax = 3.5f;
+    private float throwSpikeCountdownMax = 2.8f;
 
     private void OnEnable()
     {
