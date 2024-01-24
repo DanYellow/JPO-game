@@ -99,8 +99,6 @@ public class MechaChaseBehaviour : StateMachineBehaviour
                     mechaGolemBoss.ThrowSpikeRoutine();
                 }
             }
-
-
         }
 
         animator.SetFloat(AnimationStrings.velocityX, Mathf.Abs(rb.velocity.x));
