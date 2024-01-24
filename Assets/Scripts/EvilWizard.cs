@@ -39,14 +39,12 @@ public class EvilWizard : MonoBehaviour
 
     private new Collider2D collider;
 
-    private Invulnerable invulnerable;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         collider = GetComponent<Collider2D>();
-        invulnerable = GetComponent<Invulnerable>();
 
         animator.SetBool(AnimationStrings.invoke, false);
         enabled = false;
@@ -80,7 +78,7 @@ public class EvilWizard : MonoBehaviour
     IEnumerator InvokeCoroutine()
     {
         rb.bodyType = RigidbodyType2D.Static;
-        invulnerable.Enable();
+ 
         yield return null;
         yield return new WaitWhile(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1);
 
@@ -116,7 +114,6 @@ public class EvilWizard : MonoBehaviour
 
     IEnumerator EndInvocation()
     {
-        invulnerable.Disable();
         yield return Helpers.GetWait(0.75f);
         rb.bodyType = RigidbodyType2D.Dynamic;
         invoking = false;

@@ -22,6 +22,9 @@ public class CurrentSceneManager : MonoBehaviour
     {
         Initialize();
         Cursor.visible = false;
+        #if UNITY_EDITOR
+            Cursor.visible = true;
+        #endif
     }
 
     private void Initialize()
