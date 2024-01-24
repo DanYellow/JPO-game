@@ -31,7 +31,7 @@ Transform:
   - {fileID: 333606217336487859}
   - {fileID: 1746347345115809231}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &333606217336487858
 GameObject:
@@ -333,6 +333,9 @@ MonoBehaviour:
   canOperate: 1
   canMove: 1
   delayBeforeDeathEndEvent: 0
+  layerAfterDeath:
+    serializedVersion: 2
+    m_Bits: 32768
 --- !u!114 &333606217336487856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -403,36 +406,6 @@ MonoBehaviour:
   hasTouchedSomething: 0
   canCharge: 1
   <isFacingRight>k__BackingField: 1
-  onBegin:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 333606217336487864}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onDone:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 333606217336487864}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
   enemyData: {fileID: 11400000, guid: 9211e3b652a9ce24b90ac3a694d8e017, type: 2}
   onStunStart:
     m_PersistentCalls:
@@ -464,6 +437,36 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onBegin:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 333606217336487864}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onDone:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 333606217336487864}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &8255617519728770758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -479,6 +482,7 @@ MonoBehaviour:
   container: {fileID: 1746347344612180723}
   displayWhenFull: 0
   bar: {fileID: 1746347345254484769}
+  damageBar: {fileID: 0}
   enemyData: {fileID: 11400000, guid: 9211e3b652a9ce24b90ac3a694d8e017, type: 2}
   lifePointsText: {fileID: 0}
   nameText: {fileID: 0}

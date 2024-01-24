@@ -688,6 +688,9 @@ MonoBehaviour:
   canOperate: 1
   canMove: 1
   delayBeforeDeathEndEvent: 0
+  layerAfterDeath:
+    serializedVersion: 2
+    m_Bits: 32768
 --- !u!114 &8838257750597778021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -703,6 +706,7 @@ MonoBehaviour:
   container: {fileID: 6562245534549360179}
   displayWhenFull: 0
   bar: {fileID: 6562245534375854925}
+  damageBar: {fileID: 0}
   enemyData: {fileID: 11400000, guid: a11b561a632a79142a3edcc229160819, type: 2}
   lifePointsText: {fileID: 0}
   nameText: {fileID: 0}
