@@ -55,7 +55,11 @@ public class MechaChaseBehaviour : StateMachineBehaviour
         if (!hasFightStarted || mechaGolemBoss.isExpulsingSpikes) return;
 
         guardCheckCountDown -= Time.deltaTime;
-        throwSpikeCountdown -= Time.deltaTime;
+
+        if(!mechaGolemBoss.isThrowingSpike) {
+            throwSpikeCountdown -= Time.deltaTime;
+        }
+
         if (guardCheckCountDown <= 0 && mechaGolemBoss.canGuardCheck)
         {
             guardCheckCountDown = guardCheckCountDownInitVal;

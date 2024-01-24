@@ -13,7 +13,7 @@ public class MechaGolemBoss : MonoBehaviour
     private bool areSpikesReady = false;
     [SerializeField]
     public bool isExpulsingSpikes = false;
-    private bool isThrowingSpike = false;
+    public bool isThrowingSpike {private set; get; } = false;
     public bool canGuardCheck = true;
     public bool canMove = false;
     public bool isPlayerDead = false;
