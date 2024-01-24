@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc40447e81ba781448b3a88d390ca896, type: 3}
   m_Name: EvilWizardAttack
   m_EditorClassIdentifier: 
-  damage: 4
+  damage: 5
   knockbackForce: {x: 10, y: 5}
   isKnockingSelf: 1
+  stunTime: 1.2
+  recoveryTime: 0
+  cameraShake: {fileID: 0}
   DeveloperDescription: 
