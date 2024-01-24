@@ -26,12 +26,11 @@ public class Attack : MonoBehaviour
         {
             isRecovering = false;
             yield return new WaitUntil(() => collider.enabled == true);
-
             if (attackData.recoveryTime > 0 && GetComponentInParent<IStunnable>() != null && !isRecovering)
             {
                 onCinemachineShake?.Raise(attackData.cameraShake);
                 IStunnable iStunnable = GetComponentInParent<IStunnable>();
-                iStunnable.Stun(attackData.recoveryTime, EndAttack);
+                iStunnable.Stun(attackData.stunTime, EndAttack);
             }
         }
     }
@@ -73,6 +72,12 @@ public class Attack : MonoBehaviour
         if (selfKnockback != null && other.transform.GetComponent<IReflectable>() == null)
         {
             selfKnockback.Apply(other.gameObject, -attackData.knockbackForce / 2);
+        }
+
+        IStunnable iStunnable = other.GetComponentInParent<IStunnable>();
+        if (iStunnable != null)
+        {
+            iStunnable.Stun(attackData.stunTime, () => { });
         }
     }
 }
