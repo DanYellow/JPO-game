@@ -132,6 +132,8 @@ public class EvilWizard : MonoBehaviour
     {
         yield return Helpers.GetWait(0.75f);
         rb.gravityScale = originalGravityScale;
+        invokeCountdown = invokeCountdownMax;
+        attackCountdown = 0;
         yield return Helpers.GetWait(1.75f);
         invoking = false;
     }

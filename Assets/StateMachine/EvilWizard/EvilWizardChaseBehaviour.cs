@@ -37,8 +37,8 @@ public class EvilWizardChaseBehaviour : StateMachineBehaviour
         }
 
         if (
-                Vector2.Distance(target.position, rb.position) > 10 &&
-                Vector2.Distance(target.position, rb.position) < 25
+                Vector2.Distance(target.position, rb.position) > 8 &&
+                Vector2.Distance(target.position, rb.position) < 22
             )
         {
             Vector2 targetPos = new Vector2(target.position.x, rb.position.y);
@@ -92,7 +92,7 @@ public class EvilWizardChaseBehaviour : StateMachineBehaviour
 
         if (
             evilWizard.attackCountdown <= 0 &&
-            Vector2.Distance(target.position, rb.position) < 15 &&
+            Vector2.Distance(target.position, rb.position) < 10 &&
             !evilWizard.isAttacking
         )
         {
@@ -113,6 +113,6 @@ public class EvilWizardChaseBehaviour : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.ResetTrigger(AnimationStrings.attack);
+        
     }
 }
