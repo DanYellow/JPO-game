@@ -11,6 +11,12 @@ public class EvilWizard : MonoBehaviour
     [SerializeField]
     private float invokeDelay = 17.5f;
 
+    public float invokeCountdownMax = 17.5f;
+    public float invokeCountdown = 0;
+
+    public float attackCountdownMax = 6.25f;
+    public float attackCountdown = 0;
+
     public bool canInvoke { get; private set; } = true;
 
     [SerializeField]
@@ -52,18 +58,21 @@ public class EvilWizard : MonoBehaviour
         animator.SetBool(AnimationStrings.invoke, false);
         enabled = false;
         originalGravityScale = rb.gravityScale;
+
+        invokeCountdown = invokeCountdownMax;
+        attackCountdown = attackCountdownMax;
     }
 
     private void Update()
     {
-        if(!invoking) {
-            invokeTimer += Time.deltaTime;
-        }
-        canInvoke = invokeTimer > invokeDelay;
-        if (canInvoke)
-        {
-            invokeTimer = 0;
-        }
+        // if(!invoking) {
+        //     invokeTimer += Time.deltaTime;
+        // }
+        // canInvoke = invokeTimer > invokeDelay;
+        // if (canInvoke)
+        // {
+        //     invokeTimer = 0;
+        // }
 
         attackTimer += Time.deltaTime;
         canAttack = attackTimer > attackDelay;
@@ -76,6 +85,7 @@ public class EvilWizard : MonoBehaviour
     public void Invoke()
     {
         invoking = true;
+        invokeCountdown = invokeCountdownMax;
         StartCoroutine(InvokeCoroutine());
     }
 
@@ -120,6 +130,7 @@ public class EvilWizard : MonoBehaviour
     {
         yield return Helpers.GetWait(0.75f);
         rb.gravityScale = originalGravityScale;
+        yield return Helpers.GetWait(1.75f);
         invoking = false;
     }
 

@@ -27,6 +27,9 @@ public class EvilWizardChaseBehaviour : StateMachineBehaviour
         lookAtTarget.Face(target);
         if (evilWizard.invoking || !isGrounded.isGrounded) return;
 
+        evilWizard.invokeCountdown -= Time.deltaTime;
+        evilWizard.attackCountdown -= Time.deltaTime;
+
         float speed = enemyData.walkSpeed;
         if (Vector2.Distance(target.position, rb.position) < 15)
         {
@@ -49,7 +52,7 @@ public class EvilWizardChaseBehaviour : StateMachineBehaviour
 
         animator.SetFloat(AnimationStrings.velocityX, Mathf.Abs(rb.velocity.x));
 
-        if (evilWizard.canInvoke && !evilWizard.invoking)
+        if (evilWizard.invokeCountdown <= 0 && !evilWizard.invoking)
         {
             animator.SetBool(AnimationStrings.invoke, true);
         }
