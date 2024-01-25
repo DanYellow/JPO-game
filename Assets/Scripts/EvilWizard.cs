@@ -6,26 +6,13 @@ using UnityEngine;
 // https://forum.unity.com/threads/what-is-the-best-way-to-delay-my-attack-method.999343/
 public class EvilWizard : MonoBehaviour
 {
-    [SerializeField]
-    private float invokeTimer;
-    [SerializeField]
-    private float invokeDelay = 17.5f;
-
     public float invokeCountdownMax = 17.5f;
     public float invokeCountdown = 0;
 
-    public float attackCountdownMax = 6.25f;
+    public float attackCountdownMax = 4.25f;
     public float attackCountdown = 0;
 
-    public bool canInvoke { get; private set; } = true;
-
-    [SerializeField]
-    private float attackTimer;
-    [SerializeField]
-    private float attackDelay = 6.25f;
-    public bool canAttack { get; private set; } = true;
     public bool invoking { get; private set; } = false;
-    public bool isOperating { get; private set; } = false;
 
     [SerializeField]
     private Transform invocationPoint;
@@ -61,25 +48,6 @@ public class EvilWizard : MonoBehaviour
 
         invokeCountdown = invokeCountdownMax;
         attackCountdown = attackCountdownMax;
-    }
-
-    private void Update()
-    {
-        // if(!invoking) {
-        //     invokeTimer += Time.deltaTime;
-        // }
-        // canInvoke = invokeTimer > invokeDelay;
-        // if (canInvoke)
-        // {
-        //     invokeTimer = 0;
-        // }
-
-        attackTimer += Time.deltaTime;
-        canAttack = attackTimer > attackDelay;
-        if (canAttack)
-        {
-            attackTimer = 0;
-        }
     }
 
     public void Invoke()

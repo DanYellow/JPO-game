@@ -54,15 +54,18 @@ public class EvilWizardChaseBehaviour : StateMachineBehaviour
 
         if (evilWizard.invokeCountdown <= 0 && !evilWizard.invoking)
         {
-            animator.SetBool(AnimationStrings.invoke, true);
+            bool randVal = Random.value <= 0.5f;
+            if(randVal) {
+                animator.SetBool(AnimationStrings.invoke, true);
+            } else {
+                evilWizard.invokeCountdown = evilWizard.invokeCountdownMax;
+            }
         }
 
-        if (Vector2.Distance(target.position, rb.position) < 15 && evilWizard.canAttack)
+        if (evilWizard.attackCountdown <= 0 && Vector2.Distance(target.position, rb.position) < 15)
         {
             animator.SetTrigger(AnimationStrings.attack);
         }
-
-
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
