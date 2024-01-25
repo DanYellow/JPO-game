@@ -37,7 +37,7 @@ public class EvilWizardChaseBehaviour : StateMachineBehaviour
         }
 
         if (
-                Vector2.Distance(target.position, rb.position) > 8 &&
+                Vector2.Distance(target.position, rb.position) > 10 &&
                 Vector2.Distance(target.position, rb.position) < 25
             )
         {
@@ -48,7 +48,32 @@ public class EvilWizardChaseBehaviour : StateMachineBehaviour
         else
         {
             rb.velocity = Vector2.zero;
+
         }
+
+        // if (evilWizard.hasTouchedWall)
+        // {
+        // }
+        // else
+        // {
+        //     if (
+        //         Vector2.Distance(target.position, rb.position) > 10 &&
+        //         Vector2.Distance(target.position, rb.position) < 25
+        //     )
+        //     {
+        //         Vector2 targetPos = new Vector2(target.position.x, rb.position.y);
+        //         var dir = (targetPos - rb.position).normalized * speed;
+        //         rb.velocity = dir;
+        //     }
+        //     // else if (Vector2.Distance(target.position, rb.position) < 8)
+        //     // {
+        //     //     Vector2 targetPos = new Vector2(target.position.x, rb.position.y);
+        //     //     var dir = -(targetPos - rb.position).normalized * speed;
+        //     //     rb.velocity = dir;
+        //     // }
+        // }
+
+
 
         animator.SetFloat(AnimationStrings.velocityX, Mathf.Abs(rb.velocity.x));
 

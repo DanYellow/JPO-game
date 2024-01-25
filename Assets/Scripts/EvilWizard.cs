@@ -38,6 +38,11 @@ public class EvilWizard : MonoBehaviour
 
     private float originalGravityScale;
 
+    public bool hasTouchedWall = false;
+
+    [SerializeField]
+    private LayerMask wallLayersMask;
+
 
     private void Awake()
     {
@@ -50,7 +55,33 @@ public class EvilWizard : MonoBehaviour
         originalGravityScale = rb.gravityScale;
 
         invokeCountdown = invokeCountdownMax;
-        attackCountdown = attackCountdownMax;
+        attackCountdown = 0;
+    }
+
+    private void FixedUpdate()
+    {
+        hasTouchedWall = HasTouchedWall();
+    }
+
+    private bool HasTouchedWall()
+    {
+        return Physics2D.Linecast(
+            new Vector2(collider.bounds.max.x, collider.bounds.center.y),
+            new Vector2(collider.bounds.max.x + 0.5f, collider.bounds.center.y),
+            wallLayersMask
+        );
+    }
+
+    void OnDrawGizmos()
+    {
+        if (collider != null)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(
+                new Vector2(collider.bounds.max.x, collider.bounds.center.y),
+                new Vector2(collider.bounds.max.x + 0.5f, collider.bounds.center.y)
+            );
+        }
     }
 
     public void Invoke()
