@@ -32,7 +32,7 @@ public class Attack : MonoBehaviour
             {
                 onCinemachineShake?.Raise(attackData.cameraShake);
                 IStunnable iStunnable = GetComponentInParent<IStunnable>();
-                iStunnable.Stun(attackData.stunTime, EndAttack);
+                iStunnable.Stun(attackData.recoveryTime, EndAttack);
             }
         }
     }
