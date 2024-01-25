@@ -55,21 +55,33 @@ public class EvilWizardChaseBehaviour : StateMachineBehaviour
         if (evilWizard.invokeCountdown <= 0 && !evilWizard.invoking)
         {
             bool randVal = Random.value <= 0.5f;
-            if(randVal) {
+            if (randVal)
+            {
                 animator.SetBool(AnimationStrings.invoke, true);
-            } else {
+            }
+            else
+            {
                 evilWizard.invokeCountdown = evilWizard.invokeCountdownMax;
             }
         }
 
         if (
-            evilWizard.attackCountdown <= 0 && 
+            evilWizard.attackCountdown <= 0 &&
             Vector2.Distance(target.position, rb.position) < 15 &&
             !evilWizard.isAttacking
         )
         {
             evilWizard.isAttacking = true;
-            animator.SetTrigger(AnimationStrings.attack);
+            bool randVal = Random.value <= 0.25f;
+
+            if (randVal)
+            {
+                animator.SetTrigger(AnimationStrings.attack2);
+            }
+            else
+            {
+                animator.SetTrigger(AnimationStrings.attack);
+            }
         }
     }
 
