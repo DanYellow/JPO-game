@@ -26,6 +26,8 @@ public class Attack : MonoBehaviour
         {
             isRecovering = false;
             yield return new WaitUntil(() => collider.enabled == true);
+
+            // Stun itself
             if (attackData.recoveryTime > 0 && GetComponentInParent<IStunnable>() != null && !isRecovering)
             {
                 onCinemachineShake?.Raise(attackData.cameraShake);
