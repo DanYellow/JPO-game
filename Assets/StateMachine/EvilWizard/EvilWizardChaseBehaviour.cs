@@ -9,7 +9,7 @@ public class EvilWizardChaseBehaviour : StateMachineBehaviour
     private IsGrounded isGrounded;
 
     [SerializeField]
-    EnemyData enemyData;
+    private EnemyData enemyData;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -27,7 +27,6 @@ public class EvilWizardChaseBehaviour : StateMachineBehaviour
         lookAtTarget.Face(target);
         if (evilWizard.invoking || !isGrounded.isGrounded) return;
 
-        // animator.GetBool(AnimationStrings.canMove) == true
         float speed = enemyData.walkSpeed;
         if (Vector2.Distance(target.position, rb.position) < 15)
         {
@@ -35,7 +34,7 @@ public class EvilWizardChaseBehaviour : StateMachineBehaviour
         }
 
         if (
-                Vector2.Distance(target.position, rb.position) > 10 &&
+                Vector2.Distance(target.position, rb.position) > 8 &&
                 Vector2.Distance(target.position, rb.position) < 25
             )
         {
@@ -47,6 +46,7 @@ public class EvilWizardChaseBehaviour : StateMachineBehaviour
         {
             rb.velocity = Vector2.zero;
         }
+
         animator.SetFloat(AnimationStrings.velocityX, Mathf.Abs(rb.velocity.x));
 
         if (evilWizard.canInvoke && !evilWizard.invoking)
@@ -58,6 +58,8 @@ public class EvilWizardChaseBehaviour : StateMachineBehaviour
         {
             animator.SetTrigger(AnimationStrings.attack);
         }
+
+
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

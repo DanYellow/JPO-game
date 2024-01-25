@@ -16,9 +16,10 @@ public class EvilWizard : MonoBehaviour
     [SerializeField]
     private float attackTimer;
     [SerializeField]
-    private float attackDelay = 5;
+    private float attackDelay = 6.25f;
     public bool canAttack { get; private set; } = true;
     public bool invoking { get; private set; } = false;
+    public bool isOperating { get; private set; } = false;
 
     [SerializeField]
     private Transform invocationPoint;
@@ -39,6 +40,8 @@ public class EvilWizard : MonoBehaviour
 
     private new Collider2D collider;
 
+    private float originalGravityScale;
+
 
     private void Awake()
     {
@@ -48,6 +51,7 @@ public class EvilWizard : MonoBehaviour
 
         animator.SetBool(AnimationStrings.invoke, false);
         enabled = false;
+        originalGravityScale = rb.gravityScale;
     }
 
     private void Update()
@@ -77,8 +81,8 @@ public class EvilWizard : MonoBehaviour
 
     IEnumerator InvokeCoroutine()
     {
-        rb.bodyType = RigidbodyType2D.Static;
- 
+        // rb.bodyType = RigidbodyType2D.Static;
+        rb.gravityScale = 0;
         yield return null;
         yield return new WaitWhile(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1);
 
@@ -115,7 +119,7 @@ public class EvilWizard : MonoBehaviour
     IEnumerator EndInvocation()
     {
         yield return Helpers.GetWait(0.75f);
-        rb.bodyType = RigidbodyType2D.Dynamic;
+        rb.gravityScale = originalGravityScale;
         invoking = false;
     }
 

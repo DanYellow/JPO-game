@@ -69,7 +69,8 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private void Update()
     {
-        if(animator == null) {
+        if (animator == null)
+        {
             return;
         }
 
@@ -93,10 +94,11 @@ public class Enemy : MonoBehaviour, IDamageable
 
         healthBar.UpdateContent(currentLifePoints);
 
-        if(animator != null ) {
+        if (animator != null)
+        {
             animator.SetTrigger(AnimationStrings.hurt);
             animator.SetBool(AnimationStrings.canMove, false);
-    
+
             StartCoroutine(Hurt());
         }
 
@@ -161,22 +163,26 @@ public class Enemy : MonoBehaviour, IDamageable
         yield return Helpers.GetWait(delayBeforeDeathEndEvent);
         onDeathEnd?.Raise();
 
-        if(destroyOnDeath) {
+        if (destroyOnDeath)
+        {
             Destroy(gameObject.transform.parent.gameObject);
         }
     }
 
-    public void ResetCanOperate(float lastOperationDuration = 1) {
+    public void ResetCanOperate(float lastOperationDuration = 1)
+    {
         StartCoroutine(ResetCanOperateRoutine(lastOperationDuration));
         StartCoroutine(ResetCanMoveRoutine(lastOperationDuration));
     }
 
-    private IEnumerator ResetCanOperateRoutine(float lastOperationDuration) {
+    private IEnumerator ResetCanOperateRoutine(float lastOperationDuration)
+    {
         yield return Helpers.GetWait(lastOperationDuration * 0.9f);
         canOperate = true;
     }
 
-    private IEnumerator ResetCanMoveRoutine(float lastOperationDuration) {
+    private IEnumerator ResetCanMoveRoutine(float lastOperationDuration)
+    {
         yield return Helpers.GetWait(lastOperationDuration * 0.45f);
         canMove = true;
     }
@@ -203,12 +209,18 @@ public class Enemy : MonoBehaviour, IDamageable
         healthBar.UpdateContent(currentLifePoints);
     }
 
-    public float GetHealthNormalized() {
+    public float GetHealthNormalized()
+    {
         return (float)currentLifePoints / enemyData.maxLifePoints;
     }
 
     public int GetMaxHealth()
     {
         return enemyData.maxLifePoints;
+    }
+
+    public EnemyData GetEnemyData()
+    {
+        return enemyData;
     }
 }
