@@ -62,8 +62,13 @@ public class EvilWizardChaseBehaviour : StateMachineBehaviour
             }
         }
 
-        if (evilWizard.attackCountdown <= 0 && Vector2.Distance(target.position, rb.position) < 15)
+        if (
+            evilWizard.attackCountdown <= 0 && 
+            Vector2.Distance(target.position, rb.position) < 15 &&
+            !evilWizard.isAttacking
+        )
         {
+            evilWizard.isAttacking = true;
             animator.SetTrigger(AnimationStrings.attack);
         }
     }

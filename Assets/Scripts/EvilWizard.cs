@@ -12,6 +12,9 @@ public class EvilWizard : MonoBehaviour
     public float attackCountdownMax = 4.25f;
     public float attackCountdown = 0;
 
+    [HideInInspector]
+    public bool isAttacking = false;
+
     public bool invoking { get; private set; } = false;
 
     [SerializeField]

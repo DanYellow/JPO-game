@@ -14,5 +14,6 @@ public class EvilWizardAttackBehaviour : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         evilWizard.attackCountdown = evilWizard.attackCountdownMax;
+        evilWizard.isAttacking = false;
     }
 }
