@@ -11,6 +11,13 @@ public class EvilWizardChaseBehaviour : StateMachineBehaviour
     [SerializeField]
     private EnemyData enemyData;
 
+    private float moveDistanceMin = 8;
+    private float moveDistanceMax = 20;
+    private float runDistanceMin = 12;
+    private float attackDistanceMin = 12;
+    private float attackDistanceMax = 8;
+    private float fireBallDistanceMax = 20;
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -27,7 +34,7 @@ public class EvilWizardChaseBehaviour : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         lookAtTarget.Face(target);
-        if (evilWizard.invoking || !isGrounded.isGrounded) return;
+        if (!isGrounded.isGrounded) return;
 
         evilWizard.invokeCountdown -= Time.deltaTime;
         evilWizard.attackCountdown -= Time.deltaTime;
@@ -38,14 +45,15 @@ public class EvilWizardChaseBehaviour : StateMachineBehaviour
         }
 
         float speed = enemyData.walkSpeed;
-        if (Vector2.Distance(target.position, rb.position) < 12)
+        if (Vector2.Distance(target.position, rb.position) < runDistanceMin)
         {
             speed = enemyData.runSpeed;
         }
 
         if (
-                Vector2.Distance(target.position, rb.position) > 8 &&
-                Vector2.Distance(target.position, rb.position) < 20
+                Vector2.Distance(target.position, rb.position) > moveDistanceMin &&
+                Vector2.Distance(target.position, rb.position) < moveDistanceMax && 
+                evilWizard.canOperate
             )
         {
             Vector2 targetPos = new Vector2(target.position.x, rb.position.y);
@@ -55,55 +63,55 @@ public class EvilWizardChaseBehaviour : StateMachineBehaviour
         else
         {
             rb.velocity = Vector2.zero;
-
         }
 
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            evilWizard.FireRoutine(target.position);
-        }
+        // if (Input.GetKeyDown(KeyCode.J))
+        // {
+        //     evilWizard.FireRoutine(target.position);
+        // }
 
         animator.SetFloat(AnimationStrings.velocityX, Mathf.Abs(rb.velocity.x));
 
-        // if (evilWizard.invokeCountdown <= 0 && !evilWizard.invoking)
-        // {
-        //     bool randVal = Random.value <= 0.5f;
-        //     if (randVal)
-        //     {
-        //         animator.SetBool(AnimationStrings.invoke, true);
-        //     }
-        //     else
-        //     {
-        //         evilWizard.invokeCountdown = evilWizard.invokeCountdownMax;
-        //     }
-        // }
+        if (evilWizard.invokeCountdown <= 0 && !evilWizard.invoking)
+        {
+            bool randVal = Random.value <= 0.5f;
+            if (randVal)
+            {
+                animator.SetBool(AnimationStrings.invoke, true);
+            }
+            else
+            {
+                evilWizard.invokeCountdown = evilWizard.invokeCountdownMax;
+            }
+        }
 
-        // if (
-        //     evilWizard.attackCountdown <= 0 &&
-        //     Vector2.Distance(target.position, rb.position) < 10 &&
-        //     !evilWizard.isAttacking
-        // )
-        // {
-        //     evilWizard.isAttacking = true;
-        //     bool randVal = Random.value <= 0.25f;
+        if (
+            evilWizard.attackCountdown <= 0 &&
+            Vector2.Distance(target.position, rb.position) < attackDistanceMin &&
+            Vector2.Distance(target.position, rb.position) > attackDistanceMax &&
+            !evilWizard.isAttacking
+        )
+        {
+            evilWizard.isAttacking = true;
+            bool randVal = Random.value <= 0.25f;
 
-        //     if (randVal)
-        //     {
-        //         animator.SetTrigger(AnimationStrings.attack2);
-        //     }
-        //     else
-        //     {
-        //         animator.SetTrigger(AnimationStrings.attack);
-        //     }
-        // }
+            if (randVal)
+            {
+                animator.SetTrigger(AnimationStrings.attack2);
+            }
+            else
+            {
+                animator.SetTrigger(AnimationStrings.attack);
+            }
+        }
 
         if (
             evilWizard.fireCountdown <= 0 && 
-            (Vector2.Distance(target.position, rb.position) >= 20 || Vector2.Distance(target.position, rb.position) <= 8) &&
+            (Vector2.Distance(target.position, rb.position) >= fireBallDistanceMax || Vector2.Distance(target.position, rb.position) <= attackDistanceMax) &&
             !evilWizard.isFiring
         )
         {
-            int nbShots = Vector2.Distance(target.position, rb.position) >= 20 ? 3 : 1;
+            int nbShots = Vector2.Distance(target.position, rb.position) >= fireBallDistanceMax ? 3 : 1;
             evilWizard.FireRoutine(target.position, nbShots);
             evilWizard.fireCountdown = evilWizard.fireCountdownMax;
         }

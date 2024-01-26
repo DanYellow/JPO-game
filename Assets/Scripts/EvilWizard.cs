@@ -20,6 +20,7 @@ public class EvilWizard : MonoBehaviour
     public bool isAttacking = false;
 
     public bool invoking { get; private set; } = false;
+    public bool canOperate { get; private set; } = true;
     public bool isFiring = false;
 
     [SerializeField]
@@ -56,6 +57,8 @@ public class EvilWizard : MonoBehaviour
 
     private Light2D stickLight;
 
+    public float defaultLightIntensity;
+
 
     private void Awake()
     {
@@ -72,14 +75,14 @@ public class EvilWizard : MonoBehaviour
         invokeCountdown = invokeCountdownMax;
         attackCountdown = 0;
         fireCountdown = 0;
+
+         defaultLightIntensity = stickLight.intensity;
     }
 
     private IEnumerator Fire(Vector3 _targetPos, int nbShots)
     {
         isFiring = true;
-
-        float defaultLightIntensity = stickLight.intensity;
-
+        canOperate = false;
         float current = 0;
         float duration = 0.85f;
 
@@ -112,6 +115,8 @@ public class EvilWizard : MonoBehaviour
             yield return Helpers.GetWait(0.45f);
         }
         stickLight.intensity = defaultLightIntensity;
+        canOperate = true;
+        yield return Helpers.GetWait(2.25f);
         isFiring = false;
     }
 
@@ -149,13 +154,13 @@ public class EvilWizard : MonoBehaviour
     public void Invoke()
     {
         invoking = true;
+        canOperate = false;
         invokeCountdown = invokeCountdownMax;
         StartCoroutine(InvokeCoroutine());
     }
 
     IEnumerator InvokeCoroutine()
     {
-        // rb.bodyType = RigidbodyType2D.Static;
         rb.gravityScale = 0;
         yield return null;
         yield return new WaitWhile(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1);
@@ -197,6 +202,7 @@ public class EvilWizard : MonoBehaviour
         invokeCountdown = invokeCountdownMax;
         attackCountdown = 0;
         fireCountdown = 0;
+        canOperate = true;
         yield return Helpers.GetWait(1.75f);
         invoking = false;
     }
@@ -207,5 +213,9 @@ public class EvilWizard : MonoBehaviour
         blast.GetComponent<BlastEffect>().SetEffectData(blastEffectData);
         blast.GetComponent<SpriteRenderer>().color = blastEffectData.color;
         blast.transform.localScale *= blastEffectData.scale;
+    }
+
+    public void ResetStickLight() {
+        stickLight.intensity = defaultLightIntensity;
     }
 }
