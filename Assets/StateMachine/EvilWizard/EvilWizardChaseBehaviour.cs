@@ -29,6 +29,7 @@ public class EvilWizardChaseBehaviour : StateMachineBehaviour
 
         evilWizard.invokeCountdown -= Time.deltaTime;
         evilWizard.attackCountdown -= Time.deltaTime;
+        evilWizard.shootCountdown -= Time.deltaTime;
 
         float speed = enemyData.walkSpeed;
         if (Vector2.Distance(target.position, rb.position) < 15)
@@ -51,29 +52,10 @@ public class EvilWizardChaseBehaviour : StateMachineBehaviour
 
         }
 
-        // if (evilWizard.hasTouchedWall)
-        // {
-        // }
-        // else
-        // {
-        //     if (
-        //         Vector2.Distance(target.position, rb.position) > 10 &&
-        //         Vector2.Distance(target.position, rb.position) < 25
-        //     )
-        //     {
-        //         Vector2 targetPos = new Vector2(target.position.x, rb.position.y);
-        //         var dir = (targetPos - rb.position).normalized * speed;
-        //         rb.velocity = dir;
-        //     }
-        //     // else if (Vector2.Distance(target.position, rb.position) < 8)
-        //     // {
-        //     //     Vector2 targetPos = new Vector2(target.position.x, rb.position.y);
-        //     //     var dir = -(targetPos - rb.position).normalized * speed;
-        //     //     rb.velocity = dir;
-        //     // }
-        // }
-
-
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            evilWizard.Fire(target.position);
+        }
 
         animator.SetFloat(AnimationStrings.velocityX, Mathf.Abs(rb.velocity.x));
 
@@ -108,11 +90,17 @@ public class EvilWizardChaseBehaviour : StateMachineBehaviour
                 animator.SetTrigger(AnimationStrings.attack);
             }
         }
+        
+        if (evilWizard.shootCountdown <= 0 && Vector2.Distance(target.position, rb.position) >= 22)
+        {
+            evilWizard.Fire(target.position);
+            evilWizard.shootCountdown = evilWizard.shootCountdownMax;
+        }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
+
     }
 }

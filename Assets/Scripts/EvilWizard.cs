@@ -12,8 +12,12 @@ public class EvilWizard : MonoBehaviour
     public float attackCountdownMax = 4.25f;
     public float attackCountdown = 0;
 
+    public float shootCountdownMax = 2.25f;
+    public float shootCountdown = 0;
+
     [HideInInspector]
     public bool isAttacking = false;
+    public bool isFiring = false;
 
     public bool invoking { get; private set; } = false;
 
@@ -43,6 +47,12 @@ public class EvilWizard : MonoBehaviour
     [SerializeField]
     private LayerMask wallLayersMask;
 
+    [SerializeField]
+    private Transform firePosition;
+
+    [SerializeField]
+    private GameObject projectilePrefab;
+
 
     private void Awake()
     {
@@ -56,6 +66,17 @@ public class EvilWizard : MonoBehaviour
 
         invokeCountdown = invokeCountdownMax;
         attackCountdown = 0;
+        shootCountdown = 0;
+    }
+
+    public void Fire(Vector3 _targetPos) {
+        Quaternion rotation = Quaternion.LookRotation(_targetPos - firePosition.position, transform.TransformDirection(Vector3.down));
+
+        GameObject fireBall = Instantiate(projectilePrefab, firePosition.position, new Quaternion(0, rotation.y, rotation.z, rotation.w));
+        ProjectileSeeking projectileSeeking = fireBall.GetComponent<ProjectileSeeking>();
+
+        Vector3 throwDir = (_targetPos - firePosition.position).normalized;
+        projectileSeeking.targetPos = throwDir;
     }
 
     private void FixedUpdate()
