@@ -19,6 +19,8 @@ public class EvilWizardChaseBehaviour : StateMachineBehaviour
         evilWizard = animator.GetComponent<EvilWizard>();
         lookAtTarget = animator.GetComponent<LookAtTarget>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
+
+        evilWizard.isFiring = false;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -32,18 +34,18 @@ public class EvilWizardChaseBehaviour : StateMachineBehaviour
 
         if (!evilWizard.isFiring)
         {
-            evilWizard.shootCountdown -= Time.deltaTime;
+            evilWizard.fireCountdown -= Time.deltaTime;
         }
 
         float speed = enemyData.walkSpeed;
-        if (Vector2.Distance(target.position, rb.position) < 15)
+        if (Vector2.Distance(target.position, rb.position) < 12)
         {
             speed = enemyData.runSpeed;
         }
 
         if (
                 Vector2.Distance(target.position, rb.position) > 8 &&
-                Vector2.Distance(target.position, rb.position) < 22
+                Vector2.Distance(target.position, rb.position) < 20
             )
         {
             Vector2 targetPos = new Vector2(target.position.x, rb.position.y);
@@ -95,10 +97,14 @@ public class EvilWizardChaseBehaviour : StateMachineBehaviour
             }
         }
 
-        if (evilWizard.shootCountdown <= 0 && Vector2.Distance(target.position, rb.position) >= 22)
+        if (
+            evilWizard.fireCountdown <= 0 && 
+            Vector2.Distance(target.position, rb.position) >= 20 &&
+            !evilWizard.isFiring
+        )
         {
             evilWizard.FireRoutine(target.position);
-            evilWizard.shootCountdown = evilWizard.shootCountdownMax;
+            evilWizard.fireCountdown = evilWizard.fireCountdownMax;
         }
     }
 

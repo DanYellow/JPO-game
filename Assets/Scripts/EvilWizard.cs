@@ -13,14 +13,14 @@ public class EvilWizard : MonoBehaviour
     public float attackCountdownMax = 4.25f;
     public float attackCountdown = 0;
 
-    public float shootCountdownMax = 2.25f;
-    public float shootCountdown = 0;
+    public float fireCountdownMax = 2.25f;
+    public float fireCountdown = 0;
 
     [HideInInspector]
     public bool isAttacking = false;
 
     public bool invoking { get; private set; } = false;
-    public bool isFiring { get; private set; } = false;
+    public bool isFiring = false;
 
     [SerializeField]
     private Transform invocationPoint;
@@ -71,7 +71,7 @@ public class EvilWizard : MonoBehaviour
 
         invokeCountdown = invokeCountdownMax;
         attackCountdown = 0;
-        shootCountdown = 0;
+        fireCountdown = 0;
     }
 
     private IEnumerator Fire(Vector3 _targetPos)
@@ -173,6 +173,7 @@ public class EvilWizard : MonoBehaviour
         rb.gravityScale = originalGravityScale;
         invokeCountdown = invokeCountdownMax;
         attackCountdown = 0;
+        fireCountdown = 0;
         yield return Helpers.GetWait(1.75f);
         invoking = false;
     }
