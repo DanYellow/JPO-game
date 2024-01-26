@@ -77,14 +77,22 @@ public class EvilWizard : MonoBehaviour
     private IEnumerator Fire(Vector3 _targetPos)
     {
         isFiring = true;
+
+        Vector3 throwDir = (_targetPos - firePosition.position).normalized;
+        Vector3 cross = Vector3.Cross(throwDir, transform.up);
+        Vector3 rotateDir = cross.z > 0 ? Vector3.up : Vector3.down;
+
         for (var i = 0; i < 3; i++)
         {
-            Quaternion rotation = Quaternion.LookRotation(_targetPos - firePosition.position, transform.TransformDirection(Vector3.down));
+            Quaternion rotation = Quaternion.LookRotation(
+                _targetPos - firePosition.position, 
+                transform.TransformDirection(rotateDir)
+            );
 
-            GameObject fireBall = Instantiate(projectilePrefab, firePosition.position, new Quaternion(0, rotation.y, rotation.z, rotation.w));
+            GameObject fireBall = Instantiate(projectilePrefab, firePosition.position, new Quaternion(0, 0, rotation.z, rotation.w));
             ProjectileSeeking projectileSeeking = fireBall.GetComponent<ProjectileSeeking>();
 
-            Vector3 throwDir = (_targetPos - firePosition.position).normalized;
+
             projectileSeeking.targetPos = throwDir;
 
             yield return Helpers.GetWait(0.45f);

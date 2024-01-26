@@ -28,6 +28,7 @@ public class ProjectileSeeking : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        print("contact");
         if (collision.gameObject.CompareTag("Player"))
         {
             IDamageable iDamageable = collision.transform.GetComponentInChildren<IDamageable>();
