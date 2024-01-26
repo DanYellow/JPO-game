@@ -74,18 +74,33 @@ public class EvilWizard : MonoBehaviour
         fireCountdown = 0;
     }
 
-    private IEnumerator Fire(Vector3 _targetPos)
+    private IEnumerator Fire(Vector3 _targetPos, int nbShots)
     {
         isFiring = true;
+
+        float defaultLightIntensity = stickLight.intensity;
+
+        float current = 0;
+        float duration = 0.85f;
+
+        while (current <= duration)
+        {
+            stickLight.intensity = Mathf.Lerp(defaultLightIntensity, 5.5f, current / duration);
+            current += Time.deltaTime;
+
+            yield return null;
+        }
+
+        yield return Helpers.GetWait(0.15f);
 
         Vector3 throwDir = (_targetPos - firePosition.position).normalized;
         Vector3 cross = Vector3.Cross(throwDir, transform.up);
         Vector3 rotateDir = cross.z > 0 ? Vector3.up : Vector3.down;
 
-        for (var i = 0; i < 3; i++)
+        for (var i = 0; i < nbShots; i++)
         {
             Quaternion rotation = Quaternion.LookRotation(
-                _targetPos - firePosition.position, 
+                _targetPos - firePosition.position,
                 transform.TransformDirection(rotateDir)
             );
 
@@ -96,12 +111,13 @@ public class EvilWizard : MonoBehaviour
 
             yield return Helpers.GetWait(0.45f);
         }
+        stickLight.intensity = defaultLightIntensity;
         isFiring = false;
     }
 
-    public void FireRoutine(Vector3 _targetPos)
+    public void FireRoutine(Vector3 _targetPos, int nbShots = 1)
     {
-        StartCoroutine(Fire(_targetPos));
+        StartCoroutine(Fire(_targetPos, nbShots));
     }
 
     private void FixedUpdate()

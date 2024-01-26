@@ -99,11 +99,12 @@ public class EvilWizardChaseBehaviour : StateMachineBehaviour
 
         if (
             evilWizard.fireCountdown <= 0 && 
-            Vector2.Distance(target.position, rb.position) >= 20 &&
+            (Vector2.Distance(target.position, rb.position) >= 20 || Vector2.Distance(target.position, rb.position) <= 8) &&
             !evilWizard.isFiring
         )
         {
-            evilWizard.FireRoutine(target.position);
+            int nbShots = Vector2.Distance(target.position, rb.position) >= 20 ? 3 : 1;
+            evilWizard.FireRoutine(target.position, nbShots);
             evilWizard.fireCountdown = evilWizard.fireCountdownMax;
         }
     }
