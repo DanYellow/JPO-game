@@ -29,7 +29,11 @@ public class EvilWizardChaseBehaviour : StateMachineBehaviour
 
         evilWizard.invokeCountdown -= Time.deltaTime;
         evilWizard.attackCountdown -= Time.deltaTime;
-        evilWizard.shootCountdown -= Time.deltaTime;
+
+        if (!evilWizard.isFiring)
+        {
+            evilWizard.shootCountdown -= Time.deltaTime;
+        }
 
         float speed = enemyData.walkSpeed;
         if (Vector2.Distance(target.position, rb.position) < 15)
@@ -54,7 +58,7 @@ public class EvilWizardChaseBehaviour : StateMachineBehaviour
 
         if (Input.GetKeyDown(KeyCode.J))
         {
-            evilWizard.Fire(target.position);
+            evilWizard.FireRoutine(target.position);
         }
 
         animator.SetFloat(AnimationStrings.velocityX, Mathf.Abs(rb.velocity.x));
@@ -90,10 +94,10 @@ public class EvilWizardChaseBehaviour : StateMachineBehaviour
                 animator.SetTrigger(AnimationStrings.attack);
             }
         }
-        
+
         if (evilWizard.shootCountdown <= 0 && Vector2.Distance(target.position, rb.position) >= 22)
         {
-            evilWizard.Fire(target.position);
+            evilWizard.FireRoutine(target.position);
             evilWizard.shootCountdown = evilWizard.shootCountdownMax;
         }
     }

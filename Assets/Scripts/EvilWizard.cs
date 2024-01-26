@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 // https://game.courses/c-events-vs-unityevents/
 // https://forum.unity.com/threads/what-is-the-best-way-to-delay-my-attack-method.999343/
@@ -17,9 +18,9 @@ public class EvilWizard : MonoBehaviour
 
     [HideInInspector]
     public bool isAttacking = false;
-    public bool isFiring = false;
 
     public bool invoking { get; private set; } = false;
+    public bool isFiring { get; private set; } = false;
 
     [SerializeField]
     private Transform invocationPoint;
@@ -53,12 +54,16 @@ public class EvilWizard : MonoBehaviour
     [SerializeField]
     private GameObject projectilePrefab;
 
+    private Light2D stickLight;
+
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         collider = GetComponent<Collider2D>();
+        stickLight = GetComponentInChildren<Light2D>();
+        stickLight.enabled = false;
 
         animator.SetBool(AnimationStrings.invoke, false);
         enabled = false;
@@ -69,14 +74,27 @@ public class EvilWizard : MonoBehaviour
         shootCountdown = 0;
     }
 
-    public void Fire(Vector3 _targetPos) {
-        Quaternion rotation = Quaternion.LookRotation(_targetPos - firePosition.position, transform.TransformDirection(Vector3.down));
+    private IEnumerator Fire(Vector3 _targetPos)
+    {
+        isFiring = true;
+        for (var i = 0; i < 3; i++)
+        {
+            Quaternion rotation = Quaternion.LookRotation(_targetPos - firePosition.position, transform.TransformDirection(Vector3.down));
 
-        GameObject fireBall = Instantiate(projectilePrefab, firePosition.position, new Quaternion(0, rotation.y, rotation.z, rotation.w));
-        ProjectileSeeking projectileSeeking = fireBall.GetComponent<ProjectileSeeking>();
+            GameObject fireBall = Instantiate(projectilePrefab, firePosition.position, new Quaternion(0, rotation.y, rotation.z, rotation.w));
+            ProjectileSeeking projectileSeeking = fireBall.GetComponent<ProjectileSeeking>();
 
-        Vector3 throwDir = (_targetPos - firePosition.position).normalized;
-        projectileSeeking.targetPos = throwDir;
+            Vector3 throwDir = (_targetPos - firePosition.position).normalized;
+            projectileSeeking.targetPos = throwDir;
+
+            yield return Helpers.GetWait(0.45f);
+        }
+        isFiring = false;
+    }
+
+    public void FireRoutine(Vector3 _targetPos)
+    {
+        StartCoroutine(Fire(_targetPos));
     }
 
     private void FixedUpdate()
