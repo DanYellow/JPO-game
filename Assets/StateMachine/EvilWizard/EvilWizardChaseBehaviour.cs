@@ -65,37 +65,37 @@ public class EvilWizardChaseBehaviour : StateMachineBehaviour
 
         animator.SetFloat(AnimationStrings.velocityX, Mathf.Abs(rb.velocity.x));
 
-        if (evilWizard.invokeCountdown <= 0 && !evilWizard.invoking)
-        {
-            bool randVal = Random.value <= 0.5f;
-            if (randVal)
-            {
-                animator.SetBool(AnimationStrings.invoke, true);
-            }
-            else
-            {
-                evilWizard.invokeCountdown = evilWizard.invokeCountdownMax;
-            }
-        }
+        // if (evilWizard.invokeCountdown <= 0 && !evilWizard.invoking)
+        // {
+        //     bool randVal = Random.value <= 0.5f;
+        //     if (randVal)
+        //     {
+        //         animator.SetBool(AnimationStrings.invoke, true);
+        //     }
+        //     else
+        //     {
+        //         evilWizard.invokeCountdown = evilWizard.invokeCountdownMax;
+        //     }
+        // }
 
-        if (
-            evilWizard.attackCountdown <= 0 &&
-            Vector2.Distance(target.position, rb.position) < 10 &&
-            !evilWizard.isAttacking
-        )
-        {
-            evilWizard.isAttacking = true;
-            bool randVal = Random.value <= 0.25f;
+        // if (
+        //     evilWizard.attackCountdown <= 0 &&
+        //     Vector2.Distance(target.position, rb.position) < 10 &&
+        //     !evilWizard.isAttacking
+        // )
+        // {
+        //     evilWizard.isAttacking = true;
+        //     bool randVal = Random.value <= 0.25f;
 
-            if (randVal)
-            {
-                animator.SetTrigger(AnimationStrings.attack2);
-            }
-            else
-            {
-                animator.SetTrigger(AnimationStrings.attack);
-            }
-        }
+        //     if (randVal)
+        //     {
+        //         animator.SetTrigger(AnimationStrings.attack2);
+        //     }
+        //     else
+        //     {
+        //         animator.SetTrigger(AnimationStrings.attack);
+        //     }
+        // }
 
         if (
             evilWizard.fireCountdown <= 0 && 

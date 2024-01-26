@@ -9,26 +9,25 @@ public class ProjectileSeeking : MonoBehaviour
 
     public Vector3 targetPos;
     private new Collider2D collider;
+    private Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Awake()
     {
         collider = GetComponent<Collider2D>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     private void Start() {
         Destroy(gameObject, 5f);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        transform.position += projectileData.speed * Time.deltaTime * targetPos;
+    private void FixedUpdate() {
+        rb.MovePosition(rb.transform.position + targetPos * projectileData.speed * Time.fixedDeltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        print("contact");
         if (collision.gameObject.CompareTag("Player"))
         {
             IDamageable iDamageable = collision.transform.GetComponentInChildren<IDamageable>();

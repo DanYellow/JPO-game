@@ -92,7 +92,6 @@ public class EvilWizard : MonoBehaviour
             GameObject fireBall = Instantiate(projectilePrefab, firePosition.position, new Quaternion(0, 0, rotation.z, rotation.w));
             ProjectileSeeking projectileSeeking = fireBall.GetComponent<ProjectileSeeking>();
 
-
             projectileSeeking.targetPos = throwDir;
 
             yield return Helpers.GetWait(0.45f);
