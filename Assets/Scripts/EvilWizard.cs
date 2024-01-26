@@ -20,7 +20,7 @@ public class EvilWizard : MonoBehaviour
     public bool isAttacking = false;
 
     public bool invoking { get; private set; } = false;
-    public bool canOperate { get; private set; } = true;
+    public bool canOperate = true;
     public bool isFiring = false;
 
     [SerializeField]
@@ -116,7 +116,7 @@ public class EvilWizard : MonoBehaviour
         }
         stickLight.intensity = defaultLightIntensity;
         canOperate = true;
-        yield return Helpers.GetWait(2.25f);
+        yield return Helpers.GetWait(0.8f);
         isFiring = false;
     }
 
@@ -203,7 +203,7 @@ public class EvilWizard : MonoBehaviour
         attackCountdown = 0;
         fireCountdown = 0;
         canOperate = true;
-        yield return Helpers.GetWait(1.75f);
+        yield return Helpers.GetWait(1.5f);
         invoking = false;
     }
 

@@ -15,7 +15,7 @@ public class EvilWizardChaseBehaviour : StateMachineBehaviour
     private float moveDistanceMax = 20;
     private float runDistanceMin = 12;
     private float attackDistanceMin = 12;
-    private float attackDistanceMax = 8;
+    private float attackDistanceMax = 6;
     private float fireBallDistanceMax = 20;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
