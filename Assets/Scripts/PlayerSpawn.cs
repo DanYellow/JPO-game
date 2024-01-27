@@ -15,7 +15,8 @@ public class PlayerSpawn : MonoBehaviour
     {
         if(lastCheckpointPosition.CurrentValue != null) {
             gameObject.transform.position = (Vector3) lastCheckpointPosition.CurrentValue;
-            lastCheckpointPosition.CurrentValue = null;
+        } else {
+            lastCheckpointPosition.CurrentValue = gameObject.transform.position;
         }
         currentSpawnPosition = gameObject.transform.position;
         initialSpawnPosition = gameObject.transform.position;
