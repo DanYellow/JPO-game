@@ -1,30 +1,83 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerAnimation : MonoBehaviour
 {
     private Animator animator;
 
     [SerializeField]
-    private VectorEventChannel vectorEventChannel;
+    private VectorEventChannel rbVelocityEventChannel;
 
-    // https://forum.unity.com/threads/unsubscribe-from-an-event-using-a-lambda-expression.1287587/
-    private void Start()
+    [SerializeField]
+    private VoidEventChannel lightAttackEventChannel;
+
+    [SerializeField]
+    private BoolEventChannel playerCrouchEventChannel;
+
+    [SerializeField]
+    private BoolEventChannel onHealthUpdated;
+
+    [SerializeField]
+    private VoidEventChannel onPlayerDeath;
+
+    [SerializeField]
+    private BoolValue playerCanMove;
+    private UnityAction<bool> playerCrouch;
+    private UnityAction<bool> healthUpdated;
+
+    private UnityAction onLightAttackEvent;
+    private UnityAction onPlayerDeathEvent;
+
+    private void Awake()
     {
         animator = GetComponent<Animator>();
+
+        playerCrouch = (bool isCrouched) =>
+        {
+            animator.SetBool(AnimationStrings.isCrouched, isCrouched);
+        };
+
+        onLightAttackEvent = () =>
+        {
+            animator.SetTrigger(AnimationStrings.attack);
+        };
+
+        healthUpdated = (bool isTakingDamage) =>
+        {
+            if (isTakingDamage)
+            {
+                animator.SetTrigger(AnimationStrings.hurt);
+            }
+        };
+
+        onPlayerDeathEvent = () =>
+        {
+            animator.SetBool(AnimationStrings.isDead, true);
+        };
     }
 
     private void OnEnable()
     {
-        vectorEventChannel.OnEventRaised += UpdateMovement;
+        rbVelocityEventChannel.OnEventRaised += UpdateMovement;
+        lightAttackEventChannel.OnEventRaised += onLightAttackEvent;
+        playerCrouchEventChannel.OnEventRaised += playerCrouch;
+        onHealthUpdated.OnEventRaised += healthUpdated;
+
+        onPlayerDeath.OnEventRaised += onPlayerDeathEvent;
     }
 
     private void UpdateMovement(Vector3 direction)
     {
-        animator.SetFloat("VelocityX", Mathf.Abs(direction.x));
+        animator.SetFloat(AnimationStrings.velocityX, Mathf.Abs(direction.x));
+        animator.SetFloat(AnimationStrings.velocityY, direction.y);
     }
 
     private void OnDisable()
     {
-        vectorEventChannel.OnEventRaised -= UpdateMovement;
+        rbVelocityEventChannel.OnEventRaised -= UpdateMovement;
+        lightAttackEventChannel.OnEventRaised -= onLightAttackEvent;
+        playerCrouchEventChannel.OnEventRaised -= playerCrouch;
+        onHealthUpdated.OnEventRaised -= healthUpdated;
+        onPlayerDeath.OnEventRaised -= onPlayerDeathEvent;
     }
 }

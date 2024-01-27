@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaa054f8c30a3b944b44806a80b2cf81, type: 3}
+  m_Name: InteractionTextGameContext
+  m_EditorClassIdentifier: 
+  listSentences:
+  - Visiblement, vous avez pris le jeu en main. Bravo !
+  - "Bienvenue aux JPO 2024 de l'IUT de Sarcelles dans le d\xE9partement M\xE9tiers
+    du Multim\xE9dia et de l'Internet."
+  - "Ce jeu a \xE9t\xE9 d\xE9velopp\xE9 avec le logiciel Unity.\t"
+  - "Cet enseignement fait partie des cours exclusifs au parcours d\xE9veloppement."
+  - "Si le jeu a \xE9t\xE9 d\xE9velopp\xE9 par l'enseignant charg\xE9 du cours."
+  - "Sa r\xE9alisation est (largement) accessible pour un \xE9tudiant en MMI gr\xE2ce
+    \xE0 un travail personnel."
+  - "Quelque soit le parcours choisi \xE0 la fin de la premi\xE8re ann\xE9e..."
+  - "...le travail sur le temps personnel est <b>indispensable</b> \xE0 la r\xE9ussite
+    en MMI et dans l'insertion dans le monde du travail de l'\xE9tudiant."
+  - "Ce jeu regorge de lieux et de myst\xE8res \xE0 d\xE9couvrir."
+  - "Nous esp\xE9rons que vous appr\xE9cierez, et ce, malgr\xE9 d'\xE9ventuels bugs."
+  OnConversationEnd: {fileID: 0}

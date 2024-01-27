@@ -2,7 +2,6 @@
 using UnityEditor;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
-using UnityEngine;
 
 public class BuildVersionPostProcessor : IPreprocessBuildWithReport
 {
@@ -24,10 +23,10 @@ public class BuildVersionPostProcessor : IPreprocessBuildWithReport
     }
 
     private void UpdateVersion(string version) {
-        // if(float.TryParse(PlayerSettings.bundleVersion, out float versionNumber)) {
-        //     float newVersion = versionNumber + 0.01f;
-        //     PlayerSettings.bundleVersion = string.Format("V.{0}", newVersion);
-        // }
+        if(float.TryParse(PlayerSettings.bundleVersion, out float versionNumber)) {
+            float newVersion = versionNumber + 0.01f;
+            PlayerSettings.bundleVersion = string.Format("{0}", newVersion);
+        }
     }
 }
 #endif

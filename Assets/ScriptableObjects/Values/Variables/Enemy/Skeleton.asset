@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2456756d375de3a40aebc4b7516abfa3, type: 3}
+  m_Name: Skeleton
+  m_EditorClassIdentifier: 
+  maxLifePoints: 12
+  baseWalkSpeed: 2.5
+  walkSpeed: 2.5
+  baseRunSpeed: 4.35
+  runSpeed: 3.75
+  attackRate: 1.5
+  damage: 3
+  name: Skeleton
+  distanceDetector: 0
+  obstacleCheckRadius: 0.25
+  knockbackForce: 10
+  dropItem: {fileID: 0}
+  blastEffect: {fileID: 0}
+  blastEffectData: {fileID: 0}
+  dropProbability: 0.25
+  onInteractRangeEvent: {fileID: 11400000, guid: 980ecdfb3784b454db0a1d2846a566a0, type: 2}

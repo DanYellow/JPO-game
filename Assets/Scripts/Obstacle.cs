@@ -56,7 +56,7 @@ public class Obstacle : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();
-            playerHealth.TakeDamage();
+            playerHealth.TakeDamage(0);
 
             rb.constraints = RigidbodyConstraints2D.FreezeAll;
             animator.SetTrigger("Touched");

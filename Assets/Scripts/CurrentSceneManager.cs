@@ -1,39 +1,57 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
-using UnityEngine.Events;
 
 public class CurrentSceneManager : MonoBehaviour
 {
-    private UnityAction onDisplayCreditsScreen;
-
     [SerializeField]
     private FloatValue timeBarValue;
 
-    private SceneTransition sceneTransition;
+    [SerializeField]
+    private BoolValue playerIsDashing;
+
+    [SerializeField]
+    private Vector2Value lastCheckpoint;
 
     private void Awake()
     {
-        sceneTransition = GetComponent<SceneTransition>();
+        Application.targetFrameRate = 60;
     }
 
     void Start()
     {
-        timeBarValue.CurrentValue = 1f;
-        Application.targetFrameRate = 60;
-
-        StartCoroutine(sceneTransition.Show());
+        Initialize();
+        Cursor.visible = false;
+        #if UNITY_EDITOR
+            Cursor.visible = true;
+        #endif
     }
 
-    public void LoadLevel(int levelName = 1)
+    private void Initialize()
+    {
+        timeBarValue.CurrentValue = 1f;
+        playerIsDashing.CurrentValue = false;
+    }
+
+    public void LoadLevel(int levelIndex = 1)
     {
         EventSystem.current.SetSelectedGameObject(null);
         Time.timeScale = 1f;
-        SceneManager.LoadScene(levelName, LoadSceneMode.Single);
+        if (levelIndex == 0)
+        {
+            lastCheckpoint.CurrentValue = null;
+        }
+        SceneManager.LoadScene(levelIndex, LoadSceneMode.Single);
+    }
+
+    public void RestartLastCheckpoint()
+    {
+        LoadLevel();
     }
 
     public void QuitGame()
     {
+        lastCheckpoint.CurrentValue = null;
         Application.Quit();
     }
 

@@ -1,37 +1,43 @@
 using UnityEngine;
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth : MonoBehaviour, IDamageable
 {
     [SerializeField]
-    private VoidEventChannel isHurtVoidEventChannel;
+    private BoolEventChannel onHealthUpdated;
 
     [SerializeField]
-    private CinemachineShakeEventChannel onCinemachineShake;
-
-    [SerializeField]
-    private CameraShakeTypeValue hurtCameraShake;
-
-    [SerializeField]
-    private CameraShakeTypeValue deathCameraShake;
-
-    private Animator animator;
-    private SpriteRenderer sr;
-
-    [SerializeField]
-    private VoidEventChannel onPlayerDeathVoidEventChannel;
+    private VoidEventChannel onPlayerDeath;
 
     public GameObject deathEffectPrefab;
 
     [SerializeField]
     private PlayerStatsValue playerStatsValue;
 
+    private Invulnerable invulnerable;
+
+    [SerializeField]
+    private LayerMask layerAfterDeath;
+
+    [Space(10)]
+
+    [SerializeField]
+    private CinemachineShakeEventChannel onCinemachineShake;
+
+    [SerializeField]
+    private CameraShakeTypeValue hurtCameraShake;
+    [SerializeField]
+    private CameraShakeTypeValue deathCameraShake;
+
+    [SerializeField]
+    private int testStartHealthPoints = 20;
 
     private void Awake()
     {
         // playerStatsValue.nbCurrentLifes = playerStatsValue.nbMaxLifes;
-        animator = GetComponent<Animator>();
-        sr = GetComponent<SpriteRenderer>();
-        onPlayerDeathVoidEventChannel.OnEventRaised += OnDeath;
+        invulnerable = GetComponent<Invulnerable>();
+        #if UNITY_EDITOR
+        playerStatsValue.currentLifePoints = testStartHealthPoints;
+        #endif
     }
 
     private void Update()
@@ -39,43 +45,65 @@ public class PlayerHealth : MonoBehaviour
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.H))
         {
-            TakeDamage();
+            TakeDamage(1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            TakeDamage(int.MaxValue);
         }
 #endif
     }
 
     // Update is called once per frame
-    public void TakeDamage()
+    public void TakeDamage(int damage)
     {
-        playerStatsValue.nbCurrentLifes = Mathf.Clamp(
-            playerStatsValue.nbCurrentLifes - 1,
+        if (playerStatsValue.currentLifePoints == 0)
+        {
+            return;
+        }
+        playerStatsValue.currentLifePoints = Mathf.Clamp(
+            playerStatsValue.currentLifePoints - damage,
             0,
-            playerStatsValue.nbMaxLifes
+            playerStatsValue.maxLifePoints
         );
 
-        isHurtVoidEventChannel.Raise();
-        if (playerStatsValue.nbCurrentLifes <= 0)
+        onHealthUpdated.Raise(true);
+        if (playerStatsValue.currentLifePoints <= 0)
         {
-            onPlayerDeathVoidEventChannel.Raise();
-            OnDeath();
+            Death();
         }
         else
         {
             onCinemachineShake.Raise(hurtCameraShake);
+            invulnerable.Trigger();
         }
     }
 
-    private void OnDeath()
+    public void Heal(PotionValue potionTypeValue)
     {
-        onCinemachineShake.Raise(deathCameraShake);
-        GameObject deathEffect = Instantiate(deathEffectPrefab, transform.position, Quaternion.identity);
-        Destroy(deathEffect, deathEffect.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-        Destroy(gameObject);
+        if (potionTypeValue.type == PotionType.Heal)
+        {
+            int newPointsLife = Mathf.Clamp(
+                playerStatsValue.currentLifePoints + potionTypeValue.value,
+                0,
+                playerStatsValue.maxLifePoints
+            );
+            playerStatsValue.currentLifePoints = newPointsLife;
+            onHealthUpdated.Raise(false);
+        }
     }
 
-    private void OnDisable()
+    private void Death()
     {
-        onPlayerDeathVoidEventChannel.OnEventRaised -= OnDeath;
+        onPlayerDeath?.Raise();
+        onCinemachineShake.Raise(deathCameraShake);
+        gameObject.layer = Helpers.GetLayerIndex(layerAfterDeath.value);
+        transform.parent.gameObject.layer = Helpers.GetLayerIndex(layerAfterDeath.value);
+    }
 
+    public int GetHealth()
+    {
+        return playerStatsValue.currentLifePoints;
     }
 }

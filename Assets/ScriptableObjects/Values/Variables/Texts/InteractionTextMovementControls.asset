@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaa054f8c30a3b944b44806a80b2cf81, type: 3}
+  m_Name: InteractionTextMovementControls
+  m_EditorClassIdentifier: 
+  listSentences:
+  - "Si une biblioth\xE8que s'allume \xE0 votre passage, c'est qu'elle a quelque
+    chose \xE0 vous apprendre."
+  - "N'h\xE9sitez pas \xE0 les consulter."
+  - "D\xE9placez vous avec les touches <sprite=\"direction-spritesheet\" anim=\"0,
+    1, 2\">/<sprite=\"direction-spritesheet\" anim=\"4, 5, 2\"> et <sprite=\"direction-spritesheet\"
+    anim=\"2, 3, 2\">/<sprite=\"direction-spritesheet\" anim=\"6, 7, 2\">"
+  - Sautez avec la touche <sprite="keyboard-space" anim="0, 1, 2"><sprite="keyboard-space"
+    anim="2, 3, 2"><sprite="keyboard-space" anim="4, 5, 2">
+  - "Le monde d'<color=#ead8b5><b>Unknown Territories</b></color> regorge de nombreuses
+    connaissances enferm\xE9es dans des biblioth\xE8ques."
+  - "Mais rien ne vous emp\xEAche d'acqu\xE9rir ces connaissances sans ces biblioth\xE8ques."
+  - "L'IUT de Sarcelles regorge \xE9galement de livres, ils sont \xE0 la biblioth\xE8que
+    universitaire, elle est au deuxi\xE8me \xE9tage."
+  OnConversationEnd: {fileID: 0}

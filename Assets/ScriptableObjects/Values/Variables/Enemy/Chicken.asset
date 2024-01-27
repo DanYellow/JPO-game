@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2456756d375de3a40aebc4b7516abfa3, type: 3}
+  m_Name: Chicken
+  m_EditorClassIdentifier: 
+  maxLifePoints: 1
+  walkSpeed: 3
+  runSpeed: 3
+  attackRate: 1
+  damage: 1
+  name: Chicken
+  distanceDetector: 0
+  obstacleCheckRadius: 0.25
+  knockbackForce: 0
+  dropItem: {fileID: 1549881297164655226, guid: e08cb6d4c039e4c409e32bbbdabfde06, type: 3}
+  blastEffect: {fileID: 0}
+  dropProbability: 1
+  onInteractRangeEvent: {fileID: 11400000, guid: 980ecdfb3784b454db0a1d2846a566a0, type: 2}

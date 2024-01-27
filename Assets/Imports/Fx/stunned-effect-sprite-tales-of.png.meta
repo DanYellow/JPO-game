@@ -1,0 +1,1016 @@
+fileFormatVersion: 2
+guid: 5a53916187f389b4b9011ba3b1a5ff22
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: stunned-effect-sprite-tales-of_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 198
+        width: 56
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 606b7f0278605084894cae168e19e319
+      internalID: -552037343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stunned-effect-sprite-tales-of_1
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 198
+        width: 56
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c99745d4a6d612f4c832cb5070f7a23b
+      internalID: 1319325789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stunned-effect-sprite-tales-of_2
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 198
+        width: 56
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99081c0c583bff0429937dfedf10862b
+      internalID: -1930371881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stunned-effect-sprite-tales-of_3
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 198
+        width: 56
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4915e33b630a0a34eafb4d4a67f451fe
+      internalID: -1260620766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stunned-effect-sprite-tales-of_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 176
+        width: 56
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e4d6b30d2376fb438b6691f5d180cce
+      internalID: -1811658554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stunned-effect-sprite-tales-of_5
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 176
+        width: 56
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f95749881cedf36408b4bb46bdafff90
+      internalID: 412553337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stunned-effect-sprite-tales-of_6
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 176
+        width: 56
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 051be9c1cc6a7d64bb54a7969c82290c
+      internalID: 2087410658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stunned-effect-sprite-tales-of_7
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 176
+        width: 56
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ae5556a3335cc34281eb1acc5854cd3
+      internalID: 1860226733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stunned-effect-sprite-tales-of_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 154
+        width: 56
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bae3f76bbb8646c44ae50621bd71eafc
+      internalID: 879419515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stunned-effect-sprite-tales-of_9
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 154
+        width: 56
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04d60fcae63e8604796c60d440dccc8c
+      internalID: 263866953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stunned-effect-sprite-tales-of_10
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 154
+        width: 56
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54736639742804f4fb18e22eda326b42
+      internalID: 130616144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stunned-effect-sprite-tales-of_11
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 154
+        width: 56
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61bdcb2f6bccbe249b93a07ddb8c7142
+      internalID: 279021376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stunned-effect-sprite-tales-of_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 132
+        width: 56
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1da2d0f8e28de104eb0cc3ef78e24092
+      internalID: 897980818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stunned-effect-sprite-tales-of_13
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 132
+        width: 56
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f158a8242a41c542aad75f0ef03bc97
+      internalID: 969351823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stunned-effect-sprite-tales-of_14
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 132
+        width: 56
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f76cbad7791ada14cba04291ea44790a
+      internalID: 2093602854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stunned-effect-sprite-tales-of_15
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 132
+        width: 56
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f65e412e47aad4440b36b590309201be
+      internalID: -932549092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stunned-effect-sprite-tales-of_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 110
+        width: 56
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad14ee182c634de46b8313cfdb2b68dc
+      internalID: -1508806829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stunned-effect-sprite-tales-of_17
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 110
+        width: 56
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 862ebdf1bc04b7b4cbdc5dcb602ff2a2
+      internalID: 1110677849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stunned-effect-sprite-tales-of_18
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 110
+        width: 56
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28772535b3a86ee4bb1bb9f920ea1a83
+      internalID: 1447622172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stunned-effect-sprite-tales-of_19
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 110
+        width: 56
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f42b30274f300534c887d1af40ed43dc
+      internalID: 728049631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stunned-effect-sprite-tales-of_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 88
+        width: 56
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7cb6eb378c380194eacd2e2250b7fc4d
+      internalID: -113768000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stunned-effect-sprite-tales-of_21
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 88
+        width: 56
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a7db0b5fd2f35d40aa5be08e227e58e
+      internalID: 63069152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stunned-effect-sprite-tales-of_22
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 88
+        width: 56
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a34806f647ab214abee06714d1ff6f7
+      internalID: 1608749482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stunned-effect-sprite-tales-of_23
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 88
+        width: 56
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ac23c053f5a2f5488231c99af06c2a1
+      internalID: -8622592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stunned-effect-sprite-tales-of_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 66
+        width: 56
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f414b812c62dd9a44a2ffa5e027be653
+      internalID: 1576530171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stunned-effect-sprite-tales-of_25
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 66
+        width: 56
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61b421b85c880784fbcfbfb71e2f1485
+      internalID: -2117658815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stunned-effect-sprite-tales-of_26
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 66
+        width: 56
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa38dd4913cf51f48bb1074052f64de4
+      internalID: 188970918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stunned-effect-sprite-tales-of_27
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 66
+        width: 56
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2314e9e951a74484da5b74de59151588
+      internalID: 52278963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stunned-effect-sprite-tales-of_28
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 44
+        width: 56
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a3aefcb0b6a15c4680f77a381edc6ca
+      internalID: -1251642920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stunned-effect-sprite-tales-of_29
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 44
+        width: 56
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf76c89b4df54bf43952840145970edd
+      internalID: -1748803176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stunned-effect-sprite-tales-of_30
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 44
+        width: 56
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99be0097659e7714caeb492a694bc115
+      internalID: -913721591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stunned-effect-sprite-tales-of_31
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 44
+        width: 56
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00ded392c91d3814ca7608c100f7b711
+      internalID: 1521837632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stunned-effect-sprite-tales-of_32
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 22
+        width: 56
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a06817854babca2418fe7fd58117e4bb
+      internalID: -1964621909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stunned-effect-sprite-tales-of_33
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 22
+        width: 56
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e9207922a10e2c458b47f6d9b7c849b
+      internalID: 1312046944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stunned-effect-sprite-tales-of_34
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 22
+        width: 56
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ba2129717faefc41ba784ddb1f906a6
+      internalID: 1178452348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stunned-effect-sprite-tales-of_35
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 22
+        width: 56
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8557eeb297c4bd94db6f40e8debd7da9
+      internalID: -726506083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stunned-effect-sprite-tales-of_36
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 56
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a8577f1381f49848aa8ba6371be938b
+      internalID: 1953111611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stunned-effect-sprite-tales-of_37
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 0
+        width: 56
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c57fe8fd1834de42b7e02da840ad27b
+      internalID: -1126941625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stunned-effect-sprite-tales-of_38
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 0
+        width: 56
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 219200d42640d024ba5a8b41dd4f6f37
+      internalID: 263252538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stunned-effect-sprite-tales-of_39
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 0
+        width: 56
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d04b9602e50e9dc49ad922b807aa8adf
+      internalID: 165107658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      stunned-effect-sprite-tales-of_23: -8622592
+      stunned-effect-sprite-tales-of_31: 1521837632
+      stunned-effect-sprite-tales-of_34: 1178452348
+      stunned-effect-sprite-tales-of_29: -1748803176
+      stunned-effect-sprite-tales-of_9: 263866953
+      stunned-effect-sprite-tales-of_11: 279021376
+      stunned-effect-sprite-tales-of_28: -1251642920
+      stunned-effect-sprite-tales-of_12: 897980818
+      stunned-effect-sprite-tales-of_22: 1608749482
+      stunned-effect-sprite-tales-of_14: 2093602854
+      stunned-effect-sprite-tales-of_33: 1312046944
+      stunned-effect-sprite-tales-of_6: 2087410658
+      stunned-effect-sprite-tales-of_1: 1319325789
+      stunned-effect-sprite-tales-of_32: -1964621909
+      stunned-effect-sprite-tales-of_13: 969351823
+      stunned-effect-sprite-tales-of_5: 412553337
+      stunned-effect-sprite-tales-of_38: 263252538
+      stunned-effect-sprite-tales-of_20: -113768000
+      stunned-effect-sprite-tales-of_16: -1508806829
+      stunned-effect-sprite-tales-of_8: 879419515
+      stunned-effect-sprite-tales-of_21: 63069152
+      stunned-effect-sprite-tales-of_24: 1576530171
+      stunned-effect-sprite-tales-of_26: 188970918
+      stunned-effect-sprite-tales-of_3: -1260620766
+      stunned-effect-sprite-tales-of_37: -1126941625
+      stunned-effect-sprite-tales-of_0: -552037343
+      stunned-effect-sprite-tales-of_2: -1930371881
+      stunned-effect-sprite-tales-of_4: -1811658554
+      stunned-effect-sprite-tales-of_36: 1953111611
+      stunned-effect-sprite-tales-of_15: -932549092
+      stunned-effect-sprite-tales-of_19: 728049631
+      stunned-effect-sprite-tales-of_39: 165107658
+      stunned-effect-sprite-tales-of_30: -913721591
+      stunned-effect-sprite-tales-of_27: 52278963
+      stunned-effect-sprite-tales-of_35: -726506083
+      stunned-effect-sprite-tales-of_17: 1110677849
+      stunned-effect-sprite-tales-of_25: -2117658815
+      stunned-effect-sprite-tales-of_7: 1860226733
+      stunned-effect-sprite-tales-of_10: 130616144
+      stunned-effect-sprite-tales-of_18: 1447622172
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

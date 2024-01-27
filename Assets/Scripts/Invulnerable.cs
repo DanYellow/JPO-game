@@ -2,82 +2,101 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// https://www.aleksandrhovhannisyan.com/blog/invulnerability-frames-in-unity/
+
 public class Invulnerable : MonoBehaviour
 {
-    private SpriteRenderer sr;
-    private bool isInvulnerable = false;
+    [field: SerializeField]
+    public bool isInvulnerable { private set; get; } = false;
     [SerializeField]
     private InvulnerableDataValue invulnerableDataValue;
     [SerializeField]
-    private LayerMask listLayerToIgnoreAfterHit;
+    private LayerMask layersToIgnoreAfterHit;
     private List<int> listLayers = new List<int>();
 
-    [SerializeField]
-    private VoidEventChannel isHurtVoidEventChannel;
-
-    [SerializeField]
-    private MaterialEventChannel onMaterialChange;
-
-    [SerializeField]
     private MaterialChangeValue materialChange;
+
+
+    private Material originalMaterial;
+    private SpriteRenderer sr;
 
     private void Awake()
     {
+        materialChange = ScriptableObject.CreateInstance<MaterialChangeValue>();
+        materialChange.material = invulnerableDataValue.material;
+        materialChange.interval = invulnerableDataValue.flashDelay;
+        materialChange.duration = invulnerableDataValue.duration;
+
         sr = GetComponent<SpriteRenderer>();
+
+        originalMaterial = sr.material;
     }
+
 
     // Start is called before the first frame update
     private void Start()
     {
-        CheckMasks();
-
-        isHurtVoidEventChannel.OnEventRaised += OnCollision;
-
-        foreach (var layerIndex in listLayers)
-        {
-            Physics2D.IgnoreLayerCollision(gameObject.layer, layerIndex, false);
-        }
+        CreateListLayers();
     }
 
-    private void CheckMasks()
+    private void CreateListLayers()
     {
         for (int i = 0; i < 32; i++)
         {
-            if (listLayerToIgnoreAfterHit == (listLayerToIgnoreAfterHit | (1 << i)))
+            if (layersToIgnoreAfterHit == (layersToIgnoreAfterHit | (1 << i)))
             {
                 listLayers.Add(i);
             }
         }
     }
 
-    private void OnCollision()
+    public void Enable()
     {
-
+        Helpers.DisableCollisions(LayerMask.LayerToName(gameObject.layer), listLayers, true);
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    public void Disable()
     {
-        LayerMask otherLayer = other.gameObject.layer;
-        bool isInLayer = ((listLayerToIgnoreAfterHit & (1 << otherLayer)) != 0);
-
-        if (!isInvulnerable && isInLayer)
-        {
-            StartCoroutine(HandleInvunlnerableDelay(otherLayer.value));
-            onMaterialChange.Raise(materialChange);
-        }
+        Helpers.DisableCollisions(LayerMask.LayerToName(gameObject.layer), listLayers, false);
     }
 
-    public IEnumerator HandleInvunlnerableDelay(int layerId)
+    public void Trigger()
     {
-        Physics2D.IgnoreLayerCollision(gameObject.layer, layerId, true);
+        StopAllCoroutines();
+        StartCoroutine(HandleInvunlnerableDelay());
+    }
+
+    private IEnumerator HandleInvunlnerableDelay()
+    {
         isInvulnerable = true;
-        yield return new WaitForSeconds(invulnerableDataValue.duration);
-        isInvulnerable = false;
-        Physics2D.IgnoreLayerCollision(gameObject.layer, layerId, false);
-    }
 
-    private void OnDisable()
-    {
-        isHurtVoidEventChannel.OnEventRaised -= OnCollision;
+        Helpers.DisableCollisions(LayerMask.LayerToName(gameObject.layer), listLayers, isInvulnerable);
+        float invincibilityDeltaTime = 0.15f;
+
+        Color targetColor = sr.color;
+        targetColor.a = materialChange.opacity;
+
+        Color originalColor = sr.color;
+
+        for (float i = 0; i < invulnerableDataValue.duration; i += invincibilityDeltaTime)
+        {
+            if (sr.material == originalMaterial)
+            {
+                sr.material = materialChange.material;
+                sr.color = originalColor;
+            }
+            else
+            {
+                sr.material = originalMaterial;
+                sr.color = targetColor;
+            }
+
+            yield return Helpers.GetWait(invincibilityDeltaTime);
+        }
+
+        sr.color = originalColor;
+        sr.material = originalMaterial;
+        isInvulnerable = false;
+        Helpers.DisableCollisions(LayerMask.LayerToName(gameObject.layer), listLayers, isInvulnerable);
     }
 }

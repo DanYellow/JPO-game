@@ -21,12 +21,22 @@ public class MainMenuManager : MonoBehaviour
 
     private SceneTransition sceneTransition;
 
+    [SerializeField]
+    private StringEventChannel onPlayerInputMapChange;
+
+    [SerializeField]
+    private Vector2Value lastCheckpoint;
+
+    [SerializeField]
+    private PlayerStatsValue playerStatsValue;
+
     private void Awake()
     {
         Time.timeScale = 1f;
 
         sceneTransition = GetComponent<SceneTransition>();
         // pi.enabled = false;
+        playerStatsValue.currentLifePoints = 20;
     }
 
     private void Start()
@@ -35,12 +45,13 @@ public class MainMenuManager : MonoBehaviour
         {
             // LoadLevel(1); 
         };
-
+        Cursor.visible = true;
         StartCoroutine(sceneTransition.Show());
         OnFirstLevelStart.OnEventRaised += onFirstLevelLoadEvent;
     }
 
-    private void EnableControls() {
+    private void EnableControls()
+    {
         pi.enabled = true;
     }
 
@@ -68,13 +79,25 @@ public class MainMenuManager : MonoBehaviour
         }
     }
 
+    public void StartGame(Button btn)
+    {
+        onPlayerInputMapChange?.Raise(ActionMapName.Loading);
+        if (btn != null)
+        {
+            btn.interactable = false;
+        }
+        lastCheckpoint.CurrentValue = new Vector2(-15.02f, -3.43f);
+        LoadLevel(1);
+    }
+
     public void LoadLevel(int index)
     {
         EventSystem.current.SetSelectedGameObject(null);
         SceneManager.LoadScene(index, LoadSceneMode.Single);
     }
 
-    public void TransitionToScene(int levelIndex) {
+    public void TransitionToScene(int levelIndex)
+    {
         StartCoroutine(sceneTransition.Hide());
     }
 
