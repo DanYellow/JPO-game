@@ -25,6 +25,9 @@ public class CarController : MonoBehaviour
     private float steerAngle = 19.5f;
 
     private RaycastHit hit;
+    private bool isGrounded = true;
+    [SerializeField]
+    private LayerMask groundLayers;
 
     private Vector3 moveInput = Vector3.zero;
 
@@ -36,7 +39,21 @@ public class CarController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        transform.position = motor.transform.position;
+        transform.rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
+
         ManageWheels();
+    }
+
+    private void FixedUpdate()
+    {
+        isGrounded = Physics.Raycast(transform.position, -transform.up, out hit, 1, groundLayers);
+        if (isGrounded)
+        {
+            float finalSpeed = speed;
+            // finalSpeed *= Mathf.Abs(inputX) > 0 ? 0.95f : 1;
+            motor.AddForce(finalSpeed * transform.forward * moveInput.y, ForceMode.Acceleration);
+        }
     }
 
     private void ManageWheels()
