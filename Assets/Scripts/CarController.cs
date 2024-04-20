@@ -38,7 +38,8 @@ public class CarController : MonoBehaviour
         SwapDrag();
 
         transform.position = motor.transform.position;
-        transform.rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
+        Quaternion targetRotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 20 * Time.deltaTime);
     }
 
     private void FixedUpdate()
@@ -63,7 +64,7 @@ public class CarController : MonoBehaviour
         float newRotation = carData.turnSpeed * moveInput.x * Time.deltaTime;
         if (isGrounded)
         {
-            transform.Rotate(0, newRotation * moveInput.y, 0, Space.Self);
+            transform.Rotate(0, newRotation, 0, Space.Self);
         }
     }
 

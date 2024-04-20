@@ -4,6 +4,7 @@ using UnityEngine;
 public class CarData : ScriptableObject
 {
     public float forwardSpeed = 175;
+    public float backwardSpeed = 105;
     public float turnSpeed = 500;
     public float rotationWheelSpeed = 500;
     public float steerAngle = 19.5f;
