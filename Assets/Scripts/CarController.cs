@@ -34,16 +34,17 @@ public class CarController : MonoBehaviour
     void Awake()
     {
         motor.transform.parent = null;
+        // collision.transform.parent = null;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = motor.transform.position;
-        transform.rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
-
         ManageWheels();
         Rotate();
+
+        transform.position = motor.transform.position;
+        transform.rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
     }
 
     private void FixedUpdate()
@@ -52,7 +53,7 @@ public class CarController : MonoBehaviour
         if (isGrounded)
         {
             float finalSpeed = speed;
-            // finalSpeed *= Mathf.Abs(inputX) > 0 ? 0.95f : 1;
+            // finalSpeed *= Mathf.Abs(inputX) > 0 ? 0.95f : 1; moveInput.y
             motor.AddForce(finalSpeed * transform.forward * moveInput.y, ForceMode.Acceleration);
         }
     }
