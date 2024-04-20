@@ -17,8 +17,9 @@ public class ComputeDistanceTravelled : MonoBehaviour
 
     private void Update()
     {
-        float distance = Vector3.Distance(lastPosition, transform.position);
-        distanceTravelled.CurrentValue += (float)System.Math.Round(distance, 2);
+        float distance = Mathf.Abs((lastPosition - transform.position).z);
+        
+        distanceTravelled.CurrentValue += distance;
 
         lastPosition = transform.position;
     }
