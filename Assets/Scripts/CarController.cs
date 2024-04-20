@@ -57,6 +57,8 @@ public class CarController : MonoBehaviour
             float finalSpeed = speed;
             // finalSpeed *= Mathf.Abs(inputX) > 0 ? 0.95f : 1; moveInput.y
             motor.AddForce(finalSpeed * transform.forward * moveInput.y, ForceMode.Acceleration);
+        } else {
+            motor.AddForce(-transform.up * Physics.gravity.y);
         }
 
         collision.MoveRotation(transform.rotation);
