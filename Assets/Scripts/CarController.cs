@@ -43,6 +43,7 @@ public class CarController : MonoBehaviour
         transform.rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
 
         ManageWheels();
+        Rotate();
     }
 
     private void FixedUpdate()
@@ -53,6 +54,15 @@ public class CarController : MonoBehaviour
             float finalSpeed = speed;
             // finalSpeed *= Mathf.Abs(inputX) > 0 ? 0.95f : 1;
             motor.AddForce(finalSpeed * transform.forward * moveInput.y, ForceMode.Acceleration);
+        }
+    }
+
+    private void Rotate()
+    {
+        float newRotation = turnSpeed * moveInput.x * Time.deltaTime;
+        if (isGrounded)
+        {
+            transform.Rotate(0, newRotation * moveInput.y, 0, Space.Self);
         }
     }
 
