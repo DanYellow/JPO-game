@@ -724,7 +724,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -776,8 +776,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 0, g: 1, b: 0.9355135, a: 1}
+      key1: {r: 1, g: 0, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -1339,7 +1339,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1391,8 +1391,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 0, g: 1, b: 0.9355135, a: 1}
+      key1: {r: 1, g: 0, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -1463,15 +1463,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   motor: {fileID: 188026845}
   collision: {fileID: 1917917934}
-  speed: 175
-  turnSpeed: 500
   listWheels:
   - {fileID: 4043137338826512451}
   - {fileID: 2902831458096547384}
   - {fileID: 76023410761013216}
   - {fileID: 8422032605217620255}
-  rotationWheelSpeed: 500
-  steerAngle: 19.5
+  carData: {fileID: 11400000, guid: 7de1e523eab7c7e4c9c86afd2e90efa8, type: 2}
   groundLayers:
     serializedVersion: 2
     m_Bits: 8

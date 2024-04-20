@@ -1,5 +1,4 @@
 using UnityEngine.InputSystem;
-using UnityEngine.Events;
 using UnityEngine;
 
 public class CarController : MonoBehaviour
@@ -11,18 +10,10 @@ public class CarController : MonoBehaviour
     private Rigidbody collision;
 
     [SerializeField]
-    private float speed;
-    [SerializeField]
-    private float turnSpeed;
-
-    [SerializeField]
     private GameObject[] listWheels;
 
     [SerializeField]
-    private float rotationWheelSpeed = 150;
-
-    [SerializeField]
-    private float steerAngle = 19.5f;
+    private CarData carData;
 
     private RaycastHit hit;
     private bool isGrounded = true;
@@ -44,6 +35,7 @@ public class CarController : MonoBehaviour
     {
         ManageWheels();
         Rotate();
+        SwapDrag();
 
         transform.position = motor.transform.position;
         transform.rotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
@@ -54,10 +46,12 @@ public class CarController : MonoBehaviour
         isGrounded = Physics.Raycast(transform.position, -transform.up, out hit, 1, groundLayers);
         if (isGrounded)
         {
-            float finalSpeed = speed;
+            float finalSpeed = carData.forwardSpeed;
             // finalSpeed *= Mathf.Abs(inputX) > 0 ? 0.95f : 1; moveInput.y
             motor.AddForce(finalSpeed * transform.forward * moveInput.y, ForceMode.Acceleration);
-        } else {
+        }
+        else
+        {
             motor.AddForce(-transform.up * Physics.gravity.y);
         }
 
@@ -66,10 +60,22 @@ public class CarController : MonoBehaviour
 
     private void Rotate()
     {
-        float newRotation = turnSpeed * moveInput.x * Time.deltaTime;
+        float newRotation = carData.turnSpeed * moveInput.x * Time.deltaTime;
         if (isGrounded)
         {
             transform.Rotate(0, newRotation * moveInput.y, 0, Space.Self);
+        }
+    }
+
+    private void SwapDrag()
+    {
+        if (isGrounded)
+        {
+            motor.drag = carData.groundDrag;
+        }
+        else
+        {
+            motor.drag = carData.airDrag;
         }
     }
 
@@ -78,13 +84,13 @@ public class CarController : MonoBehaviour
         for (var i = 0; i < listWheels.Length; i++)
         {
             var wheel = listWheels[i];
-            wheel.transform.Rotate(Time.deltaTime * moveInput.y * rotationWheelSpeed, 0, 0, Space.Self);
+            wheel.transform.Rotate(Time.deltaTime * moveInput.y * carData.rotationWheelSpeed, 0, 0, Space.Self);
 
             if (i < 2)
             {
                 wheel.transform.parent.transform.localRotation = Quaternion.Euler(new Vector3(
                     wheel.transform.parent.transform.localRotation.x,
-                    Mathf.Lerp(-steerAngle, steerAngle, moveInput.x * 0.5f + 0.5f),
+                    Mathf.Lerp(-carData.steerAngle, carData.steerAngle, moveInput.x * 0.5f + 0.5f),
                     wheel.transform.parent.transform.localRotation.z
                 ));
             }
