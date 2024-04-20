@@ -32,7 +32,7 @@ public class CameraRotation : MonoBehaviour
         if (true) // moveInput.x == 0
         {
             timeCount = 0;
-            transform.rotation = originalRot;
+            // transform.rotation = originalRot;
             transform.rotation = Quaternion.FromToRotation(
                 -transform.forward,
                 target.position

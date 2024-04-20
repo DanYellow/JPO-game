@@ -181,7 +181,7 @@ Rigidbody:
   m_GameObject: {fileID: 188026842}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 3
+  m_Drag: 2.5
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -966,6 +966,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1166183952}
   - component: {fileID: 1166183951}
+  - component: {fileID: 1166183953}
   m_Layer: 0
   m_Name: MuscleCar
   m_TagString: Untagged
@@ -1016,6 +1017,19 @@ Transform:
   - {fileID: 4298241996741014631}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1166183953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1166183950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1125b8077b0bbea499438b78770c455a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceTravelled: {fileID: 11400000, guid: 34a454f90f47f2041ae312d9692b9efd, type: 2}
 --- !u!1 &1616579853
 GameObject:
   m_ObjectHideFlags: 3
@@ -1077,9 +1091,9 @@ MonoBehaviour:
   m_LookaheadTime: 0
   m_LookaheadSmoothing: 0
   m_LookaheadIgnoreY: 0
-  m_XDamping: 0.38
-  m_YDamping: 0
-  m_ZDamping: 0
+  m_XDamping: 0.1
+  m_YDamping: 0.1
+  m_ZDamping: 0.1
   m_TargetMovementOnly: 1
   m_ScreenX: 0.5
   m_ScreenY: 0.5
