@@ -1,15 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 public class GravityBody : MonoBehaviour
 {
-    public GravityAttractor planet;
-    public Rigidbody rb;
+    [SerializeField]
+    private GravityAttractor planet;
+    private Rigidbody rb;
 
     private void Awake()
     {
+        rb = GetComponent<Rigidbody>();
         // Disable rigidbody gravity and rotation as this is simulated in GravityAttractor script
         rb.useGravity = false;
         // https://forum.unity.com/threads/faux-gravity-spinning-at-south-pole.180580/
