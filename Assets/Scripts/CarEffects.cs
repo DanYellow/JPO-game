@@ -11,7 +11,7 @@ public class CarEffects : MonoBehaviour
 
     void Update()
     {
-        ToggleSkidMarks(Mathf.Abs(moveInput.y) > 0);
+        // ToggleSkidMarks(Mathf.Abs(moveInput.y) > 0);
     }
     
     private void ToggleSkidMarks(bool isEmitting)

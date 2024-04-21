@@ -51,16 +51,18 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Angle: 90
+    - _Angle: 82.15
     - _DistanceFilter: 1
     - _GridSpeed: 0.35
     - _IsMoving: 1
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _Size: 0.05
     - _Thickness: 1.02
     m_Colors:
     - _Direction: {r: 1.18, g: 0, b: 0, a: 0}
-    - _GridColor: {r: 4, g: 2.7755694, b: 0, a: 0}
-    - _TileColor: {r: 0.1509434, g: 0.1509434, b: 0.1509434, a: 0}
+    - _GridColor: {r: 4, g: 0, b: 1.9640836, a: 1}
+    - _Position: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _TileColor: {r: 0.04705883, g: 0.003921569, b: 0.27450982, a: 1}
     - _Tiling: {r: 60, g: 60, b: 0, a: 0}
   m_BuildTextureStacks: []
