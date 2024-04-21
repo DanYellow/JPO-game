@@ -15,13 +15,15 @@ public class CameraRotation : MonoBehaviour
 
     private Vector3 moveInput = Vector3.zero;
 
+    private float steerFactor = 1.25f;
+
     void Update()
     {
         transform.rotation = Quaternion.RotateTowards(transform.rotation, target.rotation, delay * Time.deltaTime);
 
         target.localRotation = Quaternion.Euler(new Vector3(
             target.localRotation.x,
-            Mathf.Lerp(carData.steerAngle * 1.5f, -carData.steerAngle * 1.5f, moveInput.x * 0.5f + 0.5f),
+            Mathf.Lerp(carData.steerAngle * steerFactor, -carData.steerAngle * steerFactor, moveInput.x * 0.5f + 0.5f),
             target.localRotation.z
         ));
     }
