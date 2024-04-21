@@ -22,6 +22,9 @@ public class CarController : MonoBehaviour
 
     private Vector3 moveInput = Vector3.zero;
 
+    [SerializeField]
+    private Transform cameraTracker;
+
     void Awake()
     {
         motor.transform.parent = null;
@@ -93,6 +96,11 @@ public class CarController : MonoBehaviour
                     wheel.transform.parent.transform.localRotation.x,
                     Mathf.Lerp(-carData.steerAngle, carData.steerAngle, moveInput.x * 0.5f + 0.5f),
                     wheel.transform.parent.transform.localRotation.z
+                ));
+                cameraTracker.localRotation = Quaternion.Euler(new Vector3(
+                    cameraTracker.localRotation.x,
+                    Mathf.Lerp(carData.steerAngle, -carData.steerAngle, moveInput.x * 0.5f + 0.5f),
+                    cameraTracker.localRotation.z
                 ));
             }
         }
