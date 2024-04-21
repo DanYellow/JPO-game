@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,7 +15,6 @@ public class CameraRotation : MonoBehaviour
 
     private Vector3 moveInput = Vector3.zero;
 
-    // Update is called once per frame -transform.forward
     void Update()
     {
         transform.rotation = Quaternion.RotateTowards(transform.rotation, target.rotation, delay * Time.deltaTime);
