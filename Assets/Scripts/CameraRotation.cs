@@ -8,13 +8,16 @@ public class CameraRotation : MonoBehaviour
 {
     public Transform target;
 
+    [SerializeField]
+    private float delay = 150;
+
     private Vector3 moveInput = Vector3.zero;
 
     private Quaternion originalRot;
 
     private float timeCount = 0.0f;
 
-
+    Quaternion q;
     private void Start()
     {
         originalRot = transform.rotation;
@@ -31,12 +34,22 @@ public class CameraRotation : MonoBehaviour
 
         if (true) // moveInput.x == 0
         {
+            // Quaternion q = Quaternion.AngleAxis(50, -transform.forward);
+                    // transform.rotation = Quaternion.AngleAxis(50, -transform.forward);
+
             timeCount = 0;
             // transform.rotation = originalRot;
-            transform.rotation = Quaternion.FromToRotation(
-                -transform.forward,
-                target.position
-            ) * transform.rotation;
+            // transform.rotation = Quaternion.FromToRotation(
+            //     q.eulerAngles,
+            //     target.position
+            // ) * transform.rotation;
+
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, target.rotation, delay * Time.deltaTime);
+            // transform.rotation = Quaternion.Slerp(transform.rotation, target.rotation, 1);
+            // transform.rotation = Quaternion.FromToRotation(
+            //     -transform.forward,
+            //     target.position
+            // ) * transform.rotation;
         }
         else
         {
