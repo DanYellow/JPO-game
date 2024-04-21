@@ -6,10 +6,14 @@ using UnityEngine.InputSystem;
 
 public class CameraRotation : MonoBehaviour
 {
-    public Transform target;
+    [SerializeField]
+    private Transform target;
 
     [SerializeField]
     private float delay = 150;
+
+    [SerializeField]
+    private CarData carData;
 
     private Vector3 moveInput = Vector3.zero;
 
@@ -17,6 +21,12 @@ public class CameraRotation : MonoBehaviour
     void Update()
     {
         transform.rotation = Quaternion.RotateTowards(transform.rotation, target.rotation, delay * Time.deltaTime);
+
+        target.localRotation = Quaternion.Euler(new Vector3(
+            target.localRotation.x,
+            Mathf.Lerp(carData.steerAngle * 1.5f, -carData.steerAngle * 1.5f, moveInput.x * 0.5f + 0.5f),
+            target.localRotation.z
+        ));
     }
 
     public void OnTurn(InputAction.CallbackContext ctx)
