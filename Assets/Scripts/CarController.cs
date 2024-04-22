@@ -1,5 +1,6 @@
 using UnityEngine.InputSystem;
 using UnityEngine;
+using System.Collections;
 
 public class CarController : MonoBehaviour
 {
@@ -64,6 +65,10 @@ public class CarController : MonoBehaviour
 
     private void Rotate()
     {
+        if(motor.velocity.sqrMagnitude <= 15) {
+            return;
+        }
+
         float newRotation = carData.turnSpeed * moveInput.x * Time.deltaTime;
         if (isGrounded)
         {
@@ -103,6 +108,33 @@ public class CarController : MonoBehaviour
 
     public void OnDrive(InputAction.CallbackContext ctx)
     {
-        moveInput = (Vector3)ctx.ReadValue<Vector2>();
+        if (ctx.phase == InputActionPhase.Performed)
+        {
+            StopAllCoroutines();
+            moveInput = (Vector3)ctx.ReadValue<Vector2>();
+        }
+        else if (ctx.phase == InputActionPhase.Canceled)
+        {
+            StopAllCoroutines();
+            StartCoroutine(Glide());
+        }
+    }
+
+    private IEnumerator Glide()
+    {
+        float current = 0;
+        float duration = 0.08f;
+
+        yield return null;
+        while (current <= 1)
+        {
+            moveInput.y = Mathf.Lerp(1, 0, Mathf.Sin(current * Mathf.PI * 0.5f));
+
+            current += Time.deltaTime / duration;
+
+            yield return null;
+        }
+
+        moveInput.y = 0;
     }
 }
