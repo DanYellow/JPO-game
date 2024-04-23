@@ -41,6 +41,8 @@ public class CarController : MonoBehaviour
         Rotate();
         SwapDrag();
 
+        collision.position = motor.position;
+
         transform.position = motor.transform.position;
         Quaternion targetRotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 20 * Time.deltaTime);
