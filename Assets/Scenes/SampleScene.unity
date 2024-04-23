@@ -1771,7 +1771,7 @@ GameObject:
   - component: {fileID: 898319468}
   - component: {fileID: 898319467}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1793,8 +1793,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 215.70001, y: 9.200012}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 215.70001, y: 17.100006}
+  m_SizeDelta: {x: 218.4683, y: 34.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &898319467
 MonoBehaviour:
@@ -1818,8 +1818,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5e4cf8c4e496ba3439ab979f2b4719e1, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 579c8939cb7f62f4ab14dfc19a058e7e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
