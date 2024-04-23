@@ -1584,7 +1584,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceTravelled: {fileID: 11400000, guid: 34a454f90f47f2041ae312d9692b9efd, type: 2}
-  chromaticAberrationStep: 0.0025
+  chromaticAberrationStep: 0.05
+  scoreStepThreshold: 850
 --- !u!1 &782224147
 GameObject:
   m_ObjectHideFlags: 0
@@ -1808,8 +1809,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 215.70001, y: 17.100006}
-  m_SizeDelta: {x: 218.4683, y: 34.2}
+  m_AnchoredPosition: {x: 215.70001, y: 5.5881}
+  m_SizeDelta: {x: 316.9148, y: 57.2238}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &898319467
 MonoBehaviour:
@@ -1858,11 +1859,11 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 42
-  m_fontSizeBase: 42
+  m_fontSize: 52
+  m_fontSizeBase: 52
   m_fontWeight: 400
   m_enableAutoSizing: 0
-  m_fontSizeMin: 18
+  m_fontSizeMin: 42
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
