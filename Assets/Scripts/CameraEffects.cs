@@ -19,7 +19,20 @@ public class CameraEffects : MonoBehaviour
     private ChromaticAberration chromaticAberrationClone;
 
     [SerializeField]
-    private Material render;
+    private Material backgroundRender;
+
+    [SerializeField]
+    private VoidEventChannel onScoreThresholdReached;
+
+    private void OnEnable()
+    {
+        onScoreThresholdReached.OnEventRaised += ScoreEffect;
+    }
+
+    private void OnDisable()
+    {
+        onScoreThresholdReached.OnEventRaised -= ScoreEffect;
+    }
 
     void Start()
     {
@@ -37,13 +50,18 @@ public class CameraEffects : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float thousandth = Mathf.Floor(distanceTravelled.CurrentValue / scoreStepThreshold);
-        if (thousandth >= 1 && thousandth > lastThousandth)
-        {
-            lastThousandth = thousandth;
-            chromaticAberrationClone.intensity.value += chromaticAberrationStep;
-            StartCoroutine(NextThresholdReached(chromaticAberrationClone.intensity.value));
-        }
+        // float thousandth = Mathf.Floor(distanceTravelled.CurrentValue / scoreStepThreshold);
+        // if (thousandth >= 1 && thousandth > lastThousandth)
+        // {
+        //     lastThousandth = thousandth;
+
+        // }
+    }
+
+    private void ScoreEffect()
+    {
+        chromaticAberrationClone.intensity.value += chromaticAberrationStep;
+        StartCoroutine(NextThresholdReached(chromaticAberrationClone.intensity.value));
     }
 
     private IEnumerator NextThresholdReached(float startValue)
@@ -54,7 +72,7 @@ public class CameraEffects : MonoBehaviour
         yield return null;
         while (current <= 1)
         {
-            chromaticAberrationClone.intensity.value = Mathf.Lerp(startValue, 1,  Spike(current));
+            chromaticAberrationClone.intensity.value = Mathf.Lerp(startValue, 1, Spike(current));
             current += Time.deltaTime / duration;
 
             yield return null;

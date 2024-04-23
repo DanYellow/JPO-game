@@ -7,6 +7,14 @@ public class ComputeDistanceTravelled : MonoBehaviour
     [SerializeField]
     private FloatValue distanceTravelled;
 
+    [SerializeField]
+    private int scoreStepThreshold = 850;
+
+    private float lastThousandth = 0;
+
+    [SerializeField]
+    private VoidEventChannel onScoreThresholdReached;
+
     private void Start()
     {
         distanceTravelled.CurrentValue = 0;
@@ -18,6 +26,13 @@ public class ComputeDistanceTravelled : MonoBehaviour
         distanceTravelled.CurrentValue += SphericalDistance(lastPosition, transform.position);
 
         lastPosition = transform.position;
+
+        float thousandth = Mathf.Floor(distanceTravelled.CurrentValue / scoreStepThreshold);
+        if (thousandth >= 1 && thousandth > lastThousandth)
+        {
+            lastThousandth = thousandth;
+            onScoreThresholdReached.Raise();
+        }
     }
 
     float SphericalDistance(Vector3 position1, Vector3 position2)
