@@ -26,7 +26,7 @@ public class CameraRotation : MonoBehaviour
             Mathf.Lerp(carData.steerAngle * steerFactor, -carData.steerAngle * steerFactor, moveInput.x * 0.5f + 0.5f),
             target.localRotation.eulerAngles.z
         ));
-    }
+    }// Mathf.Sin((moveInput.x * 0.5f + 0.5f) * Mathf.PI)
 
     public void OnTurn(InputAction.CallbackContext ctx)
     {
