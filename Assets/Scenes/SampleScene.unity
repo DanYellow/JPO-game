@@ -1583,9 +1583,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34923e74b9239bd4bab5b89b093f2b74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceTravelled: {fileID: 11400000, guid: 34a454f90f47f2041ae312d9692b9efd, type: 2}
   chromaticAberrationStep: 0.05
-  scoreStepThreshold: 850
+  backgroundRender: {fileID: 2100000, guid: 6f2249bf3438d3b44b548d6bf0dcfc89, type: 2}
+  onScoreThresholdReached: {fileID: 11400000, guid: db78dfe58cb2d3a468c633c58e480bb8,
+    type: 2}
+  distanceTravelled: {fileID: 11400000, guid: 34a454f90f47f2041ae312d9692b9efd, type: 2}
 --- !u!1 &782224147
 GameObject:
   m_ObjectHideFlags: 0
@@ -2472,6 +2474,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceTravelled: {fileID: 11400000, guid: 34a454f90f47f2041ae312d9692b9efd, type: 2}
+  scoreStepThreshold: 150
+  onScoreThresholdReached: {fileID: 11400000, guid: db78dfe58cb2d3a468c633c58e480bb8,
+    type: 2}
 --- !u!114 &1166183954
 MonoBehaviour:
   m_ObjectHideFlags: 0

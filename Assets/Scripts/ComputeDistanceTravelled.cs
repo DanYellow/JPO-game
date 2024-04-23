@@ -12,6 +12,7 @@ public class ComputeDistanceTravelled : MonoBehaviour
 
     private float lastThousandth = 0;
 
+    [Header("Scriptable Objects")]
     [SerializeField]
     private VoidEventChannel onScoreThresholdReached;
 

@@ -6,56 +6,38 @@ using UnityEngine.Rendering.Universal;
 public class CameraEffects : MonoBehaviour
 {
     [SerializeField]
-    private FloatValue distanceTravelled;
-
-    [SerializeField]
     private float chromaticAberrationStep = 0.025f;
-
-    private float lastThousandth = 0;
-
-    [SerializeField]
-    private int scoreStepThreshold = 850;
 
     private ChromaticAberration chromaticAberrationClone;
 
     [SerializeField]
     private Material backgroundRender;
 
+    private float initialVignettePower;
+
+    [Header("Scriptable Objects")]
     [SerializeField]
     private VoidEventChannel onScoreThresholdReached;
+
+    [SerializeField]
+    private FloatValue distanceTravelled;
 
     private void OnEnable()
     {
         onScoreThresholdReached.OnEventRaised += ScoreEffect;
     }
 
-    private void OnDisable()
-    {
-        onScoreThresholdReached.OnEventRaised -= ScoreEffect;
-    }
-
     void Start()
     {
+        initialVignettePower = backgroundRender.GetFloat("_VignettePower");
         CinemachineVolumeSettings cinemachineVolumeSettings = GetComponent<CinemachineVolumeSettings>();
 
         if (cinemachineVolumeSettings.m_Profile.TryGet(out ChromaticAberration chromaticAberration))
         {
-
             chromaticAberrationClone = chromaticAberration;
         }
         chromaticAberrationClone.intensity.value = 0;
         chromaticAberrationClone.intensity.overrideState = true;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        // float thousandth = Mathf.Floor(distanceTravelled.CurrentValue / scoreStepThreshold);
-        // if (thousandth >= 1 && thousandth > lastThousandth)
-        // {
-        //     lastThousandth = thousandth;
-
-        // }
     }
 
     private void ScoreEffect()
@@ -69,10 +51,14 @@ public class CameraEffects : MonoBehaviour
         float current = 0;
         float duration = 0.25f;
 
+        float factor = 0.8f;
+
         yield return null;
+        backgroundRender.SetInt("_HideGradient", 1);
         while (current <= 1)
         {
             chromaticAberrationClone.intensity.value = Mathf.Lerp(startValue, 1, Spike(current));
+            backgroundRender.SetFloat("_VignettePower", Mathf.Lerp(initialVignettePower, initialVignettePower * factor, Spike(current)));
             current += Time.deltaTime / duration;
 
             yield return null;
@@ -82,13 +68,14 @@ public class CameraEffects : MonoBehaviour
         while (current <= 1)
         {
             chromaticAberrationClone.intensity.value = Mathf.Lerp(1, startValue, Spike(current));
-
+            backgroundRender.SetFloat("_VignettePower", Mathf.Lerp(initialVignettePower * factor, initialVignettePower, Spike(current)));
             current += Time.deltaTime / duration;
 
             yield return null;
         }
-
+        backgroundRender.SetInt("_HideGradient", 0);
         chromaticAberrationClone.intensity.value = startValue;
+        backgroundRender.SetFloat("_VignettePower", initialVignettePower);
     }
 
     private float EaseIn(float t)
@@ -107,4 +94,10 @@ public class CameraEffects : MonoBehaviour
     {
         return 1 - x;
     }
+
+    private void OnDisable()
+    {
+        onScoreThresholdReached.OnEventRaised -= ScoreEffect;
+    }
+
 }
