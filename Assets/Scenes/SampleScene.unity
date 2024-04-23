@@ -1359,6 +1359,7 @@ GameObject:
   - component: {fileID: 733904706}
   - component: {fileID: 733904708}
   - component: {fileID: 733904709}
+  - component: {fileID: 733904710}
   m_Layer: 0
   m_Name: GameCamera
   m_TagString: Untagged
@@ -1453,6 +1454,20 @@ MonoBehaviour:
   m_FocusTarget: {fileID: 0}
   m_FocusOffset: 0
   m_Profile: {fileID: 11400000, guid: a6560a915ef98420e9faacc1c7438823, type: 2}
+--- !u!114 &733904710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 733904705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34923e74b9239bd4bab5b89b093f2b74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceTravelled: {fileID: 11400000, guid: 34a454f90f47f2041ae312d9692b9efd, type: 2}
+  chromaticAberrationStep: 0.0025
 --- !u!1 &782224147
 GameObject:
   m_ObjectHideFlags: 0
@@ -1588,7 +1603,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &832575518
 MonoBehaviour:
   m_ObjectHideFlags: 0
