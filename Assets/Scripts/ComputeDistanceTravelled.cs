@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ComputeDistanceTravelled : MonoBehaviour
 {
     private Vector3 lastPosition;
-    private float totalDistance;
+    private FloatValue totalDistance;
     [SerializeField]
     private FloatValue distanceTravelled;
 
@@ -17,11 +15,13 @@ public class ComputeDistanceTravelled : MonoBehaviour
 
     private void Update()
     {
-        float distance = Mathf.Abs((lastPosition - transform.position).z);
-        
-        distanceTravelled.CurrentValue += distance;
+        distanceTravelled.CurrentValue += SphericalDistance(lastPosition, transform.position);
 
         lastPosition = transform.position;
     }
 
+    float SphericalDistance(Vector3 position1, Vector3 position2)
+    {
+        return Vector3.Distance(position1, position2);
+    }
 }
