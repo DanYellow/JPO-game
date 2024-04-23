@@ -14,6 +14,9 @@
         },
         {
             "m_Id": "b32b870f644a4d4d9dbcc34da30c528c"
+        },
+        {
+            "m_Id": "64b3bf9785c44e0a8fc067a3267eaa78"
         }
     ],
     "m_Keywords": [],
@@ -95,6 +98,9 @@
         },
         {
             "m_Id": "60ae7049027540e8b376607f4d538de8"
+        },
+        {
+            "m_Id": "ee4b838d2b1647dc89e53884af2cca48"
         }
     ],
     "m_GroupDatas": [
@@ -413,6 +419,20 @@
                     "m_Id": "d0f40c18c69a49eea9690ddd2b790f11"
                 },
                 "m_SlotId": 0
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "ee4b838d2b1647dc89e53884af2cca48"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "0575e1aa86884add9199ccfe853e08f4"
+                },
+                "m_SlotId": 1
             }
         },
         {
@@ -1061,6 +1081,9 @@
         },
         {
             "m_Id": "b32b870f644a4d4d9dbcc34da30c528c"
+        },
+        {
+            "m_Id": "64b3bf9785c44e0a8fc067a3267eaa78"
         }
     ]
 }
@@ -1547,6 +1570,34 @@
 }
 
 {
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
+    "m_ObjectId": "64b3bf9785c44e0a8fc067a3267eaa78",
+    "m_Guid": {
+        "m_GuidSerialized": "80bdc457-a634-4d34-b0a3-88261784217b"
+    },
+    "m_Name": "VignettePower",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "VignettePower",
+    "m_DefaultReferenceName": "_VignettePower",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": 2.0,
+    "m_FloatType": 1,
+    "m_RangeValues": {
+        "x": 0.0,
+        "y": 10.0
+    }
+}
+
+{
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.AddNode",
     "m_ObjectId": "65eede1a0c744903b931107407b38428",
@@ -1985,8 +2036,8 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1267.0,
-            "y": 1079.0,
+            "x": -1267.0001220703125,
+            "y": 1091.0,
             "width": 124.0,
             "height": 173.0
         }
@@ -2364,6 +2415,21 @@
         "m_Guid": ""
     },
     "m_DefaultType": 0
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "ad94eb44e3b94fba9dcda46e31c83121",
+    "m_Id": 0,
+    "m_DisplayName": "VignettePower",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": 0.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": []
 }
 
 {
@@ -3227,6 +3293,42 @@
     },
     "m_Property": {
         "m_Id": "23aa4fef67e64421ae7b1f1053058b78"
+    }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
+    "m_ObjectId": "ee4b838d2b1647dc89e53884af2cca48",
+    "m_Group": {
+        "m_Id": "59e2e7ed986247d69ae9e09fdbae585f"
+    },
+    "m_Name": "Property",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -787.0,
+            "y": -142.00001525878907,
+            "width": 153.0,
+            "height": 33.999977111816409
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "ad94eb44e3b94fba9dcda46e31c83121"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_Property": {
+        "m_Id": "64b3bf9785c44e0a8fc067a3267eaa78"
     }
 }
 

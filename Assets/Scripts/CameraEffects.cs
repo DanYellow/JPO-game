@@ -18,6 +18,9 @@ public class CameraEffects : MonoBehaviour
 
     private ChromaticAberration chromaticAberrationClone;
 
+    [SerializeField]
+    private Material render;
+
     void Start()
     {
         CinemachineVolumeSettings cinemachineVolumeSettings = GetComponent<CinemachineVolumeSettings>();
@@ -37,7 +40,6 @@ public class CameraEffects : MonoBehaviour
         float thousandth = Mathf.Floor(distanceTravelled.CurrentValue / scoreStepThreshold);
         if (thousandth >= 1 && thousandth > lastThousandth)
         {
-            print($"Increased ! {thousandth}");
             lastThousandth = thousandth;
             chromaticAberrationClone.intensity.value += chromaticAberrationStep;
             StartCoroutine(NextThresholdReached(chromaticAberrationClone.intensity.value));
