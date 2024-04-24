@@ -3,9 +3,15 @@ using UnityEngine;
 
 public class MeteorSpawner : MonoBehaviour
 {
-
     public GameObject meteorPrefab;
     public float distance = 20f;
+
+    private GravityAttractor planet;
+
+    private void Awake()
+    {
+        planet = GetComponent<GravityAttractor>();
+    }
 
     void Start()
     {
@@ -14,8 +20,9 @@ public class MeteorSpawner : MonoBehaviour
 
     IEnumerator SpawnMeteor()
     {
-        Vector3 pos = Random.onUnitSphere * 20f;
-        Instantiate(meteorPrefab, pos, Quaternion.identity);
+        Vector3 pos = Random.onUnitSphere * 100f;
+        GameObject meteor = Instantiate(meteorPrefab, pos, Quaternion.identity);
+        meteor.GetComponent<GravityBody>().planet = planet;
 
         yield return new WaitForSeconds(1f);
 

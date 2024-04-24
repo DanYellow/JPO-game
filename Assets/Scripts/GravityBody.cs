@@ -3,8 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class GravityBody : MonoBehaviour
 {
-    [SerializeField]
-    private GravityAttractor planet;
+    public GravityAttractor planet;
     private Rigidbody rb;
 
     private void Awake()

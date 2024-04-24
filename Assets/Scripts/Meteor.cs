@@ -12,6 +12,8 @@ public class Meteor : MonoBehaviour
     }
     private void OnCollisionEnter(Collision other) {
         effect.SetActive(true);
-        // ps.Play();
+
+        MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
+        meshRenderer.enabled = false;
     }
 }
