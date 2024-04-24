@@ -25,3 +25,6 @@ https://www.google.com/search?q=retro+80s+background+car&sca_esv=2386da0e1e038e7
 
 https://www.youtube.com/watch?v=3Ccu3UtiSdw
 https://www.youtube.com/watch?v=wtZ5WcrV-9A
+
+https://forum.unity.com/threads/how-to-achieve-point-hit-shader-effect.1341434/
+https://www.youtube.com/watch?v=QsLkb1aOkb8
