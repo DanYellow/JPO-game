@@ -14,11 +14,12 @@ public class Meteor : MonoBehaviour
         Vector3 position = contact.point;
 
         shockwaveEffect.transform.position = position;
-        impactEffect.transform.position = position + new Vector3(0.1f, 0.1f, 0.1f);
+        impactEffect.transform.position = position;
         shockwaveEffect.SetActive(true);
 
         if (!collision.transform.CompareTag("Player"))
         {
+            impactEffect.transform.localScale = transform.localScale;
             impactEffect.SetActive(true);
         }
 
