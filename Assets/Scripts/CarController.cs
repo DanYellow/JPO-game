@@ -1,6 +1,7 @@
 using UnityEngine.InputSystem;
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class CarController : MonoBehaviour
 {
@@ -26,6 +27,9 @@ public class CarController : MonoBehaviour
     [SerializeField]
     private Transform cameraTracker;
 
+    [SerializeField]
+    private Transform spawnMeteorPivotPoint;
+
     void Awake()
     {
         motor.transform.parent = null;
@@ -40,14 +44,18 @@ public class CarController : MonoBehaviour
         ManageWheels();
         Rotate();
         SwapDrag();
-
-        // print(motor.transform.up);
+        MoveSpawnMeteorPoint();
 
         collision.position = motor.position;
 
         transform.position = motor.transform.position;
         Quaternion targetRotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 20 * Time.deltaTime);
+    }
+
+    private void MoveSpawnMeteorPoint()
+    {
+        spawnMeteorPivotPoint.rotation = motor.transform.rotation * Quaternion.Euler(0, moveInput.y > 0 ? 0 : 180, 0);
     }
 
     private void FixedUpdate()
