@@ -1124,7 +1124,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 5c64d18ac1446a64fb91e0d23cab3043, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7353,7 +7353,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 5c64d18ac1446a64fb91e0d23cab3043, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7489,6 +7489,7 @@ MonoBehaviour:
     m_Bits: 8
   cameraTracker: {fileID: 1709954605}
   spawnMeteorPivotPoint: {fileID: 2120282776}
+  onCarSlowdown: {fileID: 11400000, guid: 341e3f4c62758c846913243499cadfef, type: 2}
 --- !u!4 &1166183952
 Transform:
   m_ObjectHideFlags: 0
@@ -7543,6 +7544,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skidMarks: {fileID: 460317398}
+  onCarSlowdown: {fileID: 11400000, guid: 341e3f4c62758c846913243499cadfef, type: 2}
 --- !u!1 &1253899365
 GameObject:
   m_ObjectHideFlags: 0

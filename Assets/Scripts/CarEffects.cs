@@ -1,5 +1,6 @@
 using UnityEngine.InputSystem;
 using UnityEngine;
+using System.Collections;
 
 public class CarEffects : MonoBehaviour
 {
@@ -8,12 +9,27 @@ public class CarEffects : MonoBehaviour
 
     private Vector3 moveInput = Vector3.zero;
 
+    [Header("Scriptable Objects")]
+    [SerializeField]
+    private VoidEventChannel onCarSlowdown;
 
-    void Update()
+    private void OnEnable()
     {
-        // ToggleSkidMarks(Mathf.Abs(moveInput.y) > 0);
+        onCarSlowdown.OnEventRaised += ShowSkidMarks;
     }
-    
+
+    private void ShowSkidMarks()
+    {
+        StartCoroutine(ShowSkidMarksCoroutine());
+    }
+
+    private IEnumerator ShowSkidMarksCoroutine()
+    {
+        ToggleSkidMarks(true);
+        yield return Helpers.GetWait(1.05f);
+        ToggleSkidMarks(false);
+    }
+
     private void ToggleSkidMarks(bool isEmitting)
     {
         foreach (Transform item in skidMarks.transform)
@@ -25,5 +41,10 @@ public class CarEffects : MonoBehaviour
     public void OnDrive(InputAction.CallbackContext ctx)
     {
         moveInput = (Vector3)ctx.ReadValue<Vector2>();
+    }
+
+    private void OnDisable()
+    {
+        onCarSlowdown.OnEventRaised -= ShowSkidMarks;
     }
 }
