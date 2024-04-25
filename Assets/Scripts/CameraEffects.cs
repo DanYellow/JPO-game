@@ -14,7 +14,7 @@ public class CameraEffects : MonoBehaviour
     private Material backgroundRender;
 
     private Color startColor;
-    [SerializeField]
+    [SerializeField, ColorUsageAttribute(true,true)]
     private Color damageColor;
 
     private float initialVignettePower;
@@ -26,15 +26,20 @@ public class CameraEffects : MonoBehaviour
     [SerializeField]
     private FloatValue distanceTravelled;
 
+    [SerializeField]
+    private VoidEventChannel onCarDamage;
+
+
     private void OnEnable()
     {
         onScoreThresholdReached.OnEventRaised += ScoreEffect;
+        onCarDamage.OnEventRaised += DamageIndicator;
     }
 
     void Start()
     {
         startColor = backgroundRender.GetColor("_VignetteColor");
-        initialVignettePower = backgroundRender.GetFloat("_VignettePower");
+        initialVignettePower = backgroundRender.GetFloat("_VignetteColor");
         CinemachineVolumeSettings cinemachineVolumeSettings = GetComponent<CinemachineVolumeSettings>();
 
         if (cinemachineVolumeSettings.m_Profile.TryGet(out ChromaticAberration chromaticAberration))
@@ -49,6 +54,16 @@ public class CameraEffects : MonoBehaviour
     {
         chromaticAberrationClone.intensity.value += chromaticAberrationStep;
         StartCoroutine(NextThresholdReached(chromaticAberrationClone.intensity.value));
+    }
+
+    private void DamageIndicator() {
+        StartCoroutine(DamageIndicatorCoroutine());
+    }
+
+    private IEnumerator DamageIndicatorCoroutine() {
+        backgroundRender.SetColor("_VignetteColor", damageColor);
+        yield return Helpers.GetWait(0.5f);
+        backgroundRender.SetColor("_VignetteColor", startColor);
     }
 
     private IEnumerator NextThresholdReached(float startValue)
@@ -103,6 +118,7 @@ public class CameraEffects : MonoBehaviour
     private void OnDisable()
     {
         onScoreThresholdReached.OnEventRaised -= ScoreEffect;
+        onCarDamage.OnEventRaised -= DamageIndicator;
     }
 
 }

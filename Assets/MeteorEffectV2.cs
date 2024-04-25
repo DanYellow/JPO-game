@@ -13,6 +13,10 @@ public class MeteorEffectV2 : MonoBehaviour
 
     private Vector3 initScale;
 
+    [Header("Scriptable Objects")]
+    [SerializeField]
+    private VoidEventChannel onCarDamage;
+
     private void Awake()
     {
         initScale = transform.localScale;
@@ -30,7 +34,7 @@ public class MeteorEffectV2 : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            print("wave " + other.transform.name);
+            onCarDamage.Raise();
         }
     }
 
