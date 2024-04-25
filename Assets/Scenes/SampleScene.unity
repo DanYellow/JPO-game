@@ -206,6 +206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planet: {fileID: 3038029926327017413}
+  useMass: 0
 --- !u!54 &188026845
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -304,6 +305,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 188026842}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &191452545
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 191452546}
+  m_Layer: 0
+  m_Name: DropMeteorZone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &191452546
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191452545}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 6.74}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2120282776}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &248122887
 GameObject:
   m_ObjectHideFlags: 0
@@ -1350,7 +1382,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 733904705}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 449ef5ebbe24720439ec31d15f7b6f3d, type: 3}
   m_Name: 
@@ -7128,6 +7160,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   cameraTracker: {fileID: 1709954605}
+  spawnMeteorPivotPoint: {fileID: 2120282776}
 --- !u!4 &1166183952
 Transform:
   m_ObjectHideFlags: 0
@@ -7491,7 +7524,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2120282776}
   m_Layer: 0
-  m_Name: DropMeteorZone
+  m_Name: DropMeteorZonePivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7506,10 +7539,11 @@ Transform:
   m_GameObject: {fileID: 2120282775}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 24.01, z: 6.74}
+  m_LocalPosition: {x: 0, y: 24.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 191452546}
   m_Father: {fileID: 1166183952}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &18372172740581745
@@ -7912,9 +7946,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meteorPrefab: {fileID: 1524491131393175330, guid: 20b4ab0c3d37dd6459c988d924521e45,
     type: 3}
-  distance: 12
-  spawnTime: 1.4
-  target: {fileID: 2120282776}
+  distance: 9
+  spawnTime: 0.45
+  target: {fileID: 191452546}
 --- !u!4 &3154302773397062200
 Transform:
   m_ObjectHideFlags: 0
@@ -8313,6 +8347,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Meteor
+      objectReference: {fileID: 0}
+    - target: {fileID: 1524491131393175330, guid: 20b4ab0c3d37dd6459c988d924521e45,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3278913279152185677, guid: 20b4ab0c3d37dd6459c988d924521e45,
         type: 3}

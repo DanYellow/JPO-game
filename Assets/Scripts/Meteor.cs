@@ -16,7 +16,11 @@ public class Meteor : MonoBehaviour
         shockwaveEffect.transform.position = position;
         impactEffect.transform.position = position + new Vector3(0.1f, 0.1f, 0.1f);
         shockwaveEffect.SetActive(true);
-        impactEffect.SetActive(true);
+
+        if (!collision.transform.CompareTag("Player"))
+        {
+            impactEffect.SetActive(true);
+        }
 
         MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
         meshRenderer.enabled = false;
