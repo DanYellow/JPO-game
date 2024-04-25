@@ -24,7 +24,7 @@ public class MeteorSpawner : MonoBehaviour
 
     void Start()
     {
-        // StartCoroutine(SpawnMeteor());
+        StartCoroutine(SpawnMeteor());
     }
 
     IEnumerator SpawnMeteor()
@@ -36,7 +36,7 @@ public class MeteorSpawner : MonoBehaviour
         );
         GameObject meteor = Instantiate(meteorPrefab, pos, Quaternion.identity);
         meteor.transform.LookAt(gameObject.transform);
-        meteor.GetComponent<GravityBody>().planet = planet;
+        meteor.GetComponentInChildren<GravityBody>().planet = planet;
 
         yield return Helpers.GetWait(spawnTime);
 

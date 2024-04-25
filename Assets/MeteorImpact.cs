@@ -14,6 +14,9 @@ public class MeteorImpact : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
-        
+        if (other.CompareTag("Player"))
+        {
+            print("impact " + other.transform.name);
+        }
     }
 }
