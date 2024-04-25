@@ -11,6 +11,8 @@ public class CarController : MonoBehaviour
     [SerializeField]
     private Rigidbody collision;
 
+    private BoxCollider boxCollider;
+
     [SerializeField]
     private GameObject[] listWheels;
 
@@ -24,6 +26,8 @@ public class CarController : MonoBehaviour
 
     private Vector3 moveInput = Vector3.zero;
 
+    private float lastDirection = 1;
+
     [SerializeField]
     private Transform cameraTracker;
 
@@ -36,9 +40,10 @@ public class CarController : MonoBehaviour
 
         collision.useGravity = false;
         collision.transform.parent = null;
+
+        boxCollider = collision.GetComponent<BoxCollider>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         ManageWheels();
@@ -55,7 +60,13 @@ public class CarController : MonoBehaviour
 
     private void MoveSpawnMeteorPoint()
     {
-        spawnMeteorPivotPoint.rotation = motor.transform.rotation * Quaternion.Euler(0, moveInput.y > 0 ? 0 : 180, 0);
+        Vector3 pos = boxCollider.bounds.center;
+        pos.y = spawnMeteorPivotPoint.position.y;
+
+        pos += new Vector3(10, 0, 10);
+        // Quaternion targetRotation = Quaternion.FromToRotation(transform.up, hit.normal) * spawnMeteorPivotPoint.rotation;
+        // spawnMeteorPivotPoint.rotation = Quaternion.Slerp(spawnMeteorPivotPoint.rotation, targetRotation, 1 * Time.deltaTime);
+        spawnMeteorPivotPoint.position = pos;
     }
 
     private void FixedUpdate()
@@ -125,6 +136,10 @@ public class CarController : MonoBehaviour
         {
             StopAllCoroutines();
             moveInput = (Vector3)ctx.ReadValue<Vector2>();
+            if (lastDirection != moveInput.y)
+            {
+                lastDirection = moveInput.y;
+            }
         }
         else if (ctx.phase == InputActionPhase.Canceled)
         {

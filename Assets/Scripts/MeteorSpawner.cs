@@ -30,8 +30,8 @@ public class MeteorSpawner : MonoBehaviour
     IEnumerator SpawnMeteor()
     {
         Vector3 pos = new Vector3(
-            target.position.x + (Random.onUnitSphere.x * distance),
-            target.position.y + (Random.onUnitSphere.y * distance),
+            target.position.x + (Random.insideUnitCircle.x * distance),
+            target.position.y + (Random.insideUnitCircle.y * distance),
             target.position.z
         );
         GameObject meteor = Instantiate(meteorPrefab, pos, Quaternion.identity);

@@ -19,7 +19,7 @@ public class Meteor : MonoBehaviour
 
         if (!collision.transform.CompareTag("Player"))
         {
-            impactEffect.transform.localScale = transform.localScale;
+            impactEffect.transform.localScale = transform.localScale * 1.05f;
             impactEffect.SetActive(true);
         }
 

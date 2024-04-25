@@ -13,6 +13,10 @@ public class CameraEffects : MonoBehaviour
     [SerializeField]
     private Material backgroundRender;
 
+    private Color startColor;
+    [SerializeField]
+    private Color damageColor;
+
     private float initialVignettePower;
 
     [Header("Scriptable Objects")]
@@ -29,6 +33,7 @@ public class CameraEffects : MonoBehaviour
 
     void Start()
     {
+        startColor = backgroundRender.GetColor("_VignetteColor");
         initialVignettePower = backgroundRender.GetFloat("_VignettePower");
         CinemachineVolumeSettings cinemachineVolumeSettings = GetComponent<CinemachineVolumeSettings>();
 
@@ -49,7 +54,7 @@ public class CameraEffects : MonoBehaviour
     private IEnumerator NextThresholdReached(float startValue)
     {
         float current = 0;
-        float duration = 0.25f;
+        float duration = 0.45f;
 
         float factor = 0.8f;
 
