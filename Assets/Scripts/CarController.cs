@@ -27,6 +27,7 @@ public class CarController : MonoBehaviour
     private Vector3 moveInput = Vector3.zero;
 
     private float lastDirection = 1;
+    private float groundDrag;
 
     [SerializeField]
     private Transform cameraTracker;
@@ -34,9 +35,20 @@ public class CarController : MonoBehaviour
     [SerializeField]
     private Transform spawnMeteorPivotPoint;
 
+    [Header("Scriptable Objects")]
+    [SerializeField]
+    private VoidEventChannel onCarSlowdown;
+
+    private void OnEnable()
+    {
+        onCarSlowdown.OnEventRaised += IncreaseDrag;
+    }
+
     void Awake()
     {
         motor.transform.parent = null;
+
+        groundDrag = carData.groundDrag;
 
         collision.useGravity = false;
         collision.transform.parent = null;
@@ -67,6 +79,11 @@ public class CarController : MonoBehaviour
         // Quaternion targetRotation = Quaternion.FromToRotation(transform.up, hit.normal) * spawnMeteorPivotPoint.rotation;
         // spawnMeteorPivotPoint.rotation = Quaternion.Slerp(spawnMeteorPivotPoint.rotation, targetRotation, 1 * Time.deltaTime);
         spawnMeteorPivotPoint.position = pos;
+    }
+
+    private void IncreaseDrag()
+    {
+        groundDrag += carData.groundDrag * 0.002f;
     }
 
     private void FixedUpdate()
@@ -104,7 +121,7 @@ public class CarController : MonoBehaviour
     {
         if (isGrounded)
         {
-            motor.drag = carData.groundDrag;
+            motor.drag = groundDrag;
         }
         else
         {
@@ -164,5 +181,10 @@ public class CarController : MonoBehaviour
         }
 
         moveInput.y = 0;
+    }
+
+    private void OnDisable()
+    {
+        onCarSlowdown.OnEventRaised -= IncreaseDrag;
     }
 }

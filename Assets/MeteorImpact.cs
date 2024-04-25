@@ -1,9 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MeteorImpact : MonoBehaviour
 {
+    [Header("Scriptable Objects")]
+    [SerializeField]
+    private VoidEventChannel onCarSlowdown;
+
     [SerializeField]
     private Transform world;
     // Start is called before the first frame update
@@ -16,7 +18,7 @@ public class MeteorImpact : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Player"))
         {
-            print("impact " + other.transform.name);
+            onCarSlowdown.Raise();
         }
     }
 }
