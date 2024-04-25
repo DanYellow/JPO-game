@@ -6,7 +6,7 @@ public class Meteor : MonoBehaviour
     private GameObject shockwaveEffect;
 
     [SerializeField]
-    private GameObject impactEffect;
+    private GameObject impactEffectPrefab;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -14,12 +14,14 @@ public class Meteor : MonoBehaviour
         Vector3 position = contact.point;
 
         shockwaveEffect.transform.position = position;
-        impactEffect.transform.position = position;
         shockwaveEffect.SetActive(true);
 
         if (!collision.transform.CompareTag("Player"))
         {
+            GameObject impactEffect = Instantiate(impactEffectPrefab, position, Quaternion.identity);
             impactEffect.transform.localScale = transform.localScale * 1.05f;
+            impactEffect.transform.parent = collision.transform;
+            impactEffect.transform.LookAt(collision.transform);
             impactEffect.SetActive(true);
         }
 
