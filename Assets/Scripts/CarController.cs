@@ -83,7 +83,8 @@ public class CarController : MonoBehaviour
 
     private void IncreaseDrag()
     {
-        groundDrag += carData.groundDrag * 0.002f;
+        // groundDrag += carData.groundDrag * 0.65f;
+        groundDrag += carData.groundDrag * 0.0065f;
     }
 
     private void FixedUpdate()
@@ -99,6 +100,7 @@ public class CarController : MonoBehaviour
         {
             motor.AddForce(-transform.up * Physics.gravity.y);
         }
+        motor.velocity = Vector3.ClampMagnitude(motor.velocity, 50);
 
         collision.MoveRotation(transform.rotation);
     }

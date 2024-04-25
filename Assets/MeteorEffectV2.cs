@@ -39,7 +39,7 @@ public class MeteorEffectV2 : MonoBehaviour
         {
             Vector3 collisionPoint = collision.ClosestPoint(transform.position);
             Rigidbody rb = collision.GetComponent<Rigidbody>();
-            rb.AddExplosionForce(650, collisionPoint, 10, 0f);
+            rb.AddExplosionForce(10f, collisionPoint, 10, 0f, ForceMode.Impulse);
             onCarDamage.Raise();
         }
     }

@@ -1376,6 +1376,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 469254042}
+  - component: {fileID: 469254043}
   m_Layer: 0
   m_Name: CurrentSceneManager
   m_TagString: Untagged
@@ -1398,6 +1399,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &469254043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469254041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d3a8f831199f974f9082abc831294c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isCarTakingDamage: {fileID: 11400000, guid: 4d2d9a03caaeb5441aa45cfc4778668f, type: 2}
 --- !u!1 &697612834
 GameObject:
   m_ObjectHideFlags: 0
@@ -8371,7 +8385,7 @@ MonoBehaviour:
   meteorPrefab: {fileID: 1524491131393175330, guid: 20b4ab0c3d37dd6459c988d924521e45,
     type: 3}
   distance: 9
-  spawnTime: 0.5
+  spawnTime: 0.95
   target: {fileID: 191452546}
 --- !u!4 &3154302773397062200
 Transform:
