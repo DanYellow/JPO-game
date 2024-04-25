@@ -17,6 +17,9 @@ public class MeteorEffectV2 : MonoBehaviour
     [SerializeField]
     private VoidEventChannel onCarDamage;
 
+    [SerializeField]
+    private BoolValue isCarTakingDamage;
+
     private void Awake()
     {
         initScale = transform.localScale;
@@ -30,10 +33,13 @@ public class MeteorEffectV2 : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider collision)
     {
-        if (other.CompareTag("Player"))
+        if (collision.CompareTag("Player") && !isCarTakingDamage.CurrentValue)
         {
+            Vector3 collisionPoint = collision.ClosestPoint(transform.position);
+            Rigidbody rb = collision.GetComponent<Rigidbody>();
+            rb.AddExplosionForce(650, collisionPoint, 10, 0f);
             onCarDamage.Raise();
         }
     }

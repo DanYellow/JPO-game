@@ -1697,9 +1697,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chromaticAberrationStep: 0.05
   backgroundRender: {fileID: 2100000, guid: 6f2249bf3438d3b44b548d6bf0dcfc89, type: 2}
+  startColor: {r: 0, g: 3.9999995, b: 3.6135383, a: 0}
+  damageColor: {r: 8.010334, g: 0, b: 0, a: 1}
   onScoreThresholdReached: {fileID: 11400000, guid: db78dfe58cb2d3a468c633c58e480bb8,
     type: 2}
   distanceTravelled: {fileID: 11400000, guid: 34a454f90f47f2041ae312d9692b9efd, type: 2}
+  onCarDamage: {fileID: 11400000, guid: 4bc9ac23059f4bd4f88b7dd2dd5bbd79, type: 2}
+  isCarTakingDamage: {fileID: 11400000, guid: 4d2d9a03caaeb5441aa45cfc4778668f, type: 2}
 --- !u!1 &782224147
 GameObject:
   m_ObjectHideFlags: 0
@@ -8081,6 +8085,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 9
   delayBeforeDeath: 0.85
+  onCarDamage: {fileID: 0}
+  isCarTakingDamage: {fileID: 0}
 --- !u!33 &1592469484143315931
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -8355,7 +8361,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 889802521992455464}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 082a829fe43b05744afd074ac7e3747b, type: 3}
   m_Name: 

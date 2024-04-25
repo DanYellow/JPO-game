@@ -13,8 +13,9 @@ public class CameraEffects : MonoBehaviour
     [SerializeField]
     private Material backgroundRender;
 
+    [SerializeField, ColorUsageAttribute(true, true)]
     private Color startColor;
-    [SerializeField, ColorUsageAttribute(true,true)]
+    [SerializeField, ColorUsageAttribute(true, true)]
     private Color damageColor;
 
     private float initialVignettePower;
@@ -29,6 +30,9 @@ public class CameraEffects : MonoBehaviour
     [SerializeField]
     private VoidEventChannel onCarDamage;
 
+    [SerializeField]
+    private BoolValue isCarTakingDamage;
+
 
     private void OnEnable()
     {
@@ -38,8 +42,8 @@ public class CameraEffects : MonoBehaviour
 
     void Start()
     {
-        startColor = backgroundRender.GetColor("_VignetteColor");
-        initialVignettePower = backgroundRender.GetFloat("_VignetteColor");
+        backgroundRender.SetColor("_VignetteColor", startColor);
+        initialVignettePower = backgroundRender.GetFloat("_VignettePower");
         CinemachineVolumeSettings cinemachineVolumeSettings = GetComponent<CinemachineVolumeSettings>();
 
         if (cinemachineVolumeSettings.m_Profile.TryGet(out ChromaticAberration chromaticAberration))
@@ -56,14 +60,22 @@ public class CameraEffects : MonoBehaviour
         StartCoroutine(NextThresholdReached(chromaticAberrationClone.intensity.value));
     }
 
-    private void DamageIndicator() {
+    private void DamageIndicator()
+    {
         StartCoroutine(DamageIndicatorCoroutine());
     }
 
-    private IEnumerator DamageIndicatorCoroutine() {
+    private IEnumerator DamageIndicatorCoroutine()
+    {
+        if (isCarTakingDamage.CurrentValue)
+        {
+            yield break;
+        }
+        isCarTakingDamage.CurrentValue = true;
         backgroundRender.SetColor("_VignetteColor", damageColor);
         yield return Helpers.GetWait(0.5f);
         backgroundRender.SetColor("_VignetteColor", startColor);
+        isCarTakingDamage.CurrentValue = false;
     }
 
     private IEnumerator NextThresholdReached(float startValue)
