@@ -24,7 +24,7 @@ public class MeteorSpawner : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(SpawnMeteor());
+        // StartCoroutine(SpawnMeteor());
     }
 
     IEnumerator SpawnMeteor()
