@@ -13,7 +13,8 @@ public class MeteorEffectV2 : MonoBehaviour
 
     private Vector3 initScale;
 
-    private void Awake() {
+    private void Awake()
+    {
         initScale = transform.localScale;
         gameObject.SetActive(false);
     }
@@ -25,8 +26,12 @@ public class MeteorEffectV2 : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void OnTriggerEnter(Collider other) {
-        print("wave " + other.transform.name);
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            print("wave " + other.transform.name);
+        }
     }
 
     // Update is called once per frame
@@ -41,7 +46,8 @@ public class MeteorEffectV2 : MonoBehaviour
         );
     }
 
-    private void OnDisable() {
+    private void OnDisable()
+    {
         transform.localScale = initScale;
     }
 }

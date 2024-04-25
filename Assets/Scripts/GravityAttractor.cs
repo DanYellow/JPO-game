@@ -16,6 +16,5 @@ public class GravityAttractor : MonoBehaviour
 		// Apply downwards gravity to body
 		body.AddForce(gravityUp * Physics.gravity.y * 10);
 		// body.AddForce(gravityUp * gravity * body.mass);
-		
     }
 }

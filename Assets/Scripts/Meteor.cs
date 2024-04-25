@@ -14,6 +14,6 @@ public class Meteor : MonoBehaviour
         effect.SetActive(true);
 
         MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
-        meshRenderer.enabled = false;
+        // meshRenderer.enabled = false;
     }
 }

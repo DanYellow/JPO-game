@@ -41,6 +41,8 @@ public class CarController : MonoBehaviour
         Rotate();
         SwapDrag();
 
+        // print(motor.transform.up);
+
         collision.position = motor.position;
 
         transform.position = motor.transform.position;
@@ -67,7 +69,8 @@ public class CarController : MonoBehaviour
 
     private void Rotate()
     {
-        if(motor.velocity.sqrMagnitude <= 15) {
+        if (motor.velocity.sqrMagnitude <= 15)
+        {
             return;
         }
 
