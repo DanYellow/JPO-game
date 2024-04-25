@@ -7506,7 +7506,7 @@ Transform:
   m_GameObject: {fileID: 2120282775}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 24.01, z: 0}
+  m_LocalPosition: {x: 0, y: 24.01, z: 6.74}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7655,8 +7655,8 @@ GameObject:
   - component: {fileID: 742801162014190680}
   - component: {fileID: 1592469484143315931}
   - component: {fileID: 3038029926327017412}
-  - component: {fileID: 3038029926327017413}
   - component: {fileID: 3038029926327017414}
+  - component: {fileID: 3038029926327017413}
   - component: {fileID: 3038029926327017415}
   - component: {fileID: 3038029926327017416}
   m_Layer: 3
@@ -8000,10 +8000,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meteorPrefab: {fileID: 1608288706224738872, guid: ae28855cb4d9e4a47b532e00066ce3ba,
     type: 3}
-  distance: 20
-  spawnTime: 7
+  distance: 12
+  spawnTime: 1.4
   target: {fileID: 2120282776}
-  prefab: {fileID: 8164620634392428023, guid: fb8265bc8ef935544b1445183242b7b6, type: 3}
 --- !u!4 &3154302773397062200
 Transform:
   m_ObjectHideFlags: 0
