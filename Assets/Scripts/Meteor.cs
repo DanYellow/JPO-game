@@ -22,7 +22,6 @@ public class Meteor : MonoBehaviour
             impactEffect.transform.localScale = transform.localScale * 1.05f;
             impactEffect.transform.parent = collision.transform;
             impactEffect.transform.LookAt(collision.transform);
-            impactEffect.SetActive(true);
         }
 
         MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
