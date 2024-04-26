@@ -23,14 +23,22 @@ public class MeteorEffectV2 : MonoBehaviour
     private void Awake()
     {
         initScale = transform.localScale;
-        gameObject.SetActive(false);
     }
 
-    // Start is called before the first frame update
-    IEnumerator Start()
+    private void OnEnable() {
+        // gameObject.SetActive(false);
+    }
+
+    public void Shockwave() {
+        gameObject.SetActive(true);
+        StartCoroutine(ResetThyself());
+    }
+
+    public IEnumerator ResetThyself()
     {
         yield return new WaitForSeconds(delayBeforeDeath);
-        gameObject.SetActive(false);
+        transform.localScale = initScale;
+        GetComponentInParent<ObjectPooled>().Release();
     }
 
     private void OnTriggerEnter(Collider collision)
@@ -54,10 +62,5 @@ public class MeteorEffectV2 : MonoBehaviour
             meshScale.y + growth,
             meshScale.z + growth
         );
-    }
-
-    private void OnDisable()
-    {
-        transform.localScale = initScale;
     }
 }

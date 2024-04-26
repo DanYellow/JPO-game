@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Meteor : MonoBehaviour
 {
@@ -8,8 +9,12 @@ public class Meteor : MonoBehaviour
     [SerializeField]
     private GameObject impactEffectPrefab;
 
+    [SerializeField]
+    private UnityEvent onCrash;
+
     private void OnCollisionEnter(Collision collision)
     {
+        print("meteor " + collision.transform.name);
         ContactPoint contact = collision.contacts[0];
         Vector3 position = contact.point;
 
@@ -30,6 +35,18 @@ public class Meteor : MonoBehaviour
         SphereCollider sphereCollider = GetComponent<SphereCollider>();
         sphereCollider.isTrigger = true;
 
-        Destroy(gameObject, 0.75f);
+        onCrash?.Invoke();
+
+        // Destroy(gameObject, 0.75f);
+    }
+
+    public void ResetThyself()
+    {
+        transform.localPosition = Vector3.zero;
+        MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
+        meshRenderer.enabled = true;
+
+        SphereCollider sphereCollider = GetComponent<SphereCollider>();
+        sphereCollider.isTrigger = false;
     }
 }

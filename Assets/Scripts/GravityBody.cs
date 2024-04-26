@@ -6,9 +6,6 @@ public class GravityBody : MonoBehaviour
     public GravityAttractor planet;
     private Rigidbody rb;
 
-    [SerializeField]
-    private bool useMass = false;
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -18,11 +15,10 @@ public class GravityBody : MonoBehaviour
         rb.constraints = RigidbodyConstraints.FreezeRotation;
         // rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
     }
-    
 
     void FixedUpdate()
     {
         // Allow this body to be influenced by planet's gravity
-        planet.Attract(rb, useMass);
+        planet.Attract(rb, false);
     }
 }

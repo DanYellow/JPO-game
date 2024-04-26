@@ -75,7 +75,7 @@ public class CarController : MonoBehaviour
         Vector3 pos = boxCollider.bounds.center;
         pos.y = spawnMeteorPivotPoint.position.y;
 
-        pos += new Vector3(10, 0, 10);
+        // pos += new Vector3(10, 0, 10);
         // Quaternion targetRotation = Quaternion.FromToRotation(transform.up, hit.normal) * spawnMeteorPivotPoint.rotation;
         // spawnMeteorPivotPoint.rotation = Quaternion.Slerp(spawnMeteorPivotPoint.rotation, targetRotation, 1 * Time.deltaTime);
         spawnMeteorPivotPoint.position = pos;
@@ -83,6 +83,7 @@ public class CarController : MonoBehaviour
 
     private void IncreaseDrag()
     {
+        print("feeeee");
         // groundDrag += carData.groundDrag * 0.65f;
         groundDrag += carData.groundDrag * 0.0065f;
     }
