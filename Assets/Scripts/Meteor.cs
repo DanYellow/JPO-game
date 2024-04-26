@@ -12,16 +12,22 @@ public class Meteor : MonoBehaviour
     [SerializeField]
     private UnityEvent onCrash;
 
+    private Rigidbody rb;
+
+    private void Awake() {
+        rb = GetComponent<Rigidbody>();
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
-        print("meteor " + collision.transform.name);
+        // print("meteor " + collision.transform.name);
         ContactPoint contact = collision.contacts[0];
         Vector3 position = contact.point;
 
         shockwaveEffect.transform.position = position;
         shockwaveEffect.SetActive(true);
 
-        if (!collision.transform.CompareTag("Player"))
+        if (collision.transform.CompareTag("Ground"))
         {
             GameObject impactEffect = Instantiate(impactEffectPrefab, position, Quaternion.identity);
             impactEffect.transform.localScale = transform.localScale * 1.05f;
@@ -36,13 +42,13 @@ public class Meteor : MonoBehaviour
         sphereCollider.isTrigger = true;
 
         onCrash?.Invoke();
-
-        // Destroy(gameObject, 0.75f);
     }
 
     public void ResetThyself()
     {
         transform.localPosition = Vector3.zero;
+        transform.rotation = Quaternion.identity;
+
         MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
         meshRenderer.enabled = true;
 

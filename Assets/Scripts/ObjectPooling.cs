@@ -70,10 +70,6 @@ public class ObjectPooling : MonoBehaviour
 
     void ActionOnGet(ObjectPooled item)
     {
-        // print("fffe665");
-        // item.transform.position = transform.position;
-        // item.transform.rotation = transform.rotation;
-
         item.gameObject.SetActive(true);
     }
 

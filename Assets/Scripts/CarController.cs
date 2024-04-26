@@ -78,14 +78,22 @@ public class CarController : MonoBehaviour
         // pos += new Vector3(10, 0, 10);
         // Quaternion targetRotation = Quaternion.FromToRotation(transform.up, hit.normal) * spawnMeteorPivotPoint.rotation;
         // spawnMeteorPivotPoint.rotation = Quaternion.Slerp(spawnMeteorPivotPoint.rotation, targetRotation, 1 * Time.deltaTime);
-        spawnMeteorPivotPoint.position = pos;
+        // spawnMeteorPivotPoint.position = pos;
+        Vector3 relativePos = spawnMeteorPivotPoint.position - transform.position;
+        //  spawnMeteorPivotPoint.LookAt(transform, -Vector3.forward);
+        // spawnMeteorPivotPoint.Rotate(Vector3.up);
+        if (motor.velocity.sqrMagnitude > Mathf.Epsilon)
+        {    // Where EPSILON is a very small number
+            //  spawnMeteorPivotPoint.rotation = Quaternion.LookRotation(transform.forward * moveInput.y);
+        }
+        
+        // spawnMeteorPivotPoint.rotation = Quaternion.FromToRotation(spawnMeteorPivotPoint.forward, tr.forward * -1);
     }
 
     private void IncreaseDrag()
     {
-        print("feeeee");
         // groundDrag += carData.groundDrag * 0.65f;
-        groundDrag += carData.groundDrag * 0.0065f;
+        groundDrag += carData.groundDrag * 0.007f;
     }
 
     private void FixedUpdate()

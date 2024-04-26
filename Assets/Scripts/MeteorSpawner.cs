@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Pool;
 
 public class MeteorSpawner : MonoBehaviour
 {
@@ -20,8 +19,6 @@ public class MeteorSpawner : MonoBehaviour
 
     private ObjectPooling meteorPooling;
 
-    public IObjectPool<MeteorContainer> pool;
-
     private void Awake()
     {
         planet = GetComponent<GravityAttractor>();
@@ -30,7 +27,7 @@ public class MeteorSpawner : MonoBehaviour
 
     IEnumerator Start()
     {
-        yield return Helpers.GetWait(0.5f);
+        // yield return Helpers.GetWait(0.5f);
         // StartCoroutine(SpawnMeteor());
         while (true)
         {
@@ -38,27 +35,29 @@ public class MeteorSpawner : MonoBehaviour
 
             if (objectPooled != null)
             {
+                objectPooled.gameObject.SetActive(false);
                 Vector3 pos = new Vector3(
                     target.position.x + (Random.insideUnitSphere.x * distance),
                     target.position.y,
                     target.position.z + (Random.insideUnitSphere.z * distance)
                 );
-                objectPooled.transform.position = pos;
-                // objectPooled.transform.SetPositionAndRotation(
-                //     pos,
-                //     Quaternion.identity
-                // );
-                // objectPooled.transform.LookAt(gameObject.transform); (3.69, 71.17, 6.49)
-                objectPooled.GetComponentInChildren<GravityBody>().planet = planet;
+                
+                objectPooled.transform.SetPositionAndRotation(pos, Quaternion.identity);
                 MeteorContainer meteorContainer = objectPooled.GetComponent<MeteorContainer>();
                 meteorContainer.ResetThyself();
 
+                GravityBody gravityBody = objectPooled.GetComponentInChildren<GravityBody>();
+                gravityBody.planet = planet;
+                print(objectPooled.name + " " + gravityBody.transform.position + " " + gravityBody.transform.localPosition);
+                // gravityBody.transform.LookAt(transform);
+
+                objectPooled.gameObject.SetActive(true);
                 yield return Helpers.GetWait(5);
             }
             yield return null;
         }
 
-        yield return StartCoroutine(SpawnMeteor());
+        // yield return StartCoroutine(SpawnMeteor());
     }
 
     IEnumerator SpawnMeteor()
