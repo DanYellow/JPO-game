@@ -20,7 +20,7 @@ public class CarController : MonoBehaviour
     private CarData carData;
 
     private RaycastHit hit;
-    private bool isGrounded = true;
+
     [SerializeField]
     private LayerMask groundLayers;
 
@@ -39,6 +39,9 @@ public class CarController : MonoBehaviour
     [SerializeField]
     private VoidEventChannel onCarSlowdown;
 
+    [SerializeField]
+    private BoolValue isCarGrounded;
+
     private void OnEnable()
     {
         onCarSlowdown.OnEventRaised += IncreaseDrag;
@@ -46,11 +49,10 @@ public class CarController : MonoBehaviour
 
     void Awake()
     {
-        motor.transform.parent = null;
-
         groundDrag = carData.groundDrag;
-
         collision.useGravity = false;
+
+        motor.transform.parent = null;
         collision.transform.parent = null;
 
         boxCollider = collision.GetComponent<BoxCollider>();
@@ -98,8 +100,9 @@ public class CarController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        isGrounded = Physics.Raycast(transform.position, -transform.up, out hit, 1, groundLayers);
-        if (isGrounded)
+        isCarGrounded.CurrentValue = Physics.Raycast(transform.position, -transform.up, out hit, 1, groundLayers);
+        
+        if (isCarGrounded.CurrentValue)
         {
             float finalSpeed = carData.forwardSpeed;
             // finalSpeed *= Mathf.Abs(inputX) > 0 ? 0.95f : 1; moveInput.y
@@ -122,7 +125,7 @@ public class CarController : MonoBehaviour
         }
 
         float newRotation = carData.turnSpeed * moveInput.x * Time.deltaTime;
-        if (isGrounded)
+        if (isCarGrounded.CurrentValue)
         {
             transform.Rotate(0, newRotation, 0, Space.Self);
         }
@@ -130,7 +133,7 @@ public class CarController : MonoBehaviour
 
     private void SwapDrag()
     {
-        if (isGrounded)
+        if (isCarGrounded.CurrentValue)
         {
             motor.drag = groundDrag;
         }

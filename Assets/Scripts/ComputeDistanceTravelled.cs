@@ -10,11 +10,20 @@ public class ComputeDistanceTravelled : MonoBehaviour
     [SerializeField]
     private int scoreStepThreshold = 850;
 
+    [SerializeField]
+    private int startSpawnThreshold = 200;
+
     private float lastThousandth = 0;
 
     [Header("Scriptable Objects")]
     [SerializeField]
     private VoidEventChannel onScoreThresholdReached;
+
+    [SerializeField]
+    private BoolValue hasReachMinimumTravelDistance;
+
+    [SerializeField]
+    private BoolValue isCarGrounded;
 
     private void Start()
     {
@@ -24,7 +33,11 @@ public class ComputeDistanceTravelled : MonoBehaviour
 
     private void Update()
     {
-        distanceTravelled.CurrentValue += SphericalDistance(lastPosition, transform.position);
+        if (isCarGrounded.CurrentValue)
+        {
+            distanceTravelled.CurrentValue += SphericalDistance(lastPosition, transform.position);
+        }
+        hasReachMinimumTravelDistance.CurrentValue = distanceTravelled.CurrentValue >= startSpawnThreshold;
 
         lastPosition = transform.position;
 

@@ -22,6 +22,10 @@ public class MeteorSpawner : MonoBehaviour
 
     private ObjectPooling meteorPooling;
 
+    [Header("Scriptable Objects")]
+    [SerializeField]
+    private BoolValue hasReachMinimumTravelDistance;
+
     private void Awake()
     {
         planet = GetComponent<GravityAttractor>();
@@ -30,8 +34,7 @@ public class MeteorSpawner : MonoBehaviour
 
     IEnumerator Start()
     {
-        yield break;
-        yield return Helpers.GetWait(3f);
+        yield return new WaitUntil(() => hasReachMinimumTravelDistance.CurrentValue == true);
         // StartCoroutine(SpawnMeteor());
         while (true)
         {
@@ -47,10 +50,10 @@ public class MeteorSpawner : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Spawn();
-        }
+        // if (Input.GetKeyDown(KeyCode.Space))
+        // {
+        //     Spawn();
+        // }
         Vector3 groundNormal = spawnPoint.position - transform.position;
 
         Vector3 forwardsVector = -Vector3.Cross(groundNormal, transform.right);
@@ -79,7 +82,6 @@ public class MeteorSpawner : MonoBehaviour
             Meteor meteor = objectPooled.GetComponentInChildren<Meteor>();
             meteor.hitTarget = transform;
             meteor.transform.LookAt(transform);
-            // print(objectPooled.name + " " + gravityBody.transform.position + " " + gravityBody.transform.localPosition);
 
             objectPooled.gameObject.SetActive(true);
         }
