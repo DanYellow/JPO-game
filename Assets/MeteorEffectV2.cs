@@ -22,6 +22,7 @@ public class MeteorEffectV2 : MonoBehaviour
     private void Awake()
     {
         initScale = transform.localScale;
+        gameObject.SetActive(false);
     }
 
     public void Shockwave() {

@@ -35,32 +35,13 @@ public class MeteorSpawner : MonoBehaviour
         // StartCoroutine(SpawnMeteor());
         while (true)
         {
-            ObjectPooled objectPooled = meteorPooling.Get("meteor");
-
-            if (objectPooled != null)
+            if (Spawn() == null)
             {
-                objectPooled.gameObject.SetActive(false);
-                Vector3 pos = new Vector3(
-                    target.position.x + (Random.insideUnitSphere.x * distance),
-                    target.position.y,
-                    target.position.z + (Random.insideUnitSphere.z * distance)
-                );
-
-                objectPooled.transform.SetPositionAndRotation(pos, Quaternion.identity);
-                MeteorContainer meteorContainer = objectPooled.GetComponent<MeteorContainer>();
-                meteorContainer.ResetThyself();
-
-                GravityBody gravityBody = objectPooled.GetComponentInChildren<GravityBody>();
-                gravityBody.planet = planet;
-                // print(objectPooled.name + " " + gravityBody.transform.position + " " + gravityBody.transform.localPosition);
-                // gravityBody.transform.LookAt(transform);
-
-                objectPooled.gameObject.SetActive(true);
-                yield return Helpers.GetWait(spawnTime);
+                yield return null;
+                
             }
-            yield return null;
+            yield return Helpers.GetWait(spawnTime);
         }
-
         // yield return StartCoroutine(SpawnMeteor());
     }
 
@@ -78,7 +59,7 @@ public class MeteorSpawner : MonoBehaviour
         // target.parent.LookAt(transform, -Vector3.forward);
     }
 
-    private void Spawn()
+    private ObjectPooled Spawn()
     {
         ObjectPooled objectPooled = meteorPooling.Get("meteor");
 
@@ -95,18 +76,16 @@ public class MeteorSpawner : MonoBehaviour
             MeteorContainer meteorContainer = objectPooled.GetComponent<MeteorContainer>();
             meteorContainer.ResetThyself();
 
-            // GravityBody gravityBody = objectPooled.GetComponentInChildren<GravityBody>();
-            // gravityBody.planet = planet;
-
             Meteor meteor = objectPooled.GetComponentInChildren<Meteor>();
-            meteor.hitTarget = target;
+            meteor.hitTarget = transform;
+            meteor.transform.LookAt(transform);
             // print(objectPooled.name + " " + gravityBody.transform.position + " " + gravityBody.transform.localPosition);
-            // gravityBody.transform.LookAt(transform);
 
             objectPooled.gameObject.SetActive(true);
         }
-    }
 
+        return objectPooled;
+    }
 
 
     // IEnumerator SpawnMeteor()

@@ -18,6 +18,8 @@ public class Meteor : MonoBehaviour
     [SerializeField]
     private float speed = 150f;
 
+    private bool hasFall = false;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -41,7 +43,7 @@ public class Meteor : MonoBehaviour
             impactEffect.transform.parent = collision.transform;
             impactEffect.transform.LookAt(collision.transform);
         }
-        else if (collision.transform.CompareTag("Tag"))
+        else if (collision.transform.CompareTag("Player"))
         {
             Debug.Log("Gameover");
         }
@@ -57,9 +59,14 @@ public class Meteor : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector3 dir = (transform.position - hitTarget.position).normalized * -1;
-        rb.velocity += speed * Time.deltaTime * dir;
-        rb.rotation = Quaternion.identity;
+        Vector3 dir = (transform.position - hitTarget.position).normalized;
+        // rb.velocity += speed * Time.deltaTime * dir;
+        if (!hasFall)
+        {
+            rb.AddForce(dir * Physics.gravity.y * speed);
+            rb.rotation = Quaternion.FromToRotation(transform.up, dir) * rb.rotation;
+            hasFall = true;
+        }
     }
 
     public void ResetThyself()
@@ -72,5 +79,9 @@ public class Meteor : MonoBehaviour
 
         SphereCollider sphereCollider = GetComponent<SphereCollider>();
         sphereCollider.isTrigger = false;
+    }
+
+    private void OnDisable() {
+        hasFall = false;
     }
 }

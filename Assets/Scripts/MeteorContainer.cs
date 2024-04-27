@@ -7,8 +7,8 @@ public class MeteorContainer : MonoBehaviour
 
     private void Awake()
     {
-        meteor = GetComponentInChildren<Meteor>();
-        meteorEffect = GetComponentInChildren<MeteorEffectV2>();
+        meteor = GetComponentInChildren<Meteor>(true);
+        meteorEffect = GetComponentInChildren<MeteorEffectV2>(true);
     }
 
     public void ResetThyself()
@@ -22,6 +22,8 @@ public class MeteorContainer : MonoBehaviour
                 rb.MovePosition(Vector3.zero);
             }
         }
+        meteorEffect.gameObject.SetActive(false);
         meteor.ResetThyself();
+
     }
 }
