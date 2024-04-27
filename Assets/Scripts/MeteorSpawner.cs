@@ -17,6 +17,9 @@ public class MeteorSpawner : MonoBehaviour
     [SerializeField]
     private Transform target;
 
+    [SerializeField]
+    private Transform spawnPoint;
+
     private ObjectPooling meteorPooling;
 
     private void Awake()
@@ -27,7 +30,8 @@ public class MeteorSpawner : MonoBehaviour
 
     IEnumerator Start()
     {
-        // yield return Helpers.GetWait(0.5f);
+        yield break;
+        yield return Helpers.GetWait(3f);
         // StartCoroutine(SpawnMeteor());
         while (true)
         {
@@ -41,18 +45,18 @@ public class MeteorSpawner : MonoBehaviour
                     target.position.y,
                     target.position.z + (Random.insideUnitSphere.z * distance)
                 );
-                
+
                 objectPooled.transform.SetPositionAndRotation(pos, Quaternion.identity);
                 MeteorContainer meteorContainer = objectPooled.GetComponent<MeteorContainer>();
                 meteorContainer.ResetThyself();
 
                 GravityBody gravityBody = objectPooled.GetComponentInChildren<GravityBody>();
                 gravityBody.planet = planet;
-                print(objectPooled.name + " " + gravityBody.transform.position + " " + gravityBody.transform.localPosition);
+                // print(objectPooled.name + " " + gravityBody.transform.position + " " + gravityBody.transform.localPosition);
                 // gravityBody.transform.LookAt(transform);
 
                 objectPooled.gameObject.SetActive(true);
-                yield return Helpers.GetWait(5);
+                yield return Helpers.GetWait(spawnTime);
             }
             yield return null;
         }
@@ -60,19 +64,64 @@ public class MeteorSpawner : MonoBehaviour
         // yield return StartCoroutine(SpawnMeteor());
     }
 
-    IEnumerator SpawnMeteor()
+    private void Update()
     {
-        Vector3 pos = new Vector3(
-            target.position.x + (Random.insideUnitCircle.x * distance),
-            target.position.y + (Random.insideUnitCircle.y * distance),
-            target.position.z
-        );
-        GameObject meteor = Instantiate(meteorPrefab, Vector3.zero, Quaternion.identity);
-        meteor.transform.LookAt(gameObject.transform);
-        meteor.GetComponentInChildren<GravityBody>().planet = planet;
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Spawn();
+        }
+        Vector3 groundNormal = spawnPoint.position - transform.position;
 
-        yield return Helpers.GetWait(spawnTime);
-
-        StartCoroutine(SpawnMeteor());
+        Vector3 forwardsVector = -Vector3.Cross(groundNormal, transform.right);
+        // Finally, compose the two directions back into a single rotation.
+        spawnPoint.rotation = Quaternion.LookRotation(forwardsVector, groundNormal);
+        // target.parent.LookAt(transform, -Vector3.forward);
     }
+
+    private void Spawn()
+    {
+        ObjectPooled objectPooled = meteorPooling.Get("meteor");
+
+        if (objectPooled != null)
+        {
+            objectPooled.gameObject.SetActive(false);
+            Vector3 pos = new Vector3(
+                spawnPoint.position.x + (Random.insideUnitSphere.x * distance),
+                spawnPoint.position.y,
+                spawnPoint.position.z + (Random.insideUnitSphere.z * distance)
+            );
+
+            objectPooled.transform.SetPositionAndRotation(pos, Quaternion.identity);
+            MeteorContainer meteorContainer = objectPooled.GetComponent<MeteorContainer>();
+            meteorContainer.ResetThyself();
+
+            // GravityBody gravityBody = objectPooled.GetComponentInChildren<GravityBody>();
+            // gravityBody.planet = planet;
+
+            Meteor meteor = objectPooled.GetComponentInChildren<Meteor>();
+            meteor.hitTarget = target;
+            // print(objectPooled.name + " " + gravityBody.transform.position + " " + gravityBody.transform.localPosition);
+            // gravityBody.transform.LookAt(transform);
+
+            objectPooled.gameObject.SetActive(true);
+        }
+    }
+
+
+
+    // IEnumerator SpawnMeteor()
+    // {
+    //     Vector3 pos = new Vector3(
+    //         target.position.x + (Random.insideUnitCircle.x * distance),
+    //         target.position.y + (Random.insideUnitCircle.y * distance),
+    //         target.position.z
+    //     );
+    //     GameObject meteor = Instantiate(meteorPrefab, Vector3.zero, Quaternion.identity);
+    //     meteor.transform.LookAt(gameObject.transform);
+    //     meteor.GetComponentInChildren<GravityBody>().planet = planet;
+
+    //     yield return Helpers.GetWait(spawnTime);
+
+    //     StartCoroutine(SpawnMeteor());
+    // }
 }

@@ -93,7 +93,7 @@ public class CarController : MonoBehaviour
     private void IncreaseDrag()
     {
         // groundDrag += carData.groundDrag * 0.65f;
-        groundDrag += carData.groundDrag * 0.007f;
+        groundDrag += carData.groundDrag * 0.0095f;
     }
 
     private void FixedUpdate()

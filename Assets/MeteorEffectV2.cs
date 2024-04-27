@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 // https://www.youtube.com/watch?v=yiTF4rJu6tY
@@ -23,10 +22,6 @@ public class MeteorEffectV2 : MonoBehaviour
     private void Awake()
     {
         initScale = transform.localScale;
-    }
-
-    private void OnEnable() {
-        // gameObject.SetActive(false);
     }
 
     public void Shockwave() {

@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class DebugManagerEditor
 {
-    [MenuItem("**Debug**/Restart Scene #R")]
+    [MenuItem("**Debug**/Restart Scene _F5")]
     private static void RestartScene()
     {
         Scene currentScene = SceneManager.GetActiveScene();

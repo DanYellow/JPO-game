@@ -13,8 +13,13 @@ public class Meteor : MonoBehaviour
     private UnityEvent onCrash;
 
     private Rigidbody rb;
+    public Transform hitTarget;
 
-    private void Awake() {
+    [SerializeField]
+    private float speed = 150f;
+
+    private void Awake()
+    {
         rb = GetComponent<Rigidbody>();
     }
 
@@ -29,10 +34,16 @@ public class Meteor : MonoBehaviour
 
         if (collision.transform.CompareTag("Ground"))
         {
-            GameObject impactEffect = Instantiate(impactEffectPrefab, position, Quaternion.identity);
+            Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
+
+            GameObject impactEffect = Instantiate(impactEffectPrefab, position, rot);
             impactEffect.transform.localScale = transform.localScale * 1.05f;
             impactEffect.transform.parent = collision.transform;
             impactEffect.transform.LookAt(collision.transform);
+        }
+        else if (collision.transform.CompareTag("Tag"))
+        {
+            Debug.Log("Gameover");
         }
 
         MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
@@ -42,6 +53,13 @@ public class Meteor : MonoBehaviour
         sphereCollider.isTrigger = true;
 
         onCrash?.Invoke();
+    }
+
+    private void FixedUpdate()
+    {
+        Vector3 dir = (transform.position - hitTarget.position).normalized * -1;
+        rb.velocity += speed * Time.deltaTime * dir;
+        rb.rotation = Quaternion.identity;
     }
 
     public void ResetThyself()

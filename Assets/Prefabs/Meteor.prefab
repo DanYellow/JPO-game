@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 7932647752902740742}
   - component: {fileID: 3588581029810427204}
   - component: {fileID: 706740387473588606}
-  - component: {fileID: 3336691284041118234}
   - component: {fileID: 8525448117927851471}
   m_Layer: 7
   m_Name: Stone
@@ -135,19 +134,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!114 &3336691284041118234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 474091803327313268}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58f3f903249474047bd9771b6f71dbd1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  planet: {fileID: 0}
 --- !u!114 &8525448117927851471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,6 +164,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  hitTarget: {fileID: 0}
+  speed: 175
 --- !u!1 &1524491131393175330
 GameObject:
   m_ObjectHideFlags: 0

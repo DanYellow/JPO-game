@@ -751,7 +751,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0.42261827, y: -0, z: -0, w: 0.9063079}
-  m_LocalPosition: {x: 0, y: 74.544945, z: -13.498541}
+  m_LocalPosition: {x: 0, y: 89.09979, z: -25.711506}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1657,7 +1657,7 @@ Transform:
   m_GameObject: {fileID: 733904705}
   serializedVersion: 2
   m_LocalRotation: {x: 0.42261827, y: -0, z: -0, w: 0.9063079}
-  m_LocalPosition: {x: 0, y: 74.544945, z: -13.498541}
+  m_LocalPosition: {x: 0, y: 89.09979, z: -25.711506}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2861,7 +2861,7 @@ MonoBehaviour:
   m_TargetMovementOnly: 1
   m_ScreenX: 0.5
   m_ScreenY: 0.5
-  m_CameraDistance: 21
+  m_CameraDistance: 40
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
   m_DeadZoneDepth: 0
@@ -3590,7 +3590,8 @@ MonoBehaviour:
     type: 3}
   distance: 9
   spawnTime: 1.05
-  target: {fileID: 191452546}
+  target: {fileID: 188026843}
+  spawnPoint: {fileID: 191452546}
 --- !u!114 &3038029926327017417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4000,6 +4001,8 @@ MonoBehaviour:
   onCrash:
     m_PersistentCalls:
       m_Calls: []
+  hitTarget: {fileID: 0}
+  speed: 150
 --- !u!33 &6954137679425487117
 MeshFilter:
   m_ObjectHideFlags: 0
