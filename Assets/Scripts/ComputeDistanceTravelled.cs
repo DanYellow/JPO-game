@@ -11,7 +11,7 @@ public class ComputeDistanceTravelled : MonoBehaviour
     private int scoreStepThreshold = 850;
 
     [SerializeField]
-    private int startSpawnThreshold = 200;
+    private int startSpawnObstaclesThreshold = 150;
 
     private float lastThousandth = 0;
 
@@ -37,7 +37,7 @@ public class ComputeDistanceTravelled : MonoBehaviour
         {
             distanceTravelled.CurrentValue += SphericalDistance(lastPosition, transform.position);
         }
-        hasReachMinimumTravelDistance.CurrentValue = distanceTravelled.CurrentValue >= startSpawnThreshold;
+        hasReachMinimumTravelDistance.CurrentValue = distanceTravelled.CurrentValue >= startSpawnObstaclesThreshold;
 
         lastPosition = transform.position;
 

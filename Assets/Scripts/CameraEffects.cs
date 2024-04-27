@@ -75,6 +75,7 @@ public class CameraEffects : MonoBehaviour
         backgroundRender.SetColor("_VignetteColor", damageColor);
         yield return Helpers.GetWait(0.5f);
         backgroundRender.SetColor("_VignetteColor", startColor);
+        yield return Helpers.GetWait(0.65f);
         isCarTakingDamage.CurrentValue = false;
     }
 
