@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 35606442}
   - component: {fileID: 35606441}
   - component: {fileID: 35606440}
+  - component: {fileID: 35606443}
   m_Layer: 0
   m_Name: Quit
   m_TagString: Untagged
@@ -176,10 +177,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 1004915132}
+    m_SelectOnDown: {fileID: 842976553}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -245,6 +246,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 35606438}
   m_CullTransparentMesh: 1
+--- !u!114 &35606443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 35606438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9a5ad82630d17e4dbb2cd0ddf45855d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &88467808
 GameObject:
   m_ObjectHideFlags: 0
@@ -1757,7 +1770,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 274.3246, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &583696205
 MonoBehaviour:
@@ -1779,7 +1792,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Quitter
+  m_text: Retourner au menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5e4cf8c4e496ba3439ab979f2b4719e1, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 12045ea93b22dd14e93348080199bb63, type: 2}
@@ -1806,8 +1819,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1874,7 +1887,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &661056909
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1926,10 +1939,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -2467,6 +2480,7 @@ GameObject:
   - component: {fileID: 842976555}
   - component: {fileID: 842976554}
   - component: {fileID: 842976553}
+  - component: {fileID: 842976556}
   m_Layer: 0
   m_Name: Resume
   m_TagString: Untagged
@@ -2507,10 +2521,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 35606440}
+    m_SelectOnDown: {fileID: 1004915132}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -2588,6 +2602,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 842976551}
   m_CullTransparentMesh: 1
+--- !u!114 &842976556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 842976551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9a5ad82630d17e4dbb2cd0ddf45855d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &887373227
 GameObject:
   m_ObjectHideFlags: 0
@@ -2996,6 +3022,7 @@ GameObject:
   - component: {fileID: 1004915134}
   - component: {fileID: 1004915133}
   - component: {fileID: 1004915132}
+  - component: {fileID: 1004915135}
   m_Layer: 0
   m_Name: Restart
   m_TagString: Untagged
@@ -3036,10 +3063,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 842976553}
+    m_SelectOnDown: {fileID: 35606440}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -3117,6 +3144,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1004915130}
   m_CullTransparentMesh: 1
+--- !u!114 &1004915135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1004915130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9a5ad82630d17e4dbb2cd0ddf45855d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1034101927
 GameObject:
   m_ObjectHideFlags: 0
