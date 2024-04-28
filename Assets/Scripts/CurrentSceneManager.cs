@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CurrentSceneManager : MonoBehaviour
 {
@@ -15,5 +16,14 @@ public class CurrentSceneManager : MonoBehaviour
 
         isCarTakingDamage.CurrentValue = false;
         hasReachMinimumTravelDistance.CurrentValue = false;
+    }
+
+    public void RestartGame() {
+        Scene currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.name);
+    }
+
+    public void QuitGame() {
+        Application.Quit();
     }
 }

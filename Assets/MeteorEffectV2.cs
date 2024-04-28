@@ -32,7 +32,7 @@ public class MeteorEffectV2 : MonoBehaviour
 
     public IEnumerator ResetThyself()
     {
-        yield return new WaitForSeconds(delayBeforeDeath);
+        yield return Helpers.GetWait(delayBeforeDeath);
         transform.localScale = initScale;
         GetComponentInParent<ObjectPooled>().Release();
     }

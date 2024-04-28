@@ -34,7 +34,7 @@ public class PauseResumeManager : MonoBehaviour
         }
     }
 
-    private void Resume()
+    public void Resume()
     {
         Application.targetFrameRate = 60;
         Time.timeScale = 1;
