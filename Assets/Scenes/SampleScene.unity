@@ -258,6 +258,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9a5ad82630d17e4dbb2cd0ddf45855d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hoverMaterial: {fileID: 2100000, guid: d0ba758bdda9aa2428c2cd7c79bfbc33, type: 2}
+  hoverColor: {r: 63.999992, g: 56.799297, b: 0, a: 1}
 --- !u!1 &88467808
 GameObject:
   m_ObjectHideFlags: 0
@@ -1004,8 +1006,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -67.33522}
-  m_SizeDelta: {x: 318.0475, y: 275.791}
+  m_AnchoredPosition: {x: -0.000015258789, y: -67.33522}
+  m_SizeDelta: {x: 692.5875, y: 275.791}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &410087039
 GameObject:
@@ -1480,8 +1482,7 @@ MonoBehaviour:
   m_text: PAUSE
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5e4cf8c4e496ba3439ab979f2b4719e1, type: 2}
-  m_sharedMaterial: {fileID: -8550388617825197869, guid: 5e4cf8c4e496ba3439ab979f2b4719e1,
-    type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 4d65036f344c3a243a30c39fbb7175c0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1810,14 +1811,14 @@ MonoBehaviour:
   m_text: Retourner au menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5e4cf8c4e496ba3439ab979f2b4719e1, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 12045ea93b22dd14e93348080199bb63, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 32d03ebbcda49bc4aa4955c251582a4b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2629,6 +2630,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9a5ad82630d17e4dbb2cd0ddf45855d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hoverMaterial: {fileID: 2100000, guid: d0ba758bdda9aa2428c2cd7c79bfbc33, type: 2}
+  hoverColor: {r: 63.999992, g: 56.799297, b: 0, a: 1}
 --- !u!1 &887373227
 GameObject:
   m_ObjectHideFlags: 0
@@ -3163,6 +3166,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9a5ad82630d17e4dbb2cd0ddf45855d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hoverMaterial: {fileID: 2100000, guid: d0ba758bdda9aa2428c2cd7c79bfbc33, type: 2}
+  hoverColor: {r: 63.999992, g: 56.799297, b: 0, a: 1}
 --- !u!1 &1034101927
 GameObject:
   m_ObjectHideFlags: 0
@@ -3223,14 +3228,14 @@ MonoBehaviour:
   m_text: Recommencer
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5e4cf8c4e496ba3439ab979f2b4719e1, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 12045ea93b22dd14e93348080199bb63, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 32d03ebbcda49bc4aa4955c251582a4b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3725,7 +3730,7 @@ MonoBehaviour:
   m_text: Reprendre
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5e4cf8c4e496ba3439ab979f2b4719e1, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 12045ea93b22dd14e93348080199bb63, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 32d03ebbcda49bc4aa4955c251582a4b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

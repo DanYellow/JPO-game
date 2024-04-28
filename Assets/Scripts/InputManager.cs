@@ -37,6 +37,7 @@ public class InputManager : MonoBehaviour
         {
             SwitchActionMap(ActionMapName.Drive);
         }
+        Cursor.visible = isPaused;
     }
 
     private void SwitchActionMap(string mapName = null)

@@ -7,29 +7,36 @@ public class MenuButton : MonoBehaviour, ISelectHandler, IPointerEnterHandler, I
     private TextMeshProUGUI text;
     private Color origColor;
 
+    [SerializeField]
+    private Material hoverMaterial;
+    // private Color hoverColor = new Vector4(1.988f, 0.438f, 0.438f, 1.0f);
+
+    [ColorUsageAttribute(true, true), SerializeField]
+    public Color hoverColor;
+
     private void Awake()
     {
         text = GetComponentInChildren<TextMeshProUGUI>();
-        origColor = text.color;
+        origColor = text.faceColor;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        text.color = new Color(0, 245, 255);
+        text.faceColor = hoverColor;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        text.color = origColor;
+        text.faceColor = origColor;
     }
 
     public void OnSelect(BaseEventData eventData)
     {
-        text.color = new Color(0, 245, 255);
+        text.faceColor = hoverColor;
     }
 
     public void OnDeselect(BaseEventData eventData)
     {
-        text.color = origColor;
+        text.faceColor = origColor;
     }
 }
