@@ -1670,6 +1670,7 @@ GameObject:
   m_Component:
   - component: {fileID: 469254042}
   - component: {fileID: 469254043}
+  - component: {fileID: 469254044}
   m_Layer: 0
   m_Name: CurrentSceneManager
   m_TagString: Untagged
@@ -1707,6 +1708,20 @@ MonoBehaviour:
   isCarTakingDamage: {fileID: 11400000, guid: 4d2d9a03caaeb5441aa45cfc4778668f, type: 2}
   hasReachMinimumTravelDistance: {fileID: 11400000, guid: 759c01bd28c09fb4fac6704d5becf962,
     type: 2}
+--- !u!114 &469254044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469254041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e47b8844d69ffd644a1ee5154b4be936, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenuUI: {fileID: 661056908}
+  onTogglePauseEvent: {fileID: 11400000, guid: 58fd0952a56cec640ac85974af119583, type: 2}
 --- !u!1 &583696203
 GameObject:
   m_ObjectHideFlags: 0
@@ -2826,13 +2841,21 @@ MonoBehaviour:
     m_ActionId: 7e17e252-891d-4455-8624-f5935f75b3c0
     m_ActionName: Drive/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 469254044}
+        m_TargetAssemblyTypeName: PauseResumeManager, Assembly-CSharp
+        m_MethodName: TogglePause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 5191497f-9886-48b3-a018-3173bf0264d0
     m_ActionName: Drive/Look[/Mouse/delta]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 2855edbb-a9a0-44f6-a7d4-7624ca1f0b07
-    m_ActionName: Drive/Fire[/Mouse/leftButton]
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: c22c4160-0b6f-4b50-b1a2-2decfcdefa59
@@ -4213,7 +4236,7 @@ Transform:
   m_GameObject: {fileID: 2120282775}
   serializedVersion: 2
   m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 33, z: 56}
+  m_LocalPosition: {x: 0, y: 33, z: 47.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4720,6 +4743,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 191452546}
   hasReachMinimumTravelDistance: {fileID: 11400000, guid: 759c01bd28c09fb4fac6704d5becf962,
     type: 2}
+  carData: {fileID: 11400000, guid: 7de1e523eab7c7e4c9c86afd2e90efa8, type: 2}
 --- !u!114 &3038029926327017417
 MonoBehaviour:
   m_ObjectHideFlags: 0
