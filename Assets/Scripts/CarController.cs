@@ -101,7 +101,8 @@ public class CarController : MonoBehaviour
     private void FixedUpdate()
     {
         isCarGrounded.CurrentValue = Physics.Raycast(transform.position, -transform.up, out hit, 1, groundLayers);
-        
+        carData.currentVelocity = motor.velocity.sqrMagnitude;
+
         if (isCarGrounded.CurrentValue)
         {
             float finalSpeed = carData.forwardSpeed;

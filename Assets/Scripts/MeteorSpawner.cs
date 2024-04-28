@@ -9,8 +9,6 @@ public class MeteorSpawner : MonoBehaviour
     [SerializeField]
     private float distance = 20f;
 
-    private GravityAttractor planet;
-
     [SerializeField]
     private float spawnTime = 7f;
 
@@ -26,9 +24,11 @@ public class MeteorSpawner : MonoBehaviour
     [SerializeField]
     private BoolValue hasReachMinimumTravelDistance;
 
+    [SerializeField]
+    private CarData carData;
+
     private void Awake()
     {
-        planet = GetComponent<GravityAttractor>();
         meteorPooling = GetComponent<ObjectPooling>();
     }
 
@@ -38,10 +38,10 @@ public class MeteorSpawner : MonoBehaviour
         // StartCoroutine(SpawnMeteor());
         while (true)
         {
-            if (Spawn() == null)
+            if (carData.currentVelocity < 5 || Spawn() == null)
             {
                 yield return null;
-                
+
             }
             yield return Helpers.GetWait(spawnTime);
         }
@@ -87,6 +87,11 @@ public class MeteorSpawner : MonoBehaviour
         }
 
         return objectPooled;
+    }
+
+    private void OnDrawGizmos() {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(spawnPoint.position, distance);
     }
 
 

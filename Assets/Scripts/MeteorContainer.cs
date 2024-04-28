@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class MeteorContainer : MonoBehaviour
@@ -9,6 +10,20 @@ public class MeteorContainer : MonoBehaviour
     {
         meteor = GetComponentInChildren<Meteor>(true);
         meteorEffect = GetComponentInChildren<MeteorEffectV2>(true);
+    }
+
+    private void OnEnable() {
+        StartCoroutine(AutoDestroy());
+    }
+
+    public IEnumerator AutoDestroy()
+    {
+        yield return Helpers.GetWait(5);
+        GetComponentInParent<ObjectPooled>().Release();
+    }
+
+    private void OnDisable() {
+        StopAllCoroutines();
     }
 
     public void ResetThyself()
