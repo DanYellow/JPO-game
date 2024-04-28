@@ -50,7 +50,23 @@ public class PauseResumeManager : MonoBehaviour
         Time.timeScale = 0;
         isGamePaused = true;
         pauseMenuUI.SetActive(true);
-        // EventSystemExtensions.UpdateSelectedGameObject(pauseMenuUI.GetComponentInChildren<Button>().gameObject);
+        ExtensionsEventSystem.UpdateSelectedGameObject(pauseMenuUI.GetComponentInChildren<Button>().gameObject);
         onTogglePauseEvent.Raise(isGamePaused);
+    }
+
+    public void OnNavigate(InputAction.CallbackContext ctx)
+    {
+        if (pauseMenuUI != null && pauseMenuUI.activeInHierarchy && ctx.phase == InputActionPhase.Performed && EventSystem.current.currentSelectedGameObject == null)
+        {
+            pauseMenuUI.GetComponentInChildren<Button>().Select();
+        }
+    }
+
+    public void OnControlsChanged(PlayerInput input)
+    {
+        if (input.currentControlScheme.Equals("Gamepad") && pauseMenuUI.activeInHierarchy)
+        {
+            pauseMenuUI.GetComponentInChildren<Button>().Select();
+        }
     }
 }

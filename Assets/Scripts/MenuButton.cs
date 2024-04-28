@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
 
-public class MenuButton : MonoBehaviour, ISelectHandler, IPointerEnterHandler, IPointerExitHandler
+public class MenuButton : MonoBehaviour, ISelectHandler, IPointerEnterHandler, IPointerExitHandler, IDeselectHandler
 {
     private TextMeshProUGUI text;
     private Color origColor;
@@ -26,5 +26,10 @@ public class MenuButton : MonoBehaviour, ISelectHandler, IPointerEnterHandler, I
     public void OnSelect(BaseEventData eventData)
     {
         text.color = new Color(0, 245, 255);
+    }
+
+    public void OnDeselect(BaseEventData eventData)
+    {
+        text.color = origColor;
     }
 }
