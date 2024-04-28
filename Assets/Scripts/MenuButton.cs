@@ -7,11 +7,7 @@ public class MenuButton : MonoBehaviour, ISelectHandler, IPointerEnterHandler, I
     private TextMeshProUGUI text;
     private Color origColor;
 
-    [SerializeField]
-    private Material hoverMaterial;
-    // private Color hoverColor = new Vector4(1.988f, 0.438f, 0.438f, 1.0f);
-
-    [ColorUsageAttribute(true, true), SerializeField]
+    [ColorUsage(true, true), SerializeField]
     public Color hoverColor;
 
     private void Awake()
