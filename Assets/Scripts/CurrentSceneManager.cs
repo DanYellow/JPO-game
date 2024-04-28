@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CurrentSceneManager : MonoBehaviour
@@ -11,16 +9,11 @@ public class CurrentSceneManager : MonoBehaviour
     [SerializeField]
     private BoolValue hasReachMinimumTravelDistance;
 
-    // Start is called before the first frame update
     void Start()
     {
+        Application.targetFrameRate = 60;
+
         isCarTakingDamage.CurrentValue = false;
         hasReachMinimumTravelDistance.CurrentValue = false;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
