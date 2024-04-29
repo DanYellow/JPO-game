@@ -64,9 +64,11 @@ public class Meteor : MonoBehaviour
         if (!hasFall)
         {
             rb.AddForce(dir * Physics.gravity.y * speed);
-            rb.rotation = Quaternion.FromToRotation(transform.up, dir) * rb.rotation;
+            // rb.rotation = Quaternion.FromToRotation(transform.up, dir) * rb.rotation;
             hasFall = true;
         }
+        var rotation = Quaternion.LookRotation(dir);
+        transform.localRotation = Quaternion.Lerp(transform.rotation, rotation, 1);
     }
 
     public void ResetThyself()
@@ -81,7 +83,8 @@ public class Meteor : MonoBehaviour
         sphereCollider.isTrigger = false;
     }
 
-    private void OnDisable() {
+    private void OnDisable()
+    {
         hasFall = false;
     }
 }

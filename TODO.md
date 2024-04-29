@@ -32,3 +32,5 @@ https://www.youtube.com/watch?v=QsLkb1aOkb8
 https://www.youtube.com/watch?v=naaVpEyr4RA
 
 https://www.google.com/search?q=unity+position+gameobject+relative+to+player+on+sphere+world&sca_esv=619c697d276fe56b&sca_upv=1&hl=fr&ei=HokpZsmaHKWskdUP5IyU6Ag&ved=0ahUKEwjJoZTE9NuFAxUlVqQEHWQGBY0Q4dUDCBA&uact=5&oq=unity+position+gameobject+relative+to+player+on+sphere+world&gs_lp=Egxnd3Mtd2l6LXNlcnAiPHVuaXR5IHBvc2l0aW9uIGdhbWVvYmplY3QgcmVsYXRpdmUgdG8gcGxheWVyIG9uIHNwaGVyZSB3b3JsZDIFECEYoAEyBRAhGKABSOlDUABY-kJwAHgAkAEAmAF_oAH1IKoBBDQwLje4AQPIAQD4AQGYAi-gAq4jwgIFEAAYgATCAgUQLhiABMICDhAuGIAEGMcBGI4FGK8BwgIGEAAYFhgewgIIEAAYFhgeGA_CAggQABiABBiiBMICBBAhGBXCAgUQIRifBcICBxAhGKABGAqYAwCSBwUyOS4xOKAHo-AB&sclient=gws-wiz-serp
+
+Credits : https://opengameart.org/content/smoke-aura
