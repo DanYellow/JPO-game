@@ -15,7 +15,6 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField]
     private VoidEventChannel onStartGame;
 
-    // Start is called before the first frame update
     void Awake()
     {
         Application.targetFrameRate = 30;
