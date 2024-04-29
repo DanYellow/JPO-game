@@ -19,12 +19,18 @@ public class InputManager : MonoBehaviour
     [SerializeField]
     private BoolEventChannel onTogglePause;
 
+    [SerializeField]
+    private VoidEventChannel onStartGame;
+
     // [SerializeField]
     // private VoidEventChannel onPlayerDeath;
-    
+
     private void Awake()
     {
         onTogglePause.OnEventRaised += ToggleActionMap;
+        onStartGame.OnEventRaised += StartGame;
+
+        SwitchActionMap(ActionMapName.UI);
     }
 
     public void ToggleActionMap(bool isPaused)
@@ -46,8 +52,14 @@ public class InputManager : MonoBehaviour
         playerInput.SwitchCurrentActionMap(mapName);
     }
 
+    private void StartGame()
+    {
+        playerInput.SwitchCurrentActionMap(ActionMapName.Drive);
+    }
+
     private void OnDisable()
     {
         onTogglePause.OnEventRaised -= ToggleActionMap;
+        onStartGame.OnEventRaised -= StartGame;
     }
 }
