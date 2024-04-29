@@ -11,9 +11,6 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField]
     private GameObject mainMenuLight;
 
-    // [SerializeField]
-    // private GameObject mainMenuLight;
-
     [Header("Scriptable Objects")]
     [SerializeField]
     private VoidEventChannel onStartGame;
