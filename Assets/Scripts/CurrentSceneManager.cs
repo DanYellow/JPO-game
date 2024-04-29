@@ -12,8 +12,6 @@ public class CurrentSceneManager : MonoBehaviour
 
     void Start()
     {
-        Application.targetFrameRate = 60;
-
         isCarTakingDamage.CurrentValue = false;
         hasReachMinimumTravelDistance.CurrentValue = false;
     }
