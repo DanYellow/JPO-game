@@ -60,6 +60,11 @@ public class MeteorSpawner : MonoBehaviour
         // Finally, compose the two directions back into a single rotation.
         // spawnPoint.rotation = Quaternion.LookRotation(forwardsVector, groundNormal);
         // target.parent.LookAt(transform, -Vector3.forward);
+
+        // Vector3 dir = (target.position - spawnPoint.position).normalized;
+        // var rotation = Quaternion.LookRotation(dir);
+        // spawnPoint.localRotation = Quaternion.Lerp(spawnPoint.rotation, rotation, 1);
+
     }
 
     private ObjectPooled Spawn()
@@ -89,7 +94,8 @@ public class MeteorSpawner : MonoBehaviour
         return objectPooled;
     }
 
-    private void OnDrawGizmos() {
+    private void OnDrawGizmos()
+    {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(spawnPoint.position, distance);
     }

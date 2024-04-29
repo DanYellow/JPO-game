@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 474091803327313268}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 1
@@ -166,7 +166,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   hitTarget: {fileID: 0}
-  speed: 340
+  speed: 60
 --- !u!1 &1524491131393175330
 GameObject:
   m_ObjectHideFlags: 0
