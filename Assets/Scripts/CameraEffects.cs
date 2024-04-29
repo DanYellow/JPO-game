@@ -13,9 +13,9 @@ public class CameraEffects : MonoBehaviour
     [SerializeField]
     private Material backgroundRender;
 
-    [SerializeField, ColorUsageAttribute(true, true)]
+    [SerializeField, ColorUsage(true, true)]
     private Color startColor;
-    [SerializeField, ColorUsageAttribute(true, true)]
+    [SerializeField, ColorUsage(true, true)]
     private Color damageColor;
 
     private float initialVignettePower;
