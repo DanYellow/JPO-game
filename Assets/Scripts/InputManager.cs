@@ -1,13 +1,11 @@
 using UnityEngine.InputSystem;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class ActionMapName
 {
     public static string Drive = "Drive";
     public static string UI = "UI";
-    public static string UIGameOverAndCredits = "UIGameOverAndCredits";
-    public static string Cinematics = "Cinematics";
+    public static string GameOverAndCredits = "GameOverAndCredits";
 }
 
 public class InputManager : MonoBehaviour
@@ -22,13 +20,9 @@ public class InputManager : MonoBehaviour
     [SerializeField]
     private VoidEventChannel onStartGame;
 
-    // [SerializeField]
-    // private VoidEventChannel onPlayerDeath;
-
     private void Awake()
     {
         onTogglePause.OnEventRaised += ToggleActionMap;
-        onStartGame.OnEventRaised += StartGame;
 
         SwitchActionMap(ActionMapName.UI);
     }
@@ -52,7 +46,7 @@ public class InputManager : MonoBehaviour
         playerInput.SwitchCurrentActionMap(mapName);
     }
 
-    private void StartGame()
+    public void StartGame()
     {
         playerInput.SwitchCurrentActionMap(ActionMapName.Drive);
     }
@@ -60,6 +54,5 @@ public class InputManager : MonoBehaviour
     private void OnDisable()
     {
         onTogglePause.OnEventRaised -= ToggleActionMap;
-        onStartGame.OnEventRaised -= StartGame;
     }
 }

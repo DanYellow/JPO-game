@@ -22,6 +22,10 @@ public class MainMenuManager : MonoBehaviour
     void Awake()
     {
         Application.targetFrameRate = 30;
+    }
+
+    private void Start()
+    {
         ExtensionsEventSystem.UpdateSelectedGameObject(mainMenuUI.GetComponentInChildren<Button>().gameObject);
     }
 
