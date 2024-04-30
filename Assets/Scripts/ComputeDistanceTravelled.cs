@@ -27,8 +27,12 @@ public class ComputeDistanceTravelled : MonoBehaviour
 
     private void Start()
     {
-        distanceTravelled.CurrentValue = 0;
         lastPosition = transform.position;
+    }
+
+    public void ResetScore()
+    {
+        distanceTravelled.CurrentValue = 0;
     }
 
     private void Update()
