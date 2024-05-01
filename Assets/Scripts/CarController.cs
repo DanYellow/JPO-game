@@ -35,12 +35,17 @@ public class CarController : MonoBehaviour
     [SerializeField]
     private Transform spawnMeteorPivotPoint;
 
+    private float drifitngTimer = 0.75f;
+    private float drifitngTimeRemaning = 0;
+
     [Header("Scriptable Objects")]
     [SerializeField]
     private VoidEventChannel onCarSlowdown;
 
     [SerializeField]
     private BoolValue isCarGrounded;
+    [SerializeField]
+    private BoolValue isCarDrifting;
 
     private void OnEnable()
     {
@@ -51,6 +56,7 @@ public class CarController : MonoBehaviour
     {
         groundDrag = carData.groundDrag;
         collision.useGravity = false;
+        drifitngTimeRemaning = drifitngTimer;
 
         motor.transform.parent = null;
         collision.transform.parent = null;
@@ -66,10 +72,21 @@ public class CarController : MonoBehaviour
         MoveSpawnMeteorPoint();
 
         collision.position = motor.position;
-
         transform.position = motor.transform.position;
+
         Quaternion targetRotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 20 * Time.deltaTime);
+
+        isCarDrifting.CurrentValue = IsDrifting();
+        if(isCarDrifting.CurrentValue) {
+            drifitngTimeRemaning -= Time.deltaTime;
+        }
+        // bool isDrifting = IsDrifting();
+        // if (isDrifting && isCarDrifting.CurrentValue != isDrifting)
+        // {
+        //     print("Her");
+        //     isCarDrifting.CurrentValue = IsDrifting();
+        // }
     }
 
     private void MoveSpawnMeteorPoint()
@@ -88,7 +105,7 @@ public class CarController : MonoBehaviour
         {    // Where EPSILON is a very small number
             //  spawnMeteorPivotPoint.rotation = Quaternion.LookRotation(transform.forward * moveInput.y);
         }
-        
+
         // spawnMeteorPivotPoint.rotation = Quaternion.FromToRotation(spawnMeteorPivotPoint.forward, tr.forward * -1);
     }
 
@@ -115,6 +132,22 @@ public class CarController : MonoBehaviour
         motor.velocity = Vector3.ClampMagnitude(motor.velocity, 50);
 
         collision.MoveRotation(transform.rotation);
+
+
+    }
+
+    private bool IsDrifting()
+    {
+        float driftValue = Vector3.Dot(motor.velocity, motor.transform.forward);
+        float driftAngle = Mathf.Acos(driftValue) * Mathf.Rad2Deg;
+
+        bool _isDrifting = driftAngle <= 89f || driftAngle >= 91f;
+        if(!_isDrifting && drifitngTimeRemaning > 0 && isCarDrifting.CurrentValue) {
+            return true;
+        }
+        drifitngTimeRemaning = drifitngTimer;
+
+        return _isDrifting;
     }
 
     private void Rotate()
@@ -167,6 +200,7 @@ public class CarController : MonoBehaviour
         {
             StopAllCoroutines();
             moveInput = (Vector3)ctx.ReadValue<Vector2>();
+            print(moveInput.normalized);
             if (lastDirection != moveInput.y)
             {
                 lastDirection = moveInput.y;

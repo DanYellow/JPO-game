@@ -27,6 +27,9 @@ public class MeteorSpawner : MonoBehaviour
     [SerializeField]
     private CarData carData;
 
+    [SerializeField]
+    private BoolValue isCarDrifting;
+
     private void Awake()
     {
         meteorPooling = GetComponent<ObjectPooling>();
@@ -85,7 +88,7 @@ public class MeteorSpawner : MonoBehaviour
             meteorContainer.ResetThyself();
 
             Meteor meteor = objectPooled.GetComponentInChildren<Meteor>();
-            meteor.hitTarget = transform;
+            meteor.hitTarget = isCarDrifting.CurrentValue ? target : transform;
             meteor.transform.LookAt(transform);
 
             objectPooled.gameObject.SetActive(true);

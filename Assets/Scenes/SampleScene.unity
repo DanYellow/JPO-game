@@ -1736,7 +1736,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distanceTravelled: {fileID: 11400000, guid: 34a454f90f47f2041ae312d9692b9efd, type: 2}
   scoreText: {fileID: 898319467}
-  onStartGame: {fileID: 11400000, guid: 5057008cf4cba9f44b0b90734a61fea7, type: 2}
 --- !u!1 &449857889
 GameObject:
   m_ObjectHideFlags: 0
@@ -2476,6 +2475,7 @@ RectTransform:
   - {fileID: 1048196724}
   - {fileID: 897366121}
   - {fileID: 1161733953}
+  - {fileID: 686137034}
   m_Father: {fileID: 1253899366}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2784,6 +2784,81 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 10
   m_TargetDisplay: 0
+--- !u!1 &686137033
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 686137034}
+  - component: {fileID: 686137036}
+  - component: {fileID: 686137035}
+  m_Layer: 0
+  m_Name: Logo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &686137034
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 686137033}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 561888213}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 436}
+  m_SizeDelta: {x: 240, y: 111}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &686137035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 686137033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 5ce347c0662548b4f9e70b9234c9b7f6, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &686137036
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 686137033}
+  m_CullTransparentMesh: 1
 --- !u!1 &697612834
 GameObject:
   m_ObjectHideFlags: 0
@@ -3222,6 +3297,30 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 439393449}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1166183953}
+        m_TargetAssemblyTypeName: ComputeDistanceTravelled, Assembly-CSharp
+        m_MethodName: ResetScore
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!1 &741839329
 GameObject:
@@ -5111,6 +5210,7 @@ MonoBehaviour:
   spawnMeteorPivotPoint: {fileID: 2120282776}
   onCarSlowdown: {fileID: 11400000, guid: 341e3f4c62758c846913243499cadfef, type: 2}
   isCarGrounded: {fileID: 11400000, guid: b2db8bbf8d00f6249ae7decd76910005, type: 2}
+  isCarDrifting: {fileID: 11400000, guid: e81310de0a38a2c43ac36d0704797144, type: 2}
 --- !u!4 &1166183952
 Transform:
   m_ObjectHideFlags: 0
@@ -6863,6 +6963,7 @@ MonoBehaviour:
   hasReachMinimumTravelDistance: {fileID: 11400000, guid: 759c01bd28c09fb4fac6704d5becf962,
     type: 2}
   carData: {fileID: 11400000, guid: 7de1e523eab7c7e4c9c86afd2e90efa8, type: 2}
+  isCarDrifting: {fileID: 11400000, guid: e81310de0a38a2c43ac36d0704797144, type: 2}
 --- !u!114 &3038029926327017417
 MonoBehaviour:
   m_ObjectHideFlags: 0

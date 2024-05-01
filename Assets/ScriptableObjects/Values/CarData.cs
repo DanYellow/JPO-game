@@ -11,5 +11,4 @@ public class CarData : ScriptableObject
     public float groundDrag = 2.5f;
     public float airDrag = 2.5f;
     public float currentVelocity = 0;
-
 }
