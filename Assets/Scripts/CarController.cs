@@ -35,7 +35,7 @@ public class CarController : MonoBehaviour
     [SerializeField]
     private Transform spawnMeteorPivotPoint;
 
-    private float drifitngTimer = 0.75f;
+    private float drifitngTimer = 1.25f;
     private float drifitngTimeRemaning = 0;
 
     [Header("Scriptable Objects")]
@@ -77,16 +77,16 @@ public class CarController : MonoBehaviour
         Quaternion targetRotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 20 * Time.deltaTime);
 
-        isCarDrifting.CurrentValue = IsDrifting();
-        if(isCarDrifting.CurrentValue) {
+        if(HasStartDrifting()) {
             drifitngTimeRemaning -= Time.deltaTime;
+            print(drifitngTimeRemaning);
+            if(drifitngTimeRemaning <= 0) {
+                isCarDrifting.CurrentValue = true;
+            }
+        } else {
+            isCarDrifting.CurrentValue = false;
+            drifitngTimeRemaning = drifitngTimer;
         }
-        // bool isDrifting = IsDrifting();
-        // if (isDrifting && isCarDrifting.CurrentValue != isDrifting)
-        // {
-        //     print("Her");
-        //     isCarDrifting.CurrentValue = IsDrifting();
-        // }
     }
 
     private void MoveSpawnMeteorPoint()
@@ -136,18 +136,9 @@ public class CarController : MonoBehaviour
 
     }
 
-    private bool IsDrifting()
+    private bool HasStartDrifting()
     {
-        float driftValue = Vector3.Dot(motor.velocity, motor.transform.forward);
-        float driftAngle = Mathf.Acos(driftValue) * Mathf.Rad2Deg;
-
-        bool _isDrifting = driftAngle <= 89f || driftAngle >= 91f;
-        if(!_isDrifting && drifitngTimeRemaning > 0 && isCarDrifting.CurrentValue) {
-            return true;
-        }
-        drifitngTimeRemaning = drifitngTimer;
-
-        return _isDrifting;
+        return Mathf.Abs(moveInput.normalized.x) > 0 && moveInput.normalized.y > 0;
     }
 
     private void Rotate()
