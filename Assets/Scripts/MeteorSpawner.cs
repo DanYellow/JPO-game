@@ -53,10 +53,12 @@ public class MeteorSpawner : MonoBehaviour
 
     private void Update()
     {
+        #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Spawn();
         }
+        #endif
         Vector3 groundNormal = spawnPoint.position - transform.position;
 
         Vector3 forwardsVector = -Vector3.Cross(groundNormal, transform.right);

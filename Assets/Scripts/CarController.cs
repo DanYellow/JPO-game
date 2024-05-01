@@ -69,7 +69,6 @@ public class CarController : MonoBehaviour
         ManageWheels();
         Rotate();
         SwapDrag();
-        MoveSpawnMeteorPoint();
 
         collision.position = motor.position;
         transform.position = motor.transform.position;
@@ -79,7 +78,6 @@ public class CarController : MonoBehaviour
 
         if(HasStartDrifting()) {
             drifitngTimeRemaning -= Time.deltaTime;
-            print(drifitngTimeRemaning);
             if(drifitngTimeRemaning <= 0) {
                 isCarDrifting.CurrentValue = true;
             }
@@ -132,8 +130,6 @@ public class CarController : MonoBehaviour
         motor.velocity = Vector3.ClampMagnitude(motor.velocity, 50);
 
         collision.MoveRotation(transform.rotation);
-
-
     }
 
     private bool HasStartDrifting()
@@ -191,7 +187,7 @@ public class CarController : MonoBehaviour
         {
             StopAllCoroutines();
             moveInput = (Vector3)ctx.ReadValue<Vector2>();
-            print(moveInput.normalized);
+
             if (lastDirection != moveInput.y)
             {
                 lastDirection = moveInput.y;
