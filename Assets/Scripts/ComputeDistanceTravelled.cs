@@ -28,6 +28,7 @@ public class ComputeDistanceTravelled : MonoBehaviour
     private void Start()
     {
         lastPosition = transform.position;
+        ResetScore();
     }
 
     public void ResetScore()

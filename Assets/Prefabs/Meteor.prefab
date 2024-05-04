@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shockwaveEffect: {fileID: 4387829937478565215}
-  impactEffectPrefab: {fileID: 4699131527043417098, guid: 83e336cc238714545b9aa88504e5a95f,
+  impactEffectPrefab: {fileID: 4478984168247039711, guid: 7c1e6506e63859147949ce943e459838,
     type: 3}
   onCrash:
     m_PersistentCalls:
@@ -4383,7 +4383,7 @@ ParticleSystem:
     subEmitters:
     - serializedVersion: 3
       emitter: {fileID: 0}
-      type: 0
+      type: 1
       properties: 0
       emitProbability: 1
   LightsModule:

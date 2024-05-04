@@ -29,6 +29,8 @@ public class CarController : MonoBehaviour
     private float lastDirection = 1;
     private float groundDrag;
 
+    private MeshRenderer meshRenderer;
+
     [SerializeField]
     private Transform cameraTracker;
 
@@ -54,6 +56,8 @@ public class CarController : MonoBehaviour
 
     void Awake()
     {
+        meshRenderer = GetComponentInChildren<MeshRenderer>();
+        
         groundDrag = carData.groundDrag;
         collision.useGravity = false;
         drifitngTimeRemaning = drifitngTimer;
@@ -62,6 +66,10 @@ public class CarController : MonoBehaviour
         collision.transform.parent = null;
 
         boxCollider = collision.GetComponent<BoxCollider>();
+    }
+
+    private void Start() {
+        meshRenderer.sortingOrder = 10;
     }
 
     void Update()

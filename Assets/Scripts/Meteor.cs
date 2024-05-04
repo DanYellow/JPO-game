@@ -41,7 +41,8 @@ public class Meteor : MonoBehaviour
 
         if (collision.transform.CompareTag("Ground"))
         {
-            Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
+            // Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
+            Quaternion rot = Quaternion.LookRotation(contact.normal);
 
             GameObject impactEffect = Instantiate(impactEffectPrefab, position, rot);
             impactEffect.transform.localScale = transform.localScale * 1.05f;
