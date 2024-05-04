@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
@@ -34,6 +32,7 @@ public class CinemachineCameraSwitcher : MonoBehaviour
             vcam1.Priority = 1;
             vcam2.Priority = 0;
         }
+        isVCam1 = !isVCam1;
     }
 
     private void OnDisable()

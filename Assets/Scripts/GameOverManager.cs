@@ -4,15 +4,39 @@ using UnityEngine;
 
 public class GameOverManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private GameObject gameOverUI;
+
+    [SerializeField]
+    private GameObject mainMenuUI;
+
+    [Header("Scriptable Objects")]
+    [SerializeField]
+    private VoidEventChannel onGameOver;
+
+    private void OnEnable()
     {
-        
+        onGameOver.OnEventRaised += DisplayScreen;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void DisplayScreen()
     {
-        
+        gameOverUI.SetActive(true);
+    }
+
+    private void Awake()
+    {
+        gameOverUI.SetActive(false);
+    }
+
+    public void GoBackToIndex()
+    {
+        gameOverUI.SetActive(false);
+        mainMenuUI.SetActive(true);
+    }
+
+    private void OnDisable()
+    {
+        onGameOver.OnEventRaised -= DisplayScreen;
     }
 }
