@@ -20,6 +20,10 @@ public class Meteor : MonoBehaviour
 
     private Vector3 hitTargetDirection = Vector3.zero;
 
+    [Header("Scriptable Objects")]
+    [SerializeField]
+    private VoidEventChannel onGameOver;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -51,7 +55,7 @@ public class Meteor : MonoBehaviour
         }
         else if (collision.transform.CompareTag("Player"))
         {
-            Debug.Log("Gameover");
+            onGameOver.Raise();
         }
 
         MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
