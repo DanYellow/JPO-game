@@ -24,6 +24,9 @@ public class Meteor : MonoBehaviour
     [SerializeField]
     private VoidEventChannel onGameOver;
 
+    [SerializeField]
+    private VoidEventChannel onCameraSwitch;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -36,7 +39,6 @@ public class Meteor : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        // print("meteor " + collision.transform.name);
         ContactPoint contact = collision.contacts[0];
         Vector3 position = contact.point;
 
@@ -56,6 +58,7 @@ public class Meteor : MonoBehaviour
         else if (collision.transform.CompareTag("Player"))
         {
             onGameOver.Raise();
+            onCameraSwitch.Raise();
         }
 
         MeshRenderer meshRenderer = GetComponent<MeshRenderer>();

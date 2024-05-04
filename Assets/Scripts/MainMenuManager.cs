@@ -15,6 +15,9 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField]
     private VoidEventChannel onStartGame;
 
+    [SerializeField]
+    private VoidEventChannel onCameraSwitch;
+
     void Awake()
     {
         Application.targetFrameRate = 30;
@@ -32,6 +35,7 @@ public class MainMenuManager : MonoBehaviour
         mainMenuUI.SetActive(false);
         mainMenuLight.SetActive(false);
         onStartGame.Raise();
+        onCameraSwitch.Raise();
         Application.targetFrameRate = 60;
         EventSystem.current.SetSelectedGameObject(null);
     }

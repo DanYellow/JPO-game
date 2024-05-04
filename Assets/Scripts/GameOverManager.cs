@@ -1,6 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class GameOverManager : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class GameOverManager : MonoBehaviour
 
     private void DisplayScreen()
     {
+        ExtensionsEventSystem.UpdateSelectedGameObject(gameOverUI.GetComponentInChildren<Button>().gameObject);
         gameOverUI.SetActive(true);
     }
 
@@ -33,6 +35,22 @@ public class GameOverManager : MonoBehaviour
     {
         gameOverUI.SetActive(false);
         mainMenuUI.SetActive(true);
+    }
+
+    public void OnNavigate(InputAction.CallbackContext ctx)
+    {
+        if (gameOverUI != null && gameOverUI.activeInHierarchy && ctx.phase == InputActionPhase.Performed && EventSystem.current.currentSelectedGameObject == null)
+        {
+            gameOverUI.GetComponentInChildren<Button>().Select();
+        }
+    }
+
+    public void OnControlsChanged(PlayerInput input)
+    {
+        if (input.currentControlScheme.Equals("Gamepad") && gameOverUI.activeInHierarchy)
+        {
+            gameOverUI.GetComponentInChildren<Button>().Select();
+        }
     }
 
     private void OnDisable()

@@ -20,9 +20,13 @@ public class InputManager : MonoBehaviour
     [SerializeField]
     private VoidEventChannel onStartGame;
 
+    [SerializeField]
+    private VoidEventChannel onGameOver;
+
     private void Awake()
     {
         onTogglePause.OnEventRaised += ToggleActionMap;
+        onGameOver.OnEventRaised += OnGameOver;
 
         SwitchActionMap(ActionMapName.UI);
     }
@@ -46,6 +50,11 @@ public class InputManager : MonoBehaviour
         playerInput.SwitchCurrentActionMap(mapName);
     }
 
+    private void OnGameOver()
+    {
+        playerInput.SwitchCurrentActionMap(ActionMapName.GameOverAndCredits);
+    }
+
     public void StartGame()
     {
         playerInput.SwitchCurrentActionMap(ActionMapName.Drive);
@@ -54,5 +63,6 @@ public class InputManager : MonoBehaviour
     private void OnDisable()
     {
         onTogglePause.OnEventRaised -= ToggleActionMap;
+        onGameOver.OnEventRaised -= OnGameOver;
     }
 }
