@@ -2817,7 +2817,8 @@ MonoBehaviour:
   playerInput: {fileID: 966294436}
   onTogglePause: {fileID: 11400000, guid: 58fd0952a56cec640ac85974af119583, type: 2}
   onStartGame: {fileID: 11400000, guid: 5057008cf4cba9f44b0b90734a61fea7, type: 2}
-  onGameOver: {fileID: 0}
+  onGameOver: {fileID: 11400000, guid: 287ac5d675fb3404fa950b20289e88a5, type: 2}
+  onGoBackToMainMenu: {fileID: 11400000, guid: de6d173da402728458f7f816a7d4fe21, type: 2}
 --- !u!114 &469254047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5878,12 +5879,40 @@ MonoBehaviour:
     m_ActionId: c22c4160-0b6f-4b50-b1a2-2decfcdefa59
     m_ActionName: UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: e29d45c9-7311-4094-b4f3-4e53eb8c7d5e
-    m_ActionName: UI/Click[/Mouse/leftButton]
+      m_Calls:
+      - m_Target: {fileID: 469254047}
+        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
+        m_MethodName: OnNavigate
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 5577f202-15ca-4c62-a69b-f3885adf33ba
+    m_ActionName: GameOver/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 469254044}
+        m_TargetAssemblyTypeName: PauseResumeManager, Assembly-CSharp
+        m_MethodName: TogglePause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 9e695e70-dab1-4deb-8b3e-8c28c2717fd4
+    m_ActionName: Pause/Pause[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: UI
+  m_DefaultActionMap: Drive
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &966294437
