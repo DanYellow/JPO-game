@@ -2865,6 +2865,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOverUI: {fileID: 544568081}
   mainMenuUI: {fileID: 726012217}
+  resultTextContainer: {fileID: 970563656}
   onGameOver: {fileID: 11400000, guid: 287ac5d675fb3404fa950b20289e88a5, type: 2}
   distanceTravelled: {fileID: 11400000, guid: 34a454f90f47f2041ae312d9692b9efd, type: 2}
   totalDistanceTravelled: {fileID: 11400000, guid: 0a21112645a9a96459bb637b989c3ac8,
@@ -4541,6 +4542,37 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!1 &736481270
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 736481271}
+  m_Layer: 0
+  m_Name: DriftPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &736481271
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736481270}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1.59}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1166183952}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &741839329
 GameObject:
   m_ObjectHideFlags: 0
@@ -6029,16 +6061,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Distance parcourue : <color=#00F6FF>350 km</color>
+  m_text: 'Distance parcourue : <color=#AAAAFF><color=#00F6FF>350 km</color></color>
 
-    Distance parcourue
-    depuis ce matin : <color=#00F6FF>350 km</color>'
+    Distance
+    parcourue depuis ce matin : <color=#BBAAFF><color=#00F6FF>4200 km</color></color>'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5e4cf8c4e496ba3439ab979f2b4719e1, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 67a76bc4bfb811e479b8d1f60f914b2f, type: 2}
@@ -7063,6 +7095,7 @@ MonoBehaviour:
     m_Bits: 8
   cameraTracker: {fileID: 1709954605}
   spawnMeteorPivotPoint: {fileID: 2120282776}
+  driftPoint: {fileID: 736481271}
   onCarSlowdown: {fileID: 11400000, guid: 341e3f4c62758c846913243499cadfef, type: 2}
   isCarGrounded: {fileID: 11400000, guid: b2db8bbf8d00f6249ae7decd76910005, type: 2}
   isCarDrifting: {fileID: 11400000, guid: e81310de0a38a2c43ac36d0704797144, type: 2}
@@ -7090,6 +7123,7 @@ Transform:
   - {fileID: 2120282776}
   - {fileID: 887373228}
   - {fileID: 111097739}
+  - {fileID: 736481271}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1166183953

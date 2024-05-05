@@ -37,6 +37,9 @@ public class CarController : MonoBehaviour
     [SerializeField]
     private Transform spawnMeteorPivotPoint;
 
+    [SerializeField]
+    private Transform driftPoint;
+
     private float drifitngTimer = 1.25f;
     private float drifitngTimeRemaning = 0;
 
@@ -155,7 +158,7 @@ public class CarController : MonoBehaviour
         float newRotation = carData.turnSpeed * moveInput.x * Time.deltaTime;
         if (isCarGrounded.CurrentValue)
         {
-            transform.Rotate(0, newRotation, 0, Space.Self);
+            transform.RotateAround(driftPoint.position, transform.up, newRotation);
         }
     }
 
