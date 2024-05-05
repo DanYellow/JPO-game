@@ -9,9 +9,12 @@ public class CinemachineShake : MonoBehaviour
     private CinemachineShakeEventChannel onCinemachineShake;
 
     private CinemachineVirtualCamera cinemachineVirtualCamera;
+
+    private CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin;
     private void Awake()
     {
         cinemachineVirtualCamera = GetComponent<CinemachineVirtualCamera>();
+        cinemachineBasicMultiChannelPerlin = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
     }
 
     private void OnEnable()
@@ -26,11 +29,9 @@ public class CinemachineShake : MonoBehaviour
 
     private IEnumerator ShakeCamera(float intensity = 3f, float time = 2f)
     {
-        CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin =
-            cinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = intensity;
         cinemachineBasicMultiChannelPerlin.m_FrequencyGain = time;
-        yield return new WaitForSecondsRealtime(time);
+        yield return Helpers.GetWait(time);
         cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 0;
     }
 
