@@ -32,10 +32,10 @@ public class InputManager : MonoBehaviour
         onGameOver.OnEventRaised += OnGameOver;
         onGoBackToMainMenu.OnEventRaised += OnGameOver;
 
-        SwitchActionMap(ActionMapName.Pause);
+        SwitchActionMap(ActionMapName.MainMenuAndGameOver);
     }
 
-    public void ToggleActionMap(bool isPaused)
+    private void ToggleActionMap(bool isPaused)
     {
         if (isPaused)
         {
@@ -45,6 +45,7 @@ public class InputManager : MonoBehaviour
         {
             SwitchActionMap(ActionMapName.Drive);
         }
+
         Cursor.visible = isPaused;
     }
 
