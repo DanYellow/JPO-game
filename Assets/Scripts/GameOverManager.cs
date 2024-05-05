@@ -15,6 +15,12 @@ public class GameOverManager : MonoBehaviour
     [SerializeField]
     private VoidEventChannel onGameOver;
 
+    [SerializeField]
+    private FloatValue distanceTravelled;
+
+    [SerializeField]
+    private FloatValue totalDistanceTravelled;
+
     private void OnEnable()
     {
         onGameOver.OnEventRaised += DisplayScreen;
@@ -22,8 +28,9 @@ public class GameOverManager : MonoBehaviour
 
     private void DisplayScreen()
     {
-        ExtensionsEventSystem.UpdateSelectedGameObject(gameOverUI.GetComponentInChildren<Button>().gameObject);
+        totalDistanceTravelled.CurrentValue += Mathf.Round(distanceTravelled.CurrentValue);
         gameOverUI.SetActive(true);
+        ExtensionsEventSystem.UpdateSelectedGameObject(gameOverUI.GetComponentInChildren<Button>().gameObject);
     }
 
     private void Awake()

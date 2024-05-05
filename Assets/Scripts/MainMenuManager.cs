@@ -21,7 +21,7 @@ public class MainMenuManager : MonoBehaviour
     void Awake()
     {
         Application.targetFrameRate = 30;
-        Cursor.visible = false;
+        // Cursor.visible = false;
     }
 
     private void Start()
@@ -31,7 +31,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void StartGame()
     {
-        Cursor.visible = true;
+        // Cursor.visible = true;
         mainMenuUI.SetActive(false);
         mainMenuLight.SetActive(false);
         onStartGame.Raise();
