@@ -2867,8 +2867,11 @@ MonoBehaviour:
   mainMenuUI: {fileID: 726012217}
   resultTextContainer: {fileID: 970563656}
   onGameOver: {fileID: 11400000, guid: 287ac5d675fb3404fa950b20289e88a5, type: 2}
+  onCinemachineShake: {fileID: 11400000, guid: 909d2bbf83be90b498b0a245ddba0147, type: 2}
   distanceTravelled: {fileID: 11400000, guid: 34a454f90f47f2041ae312d9692b9efd, type: 2}
   totalDistanceTravelled: {fileID: 11400000, guid: 0a21112645a9a96459bb637b989c3ac8,
+    type: 2}
+  gameOverCameraShake: {fileID: 11400000, guid: 25ddfd996b91e9943902b6a64c30f14b,
     type: 2}
 --- !u!1 &504781306
 GameObject:
@@ -4376,6 +4379,7 @@ GameObject:
   - component: {fileID: 733904709}
   - component: {fileID: 733904710}
   - component: {fileID: 733904711}
+  - component: {fileID: 733904712}
   m_Layer: 0
   m_Name: GameCamera
   m_TagString: Untagged
@@ -4542,6 +4546,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &733904712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 733904705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d294493fc98f6e40b39474c8cccc4ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCinemachineShake: {fileID: 11400000, guid: 909d2bbf83be90b498b0a245ddba0147, type: 2}
 --- !u!1 &736481270
 GameObject:
   m_ObjectHideFlags: 0
@@ -8011,6 +8028,7 @@ GameObject:
   - component: {fileID: 1616579854}
   - component: {fileID: 1616579856}
   - component: {fileID: 1616579857}
+  - component: {fileID: 1616579858}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -8088,6 +8106,23 @@ MonoBehaviour:
   m_MaximumFOV: 60
   m_MinimumOrthoSize: 1
   m_MaximumOrthoSize: 5000
+--- !u!114 &1616579858
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1616579853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 0
+  mNoiseOffsets: {x: -205.86768, y: -939.4098, z: 248.44089}
 --- !u!1 &1677384702
 GameObject:
   m_ObjectHideFlags: 0

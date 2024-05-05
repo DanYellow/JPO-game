@@ -24,10 +24,16 @@ public class GameOverManager : MonoBehaviour
     private VoidEventChannel onGameOver;
 
     [SerializeField]
+    private CinemachineShakeEventChannel onCinemachineShake;
+
+    [SerializeField]
     private FloatValue distanceTravelled;
 
     [SerializeField]
     private FloatValue totalDistanceTravelled;
+
+    [SerializeField]
+    private CameraShakeType gameOverCameraShake;
 
     private void Awake()
     {
@@ -42,9 +48,10 @@ public class GameOverManager : MonoBehaviour
 
     private void DisplayScreen()
     {
+        onCinemachineShake.Raise(gameOverCameraShake);
         totalDistanceTravelled.CurrentValue += Mathf.Round(distanceTravelled.CurrentValue);
         UpdateResult();
- 
+
         gameOverUI.SetActive(true);
         ExtensionsEventSystem.UpdateSelectedGameObject(gameOverUI.GetComponentInChildren<Button>().gameObject);
     }
@@ -61,7 +68,7 @@ public class GameOverManager : MonoBehaviour
         string totalDistance = Regex.Match(userDistanceResultUpdated, "<color=#BBAAFF>(.*?)</color>").Groups[1].ToString();
         string totalDistanceTagColor = Regex.Match(totalDistance, "<color=#([A-z0-9]*)>").Groups[0].ToString();
         string totalDistanceComputed = $"{totalDistanceTagColor}{Mathf.Round(totalDistanceTravelled.CurrentValue)} m";
-    
+
         string totalDistanceResultUpdated = userDistanceResultUpdated.Replace(totalDistance, totalDistanceComputed);
 
         resultText.SetText(totalDistanceResultUpdated);
