@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Shader Graphs_Decal
-  m_Shader: {fileID: -6465566751694194690, guid: 8cb73a331c48fe04ba98ef6ef4477686,
+  m_Shader: {fileID: -6465566751694194690, guid: a3edcc3c549b8a44882f16ce59b2f3bb,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -37,6 +37,14 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Base_Map:
+        m_Texture: {fileID: 2800000, guid: 502b661bce88b8d44b63d699ddf7758b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Normal_Map:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTexture:
         m_Texture: {fileID: 2800000, guid: 502b661bce88b8d44b63d699ddf7758b, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -55,7 +63,17 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - Normal_Blend: 0.5
+    - _DecalMeshBiasType: 0
+    - _DecalMeshDepthBias: 0
+    - _DecalMeshViewBias: 0
+    - _DrawOrder: 0
+    - _Emission_Strength: 3.6
     - _QueueControl: 0
     - _QueueOffset: 0
-    m_Colors: []
+    - _Scale: 1.4
+    m_Colors:
+    - _Color: {r: 2.6670973, g: 2.9960785, b: 0, a: 0}
+    - _Emission_Color: {r: 0.7420903, g: 1, b: 0, a: 0}
+    - _Tint: {r: 0, g: 31.999996, b: 28.908306, a: 0}
   m_BuildTextureStacks: []
