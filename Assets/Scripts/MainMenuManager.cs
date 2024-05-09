@@ -51,4 +51,12 @@ public class MainMenuManager : MonoBehaviour
             mainMenuUI.GetComponentInChildren<Button>().Select();
         }
     }
+
+    public void Quit()
+    {
+#if UNITY_EDITOR
+        Debug.Log("Quit game");
+#endif
+        Application.Quit();
+    }
 }

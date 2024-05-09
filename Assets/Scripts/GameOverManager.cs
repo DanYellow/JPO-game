@@ -74,9 +74,9 @@ public class GameOverManager : MonoBehaviour
 
         string totalDistanceResultUpdated = userDistanceResultUpdated.Replace(totalDistance, totalDistanceComputed);
 
-        string finalString = totalDistanceResultUpdated.Replace("ce matin", startTimeGame.CurrentValue);
+        // string finalString = totalDistanceResultUpdated.Replace("ce matin", startTimeGame.CurrentValue);
 
-        resultText.SetText(finalString);
+        resultText.SetText(totalDistanceResultUpdated);
     }
 
     // public void GoBackToIndex()
