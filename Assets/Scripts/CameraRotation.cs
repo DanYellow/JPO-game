@@ -21,12 +21,15 @@ public class CameraRotation : MonoBehaviour
     {
         transform.rotation = Quaternion.RotateTowards(transform.rotation, target.rotation, delay * Time.deltaTime);
 
-        target.localRotation = Quaternion.Euler(new Vector3(
-            target.localRotation.eulerAngles.x,
-            Mathf.Lerp(carData.steerAngle * steerFactor, -carData.steerAngle * steerFactor, moveInput.x * 0.5f + 0.5f),
-            target.localRotation.eulerAngles.z
-        ));
-    }// Mathf.Sin((moveInput.x * 0.5f + 0.5f) * Mathf.PI)
+        target.localRotation = Quaternion.Euler(
+            new Vector3(
+                target.localRotation.eulerAngles.x,
+                Mathf.Lerp(carData.steerAngle * steerFactor, -carData.steerAngle * steerFactor, moveInput.x * 0.5f + 0.5f),
+                target.localRotation.eulerAngles.z
+            )
+        );
+    }
+    // Mathf.Sin((moveInput.x * 0.5f + 0.5f) * Mathf.PI)
 
     public void OnTurn(InputAction.CallbackContext ctx)
     {

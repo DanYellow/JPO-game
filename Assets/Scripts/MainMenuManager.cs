@@ -26,6 +26,7 @@ public class MainMenuManager : MonoBehaviour
 
     private void Start()
     {
+        mainMenuUI.SetActive(true);
         ExtensionsEventSystem.UpdateSelectedGameObject(mainMenuUI.GetComponentInChildren<Button>().gameObject);
     }
 

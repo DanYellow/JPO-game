@@ -3,9 +3,6 @@ using UnityEngine;
 public class ComputeDistanceTravelled : MonoBehaviour
 {
     private Vector3 lastPosition;
-    private FloatValue totalDistance;
-    [SerializeField]
-    private FloatValue distanceTravelled;
 
     [SerializeField]
     private int scoreStepThreshold = 850;
@@ -15,9 +12,13 @@ public class ComputeDistanceTravelled : MonoBehaviour
 
     private float lastThousandth = 0;
 
+    private bool isGameFinished = false;
+
     [Header("Scriptable Objects")]
     [SerializeField]
     private VoidEventChannel onScoreThresholdReached;
+    [SerializeField]
+    private VoidEventChannel onGameOver;
 
     [SerializeField]
     private BoolValue hasReachMinimumTravelDistance;
@@ -25,10 +26,19 @@ public class ComputeDistanceTravelled : MonoBehaviour
     [SerializeField]
     private BoolValue isCarGrounded;
 
+    [SerializeField]
+    private FloatValue distanceTravelled;
+
     private void Start()
     {
         lastPosition = transform.position;
+        isGameFinished = false;
         ResetScore();
+    }
+
+    private void OnEnable()
+    {
+        onGameOver.OnEventRaised += GameOver;
     }
 
     public void ResetScore()
@@ -38,7 +48,7 @@ public class ComputeDistanceTravelled : MonoBehaviour
 
     private void Update()
     {
-        if (isCarGrounded.CurrentValue)
+        if (isCarGrounded.CurrentValue && !isGameFinished)
         {
             distanceTravelled.CurrentValue += SphericalDistance(lastPosition, transform.position);
         }
@@ -57,5 +67,15 @@ public class ComputeDistanceTravelled : MonoBehaviour
     float SphericalDistance(Vector3 position1, Vector3 position2)
     {
         return Vector3.Distance(position1, position2);
+    }
+
+    private void GameOver()
+    {
+        isGameFinished = true;
+    }
+
+    private void OnDisable()
+    {
+        onGameOver.OnEventRaised -= GameOver;
     }
 }
