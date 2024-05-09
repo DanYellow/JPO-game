@@ -35,6 +35,9 @@ public class GameOverManager : MonoBehaviour
     [SerializeField]
     private CameraShakeType gameOverCameraShake;
 
+    [SerializeField]
+    private StringValue startTimeGame;
+
     private void Awake()
     {
         gameOverUI.SetActive(false);
@@ -71,7 +74,9 @@ public class GameOverManager : MonoBehaviour
 
         string totalDistanceResultUpdated = userDistanceResultUpdated.Replace(totalDistance, totalDistanceComputed);
 
-        resultText.SetText(totalDistanceResultUpdated);
+        string finalString = totalDistanceResultUpdated.Replace("ce matin", startTimeGame.CurrentValue);
+
+        resultText.SetText(finalString);
     }
 
     // public void GoBackToIndex()
