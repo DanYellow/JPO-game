@@ -9,13 +9,28 @@ public class CarEffects : MonoBehaviour
 
     private Vector3 moveInput = Vector3.zero;
 
+    [SerializeField]
+    private GameObject crater;
+
+    [SerializeField]
+    private GameObject carMesh;
+
     [Header("Scriptable Objects")]
     [SerializeField]
     private VoidEventChannel onCarSlowdown;
 
+    [SerializeField]
+    private VoidEventChannel onGameOver;
+
+    private void Awake() {
+        crater.SetActive(false);
+        carMesh.SetActive(true);
+    }
+
     private void OnEnable()
     {
         onCarSlowdown.OnEventRaised += ShowSkidMarks;
+        onGameOver.OnEventRaised += DisplayCrater;
     }
 
     private void ShowSkidMarks()
@@ -43,8 +58,14 @@ public class CarEffects : MonoBehaviour
         moveInput = (Vector3)ctx.ReadValue<Vector2>();
     }
 
+    private void DisplayCrater() {
+        crater.SetActive(true);
+        carMesh.SetActive(false);
+    }
+
     private void OnDisable()
     {
         onCarSlowdown.OnEventRaised -= ShowSkidMarks;
+        onGameOver.OnEventRaised -= DisplayCrater;
     }
 }
