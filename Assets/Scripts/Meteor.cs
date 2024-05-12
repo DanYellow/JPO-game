@@ -18,6 +18,9 @@ public class Meteor : MonoBehaviour
     [SerializeField]
     private float speed = 150f;
 
+    [HideInInspector]
+    public float speedFactor = 1;
+
     private Vector3 hitTargetDirection = Vector3.zero;
 
     [Header("Scriptable Objects")]
@@ -70,22 +73,12 @@ public class Meteor : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector3 dir = (transform.position - hitTarget.position).normalized;
-
         if (hitTargetDirection == Vector3.zero)
         {
             hitTargetDirection = (hitTarget.position - transform.position).normalized;
-            // rb.AddForce(hitTargetDirection * Physics.gravity.y * speed);
         }
-        // print(dir);
-        // print(hitTargetDirection);
-        // print((transform.position - hitTarget.position).normalized);
-        rb.position += speed * Time.deltaTime * hitTargetDirection;
-        // rb.AddForce(hitTargetDirection * Physics.gravity.y * speed);
 
-        // transform.rotation = Quaternion.FromToRotation(transform.up, hitTargetDirection) * transform.rotation;
-        // var rotation = Quaternion.LookRotation(hitTargetDirection);
-        // transform.localRotation = Quaternion.Lerp(transform.rotation, rotation, 1);
+        rb.position += speed * speedFactor * Time.deltaTime * hitTargetDirection;
     }
 
     public void ResetThyself()

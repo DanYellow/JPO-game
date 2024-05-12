@@ -15,9 +15,6 @@ public class CarController : MonoBehaviour
     [SerializeField]
     private GameObject[] listWheels;
 
-    [SerializeField]
-    private CarData carData;
-
     private RaycastHit hit;
 
     [SerializeField]
@@ -49,6 +46,9 @@ public class CarController : MonoBehaviour
     private BoolValue isCarGrounded;
     [SerializeField]
     private BoolValue isCarDrifting;
+
+    [SerializeField]
+    private CarData carData;
 
     private void OnEnable()
     {
@@ -89,9 +89,12 @@ public class CarController : MonoBehaviour
             isCarDrifting.CurrentValue = false;
             drifitngTimeRemaning = drifitngTimer;
         }
+
+        carData.isMovingBackward = moveInput.y < 0;
     }
 
-    private void LateUpdate() {
+    private void LateUpdate()
+    {
         // collision.position = motor.position;
         transform.position = motor.transform.position;
     }

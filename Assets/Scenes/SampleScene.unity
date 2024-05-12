@@ -1240,7 +1240,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 188026842}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -5282,9 +5282,9 @@ ParticleSystem:
       properties: 0
       emitProbability: 1
   LightsModule:
-    enabled: 0
-    ratio: 0
-    light: {fileID: 0}
+    enabled: 1
+    ratio: 1
+    light: {fileID: 1040629820}
     randomDistribution: 1
     color: 1
     range: 1
@@ -16692,12 +16692,12 @@ GameObject:
   - component: {fileID: 1040629820}
   - component: {fileID: 1040629819}
   m_Layer: 0
-  m_Name: Point Light
+  m_Name: DriftSmokeParticlesLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1040629819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16733,7 +16733,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.95
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -16791,12 +16791,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1040629818}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.18, y: 46, z: -4.2}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.18, y: 0.41999817, z: -4.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1166183952}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1048196723
 GameObject:
@@ -17489,7 +17489,6 @@ MonoBehaviour:
   - {fileID: 7051345546889115154}
   - {fileID: 8916138930419033052}
   - {fileID: 7362186094689848249}
-  carData: {fileID: 11400000, guid: 7de1e523eab7c7e4c9c86afd2e90efa8, type: 2}
   groundLayers:
     serializedVersion: 2
     m_Bits: 8
@@ -17500,6 +17499,7 @@ MonoBehaviour:
   onCarSlowdown: {fileID: 11400000, guid: 341e3f4c62758c846913243499cadfef, type: 2}
   isCarGrounded: {fileID: 11400000, guid: b2db8bbf8d00f6249ae7decd76910005, type: 2}
   isCarDrifting: {fileID: 11400000, guid: e81310de0a38a2c43ac36d0704797144, type: 2}
+  carData: {fileID: 11400000, guid: 7de1e523eab7c7e4c9c86afd2e90efa8, type: 2}
 --- !u!4 &1166183952
 Transform:
   m_ObjectHideFlags: 0
@@ -17527,6 +17527,7 @@ Transform:
   - {fileID: 736481271}
   - {fileID: 1407144915364419324}
   - {fileID: 2610407087643954475}
+  - {fileID: 1040629821}
   - {fileID: 193319760}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -20707,7 +20708,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 889802521992455464}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 082a829fe43b05744afd074ac7e3747b, type: 3}
   m_Name: 
@@ -21510,5 +21511,4 @@ SceneRoots:
   - {fileID: 469254042}
   - {fileID: 1253899366}
   - {fileID: 1400259846}
-  - {fileID: 1040629821}
   - {fileID: 2138122964}

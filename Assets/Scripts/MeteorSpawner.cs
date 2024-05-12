@@ -91,6 +91,7 @@ public class MeteorSpawner : MonoBehaviour
 
             Meteor meteor = objectPooled.GetComponentInChildren<Meteor>();
             meteor.hitTarget = isCarDrifting.CurrentValue ? target : transform;
+            meteor.speedFactor = carData.isMovingBackward ? 5.5f : 1;
             meteor.transform.LookAt(transform);
 
             objectPooled.gameObject.SetActive(true);
