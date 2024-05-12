@@ -15,6 +15,9 @@ public class CarEffects : MonoBehaviour
     [SerializeField]
     private GameObject carMesh;
 
+    [SerializeField]
+    private ParticleSystem driftSmokeParticles;
+
     [Header("Scriptable Objects")]
     [SerializeField]
     private VoidEventChannel onCarSlowdown;
@@ -22,15 +25,28 @@ public class CarEffects : MonoBehaviour
     [SerializeField]
     private VoidEventChannel onGameOver;
 
+    [SerializeField]
+    private BoolValue isCarDrifting;
+
     private void Awake() {
         crater.SetActive(false);
         carMesh.SetActive(true);
+
+        driftSmokeParticles.Stop();
     }
 
     private void OnEnable()
     {
         onCarSlowdown.OnEventRaised += ShowSkidMarks;
         onGameOver.OnEventRaised += DisplayCrater;
+    }
+
+    private void Update() {
+        if(isCarDrifting.CurrentValue) {
+            driftSmokeParticles.Play();
+        } else {
+            driftSmokeParticles.Stop();
+        }
     }
 
     private void ShowSkidMarks()
