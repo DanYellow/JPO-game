@@ -24,6 +24,7 @@ public class MainMenuManager : MonoBehaviour
     void Awake()
     {
         Application.targetFrameRate = 30;
+
         // Cursor.visible = false;
         if (!PlayerPrefs.HasKey("start_time"))
         {

@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using TMPro;
 using System.Text.RegularExpressions;
-
+using System.Globalization;
 
 public class GameOverManager : MonoBehaviour
 {
@@ -58,16 +58,25 @@ public class GameOverManager : MonoBehaviour
 
     private void UpdateResult()
     {
+        var nfi = (NumberFormatInfo)CultureInfo.InvariantCulture.NumberFormat.Clone();
+        nfi.NumberGroupSeparator = " ";
+
         // User score
         string userDistance = Regex.Match(resultText.text, "<color=#AAAAFF>(.*?)</color>").Groups[1].ToString();
         string userDistanceTagColor = Regex.Match(userDistance, "<color=#([A-z0-9]*)>").Groups[0].ToString();
-        string userDistanceComputed = $"{userDistanceTagColor}{Mathf.Round(distanceTravelled.CurrentValue)} m";
+        string distanceTravelledFormatted = Mathf.Round(distanceTravelled.CurrentValue).ToString("#,0", nfi);
+
+        string userDistanceComputed = $"{userDistanceTagColor}{distanceTravelledFormatted} m";
 
         string userDistanceResultUpdated = resultText.text.Replace(userDistance, userDistanceComputed);
         // Total score
         string totalDistance = Regex.Match(userDistanceResultUpdated, "<color=#BBAAFF>(.*?)</color>").Groups[1].ToString();
         string totalDistanceTagColor = Regex.Match(totalDistance, "<color=#([A-z0-9]*)>").Groups[0].ToString();
-        string totalDistanceComputed = $"{totalDistanceTagColor}{Mathf.Round(totalDistanceTravelled.CurrentValue)} m";
+
+
+        string totalDistanceTravelledFormatted = Mathf.Round(totalDistanceTravelled.CurrentValue).ToString("#,0", nfi);
+
+        string totalDistanceComputed = $"{totalDistanceTagColor}{totalDistanceTravelledFormatted} m";
 
         string totalDistanceResultUpdated = userDistanceResultUpdated.Replace(totalDistance, totalDistanceComputed);
 
