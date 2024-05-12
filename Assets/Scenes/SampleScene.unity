@@ -7840,7 +7840,8 @@ MonoBehaviour:
   mainMenuLight: {fileID: 111097738}
   onStartGame: {fileID: 11400000, guid: 5057008cf4cba9f44b0b90734a61fea7, type: 2}
   onCameraSwitch: {fileID: 11400000, guid: b768779916d8c9f4380cedaaf9466062, type: 2}
-  startTimeGame: {fileID: 11400000, guid: a85bfaa68bf50be4d8a7f1182e3fd7b5, type: 2}
+  totalDistanceTravelled: {fileID: 11400000, guid: 0a21112645a9a96459bb637b989c3ac8,
+    type: 2}
 --- !u!114 &469254048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7878,7 +7879,6 @@ MonoBehaviour:
     type: 2}
   gameOverCameraShake: {fileID: 11400000, guid: 25ddfd996b91e9943902b6a64c30f14b,
     type: 2}
-  startTimeGame: {fileID: 11400000, guid: a85bfaa68bf50be4d8a7f1182e3fd7b5, type: 2}
 --- !u!1 &504781306
 GameObject:
   m_ObjectHideFlags: 0
@@ -7972,7 +7972,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &544568082
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9316,7 +9316,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &726012218
 Transform:
   m_ObjectHideFlags: 0
@@ -10124,13 +10124,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 469254041}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 469254047}
+        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
+        m_MethodName: Quit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

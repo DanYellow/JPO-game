@@ -18,13 +18,16 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField]
     private VoidEventChannel onCameraSwitch;
 
+    [SerializeField]
+    private FloatValue totalDistanceTravelled;
+
     void Awake()
     {
         Application.targetFrameRate = 30;
         // Cursor.visible = false;
         if (!PlayerPrefs.HasKey("start_time"))
         {
-        print("fefe " + PlayerPrefs.GetString("start_time"));
+            totalDistanceTravelled.CurrentValue = 0;
             PlayerPrefs.SetString("start_time", System.DateTime.Now.ToString("HH:mm"));
         }
     }
@@ -56,10 +59,16 @@ public class MainMenuManager : MonoBehaviour
 
     public void Quit()
     {
-        PlayerPrefs.DeleteKey("start_time");
+        
 #if UNITY_EDITOR
         Debug.Log("Quit game");
 #endif
         Application.Quit();
+    }
+
+    void OnApplicationQuit()
+    {
+        PlayerPrefs.DeleteKey("start_time");
+        totalDistanceTravelled.CurrentValue = 0;
     }
 }
