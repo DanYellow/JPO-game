@@ -11,7 +11,7 @@ public class BuildPlayerWithVersion : MonoBehaviour
     public static void MyBuild()
     {
         BuildPlayerOptions buildPlayerOptions = BuildPlayerWindow.DefaultBuildMethods.GetBuildPlayerOptions(new BuildPlayerOptions());
-        string version = System.DateTime.Now.ToString("y-MM-dd-'h'-HH-mm-ss");
+        string version = System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
 
         string productNameWithExt = Regex.Match(buildPlayerOptions.locationPathName, @"" + Application.productName + ".([A-z])\\w+").Groups[0].ToString();
         string path = buildPlayerOptions.locationPathName.Replace(productNameWithExt, "");
