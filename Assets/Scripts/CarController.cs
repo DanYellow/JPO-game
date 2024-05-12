@@ -60,7 +60,7 @@ public class CarController : MonoBehaviour
     void Awake()
     {
         meshRenderer = GetComponentInChildren<MeshRenderer>();
-        
+
         groundDrag = carData.groundDrag;
         collision.useGravity = false;
         drifitngTimeRemaning = drifitngTimer;
@@ -71,7 +71,8 @@ public class CarController : MonoBehaviour
         boxCollider = collision.GetComponent<BoxCollider>();
     }
 
-    private void Start() {
+    private void Start()
+    {
         meshRenderer.sortingOrder = 10;
     }
 
@@ -87,12 +88,17 @@ public class CarController : MonoBehaviour
         Quaternion targetRotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 20 * Time.deltaTime);
 
-        if(HasStartDrifting()) {
+        if (HasStartDrifting())
+        {
             drifitngTimeRemaning -= Time.deltaTime;
-            if(drifitngTimeRemaning <= 0) {
+            if (drifitngTimeRemaning <= 0)
+            {
+                print("drifitngTimeRemaning");
                 isCarDrifting.CurrentValue = true;
             }
-        } else {
+        }
+        else
+        {
             isCarDrifting.CurrentValue = false;
             drifitngTimeRemaning = drifitngTimer;
         }

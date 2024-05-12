@@ -116,6 +116,6 @@ public class CarEffects : MonoBehaviour
         onCarSlowdown.OnEventRaised -= ShowSkidMarks;
         onGameOver.OnEventRaised -= DisplayCrater;
         onGameStart.OnEventRaised -= StartDriftSmokes;
-        onGameStart.OnEventRaised -= StopDriftSmokes;
+        onGameCameraBlendFinished.OnEventRaised -= StopDriftSmokes;
     }
 }
