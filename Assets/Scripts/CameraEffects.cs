@@ -18,6 +18,8 @@ public class CameraEffects : MonoBehaviour
     [SerializeField, ColorUsage(true, true)]
     private Color damageColor;
 
+    private Bloom bloomClone;
+
     private float initialVignettePower;
 
     [Header("Scriptable Objects")]
@@ -44,12 +46,19 @@ public class CameraEffects : MonoBehaviour
     {
         backgroundRender.SetColor("_VignetteColor", startColor);
         initialVignettePower = backgroundRender.GetFloat("_VignettePower");
+
         CinemachineVolumeSettings cinemachineVolumeSettings = GetComponent<CinemachineVolumeSettings>();
 
         if (cinemachineVolumeSettings.m_Profile.TryGet(out ChromaticAberration chromaticAberration))
         {
             chromaticAberrationClone = chromaticAberration;
         }
+
+        if (cinemachineVolumeSettings.m_Profile.TryGet(out Bloom bloom))
+        {
+            bloomClone = bloom;
+        }
+
         chromaticAberrationClone.intensity.value = 0;
         chromaticAberrationClone.intensity.overrideState = true;
     }
@@ -82,16 +91,19 @@ public class CameraEffects : MonoBehaviour
     private IEnumerator NextThresholdReached(float startValue)
     {
         float current = 0;
-        float duration = 0.45f;
+        float duration = 0.3f;
 
-        float factor = 0.8f;
+        float factor = 0.95f;
+        float startBloomIntensity = bloomClone.intensity.value;
+        float endBloomIntensity = 1.5f;
 
         yield return null;
         backgroundRender.SetInt("_HideGradient", 1);
         while (current <= 1)
         {
-            chromaticAberrationClone.intensity.value = Mathf.Lerp(startValue, 1, Spike(current));
-            backgroundRender.SetFloat("_VignettePower", Mathf.Lerp(initialVignettePower, initialVignettePower * factor, Spike(current)));
+            chromaticAberrationClone.intensity.value = Mathf.Lerp(startValue, 1, current);
+            bloomClone.intensity.value = Mathf.Lerp(startBloomIntensity, endBloomIntensity, current);
+            backgroundRender.SetFloat("_VignettePower", Mathf.Lerp(initialVignettePower, initialVignettePower * factor, current));
             current += Time.deltaTime / duration;
 
             yield return null;
@@ -100,13 +112,15 @@ public class CameraEffects : MonoBehaviour
         current = 0;
         while (current <= 1)
         {
-            chromaticAberrationClone.intensity.value = Mathf.Lerp(1, startValue, Spike(current));
-            backgroundRender.SetFloat("_VignettePower", Mathf.Lerp(initialVignettePower * factor, initialVignettePower, Spike(current)));
+            chromaticAberrationClone.intensity.value = Mathf.Lerp(1, startValue, current);
+            bloomClone.intensity.value = Mathf.Lerp(endBloomIntensity, startBloomIntensity, current);
+            backgroundRender.SetFloat("_VignettePower", Mathf.Lerp(initialVignettePower * factor, initialVignettePower, current));
             current += Time.deltaTime / duration;
 
             yield return null;
         }
         backgroundRender.SetInt("_HideGradient", 0);
+        bloomClone.intensity.value = startBloomIntensity;
         chromaticAberrationClone.intensity.value = startValue;
         backgroundRender.SetFloat("_VignettePower", initialVignettePower);
     }

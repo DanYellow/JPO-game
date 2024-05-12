@@ -12770,6 +12770,7 @@ MonoBehaviour:
   isCarTakingDamage: {fileID: 11400000, guid: 4d2d9a03caaeb5441aa45cfc4778668f, type: 2}
   hasReachMinimumTravelDistance: {fileID: 11400000, guid: 759c01bd28c09fb4fac6704d5becf962,
     type: 2}
+  isRestartingGame: {fileID: 11400000, guid: 338e57a920ea1ca45be0e40a79cd435a, type: 2}
 --- !u!114 &469254044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12818,6 +12819,7 @@ MonoBehaviour:
   onCameraSwitch: {fileID: 11400000, guid: b768779916d8c9f4380cedaaf9466062, type: 2}
   totalDistanceTravelled: {fileID: 11400000, guid: 0a21112645a9a96459bb637b989c3ac8,
     type: 2}
+  isRestartingGame: {fileID: 11400000, guid: 338e57a920ea1ca45be0e40a79cd435a, type: 2}
 --- !u!114 &469254048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16483,7 +16485,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 469254043}
         m_TargetAssemblyTypeName: CurrentSceneManager, Assembly-CSharp
-        m_MethodName: RestartGame
+        m_MethodName: ReloadGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

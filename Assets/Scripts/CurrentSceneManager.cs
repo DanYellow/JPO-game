@@ -10,6 +10,9 @@ public class CurrentSceneManager : MonoBehaviour
     [SerializeField]
     private BoolValue hasReachMinimumTravelDistance;
 
+    [SerializeField]
+    private BoolValue isRestartingGame;
+
     void Start()
     {
         isCarTakingDamage.CurrentValue = false;
@@ -20,6 +23,11 @@ public class CurrentSceneManager : MonoBehaviour
     {
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.name);
+    }
+
+    public void ReloadGame() {
+        isRestartingGame.CurrentValue = true;
+        RestartGame();
     }
 
     public void QuitGame()

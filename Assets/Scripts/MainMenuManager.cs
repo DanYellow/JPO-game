@@ -21,9 +21,13 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField]
     private FloatValue totalDistanceTravelled;
 
+    [SerializeField]
+    private BoolValue isRestartingGame;
+
     void Awake()
     {
         Application.targetFrameRate = 30;
+        Time.timeScale = 1;
 
         // Cursor.visible = false;
         if (!PlayerPrefs.HasKey("start_time"))
@@ -37,6 +41,12 @@ public class MainMenuManager : MonoBehaviour
     {
         mainMenuUI.SetActive(true);
         ExtensionsEventSystem.UpdateSelectedGameObject(mainMenuUI.GetComponentInChildren<Button>().gameObject);
+
+        if (isRestartingGame.CurrentValue)
+        {
+            isRestartingGame.CurrentValue = false;
+            StartGame();
+        }
     }
 
     public void StartGame()
@@ -60,7 +70,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void Quit()
     {
-        
+
 #if UNITY_EDITOR
         Debug.Log("Quit game");
 #endif
@@ -71,5 +81,6 @@ public class MainMenuManager : MonoBehaviour
     {
         PlayerPrefs.DeleteKey("start_time");
         totalDistanceTravelled.CurrentValue = 0;
+        isRestartingGame.CurrentValue = false;
     }
 }
