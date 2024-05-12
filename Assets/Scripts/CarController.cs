@@ -93,7 +93,6 @@ public class CarController : MonoBehaviour
             drifitngTimeRemaning -= Time.deltaTime;
             if (drifitngTimeRemaning <= 0)
             {
-                print("drifitngTimeRemaning");
                 isCarDrifting.CurrentValue = true;
             }
         }
