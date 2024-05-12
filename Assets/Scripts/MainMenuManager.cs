@@ -17,14 +17,16 @@ public class MainMenuManager : MonoBehaviour
 
     [SerializeField]
     private VoidEventChannel onCameraSwitch;
-    [SerializeField]
-    private StringValue startTimeGame;
 
     void Awake()
     {
         Application.targetFrameRate = 30;
         // Cursor.visible = false;
-        startTimeGame.CurrentValue = System.DateTime.Now.ToString("HH:mm");
+        if (!PlayerPrefs.HasKey("start_time"))
+        {
+        print("fefe " + PlayerPrefs.GetString("start_time"));
+            PlayerPrefs.SetString("start_time", System.DateTime.Now.ToString("HH:mm"));
+        }
     }
 
     private void Start()
@@ -54,6 +56,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void Quit()
     {
+        PlayerPrefs.DeleteKey("start_time");
 #if UNITY_EDITOR
         Debug.Log("Quit game");
 #endif
