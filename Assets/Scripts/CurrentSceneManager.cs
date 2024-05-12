@@ -16,12 +16,14 @@ public class CurrentSceneManager : MonoBehaviour
         hasReachMinimumTravelDistance.CurrentValue = false;
     }
 
-    public void RestartGame() {
+    public void RestartGame()
+    {
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.name);
     }
 
-    public void QuitGame() {
+    public void QuitGame()
+    {
         Application.Quit();
     }
 }
