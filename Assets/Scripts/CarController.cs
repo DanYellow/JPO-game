@@ -50,9 +50,13 @@ public class CarController : MonoBehaviour
     [SerializeField]
     private CarData carData;
 
+    [SerializeField]
+    private VoidEventChannel onGameOver;
+
     private void OnEnable()
     {
         onCarSlowdown.OnEventRaised += IncreaseDrag;
+        onGameOver.OnEventRaised += OnGameOver;
     }
 
     void Awake()
@@ -90,7 +94,8 @@ public class CarController : MonoBehaviour
             drifitngTimeRemaning = drifitngTimer;
         }
 
-        carData.isMovingBackward = moveInput.y < 0;
+        carData.isMovingBackward = moveInput.normalized.y < 0;
+        collision.mass = Mathf.Abs(moveInput.normalized.y) > 0 ? 1 : 0;
     }
 
     private void LateUpdate()
@@ -131,7 +136,7 @@ public class CarController : MonoBehaviour
 
         if (isCarGrounded.CurrentValue)
         {
-            float finalSpeed = carData.forwardSpeed;
+            float finalSpeed = carData.forwardSpeed * 1.45f;
             // finalSpeed *= Mathf.Abs(inputX) > 0 ? 0.95f : 1; moveInput.y
             motor.AddForce(finalSpeed * transform.forward * moveInput.y, ForceMode.Acceleration);
         }
@@ -147,7 +152,7 @@ public class CarController : MonoBehaviour
 
     private bool HasStartDrifting()
     {
-        return Mathf.Abs(moveInput.normalized.x) > 0 && moveInput.normalized.y > 0;
+        return Mathf.Abs(moveInput.normalized.x) > 0 && Mathf.Abs(moveInput.normalized.y) > 0;
     }
 
     private void Rotate()
@@ -236,8 +241,14 @@ public class CarController : MonoBehaviour
         moveInput.y = 0;
     }
 
+    private void OnGameOver()
+    {
+        motor.constraints = RigidbodyConstraints.FreezeAll;
+    }
+
     private void OnDisable()
     {
         onCarSlowdown.OnEventRaised -= IncreaseDrag;
+        onGameOver.OnEventRaised -= OnGameOver;
     }
 }

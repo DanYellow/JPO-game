@@ -17500,6 +17500,7 @@ MonoBehaviour:
   isCarGrounded: {fileID: 11400000, guid: b2db8bbf8d00f6249ae7decd76910005, type: 2}
   isCarDrifting: {fileID: 11400000, guid: e81310de0a38a2c43ac36d0704797144, type: 2}
   carData: {fileID: 11400000, guid: 7de1e523eab7c7e4c9c86afd2e90efa8, type: 2}
+  onGameOver: {fileID: 11400000, guid: 287ac5d675fb3404fa950b20289e88a5, type: 2}
 --- !u!4 &1166183952
 Transform:
   m_ObjectHideFlags: 0
@@ -19228,6 +19229,7 @@ GameObject:
   - component: {fileID: 1917917931}
   - component: {fileID: 1917917934}
   - component: {fileID: 1917917935}
+  - component: {fileID: 1917917936}
   m_Layer: 6
   m_Name: Collision
   m_TagString: Player
@@ -19360,9 +19362,22 @@ FixedJoint:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0
-  m_EnablePreprocessing: 1
+  m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &1917917936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1917917929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58f3f903249474047bd9771b6f71dbd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planet: {fileID: 3038029926327017413}
 --- !u!1 &2004549348
 GameObject:
   m_ObjectHideFlags: 0
@@ -19921,7 +19936,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -20708,7 +20723,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 889802521992455464}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 082a829fe43b05744afd074ac7e3747b, type: 3}
   m_Name: 
