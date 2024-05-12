@@ -28,7 +28,8 @@ public class CarEffects : MonoBehaviour
     [SerializeField]
     private BoolValue isCarDrifting;
 
-    private void Awake() {
+    private void Awake()
+    {
         crater.SetActive(false);
         carMesh.SetActive(true);
 
@@ -41,10 +42,14 @@ public class CarEffects : MonoBehaviour
         onGameOver.OnEventRaised += DisplayCrater;
     }
 
-    private void Update() {
-        if(isCarDrifting.CurrentValue) {
+    private void Update()
+    {
+        if (isCarDrifting.CurrentValue)
+        {
             driftSmokeParticles.Play();
-        } else {
+        }
+        else
+        {
             driftSmokeParticles.Stop();
         }
     }
@@ -74,7 +79,8 @@ public class CarEffects : MonoBehaviour
         moveInput = (Vector3)ctx.ReadValue<Vector2>();
     }
 
-    private void DisplayCrater() {
+    private void DisplayCrater()
+    {
         crater.SetActive(true);
         carMesh.SetActive(false);
     }
