@@ -83,7 +83,7 @@ public class CarController : MonoBehaviour
         SwapDrag();
 
         collision.position = motor.position;
-        transform.position = motor.transform.position;
+        transform.position = motor.position;
 
         Quaternion targetRotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 20 * Time.deltaTime);
@@ -143,6 +143,7 @@ public class CarController : MonoBehaviour
         {
             motor.AddForce(-transform.up * Physics.gravity.y);
         }
+        
         motor.velocity = Vector3.ClampMagnitude(motor.velocity, 50);
 
         collision.MoveRotation(transform.rotation);
@@ -211,6 +212,11 @@ public class CarController : MonoBehaviour
         }
         else if (ctx.phase == InputActionPhase.Canceled)
         {
+            moveInput.x = 0;
+            if (lastDirection == 0)
+            {
+                return;
+            }
             StopAllCoroutines();
             StartCoroutine(Glide());
         }
