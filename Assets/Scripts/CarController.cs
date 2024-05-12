@@ -1,6 +1,6 @@
-using UnityEngine.InputSystem;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.InputSystem;
 
 public class CarController : MonoBehaviour
 {
@@ -27,8 +27,6 @@ public class CarController : MonoBehaviour
 
     private float lastDirection = 1;
     private float groundDrag;
-
-    private MeshRenderer meshRenderer;
 
     [SerializeField]
     private Transform cameraTracker;
@@ -59,8 +57,6 @@ public class CarController : MonoBehaviour
 
     void Awake()
     {
-        meshRenderer = GetComponentInChildren<MeshRenderer>();
-
         groundDrag = carData.groundDrag;
         collision.useGravity = false;
         drifitngTimeRemaning = drifitngTimer;
@@ -71,19 +67,11 @@ public class CarController : MonoBehaviour
         boxCollider = collision.GetComponent<BoxCollider>();
     }
 
-    private void Start()
-    {
-        meshRenderer.sortingOrder = 10;
-    }
-
     void Update()
     {
         ManageWheels();
         Rotate();
         SwapDrag();
-
-        collision.position = motor.position;
-        transform.position = motor.position;
 
         Quaternion targetRotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 20 * Time.deltaTime);
@@ -101,6 +89,11 @@ public class CarController : MonoBehaviour
             isCarDrifting.CurrentValue = false;
             drifitngTimeRemaning = drifitngTimer;
         }
+    }
+
+    private void LateUpdate() {
+        // collision.position = motor.position;
+        transform.position = motor.transform.position;
     }
 
     private void MoveSpawnMeteorPoint()
@@ -143,10 +136,10 @@ public class CarController : MonoBehaviour
         {
             motor.AddForce(-transform.up * Physics.gravity.y);
         }
-        
-        motor.velocity = Vector3.ClampMagnitude(motor.velocity, 50);
 
+        motor.velocity = Vector3.ClampMagnitude(motor.velocity, 50);
         collision.MoveRotation(transform.rotation);
+        collision.MovePosition(motor.position);
     }
 
     private bool HasStartDrifting()
