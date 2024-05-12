@@ -12651,7 +12651,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInput: {fileID: 966294436}
   onTogglePause: {fileID: 11400000, guid: 58fd0952a56cec640ac85974af119583, type: 2}
-  onStartGame: {fileID: 11400000, guid: 5057008cf4cba9f44b0b90734a61fea7, type: 2}
+  onGameStart: {fileID: 11400000, guid: 5057008cf4cba9f44b0b90734a61fea7, type: 2}
   onGameOver: {fileID: 11400000, guid: 287ac5d675fb3404fa950b20289e88a5, type: 2}
   onGoBackToMainMenu: {fileID: 11400000, guid: de6d173da402728458f7f816a7d4fe21, type: 2}
 --- !u!114 &469254047
@@ -12668,7 +12668,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenuUI: {fileID: 726012217}
   mainMenuLight: {fileID: 111097738}
-  onStartGame: {fileID: 11400000, guid: 5057008cf4cba9f44b0b90734a61fea7, type: 2}
+  onGameStart: {fileID: 0}
   onCameraSwitch: {fileID: 11400000, guid: b768779916d8c9f4380cedaaf9466062, type: 2}
   totalDistanceTravelled: {fileID: 11400000, guid: 0a21112645a9a96459bb637b989c3ac8,
     type: 2}
@@ -17346,6 +17346,7 @@ MonoBehaviour:
   cameraTracker: {fileID: 1709954605}
   spawnMeteorPivotPoint: {fileID: 2120282776}
   driftPoint: {fileID: 736481271}
+  drifitngTimer: 0.85
   onCarSlowdown: {fileID: 11400000, guid: 341e3f4c62758c846913243499cadfef, type: 2}
   isCarGrounded: {fileID: 11400000, guid: b2db8bbf8d00f6249ae7decd76910005, type: 2}
   isCarDrifting: {fileID: 11400000, guid: e81310de0a38a2c43ac36d0704797144, type: 2}
@@ -17391,7 +17392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1125b8077b0bbea499438b78770c455a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreStepThreshold: 850
+  scoreStepThreshold: 550
   startSpawnObstaclesThreshold: 100
   onScoreThresholdReached: {fileID: 11400000, guid: db78dfe58cb2d3a468c633c58e480bb8,
     type: 2}
@@ -17419,6 +17420,7 @@ MonoBehaviour:
   onCarSlowdown: {fileID: 11400000, guid: 341e3f4c62758c846913243499cadfef, type: 2}
   onGameOver: {fileID: 11400000, guid: 287ac5d675fb3404fa950b20289e88a5, type: 2}
   isCarDrifting: {fileID: 11400000, guid: e81310de0a38a2c43ac36d0704797144, type: 2}
+  onGameStart: {fileID: 11400000, guid: 5057008cf4cba9f44b0b90734a61fea7, type: 2}
 --- !u!1 &1173349381
 GameObject:
   m_ObjectHideFlags: 0

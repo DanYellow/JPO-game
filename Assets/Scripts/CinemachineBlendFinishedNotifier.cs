@@ -2,12 +2,17 @@ using UnityEngine;
 using Cinemachine;
 using UnityEngine.Events;
 using System;
+
 public class CinemachineBlendFinishedNotifier : MonoBehaviour
 {
     CinemachineVirtualCameraBase vcamBase;
 
     [Serializable] public class BlendFinishedEvent : UnityEvent<CinemachineVirtualCameraBase> { }
     public BlendFinishedEvent OnBlendFinished;
+
+    [Header("Scriptable Objects")]
+    [SerializeField]
+    private VoidEventChannel onGameCameraBlendFinished;
 
     void Start()
     {
@@ -46,8 +51,10 @@ public class CinemachineBlendFinishedNotifier : MonoBehaviour
             enabled = false;
         else if (!brain.IsBlending)
         {
-            if (brain.IsLive(vcamBase))
+            if (brain.IsLive(vcamBase)) {
                 OnBlendFinished.Invoke(vcamBase);
+                onGameCameraBlendFinished.Raise();
+            }
             enabled = false;
         }
     }

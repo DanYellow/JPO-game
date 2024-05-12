@@ -1,7 +1,6 @@
 using UnityEngine.InputSystem;
 using UnityEngine;
 using System.Collections;
-using System;
 
 public class CarController : MonoBehaviour
 {
@@ -40,7 +39,8 @@ public class CarController : MonoBehaviour
     [SerializeField]
     private Transform driftPoint;
 
-    private float drifitngTimer = 1.25f;
+    [SerializeField]
+    private float drifitngTimer = 0.85f;
     private float drifitngTimeRemaning = 0;
 
     [Header("Scriptable Objects")]

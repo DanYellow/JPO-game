@@ -18,6 +18,8 @@ public class CarEffects : MonoBehaviour
     [SerializeField]
     private ParticleSystem driftSmokeParticles;
 
+    private bool isGameStarted = false;
+
     [Header("Scriptable Objects")]
     [SerializeField]
     private VoidEventChannel onCarSlowdown;
@@ -27,6 +29,12 @@ public class CarEffects : MonoBehaviour
 
     [SerializeField]
     private BoolValue isCarDrifting;
+
+    [SerializeField]
+    private VoidEventChannel onGameStart;
+
+    [SerializeField]
+    private VoidEventChannel onGameCameraBlendFinished;
 
     private void Awake()
     {
@@ -40,10 +48,16 @@ public class CarEffects : MonoBehaviour
     {
         onCarSlowdown.OnEventRaised += ShowSkidMarks;
         onGameOver.OnEventRaised += DisplayCrater;
+        onGameStart.OnEventRaised += StartDriftSmokes;
+        onGameCameraBlendFinished.OnEventRaised += StopDriftSmokes;
     }
 
     private void Update()
     {
+        if(!isGameStarted) {
+            return;
+        }
+
         if (isCarDrifting.CurrentValue)
         {
             driftSmokeParticles.Play();
@@ -58,6 +72,18 @@ public class CarEffects : MonoBehaviour
     {
         StartCoroutine(ShowSkidMarksCoroutine());
     }
+
+    private void StartDriftSmokes()
+    {
+        driftSmokeParticles.Play();
+    }
+
+    private void StopDriftSmokes()
+    {
+        isGameStarted = true;
+        driftSmokeParticles.Stop();
+    }
+    
 
     private IEnumerator ShowSkidMarksCoroutine()
     {
@@ -89,5 +115,7 @@ public class CarEffects : MonoBehaviour
     {
         onCarSlowdown.OnEventRaised -= ShowSkidMarks;
         onGameOver.OnEventRaised -= DisplayCrater;
+        onGameStart.OnEventRaised -= StartDriftSmokes;
+        onGameStart.OnEventRaised -= StopDriftSmokes;
     }
 }

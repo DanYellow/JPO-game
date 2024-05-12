@@ -18,9 +18,6 @@ public class InputManager : MonoBehaviour
     private BoolEventChannel onTogglePause;
 
     [SerializeField]
-    private VoidEventChannel onStartGame;
-
-    [SerializeField]
     private VoidEventChannel onGameOver;
 
     [SerializeField]

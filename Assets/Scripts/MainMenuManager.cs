@@ -13,7 +13,7 @@ public class MainMenuManager : MonoBehaviour
 
     [Header("Scriptable Objects")]
     [SerializeField]
-    private VoidEventChannel onStartGame;
+    private VoidEventChannel onGameStart;
 
     [SerializeField]
     private VoidEventChannel onCameraSwitch;
@@ -44,7 +44,7 @@ public class MainMenuManager : MonoBehaviour
         // Cursor.visible = true;
         mainMenuUI.SetActive(false);
         mainMenuLight.SetActive(false);
-        onStartGame.Raise();
+        onGameStart.Raise();
         onCameraSwitch.Raise();
         Application.targetFrameRate = 60;
         EventSystem.current.SetSelectedGameObject(null);
