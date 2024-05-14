@@ -18,18 +18,9 @@ public class Stalagmite : MonoBehaviour
         SphereCollider sphereCollider = target.GetComponent<SphereCollider>();
         float sphereColliderScale = sphereCollider.transform.lossyScale.x;
         BoxCollider boxCollider = GetComponent<BoxCollider>();
-        transform.position = Random.onUnitSphere * sphereCollider.radius * sphereColliderScale;
-
-        Vector3 forward = transform.TransformDirection(Vector3.forward);
-        Vector3 toOther = Vector3.Normalize(target.position - transform.position);
-
-        // else
-        // {
-        //     // transform.position -= boxCollider.bounds.size;
-        // }
+        transform.position = Random.onUnitSphere * (sphereCollider.radius + (boxCollider.bounds.size.y * 2 / sphereColliderScale)) * sphereColliderScale;
         transform.up = target.up;
         transform.rotation = Quaternion.LookRotation(target.position - transform.position);
-        // transform.LookAt(target);
     }
 
     private void OnCollisionEnter(Collision collision)
