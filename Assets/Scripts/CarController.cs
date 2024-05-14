@@ -95,7 +95,8 @@ public class CarController : MonoBehaviour
         }
 
         carData.isMovingBackward = moveInput.normalized.y < 0;
-        collision.mass = Mathf.Abs(moveInput.normalized.y) > 0 ? 1 : 0;
+        collision.mass = 0;
+        // collision.mass = Mathf.Abs(moveInput.normalized.y) > 0 ? 1 : 0;
     }
 
     private void LateUpdate()
@@ -137,7 +138,6 @@ public class CarController : MonoBehaviour
         if (isCarGrounded.CurrentValue)
         {
             float finalSpeed = carData.forwardSpeed * 1.45f;
-            // finalSpeed *= Mathf.Abs(inputX) > 0 ? 0.95f : 1; moveInput.y
             motor.AddForce(finalSpeed * transform.forward * moveInput.y, ForceMode.Acceleration);
         }
         else

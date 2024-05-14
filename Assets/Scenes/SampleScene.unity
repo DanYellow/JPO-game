@@ -830,7 +830,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.6901983, b: 0, a: 1}
-  m_Intensity: 5
+  m_Intensity: 1.5
   m_Range: 10
   m_SpotAngle: 179
   m_InnerSpotAngle: 143.75513
@@ -894,6 +894,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   endColor: {r: 3.999998, g: 3.549955, b: 0, a: 1}
   speed: 2
+  startColor: {r: 2.6701567, g: 0.53125, b: 0, a: 1}
 --- !u!1 &127503960
 GameObject:
   m_ObjectHideFlags: 0
@@ -20723,7 +20724,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 889802521992455464}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 082a829fe43b05744afd074ac7e3747b, type: 3}
   m_Name: 

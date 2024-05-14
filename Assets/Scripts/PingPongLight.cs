@@ -10,17 +10,18 @@ public class PingPongLight : MonoBehaviour
     [SerializeField, Range(1f, 5f)]
     private float speed;
 
+    [SerializeField, ColorUsage(true, true)]
     private Color startColor;
 
     private void Awake()
     {
         lighting = GetComponent<Light>();
-        startColor = lighting.color;
     }
 
     void Update()
     {
-        float pingPong = Mathf.PingPong(Time.time * (1 / speed), 1);
+        float pingPong = Mathf.PingPong(Time.time * (1f / speed), 1f);
+
         Color color = Color.Lerp(startColor, endColor, pingPong);
         lighting.color = color;
     }
