@@ -11,11 +11,12 @@ public class StalagmiteSpawner : MonoBehaviour
 
     [Header("Scriptable Objects")]
     [SerializeField]
-    private BoolValue hasReachMinimumTravelDistanceForStalagmites;
+    private BoolValue hasReachMinimumTravelDistance;
     
     IEnumerator Start()
     {
-        yield return new WaitUntil(() => hasReachMinimumTravelDistanceForStalagmites.CurrentValue == true);
+        // print("hasReachMinimumTravelDistanceForStalagmites " + hasReachMinimumTravelDistance.CurrentValue);
+        yield return new WaitUntil(() => hasReachMinimumTravelDistance.CurrentValue == true);
         while (true)
         {
             Spawn();
