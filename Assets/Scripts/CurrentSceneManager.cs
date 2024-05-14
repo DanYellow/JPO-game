@@ -8,15 +8,11 @@ public class CurrentSceneManager : MonoBehaviour
     private BoolValue isCarTakingDamage;
 
     [SerializeField]
-    private BoolValue hasReachMinimumTravelDistance;
-
-    [SerializeField]
     private BoolValue isRestartingGame;
 
     void Start()
     {
         isCarTakingDamage.CurrentValue = false;
-        hasReachMinimumTravelDistance.CurrentValue = false;
     }
 
     public void RestartGame()

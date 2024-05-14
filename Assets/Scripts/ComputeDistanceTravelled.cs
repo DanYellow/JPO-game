@@ -10,6 +10,9 @@ public class ComputeDistanceTravelled : MonoBehaviour
     [SerializeField]
     private int startSpawnObstaclesThreshold = 150;
 
+    [SerializeField]
+    private int startSpawnStalagmitesThreshold = 1150;
+
     private float lastThousandth = 0;
 
     private bool isGameFinished = false;
@@ -24,6 +27,9 @@ public class ComputeDistanceTravelled : MonoBehaviour
     private BoolValue hasReachMinimumTravelDistance;
 
     [SerializeField]
+    private BoolValue hasReachMinimumTravelDistanceForStalagmites;
+
+    [SerializeField]
     private BoolValue isCarGrounded;
 
     [SerializeField]
@@ -31,6 +37,9 @@ public class ComputeDistanceTravelled : MonoBehaviour
 
     private void Start()
     {
+        hasReachMinimumTravelDistance.CurrentValue = false;
+        hasReachMinimumTravelDistanceForStalagmites.CurrentValue = false;
+
         lastPosition = transform.position;
         isGameFinished = false;
         ResetScore();
@@ -53,6 +62,7 @@ public class ComputeDistanceTravelled : MonoBehaviour
             distanceTravelled.CurrentValue += SphericalDistance(lastPosition, transform.position);
         }
         hasReachMinimumTravelDistance.CurrentValue = distanceTravelled.CurrentValue >= startSpawnObstaclesThreshold;
+        hasReachMinimumTravelDistanceForStalagmites.CurrentValue = distanceTravelled.CurrentValue >= startSpawnStalagmitesThreshold;
 
         lastPosition = transform.position;
 

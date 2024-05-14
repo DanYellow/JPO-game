@@ -1,11 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Stalagmite : MonoBehaviour
 {
-    [SerializeField]
-    private Transform target;
+    [HideInInspector]
+    public Transform target;
 
     private Vector3 endPosition;
 
@@ -15,7 +14,7 @@ public class Stalagmite : MonoBehaviour
     [SerializeField]
     private VoidEventChannel onCameraSwitch;
 
-    void Awake()
+    void Start()
     {
         SphereCollider sphereCollider = target.GetComponent<SphereCollider>();
         float sphereColliderScale = sphereCollider.transform.lossyScale.x;
