@@ -12734,6 +12734,7 @@ GameObject:
   - component: {fileID: 469254047}
   - component: {fileID: 469254048}
   - component: {fileID: 469254049}
+  - component: {fileID: 469254050}
   m_Layer: 0
   m_Name: CurrentSceneManager
   m_TagString: Untagged
@@ -12856,6 +12857,21 @@ MonoBehaviour:
     type: 2}
   gameOverCameraShake: {fileID: 11400000, guid: 25ddfd996b91e9943902b6a64c30f14b,
     type: 2}
+--- !u!114 &469254050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469254041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f98d580fd5ba00741a44c30f0a01aab0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bestScoreUI: {fileID: 649811516}
+  onGameOver: {fileID: 11400000, guid: 287ac5d675fb3404fa950b20289e88a5, type: 2}
+  distanceTravelled: {fileID: 11400000, guid: 34a454f90f47f2041ae312d9692b9efd, type: 2}
 --- !u!1 &504781306
 GameObject:
   m_ObjectHideFlags: 0
@@ -13650,7 +13666,7 @@ GameObject:
   - component: {fileID: 649811519}
   - component: {fileID: 649811518}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: BestScore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13673,7 +13689,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.0000038146973, y: -20}
-  m_SizeDelta: {x: 461.1455, y: 129.9134}
+  m_SizeDelta: {x: 967.2319, y: 129.9134}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &649811518
 MonoBehaviour:
