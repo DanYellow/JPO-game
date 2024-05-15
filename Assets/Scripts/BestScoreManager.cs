@@ -16,11 +16,16 @@ public class BestScoreManager : MonoBehaviour
 
     private void OnEnable()
     {
-        onGameOver.OnEventRaised += SaveRecord;
+        onGameOver.OnEventRaised += DisplayRecord;
     }
 
-    private void UpdateLayout(bool hasBrokenPrevRecord)
+    private void DisplayRecord()
     {
+        bool hasBrokenPrevRecord = (
+            !PlayerPrefs.HasKey("best_score") ||
+            PlayerPrefs.HasKey("best_score") && distanceTravelled.CurrentValue > PlayerPrefs.GetFloat("best_score")
+        );
+
         var nfi = (NumberFormatInfo)CultureInfo.InvariantCulture.NumberFormat.Clone();
         nfi.NumberGroupSeparator = " ";
 
@@ -43,23 +48,8 @@ public class BestScoreManager : MonoBehaviour
         }
     }
 
-    private void SaveRecord()
-    {
-        bool hasBrokenPrevRecord = (
-            !PlayerPrefs.HasKey("best_score") ||
-            PlayerPrefs.HasKey("best_score") && distanceTravelled.CurrentValue > PlayerPrefs.GetFloat("best_score")
-        );
-
-        if (hasBrokenPrevRecord)
-        {
-            // PlayerPrefs.SetFloat("best_score", distanceTravelled.CurrentValue);
-        }
-
-        UpdateLayout(hasBrokenPrevRecord);
-    }
-
     private void OnDisable()
     {
-        onGameOver.OnEventRaised -= SaveRecord;
+        onGameOver.OnEventRaised -= DisplayRecord;
     }
 }
