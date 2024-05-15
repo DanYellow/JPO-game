@@ -1,6 +1,6 @@
-- Animate car in main menu
-- Change car's plate to "MMI SAR"
-- 
+- ~~Animate car in main menu~~
+- ~~Change car's plate to "MMI SAR"~~
+- Manage best score
 
 
 // https://www.youtube.com/watch?v=RXhTD8YZnY4

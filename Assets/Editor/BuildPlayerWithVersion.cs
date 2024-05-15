@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 public class BuildPlayerWithVersion : MonoBehaviour
 {
     [MenuItem("**Debug**/Build/Create build with current time")]
-    public static void MyBuild()
+    public static void CreateBuild()
     {
         BuildPlayerOptions buildPlayerOptions = BuildPlayerWindow.DefaultBuildMethods.GetBuildPlayerOptions(new BuildPlayerOptions());
         string version = System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
