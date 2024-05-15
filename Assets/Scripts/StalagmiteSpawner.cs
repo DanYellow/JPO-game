@@ -69,6 +69,7 @@ public class StalagmiteSpawner : MonoBehaviour
         yield return stalagmiteMarker.Appear();
 
         GameObject stalagmiteGO = Instantiate(stalagmitePrefab, Vector3.zero, Quaternion.identity);
+        stalagmiteGO.transform.parent = transform;
         Stalagmite stalagmite = stalagmiteGO.GetComponent<Stalagmite>();
         BoxCollider boxCollider = stalagmiteGO.GetComponent<BoxCollider>();
         stalagmite.target = transform;

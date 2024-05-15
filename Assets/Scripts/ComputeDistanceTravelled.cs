@@ -12,6 +12,8 @@ public class ComputeDistanceTravelled : MonoBehaviour
 
     [SerializeField]
     private int startSpawnStalagmitesThreshold = 1150;
+    [SerializeField]
+    private int startWorldShrinkThreshold = 2200;
 
     private float lastThousandth = 0;
 
@@ -28,6 +30,8 @@ public class ComputeDistanceTravelled : MonoBehaviour
 
     [SerializeField]
     private BoolValue hasReachMinimumTravelDistanceForStalagmites;
+    [SerializeField]
+    private BoolValue hasReachMinimumTravelDistanceForShrink;
 
     [SerializeField]
     private BoolValue isCarGrounded;
@@ -63,6 +67,7 @@ public class ComputeDistanceTravelled : MonoBehaviour
         }
         hasReachMinimumTravelDistance.CurrentValue = distanceTravelled.CurrentValue >= startSpawnObstaclesThreshold;
         hasReachMinimumTravelDistanceForStalagmites.CurrentValue = distanceTravelled.CurrentValue >= startSpawnStalagmitesThreshold;
+        hasReachMinimumTravelDistanceForShrink.CurrentValue = distanceTravelled.CurrentValue >= startWorldShrinkThreshold;
 
         lastPosition = transform.position;
 

@@ -16378,7 +16378,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -378}
-  m_SizeDelta: {x: 985.496, y: 99.693}
+  m_SizeDelta: {x: 1129.2394, y: 99.693}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &970563658
 MonoBehaviour:
@@ -16403,7 +16403,7 @@ MonoBehaviour:
   m_text: 'Distance parcourue : <color=#AAAAFF><color=#00F6FF>350 km</color></color>
 
     Distance
-    parcourue depuis ce matin : <color=#BBAAFF><color=#00F6FF>4200 km</color></color>'
+    totale parcourue depuis ce matin : <color=#BBAAFF><color=#00F6FF>4200 km</color></color>'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5e4cf8c4e496ba3439ab979f2b4719e1, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 67a76bc4bfb811e479b8d1f60f914b2f, type: 2}
@@ -17628,12 +17628,15 @@ MonoBehaviour:
   scoreStepThreshold: 550
   startSpawnObstaclesThreshold: 150
   startSpawnStalagmitesThreshold: 1150
+  startWorldShrinkThreshold: 2500
   onScoreThresholdReached: {fileID: 11400000, guid: db78dfe58cb2d3a468c633c58e480bb8,
     type: 2}
   onGameOver: {fileID: 11400000, guid: 287ac5d675fb3404fa950b20289e88a5, type: 2}
   hasReachMinimumTravelDistance: {fileID: 11400000, guid: 759c01bd28c09fb4fac6704d5becf962,
     type: 2}
   hasReachMinimumTravelDistanceForStalagmites: {fileID: 11400000, guid: eae2fa2962469b14c8de2d863ff5ca4f,
+    type: 2}
+  hasReachMinimumTravelDistanceForShrink: {fileID: 11400000, guid: 8141ef556bc9f0c4e83e5866193f2fd1,
     type: 2}
   isCarGrounded: {fileID: 11400000, guid: b2db8bbf8d00f6249ae7decd76910005, type: 2}
   distanceTravelled: {fileID: 11400000, guid: 34a454f90f47f2041ae312d9692b9efd, type: 2}
@@ -18679,6 +18682,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ground: {fileID: 742801162014190680}
+  duration: 1.05
 --- !u!1 &1677384702
 GameObject:
   m_ObjectHideFlags: 0
@@ -20169,6 +20173,7 @@ GameObject:
   - component: {fileID: 3038029926327017416}
   - component: {fileID: 3038029926327017417}
   - component: {fileID: 3038029926327017418}
+  - component: {fileID: 3038029926327017419}
   m_Layer: 3
   m_Name: World
   m_TagString: Ground
@@ -20713,6 +20718,21 @@ MonoBehaviour:
   hasReachMinimumTravelDistance: {fileID: 11400000, guid: eae2fa2962469b14c8de2d863ff5ca4f,
     type: 2}
   onGameOver: {fileID: 11400000, guid: 287ac5d675fb3404fa950b20289e88a5, type: 2}
+--- !u!114 &3038029926327017419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889802521992455464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d44384958465d1944b5a0d2ec0fbb8ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shrinkSpeed: 0.15
+  hasReachMinimumTravelDistance: {fileID: 11400000, guid: 8141ef556bc9f0c4e83e5866193f2fd1,
+    type: 2}
 --- !u!4 &3154302773397062200
 Transform:
   m_ObjectHideFlags: 0

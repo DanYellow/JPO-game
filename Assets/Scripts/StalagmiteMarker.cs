@@ -6,6 +6,9 @@ public class StalagmiteMarker : MonoBehaviour
     [SerializeField]
     private Transform ground;
 
+    [SerializeField]
+    private float duration = 1.05f;
+
     private void OnEnable()
     {
         StartCoroutine(Appear());
@@ -18,7 +21,6 @@ public class StalagmiteMarker : MonoBehaviour
         Vector3 startScale = transform.localScale;
 
         float current = 0;
-        float duration = 0.85f;
 
         transform.LookAt(ground);
         transform.RotateAround(transform.position, transform.right, -90);

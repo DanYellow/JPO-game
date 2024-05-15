@@ -85,12 +85,6 @@ public class GameOverManager : MonoBehaviour
         resultText.SetText(finalString);
     }
 
-    // public void GoBackToIndex()
-    // {
-    //     gameOverUI.SetActive(false);
-    //     mainMenuUI.SetActive(true);
-    // }
-
     public void OnNavigate(InputAction.CallbackContext ctx)
     {
         if (gameOverUI != null && gameOverUI.activeInHierarchy && ctx.phase == InputActionPhase.Performed && EventSystem.current.currentSelectedGameObject == null)
