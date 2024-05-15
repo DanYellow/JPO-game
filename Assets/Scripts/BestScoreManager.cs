@@ -37,10 +37,7 @@ public class BestScoreManager : MonoBehaviour
             PlayerPrefs.SetFloat("best_score", distanceTravelled.CurrentValue);
             
             string newRecordFormatted = Mathf.Round(distanceTravelled.CurrentValue).ToString("#,0", nfi);
-            recordText.SetText(@$"
-                Nouveau record !
-                {currentRecordFormatted} m -> {newRecordFormatted} m
-            ");
+            recordText.SetText($"Nouveau record !\n{currentRecordFormatted} m -> {newRecordFormatted} m");
         }
         else
         {
