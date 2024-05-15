@@ -3,10 +3,9 @@ using UnityEngine;
 
 public class Stalagmite : MonoBehaviour
 {
-    [HideInInspector]
     public Transform target;
 
-    private Vector3 endPosition;
+    public Vector3 endPosition;
 
     [Header("Scriptable Objects")]
     [SerializeField]
@@ -16,11 +15,8 @@ public class Stalagmite : MonoBehaviour
 
     void Start()
     {
-        SphereCollider sphereCollider = target.GetComponent<SphereCollider>();
-        float sphereColliderScale = sphereCollider.transform.lossyScale.x;
-        BoxCollider boxCollider = GetComponent<BoxCollider>();
         transform.position = Vector3.zero;
-        endPosition = Random.onUnitSphere * (sphereCollider.radius + (boxCollider.bounds.size.y * 2 / sphereColliderScale)) * sphereColliderScale;
+
         transform.up = target.up;
 
         StartCoroutine(Move());
@@ -38,7 +34,8 @@ public class Stalagmite : MonoBehaviour
             current += Time.deltaTime / duration;
             if (transform.position != Vector3.zero)
             {
-                transform.rotation = Quaternion.LookRotation(target.position - transform.position);
+                transform.LookAt(target);
+                // transform.rotation = Quaternion.LookRotation(target.position - transform.position);
             }
 
             yield return null;
