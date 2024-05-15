@@ -19,7 +19,7 @@ public class StalagmiteSpawner : MonoBehaviour
     [Header("Scriptable Objects")]
     [SerializeField]
     private BoolValue hasReachMinimumTravelDistance;
-     [SerializeField]
+    [SerializeField]
     private VoidEventChannel onGameOver;
 
     private void Awake()
@@ -28,13 +28,14 @@ public class StalagmiteSpawner : MonoBehaviour
         stalagmiteMarker = stalagmiteMarkerGO.GetComponent<StalagmiteMarker>();
     }
 
-    private void OnEnable() {
+    private void OnEnable()
+    {
         onGameOver.OnEventRaised += GameOver;
     }
 
     private void GameOver()
     {
-       StopAllCoroutines();
+        StopAllCoroutines();
     }
 
     IEnumerator Start()
@@ -66,7 +67,7 @@ public class StalagmiteSpawner : MonoBehaviour
         stalagmiteMarkerGO.SetActive(true);
 
         yield return stalagmiteMarker.Appear();
-    
+
         GameObject stalagmiteGO = Instantiate(stalagmitePrefab, Vector3.zero, Quaternion.identity);
         Stalagmite stalagmite = stalagmiteGO.GetComponent<Stalagmite>();
         BoxCollider boxCollider = stalagmiteGO.GetComponent<BoxCollider>();
@@ -74,7 +75,8 @@ public class StalagmiteSpawner : MonoBehaviour
         stalagmite.endPosition = randPosition * (sphereCollider.radius + (boxCollider.bounds.size.y * 2 / sphereColliderScale)) * sphereColliderScale;
     }
 
-    private void OnDisable() {
+    private void OnDisable()
+    {
         onGameOver.OnEventRaised -= GameOver;
     }
 }

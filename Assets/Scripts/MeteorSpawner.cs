@@ -30,35 +30,40 @@ public class MeteorSpawner : MonoBehaviour
     [SerializeField]
     private BoolValue isCarDrifting;
 
+    [SerializeField]
+    private VoidEventChannel onGameOver;
+
     private void Awake()
     {
         meteorPooling = GetComponent<ObjectPooling>();
     }
 
+    private void OnEnable()
+    {
+        onGameOver.OnEventRaised += GameOver;
+    }
+
     IEnumerator Start()
     {
         yield return new WaitUntil(() => hasReachMinimumTravelDistance.CurrentValue == true);
-        // StartCoroutine(SpawnMeteor());
         while (true)
         {
             if (carData.currentVelocity < 5 || Spawn() == null)
             {
                 yield return null;
-
             }
             yield return Helpers.GetWait(spawnTime);
         }
-        // yield return StartCoroutine(SpawnMeteor());
     }
 
     private void Update()
     {
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Spawn();
         }
-        #endif
+#endif
         Vector3 groundNormal = spawnPoint.position - transform.position;
 
         Vector3 forwardsVector = -Vector3.Cross(groundNormal, transform.right);
@@ -69,7 +74,11 @@ public class MeteorSpawner : MonoBehaviour
         // Vector3 dir = (target.position - spawnPoint.position).normalized;
         // var rotation = Quaternion.LookRotation(dir);
         // spawnPoint.localRotation = Quaternion.Lerp(spawnPoint.rotation, rotation, 1);
+    }
 
+    private void GameOver()
+    {
+        StopAllCoroutines();
     }
 
     private ObjectPooled Spawn()
@@ -106,20 +115,8 @@ public class MeteorSpawner : MonoBehaviour
         Gizmos.DrawWireSphere(spawnPoint.position, distance);
     }
 
-
-    // IEnumerator SpawnMeteor()
-    // {
-    //     Vector3 pos = new Vector3(
-    //         target.position.x + (Random.insideUnitCircle.x * distance),
-    //         target.position.y + (Random.insideUnitCircle.y * distance),
-    //         target.position.z
-    //     );
-    //     GameObject meteor = Instantiate(meteorPrefab, Vector3.zero, Quaternion.identity);
-    //     meteor.transform.LookAt(gameObject.transform);
-    //     meteor.GetComponentInChildren<GravityBody>().planet = planet;
-
-    //     yield return Helpers.GetWait(spawnTime);
-
-    //     StartCoroutine(SpawnMeteor());
-    // }
+    private void OnDisable()
+    {
+        onGameOver.OnEventRaised -= GameOver;
+    }
 }
