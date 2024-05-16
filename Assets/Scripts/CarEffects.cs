@@ -75,13 +75,13 @@ public class CarEffects : MonoBehaviour
 
     private void StartDriftSmokes()
     {
-        driftSmokeParticles.Play();
+        // driftSmokeParticles.Play();
     }
 
     private void StopDriftSmokes()
     {
         isGameStarted = true;
-        driftSmokeParticles.Stop();
+        // driftSmokeParticles.Stop();
     }
     
 
