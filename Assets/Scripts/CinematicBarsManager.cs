@@ -36,7 +36,7 @@ public class CinematicBarsManager : MonoBehaviour
     // Start is called before the first frame update
     void ShowBars()
     {
-        StartCoroutine(AnimateBars(true, 0.75f));
+        StartCoroutine(AnimateBars(true, 0.25f));
     }
 
     private IEnumerator AnimateBars(bool show, float duration)
@@ -64,7 +64,7 @@ public class CinematicBarsManager : MonoBehaviour
     // Update is called once per frame
     void HideBars()
     {
-        StartCoroutine(AnimateBars(false, 1.9f));
+        StartCoroutine(AnimateBars(false, 1.35f));
     }
 
     private void OnDisable()

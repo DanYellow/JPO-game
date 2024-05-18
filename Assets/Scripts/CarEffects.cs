@@ -54,7 +54,8 @@ public class CarEffects : MonoBehaviour
 
     private void Update()
     {
-        if(!isGameStarted) {
+        if (!isGameStarted)
+        {
             return;
         }
 
@@ -83,7 +84,7 @@ public class CarEffects : MonoBehaviour
         isGameStarted = true;
         // driftSmokeParticles.Stop();
     }
-    
+
 
     private IEnumerator ShowSkidMarksCoroutine()
     {
