@@ -15486,7 +15486,6 @@ GameObject:
   - component: {fileID: 800899478}
   - component: {fileID: 800899477}
   - component: {fileID: 800899476}
-  - component: {fileID: 800899475}
   m_Layer: 5
   m_Name: CinematicBars
   m_TagString: Untagged
@@ -15515,21 +15514,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &800899475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 800899473}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b9624c6f043aab4fa3d142ccb24dc7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distanceTravelled: {fileID: 11400000, guid: 34a454f90f47f2041ae312d9692b9efd, type: 2}
-  scoreText: {fileID: 0}
-  onGameOver: {fileID: 11400000, guid: 287ac5d675fb3404fa950b20289e88a5, type: 2}
 --- !u!114 &800899476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20961,7 +20945,7 @@ MonoBehaviour:
     type: 3}
   distance: 8
   spawnTime: 1.4
-  target: {fileID: 188026843}
+  target: {fileID: 1166183952}
   spawnPoint: {fileID: 191452546}
   hasReachMinimumTravelDistance: {fileID: 11400000, guid: 759c01bd28c09fb4fac6704d5becf962,
     type: 2}

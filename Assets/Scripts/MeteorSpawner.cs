@@ -18,6 +18,8 @@ public class MeteorSpawner : MonoBehaviour
     [SerializeField]
     private Transform spawnPoint;
 
+    private bool isSpawnPointBehindTarget = false;
+
     private ObjectPooling meteorPooling;
 
     [Header("Scriptable Objects")]
@@ -64,16 +66,14 @@ public class MeteorSpawner : MonoBehaviour
             Spawn();
         }
 #endif
-        Vector3 groundNormal = spawnPoint.position - transform.position;
-
-        Vector3 forwardsVector = -Vector3.Cross(groundNormal, transform.right);
-        // Finally, compose the two directions back into a single rotation.
-        // spawnPoint.rotation = Quaternion.LookRotation(forwardsVector, groundNormal);
-        // target.parent.LookAt(transform, -Vector3.forward);
-
-        // Vector3 dir = (target.position - spawnPoint.position).normalized;
-        // var rotation = Quaternion.LookRotation(dir);
-        // spawnPoint.localRotation = Quaternion.Lerp(spawnPoint.rotation, rotation, 1);
+        if (
+            (!isSpawnPointBehindTarget && carData.isMovingBackward) ||
+            (isSpawnPointBehindTarget && !carData.isMovingBackward)
+        )
+        {
+            isSpawnPointBehindTarget = !isSpawnPointBehindTarget;
+            spawnPoint.parent.RotateAround(target.position, target.up, 180);
+        }
     }
 
     private void GameOver()
@@ -88,10 +88,13 @@ public class MeteorSpawner : MonoBehaviour
         if (objectPooled != null)
         {
             objectPooled.gameObject.SetActive(false);
+
+            float finalRadius = distance * (isSpawnPointBehindTarget ? 0.25f : 1);
+
             Vector3 pos = new Vector3(
-                spawnPoint.position.x + (Random.insideUnitSphere.x * distance),
+                spawnPoint.position.x + (Random.insideUnitSphere.x * finalRadius),
                 spawnPoint.position.y,
-                spawnPoint.position.z + (Random.insideUnitSphere.z * distance)
+                spawnPoint.position.z + (Random.insideUnitSphere.z * finalRadius)
             );
 
             objectPooled.transform.SetPositionAndRotation(pos, Quaternion.identity);
