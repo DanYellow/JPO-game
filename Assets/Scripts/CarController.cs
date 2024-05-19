@@ -78,7 +78,6 @@ public class CarController : MonoBehaviour
         ManageWheels();
         Rotate();
         SwapDrag();
-        MoveSpawnMeteorPoint();
 
         Quaternion targetRotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 20 * Time.deltaTime);
@@ -106,36 +105,6 @@ public class CarController : MonoBehaviour
     {
         // collision.position = motor.position;
         transform.position = motor.transform.position;
-    }
-
-    private void MoveSpawnMeteorPoint()
-    {
-        // if(carData.isMovingBackward) {
-        //     Debug.Log("back");
-        // } else {
-        //     Debug.Log("front");
-        // }
-
-        // if (Input.GetKeyDown(KeyCode.T))
-        // {
-        //     spawnMeteorPivotPoint.RotateAround(transform.position, transform.up, 180);
-        // }
-        // Vector3 pos = boxCollider.bounds.center;
-        // pos.y = spawnMeteorPivotPoint.position.y;
-
-        // // pos += new Vector3(10, 0, 10);
-        // // Quaternion targetRotation = Quaternion.FromToRotation(transform.up, hit.normal) * spawnMeteorPivotPoint.rotation;
-        // // spawnMeteorPivotPoint.rotation = Quaternion.Slerp(spawnMeteorPivotPoint.rotation, targetRotation, 1 * Time.deltaTime);
-        // // spawnMeteorPivotPoint.position = pos;
-        // Vector3 relativePos = spawnMeteorPivotPoint.position - transform.position;
-        // //  spawnMeteorPivotPoint.LookAt(transform, -Vector3.forward);
-        // // spawnMeteorPivotPoint.Rotate(Vector3.up);
-        // if (motor.velocity.sqrMagnitude > Mathf.Epsilon)
-        // {    // Where EPSILON is a very small number
-        //     //  spawnMeteorPivotPoint.rotation = Quaternion.LookRotation(transform.forward * moveInput.y);
-        // }
-
-        // spawnMeteorPivotPoint.rotation = Quaternion.FromToRotation(spawnMeteorPivotPoint.forward, tr.forward * -1);
     }
 
     private void IncreaseDrag()
