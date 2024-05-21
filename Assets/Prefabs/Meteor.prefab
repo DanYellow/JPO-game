@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.75, y: 2.75, z: 2.75}
+  m_LocalScale: {x: 2.95, y: 2.95, z: 2.95}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4963151470522663774}
@@ -166,7 +166,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   hitTarget: {fileID: 0}
-  speed: 60
+  speed: 70
   speedFactor: 1
   onGameOver: {fileID: 11400000, guid: 287ac5d675fb3404fa950b20289e88a5, type: 2}
   onCameraSwitch: {fileID: 11400000, guid: b768779916d8c9f4380cedaaf9466062, type: 2}

@@ -26,6 +26,7 @@ public class BuildPlayerWithVersion : MonoBehaviour
 
         if (summary.result == BuildResult.Succeeded)
         {
+            Application.OpenURL($"file://{finalPath}");
             Debug.Log("Build succeeded: " + summary.totalSize + " bytes");
         }
 
