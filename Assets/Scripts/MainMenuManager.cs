@@ -26,6 +26,8 @@ public class MainMenuManager : MonoBehaviour
 
     [SerializeField]
     private VoidEventChannel onDisplayHowToPlayScreen;
+    [SerializeField]
+    private VoidEventChannel onHideHowToPlayScreen;
 
     void Awake()
     {
@@ -38,6 +40,11 @@ public class MainMenuManager : MonoBehaviour
             totalDistanceTravelled.CurrentValue = 0;
             PlayerPrefs.SetString("start_time", System.DateTime.Now.ToString("HH:mm"));
         }
+    }
+
+    private void OnEnable()
+    {
+        onHideHowToPlayScreen.OnEventRaised += HideHowToPlayScreen;
     }
 
     private void Start()
@@ -66,7 +73,19 @@ public class MainMenuManager : MonoBehaviour
     public void ShowHowToPlay()
     {
         EventSystem.current.SetSelectedGameObject(null);
+        foreach (var canvasGroup in mainMenuUI.GetComponentsInChildren<CanvasGroup>())
+        {
+            canvasGroup.alpha = 0.45f;
+        }
         onDisplayHowToPlayScreen.OnEventRaised();
+    }
+
+    private void HideHowToPlayScreen()
+    {
+        foreach (var canvasGroup in mainMenuUI.GetComponentsInChildren<CanvasGroup>())
+        {
+            canvasGroup.alpha = 1;
+        }
     }
 
     public void OnNavigate(InputAction.CallbackContext ctx)
@@ -85,6 +104,12 @@ public class MainMenuManager : MonoBehaviour
 #endif
         Application.Quit();
     }
+
+    private void OnDisable()
+    {
+        onHideHowToPlayScreen.OnEventRaised -= HideHowToPlayScreen;
+    }
+
 
     void OnApplicationQuit()
     {

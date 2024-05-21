@@ -20,6 +20,9 @@ public class HowToPlayManager : MonoBehaviour
     [SerializeField]
     private VoidEventChannel onDisplayHowToPlayScreen;
 
+    [SerializeField]
+    private VoidEventChannel onHideHowToPlayScreen;
+
     private void Awake()
     {
         howToPlayUI.SetActive(false);
@@ -27,7 +30,6 @@ public class HowToPlayManager : MonoBehaviour
 
     private void OnEnable()
     {
-
         onDisplayHowToPlayScreen.OnEventRaised += DisplayScreen;
     }
 
@@ -59,6 +61,7 @@ public class HowToPlayManager : MonoBehaviour
     public void GoBack()
     {
         howToPlayUI.SetActive(false);
+        onHideHowToPlayScreen.OnEventRaised();
         EventSystem.current.SetSelectedGameObject(null);
     }
 

@@ -308,8 +308,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: 99c7bf2b7046c7442a25dab7b813286a, type: 2}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_Color: {r: 0, g: 1, b: 0.9057591, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -13920,6 +13920,8 @@ MonoBehaviour:
   isRestartingGame: {fileID: 11400000, guid: 338e57a920ea1ca45be0e40a79cd435a, type: 2}
   onDisplayHowToPlayScreen: {fileID: 11400000, guid: 30b03fce954d3e04388cbe72eb40d86b,
     type: 2}
+  onHideHowToPlayScreen: {fileID: 11400000, guid: d404368ec67cc0f4985457237c8c1632,
+    type: 2}
 --- !u!114 &469254048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14004,6 +14006,8 @@ MonoBehaviour:
   howToPlayUI: {fileID: 657497555}
   instructionsText: {fileID: 899122790}
   onDisplayHowToPlayScreen: {fileID: 11400000, guid: 30b03fce954d3e04388cbe72eb40d86b,
+    type: 2}
+  onHideHowToPlayScreen: {fileID: 11400000, guid: d404368ec67cc0f4985457237c8c1632,
     type: 2}
 --- !u!1 &497785331
 GameObject:
@@ -14425,6 +14429,7 @@ GameObject:
   - component: {fileID: 561888216}
   - component: {fileID: 561888215}
   - component: {fileID: 561888214}
+  - component: {fileID: 561888217}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -14520,6 +14525,18 @@ Canvas:
   m_SortingLayerID: -356367189
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!225 &561888217
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 561888212}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &565958732
 GameObject:
   m_ObjectHideFlags: 0
@@ -15640,8 +15657,9 @@ GameObject:
   - component: {fileID: 669723715}
   - component: {fileID: 669723714}
   - component: {fileID: 669723713}
+  - component: {fileID: 669723716}
   m_Layer: 0
-  m_Name: Canvas
+  m_Name: BottomCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15731,6 +15749,18 @@ Canvas:
   m_SortingLayerID: -356367189
   m_SortingOrder: 10
   m_TargetDisplay: 0
+--- !u!225 &669723716
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669723711}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &686137033
 GameObject:
   m_ObjectHideFlags: 0
@@ -17402,8 +17432,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: 99c7bf2b7046c7442a25dab7b813286a, type: 2}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_Color: {r: 0, g: 1, b: 0.9057591, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -20404,8 +20434,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: 99c7bf2b7046c7442a25dab7b813286a, type: 2}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_Color: {r: 0, g: 1, b: 0.9057591, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -22046,7 +22076,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.9843137}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.9490196}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
@@ -22368,8 +22398,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: 99c7bf2b7046c7442a25dab7b813286a, type: 2}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_Color: {r: 0, g: 1, b: 0.9057591, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
