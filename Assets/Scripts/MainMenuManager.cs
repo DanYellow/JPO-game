@@ -24,6 +24,9 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField]
     private BoolValue isRestartingGame;
 
+    [SerializeField]
+    private VoidEventChannel onDisplayHowToPlayScreen;
+
     void Awake()
     {
         Application.targetFrameRate = 30;
@@ -58,6 +61,12 @@ public class MainMenuManager : MonoBehaviour
         onCameraSwitch.Raise();
         Application.targetFrameRate = 60;
         EventSystem.current.SetSelectedGameObject(null);
+    }
+
+    public void ShowHowToPlay()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        onDisplayHowToPlayScreen.OnEventRaised();
     }
 
     public void OnNavigate(InputAction.CallbackContext ctx)
