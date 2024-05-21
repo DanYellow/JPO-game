@@ -14002,6 +14002,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   howToPlayUI: {fileID: 657497555}
+  instructionsText: {fileID: 899122790}
   onDisplayHowToPlayScreen: {fileID: 11400000, guid: 30b03fce954d3e04388cbe72eb40d86b,
     type: 2}
 --- !u!1 &497785331
@@ -14517,7 +14518,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: -356367189
-  m_SortingOrder: -10
+  m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!1 &565958732
 GameObject:
@@ -15349,8 +15350,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -17912,10 +17913,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Bienvenue dans l'\xE9dition 2025 d'Incredible\\u00A0Unknown\\u00A0Territories.
+  m_text: "Bienvenue dans <nobr>d'Incredible Unknown Territories</nobr> version 2025.
     A bord de votre v\xE9hicule, votre objectif est simple : parcourir la plus longue
     distance possible en \xE9vitant les obstacles de cet incroyable territoire inconnu.
-    \n\nBon courage pour battre le record actuel de 400 m."
+    \n\nBon courage pour battre le record actuel de <color=#AAAAFF><color=#00F6FF>placeholder</color></color>."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5e4cf8c4e496ba3439ab979f2b4719e1, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 67a76bc4bfb811e479b8d1f60f914b2f, type: 2}
@@ -18439,6 +18440,18 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 469254049}
         m_TargetAssemblyTypeName: GameOverManager, Assembly-CSharp
+        m_MethodName: OnNavigate
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 469254052}
+        m_TargetAssemblyTypeName: HowToPlayManager, Assembly-CSharp
         m_MethodName: OnNavigate
         m_Mode: 0
         m_Arguments:
@@ -20674,6 +20687,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1256351891}
   - component: {fileID: 1256351893}
+  - component: {fileID: 1256351895}
   - component: {fileID: 1256351892}
   - component: {fileID: 1256351894}
   m_Layer: 5
@@ -20743,7 +20757,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 1256351895}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -20780,6 +20794,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverColor: {r: 0, g: 31.999996, b: 28.908306, a: 1}
+--- !u!114 &1256351895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256351890}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &1264036032
 GameObject:
   m_ObjectHideFlags: 0
