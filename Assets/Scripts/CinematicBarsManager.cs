@@ -20,14 +20,13 @@ public class CinematicBarsManager : MonoBehaviour
     {
         bottomBar.parent.gameObject.SetActive(true);
 
-        Vector3 topBarStart = topBar.position;
-        Vector3 bottomBarStart = bottomBar.position;
+        RectTransform barSize = topBar.GetComponent<RectTransform>();
+        barSize.sizeDelta = new Vector2(Screen.width, 100);
+        float xCenter = Screen.width / 2;
 
-        Vector3 startBarEnd = topBarStart + new Vector3(0, 40, 0);
-        Vector3 bottomBarEnd = bottomBarStart - new Vector3(0, 40, 0);
-
-        topBar.position = startBarEnd;
-        bottomBar.position = bottomBarEnd;
+        topBar.position = new Vector3(xCenter, -barSize.sizeDelta.y, 0);
+        bottomBar.position = new Vector3(xCenter, Screen.height + barSize.sizeDelta.y, 0);
+        bottomBar.GetComponent<RectTransform>().sizeDelta = barSize.sizeDelta;
     }
 
     private void OnEnable()
@@ -48,8 +47,10 @@ public class CinematicBarsManager : MonoBehaviour
         Vector3 topBarStart = topBar.position;
         Vector3 bottomBarStart = bottomBar.position;
 
-        Vector3 startBarEnd = topBarStart + ((show ? -1 : 1) * new Vector3(0, 40, 0));
-        Vector3 bottomBarEnd = bottomBarStart - ((show ? -1 : 1) * new Vector3(0, 40, 0));
+        RectTransform barSize = topBar.GetComponent<RectTransform>();
+
+        Vector3 startBarEnd = topBarStart + ((show ? 1 : -1) * new Vector3(0, barSize.sizeDelta.y, 0));
+        Vector3 bottomBarEnd = bottomBarStart - ((show ? 1 : -1) * new Vector3(0, barSize.sizeDelta.y, 0));
 
         yield return null;
         while (current <= 1)
