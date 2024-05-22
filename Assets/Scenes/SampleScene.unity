@@ -1587,7 +1587,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
 --- !u!135 &188026846
@@ -19947,10 +19947,8 @@ MonoBehaviour:
   groundLayers:
     serializedVersion: 2
     m_Bits: 8
-  cameraTracker: {fileID: 1709954605}
-  spawnMeteorPivotPoint: {fileID: 2120282776}
   driftPoint: {fileID: 736481271}
-  drifitngTimer: 0.75
+  drifitngTimer: 0.15
   onCarSlowdown: {fileID: 11400000, guid: 341e3f4c62758c846913243499cadfef, type: 2}
   isCarGrounded: {fileID: 11400000, guid: b2db8bbf8d00f6249ae7decd76910005, type: 2}
   isCarDrifting: {fileID: 11400000, guid: e81310de0a38a2c43ac36d0704797144, type: 2}

@@ -17,7 +17,7 @@ public class CameraRotation : MonoBehaviour
 
     private float steerFactor = 1.25f;
 
-    void Update()
+    void LateUpdate()
     {
         transform.rotation = Quaternion.RotateTowards(transform.rotation, target.rotation, delay * Time.deltaTime);
 

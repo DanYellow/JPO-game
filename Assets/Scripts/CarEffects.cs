@@ -89,7 +89,7 @@ public class CarEffects : MonoBehaviour
     private IEnumerator ShowSkidMarksCoroutine()
     {
         ToggleSkidMarks(true);
-        yield return Helpers.GetWait(1.05f);
+        yield return Helpers.GetWait(0.85f);
         ToggleSkidMarks(false);
     }
 

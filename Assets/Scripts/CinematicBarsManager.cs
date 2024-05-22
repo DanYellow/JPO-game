@@ -34,10 +34,10 @@ public class CinematicBarsManager : MonoBehaviour
         onGameStart.OnEventRaised += ShowBars;
         onGameCameraBlendFinished.OnEventRaised += HideBars;
     }
-    // Start is called before the first frame update
+
     void ShowBars()
     {
-        StartCoroutine(AnimateBars(true, 0.25f));
+        StartCoroutine(AnimateBars(true, 0.05f));
     }
 
     private IEnumerator AnimateBars(bool show, float duration)

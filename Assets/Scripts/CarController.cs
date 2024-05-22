@@ -12,8 +12,6 @@ public class CarController : MonoBehaviour
     [SerializeField]
     private Rigidbody collision;
 
-    private BoxCollider boxCollider;
-
     [SerializeField]
     private GameObject[] listWheels;
 
@@ -27,11 +25,6 @@ public class CarController : MonoBehaviour
     private float lastDirection = 1;
     private float groundDrag;
 
-    [SerializeField]
-    private Transform cameraTracker;
-
-    [SerializeField]
-    private Transform spawnMeteorPivotPoint;
 
     [SerializeField]
     private Transform driftPoint;
@@ -69,8 +62,6 @@ public class CarController : MonoBehaviour
 
         motor.transform.parent = null;
         collision.transform.parent = null;
-
-        boxCollider = collision.GetComponent<BoxCollider>();
     }
 
     void Update()
@@ -81,6 +72,7 @@ public class CarController : MonoBehaviour
 
         Quaternion targetRotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 20 * Time.deltaTime);
+        // transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles)
 
         if (HasStartDrifting())
         {
@@ -208,7 +200,7 @@ public class CarController : MonoBehaviour
     private IEnumerator Glide()
     {
         float current = 0;
-        float duration = 0.08f;
+        float duration = 0.1f;
 
         yield return null;
         while (current <= 1)
