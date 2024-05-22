@@ -71,7 +71,7 @@ public class CarController : MonoBehaviour
         SwapDrag();
 
         Quaternion targetRotation = Quaternion.FromToRotation(transform.up, hit.normal) * transform.rotation;
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 20 * Time.deltaTime);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 20f * Time.deltaTime);
         // transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles)
 
         if (HasStartDrifting())
@@ -96,7 +96,7 @@ public class CarController : MonoBehaviour
     private void LateUpdate()
     {
         // collision.position = motor.position;
-        transform.position = motor.transform.position;
+        transform.position = motor.transform.position - new Vector3(0, 0.4f, 0);
     }
 
     private void IncreaseDrag()
@@ -114,13 +114,12 @@ public class CarController : MonoBehaviour
             float finalSpeed = carData.forwardSpeed * 1.45f;
             motor.AddForce(finalSpeed * transform.forward * moveInput.y, ForceMode.Acceleration);
         }
-        else
-        {
-            motor.AddForce(-transform.up * Physics.gravity.y);
-        }
+
+        motor.AddForce(-transform.up * Physics.gravity.y, ForceMode.Acceleration);
 
         motor.velocity = Vector3.ClampMagnitude(motor.velocity, 50);
         collision.MoveRotation(transform.rotation);
+        motor.MoveRotation(transform.rotation);
         collision.MovePosition(motor.position);
     }
 

@@ -1587,7 +1587,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 1
 --- !u!135 &188026846
@@ -15659,7 +15659,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 330585545}
-  m_PlaneDistance: 2.5
+  m_PlaneDistance: 1
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -16256,8 +16256,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 733904705}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.42261827, y: -0, z: -0, w: 0.9063079}
-  m_LocalPosition: {x: 0, y: 71.43299, z: -14.141329}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 54.58, z: -22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -16310,7 +16310,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chromaticAberrationStep: 0.05
   backgroundRender: {fileID: 2100000, guid: 6f2249bf3438d3b44b548d6bf0dcfc89, type: 2}
-  startColor: {r: 0, g: 3.9999995, b: 3.6135383, a: 0}
+  startColor: {r: 0, g: 3.9999995, b: 3.6135383, a: 1}
   damageColor: {r: 8.010334, g: 0, b: 0, a: 1}
   onScoreThresholdReached: {fileID: 11400000, guid: db78dfe58cb2d3a468c633c58e480bb8,
     type: 2}
@@ -24161,7 +24161,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 889802521992455464}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 082a829fe43b05744afd074ac7e3747b, type: 3}
   m_Name: 
@@ -24203,7 +24203,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 889802521992455464}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3dd931c5850a4364d89ab77cde525338, type: 3}
   m_Name: 
@@ -24222,7 +24222,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 889802521992455464}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d44384958465d1944b5a0d2ec0fbb8ea, type: 3}
   m_Name: 
