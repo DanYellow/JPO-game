@@ -75,7 +75,7 @@ public class MainMenuManager : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(null);
         foreach (var canvasGroup in mainMenuUI.GetComponentsInChildren<CanvasGroup>())
         {
-            canvasGroup.alpha = 0.45f;
+            canvasGroup.alpha = 0.4f;
         }
         onDisplayHowToPlayScreen.OnEventRaised();
     }

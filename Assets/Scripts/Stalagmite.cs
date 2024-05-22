@@ -5,6 +5,7 @@ public class Stalagmite : MonoBehaviour
 {
     public Transform target;
 
+    [HideInInspector]
     public Vector3 endPosition;
 
     [Header("Scriptable Objects")]
@@ -25,7 +26,7 @@ public class Stalagmite : MonoBehaviour
     private IEnumerator Move()
     {
         float current = 0;
-        float duration = 0.65f;
+        float duration = 0.6f;
         Vector3 startPosition = transform.position;
 
         while (current <= 1)

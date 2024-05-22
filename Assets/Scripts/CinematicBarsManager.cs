@@ -18,6 +18,8 @@ public class CinematicBarsManager : MonoBehaviour
 
     private void Start()
     {
+        bottomBar.parent.gameObject.SetActive(true);
+
         Vector3 topBarStart = topBar.position;
         Vector3 bottomBarStart = bottomBar.position;
 

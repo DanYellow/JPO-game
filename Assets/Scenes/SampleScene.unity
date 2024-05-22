@@ -7729,7 +7729,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: COMMENT JOUER ?
+  m_text: COMMENT JOUER
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5e4cf8c4e496ba3439ab979f2b4719e1, type: 2}
   m_sharedMaterial: {fileID: -8550388617825197869, guid: 5e4cf8c4e496ba3439ab979f2b4719e1,
@@ -14178,7 +14178,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &544568082
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14452,7 +14452,6 @@ RectTransform:
   - {fileID: 741839330}
   - {fileID: 1048196724}
   - {fileID: 897366121}
-  - {fileID: 630372956}
   - {fileID: 3229400}
   - {fileID: 686137034}
   m_Father: {fileID: 726012218}
@@ -15090,81 +15089,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 598127487}
   m_CullTransparentMesh: 1
---- !u!1 &630372955
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 630372956}
-  - component: {fileID: 630372958}
-  - component: {fileID: 630372957}
-  m_Layer: 5
-  m_Name: Image
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &630372956
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 630372955}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 561888213}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -24.96, y: -305.37045}
-  m_SizeDelta: {x: 458.8, y: 191.26}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &630372957
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 630372955}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &630372958
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 630372955}
-  m_CullTransparentMesh: 1
 --- !u!1 &649811516
 GameObject:
   m_ObjectHideFlags: 0
@@ -15222,9 +15146,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Nouveau record !
-
-    350 m -> 500 m'
+  m_text: "Nouveau record !\n350 m \u2192 500 m"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5e4cf8c4e496ba3439ab979f2b4719e1, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 9777f30af0413cd4f93a4d5b352bc4ad, type: 2}
@@ -17125,7 +17047,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &800899474
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17945,8 +17867,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Bienvenue dans <nobr>d'Incredible Unknown Territories</nobr> version 2025.
     A bord de votre v\xE9hicule, votre objectif est simple : parcourir la plus longue
-    distance possible en \xE9vitant les obstacles de cet incroyable territoire inconnu.
-    \n\nBon courage pour battre le record actuel de <color=#AAAAFF><color=#00F6FF>placeholder</color></color>."
+    distance possible en esquivant les obstacles mortels de cet incroyable territoire
+    inconnu. \n\nBon courage pour battre le record actuel de <color=#AAAAFF><color=#00F6FF>placeholder</color></color>."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5e4cf8c4e496ba3439ab979f2b4719e1, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 67a76bc4bfb811e479b8d1f60f914b2f, type: 2}
@@ -18643,10 +18565,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Distance parcourue : <color=#AAAAFF><color=#00F6FF>350 km</color></color>
+  m_text: 'Vous avez parcouru : <color=#AAAAFF><color=#00F6FF>placeholder</color></color>
 
     Distance
-    totale parcourue depuis ce matin : <color=#BBAAFF><color=#00F6FF>4200 km</color></color>'
+    totale parcourue depuis ce matin : <color=#BBAAFF><color=#00F6FF>placeholder</color></color>'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5e4cf8c4e496ba3439ab979f2b4719e1, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 67a76bc4bfb811e479b8d1f60f914b2f, type: 2}
