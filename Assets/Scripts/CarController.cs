@@ -116,6 +116,12 @@ public class CarController : MonoBehaviour
         carData.isMovingBackward = moveInput.normalized.y < 0;
         collision.mass = 0;
         // collision.mass = Mathf.Abs(moveInput.normalized.y) > 0 ? 1 : 0;
+
+        // if (Input.GetKeyDown(KeyCode.Space))
+        // {
+        //     print(2πr2(1-cosθ));
+        //     // float angle = Vector3.Angle(targetDir, collision.transform.forward);
+        // }
     }
 
     private void LateUpdate()

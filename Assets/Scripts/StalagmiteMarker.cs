@@ -32,7 +32,7 @@ public class StalagmiteMarker : MonoBehaviour
 
             yield return null;
         }
-        yield return Helpers.GetWait(0.5f);
+        yield return Helpers.GetWait(0.85f);
         gameObject.SetActive(false);
     }
 

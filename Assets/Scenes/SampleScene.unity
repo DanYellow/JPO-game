@@ -21824,7 +21824,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ground: {fileID: 742801162014190680}
-  duration: 1.05
+  duration: 0.45
 --- !u!1 &1671770924
 GameObject:
   m_ObjectHideFlags: 0
@@ -24296,6 +24296,7 @@ MonoBehaviour:
   hasReachMinimumTravelDistance: {fileID: 11400000, guid: eae2fa2962469b14c8de2d863ff5ca4f,
     type: 2}
   onGameOver: {fileID: 11400000, guid: 287ac5d675fb3404fa950b20289e88a5, type: 2}
+  target: {fileID: 1166183952}
 --- !u!114 &3038029926327017419
 MonoBehaviour:
   m_ObjectHideFlags: 0
