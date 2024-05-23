@@ -143,7 +143,7 @@ public class CameraEffects : MonoBehaviour
     private IEnumerator BoostEffectProxy()
     {
         float current = 0;
-        float duration = 0.95f;
+        float duration = 0.75f;
 
         CinemachineFramingTransposer cinemachineFramingTransposer = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
 
@@ -151,9 +151,9 @@ public class CameraEffects : MonoBehaviour
 
         while (current <= 1)
         {
-            cinemachineFramingTransposer.m_XDamping = Mathf.SmoothStep(1, 0, current);
-            cinemachineFramingTransposer.m_YDamping = Mathf.SmoothStep(1, 0, current);
-            cinemachineFramingTransposer.m_ZDamping = Mathf.SmoothStep(1, 0, current);
+            cinemachineFramingTransposer.m_XDamping = Mathf.SmoothStep(0.85f, 0, current);
+            cinemachineFramingTransposer.m_YDamping = Mathf.SmoothStep(0.85f, 0, current);
+            cinemachineFramingTransposer.m_ZDamping = Mathf.SmoothStep(0.85f, 0, current);
             
             current += Time.deltaTime / duration;
 
