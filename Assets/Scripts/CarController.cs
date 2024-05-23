@@ -33,6 +33,10 @@ public class CarController : MonoBehaviour
     private float drifitngTimer = 0.85f;
     private float drifitngTimeRemaning = 0;
 
+    private bool wasDrifting = false;
+
+    private float boostFactor = 1f;
+
     [Header("Scriptable Objects")]
     [SerializeField]
     private VoidEventChannel onCarSlowdown;
@@ -88,6 +92,11 @@ public class CarController : MonoBehaviour
             drifitngTimeRemaning = drifitngTimer;
         }
 
+        if (wasDrifting)
+        {
+            StartCoroutine(Boost());
+        }
+
         carData.isMovingBackward = moveInput.normalized.y < 0;
         collision.mass = 0;
         // collision.mass = Mathf.Abs(moveInput.normalized.y) > 0 ? 1 : 0;
@@ -111,7 +120,7 @@ public class CarController : MonoBehaviour
 
         if (isCarGrounded.CurrentValue)
         {
-            float finalSpeed = carData.forwardSpeed * 1.45f;
+            float finalSpeed = carData.forwardSpeed * 1.45f * boostFactor;
             motor.AddForce(finalSpeed * transform.forward * moveInput.y, ForceMode.Acceleration);
         }
 
@@ -212,6 +221,24 @@ public class CarController : MonoBehaviour
         }
 
         moveInput.y = 0;
+    }
+
+    private IEnumerator Boost()
+    {
+        float current = 0;
+        float duration = 0.1f;
+        yield return null;
+
+        while (current <= 1)
+        {
+            boostFactor = Mathf.Lerp(1.5f, 1, current);
+
+            current += Time.deltaTime / duration;
+
+            yield return null;
+        }
+
+        boostFactor = 1;
     }
 
     private void OnGameOver()
