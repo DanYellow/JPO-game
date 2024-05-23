@@ -34,6 +34,7 @@ public class CarController : MonoBehaviour
     private float drifitngTimeRemaning = 0;
 
     private bool wasDrifting = false;
+    private bool isBoosting = false;
 
     private float boostFactor = 1f;
 
@@ -78,11 +79,14 @@ public class CarController : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 20f * Time.deltaTime);
         // transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles)
 
-        if (HasStartDrifting())
+        bool isDrifting = IsDrifting();
+
+        if (isDrifting)
         {
             drifitngTimeRemaning -= Time.deltaTime;
             if (drifitngTimeRemaning <= 0)
             {
+                wasDrifting = true;
                 isCarDrifting.CurrentValue = true;
             }
         }
@@ -92,7 +96,7 @@ public class CarController : MonoBehaviour
             drifitngTimeRemaning = drifitngTimer;
         }
 
-        if (wasDrifting)
+        if (wasDrifting && !isBoosting && !isDrifting)
         {
             StartCoroutine(Boost());
         }
@@ -132,7 +136,7 @@ public class CarController : MonoBehaviour
         collision.MovePosition(motor.position);
     }
 
-    private bool HasStartDrifting()
+    private bool IsDrifting()
     {
         return Mathf.Abs(moveInput.normalized.x) > 0 && Mathf.Abs(moveInput.normalized.y) > 0;
     }
@@ -225,19 +229,14 @@ public class CarController : MonoBehaviour
 
     private IEnumerator Boost()
     {
-        float current = 0;
-        float duration = 0.1f;
+        isBoosting = true;
+        wasDrifting = false;
+
         yield return null;
 
-        while (current <= 1)
-        {
-            boostFactor = Mathf.Lerp(1.5f, 1, current);
+        motor.AddForce(transform.forward * 200, ForceMode.Impulse);
 
-            current += Time.deltaTime / duration;
-
-            yield return null;
-        }
-
+        isBoosting = false;
         boostFactor = 1;
     }
 
