@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using Cinemachine.PostFX;
 using UnityEngine.Rendering.Universal;
+using Cinemachine;
 
 public class CameraEffects : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class CameraEffects : MonoBehaviour
     private float chromaticAberrationStep = 0.025f;
 
     private ChromaticAberration chromaticAberrationClone;
+
+    private CinemachineVirtualCamera cinemachineVirtualCamera;
 
     [SerializeField]
     private Material backgroundRender;
@@ -35,11 +38,19 @@ public class CameraEffects : MonoBehaviour
     [SerializeField]
     private BoolValue isCarTakingDamage;
 
+    [SerializeField]
+    private VoidEventChannel onCarBoost;
+
+    private void Awake()
+    {
+        cinemachineVirtualCamera = GetComponent<CinemachineVirtualCamera>();
+    }
 
     private void OnEnable()
     {
         onScoreThresholdReached.OnEventRaised += ScoreEffect;
         onCarDamage.OnEventRaised += DamageIndicator;
+        onCarBoost.OnEventRaised += BoostEffect;
     }
 
     void Start()
@@ -125,27 +136,34 @@ public class CameraEffects : MonoBehaviour
         backgroundRender.SetFloat("_VignettePower", initialVignettePower);
     }
 
-    private float EaseIn(float t)
-    {
-        return t * t;
+    private void BoostEffect() {
+        StartCoroutine(BoostEffectProxy());
     }
 
-    private float Spike(float t)
+    private IEnumerator BoostEffectProxy()
     {
-        if (t <= .5f)
-            return EaseIn(t / .5f);
-        return EaseIn(Flip(t) / .5f);
-    }
+        float current = 0;
+        float duration = 0.95f;
 
-    public float Flip(float x)
-    {
-        return 1 - x;
-    }
+        CinemachineFramingTransposer cinemachineFramingTransposer = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
 
+        yield return null;
+
+        while (current <= 1)
+        {
+            cinemachineFramingTransposer.m_XDamping = Mathf.SmoothStep(1, 0, current);
+            cinemachineFramingTransposer.m_YDamping = Mathf.SmoothStep(1, 0, current);
+            cinemachineFramingTransposer.m_ZDamping = Mathf.SmoothStep(1, 0, current);
+            
+            current += Time.deltaTime / duration;
+
+            yield return null;
+        }
+    }
     private void OnDisable()
     {
         onScoreThresholdReached.OnEventRaised -= ScoreEffect;
         onCarDamage.OnEventRaised -= DamageIndicator;
+        onCarBoost.OnEventRaised -= BoostEffect;
     }
-
 }

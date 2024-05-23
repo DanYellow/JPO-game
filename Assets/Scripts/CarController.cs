@@ -53,6 +53,9 @@ public class CarController : MonoBehaviour
     [SerializeField]
     private VoidEventChannel onGameOver;
 
+    [SerializeField]
+    private VoidEventChannel onCarBoost;
+
     private void OnEnable()
     {
         onCarSlowdown.OnEventRaised += IncreaseDrag;
@@ -234,7 +237,8 @@ public class CarController : MonoBehaviour
 
         yield return null;
 
-        motor.AddForce(transform.forward * 200, ForceMode.Impulse);
+        motor.AddForce(transform.forward * 125 * moveInput.y, ForceMode.Impulse);
+        onCarBoost.OnEventRaised();
 
         isBoosting = false;
         boostFactor = 1;
