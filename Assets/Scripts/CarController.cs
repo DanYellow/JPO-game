@@ -72,6 +72,9 @@ public class CarController : MonoBehaviour
         collision.transform.parent = null;
     }
 
+    public float cooldownTime = 5f;
+    private float lastUsedTime;
+
     void Update()
     {
         ManageWheels();
@@ -90,6 +93,7 @@ public class CarController : MonoBehaviour
             if (drifitngTimeRemaning <= 0)
             {
                 wasDrifting = true;
+                lastUsedTime = Time.time;
                 isCarDrifting.CurrentValue = true;
             }
         }
@@ -99,7 +103,12 @@ public class CarController : MonoBehaviour
             drifitngTimeRemaning = drifitngTimer;
         }
 
-        if (wasDrifting && !isBoosting && !isDrifting)
+        if (Time.time > lastUsedTime + cooldownTime)
+        {
+
+        }
+
+        if (wasDrifting && !isBoosting && !isDrifting && moveInput.sqrMagnitude == 1)
         {
             StartCoroutine(Boost());
         }
@@ -151,9 +160,9 @@ public class CarController : MonoBehaviour
             return;
         }
 
-        float newRotation = carData.turnSpeed * moveInput.x * Time.deltaTime;
-        if (isCarGrounded.CurrentValue)
+        if (isCarGrounded.CurrentValue && !isBoosting)
         {
+            float newRotation = carData.turnSpeed * moveInput.x * Time.deltaTime;
             transform.RotateAround(driftPoint.position, transform.up, newRotation);
         }
     }
@@ -238,6 +247,7 @@ public class CarController : MonoBehaviour
         yield return null;
 
         motor.AddForce(transform.forward * 125 * moveInput.y, ForceMode.Impulse);
+        yield return Helpers.GetWait(0.05f);
         onCarBoost.OnEventRaised();
 
         isBoosting = false;

@@ -20034,6 +20034,7 @@ MonoBehaviour:
   carData: {fileID: 11400000, guid: 7de1e523eab7c7e4c9c86afd2e90efa8, type: 2}
   onGameOver: {fileID: 11400000, guid: 287ac5d675fb3404fa950b20289e88a5, type: 2}
   onCarBoost: {fileID: 11400000, guid: 5ef7c9ba05f53ed4eaa221ff486516df, type: 2}
+  cooldownTime: 5
 --- !u!4 &1166183952
 Transform:
   m_ObjectHideFlags: 0
@@ -24241,7 +24242,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 889802521992455464}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 082a829fe43b05744afd074ac7e3747b, type: 3}
   m_Name: 
@@ -24283,7 +24284,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 889802521992455464}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3dd931c5850a4364d89ab77cde525338, type: 3}
   m_Name: 
@@ -24302,7 +24303,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 889802521992455464}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d44384958465d1944b5a0d2ec0fbb8ea, type: 3}
   m_Name: 

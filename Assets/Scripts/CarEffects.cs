@@ -59,8 +59,9 @@ public class CarEffects : MonoBehaviour
             return;
         }
 
-        if (isCarDrifting.CurrentValue)
+        if (isCarDrifting.CurrentValue && !driftSmokeParticles.isEmitting)
         {
+            driftSmokeParticles.Emit(1);
             driftSmokeParticles.Play();
         }
         else
