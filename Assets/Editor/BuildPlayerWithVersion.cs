@@ -7,9 +7,10 @@ using System.Text.RegularExpressions;
 // https://stackoverflow.com/questions/75630802/create-new-folder-for-the-project-to-get-build-into-throught-script-c-sharp
 public class BuildPlayerWithVersion : MonoBehaviour
 {
-    [MenuItem("**Debug**/Build/Create build with current time")]
+    [MenuItem("**Debug**/Create build")]
     public static void CreateBuild()
     {
+        PlayerPrefs.DeleteKey("best_score");
         BuildPlayerOptions buildPlayerOptions = BuildPlayerWindow.DefaultBuildMethods.GetBuildPlayerOptions(new BuildPlayerOptions());
         string version = System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
 
