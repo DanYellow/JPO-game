@@ -70,7 +70,11 @@ public class CinematicBarsManager : MonoBehaviour
 
     void HideBars()
     {
-        StartCoroutine(AnimateBars(false, 1.05f));
+        StartCoroutine(HideBarsCoroutine());
+    }
+
+    private IEnumerator HideBarsCoroutine () {
+        yield return StartCoroutine(AnimateBars(false, 1.05f));
     }
 
     private void OnDisable()
