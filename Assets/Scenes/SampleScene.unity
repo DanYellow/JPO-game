@@ -14178,7 +14178,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &544568082
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17899,7 +17899,7 @@ GameObject:
   - component: {fileID: 899122791}
   - component: {fileID: 899122790}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Description
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17944,10 +17944,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Bienvenue dans <nobr>d'Incredible Unknown Territories</nobr> version 2025.
-    A bord de votre v\xE9hicule, votre objectif est simple : parcourir la plus longue
-    distance possible en esquivant les obstacles mortels de cet incroyable territoire
-    inconnu. \n\nBon courage pour battre le record actuel de <color=#AAAAFF><color=#00F6FF>placeholder</color></color>."
+  m_text: "Bienvenue dans <nobr>d'<color=#00F6FF>Incredible Unknown Territories</color></nobr>
+    version 2025. A bord de votre v\xE9hicule, votre objectif est simple : parcourir
+    la plus longue distance possible en esquivant les obstacles mortels de cet incroyable
+    territoire inconnu. \n\nBon courage pour battre le record actuel de <color=#AAAAFF><color=#00F6FF>placeholder</color></color>."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5e4cf8c4e496ba3439ab979f2b4719e1, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 67a76bc4bfb811e479b8d1f60f914b2f, type: 2}
