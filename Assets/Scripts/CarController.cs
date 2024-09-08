@@ -101,7 +101,7 @@ public class CarController : MonoBehaviour
             drifitngTimeRemaning = drifitngTimer;
         }
 
-        if (wasDrifting && !isBoosting && !isDrifting)
+        if (wasDrifting && !isBoosting && !isDrifting && moveInput.normalized.y > 0)
         {
             StartCoroutine(Boost());
         }
