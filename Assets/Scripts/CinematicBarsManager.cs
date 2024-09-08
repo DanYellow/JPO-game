@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CinematicBarsManager : MonoBehaviour
@@ -27,11 +26,7 @@ public class CinematicBarsManager : MonoBehaviour
 
         RectTransform bottomBarSize = bottomBar.GetComponent<RectTransform>();
         bottomBarSize.sizeDelta = new Vector2(Screen.width, 100);
-        bottomBarSize.anchoredPosition = new Vector2(xCenter, 0 +- (bottomBarSize.sizeDelta.y / 2));
-        // topBar.position = new Vector3(xCenter, -barSize.sizeDelta.y, 0);
-        // print(topBar.position);
-        // bottomBar.position = new Vector3(xCenter, Screen.height + barSize.sizeDelta.y, 0);
-        // bottomBar.GetComponent<RectTransform>().sizeDelta = barSize.sizeDelta;
+        bottomBarSize.anchoredPosition = new Vector2(xCenter, 0 - (bottomBarSize.sizeDelta.y / 2));
     }
 
     private void OnEnable()
@@ -58,14 +53,14 @@ public class CinematicBarsManager : MonoBehaviour
 
         RectTransform barSize = topBar.GetComponent<RectTransform>();
 
-        Vector3 startBarEnd = topBarStart + ((show ? 1 : -1) * new Vector3(0, barSize.sizeDelta.y, 0));
-        // Vector3 bottomBarEnd = bottomBarStart - ((show ? 1 : -1) * new Vector3(0, barSize.sizeDelta.y, 0));
+        Vector3 startBarEnd = topBarStart - ((show ? 1 : -1) * new Vector3(0, barSize.sizeDelta.y, 0));
+        Vector3 bottomBarEnd = bottomBarStart + ((show ? 1 : -1) * new Vector3(0, barSize.sizeDelta.y, 0));
 
         yield return null;
         while (current <= 1)
         {
             topBarSize.anchoredPosition = Vector3.Lerp(topBarStart, startBarEnd, current);
-            // bottomBar.position = Vector3.Lerp(bottomBarStart, bottomBarEnd, current);
+            bottomBar.position = Vector3.Lerp(bottomBarStart, bottomBarEnd, current);
 
             current += Time.deltaTime / duration;
 
@@ -73,10 +68,9 @@ public class CinematicBarsManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void HideBars()
     {
-        // StartCoroutine(AnimateBars(false, 1.35f));
+        StartCoroutine(AnimateBars(false, 1.05f));
     }
 
     private void OnDisable()
