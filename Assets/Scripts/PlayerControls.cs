@@ -7,18 +7,12 @@ public class PlayerControls : MonoBehaviour
 {
     [SerializeField]
     private Rigidbody rb;
-
-    [SerializeField, Range(1, 15)]
-    private float jumpForce = 10;
-
     private bool isGrounded = false;
 
     private bool isFalling = false;
 
     private bool isGroundPounding = false;
 
-    [SerializeField, Range(0, 2)]
-    private float groundPoundCooldown = 2.75f;
     private float lastGroundPoundCooldown = 0;
 
     [SerializeField]
@@ -27,23 +21,11 @@ public class PlayerControls : MonoBehaviour
     [SerializeField]
     private Transform groundCheck;
 
-    [SerializeField]
-    private float groundCheckRadius;
-
     [SerializeField, Range(5, 20)]
     private float dropForce = 10;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    [Header("Scriptable Objects"), SerializeField]
+    private PlayerData playerData;
 
     private void FixedUpdate()
     {
@@ -65,7 +47,7 @@ public class PlayerControls : MonoBehaviour
 
     public bool IsGrounded()
     {
-        return Physics.OverlapSphere(groundCheck.position, groundCheckRadius, listGroundLayers).Length > 0;
+        return Physics.OverlapSphere(groundCheck.position, playerData.groundCheckRadius, listGroundLayers).Length > 0;
     }
 
 
@@ -73,7 +55,7 @@ public class PlayerControls : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            if (Time.time - lastGroundPoundCooldown < groundPoundCooldown)
+            if (Time.time - lastGroundPoundCooldown < playerData.groundPoundCooldown)
             {
                 return;
             }
@@ -85,7 +67,7 @@ public class PlayerControls : MonoBehaviour
 
             if (isGrounded)
             {
-                rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
+                rb.velocity = new Vector3(rb.velocity.x, playerData.jumpForce, rb.velocity.z);
             }
         }
     }
@@ -103,14 +85,14 @@ public class PlayerControls : MonoBehaviour
         rb.constraints = RigidbodyConstraints.FreezePosition;
         yield return Helpers.GetWait(0.15f);
         rb.constraints = RigidbodyConstraints.None;
-        rb.AddForce(Vector3.down * dropForce, ForceMode.Impulse);
+        rb.AddForce(Vector3.down * playerData.dropForce, ForceMode.Impulse);
     }
 
     void OnDrawGizmos()
     {
         if (groundCheck != null)
         {
-            Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+            Gizmos.DrawWireSphere(groundCheck.position, playerData.groundCheckRadius);
         }
     }
 }
