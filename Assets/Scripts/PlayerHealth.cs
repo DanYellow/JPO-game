@@ -13,10 +13,13 @@ public class PlayerHealth : MonoBehaviour
 
     private Animator animator;
 
+    private PlayerInvincibility playerInvincibility;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
+        playerInvincibility = GetComponent<PlayerInvincibility>();
 
         nbLives = playerData.maxNbLives;
     }
@@ -30,6 +33,7 @@ public class PlayerHealth : MonoBehaviour
         {
             Die(impactPoint);
         } else {
+            StartCoroutine(playerInvincibility.Invincible());
             animator.SetTrigger(AnimationStrings.isHit);
         }
     }

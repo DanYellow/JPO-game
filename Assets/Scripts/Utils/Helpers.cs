@@ -36,7 +36,7 @@ public static class Helpers
     {
         foreach (var layerIndex in layersToIgnore)
         {
-            Physics2D.IgnoreLayerCollision(
+            Physics.IgnoreLayerCollision(
                 LayerMask.NameToLayer(layerName),
                 layerIndex,
                 enabled
