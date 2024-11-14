@@ -603,14 +603,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 435406714}
-  jumpForce: 5
-  groundPoundCooldown: 0.65
   listGroundLayers:
     serializedVersion: 2
     m_Bits: 8
   groundCheck: {fileID: 215354224}
-  groundCheckRadius: 0.15
   dropForce: 10
+  playerData: {fileID: 11400000, guid: 04e41f959a19e5048ac8ef28d6075c42, type: 2}
 --- !u!1 &709000393
 GameObject:
   m_ObjectHideFlags: 0
@@ -869,6 +867,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1111240191}
   - component: {fileID: 1111240192}
+  - component: {fileID: 1111240193}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -943,6 +942,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1111240193
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111240190}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8827d3bc780c4204daf2b0a39dce4223, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1174841553
 GameObject:
   m_ObjectHideFlags: 0
