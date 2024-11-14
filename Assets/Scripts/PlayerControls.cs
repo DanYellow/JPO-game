@@ -17,7 +17,7 @@ public class PlayerControls : MonoBehaviour
 
     private bool isGroundPounding = false;
 
-    [SerializeField, Range(1, 15)]
+    [SerializeField, Range(0, 2)]
     private float groundPoundCooldown = 2.75f;
     private float lastGroundPoundCooldown = 0;
 
@@ -30,7 +30,7 @@ public class PlayerControls : MonoBehaviour
     [SerializeField]
     private float groundCheckRadius;
 
-    [SerializeField, Range(1, 15)]
+    [SerializeField, Range(5, 20)]
     private float dropForce = 10;
 
     // Start is called before the first frame update
@@ -69,21 +69,24 @@ public class PlayerControls : MonoBehaviour
     }
 
 
-    public void Jump(InputAction.CallbackContext context)
+    public void OnJump(InputAction.CallbackContext context)
     {
-        if (Time.time - lastGroundPoundCooldown > groundPoundCooldown)
+        if (context.phase == InputActionPhase.Performed)
         {
-            return;
-        }
+            if (Time.time - lastGroundPoundCooldown < groundPoundCooldown)
+            {
+                return;
+            }
 
-        if (!isGrounded)
-        {
-            StopAndSpin();
-        }
+            if (!isGrounded)
+            {
+                StopAndSpin();
+            }
 
-        if (isGrounded)
-        {
-            rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
+            if (isGrounded)
+            {
+                rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
+            }
         }
     }
 
@@ -98,7 +101,7 @@ public class PlayerControls : MonoBehaviour
     private IEnumerator DropAndPound()
     {
         rb.constraints = RigidbodyConstraints.FreezePosition;
-        yield return new WaitForSeconds(0.15f);
+        yield return Helpers.GetWait(0.15f);
         rb.constraints = RigidbodyConstraints.None;
         rb.AddForce(Vector3.down * dropForce, ForceMode.Impulse);
     }

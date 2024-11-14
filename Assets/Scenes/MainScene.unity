@@ -603,13 +603,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 435406714}
-  jumpForce: 10
-  groundPoundCooldown: 2.75
+  jumpForce: 5
+  groundPoundCooldown: 0.65
   listGroundLayers:
     serializedVersion: 2
     m_Bits: 8
-  groundCheck: {fileID: 0}
-  groundCheckRadius: 0
+  groundCheck: {fileID: 215354224}
+  groundCheckRadius: 0.15
   dropForce: 10
 --- !u!1 &709000393
 GameObject:
@@ -954,7 +954,6 @@ GameObject:
   - component: {fileID: 1174841557}
   - component: {fileID: 1174841556}
   - component: {fileID: 1174841555}
-  - component: {fileID: 1174841554}
   - component: {fileID: 1174841558}
   m_Layer: 0
   m_Name: GameAreaLandmark
@@ -963,28 +962,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!64 &1174841554
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1174841553}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &1174841555
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1080,6 +1057,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1193777710}
   - component: {fileID: 1193777711}
+  - component: {fileID: 1193777712}
   m_Layer: 0
   m_Name: CurrentSceneManager
   m_TagString: Untagged
@@ -1132,7 +1110,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 435406720}
         m_TargetAssemblyTypeName: PlayerControls, Assembly-CSharp
-        m_MethodName: Jump
+        m_MethodName: OnJump
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1146,9 +1124,21 @@ MonoBehaviour:
     m_ActionName: New action map/Jump[/Keyboard/q]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: New action map
+  m_DefaultActionMap: Player1
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &1193777712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1193777709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 019b3edcf5041354c857342647860936, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1775837139
 GameObject:
   m_ObjectHideFlags: 0
