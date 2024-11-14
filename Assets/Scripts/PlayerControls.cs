@@ -2,6 +2,15 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+public enum Player
+{
+    Player1,
+    Player2,
+    Player3,
+    Player4
+}
+
+
 public class PlayerControls : MonoBehaviour
 {
     [SerializeField]
@@ -25,11 +34,16 @@ public class PlayerControls : MonoBehaviour
 
     private Animator animator;
 
-    private void Awake() {
+    [SerializeField]
+    private Player player;
+
+    private void Awake()
+    {
         animator = GetComponentInChildren<Animator>();
     }
 
-    private void Update() {
+    private void Update()
+    {
         animator.SetFloat(AnimationStrings.velocityY, rb.velocity.y);
         animator.SetBool(AnimationStrings.isGrounded, isGrounded);
     }
@@ -113,6 +127,21 @@ public class PlayerControls : MonoBehaviour
         {
             // bottom left
             var val = Mathf.Lerp(0, -Mathf.PI / 2, (float)i / nbColliders);
+
+            switch (player)
+            {
+                case Player.Player2:
+                    val = Mathf.Lerp(0, Mathf.PI / 2, (float)i / nbColliders);
+                    break;
+                case Player.Player3:
+                    val = Mathf.Lerp(Mathf.PI, 2 * Mathf.PI, (float)i / nbColliders);
+                    break;
+                case Player.Player4:
+                    val = Mathf.Lerp(Mathf.PI, 3 * Mathf.PI / 2, (float)i / nbColliders);
+                    break;
+                default:
+                    break;
+            }
 
             // top left
             // var val = Mathf.Lerp(0, (1 * Mathf.PI) / 2, (float) i / length);

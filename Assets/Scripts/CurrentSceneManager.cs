@@ -1,9 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.EventSystems;
-using UnityEngine.Events;
 
-
+[ExecuteInEditMode]
 public class CurrentSceneManager : MonoBehaviour
 {
     private void Update()
