@@ -73,6 +73,8 @@ public class PlayerControls : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
+        // context.ReadValue<bool>();
+        // context.action.triggered;
         if (context.phase == InputActionPhase.Performed)
         {
             if (Time.time - lastGroundPoundCooldown < playerData.groundPoundCooldown)
@@ -123,10 +125,9 @@ public class PlayerControls : MonoBehaviour
         int nbColliders = 4;
         float radius = 2;
 
-        for (var i = 0; i <= nbColliders; i += 2)
+        for (int i = 0; i <= nbColliders; i += 2)
         {
-            // bottom left
-            var val = Mathf.Lerp(0, -Mathf.PI / 2, (float)i / nbColliders);
+            float val = Mathf.Lerp(0, -Mathf.PI / 2, (float)i / nbColliders);
 
             switch (player)
             {
@@ -142,17 +143,6 @@ public class PlayerControls : MonoBehaviour
                 default:
                     break;
             }
-
-            // top left
-            // var val = Mathf.Lerp(0, (1 * Mathf.PI) / 2, (float) i / length);
-
-            // top right
-            // var val = Mathf.Lerp(Mathf.PI, (1 * Mathf.PI) / 2, (float) i / length);
-
-            // bottom right
-            // var val = Mathf.Lerp(Mathf.PI, (3 * Mathf.PI) / 2, (float) i / length);
-
-            // var val = Mathf.Lerp(Mathf.PI, 2 * Mathf.PI, (float)i / length);
 
             var vertical = Mathf.Sin(val);
             var horizontal = Mathf.Cos(val);
