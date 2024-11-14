@@ -11,9 +11,13 @@ public class PlayerHealth : MonoBehaviour
 
     private Rigidbody rb;
 
+    private Animator animator;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        animator = GetComponentInChildren<Animator>();
+
         nbLives = playerData.maxNbLives;
     }
 
@@ -25,12 +29,14 @@ public class PlayerHealth : MonoBehaviour
         if (nbLives == 0)
         {
             Die(impactPoint);
+        } else {
+            animator.SetTrigger(AnimationStrings.isHit);
         }
     }
 
     private void Die(Vector3 impactPoint)
     {
-        rb.AddForce(impactPoint * 50, ForceMode.VelocityChange);
+        rb.AddForce(impactPoint * 35, ForceMode.VelocityChange);
         // rb.AddExplosionForce(1000, impactPoint, 10, 0);
     }
 }

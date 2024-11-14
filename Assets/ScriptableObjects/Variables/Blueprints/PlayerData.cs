@@ -16,6 +16,7 @@ public class PlayerData : ScriptableObject
     public float groundCheckRadius = 0.15f;
 
     public int maxNbLives = 3;
+    public float invicibilityTime = 1.25f;
 
     public GameObject waveEffect;
 }
