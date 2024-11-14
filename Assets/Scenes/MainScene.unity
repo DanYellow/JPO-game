@@ -245,7 +245,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 25
+  field of view: 24
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -607,7 +607,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   groundCheck: {fileID: 215354224}
-  dropForce: 10
   playerData: {fileID: 11400000, guid: 04e41f959a19e5048ac8ef28d6075c42, type: 2}
 --- !u!1 &709000393
 GameObject:
@@ -710,7 +709,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.9, y: 1.9, z: 1.9}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -1042,7 +1041,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.05, z: 0}
-  m_LocalScale: {x: 0.95, y: 0.95, z: 0.95}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1775837140}
@@ -1078,6 +1077,7 @@ GameObject:
   - component: {fileID: 1193777710}
   - component: {fileID: 1193777711}
   - component: {fileID: 1193777712}
+  - component: {fileID: 1193777713}
   m_Layer: 0
   m_Name: CurrentSceneManager
   m_TagString: Untagged
@@ -1157,6 +1157,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 019b3edcf5041354c857342647860936, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1193777713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1193777709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7f70ebbb9162424ebf26b9910fa46a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1775837139

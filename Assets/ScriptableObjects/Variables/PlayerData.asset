@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01223ea5082bd7c40846c1bc73d58531, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  jumpForce: 7
-  groundPoundCooldown: 2
+  jumpForce: 6
+  groundPoundCooldown: 0.65
   dropForce: 10
-  groundCheckRadius: 0
+  groundCheckRadius: 0.15
   nbLives: 3

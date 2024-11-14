@@ -13,7 +13,9 @@ public class PlayerData : ScriptableObject
     [Range(5, 20)]
     public float dropForce = 10;
 
-    public float groundCheckRadius;
+    public float groundCheckRadius = 0.15f;
 
     public int nbLives = 3;
+
+    public GameObject waveEffect;
 }
