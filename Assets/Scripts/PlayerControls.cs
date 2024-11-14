@@ -132,13 +132,13 @@ public class PlayerControls : MonoBehaviour
             switch (player)
             {
                 case Player.Player2:
-                    val = Mathf.Lerp(0, Mathf.PI / 2, (float)i / nbColliders);
+                    val = Mathf.Lerp(Mathf.PI, 3 * Mathf.PI / 2, (float)i / nbColliders);
+                    // val = Mathf.Lerp(0, Mathf.PI / 2, (float)i / nbColliders);
                     break;
                 case Player.Player3:
                     val = Mathf.Lerp(Mathf.PI, 2 * Mathf.PI, (float)i / nbColliders);
                     break;
                 case Player.Player4:
-                    val = Mathf.Lerp(Mathf.PI, 3 * Mathf.PI / 2, (float)i / nbColliders);
                     break;
                 default:
                     break;
