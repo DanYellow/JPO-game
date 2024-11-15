@@ -8,7 +8,7 @@ public class PlayerHealth : MonoBehaviour
 
     [SerializeField]
     private VectorEventChannel onPlayerExit;
-    
+
     [SerializeField]
     private VoidEventChannel onPlayerDeathEvent;
 
@@ -22,6 +22,8 @@ public class PlayerHealth : MonoBehaviour
     private PlayerInvincibility playerInvincibility;
 
     private Light lightLandmark;
+
+    private bool hasTriggeredExitScreenEvent = false;
 
     [SerializeField]
     private UnityEvent OnDeath;
@@ -43,7 +45,6 @@ public class PlayerHealth : MonoBehaviour
 
         if (nbLives == 0)
         {
-            onPlayerExit.OnEventRaised(transform.position);
             Die(impactPoint);
         }
         else
@@ -53,19 +54,28 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (nbLives == 0 && !hasTriggeredExitScreenEvent)
+        {
+            var pos = Camera.main.WorldToScreenPoint(transform.position);
+            bool isOffscreen = pos.x <= 0 || pos.x >= Screen.width ||
+                pos.y <= 0 || pos.y >= Screen.height;
+
+            if (isOffscreen)
+            {
+                hasTriggeredExitScreenEvent = true;
+                print(transform.position);
+                onPlayerExit.OnEventRaised(transform.position);
+            }
+        }
+    }
+
     private void Die(Vector3 impactPoint)
     {
         rb.AddForce(impactPoint * 35, ForceMode.VelocityChange);
         lightLandmark.enabled = false;
         onPlayerDeathEvent.OnEventRaised();
         OnDeath.Invoke();
-    }
-
-    private void OnBecameInvisible()
-    {
-        if (nbLives == 0)
-        {
-            onPlayerExit.OnEventRaised(transform.position);
-        }
     }
 }
