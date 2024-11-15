@@ -84,6 +84,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Player4",
+            "id": "f6a3b055-5b21-454c-abf6-43a0e0fefbd3",
+            "actions": [
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "d2a8aeaf-f5f1-4834-91a7-e8cd8f9f0cd5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "76f4d408-62c1-4da6-aee7-d7b791eb973b",
+                    "path": "<Keyboard>/numpad0",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
