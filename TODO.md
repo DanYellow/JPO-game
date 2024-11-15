@@ -18,7 +18,6 @@ Appuyez sur <sprite="MV Icons Keyboard - ALL" name="Key_Space_1"><sprite="MV Ico
 
 https://github.com/DanYellow/JPO-game/blob/JPO-2024-A/Assets/Scripts/Utils/TimelineController.cs
 
-https://www.google.com/search?q=retro+80s+background+car&sca_esv=2386da0e1e038e73&sca_upv=1&hl=fr&udm=2&biw=2243&bih=1278&ei=DUwlZqKfNrmrkdUPyPSO-Aw&ved=0ahUKEwji2fvd6dOFAxW5VaQEHUi6A88Q4dUDCBA&uact=5&oq=retro+80s+background+car&gs_lp=Egxnd3Mtd2l6LXNlcnAiGHJldHJvIDgwcyBiYWNrZ3JvdW5kIGNhcjIGEAAYCBgeSL4JUKgEWIMIcAF4AJABAJgBbKABuwKqAQMzLjG4AQPIAQD4AQGYAgSgApkCwgIKEAAYgAQYQxiKBcICBhAAGAcYHsICBBAAGB7CAgcQABiABBgTwgIGEAAYExgewgIIEAAYExgFGB7CAggQABgTGAgYHpgDAIgGAZIHAzMuMaAHyAg&sclient=gws-wiz-serp#vhid=Qte3UmCEkIIEgM&vssid=mosaic
 # Ressources
 
 6B7AA0
@@ -34,3 +33,5 @@ https://www.youtube.com/watch?v=naaVpEyr4RA
 https://www.google.com/search?q=unity+position+gameobject+relative+to+player+on+sphere+world&sca_esv=619c697d276fe56b&sca_upv=1&hl=fr&ei=HokpZsmaHKWskdUP5IyU6Ag&ved=0ahUKEwjJoZTE9NuFAxUlVqQEHWQGBY0Q4dUDCBA&uact=5&oq=unity+position+gameobject+relative+to+player+on+sphere+world&gs_lp=Egxnd3Mtd2l6LXNlcnAiPHVuaXR5IHBvc2l0aW9uIGdhbWVvYmplY3QgcmVsYXRpdmUgdG8gcGxheWVyIG9uIHNwaGVyZSB3b3JsZDIFECEYoAEyBRAhGKABSOlDUABY-kJwAHgAkAEAmAF_oAH1IKoBBDQwLje4AQPIAQD4AQGYAi-gAq4jwgIFEAAYgATCAgUQLhiABMICDhAuGIAEGMcBGI4FGK8BwgIGEAAYFhgewgIIEAAYFhgeGA_CAggQABiABBiiBMICBBAhGBXCAgUQIRifBcICBxAhGKABGAqYAwCSBwUyOS4xOKAHo-AB&sclient=gws-wiz-serp
 
 Credits : https://opengameart.org/content/smoke-aura
+
+https://www.youtube.com/watch?v=50qv78W5vko

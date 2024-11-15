@@ -11,7 +11,7 @@ public class PlayerInvincibility : MonoBehaviour
 
     private List<int> listLayersIndexes = new List<int>();
 
-    private LayerMask playerMask;
+    private LayerMask damageLayer;
 
     private bool isInvincible = false;
 
@@ -20,9 +20,8 @@ public class PlayerInvincibility : MonoBehaviour
 
     private void Awake()
     {
-        playerMask = playerData.damageLayer;
-        playerMask &= ~(1 << LayerMask.NameToLayer($"WaveEffect{player.ToString()}"));
-        // playerMask &= ~(1 << LayerMask.NameToLayer($"WaveEffect{player.ToString()}"));
+        damageLayer = playerData.damageLayer;
+        damageLayer &= ~(1 << LayerMask.NameToLayer($"WaveEffect{player.ToString()}"));
 
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
@@ -37,7 +36,7 @@ public class PlayerInvincibility : MonoBehaviour
     {
         for (int i = 0; i < 32; i++)
         {
-            if (playerMask == (playerMask | (1 << i)))
+            if (damageLayer == (damageLayer | (1 << i)))
             {
                 listLayersIndexes.Add(i);
             }
