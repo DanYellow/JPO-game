@@ -154,21 +154,21 @@ public class PlayerControls : MonoBehaviour
             var spawnPos = pos + spawnDir * radius;
 
             ObjectPooled waveEffect = pool.Get("WaveAttack");
+            print("okk");
             if (waveEffect == null)
             {
+                
                 return;
             }
 
             waveEffect.gameObject.layer = LayerMask.NameToLayer($"WaveEffect{player.ToString()}");
-            waveEffect.gameObject.transform.position = spawnPos;
-            waveEffect.gameObject.transform.rotation = Quaternion.identity;
-
+            waveEffect.gameObject.transform.SetPositionAndRotation(spawnPos, Quaternion.identity);
             waveEffect.gameObject.transform.LookAt(pos);
             waveEffect.gameObject.transform.RotateAround(
                 waveEffect.gameObject.transform.position,
                 waveEffect.gameObject.transform.up,
-               90
-           );
+                90
+            );
         }
     }
 

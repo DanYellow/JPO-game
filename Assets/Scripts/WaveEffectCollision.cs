@@ -23,8 +23,10 @@ public class WaveEffectCollision : MonoBehaviour
             Vector3 dirX = (other.transform.position - transform.position).normalized;
             playerHealth.TakeDamage(dirX); // other.ClosestPoint(transform.position)
         }
+        Unload();
+        // StopCoroutine(autoDestroyCoroutine);
+        // gameObject.SetActive(false);
 
-        gameObject.SetActive(false);
     }
 
     private void Update()
@@ -37,26 +39,14 @@ public class WaveEffectCollision : MonoBehaviour
 
     private void OnBecameInvisible()
     {
-        // if (!gameObject.activeInHierarchy)
-        // {
-        //     return;
-        // }
-
-        // StartCoroutine(Unload());
+        if (!gameObject.activeInHierarchy)
+        {
+            return;
+        }
+        Unload();
     }
 
-    private IEnumerator Unload()
-    {
-        yield return Helpers.GetWait(0.5f);
-        objectPooled.Release();
-    }
-
-    // private void OnEnable() {
-    //     StopCoroutine(autoDestroyCoroutine);
-    //     autoDestroyCoroutine = StartCoroutine(AutoDestroy(0.35f));
-    // }
-
-    private void OnDisable()
+    private void Unload()
     {
         if (objectPooled.Pool == null)
         {
@@ -70,16 +60,14 @@ public class WaveEffectCollision : MonoBehaviour
 
     IEnumerator AutoDestroy(float duration = 0.5f)
     {
+        if (!gameObject.activeInHierarchy)
+        {
+            yield break;
+        }
+
         yield return new WaitForSeconds(duration);
 
-        if (objectPooled.Pool == null)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            objectPooled.Release();
-        }
+        Unload();
     }
 
 }
