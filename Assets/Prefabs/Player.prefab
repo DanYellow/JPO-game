@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 2067386120912316461}
   - component: {fileID: 5651726885194495070}
   - component: {fileID: 4966838003681711026}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,6 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: 04e41f959a19e5048ac8ef28d6075c42, type: 2}
+  player: 0
 --- !u!114 &4966838003681711026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,6 +257,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 4e8cdc5e-c40a-49ec-bf99-c6a03d306587
     m_ActionName: Player2/Jump[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 962921ed-7c33-4421-a039-d44245ceb0c6
+    m_ActionName: Player3/Jump[/Keyboard/p]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player1
@@ -274,7 +279,7 @@ GameObject:
   - component: {fileID: 8085654216252192938}
   - component: {fileID: 5016107875869574109}
   - component: {fileID: 2366007370239090482}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -409,7 +414,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 259333325848091192}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}

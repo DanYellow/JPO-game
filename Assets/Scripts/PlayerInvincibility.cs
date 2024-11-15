@@ -11,10 +11,19 @@ public class PlayerInvincibility : MonoBehaviour
 
     private List<int> listLayersIndexes = new List<int>();
 
+    private LayerMask playerMask;
+
     private bool isInvincible = false;
+
+    [SerializeField]
+    private Player player;
 
     private void Awake()
     {
+        playerMask = playerData.damageLayer;
+        playerMask &= ~(1 << LayerMask.NameToLayer($"WaveEffect{player.ToString()}"));
+        // playerMask &= ~(1 << LayerMask.NameToLayer($"WaveEffect{player.ToString()}"));
+
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
@@ -28,7 +37,7 @@ public class PlayerInvincibility : MonoBehaviour
     {
         for (int i = 0; i < 32; i++)
         {
-            if (playerData.damageLayer == (playerData.damageLayer | (1 << i)))
+            if (playerMask == (playerMask | (1 << i)))
             {
                 listLayersIndexes.Add(i);
             }
@@ -37,8 +46,13 @@ public class PlayerInvincibility : MonoBehaviour
 
     public IEnumerator Invincible()
     {
+        if (isInvincible)
+        {
+            yield break;
+        }
+
         isInvincible = true;
-        
+
         ToggleCollisions(gameObject.layer, isInvincible);
 
         float timeElapsed = 0;

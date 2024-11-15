@@ -7,9 +7,8 @@ public enum Player
     Player1,
     Player2,
     Player3,
-    Player4
+    Player4,
 }
-
 
 public class PlayerControls : MonoBehaviour
 {
@@ -138,7 +137,7 @@ public class PlayerControls : MonoBehaviour
                     val = Mathf.Lerp(Mathf.PI / 2, Mathf.PI, (float)i / nbColliders);
                     break;
                 case Player.Player4:
-                    // val = Mathf.Lerp(0, Mathf.PI / 2, (float)i / nbColliders);
+                    val = Mathf.Lerp(0, Mathf.PI / 2, (float)i / nbColliders);
                     break;
                 default:
                     break;
@@ -151,6 +150,7 @@ public class PlayerControls : MonoBehaviour
             var spawnPos = pos + spawnDir * radius;
 
             GameObject newSurrounderObject = Instantiate(playerData.waveEffect, spawnPos, Quaternion.identity);
+            newSurrounderObject.layer = LayerMask.NameToLayer($"WaveEffect{player.ToString()}");
 
             newSurrounderObject.transform.LookAt(pos);
             newSurrounderObject.transform.RotateAround(
