@@ -2,15 +2,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public enum Player
-{
-    Player1,
-    Player2,
-    Player3,
-    Player4,
-}
-
-
 public class PlayerControls : MonoBehaviour
 {
     [SerializeField]
@@ -33,9 +24,6 @@ public class PlayerControls : MonoBehaviour
     private PlayerData playerData;
 
     private Animator animator;
-
-    [SerializeField]
-    private Player player;
 
     private ObjectPooling pool;
 
@@ -71,7 +59,7 @@ public class PlayerControls : MonoBehaviour
 
     public bool IsGrounded()
     {
-        return Physics.OverlapSphere(groundCheck.position, playerData.groundCheckRadius, listGroundLayers).Length > 0;
+        return Physics.OverlapSphere(groundCheck.position, playerData.root.groundCheckRadius, listGroundLayers).Length > 0;
     }
 
     public void OnJump(InputAction.CallbackContext context)
@@ -80,7 +68,7 @@ public class PlayerControls : MonoBehaviour
         // context.action.triggered;
         if (context.phase == InputActionPhase.Performed)
         {
-            if (Time.time - lastGroundPoundCooldown < playerData.groundPoundCooldown)
+            if (Time.time - lastGroundPoundCooldown < playerData.root.groundPoundCooldown)
             {
                 return;
             }
@@ -92,7 +80,7 @@ public class PlayerControls : MonoBehaviour
 
             if (isGrounded)
             {
-                rb.velocity = new Vector3(rb.velocity.x, playerData.jumpForce, rb.velocity.z);
+                rb.velocity = new Vector3(rb.velocity.x, playerData.root.jumpForce, rb.velocity.z);
             }
         }
     }
@@ -111,7 +99,7 @@ public class PlayerControls : MonoBehaviour
         rb.constraints = RigidbodyConstraints.FreezePosition;
         yield return Helpers.GetWait(0.15f);
         rb.constraints = RigidbodyConstraints.None;
-        rb.AddForce(Vector3.down * playerData.dropForce, ForceMode.Impulse);
+        rb.AddForce(Vector3.down * playerData.root.dropForce, ForceMode.Impulse);
     }
 
     private void OnCollisionEnter(Collision other)
@@ -132,15 +120,15 @@ public class PlayerControls : MonoBehaviour
         {
             float val = Mathf.Lerp(0, -Mathf.PI / 2, (float)i / nbColliders);
 
-            switch (player)
+            switch (playerData.id)
             {
-                case Player.Player2:
+                case PlayerID.Player2:
                     val = Mathf.Lerp(Mathf.PI, 3 * Mathf.PI / 2, (float)i / nbColliders);
                     break;
-                case Player.Player3:
+                case PlayerID.Player3:
                     val = Mathf.Lerp(Mathf.PI / 2, Mathf.PI, (float)i / nbColliders);
                     break;
-                case Player.Player4:
+                case PlayerID.Player4:
                     val = Mathf.Lerp(0, Mathf.PI / 2, (float)i / nbColliders);
                     break;
                 default:
@@ -159,7 +147,7 @@ public class PlayerControls : MonoBehaviour
                 return;
             }
 
-            waveEffect.gameObject.layer = LayerMask.NameToLayer($"WaveEffect{player.ToString()}");
+            waveEffect.gameObject.layer = LayerMask.NameToLayer($"WaveEffect{playerData.id.ToString()}");
             waveEffect.gameObject.transform.SetPositionAndRotation(spawnPos, Quaternion.identity);
             waveEffect.gameObject.transform.LookAt(pos);
             waveEffect.gameObject.transform.RotateAround(
@@ -174,7 +162,7 @@ public class PlayerControls : MonoBehaviour
     {
         if (groundCheck != null)
         {
-            Gizmos.DrawWireSphere(groundCheck.position, playerData.groundCheckRadius);
+            Gizmos.DrawWireSphere(groundCheck.position, playerData.root.groundCheckRadius);
         }
     }
 }

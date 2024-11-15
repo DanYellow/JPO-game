@@ -21,7 +21,7 @@ public class PlayerHealth : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         playerInvincibility = GetComponent<PlayerInvincibility>();
 
-        nbLives = playerData.maxNbLives;
+        nbLives = playerData.root.maxNbLives;
     }
 
 

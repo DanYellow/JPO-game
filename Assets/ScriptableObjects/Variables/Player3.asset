@@ -10,16 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4023ffbd3baf79848b0944e24d1ea2b9, type: 3}
-  m_Name: New Player Data2
+  m_Name: Player3
   m_EditorClassIdentifier: 
-  jumpForce: 7
-  groundPoundCooldown: 0.65
-  dropForce: 10
-  groundCheckRadius: 0.15
-  maxNbLives: 3
-  invincibilityTime: 1.25
-  waveEffect: {fileID: 0}
+  root: {fileID: 11400000, guid: 04e41f959a19e5048ac8ef28d6075c42, type: 2}
   damageLayer:
     serializedVersion: 2
-    m_Bits: 0
-  foo: 
+    m_Bits: 11264
+  id: 2

@@ -15,13 +15,11 @@ public class PlayerInvincibility : MonoBehaviour
 
     private bool isInvincible = false;
 
-    [SerializeField]
-    private Player player;
 
     private void Awake()
     {
-        damageLayer = playerData.damageLayer;
-        damageLayer &= ~(1 << LayerMask.NameToLayer($"WaveEffect{player.ToString()}"));
+        damageLayer = playerData.root.damageLayer;
+        damageLayer &= ~(1 << LayerMask.NameToLayer($"WaveEffect{playerData.id.ToString()}"));
 
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
@@ -55,7 +53,7 @@ public class PlayerInvincibility : MonoBehaviour
         ToggleCollisions(gameObject.layer, isInvincible);
 
         float timeElapsed = 0;
-        while (timeElapsed < playerData.invincibilityTime)
+        while (timeElapsed < playerData.root.invincibilityTime)
         {
             timeElapsed += Time.deltaTime;
             if (Time.frameCount % 8 == 0)
