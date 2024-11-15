@@ -37,9 +37,12 @@ public class PlayerControls : MonoBehaviour
     [SerializeField]
     private Player player;
 
+    private ObjectPooling pool;
+
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
+        pool = GetComponent<ObjectPooling>();
     }
 
     private void Update()
@@ -150,15 +153,22 @@ public class PlayerControls : MonoBehaviour
             var spawnDir = new Vector3(horizontal, 0, vertical);
             var spawnPos = pos + spawnDir * radius;
 
-            GameObject newSurrounderObject = Instantiate(playerData.waveEffect, spawnPos, Quaternion.identity);
-            newSurrounderObject.layer = LayerMask.NameToLayer($"WaveEffect{player.ToString()}");
+            ObjectPooled waveEffect = pool.Get("WaveAttack");
+            if (waveEffect == null)
+            {
+                return;
+            }
 
-            newSurrounderObject.transform.LookAt(pos);
-            newSurrounderObject.transform.RotateAround(
-                newSurrounderObject.transform.position,
-                newSurrounderObject.transform.up,
-                90
-            );
+            waveEffect.gameObject.layer = LayerMask.NameToLayer($"WaveEffect{player.ToString()}");
+            waveEffect.gameObject.transform.position = spawnPos;
+            waveEffect.gameObject.transform.rotation = Quaternion.identity;
+
+            waveEffect.gameObject.transform.LookAt(pos);
+            waveEffect.gameObject.transform.RotateAround(
+                waveEffect.gameObject.transform.position,
+                waveEffect.gameObject.transform.up,
+               90
+           );
         }
     }
 

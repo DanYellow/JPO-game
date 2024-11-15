@@ -6,6 +6,16 @@ public class WaveEffectCollision : MonoBehaviour
 {
     [SerializeField, Range(2, 10)]
     private float speed = 7;
+
+    private ObjectPooled objectPooled;
+
+    private Coroutine autoDestroyCoroutine;
+
+    private void Awake()
+    {
+        objectPooled = GetComponent<ObjectPooled>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent<PlayerHealth>(out PlayerHealth playerHealth))
@@ -19,22 +29,57 @@ public class WaveEffectCollision : MonoBehaviour
 
     private void Update()
     {
-        transform.position += transform.right * Time.deltaTime * speed;
+        if (gameObject.activeInHierarchy)
+        {
+            transform.position += transform.right * Time.deltaTime * speed;
+        }
     }
 
     private void OnBecameInvisible()
     {
-        if (!gameObject.activeInHierarchy)
-        {
-            return;
-        }
+        // if (!gameObject.activeInHierarchy)
+        // {
+        //     return;
+        // }
 
-        StartCoroutine(Invincible());
+        // StartCoroutine(Unload());
     }
 
-    private IEnumerator Invincible()
+    private IEnumerator Unload()
     {
         yield return Helpers.GetWait(0.5f);
-        gameObject.SetActive(false);
+        objectPooled.Release();
     }
+
+    // private void OnEnable() {
+    //     StopCoroutine(autoDestroyCoroutine);
+    //     autoDestroyCoroutine = StartCoroutine(AutoDestroy(0.35f));
+    // }
+
+    private void OnDisable()
+    {
+        if (objectPooled.Pool == null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            objectPooled.Release();
+        }
+    }
+
+    IEnumerator AutoDestroy(float duration = 0.5f)
+    {
+        yield return new WaitForSeconds(duration);
+
+        if (objectPooled.Pool == null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            objectPooled.Release();
+        }
+    }
+
 }

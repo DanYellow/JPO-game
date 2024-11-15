@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1501724994957231941}
   - component: {fileID: 2673831844833846019}
   - component: {fileID: -4705115942187329918}
+  - component: {fileID: -1421874034288912110}
   m_Layer: 6
   m_Name: WaveEffectCollision
   m_TagString: Untagged
@@ -119,3 +120,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
+--- !u!114 &-1421874034288912110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6519570451442300796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29b13a9db05fe774ba5328b9f87c425b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
