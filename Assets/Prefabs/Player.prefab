@@ -171,8 +171,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   groundCheck: {fileID: 259333325848091192}
-  playerData: {fileID: 11400000, guid: 04e41f959a19e5048ac8ef28d6075c42, type: 2}
-  player: 0
+  playerData: {fileID: 0}
 --- !u!114 &2067386120912316461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,7 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 523067e8d1eab09469aedac5caa9bb29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: 04e41f959a19e5048ac8ef28d6075c42, type: 2}
+  playerData: {fileID: 0}
 --- !u!114 &5651726885194495070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,8 +197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 736bed3987a7f6a41862c822f6dae947, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: 04e41f959a19e5048ac8ef28d6075c42, type: 2}
-  player: 0
+  playerData: {fileID: 0}
 --- !u!114 &4966838003681711026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,7 +331,7 @@ SpriteRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5577692466070844780}
   m_Enabled: 1
-  m_CastShadows: 0
+  m_CastShadows: 1
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -345,7 +343,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 3eb6dc79c14f84e4aa5b4d5a9a1574ef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
