@@ -174,4 +174,8 @@ public class PlayerControls : MonoBehaviour
             Gizmos.DrawWireSphere(groundCheck.position, playerData.root.groundCheckRadius);
         }
     }
+
+    public void DisableControls() {
+        playerInput.defaultActionMap = "PlayerDead";
+    }
 }

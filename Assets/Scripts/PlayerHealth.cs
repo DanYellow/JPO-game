@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -21,6 +22,9 @@ public class PlayerHealth : MonoBehaviour
     private PlayerInvincibility playerInvincibility;
 
     private Light lightLandmark;
+
+    [SerializeField]
+    private UnityEvent OnDeath;
 
     private void Awake()
     {
@@ -54,6 +58,7 @@ public class PlayerHealth : MonoBehaviour
         rb.AddForce(impactPoint * 35, ForceMode.VelocityChange);
         lightLandmark.enabled = false;
         onPlayerDeathEvent.OnEventRaised();
+        OnDeath.Invoke();
     }
 
     private void OnBecameInvisible()
