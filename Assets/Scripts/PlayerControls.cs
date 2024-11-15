@@ -27,10 +27,16 @@ public class PlayerControls : MonoBehaviour
 
     private ObjectPooling pool;
 
+    private PlayerInput playerInput;
+
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
         pool = GetComponent<ObjectPooling>();
+
+        playerInput = GetComponent<PlayerInput>();
+
+        playerInput.defaultActionMap = playerData.id.ToString();
     }
 
     private void Update()

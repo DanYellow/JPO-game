@@ -19,6 +19,4 @@ public class BasePlayerData : ScriptableObject
     public float invincibilityTime = 1.25f;
 
     public GameObject waveEffect;
-
-    public LayerMask damageLayer;
 }

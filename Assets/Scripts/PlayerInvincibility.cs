@@ -18,7 +18,7 @@ public class PlayerInvincibility : MonoBehaviour
 
     private void Awake()
     {
-        damageLayer = playerData.root.damageLayer;
+        damageLayer = playerData.damageLayer;
         damageLayer &= ~(1 << LayerMask.NameToLayer($"WaveEffect{playerData.id.ToString()}"));
 
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
