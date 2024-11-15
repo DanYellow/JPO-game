@@ -13,10 +13,6 @@ public class PlayerPositionManager : MonoBehaviour
     [SerializeField]
     private Transform topRight;
 
-    [SerializeField]
-    private VoidEventChannel onPositionSetEvent;
-
-    // Start is called before the first frame update
     private void Awake()
     {
         Mesh planeMesh = GetComponent<MeshFilter>().mesh;
@@ -27,7 +23,5 @@ public class PlayerPositionManager : MonoBehaviour
 
         bottomRight.localPosition = new Vector3(bounds.max.x, 0, bounds.min.z);
         topRight.localPosition = new Vector3(bounds.max.x, 0, bounds.max.z);
-
-        onPositionSetEvent.Raise();
     }
 }

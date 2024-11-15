@@ -20,11 +20,15 @@ public class PlayerHealth : MonoBehaviour
 
     private PlayerInvincibility playerInvincibility;
 
+    private Light lightLandmark;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
         playerInvincibility = GetComponent<PlayerInvincibility>();
+
+        lightLandmark = GetComponentInChildren<Light>();
 
         nbLives = playerData.root.maxNbLives;
     }
@@ -48,12 +52,12 @@ public class PlayerHealth : MonoBehaviour
     private void Die(Vector3 impactPoint)
     {
         rb.AddForce(impactPoint * 35, ForceMode.VelocityChange);
+        lightLandmark.enabled = false;
         onPlayerDeathEvent.OnEventRaised();
     }
 
     private void OnBecameInvisible()
     {
-        print("ggrgrgr");
         if (nbLives == 0)
         {
             onPlayerExit.OnEventRaised(transform.position);
