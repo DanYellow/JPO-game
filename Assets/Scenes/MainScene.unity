@@ -1235,6 +1235,7 @@ MonoBehaviour:
   bottomLeft: {fileID: 829318351}
   bottomRight: {fileID: 239698218}
   topRight: {fileID: 733532078}
+  onPositionSetEvent: {fileID: 11400000, guid: bc50077fbf2c7db47a0b017d06b9e74b, type: 2}
 --- !u!1 &1193777709
 GameObject:
   m_ObjectHideFlags: 0
@@ -1360,7 +1361,7 @@ PrefabInstance:
     - target: {fileID: 1042249736209252522, guid: 86e11658d68cdea46a9a980276120cdc,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1358291090268259976, guid: 86e11658d68cdea46a9a980276120cdc,
         type: 3}
@@ -1658,7 +1659,7 @@ PrefabInstance:
     - target: {fileID: 1042249736209252522, guid: 86e11658d68cdea46a9a980276120cdc,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1358291090268259976, guid: 86e11658d68cdea46a9a980276120cdc,
         type: 3}
@@ -1819,6 +1820,7 @@ MonoBehaviour:
   bottomLeft: {fileID: 362601248}
   bottomRight: {fileID: 1243396993}
   topRight: {fileID: 413142985}
+  onPositionSetEvent: {fileID: 0}
 --- !u!23 &1773833408
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2118,6 +2120,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1042249736209252522, guid: 86e11658d68cdea46a9a980276120cdc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2067386120912316461, guid: 86e11658d68cdea46a9a980276120cdc,
         type: 3}

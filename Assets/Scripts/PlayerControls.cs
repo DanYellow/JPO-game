@@ -37,6 +37,8 @@ public class PlayerControls : MonoBehaviour
 
         playerInput = GetComponent<PlayerInput>();
 
+        GetComponentInChildren<Light>().transform.name = $"Light{playerData.id.ToString()}";
+
         playerInput.defaultActionMap = playerData.id.ToString();
     }
 

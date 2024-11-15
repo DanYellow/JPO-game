@@ -13,6 +13,7 @@ public class PlayerPositionManager : MonoBehaviour
     [SerializeField]
     private Transform topRight;
 
+    [SerializeField]
     private VoidEventChannel onPositionSetEvent;
 
     // Start is called before the first frame update

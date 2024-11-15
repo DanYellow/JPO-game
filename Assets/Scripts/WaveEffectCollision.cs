@@ -29,10 +29,10 @@ public class WaveEffectCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<PlayerHealth>(out PlayerHealth playerHealth))
+        if (other.TryGetComponent(out PlayerHealth playerHealth))
         {
             Vector3 dirX = (other.transform.position - transform.position).normalized;
-            playerHealth.TakeDamage(dirX); // other.ClosestPoint(transform.position)
+            playerHealth.TakeDamage(dirX);
         }
         Unload();
     }

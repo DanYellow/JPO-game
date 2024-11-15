@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerPosition : MonoBehaviour
@@ -15,6 +16,13 @@ public class PlayerPosition : MonoBehaviour
             transform.position.y,
             startPosition.position.z
         );
+
+        StartCoroutine(UnparentLight());
+    }
+
+    private IEnumerator UnparentLight() {
+        yield return null;
+        GetComponentInChildren<Light>().transform.parent = null;
     }
 
     private void OnEnable()
@@ -24,7 +32,6 @@ public class PlayerPosition : MonoBehaviour
 
     private void OnPositionSet()
     {
-        GetComponentInChildren<Light>().transform.parent = null;
     }
 
     private void OnDisable()
