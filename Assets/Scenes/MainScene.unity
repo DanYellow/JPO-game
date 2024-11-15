@@ -1229,9 +1229,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1193777710}
-  - component: {fileID: 1193777711}
   - component: {fileID: 1193777712}
   - component: {fileID: 1193777713}
+  - component: {fileID: 1193777714}
   m_Layer: 0
   m_Name: CurrentSceneManager
   m_TagString: Untagged
@@ -1254,73 +1254,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1193777711
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1193777709}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: feb70bc834ccfe4499fce605f4a3c70d,
-    type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 435406720}
-        m_TargetAssemblyTypeName: PlayerControls, Assembly-CSharp
-        m_MethodName: OnJump
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 3a2d759c-3a4e-4b20-b000-30167b82de97
-    m_ActionName: New action map/Jump[/Keyboard/q]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 477047407}
-        m_TargetAssemblyTypeName: PlayerControls, Assembly-CSharp
-        m_MethodName: OnJump
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 4e8cdc5e-c40a-49ec-bf99-c6a03d306587
-    m_ActionName: Player2/Jump[/Keyboard/q]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 962921ed-7c33-4421-a039-d44245ceb0c6
-    m_ActionName: Player3/Jump[/Keyboard/p]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player1
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!114 &1193777712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1345,6 +1278,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7f70ebbb9162424ebf26b9910fa46a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1193777714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1193777709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 127edc7680937c341840c8d53a593cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onPlayerExitEvent: {fileID: 11400000, guid: 59e2b1a4623b25843a39a653ddf98a31, type: 2}
 --- !u!1 &1243396992
 GameObject:
   m_ObjectHideFlags: 0
@@ -1918,13 +1864,13 @@ Light:
   m_GameObject: {fileID: 2130437799}
   m_Enabled: 1
   serializedVersion: 10
-  m_Type: 2
+  m_Type: 0
   m_Shape: 0
-  m_Color: {r: 1, g: 0, b: 0.85397243, a: 1}
-  m_Intensity: 1
-  m_Range: 10
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 21.80208
+  m_Color: {r: 0.018247008, g: 1, b: 0, a: 1}
+  m_Intensity: 4.32
+  m_Range: 5.15
+  m_SpotAngle: 91.79959
+  m_InnerSpotAngle: 42.584236
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -1979,13 +1925,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2130437799}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.68, y: 1.95, z: 4.646728}
+  m_LocalRotation: {x: 0.5262254, y: -0, z: -0, w: 0.85034513}
+  m_LocalPosition: {x: -4.86, y: 1.22, z: 4.64}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 63.502, y: 0, z: 0}
 --- !u!1001 &6458152223201130787
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2012,10 +1958,55 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 2908404528522500080, guid: 86e11658d68cdea46a9a980276120cdc,
         type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908404528522500080, guid: 86e11658d68cdea46a9a980276120cdc,
+        type: 3}
+      propertyPath: m_FlipY
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908404528522500080, guid: 86e11658d68cdea46a9a980276120cdc,
+        type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 8b6ae0de993b4e04f8e995aa91a26b40,
         type: 3}
+    - target: {fileID: 3703189710441826917, guid: 86e11658d68cdea46a9a980276120cdc,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3703189710441826917, guid: 86e11658d68cdea46a9a980276120cdc,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3703189710441826917, guid: 86e11658d68cdea46a9a980276120cdc,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3703189710441826917, guid: 86e11658d68cdea46a9a980276120cdc,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3703189710441826917, guid: 86e11658d68cdea46a9a980276120cdc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3703189710441826917, guid: 86e11658d68cdea46a9a980276120cdc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3703189710441826917, guid: 86e11658d68cdea46a9a980276120cdc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4030186213758919488, guid: 86e11658d68cdea46a9a980276120cdc,
         type: 3}
       propertyPath: startPosition

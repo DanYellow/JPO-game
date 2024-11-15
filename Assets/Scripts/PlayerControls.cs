@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -22,6 +23,8 @@ public class PlayerControls : MonoBehaviour
 
     [Header("Scriptable Objects"), SerializeField]
     private PlayerData playerData;
+
+    
 
     private Animator animator;
 

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
@@ -7,6 +5,11 @@ public class PlayerHealth : MonoBehaviour
     [Header("Scriptable Objects"), SerializeField]
     private PlayerData playerData;
 
+    [SerializeField]
+    private VectorEventChannel onPlayerExit;
+    
+
+    [SerializeField]
     private int nbLives = 0;
 
     private Rigidbody rb;
@@ -24,15 +27,17 @@ public class PlayerHealth : MonoBehaviour
         nbLives = playerData.root.maxNbLives;
     }
 
-
     public void TakeDamage(Vector3 impactPoint)
     {
         nbLives--;
 
         if (nbLives == 0)
         {
+            onPlayerExit.OnEventRaised(transform.position);
             Die(impactPoint);
-        } else {
+        }
+        else
+        {
             StartCoroutine(playerInvincibility.Invincible());
             animator.SetTrigger(AnimationStrings.isHit);
         }
@@ -41,6 +46,14 @@ public class PlayerHealth : MonoBehaviour
     private void Die(Vector3 impactPoint)
     {
         rb.AddForce(impactPoint * 35, ForceMode.VelocityChange);
-        // rb.AddExplosionForce(1000, impactPoint, 10, 0);
+    }
+
+    private void OnBecameInvisible()
+    {
+        print("ggrgrgr");
+        if (nbLives == 0)
+        {
+            onPlayerExit.OnEventRaised(transform.position);
+        }
     }
 }
