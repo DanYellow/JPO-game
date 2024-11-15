@@ -154,10 +154,8 @@ public class PlayerControls : MonoBehaviour
             var spawnPos = pos + spawnDir * radius;
 
             ObjectPooled waveEffect = pool.Get("WaveAttack");
-            print("okk");
             if (waveEffect == null)
             {
-                
                 return;
             }
 
