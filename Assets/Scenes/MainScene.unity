@@ -148,18 +148,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1358291090268259976, guid: 86e11658d68cdea46a9a980276120cdc,
         type: 3}
+      propertyPath: m_Range
+      value: 3.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 1358291090268259976, guid: 86e11658d68cdea46a9a980276120cdc,
+        type: 3}
       propertyPath: m_Color.b
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1358291090268259976, guid: 86e11658d68cdea46a9a980276120cdc,
         type: 3}
       propertyPath: m_Color.g
-      value: 0.35585308
+      value: 0.93887067
       objectReference: {fileID: 0}
     - target: {fileID: 1358291090268259976, guid: 86e11658d68cdea46a9a980276120cdc,
         type: 3}
       propertyPath: m_Color.r
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1358291090268259976, guid: 86e11658d68cdea46a9a980276120cdc,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 5.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1358291090268259976, guid: 86e11658d68cdea46a9a980276120cdc,
+        type: 3}
+      propertyPath: m_SpotAngle
+      value: 123.815155
+      objectReference: {fileID: 0}
+    - target: {fileID: 1358291090268259976, guid: 86e11658d68cdea46a9a980276120cdc,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1358291090268259976, guid: 86e11658d68cdea46a9a980276120cdc,
+        type: 3}
+      propertyPath: m_InnerSpotAngle
+      value: 47.362667
       objectReference: {fileID: 0}
     - target: {fileID: 2067386120912316461, guid: 86e11658d68cdea46a9a980276120cdc,
         type: 3}
@@ -192,7 +217,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 3eb6dc79c14f84e4aa5b4d5a9a1574ef, type: 2}
+      objectReference: {fileID: 2100000, guid: 9d375d58355936045acfb01e3ccd57d8, type: 2}
     - target: {fileID: 4030186213758919488, guid: 86e11658d68cdea46a9a980276120cdc,
         type: 3}
       propertyPath: startPosition
@@ -304,6 +329,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7108339969198208228, guid: fe86b21816338f544b6cb33cfa1417bc,
         type: 3}
+    - target: {fileID: 5328176819401018089, guid: 86e11658d68cdea46a9a980276120cdc,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.039
+      objectReference: {fileID: 0}
+    - target: {fileID: 5328176819401018089, guid: 86e11658d68cdea46a9a980276120cdc,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.357
+      objectReference: {fileID: 0}
+    - target: {fileID: 5328176819401018089, guid: 86e11658d68cdea46a9a980276120cdc,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.902
+      objectReference: {fileID: 0}
     - target: {fileID: 5476196862709047349, guid: 86e11658d68cdea46a9a980276120cdc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -317,7 +357,7 @@ PrefabInstance:
     - target: {fileID: 5476196862709047349, guid: 86e11658d68cdea46a9a980276120cdc,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.99
+      value: 7.13
       objectReference: {fileID: 0}
     - target: {fileID: 5476196862709047349, guid: 86e11658d68cdea46a9a980276120cdc,
         type: 3}
@@ -1305,6 +1345,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 127edc7680937c341840c8d53a593cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerDeathEffectPrefab: {fileID: 2105518355691488756, guid: 2786c71b21f7bda4a88c62ad18173dab,
+    type: 3}
   onPlayerExitEvent: {fileID: 11400000, guid: 59e2b1a4623b25843a39a653ddf98a31, type: 2}
   onPlayerDeathEvent: {fileID: 11400000, guid: 94b1aae6a67185748a804d224092b403, type: 2}
   onGameEndEvent: {fileID: 11400000, guid: e247249aac70dd141a4b00e04e16cefb, type: 2}

@@ -28,7 +28,8 @@ public class GameManager : MonoBehaviour
         StartCoroutine(PlayerDeathEffect(position));
     }
 
-    IEnumerator PlayerDeathEffect(Vector3 position) {
+    IEnumerator PlayerDeathEffect(Vector3 position)
+    {
         GameObject playerDeathEffect = Instantiate(playerDeathEffectPrefab, position, Quaternion.identity);
         yield return Helpers.GetWait(playerDeathEffect.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
         Destroy(playerDeathEffect);
