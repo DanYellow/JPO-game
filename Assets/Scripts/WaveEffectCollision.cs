@@ -9,9 +9,22 @@ public class WaveEffectCollision : MonoBehaviour
 
     private Vector3 originPosition;
 
+    [SerializeField]
+    private VoidEventChannel onGameEndEvent;
+
     private void Awake()
     {
         objectPooled = GetComponent<ObjectPooled>();
+    }
+
+    private void OnGameEnd()
+    {
+        Destroy(gameObject);
+    }
+
+    private void OnDisable()
+    {
+        onGameEndEvent.OnEventRaised -= OnGameEnd;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -51,6 +64,7 @@ public class WaveEffectCollision : MonoBehaviour
 
     private void OnEnable()
     {
+        onGameEndEvent.OnEventRaised += OnGameEnd;
         originPosition = gameObject.transform.position;
     }
 }

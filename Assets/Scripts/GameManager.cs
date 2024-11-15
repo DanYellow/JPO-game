@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private VoidEventChannel onPlayerDeathEvent;
 
+    [SerializeField]
+    private VoidEventChannel onGameEndEvent;
+
     private int nbPlayers = 4;
 
     private void OnEnable()
@@ -24,10 +27,12 @@ public class GameManager : MonoBehaviour
         Debug.Log("target is " + screenPos.x + " pixels from the left" + screenPos.y);
     }
 
-    private void OnPlayerDeath() {
+    private void OnPlayerDeath()
+    {
         nbPlayers--;
-        if (nbPlayers == 1) {
-            print("Game !");
+        if (nbPlayers == 1)
+        {
+            onGameEndEvent.Raise();
         }
     }
 

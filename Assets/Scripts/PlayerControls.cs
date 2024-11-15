@@ -24,8 +24,6 @@ public class PlayerControls : MonoBehaviour
     [Header("Scriptable Objects"), SerializeField]
     private PlayerData playerData;
 
-    
-
     private Animator animator;
 
     private ObjectPooling pool;
