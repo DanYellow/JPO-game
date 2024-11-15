@@ -1,9 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject playerDeathEffectPrefab;
+
     [Header("Scriptable Objects"), SerializeField]
     private VectorEventChannel onPlayerExitEvent;
 
@@ -23,8 +25,13 @@ public class GameManager : MonoBehaviour
 
     private void OnPlayerExit(Vector3 position)
     {
-        Vector3 screenPos = Camera.main.WorldToScreenPoint(position);
-        Debug.Log("target is " + screenPos.x + " pixels from the left" + screenPos.y);
+        StartCoroutine(PlayerDeathEffect(position));
+    }
+
+    IEnumerator PlayerDeathEffect(Vector3 position) {
+        GameObject playerDeathEffect = Instantiate(playerDeathEffectPrefab, position, Quaternion.identity);
+        yield return Helpers.GetWait(playerDeathEffect.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+        Destroy(playerDeathEffect);
     }
 
     private void OnPlayerDeath()
