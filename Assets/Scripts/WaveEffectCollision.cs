@@ -21,4 +21,20 @@ public class WaveEffectCollision : MonoBehaviour
     {
         transform.position += transform.right * Time.deltaTime * speed;
     }
+
+    private void OnBecameInvisible()
+    {
+        if (!gameObject.activeInHierarchy)
+        {
+            return;
+        }
+
+        StartCoroutine(Invincible());
+    }
+
+    private IEnumerator Invincible()
+    {
+        yield return Helpers.GetWait(0.5f);
+        gameObject.SetActive(false);
+    }
 }
