@@ -8,6 +8,8 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField]
     private VectorEventChannel onPlayerExit;
     
+    [SerializeField]
+    private VoidEventChannel onPlayerDeathEvent;
 
     [SerializeField]
     private int nbLives = 0;
@@ -46,6 +48,7 @@ public class PlayerHealth : MonoBehaviour
     private void Die(Vector3 impactPoint)
     {
         rb.AddForce(impactPoint * 35, ForceMode.VelocityChange);
+        onPlayerDeathEvent.OnEventRaised();
     }
 
     private void OnBecameInvisible()
