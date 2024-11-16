@@ -206,7 +206,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerData: {fileID: 0}
   onPlayerExit: {fileID: 11400000, guid: 59e2b1a4623b25843a39a653ddf98a31, type: 2}
-  onPlayerDeathEvent: {fileID: 11400000, guid: 94b1aae6a67185748a804d224092b403, type: 2}
+  onPlayerDeathEvent: {fileID: 11400000, guid: be4f9c5ba79b2724daba22fd85495fb9, type: 2}
   nbLives: 0
   OnDeath:
     m_PersistentCalls:
@@ -474,7 +474,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4885321763905102691}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.96}
+  m_LocalPosition: {x: 0, y: 0, z: 0.276}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -483,7 +483,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0.782}
+  m_AnchoredPosition: {x: 0, y: 0.858}
   m_SizeDelta: {x: 3.4929, y: 1.0203}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &505011380861617620

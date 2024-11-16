@@ -19,7 +19,7 @@ public class WaveEffectCollision : MonoBehaviour
 
     private void OnGameEnd()
     {
-        Destroy(gameObject);
+        // Destroy(gameObject);
     }
 
     private void OnDisable()

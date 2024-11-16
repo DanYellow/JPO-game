@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -10,11 +11,11 @@ public class GameManager : MonoBehaviour
     private VectorEventChannel onPlayerExitEvent;
 
     [SerializeField]
-    private VoidEventChannel onPlayerDeathEvent;
+    private GameObjectEventChannel onPlayerDeathEvent;
 
     [SerializeField]
     private VoidEventChannel onGameEndEvent;
-    
+
     private int nbPlayers = 4;
 
     private void OnEnable()
@@ -35,9 +36,20 @@ public class GameManager : MonoBehaviour
         Destroy(playerDeathEffect);
     }
 
-    private void OnPlayerDeath()
+    private void OnPlayerDeath(GameObject gameObject)
     {
         nbPlayers--;
+        string[] listRankLabel = {
+            "1<sup>er</sup>",
+            "2<sup>nd</sup>",
+            "3<sup>ème</sup>",
+            "4<sup>ème</sup>"
+        };
+        Canvas rankCanvas = gameObject.GetComponent<Player>().rankCanvas;
+        TextMeshProUGUI rank = rankCanvas.GetComponentInChildren<TextMeshProUGUI>();
+        rank.SetText(listRankLabel[nbPlayers]);
+        rankCanvas.gameObject.SetActive(true);
+
         if (nbPlayers == 1)
         {
             onGameEndEvent.Raise();

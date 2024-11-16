@@ -13,12 +13,5 @@ public class PlayerPosition : MonoBehaviour
             transform.position.y,
             startPosition.position.z
         );
-
-        StartCoroutine(UnparentLight());
-    }
-
-    private IEnumerator UnparentLight() {
-        yield return null;
-        GetComponentInChildren<Light>().transform.parent = null;
     }
 }
