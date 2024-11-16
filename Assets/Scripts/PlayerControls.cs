@@ -198,5 +198,4 @@ public class PlayerControls : MonoBehaviour
     {
         onGameEndEvent.OnEventRaised += OnGameEnd;
     }
-
 }

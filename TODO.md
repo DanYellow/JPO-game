@@ -1,36 +1,7 @@
-- ~~Animate car in main menu~~
-- ~~Change car's plate to "MMI SAR"~~
-- ~~Manage best score~~
-
-
-// https://www.youtube.com/watch?v=RXhTD8YZnY4
-// https://joebrogers.itch.io/bitpotion
-// https://gamedevbeginner.com/coroutines-in-unity-when-and-how-to-use-them/
-// https://el-tramo.be/blog/fancy-dmg/
-// https://www.youtube.com/watch?v=Y5WVxdhEiIg
-// https://game.courses/c-events-vs-unityevents
-// https://unity.com/how-to/unity-ui-optimization-tips#avoid-layout-groups-when-possible
-// https://www.slideshare.net/secret/xLig7llwdlRQIp
-// https://unity.com/how-to/unity-ui-optimization-tips
-// https://forum.unity.com/threads/weird-behavior-applying-force-to-component-spawned-from-object-pool.1308858/
-
-Appuyez sur <sprite="MV Icons Keyboard - ALL" name="Key_Space_1"><sprite="MV Icons Keyboard - ALL" name="Key_Space_2"><sprite="MV Icons Keyboard - ALL" name="Key_Space_3"> pour interagir
-
-https://github.com/DanYellow/JPO-game/blob/JPO-2024-A/Assets/Scripts/Utils/TimelineController.cs
-
-# Ressources
-
-6B7AA0
-
-https://www.youtube.com/watch?v=3Ccu3UtiSdw
-https://www.youtube.com/watch?v=wtZ5WcrV-9A
-
-https://forum.unity.com/threads/how-to-achieve-point-hit-shader-effect.1341434/
-https://www.youtube.com/watch?v=QsLkb1aOkb8
-
-https://www.youtube.com/watch?v=naaVpEyr4RA
-
-https://www.google.com/search?q=unity+position+gameobject+relative+to+player+on+sphere+world&sca_esv=619c697d276fe56b&sca_upv=1&hl=fr&ei=HokpZsmaHKWskdUP5IyU6Ag&ved=0ahUKEwjJoZTE9NuFAxUlVqQEHWQGBY0Q4dUDCBA&uact=5&oq=unity+position+gameobject+relative+to+player+on+sphere+world&gs_lp=Egxnd3Mtd2l6LXNlcnAiPHVuaXR5IHBvc2l0aW9uIGdhbWVvYmplY3QgcmVsYXRpdmUgdG8gcGxheWVyIG9uIHNwaGVyZSB3b3JsZDIFECEYoAEyBRAhGKABSOlDUABY-kJwAHgAkAEAmAF_oAH1IKoBBDQwLje4AQPIAQD4AQGYAi-gAq4jwgIFEAAYgATCAgUQLhiABMICDhAuGIAEGMcBGI4FGK8BwgIGEAAYFhgewgIIEAAYFhgeGA_CAggQABiABBiiBMICBBAhGBXCAgUQIRifBcICBxAhGKABGAqYAwCSBwUyOS4xOKAHo-AB&sclient=gws-wiz-serp
+- Display UI for player's lives
+- Display game end canvas
+- Make main menu
+- Modelize player's base
 
 Credits : https://opengameart.org/content/smoke-aura
 

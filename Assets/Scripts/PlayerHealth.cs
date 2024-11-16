@@ -16,9 +16,6 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField]
     private VoidEventChannel onGameEndEvent;
 
-    [SerializeField]
-    private int nbLives = 0;
-
     private Rigidbody rb;
 
     private Animator animator;
@@ -40,7 +37,7 @@ public class PlayerHealth : MonoBehaviour
 
         lightLandmark = GetComponentInChildren<Light>();
 
-        nbLives = playerData.root.maxNbLives;
+        playerData.nbLives = playerData.root.maxNbLives;
     }
 
     private void OnEnable()
@@ -50,7 +47,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void OnGameEnd()
     {
-        if (nbLives > 0)
+        if (playerData.nbLives > 0)
         {
             StartCoroutine(playerInvincibility.Invincible(10));
         }
@@ -58,9 +55,9 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(Vector3 impactPoint)
     {
-        nbLives--;
+        playerData.nbLives--;
 
-        if (nbLives == 0)
+        if (playerData.nbLives == 0)
         {
             Die(impactPoint);
         }
@@ -73,7 +70,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Update()
     {
-        if (nbLives == 0 && !hasTriggeredExitScreenEvent)
+        if (playerData.nbLives == 0 && !hasTriggeredExitScreenEvent)
         {
             var pos = Camera.main.WorldToScreenPoint(transform.position);
             bool isOffscreen = pos.x <= 0 || pos.x >= Screen.width ||
