@@ -208,8 +208,8 @@ MonoBehaviour:
   playerData: {fileID: 0}
   onPlayerExit: {fileID: 11400000, guid: 59e2b1a4623b25843a39a653ddf98a31, type: 2}
   onPlayerDeathEvent: {fileID: 11400000, guid: be4f9c5ba79b2724daba22fd85495fb9, type: 2}
+  onPlayerHitEvent: {fileID: 11400000, guid: dfb596387ea8e5144a1ad4c53dfd4d34, type: 2}
   onGameEndEvent: {fileID: 11400000, guid: e247249aac70dd141a4b00e04e16cefb, type: 2}
-  nbLives: 0
   OnDeath:
     m_PersistentCalls:
       m_Calls:

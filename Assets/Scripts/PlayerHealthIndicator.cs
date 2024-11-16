@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
-
+using System;
 
 public class PlayerHealthIndicator : MonoBehaviour
 {
@@ -25,10 +25,31 @@ public class PlayerHealthIndicator : MonoBehaviour
     [Header("Scriptable Objects"), SerializeField]
     private PlayerData playerData;
 
+    [SerializeField]
+    private PlayerIDEventChannel onPlayerHitEvent;
+
     private void Awake()
     {
         playerName.SetText($"{playerNameDict[playerData.id]}");
         playerImage.sprite = playerData.image;
         playerImageShadow.sprite = playerData.image;
+    }
+
+    private void OnEnable()
+    {
+        onPlayerHitEvent.OnEventRaised += OnPlayerHit;
+    }
+
+    private void OnPlayerHit(PlayerID playerID)
+    {
+        if (playerID == playerData.id)
+        {
+            print("Player " + playerID.ToString() + " - " + playerData.id);
+        }
+    }
+
+    private void OnDisable()
+    {
+        onPlayerHitEvent.OnEventRaised += OnPlayerHit;
     }
 }

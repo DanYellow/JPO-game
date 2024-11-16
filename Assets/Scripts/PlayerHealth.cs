@@ -12,6 +12,8 @@ public class PlayerHealth : MonoBehaviour
 
     [SerializeField]
     private GameObjectEventChannel onPlayerDeathEvent;
+    [SerializeField]
+    private PlayerIDEventChannel onPlayerHitEvent;
 
     [SerializeField]
     private VoidEventChannel onGameEndEvent;
@@ -63,6 +65,7 @@ public class PlayerHealth : MonoBehaviour
         }
         else
         {
+            onPlayerHitEvent.Raise(playerData.id);
             StartCoroutine(playerInvincibility.Invincible(null));
             animator.SetTrigger(AnimationStrings.isHit);
         }
