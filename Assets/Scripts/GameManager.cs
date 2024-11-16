@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private VoidEventChannel onGameEndEvent;
-
+    
     private int nbPlayers = 4;
 
     private void OnEnable()

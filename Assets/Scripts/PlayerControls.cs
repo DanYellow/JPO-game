@@ -24,6 +24,9 @@ public class PlayerControls : MonoBehaviour
     [Header("Scriptable Objects"), SerializeField]
     private PlayerData playerData;
 
+    [SerializeField]
+    private VoidEventChannel onGameEndEvent;
+
     private Animator animator;
 
     private ObjectPooling pool;
@@ -37,6 +40,11 @@ public class PlayerControls : MonoBehaviour
 
         playerInput = GetComponent<PlayerInput>();
         playerInput.defaultActionMap = playerData.id.ToString();
+    }
+
+    private void OnEnable()
+    {
+        onGameEndEvent.OnEventRaised += OnGameEnd;
     }
 
     private void Update()
@@ -89,6 +97,11 @@ public class PlayerControls : MonoBehaviour
                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, playerData.root.jumpForce, rb.linearVelocity.z);
             }
         }
+    }
+
+    private void OnGameEnd()
+    {
+        DisableControls();
     }
 
     private void StopAndSpin()
@@ -172,7 +185,14 @@ public class PlayerControls : MonoBehaviour
         }
     }
 
-    public void DisableControls() {
+    public void DisableControls()
+    {
         playerInput.defaultActionMap = "PlayerDead";
     }
+
+    private void OnDisable()
+    {
+        onGameEndEvent.OnEventRaised += OnGameEnd;
+    }
+
 }

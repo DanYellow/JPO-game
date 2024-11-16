@@ -65,7 +65,6 @@ public class PlayerHealth : MonoBehaviour
             if (isOffscreen)
             {
                 hasTriggeredExitScreenEvent = true;
-                print(transform.position);
                 onPlayerExit.OnEventRaised(transform.position);
             }
         }
@@ -73,7 +72,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Die(Vector3 impactPoint)
     {
-        rb.AddForce(impactPoint * 35, ForceMode.VelocityChange);
+        rb.AddForce(impactPoint * 60, ForceMode.VelocityChange);
         lightLandmark.enabled = false;
         onPlayerDeathEvent.OnEventRaised();
         OnDeath.Invoke();

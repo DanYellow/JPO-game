@@ -190,6 +190,7 @@ MonoBehaviour:
     m_Bits: 8
   groundCheck: {fileID: 259333325848091192}
   playerData: {fileID: 0}
+  onGameEndEvent: {fileID: 11400000, guid: e247249aac70dd141a4b00e04e16cefb, type: 2}
 --- !u!114 &2067386120912316461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -319,7 +320,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   listItemsToPool:
   - key: WaveAttack
-    minItems: 1
+    minItems: 3
     maxItems: 15
     prefab: {fileID: 6519570451442300796, guid: 5d1580e049c89db4a95e9f4f7611eb50,
       type: 3}
