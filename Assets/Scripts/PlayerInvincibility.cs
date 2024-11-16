@@ -15,7 +15,6 @@ public class PlayerInvincibility : MonoBehaviour
 
     private bool isInvincible = false;
 
-
     private void Awake()
     {
         damageLayer = playerData.damageLayer;

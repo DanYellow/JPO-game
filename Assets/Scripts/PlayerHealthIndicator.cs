@@ -62,7 +62,7 @@ public class PlayerHealthIndicator : MonoBehaviour
 
     private void OnPlayerHit(PlayerID playerID)
     {
-        if (playerID == playerData.id)
+        if (playerID == playerData.id && playerData.nbLives > 0)
         {
             listImages[playerData.nbLives].color = Color.white;
         }
