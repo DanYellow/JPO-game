@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Image winnerImage;
     [SerializeField]
+    private Image winnerShadow;
+    [SerializeField]
     private TextMeshProUGUI winnerName;
 
     [Header("Scriptable Objects"), SerializeField]
@@ -46,6 +48,7 @@ public class GameManager : MonoBehaviour
     {
         Player player = playerGO.GetComponent<Player>();
         winnerImage.sprite = player.playerData.image;
+        winnerShadow.sprite = player.playerData.image;
         winnerName.SetText($"Le <b>{player.playerData.GetName()}</b>\nremporte la partie !");
     }
 
