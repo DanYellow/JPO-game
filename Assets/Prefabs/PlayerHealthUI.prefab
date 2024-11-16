@@ -55,11 +55,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f62a47a7de5f87644b8e3dc18a9f9122, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blackAndWhiteMaterial: {fileID: 2100000, guid: 86c471813c7d9b448874162a4dc0344d,
+    type: 2}
   playerImage: {fileID: 319513300026072287}
   playerImageShadow: {fileID: 6004980703821212335}
   playerName: {fileID: 4903226466981650094}
   playerData: {fileID: 11400000, guid: 4c6e42ffc13b6814094ad508d5ac92ba, type: 2}
   onPlayerHitEvent: {fileID: 11400000, guid: dfb596387ea8e5144a1ad4c53dfd4d34, type: 2}
+  onPlayerDeathEvent: {fileID: 11400000, guid: be4f9c5ba79b2724daba22fd85495fb9, type: 2}
 --- !u!1 &1334229101208398539
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,6 +14,9 @@ public class PlayerHealthIndicator : MonoBehaviour
     };
 
     [SerializeField]
+    private Material blackAndWhiteMaterial;
+
+    [SerializeField]
     private Image playerImage;
 
     [SerializeField]
@@ -28,6 +31,9 @@ public class PlayerHealthIndicator : MonoBehaviour
     [SerializeField]
     private PlayerIDEventChannel onPlayerHitEvent;
 
+    [SerializeField]
+    private GameObjectEventChannel onPlayerDeathEvent;
+
     private void Awake()
     {
         playerName.SetText($"{playerNameDict[playerData.id]}");
@@ -38,6 +44,7 @@ public class PlayerHealthIndicator : MonoBehaviour
     private void OnEnable()
     {
         onPlayerHitEvent.OnEventRaised += OnPlayerHit;
+        onPlayerDeathEvent.OnEventRaised += OnPlayerDeath;
     }
 
     private void OnPlayerHit(PlayerID playerID)
@@ -48,8 +55,20 @@ public class PlayerHealthIndicator : MonoBehaviour
         }
     }
 
+    private void OnPlayerDeath(GameObject _player)
+    {
+        Player player = _player.GetComponent<Player>();
+
+        if (player.playerData.id == playerData.id)
+        {
+            playerImage.material = blackAndWhiteMaterial;
+        }
+    }
+
     private void OnDisable()
     {
         onPlayerHitEvent.OnEventRaised += OnPlayerHit;
+        onPlayerDeathEvent.OnEventRaised += OnPlayerDeath;
     }
+
 }

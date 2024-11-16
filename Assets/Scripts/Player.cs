@@ -4,7 +4,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [Header("Scriptable Objects"), SerializeField]
-    private PlayerData playerData;
+    public PlayerData playerData;
 
     public Canvas rankCanvas;
 
