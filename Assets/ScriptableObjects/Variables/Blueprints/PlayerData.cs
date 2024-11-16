@@ -1,5 +1,6 @@
 
 using UnityEngine;
+using System.Collections.Generic;
 
 public enum PlayerID
 {
@@ -18,4 +19,17 @@ public class PlayerData : ScriptableObject
     public int nbLives = 0;
 
     public Sprite image;
+    public string gamerName;
+
+    public string GetName()
+    {
+        Dictionary<PlayerID, string> playerNameDict = new Dictionary<PlayerID, string>(){
+            {PlayerID.Player1, "Joueur 1"},
+            {PlayerID.Player2, "Joueur 2"},
+            {PlayerID.Player3, "Joueur 3"},
+            {PlayerID.Player4, "Joueur 4"}
+        };
+
+        return playerNameDict[id];
+    }
 }

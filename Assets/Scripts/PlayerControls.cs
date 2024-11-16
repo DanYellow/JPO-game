@@ -27,6 +27,9 @@ public class PlayerControls : MonoBehaviour
     [SerializeField]
     private VoidEventChannel onGameEndEvent;
 
+    [SerializeField]
+    private GameObjectEventChannel onPlayerWinsEvent;
+
     private Animator animator;
 
     private ObjectPooling pool;
@@ -103,6 +106,10 @@ public class PlayerControls : MonoBehaviour
     private void OnGameEnd()
     {
         DisableControls();
+        if (playerData.nbLives > 0)
+        {
+            onPlayerWinsEvent.Raise(gameObject);
+        }
     }
 
     private void StopAndSpin()

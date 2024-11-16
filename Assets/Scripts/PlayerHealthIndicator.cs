@@ -39,7 +39,7 @@ public class PlayerHealthIndicator : MonoBehaviour
 
     private void Awake()
     {
-        playerName.SetText($"{playerNameDict[playerData.id]}");
+        playerName.SetText($"{playerData.GetName()}");
         playerImage.sprite = playerData.image;
         playerImageShadow.sprite = playerData.image;
 

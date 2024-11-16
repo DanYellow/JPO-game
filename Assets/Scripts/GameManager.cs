@@ -1,11 +1,20 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject playerDeathEffectPrefab;
+
+    [SerializeField]
+    private GameObject gameEndMenuUI;
+    [SerializeField]
+    private Image winnerImage;
+    [SerializeField]
+    private TextMeshProUGUI winnerName;
 
     [Header("Scriptable Objects"), SerializeField]
     private VectorEventChannel onPlayerExitEvent;
@@ -16,17 +25,38 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private VoidEventChannel onGameEndEvent;
 
+    [SerializeField]
+    private GameObjectEventChannel onPlayerWinsEvent;
+
     private int nbPlayers = 4;
+
+    private void Awake()
+    {
+        gameEndMenuUI.SetActive(false);
+    }
 
     private void OnEnable()
     {
         onPlayerExitEvent.OnEventRaised += OnPlayerExit;
         onPlayerDeathEvent.OnEventRaised += OnPlayerDeath;
+        onPlayerWinsEvent.OnEventRaised += DisplayGameWinner;
+    }
+
+    private void DisplayGameWinner(GameObject playerGO)
+    {
+        Player player = playerGO.GetComponent<Player>();
+        winnerImage.sprite = player.playerData.image;
+        winnerName.SetText($"Le <b>{player.playerData.GetName()}</b>\nremporte la partie !");
     }
 
     private void OnPlayerExit(Vector3 position)
     {
         StartCoroutine(PlayerDeathEffect(position));
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
     }
 
     IEnumerator PlayerDeathEffect(Vector3 position)
@@ -53,6 +83,7 @@ public class GameManager : MonoBehaviour
         if (nbPlayers == 1)
         {
             onGameEndEvent.Raise();
+            gameEndMenuUI.SetActive(true);
         }
     }
 
@@ -60,5 +91,6 @@ public class GameManager : MonoBehaviour
     {
         onPlayerExitEvent.OnEventRaised -= OnPlayerExit;
         onPlayerDeathEvent.OnEventRaised -= OnPlayerDeath;
+        onPlayerWinsEvent.OnEventRaised -= DisplayGameWinner;
     }
 }
