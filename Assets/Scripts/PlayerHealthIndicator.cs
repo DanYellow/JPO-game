@@ -15,6 +15,10 @@ public class PlayerHealthIndicator : MonoBehaviour
 
     [SerializeField]
     private Image playerImage;
+
+    [SerializeField]
+    private Image playerImageShadow;
+
     [SerializeField]
     private TextMeshProUGUI playerName;
 
@@ -24,5 +28,7 @@ public class PlayerHealthIndicator : MonoBehaviour
     private void Awake()
     {
         playerName.SetText($"{playerNameDict[playerData.id]}");
+        playerImage.sprite = playerData.image;
+        playerImageShadow.sprite = playerData.image;
     }
 }

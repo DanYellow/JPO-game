@@ -16,4 +16,6 @@ public class PlayerData : ScriptableObject
     public LayerMask damageLayer;
     public PlayerID id;
     public int nbLives = 0;
+
+    public Sprite image;
 }
