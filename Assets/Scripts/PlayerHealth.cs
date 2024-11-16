@@ -66,6 +66,7 @@ public class PlayerHealth : MonoBehaviour
             {
                 hasTriggeredExitScreenEvent = true;
                 onPlayerExit.OnEventRaised(transform.position);
+                gameObject.SetActive(false);
             }
         }
     }
