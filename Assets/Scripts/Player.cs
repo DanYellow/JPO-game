@@ -11,16 +11,16 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         GetComponentInChildren<Light>().transform.name = $"Light{playerData.id.ToString()}";
-
-        if (playerData.id == PlayerID.Player2 || playerData.id == PlayerID.Player3)
-        {
-            GetComponentInChildren<SpriteRenderer>().flipX = true;
-        }
     }
 
     private void Start()
     {
         StartCoroutine(UnparentLight());
+
+        if (playerData.id == PlayerID.Player2 || playerData.id == PlayerID.Player3)
+        {
+            GetComponentInChildren<SpriteRenderer>().transform.localScale = new Vector3(-1, 1, 1);
+        }
     }
 
     private IEnumerator UnparentLight()

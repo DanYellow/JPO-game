@@ -25,6 +25,9 @@ public class PlayerHealthIndicator : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI playerName;
 
+    [SerializeField]
+    private List<Image> listImages = new List<Image> { };
+
     [Header("Scriptable Objects"), SerializeField]
     private PlayerData playerData;
 
@@ -39,6 +42,16 @@ public class PlayerHealthIndicator : MonoBehaviour
         playerName.SetText($"{playerNameDict[playerData.id]}");
         playerImage.sprite = playerData.image;
         playerImageShadow.sprite = playerData.image;
+
+        string filledHeartColor = "#AA0000";
+
+        foreach (var image in listImages)
+        {
+            if (ColorUtility.TryParseHtmlString(filledHeartColor, out Color hexColor))
+            {
+                image.color = hexColor;
+            }
+        }
     }
 
     private void OnEnable()
@@ -51,7 +64,7 @@ public class PlayerHealthIndicator : MonoBehaviour
     {
         if (playerID == playerData.id)
         {
-            print("Player " + playerID.ToString() + " - " + playerData.id);
+            listImages[playerData.nbLives].color = Color.white;
         }
     }
 
@@ -59,9 +72,10 @@ public class PlayerHealthIndicator : MonoBehaviour
     {
         Player player = _player.GetComponent<Player>();
 
-        if (player.playerData.id == playerData.id)
+        if (player.playerData.id == playerData.id && playerImage.material != blackAndWhiteMaterial)
         {
             playerImage.material = blackAndWhiteMaterial;
+            listImages[0].color = Color.white;
         }
     }
 
@@ -70,5 +84,4 @@ public class PlayerHealthIndicator : MonoBehaviour
         onPlayerHitEvent.OnEventRaised += OnPlayerHit;
         onPlayerDeathEvent.OnEventRaised += OnPlayerDeath;
     }
-
 }
