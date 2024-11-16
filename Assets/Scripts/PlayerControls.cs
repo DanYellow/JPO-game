@@ -41,7 +41,7 @@ public class PlayerControls : MonoBehaviour
 
     private void Update()
     {
-        animator.SetFloat(AnimationStrings.velocityY, rb.velocity.y);
+        animator.SetFloat(AnimationStrings.velocityY, rb.linearVelocity.y);
         animator.SetBool(AnimationStrings.isGrounded, isGrounded);
     }
 
@@ -52,15 +52,15 @@ public class PlayerControls : MonoBehaviour
 
         if (!isGrounded && !isGroundPounding)
         {
-            Vector3 vel = rb.velocity;
+            Vector3 vel = rb.linearVelocity;
             vel.y -= 10.5f * Time.deltaTime;
-            rb.velocity = vel;
+            rb.linearVelocity = vel;
         }
     }
 
     public bool IsFalling()
     {
-        return rb.velocity.y < 0;
+        return rb.linearVelocity.y < 0;
     }
 
     public bool IsGrounded()
@@ -86,7 +86,7 @@ public class PlayerControls : MonoBehaviour
 
             if (isGrounded)
             {
-                rb.velocity = new Vector3(rb.velocity.x, playerData.root.jumpForce, rb.velocity.z);
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, playerData.root.jumpForce, rb.linearVelocity.z);
             }
         }
     }
