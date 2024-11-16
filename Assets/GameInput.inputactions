@@ -9,7 +9,7 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "3a2d759c-3a4e-4b20-b000-30167b82de97",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -116,8 +116,30 @@
         {
             "name": "PlayerDead",
             "id": "34609e51-15f9-4c5a-8ea2-8741d04b43ba",
-            "actions": [],
-            "bindings": []
+            "actions": [
+                {
+                    "name": "null",
+                    "type": "Button",
+                    "id": "8d559c35-f58e-453d-b82b-cbf4eb9449a7",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "61a2af74-9e7f-4631-9ed8-cb70764d634e",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "null",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

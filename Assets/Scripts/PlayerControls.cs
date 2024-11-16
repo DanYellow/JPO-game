@@ -80,6 +80,7 @@ public class PlayerControls : MonoBehaviour
     {
         // context.ReadValue<bool>();
         // context.action.triggered;
+
         if (context.phase == InputActionPhase.Performed)
         {
             if (Time.time - lastGroundPoundCooldown < playerData.root.groundPoundCooldown)
@@ -187,7 +188,10 @@ public class PlayerControls : MonoBehaviour
 
     public void DisableControls()
     {
-        playerInput.defaultActionMap = "PlayerDead";
+        if (gameObject.activeInHierarchy)
+        {
+            playerInput.SwitchCurrentActionMap("PlayerDead");
+        }
     }
 
     private void OnDisable()

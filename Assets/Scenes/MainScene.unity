@@ -1378,7 +1378,7 @@ MonoBehaviour:
   playerDeathEffectPrefab: {fileID: 2105518355691488756, guid: 2786c71b21f7bda4a88c62ad18173dab,
     type: 3}
   onPlayerExitEvent: {fileID: 11400000, guid: 59e2b1a4623b25843a39a653ddf98a31, type: 2}
-  onPlayerDeathEvent: {fileID: 11400000, guid: 94b1aae6a67185748a804d224092b403, type: 2}
+  onPlayerDeathEvent: {fileID: 11400000, guid: be4f9c5ba79b2724daba22fd85495fb9, type: 2}
   onGameEndEvent: {fileID: 11400000, guid: e247249aac70dd141a4b00e04e16cefb, type: 2}
 --- !u!1 &1243396992
 GameObject:
@@ -1862,12 +1862,12 @@ PrefabInstance:
     - target: {fileID: 1519171355121263674, guid: 59f2959683982604c8ad227eae5b66a2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.79
+      value: 3.82
       objectReference: {fileID: 0}
     - target: {fileID: 1519171355121263674, guid: 59f2959683982604c8ad227eae5b66a2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.42
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 1519171355121263674, guid: 59f2959683982604c8ad227eae5b66a2,
         type: 3}
@@ -2501,7 +2501,7 @@ PrefabInstance:
     - target: {fileID: 1519171355121263674, guid: 59f2959683982604c8ad227eae5b66a2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.69
+      value: 3.8
       objectReference: {fileID: 0}
     - target: {fileID: 1519171355121263674, guid: 59f2959683982604c8ad227eae5b66a2,
         type: 3}
