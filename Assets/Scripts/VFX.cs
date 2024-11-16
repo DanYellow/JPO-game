@@ -7,7 +7,7 @@ public class VFX : MonoBehaviour
 {
     [Header("Scriptable Objects")]
     [SerializeField]
-    private VoidEventChannel onPlayerDeathEvent;
+    private VectorEventChannel onPlayerExitEvent;
 
     private ChromaticAberration chromaticAberrationClone;
 
@@ -24,10 +24,10 @@ public class VFX : MonoBehaviour
 
     private void OnEnable()
     {
-        onPlayerDeathEvent.OnEventRaised += OnPlayerDeath;
+        onPlayerExitEvent.OnEventRaised += OnPlayerDeath;
     }
 
-    private void OnPlayerDeath()
+    private void OnPlayerDeath(Vector3 exitPoint)
     {
         chromaticAberrationClone.intensity.value = 0.5f;
         chromaticAberrationClone.intensity.overrideState = true;
@@ -53,6 +53,6 @@ public class VFX : MonoBehaviour
 
     private void OnDisable()
     {
-        onPlayerDeathEvent.OnEventRaised -= OnPlayerDeath;
+        onPlayerExitEvent.OnEventRaised -= OnPlayerDeath;
     }
 }
