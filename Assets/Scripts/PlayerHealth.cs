@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -11,6 +12,9 @@ public class PlayerHealth : MonoBehaviour
 
     [SerializeField]
     private GameObjectEventChannel onPlayerDeathEvent;
+
+    [SerializeField]
+    private VoidEventChannel onGameEndEvent;
 
     [SerializeField]
     private int nbLives = 0;
@@ -39,6 +43,19 @@ public class PlayerHealth : MonoBehaviour
         nbLives = playerData.root.maxNbLives;
     }
 
+    private void OnEnable()
+    {
+        onGameEndEvent.OnEventRaised += OnGameEnd;
+    }
+
+    private void OnGameEnd()
+    {
+        if (nbLives > 0)
+        {
+            StartCoroutine(playerInvincibility.Invincible(10));
+        }
+    }
+
     public void TakeDamage(Vector3 impactPoint)
     {
         nbLives--;
@@ -49,7 +66,7 @@ public class PlayerHealth : MonoBehaviour
         }
         else
         {
-            StartCoroutine(playerInvincibility.Invincible());
+            StartCoroutine(playerInvincibility.Invincible(null));
             animator.SetTrigger(AnimationStrings.isHit);
         }
     }
@@ -77,5 +94,10 @@ public class PlayerHealth : MonoBehaviour
         lightLandmark.enabled = false;
         onPlayerDeathEvent.OnEventRaised(gameObject);
         OnDeath.Invoke();
+    }
+
+    private void OnDisable()
+    {
+        onGameEndEvent.OnEventRaised += OnGameEnd;
     }
 }

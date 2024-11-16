@@ -41,7 +41,7 @@ public class PlayerInvincibility : MonoBehaviour
         }
     }
 
-    public IEnumerator Invincible()
+    public IEnumerator Invincible(float? duration)
     {
         if (isInvincible)
         {
@@ -52,8 +52,10 @@ public class PlayerInvincibility : MonoBehaviour
 
         ToggleCollisions(gameObject.layer, isInvincible);
 
+        float invincibilityTime = duration ?? playerData.root.invincibilityTime;
+
         float timeElapsed = 0;
-        while (timeElapsed < playerData.root.invincibilityTime)
+        while (timeElapsed < invincibilityTime)
         {
             timeElapsed += Time.deltaTime;
             if (Time.frameCount % 8 == 0)
