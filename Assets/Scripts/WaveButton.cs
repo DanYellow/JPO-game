@@ -16,6 +16,12 @@ public class WaveButton : MonoBehaviour
     [SerializeField]
     private GameObject pushButton;
 
+    [SerializeField]
+    private GameObject ringButton;
+    private Material ringLightOnMaterial;
+    [SerializeField]
+    private Material ringLightOffMaterial;
+
     [Header("Scriptable Objects"), SerializeField]
     private PlayerData playerData;
 
@@ -26,7 +32,7 @@ public class WaveButton : MonoBehaviour
             startPosition.position.y,
             startPosition.position.z
         );
-
+        ringLightOnMaterial = ringButton.GetComponent<MeshRenderer>().materials[0];
         onPositionSet.Invoke(playerPosition);
     }
 
@@ -39,6 +45,10 @@ public class WaveButton : MonoBehaviour
     {
         float timeElapsed = 0;
 
+        Material[] newMaterials = ringButton.GetComponent<MeshRenderer>().materials;
+        newMaterials[0] = ringLightOffMaterial;
+
+        ringButton.GetComponent<MeshRenderer>().materials = newMaterials;
         Vector3 startPos = pushButton.transform.position;
         Vector3 endPos = pushButton.transform.position - (Vector3.up * 0.1f);
 
@@ -60,6 +70,8 @@ public class WaveButton : MonoBehaviour
             yield return null;
         }
         pushButton.transform.position = startPos;
+        newMaterials[0] = ringLightOnMaterial;
+        ringButton.GetComponent<MeshRenderer>().materials = newMaterials;
     }
 
     private void OnCollisionEnter(Collision other)
