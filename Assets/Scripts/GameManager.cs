@@ -55,6 +55,11 @@ public class GameManager : MonoBehaviour
         winnerImage.sprite = player.playerData.image;
         winnerShadow.sprite = player.playerData.image;
         winnerName.SetText($"Le <b>{player.playerData.GetName()}</b>\nremporte la partie !");
+    
+        Canvas rankCanvas = player.rankCanvas;
+        TextMeshProUGUI rank = rankCanvas.GetComponentInChildren<TextMeshProUGUI>();
+        rank.SetText("1<sup>er</sup>");
+        rankCanvas.gameObject.SetActive(true);
     }
 
     private void OnPlayerExit(Vector3 position)
@@ -97,7 +102,6 @@ public class GameManager : MonoBehaviour
 
     private void OnTimerEnd()
     {
-        print("okoke");
         onGameEndEvent.Raise();
         gameEndMenuUI.SetActive(true);
     }
