@@ -111,7 +111,7 @@ public class PlayerControls : MonoBehaviour
         if (playerData.nbLives > 0)
         {
             DisableControls();
-            onPlayerWinsEvent.Raise(gameObject);
+            // onPlayerWinsEvent.Raise(gameObject);
         }
     }
 
@@ -126,9 +126,9 @@ public class PlayerControls : MonoBehaviour
     private IEnumerator DropAndPound()
     {
         animator.SetTrigger(AnimationStrings.doubleJump);
-        rb.constraints = RigidbodyConstraints.FreezePosition;
+        rb.constraints = RigidbodyConstraints.FreezeAll;
         yield return Helpers.GetWait(0.15f);
-        rb.constraints = RigidbodyConstraints.None;
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
         rb.AddForce(Vector3.down * playerData.root.dropForce, ForceMode.Impulse);
     }
 
