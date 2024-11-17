@@ -112,7 +112,7 @@ public class PlayerControls : MonoBehaviour
     {
         if (playerData.nbLives > 0)
         {
-        DisableControls();
+            DisableControls();
             onPlayerWinsEvent.Raise(gameObject);
         }
     }

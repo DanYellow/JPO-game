@@ -9,7 +9,7 @@ public class WaveEffectCollision : MonoBehaviour
 
     private Vector3 originPosition;
 
-    [SerializeField]
+    [Header("Scriptable Objects"), SerializeField]
     private VoidEventChannel onGameEndEvent;
 
     private void Awake()
@@ -32,7 +32,6 @@ public class WaveEffectCollision : MonoBehaviour
         if (other.TryGetComponent(out PlayerHealth playerHealth))
         {
             Vector3 dirX = (other.transform.position - transform.position).normalized;
-            print(playerHealth.gameObject.name);
             playerHealth.TakeDamage(dirX);
         }
         Unload();
