@@ -20,7 +20,7 @@ public class WaveButton : MonoBehaviour
     private GameObject ringButton;
     private Material ringLightOnMaterial;
     [SerializeField]
-    private Material ringLightOffMaterial;
+    private Material ringLightOffMaterial; // #4E4C00
 
     [Header("Scriptable Objects"), SerializeField]
     private PlayerData playerData;
@@ -43,8 +43,6 @@ public class WaveButton : MonoBehaviour
 
     IEnumerator MoveObject(GameObject player)
     {
-        float timeElapsed = 0;
-
         Material[] newMaterials = ringButton.GetComponent<MeshRenderer>().materials;
         newMaterials[0] = ringLightOffMaterial;
 
@@ -52,16 +50,8 @@ public class WaveButton : MonoBehaviour
         Vector3 startPos = pushButton.transform.position;
         Vector3 endPos = pushButton.transform.position - (Vector3.up * 0.1f);
 
-        // while (timeElapsed < duration)
-        // {
-        //     timeElapsed += Time.deltaTime;
-        //     pushButton.transform.position = Vector3.Lerp(startPos, endPos, timeElapsed);
-
-        //     yield return null;
-        // }
-
         pushButton.transform.position = endPos;
-        timeElapsed = 0;
+        float timeElapsed = 0;
         while (timeElapsed < playerData.root.groundPoundCooldown)
         {
             timeElapsed += Time.deltaTime;
