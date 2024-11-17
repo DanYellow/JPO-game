@@ -48,24 +48,23 @@ public class PlayerInvincibility : MonoBehaviour
         }
 
         isInvincible = true;
-
         ToggleCollisions(gameObject.layer, isInvincible);
 
         float invincibilityTime = duration ?? playerData.root.invincibilityTime;
-
         float timeElapsed = 0;
+
         while (timeElapsed < invincibilityTime)
         {
             timeElapsed += Time.deltaTime;
             if (Time.frameCount % 8 == 0)
             {
-                if (spriteRenderer.color.a == 1)
+                if (spriteRenderer.material.GetFloat("_Alpha") == 1)
                 {
-                    spriteRenderer.color = new Color(1f, 1f, 1f, 0f);
+                    spriteRenderer.material.SetFloat("_Alpha", 0);
                 }
                 else
                 {
-                    spriteRenderer.color = new Color(1f, 1f, 1f, 1f);
+                    spriteRenderer.material.SetFloat("_Alpha", 1);
                 }
             }
 

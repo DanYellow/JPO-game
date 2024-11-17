@@ -318,7 +318,7 @@ PrefabInstance:
     - target: {fileID: 1042249736209252522, guid: 86e11658d68cdea46a9a980276120cdc,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1358291090268259976, guid: 86e11658d68cdea46a9a980276120cdc,
         type: 3}
@@ -392,6 +392,26 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -1320907973, guid: 69b8bb795c4e3264e9eeb5d93691435a,
         type: 3}
+    - target: {fileID: 2908404528522500080, guid: 86e11658d68cdea46a9a980276120cdc,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908404528522500080, guid: 86e11658d68cdea46a9a980276120cdc,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908404528522500080, guid: 86e11658d68cdea46a9a980276120cdc,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908404528522500080, guid: 86e11658d68cdea46a9a980276120cdc,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2908404528522500080, guid: 86e11658d68cdea46a9a980276120cdc,
         type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -2931,6 +2951,7 @@ MonoBehaviour:
   onPlayerExitEvent: {fileID: 11400000, guid: 59e2b1a4623b25843a39a653ddf98a31, type: 2}
   onPlayerDeathEvent: {fileID: 11400000, guid: be4f9c5ba79b2724daba22fd85495fb9, type: 2}
   onGameEndEvent: {fileID: 11400000, guid: e247249aac70dd141a4b00e04e16cefb, type: 2}
+  onTimerEndEvent: {fileID: 11400000, guid: d8d88bd40965d86408dd2169579e9ab5, type: 2}
   onPlayerWinsEvent: {fileID: 11400000, guid: bb26eacc30fae51469cdf98a268174c3, type: 2}
 --- !u!1 &1243396992
 GameObject:
@@ -2975,7 +2996,7 @@ GameObject:
   - component: {fileID: 1257400427}
   - component: {fileID: 1257400426}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3013,7 +3034,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3592,7 +3613,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.93962264, g: 0.93962264, b: 0.93962264, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3631,7 +3652,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeRemaining: 45
   timerText: {fileID: 711658895}
+  background: {fileID: 1477065623}
+  icon: {fileID: 1257400426}
   onGameEndEvent: {fileID: 11400000, guid: e247249aac70dd141a4b00e04e16cefb, type: 2}
+  onTimerEndEvent: {fileID: 11400000, guid: d8d88bd40965d86408dd2169579e9ab5, type: 2}
 --- !u!114 &1516789960 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8489243013509266043, guid: 96219bc66c313b04680c4ef8c8c618e3,
@@ -5482,6 +5506,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 8b6ae0de993b4e04f8e995aa91a26b40,
         type: 3}
+    - target: {fileID: 2908404528522500080, guid: 86e11658d68cdea46a9a980276120cdc,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 3eb6dc79c14f84e4aa5b4d5a9a1574ef, type: 2}
     - target: {fileID: 3703189710441826917, guid: 86e11658d68cdea46a9a980276120cdc,
         type: 3}
       propertyPath: m_LocalRotation.w
