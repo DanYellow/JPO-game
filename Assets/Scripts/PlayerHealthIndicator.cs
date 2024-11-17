@@ -2,17 +2,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
-using System;
 
 public class PlayerHealthIndicator : MonoBehaviour
 {
-    private Dictionary<PlayerID, string> playerNameDict = new Dictionary<PlayerID, string>(){
-        {PlayerID.Player1, "Joueur 1"},
-        {PlayerID.Player2, "Joueur 2"},
-        {PlayerID.Player3, "Joueur 3"},
-        {PlayerID.Player4, "Joueur 4"}
-    };
-
     [SerializeField]
     private Material blackAndWhiteMaterial;
 
@@ -62,7 +54,7 @@ public class PlayerHealthIndicator : MonoBehaviour
 
     private void OnPlayerHit(PlayerID playerID)
     {
-        if (playerID == playerData.id && playerData.nbLives > 0)
+        if (playerID == playerData.id && playerData.nbLives > 0 && listImages[playerData.nbLives] != null)
         {
             listImages[playerData.nbLives].color = Color.white;
         }
@@ -74,8 +66,15 @@ public class PlayerHealthIndicator : MonoBehaviour
 
         if (player.playerData.id == playerData.id && playerImage.material != blackAndWhiteMaterial)
         {
-            playerImage.material = blackAndWhiteMaterial;
-            listImages[0].color = Color.white;
+            if (playerImage != null)
+            {
+                playerImage.material = blackAndWhiteMaterial;
+            }
+
+            if (listImages[0] != null)
+            {
+                listImages[0].color = Color.white;
+            }
         }
     }
 
