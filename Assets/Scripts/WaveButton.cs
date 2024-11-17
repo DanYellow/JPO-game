@@ -25,7 +25,7 @@ public class WaveButton : MonoBehaviour
     [SerializeField]
     private Transform waveEffectTransform;
     [SerializeField]
-    private GameObject waveEffectPrefab;
+    private GameObject waveEffectColliderPrefab;
 
     private MeshRenderer ringLightMeshRenderer;
 
@@ -34,11 +34,15 @@ public class WaveButton : MonoBehaviour
     [SerializeField]
     private Material waveMaterial;
 
+    private ObjectPooling pool;
+
     [Header("Scriptable Objects"), SerializeField]
     private PlayerData playerData;
 
-    private void Awake() {
+    private void Awake()
+    {
         ringLightMeshRenderer = ringButton.GetComponent<MeshRenderer>();
+        pool = GetComponent<ObjectPooling>();
     }
 
     private void Start()
@@ -71,11 +75,9 @@ public class WaveButton : MonoBehaviour
         onButtonPressed.Invoke();
         pushButton.transform.position = endPos;
 
-        GameObject waveEffect = Instantiate(waveEffectPrefab, waveEffectTransform.position, Quaternion.identity);
-        Material[] waveEffectMaterials = waveEffect.GetComponent<MeshRenderer>().materials;
-        waveEffectMaterials[0] = waveMaterial;
-        waveEffect.GetComponent<MeshRenderer>().materials = waveEffectMaterials;
-        
+        CreateWave();
+        // GameObject waveEffect = Instantiate(waveEffectPrefab, waveEffectTransform.position, Quaternion.identity);
+
         float timeElapsed = 0;
         while (timeElapsed < playerData.root.groundPoundCooldown)
         {
@@ -87,6 +89,37 @@ public class WaveButton : MonoBehaviour
         pushButton.transform.position = startPos;
         newMaterials[0] = ringLightOnMaterial;
         ringLightMeshRenderer.materials = newMaterials;
+    }
+
+    private void CreateWave()
+    {
+        ObjectPooled waveEffect = pool.Get("WaveEffect");
+        if (waveEffect == null)
+        {
+            return;
+        }
+        waveEffect.gameObject.transform.SetPositionAndRotation(waveEffectTransform.position, Quaternion.identity);
+        Material[] waveEffectMaterials = waveEffect.GetComponent<MeshRenderer>().materials;
+        waveEffectMaterials[0] = waveMaterial;
+        waveEffect.GetComponent<MeshRenderer>().materials = waveEffectMaterials;
+
+        foreach (var pos in waveEffect.GetComponent<WaveEffect>().GetTrakers(playerData.id))
+        {
+            GameObject waveEffectCollider = Instantiate(waveEffectColliderPrefab, waveEffectTransform.position, Quaternion.identity);
+            waveEffectCollider.GetComponent<Follow>().target = pos;
+            waveEffectCollider.gameObject.layer = LayerMask.NameToLayer($"WaveEffect{playerData.id.ToString()}");
+            // waveEffectCollider.gameObject.transform.SetPositionAndRotation(pos.position, Quaternion.identity);
+            
+            waveEffectCollider.transform.rotation = Quaternion.identity;
+            waveEffectCollider.gameObject.transform.LookAt(pos);
+
+            waveEffectCollider.gameObject.transform.RotateAround(
+                waveEffectCollider.gameObject.transform.position,
+                waveEffectCollider.gameObject.transform.up,
+                90
+            );
+        }
+
     }
 
     private void OnCollisionEnter(Collision other)

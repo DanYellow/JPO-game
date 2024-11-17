@@ -140,7 +140,7 @@ public class PlayerControls : MonoBehaviour
         if (isGroundPounding)
         {
             onGroundPound.Invoke(gameObject);
-            CreateShockwave(other.contacts[0].point);
+            // CreateShockwave(other.contacts[0].point);
         }
         isGroundPounding = false;
     }
