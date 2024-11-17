@@ -29,7 +29,7 @@ public class PlayerHealth : MonoBehaviour
     private bool hasTriggeredExitScreenEvent = false;
 
     [SerializeField]
-    private UnityEvent OnDeath;
+    private UnityEvent onDeath;
 
     private void Awake()
     {
@@ -49,7 +49,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void OnGameEnd()
     {
-        if (playerData.nbLives > 0)
+        if (playerData.nbLives > 0 && playerInvincibility != null)
         {
             playerInvincibility.Winner();
         }
@@ -83,7 +83,7 @@ public class PlayerHealth : MonoBehaviour
             {
                 hasTriggeredExitScreenEvent = true;
                 onPlayerExit.OnEventRaised(transform.position);
-                gameObject.SetActive(false);
+                // gameObject.SetActive(false);
             }
         }
     }
@@ -93,7 +93,7 @@ public class PlayerHealth : MonoBehaviour
         rb.AddForce(impactPoint * 60, ForceMode.VelocityChange);
         lightLandmark.enabled = false;
         onPlayerDeathEvent.OnEventRaised(gameObject);
-        OnDeath.Invoke();
+        onDeath.Invoke();
     }
 
     private void OnDisable()
