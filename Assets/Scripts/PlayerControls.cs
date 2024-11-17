@@ -110,9 +110,9 @@ public class PlayerControls : MonoBehaviour
 
     private void OnGameEnd()
     {
-        DisableControls();
         if (playerData.nbLives > 0)
         {
+        DisableControls();
             onPlayerWinsEvent.Raise(gameObject);
         }
     }
@@ -201,10 +201,10 @@ public class PlayerControls : MonoBehaviour
 
     public void DisableControls()
     {
-        if (gameObject.activeInHierarchy)
-        {
-            playerInput.SwitchCurrentActionMap("PlayerDead");
-        }
+        // if (gameObject.activeInHierarchy)
+        // {
+        //     playerInput.SwitchCurrentActionMap("PlayerDead");
+        // }
     }
 
     private void OnDisable()

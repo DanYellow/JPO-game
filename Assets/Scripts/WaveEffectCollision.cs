@@ -19,7 +19,7 @@ public class WaveEffectCollision : MonoBehaviour
 
     private void OnGameEnd()
     {
-        // Destroy(gameObject);
+        Destroy(gameObject);
     }
 
     private void OnDisable()
@@ -32,6 +32,7 @@ public class WaveEffectCollision : MonoBehaviour
         if (other.TryGetComponent(out PlayerHealth playerHealth))
         {
             Vector3 dirX = (other.transform.position - transform.position).normalized;
+            print(playerHealth.gameObject.name);
             playerHealth.TakeDamage(dirX);
         }
         Unload();
