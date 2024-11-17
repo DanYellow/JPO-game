@@ -447,8 +447,7 @@ MonoBehaviour:
   ringLightOffMaterial: {fileID: 2100000, guid: 2b3e1b5fc7a19fe4fbdb5b1bca79cc87,
     type: 2}
   waveEffectTransform: {fileID: 1030887940485196176}
-  waveEffectPrefab: {fileID: 616433127942121861, guid: 5ac62168043835b499a793848cacd2c9,
-    type: 3}
+  waveEffectColliderPrefab: {fileID: 0}
   onButtonPressed:
     m_PersistentCalls:
       m_Calls: []
@@ -498,4 +497,10 @@ MonoBehaviour:
     minItems: 1
     maxItems: 5
     prefab: {fileID: 616433127942121861, guid: 5ac62168043835b499a793848cacd2c9, type: 3}
+    count: 0
+  - key: WaveEffectCollider
+    minItems: 1
+    maxItems: 9
+    prefab: {fileID: 6519570451442300796, guid: 347c72722a8fc3d4c9cf5a4f8681860e,
+      type: 3}
     count: 0

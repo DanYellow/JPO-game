@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 7277083853982698689}
   - component: {fileID: 1501724994957231941}
   - component: {fileID: 2673831844833846019}
-  - component: {fileID: -4705115942187329918}
   - component: {fileID: -1421874034288912110}
+  - component: {fileID: 1894882722116367011}
+  - component: {fileID: 3314093514750423365}
   m_Layer: 6
   m_Name: WaveEffectCollision
   m_TagString: Untagged
@@ -61,6 +62,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -107,20 +111,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-4705115942187329918
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6519570451442300796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b3acee338299b34bb094b5b3f2778c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 6
-  onGameEndEvent: {fileID: 11400000, guid: e247249aac70dd141a4b00e04e16cefb, type: 2}
 --- !u!114 &-1421874034288912110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,3 +123,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29b13a9db05fe774ba5328b9f87c425b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1894882722116367011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6519570451442300796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b21089b6edf50b941b02e9d01d9e6534, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+--- !u!114 &3314093514750423365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6519570451442300796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b3acee338299b34bb094b5b3f2778c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onGameEndEvent: {fileID: 11400000, guid: e247249aac70dd141a4b00e04e16cefb, type: 2}
+  onTimerEndEvent: {fileID: 11400000, guid: d8d88bd40965d86408dd2169579e9ab5, type: 2}

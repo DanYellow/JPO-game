@@ -2,15 +2,14 @@ using UnityEngine;
 
 public class WaveEffectCollision : MonoBehaviour
 {
-    [SerializeField, Range(2, 10)]
-    private float speed = 7;
-
     private ObjectPooled objectPooled;
-
-    private Vector3 originPosition;
 
     [Header("Scriptable Objects"), SerializeField]
     private VoidEventChannel onGameEndEvent;
+    [SerializeField]
+    private VoidEventChannel onTimerEndEvent;
+
+    public GameObject vfx;
 
     private void Awake()
     {
@@ -22,9 +21,11 @@ public class WaveEffectCollision : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnDisable()
+
+    private void OnEnable()
     {
-        onGameEndEvent.OnEventRaised -= OnGameEnd;
+        onGameEndEvent.OnEventRaised += OnGameEnd;
+        onTimerEndEvent.OnEventRaised += OnGameEnd;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -39,12 +40,7 @@ public class WaveEffectCollision : MonoBehaviour
 
     private void Update()
     {
-        if (gameObject.activeInHierarchy)
-        {
-            transform.position += transform.right * Time.deltaTime * speed;
-        }
-
-        if (Vector3.Distance(gameObject.transform.position, originPosition) > 25 && gameObject.activeInHierarchy)
+        if (!vfx.activeInHierarchy)
         {
             Unload();
         }
@@ -62,9 +58,9 @@ public class WaveEffectCollision : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+    private void OnDisable()
     {
-        onGameEndEvent.OnEventRaised += OnGameEnd;
-        originPosition = gameObject.transform.position;
+        onGameEndEvent.OnEventRaised -= OnGameEnd;
+        onTimerEndEvent.OnEventRaised -= OnGameEnd;
     }
 }

@@ -19,7 +19,6 @@ GameObject:
   - component: {fileID: 2067386120912316461}
   - component: {fileID: 5651726885194495070}
   - component: {fileID: 4966838003681711026}
-  - component: {fileID: 5068324916385029094}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -317,25 +316,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player1
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &5068324916385029094
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1042249736209252522}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca097d78172fcd94c87caa4c9cd5c0f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  listItemsToPool:
-  - key: WaveAttack
-    minItems: 3
-    maxItems: 15
-    prefab: {fileID: 6519570451442300796, guid: 5d1580e049c89db4a95e9f4f7611eb50,
-      type: 3}
-    count: 0
 --- !u!1 &4359017046021295307
 GameObject:
   m_ObjectHideFlags: 0

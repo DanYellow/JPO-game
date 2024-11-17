@@ -76,7 +76,6 @@ public class WaveButton : MonoBehaviour
         pushButton.transform.position = endPos;
 
         CreateWave();
-        // GameObject waveEffect = Instantiate(waveEffectPrefab, waveEffectTransform.position, Quaternion.identity);
 
         float timeElapsed = 0;
         while (timeElapsed < playerData.root.groundPoundCooldown)
@@ -105,11 +104,15 @@ public class WaveButton : MonoBehaviour
 
         foreach (var pos in waveEffect.GetComponent<WaveEffect>().GetTrakers(playerData.id))
         {
-            GameObject waveEffectCollider = Instantiate(waveEffectColliderPrefab, waveEffectTransform.position, Quaternion.identity);
+            ObjectPooled waveEffectCollider = pool.Get("WaveEffectCollider");
+            if (waveEffect == null)
+            {
+                return;
+            }
+
             waveEffectCollider.GetComponent<Follow>().target = pos;
+            waveEffectCollider.GetComponent<WaveEffectCollision>().vfx = waveEffect.gameObject;
             waveEffectCollider.gameObject.layer = LayerMask.NameToLayer($"WaveEffect{playerData.id.ToString()}");
-            // waveEffectCollider.gameObject.transform.SetPositionAndRotation(pos.position, Quaternion.identity);
-            
             waveEffectCollider.transform.rotation = Quaternion.identity;
             waveEffectCollider.gameObject.transform.LookAt(pos);
 
@@ -119,7 +122,6 @@ public class WaveButton : MonoBehaviour
                 90
             );
         }
-
     }
 
     private void OnCollisionEnter(Collision other)
