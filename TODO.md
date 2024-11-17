@@ -1,5 +1,5 @@
-- Display UI for player's lives
-- Display game end canvas
+- ~~Display UI for player's lives~~
+- ~~Display game end canvas~~
 - Make main menu
 - Modelize player's base
 

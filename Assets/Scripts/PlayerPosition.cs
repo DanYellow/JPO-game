@@ -1,17 +1,18 @@
-using System.Collections;
 using UnityEngine;
 
-public class PlayerPosition : MonoBehaviour
+public class Playerposition : MonoBehaviour
 {
-    [SerializeField]
-    private Transform startPosition;
+    private float heightSprite;
 
-    private void Start()
-    {
+    private void Awake() {
+        heightSprite = GetComponentInChildren<SpriteRenderer>().bounds.size.y / 2;
+    }
+
+    public void SetPosition(Transform transform) {
         GetComponent<Rigidbody>().position = new Vector3(
-            startPosition.position.x,
-            transform.position.y,
-            startPosition.position.z
+            transform.position.x,
+            transform.position.y + heightSprite,
+            transform.position.z
         );
     }
 }
