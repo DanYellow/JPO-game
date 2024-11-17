@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -28,6 +29,9 @@ public class GameManager : MonoBehaviour
     private VoidEventChannel onGameEndEvent;
 
     [SerializeField]
+    private VoidEventChannel onTimerEndEvent;
+
+    [SerializeField]
     private GameObjectEventChannel onPlayerWinsEvent;
 
     private int nbPlayers = 4;
@@ -42,6 +46,7 @@ public class GameManager : MonoBehaviour
         onPlayerExitEvent.OnEventRaised += OnPlayerExit;
         onPlayerDeathEvent.OnEventRaised += OnPlayerDeath;
         onPlayerWinsEvent.OnEventRaised += DisplayGameWinner;
+        onTimerEndEvent.OnEventRaised += OnTimerEnd;
     }
 
     private void DisplayGameWinner(GameObject playerGO)
@@ -90,10 +95,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void OnTimerEnd()
+    {
+        print("okoke");
+        onGameEndEvent.Raise();
+        gameEndMenuUI.SetActive(true);
+    }
+
     private void OnDisable()
     {
         onPlayerExitEvent.OnEventRaised -= OnPlayerExit;
         onPlayerDeathEvent.OnEventRaised -= OnPlayerDeath;
         onPlayerWinsEvent.OnEventRaised -= DisplayGameWinner;
+        onTimerEndEvent.OnEventRaised -= OnTimerEnd;
     }
 }

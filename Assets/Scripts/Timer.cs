@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
@@ -10,8 +11,16 @@ public class Timer : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI timerText;
 
+    [SerializeField]
+    private Image background;
+    [SerializeField]
+    private Image icon;
+
     [Header("Scriptable Objects"), SerializeField]
     private VoidEventChannel onGameEndEvent;
+
+    [SerializeField]
+    private VoidEventChannel onTimerEndEvent;
 
     private bool isGameFinished = false;
 
@@ -32,13 +41,22 @@ public class Timer : MonoBehaviour
 
     private IEnumerator Countdown()
     {
-        while (timeRemaining > 0 && isGameFinished == false)
+        Color redColor = new Color(0.735849f, 0, 0);
+        timerText.SetText(timeRemaining.ToString());
+        while (timeRemaining > -1 && isGameFinished == false)
         {
+            yield return Helpers.GetWait(1);
             timerText.SetText(timeRemaining.ToString());
             timeRemaining--;
 
-            yield return Helpers.GetWait(1);
+            if (timeRemaining < 5)
+            {
+                background.color = redColor;
+                timerText.color = Color.white;
+                icon.color = Color.white;
+            }
         }
+        onTimerEndEvent.Raise();
     }
 
     private void OnDisable()
