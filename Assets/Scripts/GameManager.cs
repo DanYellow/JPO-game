@@ -3,7 +3,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
@@ -32,7 +33,10 @@ public class GameManager : MonoBehaviour
     private VoidEventChannel onTimerEndEvent;
 
     [SerializeField]
-    private GameObjectEventChannel onPlayerWinsEvent;
+    private PlayerIDEventChannel onPlayerWinsEvent;
+
+    [SerializeField]
+    private List<PlayerData> listPlayers;
 
     private int nbPlayers = 4;
 
@@ -49,13 +53,14 @@ public class GameManager : MonoBehaviour
         onTimerEndEvent.OnEventRaised += OnTimerEnd;
     }
 
-    private void DisplayGameWinner(GameObject playerGO)
+    private void DisplayGameWinner(PlayerID playerID)
     {
-        Player player = playerGO.GetComponent<Player>();
-        winnerImage.sprite = player.playerData.image;
-        winnerShadow.sprite = player.playerData.image;
-        winnerName.SetText($"Le <b>{player.playerData.GetName()}</b>\nremporte la partie !");
-    
+        PlayerData playerData = listPlayers.Where(item => item.id == playerID).First();
+        winnerImage.sprite = playerData.image;
+        winnerShadow.sprite = playerData.image;
+        winnerName.SetText($"Le <b>{playerData.GetName()}</b>\nremporte la partie !");
+
+        Player player = playerData.gameObject.GetComponent<Player>();
         Canvas rankCanvas = player.rankCanvas;
         TextMeshProUGUI rank = rankCanvas.GetComponentInChildren<TextMeshProUGUI>();
         rank.SetText("1<sup>er</sup>");
@@ -104,6 +109,9 @@ public class GameManager : MonoBehaviour
     {
         onGameEndEvent.Raise();
         gameEndMenuUI.SetActive(true);
+
+        PlayerData winner = listPlayers.OrderByDescending(item => item.nbLives).First();
+        DisplayGameWinner(winner.id);
     }
 
     private void OnDisable()

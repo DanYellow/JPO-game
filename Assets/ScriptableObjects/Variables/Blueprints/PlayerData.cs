@@ -23,6 +23,8 @@ public class PlayerData : ScriptableObject
     [ColorUsageAttribute(true, true)]
     public Color color;
 
+    public GameObject gameObject;
+
     public string GetName()
     {
         Dictionary<PlayerID, string> playerNameDict = new Dictionary<PlayerID, string>(){

@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        playerData.gameObject = gameObject;
         GetComponentInChildren<Light>().transform.name = $"Light{playerData.id.ToString()}";
     }
 

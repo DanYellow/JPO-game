@@ -34,7 +34,7 @@ public class PlayerControls : MonoBehaviour
     private VoidEventChannel onGameEndEvent;
 
     [SerializeField]
-    private GameObjectEventChannel onPlayerWinsEvent;
+    private PlayerIDEventChannel onPlayerWinsEvent;
 
     private Animator animator;
 
@@ -111,7 +111,7 @@ public class PlayerControls : MonoBehaviour
         if (playerData.nbLives > 0)
         {
             DisableControls();
-            // onPlayerWinsEvent.Raise(gameObject);
+            onPlayerWinsEvent.Raise(playerData.id);
         }
     }
 
