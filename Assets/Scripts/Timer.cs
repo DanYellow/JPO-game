@@ -56,7 +56,11 @@ public class Timer : MonoBehaviour
                 icon.color = Color.white;
             }
         }
-        onTimerEndEvent.Raise();
+
+        if (timeRemaining <= 0)
+        {
+            onTimerEndEvent.Raise();
+        }
     }
 
     private void OnDisable()
