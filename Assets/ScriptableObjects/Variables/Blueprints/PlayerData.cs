@@ -20,6 +20,8 @@ public class PlayerData : ScriptableObject
 
     public Sprite image;
     public string gamerName;
+    [ColorUsageAttribute(true, true)]
+    public Color color;
 
     public string GetName()
     {

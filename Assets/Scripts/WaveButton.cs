@@ -31,6 +31,8 @@ public class WaveButton : MonoBehaviour
 
     [SerializeField]
     private UnityEvent onButtonPressed;
+    [SerializeField]
+    private Material waveMaterial;
 
     [Header("Scriptable Objects"), SerializeField]
     private PlayerData playerData;
@@ -48,6 +50,8 @@ public class WaveButton : MonoBehaviour
         );
         ringLightOnMaterial = ringLightMeshRenderer.materials[0];
         onPositionSet.Invoke(playerPosition);
+
+        waveMaterial.SetColor("_TintColor", playerData.color);
     }
 
     public void OnGroundPound(GameObject player)
@@ -66,7 +70,12 @@ public class WaveButton : MonoBehaviour
 
         onButtonPressed.Invoke();
         pushButton.transform.position = endPos;
-        Instantiate(waveEffectPrefab, waveEffectTransform.position, Quaternion.identity);
+
+        GameObject waveEffect = Instantiate(waveEffectPrefab, waveEffectTransform.position, Quaternion.identity);
+        Material[] waveEffectMaterials = waveEffect.GetComponent<MeshRenderer>().materials;
+        waveEffectMaterials[0] = waveMaterial;
+        waveEffect.GetComponent<MeshRenderer>().materials = waveEffectMaterials;
+        
         float timeElapsed = 0;
         while (timeElapsed < playerData.root.groundPoundCooldown)
         {

@@ -318,7 +318,7 @@ PrefabInstance:
     - target: {fileID: 1042249736209252522, guid: 86e11658d68cdea46a9a980276120cdc,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1358291090268259976, guid: 86e11658d68cdea46a9a980276120cdc,
         type: 3}
@@ -3204,7 +3204,7 @@ PrefabInstance:
     - target: {fileID: 1042249736209252522, guid: 86e11658d68cdea46a9a980276120cdc,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1358291090268259976, guid: 86e11658d68cdea46a9a980276120cdc,
         type: 3}
@@ -5392,6 +5392,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 6956cfa7915503142a6bbd422450ed49,
         type: 2}
+    - target: {fileID: 6824820357513407457, guid: 86e11658d68cdea46a9a980276120cdc,
+        type: 3}
+      propertyPath: waveEffectPrefab
+      value: 
+      objectReference: {fileID: 616433127942121861, guid: 5ac62168043835b499a793848cacd2c9,
+        type: 3}
     - target: {fileID: 6824820357513407457, guid: 86e11658d68cdea46a9a980276120cdc,
         type: 3}
       propertyPath: onPlayerWinsEvent
