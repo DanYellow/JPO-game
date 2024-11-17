@@ -51,7 +51,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (playerData.nbLives > 0)
         {
-            StartCoroutine(playerInvincibility.Invincible(10));
+            playerInvincibility.Winner();
         }
     }
 
