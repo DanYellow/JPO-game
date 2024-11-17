@@ -1,12 +1,14 @@
-using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class PlayerControls : MonoBehaviour
 {
     [SerializeField]
     private Rigidbody rb;
+
+    [SerializeField]
     private bool isGrounded = false;
 
     private bool isFalling = false;
@@ -20,6 +22,9 @@ public class PlayerControls : MonoBehaviour
 
     [SerializeField]
     private Transform groundCheck;
+
+    [SerializeField]
+    private UnityEvent<GameObject> onGroundPound;
 
     [Header("Scriptable Objects"), SerializeField]
     private PlayerData playerData;
@@ -133,6 +138,7 @@ public class PlayerControls : MonoBehaviour
     {
         if (isGroundPounding)
         {
+            onGroundPound.Invoke(gameObject);
             CreateShockwave(other.contacts[0].point);
         }
         isGroundPounding = false;
