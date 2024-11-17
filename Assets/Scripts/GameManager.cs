@@ -13,12 +13,12 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private GameObject gameEndMenuUI;
+
     [SerializeField]
-    private Image winnerImage;
+    private GameObject winnerDisplayPrefab;
+
     [SerializeField]
-    private Image winnerShadow;
-    [SerializeField]
-    private TextMeshProUGUI winnerName;
+    private Transform listWinnersContainer;
 
     [Header("Scriptable Objects"), SerializeField]
     private VectorEventChannel onPlayerExitEvent;
@@ -56,9 +56,14 @@ public class GameManager : MonoBehaviour
     private void DisplayGameWinner(PlayerID playerID)
     {
         PlayerData playerData = listPlayers.Where(item => item.id == playerID).First();
-        winnerImage.sprite = playerData.image;
-        winnerShadow.sprite = playerData.image;
-        winnerName.SetText($"Le <b>{playerData.GetName()}</b>\nremporte la partie !");
+
+        GameObject winnerDisplay = Instantiate(winnerDisplayPrefab);
+        winnerDisplay.transform.parent = listWinnersContainer;
+
+        WinnerCard winnerCard = winnerDisplay.GetComponent<WinnerCard>();
+        winnerCard.shadow.sprite = playerData.image;
+        winnerCard.image.sprite = playerData.image;
+        winnerCard.winnerName.SetText($"Le <b>{playerData.GetName()}</b>\nremporte la partie !");
 
         Player player = playerData.gameObject.GetComponent<Player>();
         Canvas rankCanvas = player.rankCanvas;
