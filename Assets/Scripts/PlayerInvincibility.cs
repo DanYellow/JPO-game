@@ -71,9 +71,14 @@ public class PlayerInvincibility : MonoBehaviour
             yield return null;
         }
 
-        spriteRenderer.color = new Color(1f, 1f, 1f, 1f);
+        spriteRenderer.material.SetFloat("_Alpha", 1);
         isInvincible = false;
         ToggleCollisions(gameObject.layer, isInvincible);
+    }
+
+    public void Winner()
+    {
+        ToggleCollisions(gameObject.layer, true);
     }
 
     private void ToggleCollisions(int gameObjectLayer, bool enabled)
