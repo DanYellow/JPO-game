@@ -29,7 +29,8 @@ public class WaveButton : MonoBehaviour
 
     private MeshRenderer ringLightMeshRenderer;
 
-    
+    [SerializeField]
+    private UnityEvent onButtonPressed;
 
     [Header("Scriptable Objects"), SerializeField]
     private PlayerData playerData;
@@ -63,6 +64,7 @@ public class WaveButton : MonoBehaviour
         Vector3 startPos = pushButton.transform.position;
         Vector3 endPos = pushButton.transform.position - (Vector3.up * 0.1f);
 
+        onButtonPressed.Invoke();
         pushButton.transform.position = endPos;
         Instantiate(waveEffectPrefab, waveEffectTransform.position, Quaternion.identity);
         float timeElapsed = 0;

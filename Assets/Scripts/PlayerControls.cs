@@ -25,6 +25,7 @@ public class PlayerControls : MonoBehaviour
 
     [SerializeField]
     private UnityEvent<GameObject> onGroundPound;
+    
 
     [Header("Scriptable Objects"), SerializeField]
     private PlayerData playerData;
