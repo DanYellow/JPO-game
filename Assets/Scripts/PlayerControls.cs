@@ -111,7 +111,7 @@ public class PlayerControls : MonoBehaviour
         if (playerData.nbLives > 0)
         {
             DisableControls();
-            onPlayerWinsEvent.Raise(playerData.id);
+            // onPlayerWinsEvent.Raise(playerData.id);
         }
     }
 

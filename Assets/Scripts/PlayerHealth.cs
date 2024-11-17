@@ -48,8 +48,9 @@ public class PlayerHealth : MonoBehaviour
 
     private void OnGameEnd()
     {
-        if (playerData.nbLives > 0 && playerInvincibility != null)
+        if (playerData.nbLives > 0)
         {
+            print(playerData.id.ToString());
             playerInvincibility.Winner();
         }
     }
