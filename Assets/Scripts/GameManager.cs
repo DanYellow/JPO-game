@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,6 +20,12 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Transform listWinnersContainer;
 
+    [SerializeField]
+    private GameObject loadingCanvas;
+
+    [SerializeField]
+    private List<PlayerData> listPlayers;
+
     [Header("Scriptable Objects"), SerializeField]
     private VectorEventChannel onPlayerExitEvent;
 
@@ -26,21 +33,26 @@ public class GameManager : MonoBehaviour
     private PlayerIDEventChannel onPlayerDeathEvent;
 
     [SerializeField]
-    private VoidEventChannel onGameEndEvent;
+    private VoidEventChannel onTimerEndEvent;
 
     [SerializeField]
-    private VoidEventChannel onTimerEndEvent;
+    private VoidEventChannel onPlayerReadyEvent;
 
     [SerializeField]
     private PlayerIDEventChannel onPlayerWinsEvent;
 
     [SerializeField]
-    private List<PlayerData> listPlayers;
+    private VoidEventChannel onGameEndEvent;
+
+    [SerializeField]
+    private VoidEventChannel onGameStartEvent;
+
     private List<PlayerID> listWinners = new List<PlayerID>() { };
 
     private List<int> listNbLivesSolesSurvivors = new List<int>() { };
 
     private int nbPlayers;
+    private int nbPlayersReady;
     private int maxLives = 0;
 
     private string[] listRankLabel = {
@@ -54,6 +66,7 @@ public class GameManager : MonoBehaviour
     {
         nbPlayers = listPlayers.Count();
         gameEndMenuUI.SetActive(false);
+        loadingCanvas.SetActive(true);
     }
 
     private void OnEnable()
@@ -62,6 +75,7 @@ public class GameManager : MonoBehaviour
         onPlayerDeathEvent.OnEventRaised += OnPlayerDeath;
         onPlayerWinsEvent.OnEventRaised += DisplayGameWinner;
         onTimerEndEvent.OnEventRaised += OnTimerEnd;
+        onPlayerReadyEvent.OnEventRaised += OnPlayerReady;
     }
 
     private void DisplayGameWinner(PlayerID playerID)
@@ -155,5 +169,16 @@ public class GameManager : MonoBehaviour
         onPlayerDeathEvent.OnEventRaised -= OnPlayerDeath;
         onPlayerWinsEvent.OnEventRaised -= DisplayGameWinner;
         onTimerEndEvent.OnEventRaised -= OnTimerEnd;
+        onPlayerReadyEvent.OnEventRaised -= OnPlayerReady;
+    }
+
+    private void OnPlayerReady()
+    {
+        nbPlayersReady++;
+        if (nbPlayersReady == nbPlayers)
+        {
+            loadingCanvas.SetActive(false);
+            onGameStartEvent.Raise();
+        }
     }
 }

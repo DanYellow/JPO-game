@@ -22,25 +22,26 @@ public class Timer : MonoBehaviour
     [SerializeField]
     private VoidEventChannel onTimerEndEvent;
 
+    [SerializeField]
+    private VoidEventChannel onGameStartEvent;
+
     private bool isGameFinished = false;
     private Color redColor = new Color(0.735849f, 0, 0);
 
     private void Start()
     {
-
         if (timeRemaining <= 5)
         {
             background.color = redColor;
             timerText.color = Color.white;
             icon.color = Color.white;
         }
-
-        StartCoroutine(Countdown());
     }
 
     private void OnEnable()
     {
         onGameEndEvent.OnEventRaised += OnGameEnd;
+        onGameStartEvent.OnEventRaised += OnGameStart;
     }
 
     private void OnGameEnd()
@@ -71,8 +72,14 @@ public class Timer : MonoBehaviour
         }
     }
 
+    private void OnGameStart()
+    {
+        StartCoroutine(Countdown());
+    }
+
     private void OnDisable()
     {
         onGameEndEvent.OnEventRaised -= OnGameEnd;
+        onGameStartEvent.OnEventRaised -= OnGameStart;
     }
 }

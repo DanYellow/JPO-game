@@ -3,10 +3,14 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public Canvas rankCanvas;
+
     [Header("Scriptable Objects"), SerializeField]
     public PlayerData playerData;
 
-    public Canvas rankCanvas;
+    [SerializeField]
+    private VoidEventChannel onPlayerReadyEvent;
+
 
     private void Awake()
     {
@@ -35,5 +39,6 @@ public class Player : MonoBehaviour
         yield return Helpers.GetWait(0.75f);
         GetComponentInChildren<Light>().transform.parent = null;
         rankCanvas.transform.parent = null;
+        onPlayerReadyEvent.Raise();
     }
 }

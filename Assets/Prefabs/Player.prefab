@@ -158,8 +158,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6701d9f399863e4b98038d878dd8b35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData: {fileID: 0}
   rankCanvas: {fileID: 0}
+  playerData: {fileID: 0}
+  onPlayerReadyEvent: {fileID: 11400000, guid: 489d2c50bb91748478de6e6da4466512, type: 2}
 --- !u!114 &4030186213758919488
 MonoBehaviour:
   m_ObjectHideFlags: 0
