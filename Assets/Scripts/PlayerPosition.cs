@@ -1,8 +1,12 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerPosition : MonoBehaviour
 {
     private float heightSprite;
+
+    [SerializeField]
+    private UnityEvent onPositionSet;
 
     private void Awake()
     {
@@ -16,5 +20,6 @@ public class PlayerPosition : MonoBehaviour
             transform.position.y + heightSprite,
             transform.position.z
         );
+        onPositionSet.Invoke();
     }
 }
