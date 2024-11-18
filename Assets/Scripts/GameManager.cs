@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour
     private GameObject loadingCanvas;
 
     [SerializeField]
+    private GameObject letsgoCanvas;
+
+    [SerializeField]
     private List<PlayerData> listPlayers;
 
     [Header("Scriptable Objects"), SerializeField]
@@ -67,6 +70,7 @@ public class GameManager : MonoBehaviour
         nbPlayers = listPlayers.Count();
         gameEndMenuUI.SetActive(false);
         loadingCanvas.SetActive(true);
+        letsgoCanvas.SetActive(false);
     }
 
     private void OnEnable()
@@ -177,8 +181,16 @@ public class GameManager : MonoBehaviour
         nbPlayersReady++;
         if (nbPlayersReady == nbPlayers)
         {
-            loadingCanvas.SetActive(false);
             onGameStartEvent.Raise();
+            loadingCanvas.SetActive(false);
+            StartCoroutine(HideLetgoCanvas());
         }
+    }
+
+    private IEnumerator HideLetgoCanvas()
+    {
+        letsgoCanvas.SetActive(true);
+        yield return Helpers.GetWait(1.5f);
+        letsgoCanvas.SetActive(false);
     }
 }
