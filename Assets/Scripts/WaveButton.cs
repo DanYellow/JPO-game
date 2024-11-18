@@ -64,6 +64,11 @@ public class WaveButton : MonoBehaviour
             startPosition.position.z
         );
         ringLightOnMaterial = ringLightMeshRenderer.materials[0];
+        ringLightOnMaterial.SetColor("_Color", playerData.color);
+
+        Material[] newMaterials = ringLightMeshRenderer.materials;
+        newMaterials[0] = ringLightOnMaterial;
+
         onPositionSet.Invoke(playerPosition);
 
         waveMaterial.SetColor("_TintColor", playerData.color);
