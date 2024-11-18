@@ -70,7 +70,6 @@ public class GameManager : MonoBehaviour
         {
             return;
         }
-        print("Dis1playGameWinner0");
 
         PlayerData playerData = listPlayers.Where(item => item.id == playerID).First();
         Player player = playerData.gameObject.GetComponent<Player>();

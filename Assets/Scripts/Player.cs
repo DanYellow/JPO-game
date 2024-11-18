@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
     }
 
     private IEnumerator UnparentChildrenCoroutine() {
-        yield return null;
+        yield return Helpers.GetWait(0.75f);
         GetComponentInChildren<Light>().transform.parent = null;
         rankCanvas.transform.parent = null;
     }
