@@ -25,7 +25,7 @@ public class PlayerControls : MonoBehaviour
 
     [SerializeField]
     private UnityEvent<GameObject> onGroundPound;
-    
+
 
     [Header("Scriptable Objects"), SerializeField]
     private PlayerData playerData;
@@ -151,10 +151,10 @@ public class PlayerControls : MonoBehaviour
 
     public void DisableControls()
     {
-        // if (gameObject.activeInHierarchy)
-        // {
-        //     playerInput.SwitchCurrentActionMap("PlayerDead");
-        // }
+        if (gameObject.activeInHierarchy)
+        {
+            playerInput.SwitchCurrentActionMap("PlayerDead");
+        }
     }
 
     private void OnDisable()

@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     IEnumerator PlayerDeathEffect(Vector3 position)

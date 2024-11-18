@@ -23,9 +23,18 @@ public class Timer : MonoBehaviour
     private VoidEventChannel onTimerEndEvent;
 
     private bool isGameFinished = false;
+    private Color redColor = new Color(0.735849f, 0, 0);
 
     private void Start()
     {
+
+        if (timeRemaining <= 5)
+        {
+            background.color = redColor;
+            timerText.color = Color.white;
+            icon.color = Color.white;
+        }
+
         StartCoroutine(Countdown());
     }
 
@@ -41,7 +50,6 @@ public class Timer : MonoBehaviour
 
     private IEnumerator Countdown()
     {
-        Color redColor = new Color(0.735849f, 0, 0);
         timerText.SetText(timeRemaining.ToString());
         while (timeRemaining > -1 && isGameFinished == false)
         {
@@ -49,7 +57,7 @@ public class Timer : MonoBehaviour
             timerText.SetText(timeRemaining.ToString());
             timeRemaining--;
 
-            if (timeRemaining < 5)
+            if (timeRemaining <= 5)
             {
                 background.color = redColor;
                 timerText.color = Color.white;
