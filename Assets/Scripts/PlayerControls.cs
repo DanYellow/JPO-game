@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -34,6 +35,9 @@ public class PlayerControls : MonoBehaviour
     private VoidEventChannel onGameEndEvent;
 
     [SerializeField]
+    private VoidEventChannel onGameStartEvent;
+
+    [SerializeField]
     private PlayerIDEventChannel onPlayerWinsEvent;
 
     private Animator animator;
@@ -45,12 +49,13 @@ public class PlayerControls : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
 
         playerInput = GetComponent<PlayerInput>();
-        playerInput.defaultActionMap = playerData.id.ToString();
+        DisableControls();
     }
 
     private void OnEnable()
     {
         onGameEndEvent.OnEventRaised += OnGameEnd;
+        onGameStartEvent.OnEventRaised += OnGameStart;
     }
 
     private void Update()
@@ -152,14 +157,16 @@ public class PlayerControls : MonoBehaviour
     public void DisableControls()
     {
         playerInput.SwitchCurrentActionMap("PlayerDead");
-
-        if (gameObject.activeInHierarchy)
-        {
-        }
     }
 
     private void OnDisable()
     {
         onGameEndEvent.OnEventRaised -= OnGameEnd;
+        onGameStartEvent.OnEventRaised -= OnGameStart;
+    }
+
+    private void OnGameStart()
+    {
+        playerInput.SwitchCurrentActionMap(playerData.id.ToString());
     }
 }

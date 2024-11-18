@@ -190,7 +190,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator HideLetgoCanvas()
     {
         letsgoCanvas.SetActive(true);
-        yield return Helpers.GetWait(1.5f);
+        yield return Helpers.GetWait(1.15f);
         letsgoCanvas.SetActive(false);
     }
 }
