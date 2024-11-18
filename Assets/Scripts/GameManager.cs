@@ -133,6 +133,11 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    public void GoBackToHome()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     IEnumerator PlayerDeathEffect(Vector3 position)
     {
         GameObject playerDeathEffect = Instantiate(playerDeathEffectPrefab, position, Quaternion.identity);
