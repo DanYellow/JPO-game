@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_CellShadingShader
-  m_Shader: {fileID: -6465566751694194690, guid: 7d263df88bd3ce948b5b0b8fbe6be6ba,
+  m_Name: WaveEffectPlayer2
+  m_Shader: {fileID: -6465566751694194690, guid: c0cb3dd02c9ae584386190eedb742725,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -19,14 +19,17 @@ Material:
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
-  disabledShaderPasses:
-  - MOTIONVECTORS
+  disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _EmissionMask:
+        m_Texture: {fileID: 2800000, guid: e51491a644fc4ed4b9418d261e937baa, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: e51491a644fc4ed4b9418d261e937baa, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -42,17 +45,12 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
-    m_Floats:
-    - _MaxBrightness: 1
-    - _MinBrightness: 0.3
-    - _QueueControl: 0
-    - _QueueOffset: 0
-    - _Shades: 0.1
+    m_Floats: []
     m_Colors:
-    - _Color: {r: 1, g: 0, b: 0, a: 1}
+    - _GlowColor: {r: 1367.1202, g: 1030.7084, b: 0, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &3051915644139358797
+--- !u!114 &4761541192227275753
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
