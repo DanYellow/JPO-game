@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -160,6 +161,7 @@ public class GameManager : MonoBehaviour
         {
             onGameEndEvent.Raise();
             gameEndMenuUI.SetActive(true);
+            gameEndMenuUI.GetComponentInChildren<Button>().Select();
         }
     }
 
@@ -170,6 +172,7 @@ public class GameManager : MonoBehaviour
 
         onGameEndEvent.Raise();
         gameEndMenuUI.SetActive(true);
+        gameEndMenuUI.GetComponentInChildren<Button>().Select();
     }
 
     private void OnDisable()
