@@ -1,7 +1,6 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,10 +37,12 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private List<PlayerData> listPlayers;
 
-    private int nbPlayers = 4;
+    private int nbPlayers;
+    private int maxLives = 0;
 
     private void Awake()
     {
+        nbPlayers = listPlayers.Count();
         gameEndMenuUI.SetActive(false);
     }
 
@@ -56,6 +57,10 @@ public class GameManager : MonoBehaviour
     private void DisplayGameWinner(PlayerID playerID)
     {
         PlayerData playerData = listPlayers.Where(item => item.id == playerID).First();
+        if (maxLives != 0 && playerData.nbLives < maxLives)
+        {
+            return;
+        }
 
         GameObject winnerDisplay = Instantiate(winnerDisplayPrefab);
         winnerDisplay.transform.parent = listWinnersContainer;
@@ -70,26 +75,6 @@ public class GameManager : MonoBehaviour
         TextMeshProUGUI rank = rankCanvas.GetComponentInChildren<TextMeshProUGUI>();
         rank.SetText("1<sup>er</sup>");
         rankCanvas.gameObject.SetActive(true);
-    }
-
-    private void DisplayGameWinner(PlayerData[] listSoleSurvivors)
-    {
-        foreach (var soleSurvivor in listSoleSurvivors)
-        {
-            GameObject winnerDisplay = Instantiate(winnerDisplayPrefab);
-            winnerDisplay.transform.parent = listWinnersContainer;
-
-            WinnerCard winnerCard = winnerDisplay.GetComponent<WinnerCard>();
-            winnerCard.shadow.sprite = soleSurvivor.image;
-            winnerCard.image.sprite = soleSurvivor.image;
-            winnerCard.winnerName.SetText($"Le <b>{soleSurvivor.GetName()}</b>\nremporte la partie !");
-
-            Player player = soleSurvivor.gameObject.GetComponent<Player>();
-            Canvas rankCanvas = player.rankCanvas;
-            TextMeshProUGUI rank = rankCanvas.GetComponentInChildren<TextMeshProUGUI>();
-            rank.SetText("1<sup>er</sup>");
-            rankCanvas.gameObject.SetActive(true);
-        }
     }
 
     private void OnPlayerExit(Vector3 position)
@@ -132,15 +117,9 @@ public class GameManager : MonoBehaviour
 
     private void OnTimerEnd()
     {
+        maxLives = listPlayers.Max(item => item.nbLives);
         onGameEndEvent.Raise();
         gameEndMenuUI.SetActive(true);
-
-        int maxLives = listPlayers.Max(item => item.nbLives);
-
-        PlayerData[] listSoleSurvivors = listPlayers.Where(item => item.nbLives == maxLives).ToArray();
-        print(listPlayers.Where(item => item.nbLives == maxLives));
-        // PlayerData winner = listPlayers.Where(item => item.nbLives == maxLives);
-        DisplayGameWinner(listSoleSurvivors);
     }
 
     private void OnDisable()

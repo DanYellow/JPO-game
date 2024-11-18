@@ -3188,7 +3188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d47e9c84c3ddca4c8762bf866e0b394, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeRemaining: 20
+  timeRemaining: 5
   timerText: {fileID: 711658895}
   background: {fileID: 1477065623}
   icon: {fileID: 1257400426}
@@ -3338,7 +3338,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 640, y: 230}
-  m_Spacing: {x: 30, y: 90}
+  m_Spacing: {x: 50, y: 90}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!114 &1603918167 stripped
@@ -5062,7 +5062,8 @@ PrefabInstance:
         type: 3}
       propertyPath: onPlayerWinsEvent
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11400000, guid: bb26eacc30fae51469cdf98a268174c3,
+        type: 2}
     - target: {fileID: 6824820357513407457, guid: 86e11658d68cdea46a9a980276120cdc,
         type: 3}
       propertyPath: onGroundPound.m_PersistentCalls.m_Calls.Array.size

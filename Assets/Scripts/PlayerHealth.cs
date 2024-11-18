@@ -50,7 +50,6 @@ public class PlayerHealth : MonoBehaviour
     {
         if (playerData.nbLives > 0)
         {
-            print(playerData.id.ToString());
             playerInvincibility.Winner();
         }
     }
