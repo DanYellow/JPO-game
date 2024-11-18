@@ -19,11 +19,17 @@ public class PlayerData : ScriptableObject
     public int nbLives = 0;
 
     public Sprite image;
+    [ReadOnlyInspector]
     public string gamerName;
     [ColorUsageAttribute(true, true)]
     public Color color;
 
+    [ReadOnlyInspector]
     public GameObject gameObject;
+
+    private void OnEnable() {
+        gamerName = GetName();
+    }
 
     public string GetName()
     {
