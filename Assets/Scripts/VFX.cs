@@ -29,7 +29,7 @@ public class VFX : MonoBehaviour
 
     private void OnPlayerDeath(Vector3 exitPoint)
     {
-        chromaticAberrationClone.intensity.value = 0.5f;
+        chromaticAberrationClone.intensity.value = 0.65f;
         chromaticAberrationClone.intensity.overrideState = true;
         StartCoroutine(DecreaseDeathEffect());
     }
