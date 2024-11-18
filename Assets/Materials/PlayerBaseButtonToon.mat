@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PlayerBaseToon 1
+  m_Name: PlayerBaseButtonToon
   m_Shader: {fileID: -6465566751694194690, guid: 7d263df88bd3ce948b5b0b8fbe6be6ba,
     type: 3}
   m_Parent: {fileID: 0}
@@ -45,11 +45,12 @@ Material:
     m_Floats:
     - _MaxBrightness: 1
     - _MinBrightness: 0.3
+    - _PatternSpeed: 2
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Shades: 0.11
     m_Colors:
-    - _Color: {r: 2.5725486, g: 5.8705196, b: 8.282353, a: 1}
+    - _Color: {r: 1.3996757, g: 1.2804763, b: 1.1593541, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &3051915644139358797
