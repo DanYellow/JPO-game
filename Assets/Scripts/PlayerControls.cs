@@ -151,14 +151,15 @@ public class PlayerControls : MonoBehaviour
 
     public void DisableControls()
     {
+        playerInput.SwitchCurrentActionMap("PlayerDead");
+
         if (gameObject.activeInHierarchy)
         {
-            playerInput.SwitchCurrentActionMap("PlayerDead");
         }
     }
 
     private void OnDisable()
     {
-        onGameEndEvent.OnEventRaised += OnGameEnd;
+        onGameEndEvent.OnEventRaised -= OnGameEnd;
     }
 }

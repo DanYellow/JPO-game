@@ -78,7 +78,7 @@ public class PlayerHealthIndicator : MonoBehaviour
 
     private void OnDisable()
     {
-        onPlayerHitEvent.OnEventRaised += OnPlayerHit;
-        onPlayerDeathEvent.OnEventRaised += OnPlayerDeath;
+        onPlayerHitEvent.OnEventRaised -= OnPlayerHit;
+        onPlayerDeathEvent.OnEventRaised -= OnPlayerDeath;
     }
 }

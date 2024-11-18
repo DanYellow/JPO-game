@@ -97,6 +97,6 @@ public class PlayerHealth : MonoBehaviour
 
     private void OnDisable()
     {
-        onGameEndEvent.OnEventRaised += OnGameEnd;
+        onGameEndEvent.OnEventRaised -= OnGameEnd;
     }
 }
