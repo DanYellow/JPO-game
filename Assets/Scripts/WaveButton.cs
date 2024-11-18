@@ -44,6 +44,22 @@ public class WaveButton : MonoBehaviour
     {
         ringLightMeshRenderer = ringButton.GetComponent<MeshRenderer>();
         pool = GetComponent<ObjectPooling>();
+
+        switch (playerData.id)
+        {
+            case PlayerID.Player2:
+                transform.localRotation = Quaternion.Euler(0, 135, 0);
+                break;
+            case PlayerID.Player3:
+                transform.localRotation = Quaternion.Euler(0, -135, 0);
+                break;
+            case PlayerID.Player4:
+                transform.localRotation = Quaternion.Euler(0, -45, 0);
+                break;
+            default:
+                transform.localRotation = Quaternion.Euler(0, 45, 0);
+                break;
+        }
     }
 
     private void OnEnable()
