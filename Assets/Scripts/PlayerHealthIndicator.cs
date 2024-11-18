@@ -27,7 +27,7 @@ public class PlayerHealthIndicator : MonoBehaviour
     private PlayerIDEventChannel onPlayerHitEvent;
 
     [SerializeField]
-    private GameObjectEventChannel onPlayerDeathEvent;
+    private PlayerIDEventChannel onPlayerDeathEvent;
 
     private void Awake()
     {
@@ -60,11 +60,9 @@ public class PlayerHealthIndicator : MonoBehaviour
         }
     }
 
-    private void OnPlayerDeath(GameObject _player)
+    private void OnPlayerDeath(PlayerID playerID)
     {
-        Player player = _player.GetComponent<Player>();
-
-        if (player.playerData.id == playerData.id && playerImage.material != blackAndWhiteMaterial)
+        if (playerID == playerData.id && playerImage.material != blackAndWhiteMaterial)
         {
             if (playerImage != null)
             {

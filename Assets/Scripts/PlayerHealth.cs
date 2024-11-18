@@ -10,7 +10,7 @@ public class PlayerHealth : MonoBehaviour
     private VectorEventChannel onPlayerExit;
 
     [SerializeField]
-    private GameObjectEventChannel onPlayerDeathEvent;
+    private PlayerIDEventChannel onPlayerDeathEvent;
     [SerializeField]
     private PlayerIDEventChannel onPlayerHitEvent;
 
@@ -91,7 +91,7 @@ public class PlayerHealth : MonoBehaviour
     {
         rb.AddForce(impactPoint * 60, ForceMode.VelocityChange);
         lightLandmark.enabled = false;
-        onPlayerDeathEvent.OnEventRaised(gameObject);
+        onPlayerDeathEvent.OnEventRaised(playerData.id);
         onDeath.Invoke();
     }
 

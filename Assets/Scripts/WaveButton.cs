@@ -24,8 +24,6 @@ public class WaveButton : MonoBehaviour
 
     [SerializeField]
     private Transform waveEffectTransform;
-    [SerializeField]
-    private GameObject waveEffectColliderPrefab;
 
     private MeshRenderer ringLightMeshRenderer;
 
@@ -39,10 +37,23 @@ public class WaveButton : MonoBehaviour
     [Header("Scriptable Objects"), SerializeField]
     private PlayerData playerData;
 
+    [SerializeField]
+    private PlayerIDEventChannel onPlayerDeathEvent;
+
     private void Awake()
     {
         ringLightMeshRenderer = ringButton.GetComponent<MeshRenderer>();
         pool = GetComponent<ObjectPooling>();
+    }
+
+    private void OnEnable()
+    {
+        onPlayerDeathEvent.OnEventRaised += Disabled;
+    }
+
+    private void OnDisable()
+    {
+        onPlayerDeathEvent.OnEventRaised -= Disabled;
     }
 
     private void Start()
@@ -60,10 +71,10 @@ public class WaveButton : MonoBehaviour
 
     public void OnGroundPound(GameObject player)
     {
-        StartCoroutine(MoveObject(player));
+        StartCoroutine(MoveObject());
     }
 
-    IEnumerator MoveObject(GameObject player)
+    IEnumerator MoveObject()
     {
         Material[] newMaterials = ringLightMeshRenderer.materials;
         newMaterials[0] = ringLightOffMaterial;
@@ -122,6 +133,20 @@ public class WaveButton : MonoBehaviour
                 90
             );
         }
+    }
+
+    private void Disabled(PlayerID playerID)
+    {
+        if (playerID != playerData.id)
+        {
+            return;
+        }
+        Vector3 endPos = pushButton.transform.position - (Vector3.up * 0.1f);
+        pushButton.transform.position = endPos;
+
+        Material[] newMaterials = ringLightMeshRenderer.materials;
+        newMaterials[0] = ringLightOffMaterial;
+        ringLightMeshRenderer.materials = newMaterials;
     }
 
     private void OnCollisionEnter(Collision other)

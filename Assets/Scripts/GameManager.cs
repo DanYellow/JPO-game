@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     private VectorEventChannel onPlayerExitEvent;
 
     [SerializeField]
-    private GameObjectEventChannel onPlayerDeathEvent;
+    private PlayerIDEventChannel onPlayerDeathEvent;
 
     [SerializeField]
     private VoidEventChannel onGameEndEvent;
@@ -121,11 +121,13 @@ public class GameManager : MonoBehaviour
         Destroy(playerDeathEffect);
     }
 
-    private void OnPlayerDeath(GameObject gameObject)
+    private void OnPlayerDeath(PlayerID playerID)
     {
         nbPlayers--;
 
-        Canvas rankCanvas = gameObject.GetComponent<Player>().rankCanvas;
+        PlayerData playerData = listPlayers.Where(item => item.id == playerID).First();
+
+        Canvas rankCanvas = playerData.gameObject.GetComponent<Player>().rankCanvas;
         TextMeshProUGUI rank = rankCanvas.GetComponentInChildren<TextMeshProUGUI>();
         rank.SetText(listRankLabel[nbPlayers]);
         rankCanvas.gameObject.SetActive(true);
