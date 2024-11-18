@@ -70,6 +70,7 @@ public class GameManager : MonoBehaviour
         {
             return;
         }
+        print("Dis1playGameWinner0");
 
         PlayerData playerData = listPlayers.Where(item => item.id == playerID).First();
         Player player = playerData.gameObject.GetComponent<Player>();
@@ -95,6 +96,7 @@ public class GameManager : MonoBehaviour
 
         GameObject winnerDisplay = Instantiate(winnerDisplayPrefab);
         winnerDisplay.transform.parent = listWinnersContainer;
+        winnerDisplay.transform.localScale = Vector3.one;
 
         WinnerCard winnerCard = winnerDisplay.GetComponent<WinnerCard>();
         winnerCard.shadow.sprite = playerData.image;
