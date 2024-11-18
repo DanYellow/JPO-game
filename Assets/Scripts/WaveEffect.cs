@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// https://www.youtube.com/watch?v=CVsZ98TSEwI
 public class WaveEffect : MonoBehaviour
 {
     [SerializeField, Range(0, 5)]
