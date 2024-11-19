@@ -18,10 +18,10 @@ public class PlayerPositionManager : MonoBehaviour
         Mesh planeMesh = GetComponent<MeshFilter>().mesh;
         Bounds bounds = planeMesh.bounds;
 
-        topLeft.localPosition = new Vector3(bounds.min.x, 0, bounds.max.z);
-        bottomLeft.localPosition = new Vector3(bounds.min.x, 0, bounds.min.z);
+        topLeft.localPosition = new Vector3(bounds.min.x, 0.05f, bounds.max.z);
+        bottomLeft.localPosition = new Vector3(bounds.min.x, 0.05f, bounds.min.z);
 
-        bottomRight.localPosition = new Vector3(bounds.max.x, 0, bounds.min.z);
-        topRight.localPosition = new Vector3(bounds.max.x, 0, bounds.max.z);
+        bottomRight.localPosition = new Vector3(bounds.max.x, 0.05f, bounds.min.z);
+        topRight.localPosition = new Vector3(bounds.max.x, 0.05f, bounds.max.z);
     }
 }
