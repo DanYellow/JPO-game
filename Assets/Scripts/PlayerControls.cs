@@ -44,12 +44,9 @@ public class PlayerControls : MonoBehaviour
 
     private PlayerInput playerInput;
 
-    private ParticleSystem particlesSystem;
-
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
-        particlesSystem = GetComponentInChildren<ParticleSystem>();
 
         playerInput = GetComponent<PlayerInput>();
         DisableControls();
@@ -133,7 +130,6 @@ public class PlayerControls : MonoBehaviour
 
     private IEnumerator DropAndPound()
     {
-        particlesSystem.Play();
         animator.SetTrigger(AnimationStrings.doubleJump);
         rb.constraints = RigidbodyConstraints.FreezeAll;
         yield return Helpers.GetWait(0.15f);

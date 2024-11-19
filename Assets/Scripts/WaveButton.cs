@@ -41,11 +41,14 @@ public class WaveButton : MonoBehaviour
     private PlayerIDEventChannel onPlayerDeathEvent;
 
     private float heightButton = 0;
+     private ParticleSystem particlesSystem;
 
     private void Awake()
     {
         ringLightMeshRenderer = ringButton.GetComponent<MeshRenderer>();
         pool = GetComponent<ObjectPooling>();
+        particlesSystem = GetComponentInChildren<ParticleSystem>();
+
         heightButton = GetComponentInChildren<BoxCollider>().bounds.size.y;
 
         switch (playerData.id)
@@ -95,10 +98,10 @@ public class WaveButton : MonoBehaviour
 
     public void OnGroundPound(GameObject player)
     {
-        StartCoroutine(MoveObject());
+        StartCoroutine(PressButton());
     }
 
-    IEnumerator MoveObject()
+    IEnumerator PressButton()
     {
         Material[] newMaterials = ringLightMeshRenderer.materials;
         newMaterials[0] = ringLightOffMaterial;
@@ -109,6 +112,7 @@ public class WaveButton : MonoBehaviour
 
         onButtonPressed.Invoke();
         pushButton.transform.position = endPos;
+        particlesSystem.Play();
 
         CreateWave();
 
