@@ -1,10 +1,10 @@
-using UnityEngine;  
+using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
-public class UIButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, ISelectHandler, IDeselectHandler
+public class UIButton : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, ISelectHandler, IDeselectHandler
 {
     private TextMeshProUGUI textContainer;
 
@@ -25,7 +25,8 @@ public class UIButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     private Button button;
 
-    private void Awake() {
+    private void Awake()
+    {
         textContainer = GetComponentInChildren<TextMeshProUGUI>();
         button = GetComponent<Button>();
         button.GetComponent<Image>().enabled = keepImageButton;
@@ -34,8 +35,10 @@ public class UIButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         originalText = textContainer.text;
     }
 
-    private void Update() {
-        if(button.interactable == false) {
+    private void Update()
+    {
+        if (button.interactable == false)
+        {
             textContainer.color = disabledColor;
         }
     }
@@ -57,7 +60,8 @@ public class UIButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnSelect(BaseEventData eventData)
     {
-        if(eventData.selectedObject == gameObject) {
+        if (eventData.selectedObject == gameObject)
+        {
             textContainer.color = hoverColor;
             // textContainer.SetText($"►{originalText}◄");
         }
@@ -65,9 +69,15 @@ public class UIButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnDeselect(BaseEventData eventData)
     {
-        if(eventData.selectedObject == gameObject) {
+        if (eventData.selectedObject == gameObject)
+        {
             textContainer.color = originalColor;
             // textContainer.SetText(originalText);
         }
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        EventSystem.current.SetSelectedGameObject(null);
     }
 }

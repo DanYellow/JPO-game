@@ -2382,7 +2382,7 @@ GameObject:
   - component: {fileID: 909825958}
   - component: {fileID: 909825957}
   m_Layer: 5
-  m_Name: LoadingCanvas
+  m_Name: StartGameCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3282,7 +3282,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1428064991
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5239,9 +5239,39 @@ PrefabInstance:
       objectReference: {fileID: 88644590}
     - target: {fileID: 2075206888538566459, guid: 93c01f50640a25b419e53c387d69dc02,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2075206888538566459, guid: 93c01f50640a25b419e53c387d69dc02,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2075206888538566459, guid: 93c01f50640a25b419e53c387d69dc02,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1193777714}
+    - target: {fileID: 2075206888538566459, guid: 93c01f50640a25b419e53c387d69dc02,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2075206888538566459, guid: 93c01f50640a25b419e53c387d69dc02,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RestartGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 2075206888538566459, guid: 93c01f50640a25b419e53c387d69dc02,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2075206888538566459, guid: 93c01f50640a25b419e53c387d69dc02,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4074569904694590306, guid: 93c01f50640a25b419e53c387d69dc02,
         type: 3}
       propertyPath: m_Pivot.x
