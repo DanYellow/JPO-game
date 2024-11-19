@@ -40,10 +40,13 @@ public class WaveButton : MonoBehaviour
     [SerializeField]
     private PlayerIDEventChannel onPlayerDeathEvent;
 
+    private float heightButton = 0;
+
     private void Awake()
     {
         ringLightMeshRenderer = ringButton.GetComponent<MeshRenderer>();
         pool = GetComponent<ObjectPooling>();
+        heightButton = GetComponentInChildren<BoxCollider>().bounds.size.y;
 
         switch (playerData.id)
         {
@@ -102,7 +105,7 @@ public class WaveButton : MonoBehaviour
 
         ringLightMeshRenderer.materials = newMaterials;
         Vector3 startPos = pushButton.transform.position;
-        Vector3 endPos = pushButton.transform.position - (Vector3.up * 0.1f);
+        Vector3 endPos = pushButton.transform.position - (Vector3.up * (heightButton * 1.5f));
 
         onButtonPressed.Invoke();
         pushButton.transform.position = endPos;

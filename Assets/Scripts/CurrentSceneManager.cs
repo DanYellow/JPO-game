@@ -6,8 +6,11 @@ public class CurrentSceneManager : MonoBehaviour
 {
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.R)) {
+// #if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.R))
+        {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
         }
+// #endif
     }
 }
