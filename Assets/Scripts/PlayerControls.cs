@@ -99,11 +99,7 @@ public class PlayerControls : MonoBehaviour
                 return;
             }
 
-            if (!isGrounded)
-            {
-                GroundPound();
-            }
-
+            GroundPound();
             Jump();
         }
     }
@@ -127,6 +123,9 @@ public class PlayerControls : MonoBehaviour
 
     private void GroundPound()
     {
+        if (isGrounded) {
+            return;
+        }
         isGroundPounding = true;
         lastGroundPoundCooldown = Time.time;
 
