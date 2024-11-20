@@ -13,6 +13,7 @@ public class BasePlayerData : ScriptableObject
     public float dropForce = 10;
 
     public float groundCheckRadius = 0.15f;
+    public float incomingAttackRadius = 1.35f;
 
     public int maxNbLives = 3;
 

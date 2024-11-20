@@ -21,7 +21,6 @@ public class WaveEffectCollision : MonoBehaviour
         Destroy(gameObject);
     }
 
-
     private void OnEnable()
     {
         onGameEndEvent.OnEventRaised += OnGameEnd;

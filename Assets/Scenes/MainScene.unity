@@ -940,7 +940,7 @@ PrefabInstance:
     - target: {fileID: 1042249736209252522, guid: 86e11658d68cdea46a9a980276120cdc,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1358291090268259976, guid: 86e11658d68cdea46a9a980276120cdc,
         type: 3}
@@ -4420,9 +4420,7 @@ MonoBehaviour:
   letsgoCanvas: {fileID: 909825955}
   listPlayers:
   - {fileID: 11400000, guid: 6956cfa7915503142a6bbd422450ed49, type: 2}
-  - {fileID: 11400000, guid: 5cc77d5f161f1d840823d940db004612, type: 2}
   - {fileID: 11400000, guid: 4c6e42ffc13b6814094ad508d5ac92ba, type: 2}
-  - {fileID: 11400000, guid: 71711a7352c41934b9508db9eede91c3, type: 2}
   onPlayerExitEvent: {fileID: 11400000, guid: 59e2b1a4623b25843a39a653ddf98a31, type: 2}
   onPlayerDeathEvent: {fileID: 11400000, guid: be4f9c5ba79b2724daba22fd85495fb9, type: 2}
   onTimerEndEvent: {fileID: 11400000, guid: d8d88bd40965d86408dd2169579e9ab5, type: 2}
@@ -6915,7 +6913,7 @@ PrefabInstance:
     - target: {fileID: 1042249736209252522, guid: 86e11658d68cdea46a9a980276120cdc,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1358291090268259976, guid: 86e11658d68cdea46a9a980276120cdc,
         type: 3}
