@@ -43,6 +43,8 @@ public class PlayerControls : MonoBehaviour
 
     private PlayerInput playerInput;
 
+    private bool isGameFinished = false;
+
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
@@ -100,7 +102,7 @@ public class PlayerControls : MonoBehaviour
 
     public void Jump()
     {
-        if (Time.time - lastGroundPoundCooldown < playerData.root.groundPoundCooldown)
+        if (isGameFinished || Time.time - lastGroundPoundCooldown < playerData.root.groundPoundCooldown)
         {
             return;
         }
@@ -113,6 +115,7 @@ public class PlayerControls : MonoBehaviour
 
     private void OnGameEnd()
     {
+        isGameFinished = true;
         if (playerData.nbLives > 0)
         {
             DisableControls();
