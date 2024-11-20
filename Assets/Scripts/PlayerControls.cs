@@ -94,18 +94,18 @@ public class PlayerControls : MonoBehaviour
 
         if (context.phase == InputActionPhase.Performed)
         {
-            if (Time.time - lastGroundPoundCooldown < playerData.root.groundPoundCooldown)
-            {
-                return;
-            }
-
-            GroundPound();
             Jump();
+            GroundPound();
         }
     }
 
     public void Jump()
     {
+        if (Time.time - lastGroundPoundCooldown < playerData.root.groundPoundCooldown)
+        {
+            return;
+        }
+
         if (isGrounded)
         {
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, playerData.root.jumpForce, rb.linearVelocity.z);
@@ -123,7 +123,8 @@ public class PlayerControls : MonoBehaviour
 
     public void GroundPound()
     {
-        if (isGrounded) {
+        if (isGrounded)
+        {
             return;
         }
         isGroundPounding = true;
