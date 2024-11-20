@@ -101,13 +101,18 @@ public class PlayerControls : MonoBehaviour
 
             if (!isGrounded)
             {
-                StopAndSpin();
+                GroundPound();
             }
 
-            if (isGrounded)
-            {
-                rb.linearVelocity = new Vector3(rb.linearVelocity.x, playerData.root.jumpForce, rb.linearVelocity.z);
-            }
+            Jump();
+        }
+    }
+
+    private void Jump()
+    {
+        if (isGrounded)
+        {
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, playerData.root.jumpForce, rb.linearVelocity.z);
         }
     }
 
@@ -120,7 +125,7 @@ public class PlayerControls : MonoBehaviour
         }
     }
 
-    private void StopAndSpin()
+    private void GroundPound()
     {
         isGroundPounding = true;
         lastGroundPoundCooldown = Time.time;

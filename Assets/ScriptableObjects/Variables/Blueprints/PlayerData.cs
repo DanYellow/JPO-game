@@ -27,6 +27,8 @@ public class PlayerData : ScriptableObject
     [ReadOnlyInspector]
     public GameObject gameObject;
 
+    public bool isCPU = false;
+
     private void OnEnable() {
         gamerName = GetName();
     }

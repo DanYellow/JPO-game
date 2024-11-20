@@ -2,6 +2,7 @@
 - ~~Display game end canvas~~
 - Make main menu
 - ~~Modelize player's base~~
+- Add animation on player display
 
 Credits : https://opengameart.org/content/smoke-aura
 
