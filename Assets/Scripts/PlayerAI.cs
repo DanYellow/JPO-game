@@ -6,10 +6,14 @@ public class PlayerAI : MonoBehaviour
     [SerializeField, Header("Scriptable Objects")]
     PlayerData playerData;
 
+    [SerializeField]
+    private PlayerIDEventChannel onPlayerHitEvent;
+
     private PlayerControls playerControls;
 
     private Collider[] hitColliders;
-    private bool isGroundPounding = false;
+
+    private float liveFraction = 0;
 
     private void Awake()
     {
@@ -20,20 +24,34 @@ public class PlayerAI : MonoBehaviour
             enabled = false;
         }
     }
+
+    private void OnEnable()
+    {
+        onPlayerHitEvent.OnEventRaised += OnPlayerHit;
+    }
+
+    private void OnPlayerHit(PlayerID playerID)
+    {
+        if (playerID == playerData.id)
+        {
+            liveFraction = (float)playerData.nbLives / playerData.root.maxNbLives;
+        }
+    }
+
     private void FixedUpdate()
     {
-        if (isGroundPounding)
+        if (!playerControls.isGrounded)
         {
             return;
         }
-        // float radiusDetection = Mathf.Lerp(0.85f, 1.85f, Random.value);
+
         hitColliders = Physics.OverlapSphere(transform.position, playerData.root.incomingAttackRadius, playerData.damageLayer);
         for (int i = 0; i < hitColliders.Length; i++)
         {
-            if (Random.value < 0.2f)
+            if (Random.value < Mathf.Lerp(0.95f, 0.2f, liveFraction))
             {
                 playerControls.Jump();
-                if (Random.value < 1.2f && !isGroundPounding)
+                if (Random.value < Mathf.Lerp(0.6f, 0.33f, liveFraction))
                 {
                     StartCoroutine(DelayGroundPound());
                 }
@@ -44,16 +62,22 @@ public class PlayerAI : MonoBehaviour
 
     private IEnumerator DelayGroundPound()
     {
-        isGroundPounding = true;
-        float duration = Mathf.Lerp(0.15f, 1.05f, Random.value);
+        float duration = Mathf.Lerp(
+            0.35f,
+            Mathf.Lerp(0.85f, 1.1f, liveFraction),
+        Random.value);
         yield return new WaitForSeconds(duration);
         playerControls.GroundPound();
-        isGroundPounding = false;
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, playerData.root.incomingAttackRadius);
+    }
+
+    private void OnDisable()
+    {
+        onPlayerHitEvent.OnEventRaised -= OnPlayerHit;
     }
 }

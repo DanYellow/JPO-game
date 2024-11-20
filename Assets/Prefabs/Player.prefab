@@ -202,7 +202,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 6918061016525105331}
-  isGrounded: 0
   listGroundLayers:
     serializedVersion: 2
     m_Bits: 8
@@ -272,6 +271,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 0}
+  onPlayerHitEvent: {fileID: 11400000, guid: dfb596387ea8e5144a1ad4c53dfd4d34, type: 2}
 --- !u!114 &4966838003681711026
 MonoBehaviour:
   m_ObjectHideFlags: 0

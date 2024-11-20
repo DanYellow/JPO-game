@@ -9,8 +9,7 @@ public class PlayerControls : MonoBehaviour
     [SerializeField]
     private Rigidbody rb;
 
-    [SerializeField]
-    private bool isGrounded = false;
+    public bool isGrounded { get; private set; } = false;
 
     private bool isFalling = false;
 
