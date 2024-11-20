@@ -30,40 +30,11 @@ public class WaveEffect : MonoBehaviour
         startScale = transform.localScale;
     }
 
-    private void SetTrackersPosition(PlayerID playerID)
+    private void SetTrackersPosition(List<Vector3> listDirections)
     {
-        int nbColliders = 4;
-        List<Vector3> pos = new List<Vector3>();
-
-        for (int i = 0; i <= nbColliders; i += 2)
+        for (var i = 0; i < listDirections.Count; i++)
         {
-            float val = Mathf.Lerp(0, -Mathf.PI / 2, (float)i / nbColliders);
-
-            switch (playerID)
-            {
-                case PlayerID.Player2:
-                    val = Mathf.Lerp(Mathf.PI, 3 * Mathf.PI / 2, (float)i / nbColliders);
-                    break;
-                case PlayerID.Player3:
-                    val = Mathf.Lerp(Mathf.PI / 2, Mathf.PI, (float)i / nbColliders);
-                    break;
-                case PlayerID.Player4:
-                    val = Mathf.Lerp(0, Mathf.PI / 2, (float)i / nbColliders);
-                    break;
-                default:
-                    break;
-            }
-
-            var vertical = Mathf.Sin(val);
-            var horizontal = Mathf.Cos(val);
-
-            var spawnDir = new Vector3(horizontal, 0, vertical);
-            pos.Add(spawnDir);
-        }
-
-        for (var i = 0; i < pos.Count; i++)
-        {
-            listTrackers[i].transform.position = transform.position + pos[i] * (meshRenderer.bounds.size.x / 2);
+            listTrackers[i].transform.position = transform.position + listDirections[i] * (meshRenderer.bounds.size.x / 2);
         }
     }
 
@@ -85,9 +56,9 @@ public class WaveEffect : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public Transform[] GetTrakers(PlayerID playerID)
+    public Transform[] GetTrakers(List<Vector3> listDirections)
     {
-        SetTrackersPosition(playerID);
+        SetTrackersPosition(listDirections);
 
         return listTrackers;
     }

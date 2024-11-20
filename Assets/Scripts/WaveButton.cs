@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -34,6 +35,8 @@ public class WaveButton : MonoBehaviour
 
     private ObjectPooling pool;
 
+    private List<Vector3> listAttackDirections;
+
     [Header("Scriptable Objects"), SerializeField]
     private PlayerData playerData;
 
@@ -41,14 +44,13 @@ public class WaveButton : MonoBehaviour
     private PlayerIDEventChannel onPlayerDeathEvent;
 
     private float heightButton = 0;
-     private ParticleSystem particlesSystem;
+    private ParticleSystem particlesSystem;
 
     private void Awake()
     {
         ringLightMeshRenderer = ringButton.GetComponent<MeshRenderer>();
         pool = GetComponent<ObjectPooling>();
         particlesSystem = GetComponentInChildren<ParticleSystem>();
-
         heightButton = GetComponentInChildren<BoxCollider>().bounds.size.y;
 
         switch (playerData.id)
@@ -80,6 +82,8 @@ public class WaveButton : MonoBehaviour
 
     private void Start()
     {
+        listAttackDirections = playerData.gameObject.GetComponent<Player>().GetAttackDirections();
+
         transform.position = new Vector3(
             startPosition.position.x,
             startPosition.position.y,
@@ -141,7 +145,7 @@ public class WaveButton : MonoBehaviour
         waveEffectMaterials[0] = waveMaterial;
         waveEffect.GetComponent<MeshRenderer>().materials = waveEffectMaterials;
 
-        foreach (var pos in waveEffect.GetComponent<WaveEffect>().GetTrakers(playerData.id))
+        foreach (var pos in waveEffect.GetComponent<WaveEffect>().GetTrakers(listAttackDirections))
         {
             ObjectPooled waveEffectCollider = pool.Get("WaveEffectCollider");
             if (waveEffect == null)
