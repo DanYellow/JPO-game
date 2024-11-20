@@ -35,7 +35,7 @@ public class WaveButton : MonoBehaviour
 
     private ObjectPooling pool;
 
-    private List<Vector3> listAttackDirections;
+    private List<(Vector3 Position, float GradeAngle)> listAttackDirections;
 
     [Header("Scriptable Objects"), SerializeField]
     private PlayerData playerData;

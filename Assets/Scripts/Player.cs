@@ -30,10 +30,10 @@ public class Player : MonoBehaviour
         }
     }
 
-    public List<Vector3> GetAttackDirections()
+    public List<(Vector3 Position, float GradeAngle)> GetAttackDirections()
     {
         int nbColliders = 4;
-        List<Vector3> listDirections = new List<Vector3>();
+        List<(Vector3, float)> listDirections = new List<(Vector3, float)>();
 
         for (int i = 0; i <= nbColliders; i += 2)
         {
@@ -58,7 +58,7 @@ public class Player : MonoBehaviour
             var horizontal = Mathf.Cos(val);
 
             var spawnDir = new Vector3(horizontal, 0, vertical);
-            listDirections.Add(spawnDir);
+            listDirections.Add((spawnDir, val));
         }
 
         return listDirections;

@@ -30,11 +30,11 @@ public class WaveEffect : MonoBehaviour
         startScale = transform.localScale;
     }
 
-    private void SetTrackersPosition(List<Vector3> listDirections)
+    private void SetTrackersPosition(List<(Vector3 Position, float RadiansAngle)> listDirections)
     {
         for (var i = 0; i < listDirections.Count; i++)
         {
-            listTrackers[i].transform.position = transform.position + listDirections[i] * (meshRenderer.bounds.size.x / 2);
+            listTrackers[i].transform.position = transform.position + listDirections[i].Position * (meshRenderer.bounds.size.x / 2);
         }
     }
 
@@ -56,7 +56,7 @@ public class WaveEffect : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public Transform[] GetTrakers(List<Vector3> listDirections)
+    public Transform[] GetTrakers(List<(Vector3 Position, float RadiansAngle)> listDirections)
     {
         SetTrackersPosition(listDirections);
 
