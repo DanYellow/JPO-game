@@ -11,9 +11,12 @@ public class PlayerIA : MonoBehaviour
 
     private Vector3 startPos;
 
+    private PlayerControls playerControls;
+
     private void Awake()
     {
         bc = GetComponent<BoxCollider>();
+        playerControls = GetComponent<PlayerControls>();
         listAttackDirections = GetComponent<Player>().GetAttackDirections();
 
         startPos = new Vector3(
@@ -24,13 +27,17 @@ public class PlayerIA : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if(playerData.id != PlayerID.Player1) {
+            return;
+        }
         foreach (var direction in listAttackDirections)
         {
-            Vector3 endPos = direction * 2.5f;
+            Vector3 endPos = direction * 1.85f;
 
             if (Physics.Linecast(startPos, endPos, out RaycastHit hitInfo, playerData.damageLayer))
             {
-                Debug.Log(hitInfo.transform.name);
+                playerControls.Jump();
+                // Debug.Log(hitInfo.transform.name);
             }
         }
     }
@@ -46,7 +53,7 @@ public class PlayerIA : MonoBehaviour
 
         foreach (var direction in listAttackDirections)
         {
-            Vector3 endPos = direction * 2.5f;
+            Vector3 endPos = direction * 1.85f;
 
             Debug.DrawLine(startPos, startPos + endPos, Color.red);
         }
