@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -6,9 +5,6 @@ using UnityEngine.UI;
 
 public class PlayerSelectionHUD : MonoBehaviour
 {
-
-
-
     [SerializeField]
     private Image playerImage;
 
@@ -19,8 +15,6 @@ public class PlayerSelectionHUD : MonoBehaviour
     private TextMeshProUGUI readyToPlay;
 
     private PlayerInput playerInput;
-
-    private int nbPlayersReady = 0;
 
     [Header("Scriptable Objects"), SerializeField]
     private PlayerData playerData;
@@ -35,14 +29,9 @@ public class PlayerSelectionHUD : MonoBehaviour
         readyToPlay.SetText("<b>Appuyer sur x\npour rejoindre la partie</b>");
 
         playerInput = GetComponent<PlayerInput>();
-        playerInput.defaultActionMap = playerData.id.ToString();
+        playerInput.defaultActionMap = "Game";
 
         playerData.isCPU = true;
-    }
-
-    private void OnEnable()
-    {
-        onPlayerInputReadyEvent.OnEventRaised += OnPlayerInputReady;
     }
 
     public void OnActivatePlayer(InputAction.CallbackContext context)
@@ -53,16 +42,7 @@ public class PlayerSelectionHUD : MonoBehaviour
             readyToPlay.SetText("<color=#00a100><b>OK !</b></color>");
             readyToPlay.fontSize = 28;
             playerData.isCPU = false;
+            onPlayerInputReadyEvent.Raise();
         }
-    }
-
-    private void OnPlayerInputReady()
-    {
-        nbPlayersReady++;
-    }
-
-    private void OnDisable()
-    {
-        onPlayerInputReadyEvent.OnEventRaised -= OnPlayerInputReady;
     }
 }

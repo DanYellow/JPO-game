@@ -1,0 +1,82 @@
+{
+    "name": "Player3",
+    "maps": [
+        {
+            "name": "Game",
+            "id": "9cf9f7e1-9089-4d48-a835-c4247d331ad7",
+            "actions": [
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "3a2d759c-3a4e-4b20-b000-30167b82de97",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Activate",
+                    "type": "Button",
+                    "id": "63f7a997-714d-457d-9e73-8c3221808bdb",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "016ebbc2-7d97-4639-8fe3-4f997defc95a",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4b0fb14e-95b0-49b5-9888-8a2c27719028",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Activate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Dead",
+            "id": "34609e51-15f9-4c5a-8ea2-8741d04b43ba",
+            "actions": [
+                {
+                    "name": "null",
+                    "type": "Button",
+                    "id": "8d559c35-f58e-453d-b82b-cbf4eb9449a7",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "61a2af74-9e7f-4631-9ed8-cb70764d634e",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "null",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

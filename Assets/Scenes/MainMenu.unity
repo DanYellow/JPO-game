@@ -362,7 +362,7 @@ PrefabInstance:
     - target: {fileID: 2984731396632313996, guid: 90d2298768e8dd5499f85967feed03e2,
         type: 3}
       propertyPath: m_Name
-      value: PlayerSelectionUI (1)
+      value: Player2SelectionUI
       objectReference: {fileID: 0}
     - target: {fileID: 5020330527447914867, guid: 90d2298768e8dd5499f85967feed03e2,
         type: 3}
@@ -463,6 +463,32 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7753844075939668329, guid: 90d2298768e8dd5499f85967feed03e2,
+        type: 3}
+      propertyPath: m_Actions
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: 604acfeedbb68ab4fa1c3e02be79bced,
+        type: 3}
+    - target: {fileID: 7753844075939668329, guid: 90d2298768e8dd5499f85967feed03e2,
+        type: 3}
+      propertyPath: m_DefaultActionMap
+      value: Game
+      objectReference: {fileID: 0}
+    - target: {fileID: 7753844075939668329, guid: 90d2298768e8dd5499f85967feed03e2,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7753844075939668329, guid: 90d2298768e8dd5499f85967feed03e2,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_ActionId
+      value: 8d559c35-f58e-453d-b82b-cbf4eb9449a7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7753844075939668329, guid: 90d2298768e8dd5499f85967feed03e2,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_ActionName
+      value: PlayerDead/null
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -492,7 +518,7 @@ PrefabInstance:
     - target: {fileID: 2984731396632313996, guid: 90d2298768e8dd5499f85967feed03e2,
         type: 3}
       propertyPath: m_Name
-      value: PlayerSelectionUI (3)
+      value: Player4SelectionUI
       objectReference: {fileID: 0}
     - target: {fileID: 5020330527447914867, guid: 90d2298768e8dd5499f85967feed03e2,
         type: 3}
@@ -593,6 +619,32 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7753844075939668329, guid: 90d2298768e8dd5499f85967feed03e2,
+        type: 3}
+      propertyPath: m_Actions
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: 8a49104cc5e287242bdb14d06c857e35,
+        type: 3}
+    - target: {fileID: 7753844075939668329, guid: 90d2298768e8dd5499f85967feed03e2,
+        type: 3}
+      propertyPath: m_DefaultActionMap
+      value: Game
+      objectReference: {fileID: 0}
+    - target: {fileID: 7753844075939668329, guid: 90d2298768e8dd5499f85967feed03e2,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7753844075939668329, guid: 90d2298768e8dd5499f85967feed03e2,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_ActionId
+      value: 8d559c35-f58e-453d-b82b-cbf4eb9449a7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7753844075939668329, guid: 90d2298768e8dd5499f85967feed03e2,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_ActionName
+      value: PlayerDead/null
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1680,7 +1732,7 @@ PrefabInstance:
     - target: {fileID: 2984731396632313996, guid: 90d2298768e8dd5499f85967feed03e2,
         type: 3}
       propertyPath: m_Name
-      value: PlayerSelectionUI
+      value: Player1SelectionUI
       objectReference: {fileID: 0}
     - target: {fileID: 5020330527447914867, guid: 90d2298768e8dd5499f85967feed03e2,
         type: 3}
@@ -2613,7 +2665,7 @@ PrefabInstance:
     - target: {fileID: 1389054990064450671, guid: 93c01f50640a25b419e53c387d69dc02,
         type: 3}
       propertyPath: m_Name
-      value: UIButton
+      value: StartButton
       objectReference: {fileID: 0}
     - target: {fileID: 2075206888538566459, guid: 93c01f50640a25b419e53c387d69dc02,
         type: 3}
@@ -2758,7 +2810,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1389054990064450671, guid: 93c01f50640a25b419e53c387d69dc02,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1853701020}
   m_SourcePrefab: {fileID: 100100000, guid: 93c01f50640a25b419e53c387d69dc02, type: 3}
 --- !u!224 &1706744199 stripped
 RectTransform:
@@ -2804,6 +2860,26 @@ RectTransform:
   m_AnchoredPosition: {x: -446, y: -136}
   m_SizeDelta: {x: 1036.0391, y: 1277.5955}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1853701015 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1389054990064450671, guid: 93c01f50640a25b419e53c387d69dc02,
+    type: 3}
+  m_PrefabInstance: {fileID: 1706744198}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1853701020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1853701015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e38c9de8d2d21c4ba2bc34a84ff8e98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onPlayerInputReadyEvent: {fileID: 11400000, guid: 60d042de17c570441a6aae1aa76c47b7,
+    type: 2}
 --- !u!1001 &1971261838
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2821,7 +2897,7 @@ PrefabInstance:
     - target: {fileID: 2984731396632313996, guid: 90d2298768e8dd5499f85967feed03e2,
         type: 3}
       propertyPath: m_Name
-      value: PlayerSelectionUI (2)
+      value: Player3SelectionUI
       objectReference: {fileID: 0}
     - target: {fileID: 5020330527447914867, guid: 90d2298768e8dd5499f85967feed03e2,
         type: 3}
@@ -2922,6 +2998,32 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7753844075939668329, guid: 90d2298768e8dd5499f85967feed03e2,
+        type: 3}
+      propertyPath: m_Actions
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: bef427ff68f3dc74eb124c81c9fe2a83,
+        type: 3}
+    - target: {fileID: 7753844075939668329, guid: 90d2298768e8dd5499f85967feed03e2,
+        type: 3}
+      propertyPath: m_DefaultActionMap
+      value: Game
+      objectReference: {fileID: 0}
+    - target: {fileID: 7753844075939668329, guid: 90d2298768e8dd5499f85967feed03e2,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7753844075939668329, guid: 90d2298768e8dd5499f85967feed03e2,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_ActionId
+      value: 8d559c35-f58e-453d-b82b-cbf4eb9449a7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7753844075939668329, guid: 90d2298768e8dd5499f85967feed03e2,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_ActionName
+      value: PlayerDead/null
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -50,6 +49,7 @@ public class PlayerControls : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
 
         playerInput = GetComponent<PlayerInput>();
+        
         DisableControls();
     }
 
@@ -163,7 +163,7 @@ public class PlayerControls : MonoBehaviour
 
     public void DisableControls()
     {
-        playerInput.SwitchCurrentActionMap("PlayerDead");
+        playerInput.SwitchCurrentActionMap("Dead");
     }
 
     private void OnDisable()
@@ -174,6 +174,6 @@ public class PlayerControls : MonoBehaviour
 
     private void OnGameStart()
     {
-        playerInput.SwitchCurrentActionMap(playerData.id.ToString());
+        playerInput.SwitchCurrentActionMap("Game");
     }
 }
