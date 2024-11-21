@@ -101,7 +101,7 @@ public class PlayerControls : MonoBehaviour
 
     public void Jump()
     {
-        if (isGameFinished || Time.time - lastGroundPoundCooldown < playerData.root.groundPoundCooldown)
+        if (isGameFinished || Time.time < lastGroundPoundCooldown + playerData.root.groundPoundCooldown)
         {
             return;
         }
