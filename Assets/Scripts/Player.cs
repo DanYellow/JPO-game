@@ -28,7 +28,6 @@ public class Player : MonoBehaviour
 
         playerInput.actions = playerData.inputActionAsset;
         playerInput.defaultActionMap = "Game";
-        print(playerData.inputActionAsset);
     }
 
     private void Start()

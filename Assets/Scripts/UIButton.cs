@@ -63,7 +63,6 @@ public class UIButton : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
         if (eventData.selectedObject == gameObject)
         {
             textContainer.color = hoverColor;
-            // textContainer.SetText($"►{originalText}◄");
         }
     }
 
@@ -72,7 +71,6 @@ public class UIButton : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
         if (eventData.selectedObject == gameObject)
         {
             textContainer.color = originalColor;
-            // textContainer.SetText(originalText);
         }
     }
 

@@ -12,6 +12,9 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField]
     private GameObject selectPlayerUI;
 
+    [SerializeField]
+    private GameObject creditsUI;
+
 
     void Awake()
     {
@@ -19,6 +22,7 @@ public class MainMenuManager : MonoBehaviour
         Time.timeScale = 1;
         introUI.SetActive(true);
         selectPlayerUI.SetActive(false);
+        creditsUI.SetActive(false);
     }
 
     public void StartGame()
@@ -28,9 +32,18 @@ public class MainMenuManager : MonoBehaviour
         SceneManager.LoadScene(1, LoadSceneMode.Single);
     }
 
-    public void SelectPlayer() {
+    public void SelectPlayer()
+    {
         introUI.SetActive(false);
+        creditsUI.SetActive(false);
         selectPlayerUI.SetActive(true);
+    }
+
+    public void DisplayCredits()
+    {
+        creditsUI.SetActive(true);
+        introUI.SetActive(false);
+        selectPlayerUI.SetActive(false);
     }
 
 
