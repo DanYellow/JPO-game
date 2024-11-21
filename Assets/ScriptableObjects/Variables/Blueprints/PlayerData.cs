@@ -40,6 +40,8 @@ public class PlayerData : ScriptableObject
 
     public InputActionAsset inputActionAsset;
 
+    public string[] listSpritesCharactersKeysNames;
+
     private void OnEnable() {
         gamerName = GetName();
     }

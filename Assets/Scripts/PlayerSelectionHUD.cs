@@ -14,6 +14,9 @@ public class PlayerSelectionHUD : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI readyToPlay;
 
+    [SerializeField]
+    private TextMeshProUGUI controls;
+
     private PlayerInput playerInput;
 
     [Header("Scriptable Objects"), SerializeField]
@@ -26,12 +29,20 @@ public class PlayerSelectionHUD : MonoBehaviour
         playerName.SetText($"{playerData.GetName()} - CPU");
         playerImage.sprite = playerData.image;
 
-        readyToPlay.SetText("<b>Appuyer sur x\npour rejoindre la partie</b>");
+        readyToPlay.SetText($"<b>Appuyer sur  <sprite name=\"{playerData.listSpritesCharactersKeysNames[0]}\"> \npour rejoindre la partie</b>");
 
         playerInput = GetComponent<PlayerInput>();
         playerInput.defaultActionMap = "Game";
 
         playerData.isCPU = true;
+
+        controls.SetText(
+            controls.text.Replace("PLACEHOLDER_KEY", playerData.listSpritesCharactersKeysNames[0])
+        );
+
+        // readyToPlay.SetText(
+        //     readyToPlay.text.Replace("PLACEHOLDER_KEY", playerData.listSpritesCharactersKeysNames[0])
+        // );
     }
 
     public void OnActivatePlayer(InputAction.CallbackContext context)
