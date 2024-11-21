@@ -153,8 +153,11 @@ public class WaveButton : MonoBehaviour
                 return;
             }
 
+            WaveEffectCollision waveEffectCollision = waveEffectCollider.GetComponent<WaveEffectCollision>();
             waveEffectCollider.GetComponent<Follow>().target = pos;
-            waveEffectCollider.GetComponent<WaveEffectCollision>().vfx = waveEffect.gameObject;
+            waveEffectCollision.vfx = waveEffect.gameObject;
+            waveEffectCollision.playerData = playerData;
+            
             waveEffectCollider.gameObject.layer = LayerMask.NameToLayer($"WaveEffect{playerData.id.ToString()}");
             waveEffectCollider.transform.rotation = Quaternion.identity;
             waveEffectCollider.transform.LookAt(pos);

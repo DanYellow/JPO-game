@@ -8,7 +8,7 @@ public class WaveEffectCollision : MonoBehaviour
     private VoidEventChannel onGameEndEvent;
     [SerializeField]
     private VoidEventChannel onTimerEndEvent;
-
+    public PlayerData playerData;
     public GameObject vfx;
 
     private void Awake()
