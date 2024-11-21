@@ -12,6 +12,9 @@ public class PlayerAI : MonoBehaviour
     [SerializeField]
     private PlayerIDEventChannel onPlayerDeathEvent;
 
+    [SerializeField]
+    private PlayerIDEventChannel onPlayerWinsEvent;
+
     private PlayerControls playerControls;
 
     private Collider[] hitColliders;
@@ -19,6 +22,7 @@ public class PlayerAI : MonoBehaviour
     private float liveFraction = 0;
     private float lastGroundPoundCooldown = 0;
     private float delayGroundPound = 3.5f;
+    private float delayGroundPoundAggressityFactor = 1f;
 
     private float highestAttackProbability = 0;
     private float lowestAttackProbability = 0;
@@ -39,23 +43,26 @@ public class PlayerAI : MonoBehaviour
             case PlayerAgressivity.Medium:
                 highestAttackProbability = 0.55f;
                 lowestAttackProbability = 0.45f;
+                delayGroundPoundAggressityFactor = 1f;
                 break;
             case PlayerAgressivity.High:
                 highestAttackProbability = 0.82f;
                 lowestAttackProbability = 0.7f;
-                delayGroundPound *= 0.9f;
+                delayGroundPoundAggressityFactor = 0.9f;
                 break;
             default:
                 highestAttackProbability = 0.15f;
                 lowestAttackProbability = 0.35f;
-                delayGroundPound *= 1.1f;
+                delayGroundPoundAggressityFactor = 1.1f;
                 break;
         }
+
+        delayGroundPound *= delayGroundPoundAggressityFactor;
     }
 
     IEnumerator Start()
     {
-        yield return Helpers.GetWait(10);
+        yield return Helpers.GetWait(11.25f * delayGroundPoundAggressityFactor);
         while (true)
         {
             if (
@@ -66,7 +73,7 @@ public class PlayerAI : MonoBehaviour
             )
             {
                 playerControls.Jump();
-                yield return Helpers.GetWait(0.25f);
+                yield return Helpers.GetWait(0.35f);
                 playerControls.GroundPound();
                 // StartCoroutine(DelayGroundPound());
             }
@@ -80,6 +87,7 @@ public class PlayerAI : MonoBehaviour
     {
         onPlayerHitEvent.OnEventRaised += OnPlayerHit;
         onPlayerDeathEvent.OnEventRaised += OnPlayerDeath;
+        onPlayerWinsEvent.OnEventRaised += OnDisplayWinner;
     }
 
     private void OnPlayerHit(PlayerID playerID)
@@ -88,6 +96,11 @@ public class PlayerAI : MonoBehaviour
         {
             liveFraction = (float)playerData.nbLives / playerData.root.maxNbLives;
         }
+    }
+
+    private void OnDisplayWinner(PlayerID playerID)
+    {
+        enabled = false;
     }
 
     private void OnPlayerDeath(PlayerID playerID)
@@ -115,7 +128,11 @@ public class PlayerAI : MonoBehaviour
             float highestProbability = isCPU ? 0.10f : 0.13f;
             float lowestProbability = isCPU ? 0.05f : 0.09f;
 
-            if (Time.time - lastGroundPoundCooldown > delayGroundPound && Random.value < Mathf.Lerp(highestProbability, lowestProbability, liveFraction))
+            if (
+                !isGroundPounding && 
+                Time.time - lastGroundPoundCooldown > delayGroundPound && 
+                Random.value < Mathf.Lerp(highestProbability, lowestProbability, liveFraction)
+            )
             {
                 StartCoroutine(DelayGroundPound());
             }
@@ -149,5 +166,6 @@ public class PlayerAI : MonoBehaviour
     {
         onPlayerHitEvent.OnEventRaised -= OnPlayerHit;
         onPlayerDeathEvent.OnEventRaised -= OnPlayerDeath;
+        onPlayerWinsEvent.OnEventRaised -= OnDisplayWinner;
     }
 }
