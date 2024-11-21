@@ -18,6 +18,9 @@ public class PlayerHealthIndicator : MonoBehaviour
     private TextMeshProUGUI playerName;
 
     [SerializeField]
+    private Outline playerNameOutline;
+
+    [SerializeField]
     private List<Image> listImages = new List<Image> { };
 
     [Header("Scriptable Objects"), SerializeField]
@@ -31,9 +34,16 @@ public class PlayerHealthIndicator : MonoBehaviour
 
     private void Awake()
     {
-        playerName.SetText($"{playerData.GetName()}");
+        if (playerData.isCPU)
+        {
+            playerName.SetText($"{playerData.GetName()} - CPU");
+        } else {
+            playerName.SetText(playerData.GetName());
+        }
+
         playerImage.sprite = playerData.image;
         playerImageShadow.sprite = playerData.image;
+        playerNameOutline.effectColor = playerData.color;
 
         string filledHeartColor = "#AA0000";
 
