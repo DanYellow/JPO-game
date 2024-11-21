@@ -10,6 +10,13 @@ public enum PlayerID
     Player4,
 }
 
+public enum PlayerAgressivity
+{
+    Low,
+    Medium,
+    High,
+}
+
 [CreateAssetMenu(fileName = "New Player Data", menuName = "ScriptableObjects/Values/PlayerData", order = 0)]
 public class PlayerData : ScriptableObject
 {
@@ -23,6 +30,7 @@ public class PlayerData : ScriptableObject
     public string gamerName;
     [ColorUsageAttribute(true, true)]
     public Color color;
+    public PlayerAgressivity agressivity;
 
     [ReadOnlyInspector]
     public GameObject gameObject;

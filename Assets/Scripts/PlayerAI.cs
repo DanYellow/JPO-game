@@ -17,6 +17,9 @@ public class PlayerAI : MonoBehaviour
     private float lastGroundPoundCooldown = 0;
     private float delayGroundPound = 2.75f;
 
+    private float highestAttackProbability = 0;
+    private float lowestAttackProbability = 0;
+
     private void Awake()
     {
         playerControls = GetComponent<PlayerControls>();
@@ -26,6 +29,23 @@ public class PlayerAI : MonoBehaviour
             enabled = false;
         }
         liveFraction = (float)playerData.nbLives / playerData.root.maxNbLives;
+
+        switch (playerData.agressivity)
+        {
+            case PlayerAgressivity.Medium:
+                highestAttackProbability = 0.55f;
+                lowestAttackProbability = 0.45f;
+                break;
+            case PlayerAgressivity.High:
+                highestAttackProbability = 0.8f;
+                lowestAttackProbability = 0.7f;
+                break;
+            default:
+                highestAttackProbability = 0.15f;
+                lowestAttackProbability = 0.35f;
+                break;
+        }
+
     }
 
     IEnumerator Start()
@@ -33,7 +53,7 @@ public class PlayerAI : MonoBehaviour
         yield return Helpers.GetWait(15);
         while (true)
         {
-            if (playerControls.isGrounded && Random.value < Mathf.Lerp(0.8f, 0.5f, liveFraction) && Time.time - lastGroundPoundCooldown > delayGroundPound)
+            if (playerControls.isGrounded && Random.value < Mathf.Lerp(highestAttackProbability, lowestAttackProbability, liveFraction) && Time.time - lastGroundPoundCooldown > delayGroundPound)
             {
                 playerControls.Jump();
                 StartCoroutine(DelayGroundPound());
@@ -89,8 +109,9 @@ public class PlayerAI : MonoBehaviour
         lastGroundPoundCooldown = Time.time;
         float duration = Mathf.Lerp(
             0.35f,
-            Mathf.Lerp(0.85f, 1.1f, liveFraction),
-        Random.value);
+            Mathf.Lerp(0.85f, 1, liveFraction),
+            Random.value
+        );
         yield return new WaitForSeconds(duration);
         playerControls.GroundPound();
     }
