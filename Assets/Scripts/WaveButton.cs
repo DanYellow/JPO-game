@@ -46,6 +46,8 @@ public class WaveButton : MonoBehaviour
     private float heightButton = 0;
     private ParticleSystem particlesSystem;
 
+    private Vector3 pushButtonStartPosition;
+
     private void Awake()
     {
         ringLightMeshRenderer = ringButton.GetComponent<MeshRenderer>();
@@ -98,6 +100,8 @@ public class WaveButton : MonoBehaviour
         onPositionSet.Invoke(playerPosition);
 
         waveMaterial.SetColor("_TintColor", playerData.color);
+
+        pushButtonStartPosition = pushButton.transform.position;
     }
 
     public void OnGroundPound(GameObject player)
@@ -111,8 +115,7 @@ public class WaveButton : MonoBehaviour
         newMaterials[0] = ringLightOffMaterial;
 
         ringLightMeshRenderer.materials = newMaterials;
-        Vector3 startPos = pushButton.transform.position;
-        Vector3 endPos = pushButton.transform.position - (Vector3.up * (heightButton * 1.5f));
+        Vector3 endPos = pushButtonStartPosition - (Vector3.up * (heightButton * 1.5f));
 
         onButtonPressed.Invoke();
         pushButton.transform.position = endPos;
@@ -124,11 +127,11 @@ public class WaveButton : MonoBehaviour
         while (timeElapsed < playerData.root.groundPoundCooldown)
         {
             timeElapsed += Time.deltaTime;
-            pushButton.transform.position = Vector3.Lerp(endPos, startPos, timeElapsed);
+            pushButton.transform.position = Vector3.Lerp(endPos, pushButtonStartPosition, timeElapsed);
 
             yield return null;
         }
-        pushButton.transform.position = startPos;
+        pushButton.transform.position = pushButtonStartPosition;
         newMaterials[0] = ringLightOnMaterial;
         ringLightMeshRenderer.materials = newMaterials;
     }
@@ -177,7 +180,8 @@ public class WaveButton : MonoBehaviour
         {
             return;
         }
-        Vector3 endPos = pushButton.transform.position - (Vector3.up * 0.1f);
+        StopAllCoroutines();
+        Vector3 endPos = pushButtonStartPosition - (Vector3.up * (heightButton * 1.5f));
         pushButton.transform.position = endPos;
 
         Material[] newMaterials = ringLightMeshRenderer.materials;
