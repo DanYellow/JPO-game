@@ -40,7 +40,7 @@ public class PlayerAI : MonoBehaviour
                 lowestAttackProbability = 0.45f;
                 break;
             case PlayerAgressivity.High:
-                highestAttackProbability = 0.8f;
+                highestAttackProbability = 0.82f;
                 lowestAttackProbability = 0.7f;
                 break;
             default:
@@ -52,12 +52,13 @@ public class PlayerAI : MonoBehaviour
 
     IEnumerator Start()
     {
-        yield return Helpers.GetWait(15);
+        yield return Helpers.GetWait(10);
         while (true)
         {
             if (playerControls.isGrounded && Random.value < Mathf.Lerp(highestAttackProbability, lowestAttackProbability, liveFraction) && Time.time - lastGroundPoundCooldown > delayGroundPound)
             {
                 playerControls.Jump();
+                yield return Helpers.GetWait(0.19f);
                 StartCoroutine(DelayGroundPound());
             }
 
