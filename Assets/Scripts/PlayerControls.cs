@@ -125,7 +125,7 @@ public class PlayerControls : MonoBehaviour
 
     public void GroundPound()
     {
-        if (isGrounded)
+        if (isGrounded || isGroundPounding)
         {
             return;
         }
