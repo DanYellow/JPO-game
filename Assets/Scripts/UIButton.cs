@@ -16,6 +16,8 @@ public class UIButton : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
     [SerializeField]
     private Color disabledColor = Color.gray;
 
+    private Color normalColor = Color.white;
+
     private string originalText;
 
     private Color originalColor;
@@ -28,6 +30,7 @@ public class UIButton : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
     private void Awake()
     {
         textContainer = GetComponentInChildren<TextMeshProUGUI>();
+        normalColor = textContainer.color;
         button = GetComponent<Button>();
         button.GetComponent<Image>().enabled = keepImageButton;
 
@@ -40,6 +43,8 @@ public class UIButton : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
         if (button.interactable == false)
         {
             textContainer.color = disabledColor;
+        } else {
+            textContainer.color = normalColor;
         }
     }
 

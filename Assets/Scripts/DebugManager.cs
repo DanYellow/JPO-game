@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [ExecuteInEditMode]
-public class CurrentSceneManager : MonoBehaviour
+public class DebugManager : MonoBehaviour
 {
     private void Update()
     {

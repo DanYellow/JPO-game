@@ -1200,12 +1200,16 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Bienvenue aux Journ\xE9es Portes Ouvertes de l'IUT de Sarcelles dans le
     d\xE9partement M\xE9tiers du Multim\xE9dia et de l'Internet.\nCe jeu vid\xE9o
-    multijoueurs local a \xE9t\xE9 d\xE9velopp\xE9 avec le logiciel Unity dont l'apprentissage
-    se fait uniquement dans le parcours \"D\xE9veloppement web et m\xE9dias interactifs\".
-    \nAux c\xF4t\xE9s de ce parcours, nous trouvons deux autres parcours :\n\n\u2022
-    Strat\xE9gie de communication num\xE9rique et design d'exp\xE9rience\n\u2022
-    Cr\xE9ation num\xE9rique\n\nN'h\xE9sitez pas \xE0 questionner \xE9tudiants ou
-    enseignants, si vous avez besoin d'informations suppl\xE9mentaires sur nos parcours.\r"
+    multijoueur local \xE0 quatre a \xE9t\xE9 d\xE9velopp\xE9 avec le logiciel Unity
+    dont l'apprentissage se fait uniquement dans le parcours \"D\xE9veloppement web
+    et m\xE9dias interactifs\".\nAux c\xF4t\xE9s de ce parcours, nous trouvons deux
+    autres parcours :\n\n\u2022 Strat\xE9gie de communication num\xE9rique et design
+    d'exp\xE9rience\n\u2022 Cr\xE9ation num\xE9rique\n\nN'h\xE9sitez pas \xE0 questionner
+    \xE9tudiants ou enseignants, si vous avez besoin d'informations suppl\xE9mentaires
+    sur nos parcours. \n\nSi ce jeu a \xE9t\xE9 d\xE9velopp\xE9 par un enseignant,
+    la r\xE9alisation d'un jeu du m\xEAme genre est largement dans les capacit\xE9s
+    d'un \xE9tudiant MMI \xE0 condition de prendre de d\xE9dier du temps \xE0 un
+    travail personnel.\r"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1404,6 +1408,8 @@ MonoBehaviour:
   introUI: {fileID: 1040088944}
   selectPlayerUI: {fileID: 1717888976}
   creditsUI: {fileID: 1624257857}
+  mainMenuUI: {fileID: 0}
+  timeBeforeResetScreen: 300
 --- !u!1001 &1243569004
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1580,7 +1586,7 @@ GameObject:
   - component: {fileID: 1259837584}
   - component: {fileID: 1259837585}
   m_Layer: 5
-  m_Name: Grid
+  m_Name: ListPlayers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1606,7 +1612,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 503.9999, y: -5.5807}
+  m_AnchoredPosition: {x: 504, y: -56}
   m_SizeDelta: {x: 1008.4, y: 470.1881}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1259837585
@@ -2448,7 +2454,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Sautez pour \xE9viter les attaques de vos adversaires.\n.\rEffectuez un
-    double-saut pour lancer vos propres attaques et \xE9liminer vos adversaires !"
+    double saut pour lancer vos propres attaques et \xE9liminer vos adversaires !\n\n<b>Commandes</b>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2802,6 +2808,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2075206888538566459, guid: 93c01f50640a25b419e53c387d69dc02,
         type: 3}
+      propertyPath: m_Colors.m_DisabledColor.a
+      value: 0.003921569
+      objectReference: {fileID: 0}
+    - target: {fileID: 2075206888538566459, guid: 93c01f50640a25b419e53c387d69dc02,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -2918,7 +2929,7 @@ PrefabInstance:
     - target: {fileID: 4074569904694590306, guid: 93c01f50640a25b419e53c387d69dc02,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 295
+      value: 213
       objectReference: {fileID: 0}
     - target: {fileID: 4074569904694590306, guid: 93c01f50640a25b419e53c387d69dc02,
         type: 3}
@@ -2934,6 +2945,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4966136737514380700, guid: 93c01f50640a25b419e53c387d69dc02,
+        type: 3}
+      propertyPath: disabledColor.a
+      value: 0.003921569
       objectReference: {fileID: 0}
     - target: {fileID: 6076093125564722802, guid: 93c01f50640a25b419e53c387d69dc02,
         type: 3}

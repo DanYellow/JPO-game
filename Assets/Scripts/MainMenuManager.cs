@@ -1,8 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class MainMenuManager : MonoBehaviour
 {
@@ -14,6 +14,12 @@ public class MainMenuManager : MonoBehaviour
 
     [SerializeField]
     private GameObject creditsUI;
+
+    [SerializeField]
+    private GameObject mainMenuUI;
+
+    [SerializeField]
+    private int timeBeforeResetScreen = 300;
 
 
     void Awake()
@@ -46,6 +52,18 @@ public class MainMenuManager : MonoBehaviour
         selectPlayerUI.SetActive(false);
     }
 
+    private IEnumerator Countdown()
+    {
+        while (timeBeforeResetScreen > -1)
+        {
+            yield return Helpers.GetWait(1);
+        }
+
+        introUI.SetActive(true);
+        selectPlayerUI.SetActive(false);
+        creditsUI.SetActive(false);
+    }
+
 
     public void OnNavigate(InputAction.CallbackContext ctx)
     {
@@ -63,9 +81,4 @@ public class MainMenuManager : MonoBehaviour
 #endif
         Application.Quit();
     }
-
-    private void OnDisable()
-    {
-    }
-
 }

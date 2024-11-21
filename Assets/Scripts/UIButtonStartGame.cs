@@ -9,7 +9,8 @@ public class UIButtonStartGame : MonoBehaviour
 
     private Button button;
 
-    private void Awake() {
+    private void Awake()
+    {
         button = GetComponent<Button>();
         button.interactable = false;
     }
