@@ -65,8 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Sauter :  <sprite name=\"PLACEHOLDER_KEY\">\n\rAttaquer :  <sprite name=\"PLACEHOLDER_KEY\"> 
-    <sprite name=\"PLACEHOLDER_KEY\">\n"
+  m_text: "Sauter :  PLACEHOLDER_KEY_0\n\rAttaquer :  PLACEHOLDER_KEY_0  PLACEHOLDER_KEY_0\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -202,7 +201,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<b>Appuyer sur <sprite name=\"PLACEHOLDER_KEY\"> \npour rejoindre la partie</b>"
+  m_text: '<b>Appuyer sur  PLACEHOLDER_KEY_0
+
+    pour rejoindre la partie</b>'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

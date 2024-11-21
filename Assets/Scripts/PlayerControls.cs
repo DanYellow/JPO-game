@@ -92,7 +92,7 @@ public class PlayerControls : MonoBehaviour
         // context.ReadValue<bool>();
         // context.action.triggered;
 
-        if (context.phase == InputActionPhase.Performed)
+        if (playerData.isCPU || context.phase == InputActionPhase.Performed)
         {
             Jump();
             GroundPound();

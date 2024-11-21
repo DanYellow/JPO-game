@@ -1,3 +1,4 @@
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -29,20 +30,21 @@ public class PlayerSelectionHUD : MonoBehaviour
         playerName.SetText($"{playerData.GetName()} - CPU");
         playerImage.sprite = playerData.image;
 
-        readyToPlay.SetText($"<b>Appuyer sur  <sprite name=\"{playerData.listSpritesCharactersKeysNames[0]}\"> \npour rejoindre la partie</b>");
-
         playerInput = GetComponent<PlayerInput>();
         playerInput.defaultActionMap = "Game";
 
         playerData.isCPU = true;
 
-        controls.SetText(
-            controls.text.Replace("PLACEHOLDER_KEY", playerData.listSpritesCharactersKeysNames[0])
-        );
-
-        // readyToPlay.SetText(
-        //     readyToPlay.text.Replace("PLACEHOLDER_KEY", playerData.listSpritesCharactersKeysNames[0])
-        // );
+        for (var i = 0; i < playerData.listSpritesCharactersKeysNames.Count(); i++)
+        {
+            string key = playerData.listSpritesCharactersKeysNames[i];
+            controls.SetText(
+                controls.text.Replace($"PLACEHOLDER_KEY_{i}", $"<sprite name=\"{key}\">")
+            );
+            readyToPlay.SetText(
+                readyToPlay.text.Replace($"PLACEHOLDER_KEY_{i}", $"<sprite name=\"{key}\">")
+            );
+        }
     }
 
     public void OnActivatePlayer(InputAction.CallbackContext context)

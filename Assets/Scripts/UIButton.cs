@@ -16,7 +16,7 @@ public class UIButton : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
     [SerializeField]
     private Color disabledColor = Color.gray;
 
-    private Color normalColor = Color.white;
+    private Color normalColor;
 
     private string originalText;
 
@@ -36,35 +36,34 @@ public class UIButton : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
 
         originalColor = textContainer.color;
         originalText = textContainer.text;
-    }
 
-    private void Update()
-    {
         if (button.interactable == false)
         {
             textContainer.color = disabledColor;
-        } else {
-            textContainer.color = normalColor;
         }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (!button.interactable) return;
         textContainer.color = hoverColor;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        if (!button.interactable) return;
         textContainer.color = originalColor;
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        if (!button.interactable) return;
         textContainer.color = pressedColor;
     }
 
     public void OnSelect(BaseEventData eventData)
     {
+        if (!button.interactable) return;
         if (eventData.selectedObject == gameObject)
         {
             textContainer.color = hoverColor;
@@ -73,6 +72,7 @@ public class UIButton : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
 
     public void OnDeselect(BaseEventData eventData)
     {
+        if (!button.interactable) return;
         if (eventData.selectedObject == gameObject)
         {
             textContainer.color = originalColor;
@@ -82,5 +82,17 @@ public class UIButton : MonoBehaviour, IPointerUpHandler, IPointerEnterHandler, 
     public void OnPointerUp(PointerEventData eventData)
     {
         EventSystem.current.SetSelectedGameObject(null);
+    }
+
+    public void Enable()
+    {
+        textContainer.color = normalColor;
+        button.interactable = true;
+    }
+
+    public void Disable()
+    {
+        textContainer.color = disabledColor;
+        button.interactable = false;
     }
 }

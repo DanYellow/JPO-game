@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class UIButtonStartGame : MonoBehaviour
@@ -8,6 +9,9 @@ public class UIButtonStartGame : MonoBehaviour
     private VoidEventChannel onPlayerInputReadyEvent;
 
     private Button button;
+
+    [SerializeField]
+    private UnityEvent onActivate;
 
     private void Awake()
     {
@@ -22,7 +26,10 @@ public class UIButtonStartGame : MonoBehaviour
     private void OnPlayerInputReady()
     {
         nbPlayersReady++;
-        button.interactable = nbPlayersReady >= 1;
+        if (nbPlayersReady >= 1)
+        {
+            onActivate.Invoke();
+        }
     }
 
     private void OnDisable()
