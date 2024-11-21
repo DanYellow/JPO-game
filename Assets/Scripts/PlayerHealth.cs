@@ -82,14 +82,14 @@ public class PlayerHealth : MonoBehaviour
             {
                 hasTriggeredExitScreenEvent = true;
                 onPlayerExit.OnEventRaised(transform.position);
-                // gameObject.SetActive(false);
+                gameObject.SetActive(false);
             }
         }
     }
 
     private void Die(Vector3 impactPoint)
     {
-        rb.AddForce(impactPoint * 60, ForceMode.VelocityChange);
+        rb.AddForce(impactPoint * 90, ForceMode.VelocityChange);
         lightLandmark.enabled = false;
         onPlayerDeathEvent.OnEventRaised(playerData.id);
         onDeath.Invoke();
