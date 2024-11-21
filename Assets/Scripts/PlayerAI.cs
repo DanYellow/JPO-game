@@ -9,13 +9,16 @@ public class PlayerAI : MonoBehaviour
     [SerializeField]
     private PlayerIDEventChannel onPlayerHitEvent;
 
+    [SerializeField]
+    private PlayerIDEventChannel onPlayerDeathEvent;
+
     private PlayerControls playerControls;
 
     private Collider[] hitColliders;
 
     private float liveFraction = 0;
     private float lastGroundPoundCooldown = 0;
-    private float delayGroundPound = 2.75f;
+    private float delayGroundPound = 2.55f;
 
     private float highestAttackProbability = 0;
     private float lowestAttackProbability = 0;
@@ -45,7 +48,6 @@ public class PlayerAI : MonoBehaviour
                 lowestAttackProbability = 0.35f;
                 break;
         }
-
     }
 
     IEnumerator Start()
@@ -58,8 +60,8 @@ public class PlayerAI : MonoBehaviour
                 playerControls.Jump();
                 StartCoroutine(DelayGroundPound());
             }
-            yield return Helpers.GetWait(1.5f);
 
+            yield return Helpers.GetWait(1.5f);
             yield return null;
         }
     }
@@ -67,6 +69,7 @@ public class PlayerAI : MonoBehaviour
     private void OnEnable()
     {
         onPlayerHitEvent.OnEventRaised += OnPlayerHit;
+        onPlayerDeathEvent.OnEventRaised += OnPlayerDeath;
     }
 
     private void OnPlayerHit(PlayerID playerID)
@@ -74,6 +77,14 @@ public class PlayerAI : MonoBehaviour
         if (playerID == playerData.id)
         {
             liveFraction = (float)playerData.nbLives / playerData.root.maxNbLives;
+        }
+    }
+
+    private void OnPlayerDeath(PlayerID playerID)
+    {
+        if (playerID == playerData.id)
+        {
+            enabled = false;
         }
     }
 
@@ -125,5 +136,6 @@ public class PlayerAI : MonoBehaviour
     private void OnDisable()
     {
         onPlayerHitEvent.OnEventRaised -= OnPlayerHit;
+        onPlayerDeathEvent.OnEventRaised -= OnPlayerDeath;
     }
 }
