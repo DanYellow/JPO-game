@@ -137,7 +137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4311948
 Transform:
   m_ObjectHideFlags: 0
@@ -595,7 +595,7 @@ PrefabInstance:
     - target: {fileID: 5179311076002450396, guid: 9d04f43a11e817340b2cebd5bcb118d2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.93
+      value: -5.95
       objectReference: {fileID: 0}
     - target: {fileID: 5179311076002450396, guid: 9d04f43a11e817340b2cebd5bcb118d2,
         type: 3}
@@ -957,7 +957,7 @@ PrefabInstance:
     - target: {fileID: 5179311076002450396, guid: 9d04f43a11e817340b2cebd5bcb118d2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.56
+      value: 6.29
       objectReference: {fileID: 0}
     - target: {fileID: 5179311076002450396, guid: 9d04f43a11e817340b2cebd5bcb118d2,
         type: 3}
@@ -3015,6 +3015,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player3HealthUI
       objectReference: {fileID: 0}
+    - target: {fileID: 411542613801372845, guid: 476562dba13c4ec40af328fec6acac3f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1035728575745984175, guid: 476562dba13c4ec40af328fec6acac3f,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -3973,7 +3978,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1053463875
 Transform:
   m_ObjectHideFlags: 0
@@ -4190,7 +4195,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1123905827
 Transform:
   m_ObjectHideFlags: 0
@@ -5141,7 +5146,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &1305585002
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6446,6 +6451,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player1HealthUI
       objectReference: {fileID: 0}
+    - target: {fileID: 411542613801372845, guid: 476562dba13c4ec40af328fec6acac3f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1035728575745984175, guid: 476562dba13c4ec40af328fec6acac3f,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -6906,6 +6916,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player2HealthUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 411542613801372845, guid: 476562dba13c4ec40af328fec6acac3f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1035728575745984175, guid: 476562dba13c4ec40af328fec6acac3f,
         type: 3}
@@ -8337,6 +8352,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player4HealthUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 411542613801372845, guid: 476562dba13c4ec40af328fec6acac3f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1035728575745984175, guid: 476562dba13c4ec40af328fec6acac3f,
         type: 3}
