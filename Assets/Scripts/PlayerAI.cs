@@ -99,7 +99,7 @@ public class PlayerAI : MonoBehaviour
         hitColliders = Physics.OverlapSphere(transform.position, playerData.root.incomingAttackRadius, playerData.damageLayer);
         // for (int i = 0; i < hitColliders.Length; i++)
         // {
-        if (hitColliders.Length != 0 && Random.value < Mathf.Lerp(0.45f, 0.15f, liveFraction))
+        if (hitColliders.Length != 0 && Random.value < Mathf.Lerp(0.35f, 0.15f, liveFraction))
         {
             playerControls.Jump();
             bool isCPU = hitColliders[0].transform.GetComponent<WaveEffectCollision>().playerData.isCPU;
