@@ -1,7 +1,6 @@
 
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.InputSystem;
 
 public enum PlayerID
 {
@@ -38,11 +37,10 @@ public class PlayerData : ScriptableObject
 
     public bool isCPU = false;
 
-    public InputActionAsset inputActionAsset;
-
     public string[] listSpritesCharactersKeysNames;
 
-    private void OnEnable() {
+    private void OnEnable()
+    {
         gamerName = GetName();
     }
 

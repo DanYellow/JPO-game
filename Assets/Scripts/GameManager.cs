@@ -27,6 +27,9 @@ public class GameManager : MonoBehaviour
     private GameObject letsgoCanvas;
 
     [SerializeField]
+    private GameObject HUDCanvas;
+
+    [SerializeField]
     private List<PlayerData> listPlayers;
 
     [Header("Scriptable Objects"), SerializeField]
@@ -71,6 +74,7 @@ public class GameManager : MonoBehaviour
         gameEndMenuUI.SetActive(false);
         loadingCanvas.SetActive(true);
         letsgoCanvas.SetActive(false);
+        HUDCanvas.SetActive(true);
     }
 
     private void OnEnable()
@@ -88,7 +92,7 @@ public class GameManager : MonoBehaviour
         {
             return;
         }
-
+        HUDCanvas.SetActive(false);
         PlayerData playerData = listPlayers.Where(item => item.id == playerID).First();
         Player player = playerData.gameObject.GetComponent<Player>();
         Canvas rankCanvas = player.rankCanvas;

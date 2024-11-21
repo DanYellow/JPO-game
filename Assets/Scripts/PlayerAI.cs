@@ -18,10 +18,11 @@ public class PlayerAI : MonoBehaviour
 
     private float liveFraction = 0;
     private float lastGroundPoundCooldown = 0;
-    private float delayGroundPound = 2.55f;
+    private float delayGroundPound = 3.5f;
 
     private float highestAttackProbability = 0;
     private float lowestAttackProbability = 0;
+    private bool isGroundPounding = false;
 
     private void Awake()
     {
@@ -42,10 +43,12 @@ public class PlayerAI : MonoBehaviour
             case PlayerAgressivity.High:
                 highestAttackProbability = 0.82f;
                 lowestAttackProbability = 0.7f;
+                delayGroundPound *= 0.9f;
                 break;
             default:
                 highestAttackProbability = 0.15f;
                 lowestAttackProbability = 0.35f;
+                delayGroundPound *= 1.1f;
                 break;
         }
     }
@@ -55,11 +58,17 @@ public class PlayerAI : MonoBehaviour
         yield return Helpers.GetWait(10);
         while (true)
         {
-            if (playerControls.isGrounded && Random.value < Mathf.Lerp(highestAttackProbability, lowestAttackProbability, liveFraction) && Time.time - lastGroundPoundCooldown > delayGroundPound)
+            if (
+                !isGroundPounding &&
+                playerControls.isGrounded && 
+                Random.value < Mathf.Lerp(highestAttackProbability, lowestAttackProbability, liveFraction) && 
+                Time.time - lastGroundPoundCooldown > delayGroundPound
+            )
             {
                 playerControls.Jump();
-                yield return Helpers.GetWait(0.19f);
-                StartCoroutine(DelayGroundPound());
+                yield return Helpers.GetWait(0.25f);
+                playerControls.GroundPound();
+                // StartCoroutine(DelayGroundPound());
             }
 
             yield return Helpers.GetWait(1.5f);
@@ -103,8 +112,8 @@ public class PlayerAI : MonoBehaviour
         {
             playerControls.Jump();
             bool isCPU = hitColliders[0].transform.GetComponent<WaveEffectCollision>().playerData.isCPU;
-            float highestProbability = isCPU ? 0.35f : 0.42f;
-            float lowestProbability = isCPU ? 0.175f : 0.2f;
+            float highestProbability = isCPU ? 0.10f : 0.13f;
+            float lowestProbability = isCPU ? 0.05f : 0.09f;
 
             if (Time.time - lastGroundPoundCooldown > delayGroundPound && Random.value < Mathf.Lerp(highestProbability, lowestProbability, liveFraction))
             {
@@ -118,7 +127,7 @@ public class PlayerAI : MonoBehaviour
 
     private IEnumerator DelayGroundPound()
     {
-        lastGroundPoundCooldown = Time.time;
+        isGroundPounding = true;
         float duration = Mathf.Lerp(
             0.35f,
             Mathf.Lerp(0.85f, 1, liveFraction),
@@ -126,6 +135,8 @@ public class PlayerAI : MonoBehaviour
         );
         yield return new WaitForSeconds(duration);
         playerControls.GroundPound();
+        lastGroundPoundCooldown = Time.time;
+        isGroundPounding = false;
     }
 
     private void OnDrawGizmos()

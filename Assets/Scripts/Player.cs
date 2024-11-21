@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
@@ -13,8 +12,6 @@ public class Player : MonoBehaviour
     [SerializeField]
     private VoidEventChannel onPlayerReadyEvent;
 
-    private PlayerInput playerInput;
-
     private void Awake()
     {
         playerData.gameObject = gameObject;
@@ -23,11 +20,6 @@ public class Player : MonoBehaviour
         rankCanvas = GetComponentInChildren<Canvas>();
         rankCanvas.transform.name = $"RankCanvas{playerData.id}";
         rankCanvas.gameObject.SetActive(false);
-
-        playerInput = GetComponent<PlayerInput>();
-
-        playerInput.actions = playerData.inputActionAsset;
-        playerInput.defaultActionMap = "Game";
     }
 
     private void Start()

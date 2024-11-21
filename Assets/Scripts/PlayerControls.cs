@@ -49,8 +49,7 @@ public class PlayerControls : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
 
         playerInput = GetComponent<PlayerInput>();
-        
-        DisableControls();
+        playerInput.defaultActionMap = "Dead";
     }
 
     private void OnEnable()
