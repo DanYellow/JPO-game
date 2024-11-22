@@ -21,7 +21,7 @@ public class PlayerAI : MonoBehaviour
 
     private float liveFraction = 0;
     private float lastGroundPoundCooldown = 0;
-    private float delayGroundPound = 5.1f;
+    private float delayGroundPound = 3.25f;
     private float delayGroundPoundAggressityFactor = 1f;
 
     private float highestAttackProbability = 0;
@@ -46,9 +46,9 @@ public class PlayerAI : MonoBehaviour
                 delayGroundPoundAggressityFactor = 1f;
                 break;
             case PlayerAgressivity.High:
-                highestAttackProbability = 0.5f;
+                highestAttackProbability = 0.65f;
                 lowestAttackProbability = 0.45f;
-                delayGroundPoundAggressityFactor = 0.9f;
+                delayGroundPoundAggressityFactor = 0.85f;
                 break;
             default:
                 highestAttackProbability = 0.15f;
@@ -62,7 +62,7 @@ public class PlayerAI : MonoBehaviour
 
     IEnumerator Start()
     {
-        yield return Helpers.GetWait(6.5f * delayGroundPoundAggressityFactor);
+        yield return Helpers.GetWait(4.5f * delayGroundPoundAggressityFactor);
         while (true)
         {
             if (
@@ -119,12 +119,12 @@ public class PlayerAI : MonoBehaviour
         hitColliders = Physics.OverlapSphere(transform.position, playerData.root.incomingAttackRadius, playerData.damageLayer);
         // for (int i = 0; i < hitColliders.Length; i++)
         // {
-        if (hitColliders.Length != 0 && Random.value < Mathf.Lerp(0.2f, 0.15f, liveFraction))
+        if (hitColliders.Length != 0 && Random.value < Mathf.Lerp(0.25f, 0.19f, liveFraction))
         {
             playerControls.Jump();
             bool isCPU = hitColliders[0].transform.GetComponent<WaveEffectCollision>().playerData.isCPU;
-            float highestProbability = isCPU ? 0.10f : 0.13f;
-            float lowestProbability = isCPU ? 0.05f : 0.09f;
+            float highestProbability = isCPU ? 0.2f : 0.25f;
+            float lowestProbability = isCPU ? 0.15f : 0.15f;
 
             if (
                 !isGroundPounding &&
