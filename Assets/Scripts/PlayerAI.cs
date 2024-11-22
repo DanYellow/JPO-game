@@ -145,7 +145,7 @@ public class PlayerAI : MonoBehaviour
         isGroundPounding = true;
         float duration = Mathf.Lerp(
             0.35f,
-            Mathf.Lerp(0.85f, 1, liveFraction),
+            Mathf.Lerp(0.55f, 0.8f, liveFraction),
             Random.value
         );
         yield return new WaitForSeconds(duration);

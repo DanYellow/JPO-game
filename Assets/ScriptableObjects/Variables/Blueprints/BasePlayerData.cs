@@ -6,7 +6,7 @@ public class BasePlayerData : ScriptableObject
     [Range(1, 15)]
     public float jumpForce = 7;
 
-    [Range(0, 1)]
+    [Range(0, 5)]
     public float groundPoundCooldown = 0.65f;
 
     [Range(5, 20)]

@@ -36,6 +36,8 @@ public class PlayerData : ScriptableObject
     public GameObject gameObject;
 
     public bool isCPU = false;
+    [ReadOnlyInspector]
+    public bool canOperate = true;
 
     public string[] listSpritesCharactersKeysNames;
 

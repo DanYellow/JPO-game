@@ -111,6 +111,7 @@ public class WaveButton : MonoBehaviour
 
     IEnumerator PressButton()
     {
+        playerData.canOperate = false;
         Material[] newMaterials = ringLightMeshRenderer.materials;
         newMaterials[0] = ringLightOffMaterial;
 
@@ -122,7 +123,7 @@ public class WaveButton : MonoBehaviour
         particlesSystem.Play();
 
         CreateWave();
-
+        yield return Helpers.GetWait(0.45f);
         float timeElapsed = 0;
         while (timeElapsed < playerData.root.groundPoundCooldown)
         {
@@ -131,6 +132,7 @@ public class WaveButton : MonoBehaviour
 
             yield return null;
         }
+        playerData.canOperate = true;
         pushButton.transform.position = pushButtonStartPosition;
         newMaterials[0] = ringLightOnMaterial;
         ringLightMeshRenderer.materials = newMaterials;

@@ -14,8 +14,6 @@ public class PlayerControls : MonoBehaviour
 
     private bool isGroundPounding = false;
 
-    private float lastGroundPoundCooldown = 0;
-
     [SerializeField]
     private LayerMask listGroundLayers;
 
@@ -50,6 +48,8 @@ public class PlayerControls : MonoBehaviour
 
         playerInput = GetComponent<PlayerInput>();
         playerInput.defaultActionMap = "Dead";
+
+        playerData.canOperate = true;
     }
 
     private void OnEnable()
@@ -101,7 +101,7 @@ public class PlayerControls : MonoBehaviour
 
     public void Jump()
     {
-        if (isGameFinished || Time.time < lastGroundPoundCooldown + playerData.root.groundPoundCooldown)
+        if (isGameFinished || !playerData.canOperate)
         {
             return;
         }
@@ -129,7 +129,6 @@ public class PlayerControls : MonoBehaviour
             return;
         }
         isGroundPounding = true;
-        lastGroundPoundCooldown = Time.time;
 
         StartCoroutine(DropAndPound());
     }
