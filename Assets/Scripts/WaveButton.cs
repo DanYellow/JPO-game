@@ -123,7 +123,7 @@ public class WaveButton : MonoBehaviour
         particlesSystem.Play();
 
         CreateWave();
-        yield return Helpers.GetWait(0.45f);
+        yield return Helpers.GetWait(0.15f);
         float timeElapsed = 0;
         while (timeElapsed < playerData.root.groundPoundCooldown)
         {

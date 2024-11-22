@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.35, y: 0.35, z: 4}
+  m_LocalScale: {x: 0.35, y: 0.2, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -150,4 +150,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onGameEndEvent: {fileID: 11400000, guid: e247249aac70dd141a4b00e04e16cefb, type: 2}
   onTimerEndEvent: {fileID: 11400000, guid: d8d88bd40965d86408dd2169579e9ab5, type: 2}
+  playerData: {fileID: 0}
   vfx: {fileID: 0}
