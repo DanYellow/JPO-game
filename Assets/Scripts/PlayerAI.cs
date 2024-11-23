@@ -118,11 +118,11 @@ public class PlayerAI : MonoBehaviour
         for (int i = 0; i < hitColliders.Length; i++)
         {
             // if (Random.value < 1)
-            if (Random.value < Mathf.Lerp(0.25f, 0.19f, liveFraction))
+            if (playerControls.isGrounded && Random.value < Mathf.Lerp(0.25f, 0.19f, liveFraction))
             {
                 playerControls.Jump();
                 bool isCPU = hitColliders[i].transform.GetComponent<WaveEffectCollision>().playerData.isCPU;
-                float highestProbability = isCPU ? 0.2f : 0.25f;
+                float highestProbability = isCPU ? 0.25f : 0.29f;
                 float lowestProbability = isCPU ? 0.15f : 0.15f;
 
                 if (
