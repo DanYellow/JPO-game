@@ -34,12 +34,8 @@ public class PlayerHealthIndicator : MonoBehaviour
 
     private void Awake()
     {
-        if (playerData.isCPU)
-        {
-            playerName.SetText($"{playerData.GetName()} - CPU");
-        } else {
-            playerName.SetText(playerData.GetName());
-        }
+        string playerFullname = playerData.GetName() + (playerData.isCPU ? " - CPU" : "");
+        playerName.SetText(playerFullname);
 
         playerImage.sprite = playerData.image;
         playerImageShadow.sprite = playerData.image;
