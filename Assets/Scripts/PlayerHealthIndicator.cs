@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Linq;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
@@ -16,6 +17,9 @@ public class PlayerHealthIndicator : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI playerName;
+
+    [SerializeField]
+    private TextMeshProUGUI playerControls;
 
     [SerializeField]
     private Outline playerNameOutline;
@@ -50,6 +54,20 @@ public class PlayerHealthIndicator : MonoBehaviour
                 image.color = hexColor;
             }
         }
+
+        for (var i = 0; i < playerData.listSpritesCharactersKeysNames.Count(); i++)
+        {
+            string key = playerData.listSpritesCharactersKeysNames[i];
+            playerControls.SetText(
+                playerControls.text.Replace($"PLACEHOLDER_KEY_{i}", $"<sprite name=\"{key}\">")
+            );
+        }
+
+    }
+
+    private void Start() {
+        Debug.Log(playerControls.transform.parent);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(playerControls.transform.parent.GetComponent<RectTransform>());
     }
 
     private void OnEnable()

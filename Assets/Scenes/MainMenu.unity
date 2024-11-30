@@ -480,12 +480,12 @@ PrefabInstance:
     - target: {fileID: 5020330527447914867, guid: 90d2298768e8dd5499f85967feed03e2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 245.79999
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5020330527447914867, guid: 90d2298768e8dd5499f85967feed03e2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 135.09406
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5020330527447914867, guid: 90d2298768e8dd5499f85967feed03e2,
         type: 3}
@@ -548,8 +548,8 @@ PrefabInstance:
     - target: {fileID: 6357222997775868018, guid: 90d2298768e8dd5499f85967feed03e2,
         type: 3}
       propertyPath: m_text
-      value: "Sauter :   PLACEHOLDER_KEY_0PLACEHOLDER_KEY_1PLACEHOLDER_KEY_2\n\rAttaquer
-        :   PLACEHOLDER_KEY_0PLACEHOLDER_KEY_1PLACEHOLDER_KEY_2  <sprite name=\"arrow_0\">
+      value: "Sauter : PLACEHOLDER_KEY_0PLACEHOLDER_KEY_1PLACEHOLDER_KEY_2\n\rAttaquer
+        : PLACEHOLDER_KEY_0PLACEHOLDER_KEY_1PLACEHOLDER_KEY_2 <sprite name=\"arrow_0\">
         PLACEHOLDER_KEY_0PLACEHOLDER_KEY_1PLACEHOLDER_KEY_2\n"
       objectReference: {fileID: 0}
     - target: {fileID: 7753844075939668329, guid: 90d2298768e8dd5499f85967feed03e2,
@@ -668,12 +668,12 @@ PrefabInstance:
     - target: {fileID: 5020330527447914867, guid: 90d2298768e8dd5499f85967feed03e2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 245.79999
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5020330527447914867, guid: 90d2298768e8dd5499f85967feed03e2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -124.905945
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5020330527447914867, guid: 90d2298768e8dd5499f85967feed03e2,
         type: 3}
@@ -728,7 +728,7 @@ PrefabInstance:
     - target: {fileID: 6357222997775868018, guid: 90d2298768e8dd5499f85967feed03e2,
         type: 3}
       propertyPath: m_text
-      value: "Sauter :   PLACEHOLDER_KEY_0\n\rAttaquer :   PLACEHOLDER_KEY_0  <sprite
+      value: "Sauter : PLACEHOLDER_KEY_0\n\rAttaquer : PLACEHOLDER_KEY_0 <sprite
         name=\"arrow_0\"> PLACEHOLDER_KEY_0\n"
       objectReference: {fileID: 0}
     - target: {fileID: 7753844075939668329, guid: 90d2298768e8dd5499f85967feed03e2,
@@ -1229,8 +1229,7 @@ MonoBehaviour:
     \xE9tudiants ou enseignants, si vous avez besoin d'informations suppl\xE9mentaires
     sur nos parcours. \n\nSi ce jeu a \xE9t\xE9 d\xE9velopp\xE9 par un enseignant,
     la r\xE9alisation d'un jeu du m\xEAme genre est largement dans les capacit\xE9s
-    d'un \xE9tudiant MMI \xE0 condition de prendre de d\xE9dier du temps \xE0 un
-    travail personnel.\r"
+    d'un \xE9tudiant MMI \xE0 condition de d\xE9dier du temps \xE0 un travail personnel.\r"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1511,12 +1510,12 @@ PrefabInstance:
     - target: {fileID: 5020330527447914867, guid: 90d2298768e8dd5499f85967feed03e2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -279.2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5020330527447914867, guid: 90d2298768e8dd5499f85967feed03e2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 135.09406
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5020330527447914867, guid: 90d2298768e8dd5499f85967feed03e2,
         type: 3}
@@ -1571,7 +1570,7 @@ PrefabInstance:
     - target: {fileID: 6357222997775868018, guid: 90d2298768e8dd5499f85967feed03e2,
         type: 3}
       propertyPath: m_text
-      value: "Sauter :   PLACEHOLDER_KEY_0\n\rAttaquer :   PLACEHOLDER_KEY_0  <sprite
+      value: "Sauter : PLACEHOLDER_KEY_0\n\rAttaquer : PLACEHOLDER_KEY_0 <sprite
         name=\"arrow_0\"> PLACEHOLDER_KEY_0\n"
       objectReference: {fileID: 0}
     - target: {fileID: 7753844075939668329, guid: 90d2298768e8dd5499f85967feed03e2,
@@ -1735,7 +1734,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.72156864}
+  m_Color: {r: 1, g: 0.99607843, b: 0.9137255, a: 0.9019608}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3051,7 +3050,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1717888977
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3218,12 +3217,12 @@ PrefabInstance:
     - target: {fileID: 5020330527447914867, guid: 90d2298768e8dd5499f85967feed03e2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -279.2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5020330527447914867, guid: 90d2298768e8dd5499f85967feed03e2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -124.905945
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5020330527447914867, guid: 90d2298768e8dd5499f85967feed03e2,
         type: 3}
@@ -3278,7 +3277,7 @@ PrefabInstance:
     - target: {fileID: 6357222997775868018, guid: 90d2298768e8dd5499f85967feed03e2,
         type: 3}
       propertyPath: m_text
-      value: "Sauter :   PLACEHOLDER_KEY_0\n\rAttaquer :   PLACEHOLDER_KEY_0  <sprite
+      value: "Sauter : PLACEHOLDER_KEY_0\n\rAttaquer : PLACEHOLDER_KEY_0 <sprite
         name=\"arrow_0\"> PLACEHOLDER_KEY_0\n"
       objectReference: {fileID: 0}
     - target: {fileID: 7753844075939668329, guid: 90d2298768e8dd5499f85967feed03e2,
