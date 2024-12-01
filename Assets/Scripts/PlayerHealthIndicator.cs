@@ -65,10 +65,6 @@ public class PlayerHealthIndicator : MonoBehaviour
 
     }
 
-    private void Start() {
-        // LayoutRebuilder.ForceRebuildLayoutImmediate(playerControls.transform.parent.GetComponent<RectTransform>());
-    }
-
     private void OnEnable()
     {
         onPlayerHitEvent.OnEventRaised += OnPlayerHit;
