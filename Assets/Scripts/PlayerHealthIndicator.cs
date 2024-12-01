@@ -66,8 +66,7 @@ public class PlayerHealthIndicator : MonoBehaviour
     }
 
     private void Start() {
-        Debug.Log(playerControls.transform.parent);
-        LayoutRebuilder.ForceRebuildLayoutImmediate(playerControls.transform.parent.GetComponent<RectTransform>());
+        // LayoutRebuilder.ForceRebuildLayoutImmediate(playerControls.transform.parent.GetComponent<RectTransform>());
     }
 
     private void OnEnable()
