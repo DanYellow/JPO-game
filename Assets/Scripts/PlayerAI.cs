@@ -26,6 +26,8 @@ public class PlayerAI : MonoBehaviour
     private float highestAttackProbability = 0;
     private float lowestAttackProbability = 0;
 
+    private float timeBeforeFirstAttack = 3.75f;
+
     private void Awake()
     {
         playerControls = GetComponent<PlayerControls>();
@@ -60,7 +62,7 @@ public class PlayerAI : MonoBehaviour
 
     IEnumerator Start()
     {
-        yield return Helpers.GetWait(5f * delayGroundPoundAggressityFactor);
+        yield return Helpers.GetWait(timeBeforeFirstAttack * delayGroundPoundAggressityFactor);
         while (true)
         {
             if (
@@ -121,9 +123,9 @@ public class PlayerAI : MonoBehaviour
             if (playerControls.isGrounded && Random.value < Mathf.Lerp(0.25f, 0.19f, liveFraction))
             {
                 playerControls.Jump();
-                bool isCPU = hitColliders[i].transform.GetComponent<WaveEffectCollision>().playerData.isCPU;
-                float highestProbability = isCPU ? 0.25f : 0.29f;
-                float lowestProbability = isCPU ? 0.15f : 0.15f;
+                bool isFromCPU = hitColliders[i].transform.GetComponent<WaveEffectCollision>().playerData.isCPU;
+                float highestProbability = isFromCPU ? 0.25f : 0.29f;
+                float lowestProbability = isFromCPU ? 0.1725f : 0.1725f;
 
                 if (
                     Random.value < Mathf.Lerp(highestProbability, lowestProbability, liveFraction)
