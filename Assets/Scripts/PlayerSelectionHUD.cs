@@ -27,7 +27,7 @@ public class PlayerSelectionHUD : MonoBehaviour
 
     private void Awake()
     {
-        playerName.SetText($"{playerData.GetName()} - CPU");
+        playerName.SetText($"{playerData.GetName()} (CPU)");
         playerImage.sprite = playerData.image;
 
         playerInput = GetComponent<PlayerInput>();

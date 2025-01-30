@@ -122,7 +122,7 @@ public class GameManager : MonoBehaviour
         WinnerCard winnerCard = winnerDisplay.GetComponent<WinnerCard>();
         winnerCard.shadow.sprite = playerData.image;
         winnerCard.image.sprite = playerData.image;
-        string winnerFullname = playerData.GetName() + (playerData.isCPU ? " - CPU" : "");
+        string winnerFullname = playerData.GetName() + (playerData.isCPU ? " (CPU)" : "");
         winnerCard.winnerName.SetText($"Le <b>{winnerFullname}</b>\nremporte la partie !");
 
         listWinners.Add(playerID);

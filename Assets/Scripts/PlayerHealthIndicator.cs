@@ -38,7 +38,7 @@ public class PlayerHealthIndicator : MonoBehaviour
 
     private void Awake()
     {
-        string playerFullname = playerData.GetName() + (playerData.isCPU ? " - CPU" : "");
+        string playerFullname = playerData.GetName() + (playerData.isCPU ? " (CPU)" : "");
         playerName.SetText(playerFullname);
 
         playerImage.sprite = playerData.image;
