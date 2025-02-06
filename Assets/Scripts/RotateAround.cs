@@ -10,7 +10,7 @@ public class RotateAround : MonoBehaviour
 
     void Update()
     {
-        // transform.LookAt(pivotPoint);
+        // transform.LookAt(pivotPoint.position, pivotPoint.forward);
         // transform.RotateAround(transform.position, transform.up, speed * Time.deltaTime);
         transform.RotateAround(pivotPoint.position, pivotPoint.up, speed * Time.deltaTime);
     }
