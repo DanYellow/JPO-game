@@ -131,7 +131,7 @@ public class CarController : MonoBehaviour
     private void FixedUpdate()
     {
         isCarGrounded.CurrentValue = Physics.Raycast(transform.position, -transform.up, out hit, 1, groundLayers);
-        carData.currentVelocity = motor.velocity.sqrMagnitude;
+        carData.currentVelocity = motor.linearVelocity.sqrMagnitude;
 
         if (isCarGrounded.CurrentValue)
         {
@@ -141,7 +141,7 @@ public class CarController : MonoBehaviour
 
         motor.AddForce(-transform.up * Physics.gravity.y, ForceMode.Acceleration);
 
-        motor.velocity = Vector3.ClampMagnitude(motor.velocity, 50);
+        motor.linearVelocity = Vector3.ClampMagnitude(motor.linearVelocity, 50);
         collision.MoveRotation(transform.rotation);
         motor.MoveRotation(transform.rotation);
         collision.MovePosition(motor.position);
@@ -154,7 +154,7 @@ public class CarController : MonoBehaviour
 
     private void Rotate()
     {
-        if (motor.velocity.sqrMagnitude <= 15)
+        if (motor.linearVelocity.sqrMagnitude <= 15)
         {
             return;
         }
@@ -170,11 +170,11 @@ public class CarController : MonoBehaviour
     {
         if (isCarGrounded.CurrentValue)
         {
-            motor.drag = groundDrag;
+            motor.linearDamping = groundDrag;
         }
         else
         {
-            motor.drag = carData.airDrag;
+            motor.linearDamping = carData.airDrag;
         }
     }
 
