@@ -13,8 +13,6 @@ public class NPC : MonoBehaviour
 
     private Queue<string> listSentences;
 
-    private Animator animator;
-
     [SerializeField]
     private GameObject nextSentenceSprite;
 
@@ -40,6 +38,9 @@ public class NPC : MonoBehaviour
     private bool dialogueHasStarted = false;
     private bool sentenceWasCompleted = false;
 
+    private WaitForSeconds typingCharDelay = new WaitForSeconds(0.03f);
+    private WaitForSeconds nextSentenceDelay = new WaitForSeconds(0.025f);
+
     private Coroutine resetDialogueCo;
 
     [SerializeField]
@@ -50,8 +51,13 @@ public class NPC : MonoBehaviour
     private void Awake()
     {
         animatorBubble = bubble.GetComponent<Animator>();
-        playerListenEventChannel.OnEventRaised += DisplayNextSentence;
+
         nextSentenceSprite.SetActive(false);
+    }
+
+    void OnEnable()
+    {
+        playerListenEventChannel.OnEventRaised += DisplayNextSentence;
     }
 
     void Start()
@@ -182,18 +188,17 @@ public class NPC : MonoBehaviour
         dialogueText.maxVisibleCharacters = 0;
         int counter = 0;
 
-        TMP_TextInfo textInfo = dialogueText.textInfo;
-
-        WaitForSeconds internalTypingChar = new WaitForSeconds(0.03f);
         while (counter < totalVisibleCharacters)
         {
             dialogueText.maxVisibleCharacters++;
 
-            yield return internalTypingChar;
+            yield return typingCharDelay;
             counter++;
         }
         sentenceWasCompleted = true;
-        yield return new WaitForSeconds(0.025f);
+
+        yield return nextSentenceDelay;
+
         EndSentence();
     }
 
@@ -226,7 +231,7 @@ public class NPC : MonoBehaviour
                 sentenceWasCompleted = false;
                 dialogueText.fontStyle = FontStyles.Bold;
                 yield return typeSentenceCo = StartCoroutine(TypeSentence(dialogue.interruptionSentence, true));
-                yield return new WaitForSeconds(0.75f);
+                yield return new WaitForSeconds(0.95f);
             }
             resetDialogueCo = StartCoroutine(ResetDialogue());
         }
