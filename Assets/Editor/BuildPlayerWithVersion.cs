@@ -17,7 +17,7 @@ public class BuildPlayerWithVersion : MonoBehaviour
         string productNameWithExt = Regex.Match(buildPlayerOptions.locationPathName, @"" + Application.productName + ".([A-z])\\w+").Groups[0].ToString();
         string path = buildPlayerOptions.locationPathName.Replace(productNameWithExt, "");
 
-        string finalPath = Path.Join(path, version);
+        string finalPath = Path.Join(path, $"{version}-{Application.productName.GenerateSlug()}");
         Directory.CreateDirectory(finalPath);
 
         buildPlayerOptions.locationPathName = $"{finalPath}/{productNameWithExt}";
