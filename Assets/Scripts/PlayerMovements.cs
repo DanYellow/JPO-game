@@ -47,7 +47,7 @@ public class PlayerMovements : MonoBehaviour
 
         Flip();
 
-        if (Mathf.Abs(rb.velocity.x) > 0)
+        if (Mathf.Abs(rb.linearVelocity.x) > 0)
         {
             if(!dust.isEmitting) {
                 dust.Play();
@@ -59,8 +59,8 @@ public class PlayerMovements : MonoBehaviour
 
     private void FixedUpdate()
     {
-        nextPosition = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
-        rb.velocity = nextPosition;
+        nextPosition = new Vector2(moveInput.x * moveSpeed, rb.linearVelocity.y);
+        rb.linearVelocity = nextPosition;
 
         isGrounded = IsGrounded();
     }

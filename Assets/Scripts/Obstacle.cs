@@ -19,16 +19,16 @@ public class Obstacle : MonoBehaviour
         animator = GetComponent<Animator>();
 
         height = sr.bounds.size.y;
-        rb.drag = maxLinearDrag;
+        rb.linearDamping = maxLinearDrag;
     }
 
     private void OnEnable()
     {
         if (nbInvocations % accelerationFallThreshold == 0)
         {
-            rb.drag = Mathf.Clamp(rb.drag - 0.75f, 0, maxLinearDrag);
+            rb.linearDamping = Mathf.Clamp(rb.linearDamping - 0.75f, 0, maxLinearDrag);
         }
-        rb.velocity = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         animator.ResetTrigger("Touched");
 
