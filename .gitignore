@@ -7,6 +7,7 @@
 /[Oo]bj/
 /[Bb]uild/
 /[Bb]uilds/
+/[Ee]xports/
 /[Ll]ogs/
 /[Mm]emoryCaptures/
 
@@ -60,3 +61,16 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+.vsconfig
+extensions.json
+launch.json
+
+.DS_Store
+
+Exports/**
+Recordings/**
+
+**/SyntyStudios
+
+*.blend?
+*.blend?.*
