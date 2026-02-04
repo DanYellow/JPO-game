@@ -13,6 +13,8 @@ public class PickUpItem : MonoBehaviour
 
     private Coroutine autoDisable;
 
+    private WaitForSeconds delayBeforeDestroy = new WaitForSeconds(7);
+
     [SerializeField]
     private MaterialEventChannel onMaterialChange;
 
@@ -61,7 +63,7 @@ public class PickUpItem : MonoBehaviour
 
     IEnumerator AutoDisable()
     {
-        yield return new WaitForSeconds(7);
+        yield return delayBeforeDestroy;
         sr.color = Color.black;
         StartCoroutine(Disable());
     }

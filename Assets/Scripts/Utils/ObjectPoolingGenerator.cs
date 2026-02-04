@@ -23,10 +23,18 @@ public class ObjectPoolingGenerator : MonoBehaviour
 
     private void Awake()
     {
-        objectPooling = FindObjectOfType<ObjectPoolingManager>(false);
         onPlayerDeathVoidEventChannel.OnEventRaised += StopPooling;
 
         baseDelayBetweenNewItemPooled = delayBetweenNewItemPooled;
+    }
+
+    private void Start() {
+        objectPooling = FindFirstObjectByType<ObjectPoolingManager>();
+    }
+
+    void OnEnable()
+    {
+        onPlayerDeathVoidEventChannel.OnEventRaised += StopPooling;
     }
 
     public void StartGame()
@@ -78,7 +86,6 @@ public class ObjectPoolingGenerator : MonoBehaviour
 
     IEnumerator Create()
     {
-        // WaitForSeconds intervalNewItemPooled = new WaitForSeconds(0);
         WaitForSeconds intervalNewItemPooled = new WaitForSeconds(delayBetweenNewItemPooled);
 
         while (true)
