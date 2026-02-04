@@ -18,7 +18,7 @@ public class GameOverManager : MonoBehaviour
     private ScoreIndicator[] listScoreIndicator;
 
     [SerializeField, Range(1, 60)]
-    private int scoreThreshold = 42;
+    private int scoreThreshold = 45;
 
     private void Awake()
     {
@@ -35,8 +35,7 @@ public class GameOverManager : MonoBehaviour
 #endif
     }
 
-    // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         onPlayerDeathVoidEventChannel.OnEventRaised += DisplayGameOverScreen;
     }

@@ -3659,12 +3659,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c94a278917b7bc4a81ea644bdb88685, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObjectPooling
-  listItemsToPool:
-  - key: diamond
-    minItems: 1
-    maxItems: 20
-    prefab: {fileID: 1709273481406156916, guid: 74be66d7f2604864ba3834afbc8836b8, type: 3}
-    count: 0
 --- !u!1001 &981178079
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4501,7 +4495,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1278083185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4509,7 +4503,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1278083184}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a5c3381e20ad8dc4aad0ecdf4e4310f8, type: 3}
   m_Name: 
@@ -5080,7 +5074,7 @@ MonoBehaviour:
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
-          m_CallState: 0
+          m_CallState: 1
         - m_Target: {fileID: 974776409}
           m_TargetAssemblyTypeName: ObjectPoolingGenerator, Assembly-CSharp
           m_MethodName: StartGame

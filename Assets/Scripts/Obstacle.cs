@@ -12,6 +12,9 @@ public class Obstacle : MonoBehaviour
     private int accelerationFallThreshold = 2;
     public float maxLinearDrag = 3.5f;
 
+    [SerializeField]
+    private VoidEventChannel onPlayerDeathVoidEventChannel;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -40,6 +43,16 @@ public class Obstacle : MonoBehaviour
             ScreenUtility.Instance.Top + height,
             transform.position.z
         );
+
+        onPlayerDeathVoidEventChannel.OnEventRaised += OnGameOver;
+    }
+
+    private void OnGameOver()
+    {
+        if (TryGetComponent(out BoxCollider2D bc))
+        {
+            bc.enabled = false;
+        }
     }
 
     private void Update()
@@ -65,6 +78,11 @@ public class Obstacle : MonoBehaviour
             yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
             gameObject.SetActive(false);
         }
+    }
+
+    void OnDisable()
+    {
+        onPlayerDeathVoidEventChannel.OnEventRaised -= OnGameOver;
     }
 }
 
