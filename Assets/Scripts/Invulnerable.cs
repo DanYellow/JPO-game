@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Invulnerable : MonoBehaviour
 {
-    private SpriteRenderer sr;
     private bool isInvulnerable = false;
     [SerializeField]
     private InvulnerableDataValue invulnerableDataValue;
@@ -21,22 +20,24 @@ public class Invulnerable : MonoBehaviour
     [SerializeField]
     private MaterialChangeValue materialChange;
 
+    private WaitForSeconds invulnerableDelay;
+
     private void Awake()
     {
-        sr = GetComponent<SpriteRenderer>();
-    }
+        invulnerableDelay = new WaitForSeconds(invulnerableDataValue.duration);
 
-    // Start is called before the first frame update
-    private void Start()
-    {
         CheckMasks();
 
-        isHurtVoidEventChannel.OnEventRaised += OnCollision;
 
         foreach (var layerIndex in listLayers)
         {
             Physics2D.IgnoreLayerCollision(gameObject.layer, layerIndex, false);
         }
+    }
+
+    void OnEnable()
+    {
+        isHurtVoidEventChannel.OnEventRaised += OnCollision;
     }
 
     private void CheckMasks()
@@ -58,7 +59,7 @@ public class Invulnerable : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         LayerMask otherLayer = other.gameObject.layer;
-        bool isInLayer = ((listLayerToIgnoreAfterHit & (1 << otherLayer)) != 0);
+        bool isInLayer = (listLayerToIgnoreAfterHit & (1 << otherLayer)) != 0;
 
         if (!isInvulnerable && isInLayer)
         {
@@ -71,7 +72,7 @@ public class Invulnerable : MonoBehaviour
     {
         Physics2D.IgnoreLayerCollision(gameObject.layer, layerId, true);
         isInvulnerable = true;
-        yield return new WaitForSeconds(invulnerableDataValue.duration);
+        yield return invulnerableDelay;
         isInvulnerable = false;
         Physics2D.IgnoreLayerCollision(gameObject.layer, layerId, false);
     }

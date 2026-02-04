@@ -8300,6 +8300,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2098549024}
     m_Modifications:
+    - target: {fileID: 1131228885091170752, guid: e430d72c11e990d46813eb9671e39854, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1182617013785124441, guid: e430d72c11e990d46813eb9671e39854, type: 3}
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
@@ -8406,15 +8410,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1182617015517201739, guid: e430d72c11e990d46813eb9671e39854, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.65992165
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1182617015517201739, guid: e430d72c11e990d46813eb9671e39854, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.65992165
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1182617015517201739, guid: e430d72c11e990d46813eb9671e39854, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.65992165
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1182617015517201739, guid: e430d72c11e990d46813eb9671e39854, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9148,7 +9152,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2098549023}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
   m_Name: 

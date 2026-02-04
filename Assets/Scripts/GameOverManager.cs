@@ -18,7 +18,7 @@ public class GameOverManager : MonoBehaviour
     private ScoreIndicator[] listScoreIndicator;
 
     [SerializeField, Range(1, 60)]
-    private int scoreThreshold = 45;
+    private int scoreThreshold = 40;
 
     private void Awake()
     {
