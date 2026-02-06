@@ -40,7 +40,8 @@ public class MainMenuManager : MonoBehaviour
         OnFirstLevelStart.OnEventRaised += onFirstLevelLoadEvent;
     }
 
-    private void EnableControls() {
+    private void EnableControls()
+    {
         pi.enabled = true;
     }
 
@@ -74,7 +75,8 @@ public class MainMenuManager : MonoBehaviour
         SceneManager.LoadScene(index, LoadSceneMode.Single);
     }
 
-    public void TransitionToScene(int levelIndex) {
+    public void TransitionToScene(int levelIndex)
+    {
         StartCoroutine(sceneTransition.Hide());
     }
 
@@ -84,6 +86,14 @@ public class MainMenuManager : MonoBehaviour
         Debug.Log("Quit game");
 #endif
         Application.Quit();
+    }
+
+    public void OnQuit(InputAction.CallbackContext ctx)
+    {
+        if (ctx.phase == InputActionPhase.Performed)
+        {
+            QuitGame();
+        }
     }
 
     private void OnDisable()

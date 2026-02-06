@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public class CurrentSceneManager : MonoBehaviour
 {
@@ -33,7 +34,18 @@ public class CurrentSceneManager : MonoBehaviour
 
     public void QuitGame()
     {
+#if UNITY_EDITOR
+        Debug.Log("Quit game");
+#endif
         Application.Quit();
+    }
+
+    public void OnQuit(InputAction.CallbackContext ctx)
+    {
+        if (ctx.phase == InputActionPhase.Performed)
+        {
+            QuitGame();
+        }
     }
 
     private void OnEnable()
